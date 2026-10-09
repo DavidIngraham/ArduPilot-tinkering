@@ -79,9 +79,9 @@ With positive pitch rate defined as nose-up, a nose-down rotation produces a pos
 
 The articulated model showed why that assumption could fail. The thrust line is below the suspension point, but above the payload CG. Forward thrust therefore produces a nose-down moment about the payload CG. The suspension point moves with the system; treating it as a fixed pivot leaves out an important part of the dynamics.
 
-![Free-body diagram of the payload and canopy, showing thrust above the payload CG and the reinforcing feedback sequence](assets/flight-testing/pitch-damper-fbd.png)
+![Free-body diagram of the payload and canopy, showing thrust above the payload CG and the reinforcing feedback sequence](assets/flight-testing/pitch-damper-fbd-pusher.png)
 
-*The diagram shows schematic geometry, not measured dimensions. The ballast location is confirmed from the build history; the loaded CG and thrust offset have not yet been measured. The suspension forces are equal and opposite. The labeled thrust offset is the moment arm about the loaded payload CG; the suspension reaction also has a moment arm about that CG. Canopy aerodynamic moment and any joint couple also belong in the complete angular equations.*
+*The rear-mounted pusher prop is shown pushing forward into the payload; this arrow is thrust on the aircraft, not the rearward airflow. Its line of action remains above the modeled payload CG, so the direct moment is still nose-down. The diagram shows schematic geometry, not measured dimensions. The ballast location is confirmed from the build history; the loaded CG and thrust offset have not yet been measured. The suspension forces are equal and opposite. The labeled thrust offset is the moment arm about the loaded payload CG; the suspension reaction also has a moment arm about that CG. Canopy aerodynamic moment and any joint couple also belong in the complete angular equations.*
 
 For the modeled initial response, the feedback can run in the wrong direction:
 
