@@ -1,12 +1,14 @@
 # What does my paraglider need from its controller?
 
-My first approach was to reuse ArduPlane's roll controller. I wanted the existing navigation system to command turns through differential braking, without first writing a new lateral controller. Looking through the controller blocks, I realized that its rate feed-forward path could serve as an angle controller if I turned off the inner rate-feedback gains.
+I initially thought I would need to design a yaw-rate controller for the parafoil. Differential braking makes it turn, so controlling the rate of that turn seemed more natural than asking an airplane roll controller to do the job. I wanted to keep ArduPlane's navigation and replace the part that translated its demands into brake movement.
 
-That was the starting point for the real flights. Later, the simulation work led to a dedicated heading-rate controller, achievable-turn-radius guidance, and a model of canopy–payload pitch motion. The [flight-test post](flight-testing.md) covers the aircraft tests; this page follows the lateral-control reasoning from the original shortcut to the replacement controller.
+As I worked through my notes, I figured out that I could get much of the same behavior by changing the gains in the controller that was already there. The trick was to turn off the inner roll-rate feedback and use its feed-forward path as an angle gain. With bank angle standing in for turn rate, that gave me a practical route to the first flights without writing the new controller immediately.
 
-## The first approach: turn rate feed-forward into angle control
+The flights got me to working autonomous missions. Thinking through the flight behavior afterward and testing the loops in simulation brought me back to the original idea: a dedicated turn-rate controller would make the response easier to tune and the achievable turns easier to express. The [flight-test post](flight-testing.md) covers the aircraft tests; this page follows that progression in the lateral controller.
 
-My January 30 notebook page compares the standard ArduPlane loops, the first-flight configuration, a paramotor controller from the ACRA paper, and a simplified version of my own. In the first-flight diagram I crossed out the rate P, I, and D paths. The key annotation on the simplified diagram is “essentially φ P gain.”
+## Getting the first controller by changing the gains
+
+I started by breaking ArduPlane's roll controller into its individual paths. It normally converts bank-angle error into a requested roll rate, then uses rate feedback and feed-forward to drive the ailerons. I crossed out the rate P, I, and D paths and followed what was left. The feed-forward path reduced to something much simpler: essentially a proportional gain on bank-angle error.
 
 ![Original lateral-control analysis comparing ArduPlane, the first-flight configuration, and the simplified angle controller](assets/micro-agu/lateral-control-notes.png)
 
@@ -71,13 +73,13 @@ u_FF(s) = K_φ H_T(s) [φ_cmd(s) − φ(s)]
 
 ### Where damping fits
 
-The lower notebook sketch also explores a derivative path. If derivative feed-forward is enabled, it differentiates the requested rate—which already contains bank-angle error. At fixed scaling, its contribution reduces to:
+I also worked through how I could add damping using the derivative feed-forward path. If derivative feed-forward is enabled, it differentiates the requested rate—which already contains bank-angle error. At fixed scaling, its contribution reduces to:
 
 ```text
 u_DFF = [F K_DFF S / (E τ)] d(φ_cmd − φ)/dt
 ```
 
-For a steady bank command this becomes a negative bank-rate term, supplying damping. During a changing command it also reacts to the commanded bank rate. This is different from the inner rate-P term, which acts on requested minus measured body roll rate. The January flight had D_FF set to zero; the sketch shows how damping could be added to the basic angle-control shortcut.
+For a steady bank command this becomes a negative bank-rate term, supplying damping. During a changing command it also reacts to the commanded bank rate. This is different from the inner rate-P term, which acts on requested minus measured body roll rate. I left D_FF at zero for the January flight, but this gave me a way to add damping to the same basic structure.
 
 ArduPlane's navigation still supplies the bank command from desired lateral acceleration:
 
@@ -85,11 +87,43 @@ ArduPlane's navigation still supplies the bank command from desired lateral acce
 φ_cmd = atan(a_lat_cmd / g)
 ```
 
-That preserves the existing path-following interface. The shortcut makes the brakes respond to bank error; it does not directly regulate heading rate. Its effectiveness depends on the parafoil's relationship between differential brake, bank, and turn rate. That distinction motivated the next controller.
+### Why this was close to the yaw-rate controller I wanted
 
-## Is the roll controller the right abstraction?
+The other part of the idea was the relationship between bank and turn rate. For a steady coordinated turn at airspeed V, heading rate ω is:
 
-In simulation, increasing the roll-to-servo gain increased the differential-brake correction produced by this angle loop. That made the aircraft turn more strongly, but the quantity I ultimately wanted to control was its rate of turning. I wanted to see whether a dedicated turn controller would make the behavior easier to understand and tune. We implemented and manually tuned a replacement that tracks heading rate directly, with differential-brake feedforward, PI feedback, rate/acceleration limits and coupled roll-rate damping. Feature guards keep paraglider-specific code out of standard builds; legacy/mode handover is tested.
+```text
+ω = (g / V) tan(φ)
+```
+
+At small bank angles, tan(φ) ≈ φ, with φ in radians. At fixed speed, the commanded and actual bank angles therefore give:
+
+```text
+ω_cmd ≈ (g / V) φ_cmd
+ω     ≈ (g / V) φ
+
+φ_cmd − φ ≈ (V / g) (ω_cmd − ω)
+```
+
+Substituting that into the angle controller gives:
+
+```text
+u ≈ K_φ (V / g) (ω_cmd − ω)
+  = K_ω (ω_cmd − ω)
+
+K_ω = K_φ V / g
+```
+
+That was the useful discovery: **under the steady-turn approximation, the angle loop is mathematically equivalent to a proportional turn-rate loop with a rescaled gain.** I could use the bank-angle demand already produced by navigation, adjust the existing gains, and get something close to the yaw-rate behavior I had set out to implement.
+
+Here ω means heading rate, the rate of turning in the horizontal plane. It is the navigation quantity I wanted to control; it is not generally identical to the body-axis yaw gyro reading. The equivalence uses steady coordinated motion and fixed speed. Around a larger steady bank angle φ₀, the local conversion becomes K_ω = K_φ V cos²(φ₀) / g.
+
+## Why I came back to a dedicated turn-rate controller
+
+The shortcut got the aircraft flying missions, but it still used bank angle as a stand-in for the response I cared about. Looking back at the flights, I wanted to understand what changing the roll gains was actually doing to the turns. Simulation gave me a way to separate the steering loop from the navigation geometry and test that question repeatedly.
+
+Increasing the roll-to-servo gain produced a stronger differential-brake correction. It did not give me independent control over turn-rate tracking and roll damping. During a turn entry or an oscillation, bank and heading rate do not follow the steady-turn relationship instantaneously. Changes in speed also change their relationship. Those are the places where the convenient mathematical equivalence stops describing the full dynamics.
+
+I therefore returned to the yaw-rate-controller idea, implementing it as a dedicated **heading-rate controller**. It tracks the rate of turning directly, with differential-brake feed-forward, PI feedback, rate and acceleration limits, and a separate roll-rate damping term. That lets me tune how quickly the aircraft turns without using the same gain to stand in for all of its lateral motion. The replacement was developed and tested in SITL; the real flights described here used the original approach.
 
 The mission plots also made me question the waypoint radius. We could make the response better damped and still overshoot the next track if the requested turn was too tight. I asked us to base the turn geometry on achievable turn rate, then optimize for tighter turns with less overshoot and repeat the comparison across wind and turbulence. Those experiments helped separate guidance geometry from the steering-loop tuning.
 
