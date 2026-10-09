@@ -1,0 +1,195 @@
+{
+  "2026-01-03 15-41-42": {
+    "airborne": {
+      "start_boot_s": 298.44,
+      "end_boot_s": 1073.56,
+      "duration_min": 12.918666666666665,
+      "charge_Ah": 11.774814908327588,
+      "energy_Wh": 270.01891963273357,
+      "integrated_Ah": 11.7745424592098,
+      "integrated_Wh": 270.01246839267645,
+      "mean_A": 54.68618130503056,
+      "mean_W": 1254.0572894695472,
+      "voltage_start_end": [
+        23.663445776670546,
+        23.20476239941342
+      ],
+      "voltage_min": 22.352569580078125,
+      "current_p50_p95_max": [
+        47.54652404785156,
+        128.45958557128907,
+        185.51124572753906
+      ],
+      "seconds_above_2400W": 133.9003199999999,
+      "last_10s_voltage_median": 23.151355743408203
+    },
+    "whole_log": {
+      "start_boot_s": 40.165364,
+      "end_boot_s": 1095.464514,
+      "duration_min": 17.58831916666667,
+      "charge_Ah": 11.82265389496088,
+      "energy_Wh": 271.1341499108821,
+      "integrated_Ah": 11.821731821850822,
+      "integrated_Wh": 271.1139936110651,
+      "mean_A": 40.32812360235764,
+      "mean_W": 924.8660694930289,
+      "voltage_start_end": [
+        24.208065032958984,
+        23.27497100830078
+      ],
+      "voltage_min": 21.934144973754883,
+      "current_p50_p95_max": [
+        28.996575355529785,
+        124.75782661437988,
+        185.51124572753906
+      ],
+      "seconds_above_2400W": 134.4999304999999,
+      "last_10s_voltage_median": 23.26603412628174
+    },
+    "battery_start_end": {
+      "Volt": [
+        24.208065032958984,
+        23.27497100830078
+      ],
+      "Curr": [
+        0.06165451928973198,
+        0.06918741017580032
+      ],
+      "CurrTot": [
+        0.7543081641197205,
+        11823.408203125
+      ],
+      "EnrgTot": [
+        0.018254874274134636,
+        271.15240478515625
+      ],
+      "RemPct": [
+        99.0,
+        0.0
+      ]
+    }
+  },
+  "2026-02-15 15-38-50": {
+    "airborne": {
+      "start_boot_s": 202.81,
+      "end_boot_s": 3474.77,
+      "duration_min": 54.532666666666664,
+      "charge_Ah": 3.9226061771498664,
+      "energy_Wh": 84.9748242953104,
+      "integrated_Ah": 3.9223074891192113,
+      "integrated_Wh": 84.96863851237667,
+      "mean_A": 4.315549994752124,
+      "mean_W": 93.48741996985171,
+      "voltage_start_end": [
+        24.185929868035096,
+        19.966004361429725
+      ],
+      "voltage_min": 18.939912796020508,
+      "current_p50_p95_max": [
+        4.228156566619873,
+        7.456789970397949,
+        18.694705963134766
+      ],
+      "seconds_above_2400W": 0.0,
+      "last_10s_voltage_median": 19.895092010498047
+    },
+    "whole_log": {
+      "start_boot_s": 140.374994,
+      "end_boot_s": 3495.373996,
+      "duration_min": 55.91665003333333,
+      "charge_Ah": 3.931673485994339,
+      "energy_Wh": 85.18582612648606,
+      "integrated_Ah": 3.931352050066435,
+      "integrated_Wh": 85.17922187352943,
+      "mean_A": 4.218441606630071,
+      "mean_W": 91.39949030145969,
+      "voltage_start_end": [
+        24.455717086791992,
+        20.11948013305664
+      ],
+      "voltage_min": 18.939912796020508,
+      "current_p50_p95_max": [
+        4.187517166137695,
+        7.419509172439575,
+        117.78080749511719
+      ],
+      "seconds_above_2400W": 0.10021500000000572,
+      "last_10s_voltage_median": 20.09114170074463
+    },
+    "battery_start_end": {
+      "Volt": [
+        24.455717086791992,
+        20.11948013305664
+      ],
+      "Curr": [
+        0.05709639936685562,
+        0.06817981600761414
+      ],
+      "CurrTot": [
+        2.1702640056610107,
+        3933.84375
+      ],
+      "EnrgTot": [
+        0.053080733865499496,
+        85.23890686035156
+      ],
+      "RemPct": [
+        99.0,
+        34.0
+      ]
+    },
+    "late_auto": {
+      "start_boot_s": 2738.09,
+      "end_boot_s": 3360.73,
+      "duration_min": 10.37733333333333,
+      "charge_Ah": 0.690195372020964,
+      "energy_Wh": 13.938361018682443,
+      "integrated_Ah": 0.6901381583761037,
+      "integrated_Wh": 13.937220975207095,
+      "mean_A": 3.9902630254303832,
+      "mean_W": 80.58267299040466,
+      "voltage_start_end": [
+        20.60162484003142,
+        19.527183521201156
+      ],
+      "voltage_min": 19.462894439697266,
+      "current_p50_p95_max": [
+        4.033524990081787,
+        5.522414445877074,
+        6.931838512420654
+      ],
+      "seconds_above_2400W": 0.0,
+      "last_10s_voltage_median": 19.570249557495117
+    },
+    "last_5min": {
+      "start_boot_s": 3174.77,
+      "end_boot_s": 3474.77,
+      "duration_min": 5.0,
+      "charge_Ah": 0.3057051671062295,
+      "energy_Wh": 6.020781613076537,
+      "integrated_Ah": 0.30574534134839243,
+      "integrated_Wh": 6.021636311134873,
+      "mean_A": 3.6689440961807094,
+      "mean_W": 72.25963573361848,
+      "voltage_start_end": [
+        19.926082913973502,
+        19.966004361429725
+      ],
+      "voltage_min": 18.939912796020508,
+      "current_p50_p95_max": [
+        3.81152081489563,
+        7.385536861419678,
+        10.295153617858887
+      ],
+      "seconds_above_2400W": 0.0,
+      "last_10s_voltage_median": 19.895092010498047
+    }
+  },
+  "method": {
+    "source": "BAT instance 0 from the same onboard logs identified in flight-evidence.json",
+    "windows": "Existing selected airborne windows; not a new takeoff/landing detector",
+    "integration": "Linear interpolation at window boundaries; trapezoidal integration of current and instantaneous voltage times current; compared with differences in onboard cumulative counters",
+    "limitations": "Hood River current and all derived power/energy invalid. Trout Lake current calibration has not been checked against a charger or external meter. A pre-airborne single-sample current spike is excluded by the airborne window.",
+    "pilot_history": "Two 6S Li-ion packs in parallel; second added for required mass. Missing avionics-input electrolytic capacitor caused bad current and false limiting at Hood River; repaired before Trout Lake."
+  }
+}

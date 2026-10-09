@@ -48,7 +48,7 @@ The component tree fills in details that are difficult to see in the overall pre
 | Battery packaging | Two instances of `Nav6S300Lion` in `BatteryBoxAssm`, plus two battery gates in the main assembly |
 | Structure | Spreader assembly, core block, top block, battery enclosure, propeller shroud, and skid |
 
-Those are identities in the saved CAD, rather than a verified bill of materials for every flight. In particular, two battery-model instances do not establish how the packs were wired, their actual capacity, or which packs were carried on a particular day. The `AutoPilot` model name alone does not identify the board; the flight logs provide the evidence for the Matek H743 controller used in the tests.
+Those are identities in the saved CAD, rather than a verified bill of materials for every flight. The two battery-model instances alone do not establish their wiring, but my build history does: I connected two 6S Li-ion packs in parallel. Exact installed capacity and the configuration on each flight still need to be distinguished from CAD names and parameter settings. The `AutoPilot` model name alone does not identify the board; the flight logs provide the evidence for the Matek H743 controller used in the tests.
 
 ![The compact core held in one hand, with motor and side-mounted brake mechanisms](assets/micro-agu/build-core.jpg)
 
@@ -57,6 +57,14 @@ Those are identities in the saved CAD, rather than a verified bill of materials 
 ![Open core showing the flight electronics, microSD card, wiring and power connections](assets/micro-agu/build-electronics.jpg)
 
 *The assembled electronics. The photos document packaging; they do not establish the wiring or component configuration of every flight. The print material has not been identified from the photographs.*
+
+## A battery I already owned, and propulsion that fit
+
+I already had a 6S Li-ion pack bought from GetFPV for an earlier project, so I built around it. When the aircraft needed more weight, I bought a second pack and connected them in parallel: 6S2P at the pack level, keeping the voltage and adding capacity. That let some of the required mass carry useful energy, although the later lead ballast was still necessary.
+
+The motor was an inexpensive Amazon purchase with a KV close enough for the intended setup. Propeller diameter was a hard packaging constraint, set by the payload design and my desire to keep it packable. This was a practical integration of available parts, not an optimized motor-and-propeller endurance design. The CAD lists an APC 9x6 CW propeller model; that is not independent confirmation of the prop flown on each date.
+
+The flight logs configure 6,000 mAh battery capacity. At an assumed 3.6–3.7 V nominal per cell, a 6S 6 Ah battery represents roughly 130–133 Wh of nominal energy, not a measured usable-energy budget. The [endurance analysis](flight-testing.md#what-endurance-did-it-actually-achieve) records 54.5 minutes airborne at Trout Lake, with approximately 85 Wh measured by the onboard monitor.
 
 ## Two brake channels, and an airplane autopilot to adapt
 
@@ -82,7 +90,7 @@ The January 3 flight notes are more specific than my memory of a difficult launc
 
 *My notebook, page 185. The climb and sink figures are contemporary notes from my log review, not a new performance characterization.*
 
-I recorded about 0.5 m/s climb and a minimum sink figure of 0.962 m/s, with brake trim explicitly suspected of influencing both. The page also flags an apparently incorrect current reading and Yaapu crashes. That makes these notes useful design feedback, but a poor basis for claiming a clean endurance or aerodynamic benchmark.
+I recorded about 0.5 m/s climb and a minimum sink figure of 0.962 m/s, with brake trim explicitly suspected of influencing both. The page also flags an apparently incorrect current reading and Yaapu crashes. I subsequently traced the current problem and false throttle power limiting to a missing electrolytic capacitor on the power input of the Matek avionics stack, and fixed it before Trout Lake. That diagnosis comes from my repair history; the logs independently show implausible current consumption. That makes these notes useful design feedback, but a poor basis for claiming a clean endurance or aerodynamic benchmark.
 
 The hardware implications were direct. The shroud and skid had to work during awkward handling and landings. The brake mechanism needed usable travel and correct neutral trim. The instrumentation needed to be trustworthy before its numbers could support a performance claim. Autonomous flight did not remove those requirements.
 

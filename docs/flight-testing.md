@@ -26,7 +26,7 @@ My first flight in Hood River was much too lightly loaded. Adding weight made it
 
 Opale's [own FAQ](https://www.opale-paramodels.com/gb/content/11-faq-rc-paraglider) also discusses adding ballast when a model is too light to make progress into the wind. My observation here is narrower: the added weight improved the behavior of my particular model in those conditions. The ballast went on the **bottom of the suspended payload**. That increased wing loading, lowered the payload CG, and changed its pitch inertia. The logs do not record those physical changes, so they cannot separate their contributions to the improvement. This was not an increase in canopy mass.
 
-The notebook adds another contributor: I thought the brake lines were too tight. I recorded a persistent nose-up attitude and disappointing performance, with about 0.5 m/s climb and a minimum sink figure of 0.962 m/s, both suspected to be affected by brake trim. Those are contemporary observations, not a newly validated performance benchmark. Weight alone does not explain everything that needed attention. The stock V2 setup also calls for careful brake neutral and one-sided steering travel; [JohnVHRC demonstrates the mixing](https://www.youtube.com/watch?v=OqNvJ_UtPqc&t=480s). Its stock line dimensions are not directly transferable to my custom actuators. A [later WestHobbiesRC setup walkthrough](https://www.youtube.com/watch?v=HRO3tUq2NUA&t=575s) reinforces the same point; it was published after these flights and is supporting research, not a video I used at the time.
+The notebook adds another contributor: I thought the brake lines were too tight. I recorded a persistent nose-up attitude and disappointing performance, with about 0.5 m/s climb and a minimum sink figure of 0.962 m/s, both suspected to be affected by brake trim. Those are contemporary observations, not a newly validated performance benchmark. There was also an electrical problem: I had omitted the electrolytic capacitor on the Matek avionics stack power input. It caused erroneous current readings and false throttle power limiting; I corrected it before Trout Lake. That repair history changes the interpretation of the early performance figures: loading, brake trim, and unintended power limiting were all involved. The stock V2 setup also calls for careful brake neutral and one-sided steering travel; [JohnVHRC demonstrates the mixing](https://www.youtube.com/watch?v=OqNvJ_UtPqc&t=480s). Its stock line dimensions are not directly transferable to my custom actuators. A [later WestHobbiesRC setup walkthrough](https://www.youtube.com/watch?v=HRO3tUq2NUA&t=575s) reinforces the same point; it was published after these flights and is supporting research, not a video I used at the time.
 
 ![January 3 notes on launch technique, brake trim, weight and hardware](assets/micro-agu/january-flight-notes.png)
 
@@ -40,7 +40,7 @@ The sustained January 3 flight gives us a useful early baseline. It spent most o
 
 ## Trout Lake: another kilogram, and autonomous missions
 
-At Trout Lake we added another kilogram of lead to the bottom of the payload. With the heavier configuration, we were able to fly successful autonomous missions. The February 15 log contains about 54.6 minutes of selected airborne data, including extended AUTO, LOITER and GUIDED operation.
+At Trout Lake we added another kilogram of lead to the bottom of the payload. With the heavier configuration, we were able to fly successful autonomous missions. The February 15 log contains about 54.5 minutes of selected airborne data, including extended AUTO, LOITER and GUIDED operation.
 
 That did not mean the controller was finished. The early part of the flight involved a lot of tuning and some substantial oscillation. Later sections became much quieter, and the repeated waypoint messages show the aircraft making progress through the mission.
 
@@ -53,6 +53,32 @@ One of the satisfying results is the later continuous AUTO segment. It lasts mor
 ![More than ten minutes of AUTO flight: relative ground track, actual and demanded height, and throttle](assets/flight-testing/trout-lake-auto.png)
 
 *The ground track is measured relative to the start of this segment. It is not a commanded-path error plot. This is real onboard data, not a simulated mission.*
+
+## What endurance did it actually achieve?
+
+The battery choice started with a 6S Li-ion pack I already owned from GetFPV. I bought another and connected the packs in parallel because the aircraft needed weight. The motor was a cheap Amazon purchase with a roughly suitable KV, and prop diameter was constrained by the payload and packability. The [design post](micro-agu-design.md#a-battery-i-already-owned-and-propulsion-that-fit) explains that tradeoff. The result was useful endurance without a systematically optimized propulsion installation.
+
+| Selected flight interval | Duration | Logged charge used | Logged energy used | Average battery power |
+|---|---:|---:|---:|---:|
+| Hood River, January 3 | 12.92 min | Invalid | Invalid | Invalid |
+| Trout Lake, February 15 | 54.53 min | 3.923 Ah | 84.97 Wh | 93.5 W |
+| Late continuous AUTO segment, within that Trout Lake flight | 10.38 min | 0.690 Ah | 13.94 Wh | 80.6 W |
+
+The AUTO row is a subset, not an additional flight. Mean current was 4.32 A over the full selected Trout Lake airborne interval and 3.99 A during the late AUTO segment. That segment ended about 10 m higher than it began, so its lower average power was not simply the result of a net descent. Different maneuvers, tuning and battery voltage prevent treating it as a controlled efficiency improvement.
+
+![Trout Lake battery voltage, current and cumulative energy over the selected airborne interval](assets/flight-testing/trout-lake-endurance.png)
+
+*BAT instance 0; 202.81–3474.77 seconds after boot. Green marks the 2738.09–3360.73 s AUTO segment. This is battery-side electrical energy, not mechanical propulsive power. A brief current spike before the airborne window is excluded.*
+
+Hood River cannot provide an energy comparison. Its monitor claims 11.77 Ah and 270 Wh in the selected 12.92 minutes—almost twice the configured 6 Ah capacity. The recorded power exceeds the configured `BATT_WATT_MAX = 2400` for approximately 134 seconds of that interval. The inspected ArduPlane watt-limiter code uses measured voltage times current to detect overpower and reduce allowed throttle, consistent with my account of false limiting. These are corrupt electrical measurements, not actual power consumption; the threshold duration is not a measurement of exactly how long or how severely throttle was limited.
+
+The missing input capacitor and its repair are established by my build history. Both logs retain the same recorded current scale (`BATT_AMP_PERVLT` about 66.7) and zero offset, so there is no logged scale adjustment explaining the change. Trout Lake's current and energy are plausible after the repair, but still lack independent calibration against a charger or external meter. Integrating the logged current and power reproduces the onboard totals; that checks the analysis, not the sensor's accuracy.
+
+The supported endurance claim is **54.5 minutes of demonstrated airborne operation**, not maximum endurance. At the end of the record the monitor reports about 3.934 Ah consumed and 34% remaining against its configured 6 Ah capacity. That percentage is a capacity-counter estimate, not a measured reserve. Pack voltage was about 24.46 V at the beginning of logging and 20.12 V near the end, with a minimum of 18.94 V under load during flight. These are pack voltages; individual cell voltages were not recorded. A low-battery message also appears about 34.5 minutes into the selected flight.
+
+Dividing nominal capacity by average current would suggest about 83 minutes, but it assumes all configured capacity is usable and the current calibration and operating conditions hold. The data do not validate those assumptions or establish why the flight ended. I therefore would not claim an 80–90 minute endurance or a further half-hour of reserve from this flight. A measured recharge and an independently checked current scale would make the next endurance comparison much stronger.
+
+The [endurance evidence](assets/flight-testing/endurance-evidence.json) records the windows, integrations, cumulative-counter differences and limitations. The selected airborne intervals reuse the same boundaries as the earlier flight figures.
 
 ## Configuration context for the plots
 
