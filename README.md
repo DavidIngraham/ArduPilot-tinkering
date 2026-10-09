@@ -6,7 +6,7 @@ The turn-tracking questions also led me into fixed-wing trajectory planning. I w
 
 This repository tells that story through the questions, experiments and results. I worked with Codex to implement ideas, run comparisons and investigate failures. These are simulation-based engineering investigations; I have not established that the experimental designs are ready for flight.
 
-The write-ups and selected figures are also published on [my project site](https://davidingraham.github.io/ardupilot-tinkering/). This full research archive remains private for now.
+The write-ups are rendered directly from this repository on [my project site](https://davidingraham.github.io/ardupilot-tinkering/), with figures and results linked to their source files here. The homepage repository manages the publishing manifest; edits to these Markdown files appear when readers reload, subject to GitHub caching. This research archive is now public.
 
 ## The questions I explored
 
