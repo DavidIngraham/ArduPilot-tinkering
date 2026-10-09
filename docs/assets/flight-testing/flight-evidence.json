@@ -34,5 +34,11 @@
     "end_boot_s": 3360.73,
     "duration_min": 10.37733333333333
   },
-  "provenance": "Launch and ballast history supplied by the pilot. Log measurements do not encode ballast placement or mass. Overview plot CSVs are sampled at 5 Hz from the 25 Hz aligned analysis; rate metrics were calculated at 25 Hz."
+  "provenance": "Launch and ballast history supplied by the pilot, with contemporary January 3 notebook observations on page 185 of Paraglider.pdf. Overview plot CSVs are sampled at 5 Hz from the 25 Hz aligned analysis; rate metrics were calculated at 25 Hz.",
+  "pilot_confirmed_configuration": {
+    "canopy": "HobbyKing V2",
+    "ballast_location": "Bottom of suspended payload",
+    "trout_lake_additional_ballast_kg": 1,
+    "source": "Pilot clarification; not encoded in flight logs"
+  }
 }

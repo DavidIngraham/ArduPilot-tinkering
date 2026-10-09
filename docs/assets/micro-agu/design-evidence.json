@@ -1,0 +1,348 @@
+{
+  "notes_source": {
+    "file": "Paraglider.pdf",
+    "sha256": "915aebe8e4f256558d91cbfe8355fca3bab6eab6537c0eddd482de2107d63362",
+    "page_count": 323,
+    "original_notes_pages": [
+      1,
+      185,
+      323
+    ]
+  },
+  "cad_files": [
+    {
+      "file": "3115Motor.SLDASM",
+      "sha256": "dd3f35091f1c7bbdb115565cc72e4f7cdab8c8b6ce06a7f4121b948eb892d5a6"
+    },
+    {
+      "file": "APC 9x6 CW.SLDPRT",
+      "sha256": "78eeb80fa1da325670423163396fd1c61750c969fd125b3af48deae389104749"
+    },
+    {
+      "file": "AutoPilot.SLDPRT",
+      "sha256": "5e0b81c937f08de75390c0e529d34402f94d2c58eb271a1e1741462fbe5d866b"
+    },
+    {
+      "file": "AvionicsAsm.SLDASM",
+      "sha256": "451c40fd7421bea1d48205da7a1ed66f1d1a427f1404a8dd376ebf45f5840b83"
+    },
+    {
+      "file": "BatteryBox.SLDPRT",
+      "sha256": "ce360bb29cf093cc6a2044a81ad721f414ef97bcecbeef75b6571a84016c2a8a"
+    },
+    {
+      "file": "BatteryBoxAssm.SLDASM",
+      "sha256": "ea05e2fe097d3bc1835e6185a7e84fdad8104e0bd510916f3b9082548b273c68"
+    },
+    {
+      "file": "BatteryBoxWithInserts.SLDASM",
+      "sha256": "635d968f32f8dbf74658a8bcca6f64b693fcc677b5fdce10ed038b7421ac542d"
+    },
+    {
+      "file": "BatteryGate.SLDPRT",
+      "sha256": "ae50437e78b9c35c469221564a38cae87c502ede32932d862d4f2f15285e6b7d"
+    },
+    {
+      "file": "ControlArm.SLDPRT",
+      "sha256": "c61990136c0ebbd5052cebc9599bed706d817e71a17e8ac0d581b76f975dbde3"
+    },
+    {
+      "file": "CoreBlock.SLDPRT",
+      "sha256": "05c7a9caf3a259409b72ecb31cd5158d9525326f58cd5700a332ea66b50124c5"
+    },
+    {
+      "file": "CoreWithInserts.SLDASM",
+      "sha256": "de151ff16e94be484468b39536a99a8d5fcab766eaf81dc93ce32670425dfde1"
+    },
+    {
+      "file": "DS339HV.SLDPRT",
+      "sha256": "df3cbbb94edd098037a944ff2d22d18039613e8fd529721d482dc3f2842cabe9"
+    },
+    {
+      "file": "ESC.SLDPRT",
+      "sha256": "dc30aa3b2b0d2a9c54d1ab1adf0c7e804f24f054526b5421920d5f9503a07ca7"
+    },
+    {
+      "file": "M10Q-5883.SLDPRT",
+      "sha256": "ca262f912f895791086d5da3ecce4c5f61f5d55f7c33b69254038dd9271e72dd"
+    },
+    {
+      "file": "microAGU.SLDASM",
+      "sha256": "4d79341c185576bc64356f4bc22a1d7a6c78dbde1d2fcabf8451a6747c8e2eb0"
+    },
+    {
+      "file": "MirrorControlArm.SLDPRT",
+      "sha256": "b4e9088758b4225cc88f7df9b1da56fb63f23a370488222ffac1b4c1af9c2e9d"
+    },
+    {
+      "file": "MirrorDS339HV.SLDPRT",
+      "sha256": "872ea938fda58b3744fcf6b4fe33072e0ad4bd7c0aa0552460f28e22f8a10206"
+    },
+    {
+      "file": "MirrorServoAssembly.SLDASM",
+      "sha256": "75d4a1648a75abfaf17eeb131d582f96970033e14d21e876c7ea6e659dca1bc6"
+    },
+    {
+      "file": "MirrorServoHorn.SLDPRT",
+      "sha256": "f84b7cad34a7c5be43d5546103d669802e0b791d2546a7ec8093872f5f3468d7"
+    },
+    {
+      "file": "Nav6S300Lion.SLDPRT",
+      "sha256": "03725ec5e09dbc4eda6fb78605d84ea9365bb714cb5877b954933a0b70a292ee"
+    },
+    {
+      "file": "Rotor.SLDPRT",
+      "sha256": "9bcaaaf2fb47e82617f84fc571e15d3475a79c0d40fd0f00d217ff5dadb99563"
+    },
+    {
+      "file": "ServoAssembly.SLDASM",
+      "sha256": "57873bc63f1e5b84db83373fcf0e0844ce2807d74ce1facefb01cbef7a0395bd"
+    },
+    {
+      "file": "ServoHorn.SLDPRT",
+      "sha256": "277f5da091e9d70872d806d56d9f2a2947235fc4842e6c253e0af3f04c054c19"
+    },
+    {
+      "file": "Shroud.SLDPRT",
+      "sha256": "bcd1380abf3042349c74cc12ea5b60e4253ff8d8a3d4ec147aada130765ceefb"
+    },
+    {
+      "file": "Skid.SLDPRT",
+      "sha256": "4e6501a28f8da36848754ef6691269dd607027bb18a2223ba82af50c1b04301f"
+    },
+    {
+      "file": "SpreaderAssembly.SLDASM",
+      "sha256": "7149abc6222f55dd7d86cd78c8e1705354e1f7867837b6bdbeb5193f41d2bed2"
+    },
+    {
+      "file": "SpreaderBar.SLDPRT",
+      "sha256": "51e8a07c6abf567c7e830d75f30c7a3bfdc5739eb214302972910ef939ee063f"
+    },
+    {
+      "file": "SpreaderBarSpar.SLDPRT",
+      "sha256": "40de59f4c2a8736b40d74fda43afc4211b357cf91fad9bbc3f8a311c41c97ef5"
+    },
+    {
+      "file": "Stator.SLDPRT",
+      "sha256": "69c8dbac2436fd58e4cda64735820fac59833b5e52311ee730ca11423f462f38"
+    },
+    {
+      "file": "TopBlock.SLDPRT",
+      "sha256": "92665057364e5289c06d850e836f622d47f15e81349cee0164fb9f639d91c51a"
+    },
+    {
+      "file": "USBBoard.SLDPRT",
+      "sha256": "465e8db28eda755d35612edfe1e60b41f7b4666d8846acea3fc6b626692c0cae"
+    }
+  ],
+  "saved_assembly_structure": {
+    "3115Motor": [
+      {
+        "part": "Stator",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "Rotor",
+        "instance": "1",
+        "suppressed": "NO"
+      }
+    ],
+    "SpreaderAssembly": [
+      {
+        "part": "SpreaderBarSpar",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "m3_standard",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "m3_standard",
+        "instance": "2",
+        "suppressed": "NO"
+      }
+    ],
+    "BatteryBoxAssm": [
+      {
+        "part": "Nav6S300Lion",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "Nav6S300Lion",
+        "instance": "2",
+        "suppressed": "NO"
+      },
+      {
+        "part": "BatteryBox",
+        "instance": "1",
+        "suppressed": "NO"
+      }
+    ],
+    "ServoAssembly": [
+      {
+        "part": "ControlArm",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "DS339HV",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "ServoHorn",
+        "instance": "1",
+        "suppressed": "NO"
+      }
+    ],
+    "AvionicsAsm": [
+      {
+        "part": "CoreBlock",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "AutoPilot",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "m3_standard",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "m3_standard",
+        "instance": "2",
+        "suppressed": "NO"
+      },
+      {
+        "part": "m3_standard",
+        "instance": "3",
+        "suppressed": "NO"
+      },
+      {
+        "part": "m3_standard",
+        "instance": "4",
+        "suppressed": "NO"
+      },
+      {
+        "part": "m3_standard",
+        "instance": "5",
+        "suppressed": "NO"
+      },
+      {
+        "part": "USBBoard",
+        "instance": "2",
+        "suppressed": "NO"
+      },
+      {
+        "part": "ServoAssembly",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "ServoAssembly",
+        "instance": "2",
+        "suppressed": "NO"
+      },
+      {
+        "part": "m3_standard",
+        "instance": "6",
+        "suppressed": "NO"
+      },
+      {
+        "part": "m3_standard",
+        "instance": "7",
+        "suppressed": "NO"
+      },
+      {
+        "part": "m3_standard",
+        "instance": "8",
+        "suppressed": "NO"
+      },
+      {
+        "part": "m3_standard",
+        "instance": "9",
+        "suppressed": "NO"
+      },
+      {
+        "part": "m3_standard",
+        "instance": "10",
+        "suppressed": "NO"
+      },
+      {
+        "part": "m3_standard",
+        "instance": "11",
+        "suppressed": "NO"
+      },
+      {
+        "part": "ESC",
+        "instance": "1",
+        "suppressed": "NO"
+      }
+    ],
+    "microAGU": [
+      {
+        "part": "Shroud",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "3115Motor",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "APC 9x6 CW",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "SpreaderAssembly",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "BatteryBoxAssm",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "TopBlock",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "M10Q-5883",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "AvionicsAsm",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "Skid",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "BatteryGate",
+        "instance": "1",
+        "suppressed": "NO"
+      },
+      {
+        "part": "BatteryGate",
+        "instance": "2",
+        "suppressed": "NO"
+      }
+    ]
+  },
+  "limits": "Saved previews and component-instance metadata; no native CAD rebuild or validated mass properties. Named components do not establish the configuration flown on each date. Battery assembly contains two Nav6S300Lion instances; electrical wiring and actual capacity are unverified. Ballast placement at the bottom of the payload and HobbyKing V2 canopy identified by pilot."
+}

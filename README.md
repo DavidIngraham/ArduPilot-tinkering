@@ -10,6 +10,9 @@ The write-ups are rendered directly from this repository on [my project site](ht
 
 ## The questions I explored
 
+- [Micro-AGU design](docs/micro-agu-design.md): the motivation, physical payload design, and lessons from the original notebook.
+- [Real flight testing](docs/flight-testing.md): learning to launch, ballast and trim, autonomous missions, and pitch-damper behavior.
+
 - [Plane trajectory planning](docs/trajectory.md): line-to-line turns, wind, raster surveys and Monte Carlo results.
 - [Paraglider model and lateral control](docs/paraglider.md): heading-rate steering, pitch articulation and launch experiments.
 - [Longitudinal control and observer design](docs/longitudinal-observer.md): truth-state benchmarks, observability and normalized force balance.
