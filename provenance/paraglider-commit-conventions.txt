@@ -1,0 +1,18 @@
+
+Checking 3 commit(s) since e97b724214...
+
+✓ No merge commits.
+✓ No fixup! commits.
+✓ All commit messages have well-formed subsystem tags.
+✓ All commits touch a single allowed subsystem.
+✓ All commit subject lines within 160 characters.
+✓ No unacceptable author emails.
+✓ All submodule updates are isolated in their own commits.
+~ Submodule reference check only applies to master-targeting PRs.
+✓ board_types.txt not changed (board ID check).
+✓ No changed source files lose their trailing newline.
+✓ No markdown files changed.
+✓ No markdown files changed (RST markup check).
+✓ No markdown files changed (underline heading check).
+
+All checks passed.

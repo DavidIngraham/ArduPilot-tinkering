@@ -1,0 +1,9 @@
+{
+  "config": {
+    "name": "locked-g0.2",
+    "joint": 1,
+    "gain": 0.2,
+    "model": "locked.json"
+  },
+  "start": 129.764
+}

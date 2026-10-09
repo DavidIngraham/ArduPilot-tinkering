@@ -1,0 +1,14 @@
+[
+  {
+    "name": "joint-rampwind-g0",
+    "returncode": 1
+  },
+  {
+    "name": "joint-rampwind-g0.2",
+    "returncode": 1
+  },
+  {
+    "name": "rigid-rampwind-g0.2",
+    "returncode": 1
+  }
+]

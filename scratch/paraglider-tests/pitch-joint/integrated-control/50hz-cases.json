@@ -1,0 +1,29 @@
+[
+  {
+    "name": "step50-gentle",
+    "controller": "gentle",
+    "parameters": {
+      "TECS_TIME_CONST": 2,
+      "TECS_HDEM_TCONST": 2,
+      "TECS_VERT_ACC": 2
+    }
+  },
+  {
+    "name": "step50-balanced",
+    "controller": "balanced",
+    "parameters": {
+      "TECS_TIME_CONST": 2,
+      "TECS_HDEM_TCONST": 2,
+      "TECS_VERT_ACC": 2
+    }
+  },
+  {
+    "name": "step50-fast",
+    "controller": "fast",
+    "parameters": {
+      "TECS_TIME_CONST": 2,
+      "TECS_HDEM_TCONST": 2,
+      "TECS_VERT_ACC": 2
+    }
+  }
+]

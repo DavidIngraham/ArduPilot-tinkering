@@ -1,0 +1,14 @@
+[
+  {
+    "name": "step-rate-soft",
+    "returncode": 0
+  },
+  {
+    "name": "step-rate-medium",
+    "returncode": 0
+  },
+  {
+    "name": "step-rate-fast",
+    "returncode": 0
+  }
+]

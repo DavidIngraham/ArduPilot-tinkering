@@ -1,0 +1,23 @@
+[
+  {
+    "path": "/workspace/ardupilot",
+    "branch": "paraglider-rebase",
+    "head": "b2f6da3a183a68d3de6f2c721ec90fca0eab53d5",
+    "status": "",
+    "origin": "https://github.com/DavidIngraham/ardupilot.git"
+  },
+  {
+    "path": "/workspace/ardupilot-plane-trajectory",
+    "branch": "plane-trajectory-wip",
+    "head": "81f32455ec7098888d21977fdc474f3b64657ba4",
+    "status": "",
+    "origin": "https://github.com/DavidIngraham/ardupilot.git"
+  },
+  {
+    "path": "/workspace/ardupilot-quicktune-wip",
+    "branch": "paraglider-quicktune-wip",
+    "head": "e97b724214c63f5c21ff6ae1a5594b91de8fe48f",
+    "status": "M ArduPlane/Plane.cpp\n M ArduPlane/Plane.h\n M Tools/autotest/arduplane.py\n M Tools/scripts/build_options.py\n M libraries/AP_Scripting/docs/docs.lua\n M libraries/AP_Scripting/generator/description/bindings.desc\n M libraries/AP_TECS/AP_TECS_config.h\n M libraries/AP_Vehicle/AP_Vehicle.h\n?? libraries/AP_Scripting/applets/paraglider-quicktune.lua",
+    "origin": "https://github.com/DavidIngraham/ardupilot.git"
+  }
+]

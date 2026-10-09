@@ -1,0 +1,18 @@
+[
+  {
+    "name": "frequency-default",
+    "returncode": 0
+  },
+  {
+    "name": "frequency-snappy-current",
+    "returncode": 0
+  },
+  {
+    "name": "frequency-snappy-oracle",
+    "returncode": 0
+  },
+  {
+    "name": "frequency-snappy-rate-only",
+    "returncode": 0
+  }
+]

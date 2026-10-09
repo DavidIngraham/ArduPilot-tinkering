@@ -1,0 +1,7 @@
+{
+  "name": "zero-damper",
+  "damper": 0,
+  "ka": 0,
+  "kr": 0,
+  "parameters": {}
+}
