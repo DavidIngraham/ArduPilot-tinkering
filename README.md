@@ -6,6 +6,8 @@ The turn-tracking questions also led me into fixed-wing trajectory planning. I w
 
 This repository tells that story through the questions, experiments and results. I worked with Codex to implement ideas, run comparisons and investigate failures. These are simulation-based engineering investigations; I have not established that the experimental designs are ready for flight.
 
+The write-ups and selected figures are also published on [my project site](https://davidingraham.github.io/ardupilot-tinkering/). This full research archive remains private for now.
+
 ## The questions I explored
 
 - [Plane trajectory planning](docs/trajectory.md): line-to-line turns, wind, raster surveys and Monte Carlo results.
