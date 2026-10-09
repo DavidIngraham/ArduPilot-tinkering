@@ -1,0 +1,12 @@
+[
+  {
+    "start": "11:30:00",
+    "duration_s": 45,
+    "bank_error_rms_deg": 11.569419817615673
+  },
+  {
+    "start": "11:35:15",
+    "duration_s": 45,
+    "bank_error_rms_deg": 14.374472592334675
+  }
+]

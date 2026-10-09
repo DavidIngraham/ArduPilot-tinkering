@@ -22,7 +22,7 @@ The [V2 manual](https://manuals.plus/m/cdab9dabe4a9759fe1f47d8eb9e2d012e56b48235
 
 ## Hood River: the model was too light
 
-My first flight in Hood River was much too lightly loaded. Adding weight made it noticeably more stable. That was a practical lesson before it was a control-system lesson: I needed a model that flew reasonably well before asking an autopilot to improve it.
+My first flight, at the Barrett Park RC field in Hood River, was much too lightly loaded. Adding weight made it noticeably more stable. That was a practical lesson before it was a control-system lesson: I needed a model that flew reasonably well before asking an autopilot to improve it.
 
 The ballast went on the **bottom of the payload**, increasing wing loading, lowering its CG, and changing its pitch inertia. The model flew noticeably better with the added weight. Opale’s [FAQ](https://www.opale-paramodels.com/gb/content/11-faq-rc-paraglider) discusses the same practical benefit of ballast for wind penetration.
 
@@ -38,9 +38,21 @@ The sustained January 3 flight gives us a useful early baseline. It spent most o
 
 *Hood River, January 3: height above home, payload pitch, and throttle during the sustained flight. Green marks AUTO mode.*
 
+## Between the fields: tuning in the simple simulator
+
+Hood River gave me the first real measurements to work from. I used both live telemetry and later log analysis to understand the climb and glide performance. Before the next flight, I used our simple initial simulation model to tune the lateral controller.
+
+The Mission Planner recordings preserve that work on February 14 and the morning of February 15. I tried different feed-forward gains, damping, angle time constants, and navigation settings. The simulator made it easy to explore settings that produced large bank oscillations and then back them off.
+
+![Recorded simulation tuning: gain changes, bank, heading rate and flight mode](assets/flight-testing/sitl-lateral-tuning.png)
+
+*February 15, 11:20–11:50 a.m. PST: actual recorded SITL telemetry from the initial model. The gain changes sit above the simulated response; the bottom panel shows mode changes during the session.*
+
+I settled on roll feed-forward of 1.0, derivative feed-forward of 0.05, and a 1 Hz target filter, with the angle time constant at one second. The log records the final FF and D_FF selections at 11:37 a.m., just a few hours before flying at Collin’s house. The [lateral-controller article](paraglider.md) explains how these settings turn the existing roll-controller paths into angle correction and damping.
+
 ## Trout Lake: another kilogram, and autonomous missions
 
-I remember a short attempt or failed launch at Trout Lake before adding another kilogram of lead to the bottom of the payload. With that weight aboard, the next flight lasted **54.5 minutes continuously on one charge**, including AUTO, LOITER, and GUIDED operation. I landed because I had finished testing.
+At my friend Collin’s house in Trout Lake, I remember a short attempt or failed launch before adding another kilogram of lead to the bottom of the payload. With that weight aboard, the next flight lasted **54.5 minutes continuously on one charge**, including AUTO, LOITER, and GUIDED operation. I landed because I had finished testing.
 
 That did not mean the controller was finished. The early part of the flight involved a lot of tuning and some substantial oscillation. Later sections became much quieter, and the repeated waypoint messages show the aircraft making progress through the mission.
 
@@ -117,6 +129,16 @@ The fast oscillation reduced sharply. Later in the same flight, reintroducing th
 
 That experience led to the [longitudinal controller and observer investigation](longitudinal-observer.md). The next step is to control the relative canopy–payload motion, accounting for motor response and the different oscillation modes.
 
+## Testing tighter turns at Trout Lake
+
+The lateral gains came from the simulator and stayed fixed throughout the long flight. I deliberately reduced the loiter-radius setting from 60 to 40 metres at 10:26 after takeoff, then to 30 metres at 35:47. The first change was in LOITER; the second was entered in GUIDED.
+
+![Trout Lake response to reducing the loiter radius from 60 to 40 metres](assets/flight-testing/lateral-loiter-response.png)
+
+*The dashed line marks the 60 → 40 m radius change. Grey shading marks a brief MANUAL interval between LOITER segments. Bank and heading-rate transients are visible alongside the eventual path tracking.*
+
+Selected settled portions of the 60 m and 40 m loiters show median heading rate increasing from about 5.0 to 6.4 degrees per second. A later 40 m segment had 0.36 m RMS logged cross-track error. That gave me a concrete result from the flight: the controller could guide the aircraft around a tighter circle, while the transitions still gave me work to do.
+
 ## Bringing the simulation back to the aircraft
 
 The flights give the simulation clear targets: a slow pitch mode around 0.32–0.37 Hz and a faster oscillation excited by the damper. The articulated model captures a similar slow mode, but still needs calibration to reproduce the recorded response to throttle.
@@ -132,3 +154,5 @@ The figures use the January 3 and February 15 onboard logs. Height is relative t
 The force diagram explains the mechanism identified afterward in the articulated model; loaded CG and inertia remain to be measured. The February 15 firmware reports `3a2da6cf`, while its parameter names match later source changes. The inspected implementations agree on the damper sign, but the version string does not identify the exact compiled tree. Filter behavior also matters: the inspected code zeros the signal at zero cutoff, applies positive cutoff changes on reset, and updates at 50 Hz using the throttle-loop timestep.
 
 I reviewed six onboard logs and 54 telemetry logs with their raw companions. A February 22 telemetry recording switches from hardware to SITL; that simulated section is excluded here. The [flight evidence](assets/flight-testing/flight-evidence.json) records source hashes and comparison windows. [Hood River](assets/flight-testing/hood-river-plot-data.csv.gz) and [Trout Lake](assets/flight-testing/trout-lake-plot-data.csv.gz) overview data are sampled at 5 Hz; pitch-rate comparisons use the 25 Hz analysis.
+
+The simulation figures use the Mission Planner SITL recording beginning February 14 at 13:43:43 PST, which continues into February 15. It is kept separate from the aircraft flight data. Recorded parameter values and timestamps are preserved in the [simulation tuning history](assets/flight-testing/sitl-lateral-tuning-history.json).
