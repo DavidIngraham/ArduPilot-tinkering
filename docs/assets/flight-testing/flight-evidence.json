@@ -1,0 +1,38 @@
+{
+  "source_logs": [
+    {
+      "file": "2026-01-03 15-41-42.bin",
+      "sha256": "08a03da95e40a2fe52dcc23962d336d9fa63602139de8e0268c5cd8059aa3d25"
+    },
+    {
+      "file": "2026-02-15 15-38-50.bin",
+      "sha256": "22fee6ddbcb41a60fb8cd0a4ceb1c7da2bc3f130770f151e4c785bd83f76b673"
+    }
+  ],
+  "comparison": [
+    {
+      "label": "Damper 0.10; P=I=0",
+      "start": 635,
+      "end": 654,
+      "q_rms": 76.42480850314857,
+      "throttle_sd": 11.281558748358428,
+      "slow_rms": 8.350246100087144,
+      "fast_rms": 70.9470303096112
+    },
+    {
+      "label": "Damper 0; P=I=0",
+      "start": 659,
+      "end": 681,
+      "q_rms": 22.66274597929268,
+      "throttle_sd": 3.3365710393307473,
+      "slow_rms": 7.650301107907121,
+      "fast_rms": 10.849158813579226
+    }
+  ],
+  "auto_segment": {
+    "start_boot_s": 2738.09,
+    "end_boot_s": 3360.73,
+    "duration_min": 10.37733333333333
+  },
+  "provenance": "Launch and ballast history supplied by the pilot. Log measurements do not encode ballast placement or mass. Overview plot CSVs are sampled at 5 Hz from the 25 Hz aligned analysis; rate metrics were calculated at 25 Hz."
+}
