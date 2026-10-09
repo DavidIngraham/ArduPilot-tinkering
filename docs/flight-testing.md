@@ -2,7 +2,7 @@
 
 The first problem with my powered model paraglider was getting it into the air. The next was keeping the controller from making it wobble.
 
-This aircraft is part of **micro-AGU (Micro Aerial Guidance Unit)**, inspired by my high-school work at Stara Technologies on guided parafoils. I wanted to explore how much better small guided parafoils could perform with modern open-source avionics. This powered test platform uses a **HobbyKing V2 canopy** and a custom suspended payload; the [design post](micro-agu-design.md) describes the hardware and original notebook.
+This aircraft is part of **micro-AGU (Micro Aerial Guidance Unit)**, inspired by helping execute guided-parafoil tests at Stara Technologies in high school—mostly recovering hardware around the desert on ATVs. I wanted to explore how much better small guided parafoils could perform with modern open-source avionics. This powered test platform uses a **HobbyKing V2 canopy** and a custom suspended payload; the [design post](micro-agu-design.md) describes the hardware and original notebook. I had wanted to try this for years, but the premium canopies I considered were too expensive for the experiment and I thought the original HobbyKing wing was poor. The inexpensive V2 made the project practical.
 
 These flight tests took me from awkward launch attempts in Hood River to sustained autonomous missions in Trout Lake. Looking back through the logs with Codex helped connect what I remembered at the field with what the aircraft actually recorded. The useful story includes the launch technique, the weight of the model, and a throttle-to-pitch response that ran against my intuition.
 
@@ -12,7 +12,13 @@ I initially tried running with the model before tossing it. That produced some v
 
 Watching Opale Paramodels videos helped me learn a better technique. Getting the canopy inflated and overhead before releasing the model made much more sense than trying to solve the whole launch by running faster. It took practice to make that sequence repeatable. My January 3 notebook specifically calls for a “multi-step walk” and a better hand position—useful contemporary detail behind my recollection of learning to launch.
 
-For a visual reference, Opale's [English first-flight Backpack tutorial](https://www.youtube.com/watch?v=UEoCY5cZiRg) and [Ultra 3.5: Easy take off with Mike XL](https://www.youtube.com/watch?v=Y3AK1-yno0g) show the sort of preparation and launch technique I was learning. Both are from Opale's own channel; these are useful reference videos, rather than a claim that I have recovered the exact videos I watched that day. Their [tutorial playlist](https://www.youtube.com/playlist?list=PLQ6f0XQ2TFqdJHD9zXCt2_ikhzftwdELU) collects more of the setup material.
+For a visual reference, Opale's [first-flight Backpack tutorial](https://www.youtube.com/watch?v=UEoCY5cZiRg) and [Ultra 3.5: Easy take off with Mike XL](https://www.youtube.com/watch?v=Y3AK1-yno0g) show the sort of preparation and launch technique I was learning. Both are from Opale's own channel; these are useful reference videos, rather than a claim that I have recovered the exact videos I watched that day. Their [tutorial playlist](https://www.youtube.com/playlist?list=PLQ6f0XQ2TFqdJHD9zXCt2_ikhzftwdELU) collects more of the setup material.
+
+The V2 documentation and owner reports put that learning curve in context. The [manual](https://manuals.plus/m/cdab9dabe4a9759fe1f47d8eb9e2d012e56b482351e1acf6d5046c899579cf24) describes a smooth overhead launch and establishing an inflated wing before release. [Owners also report failed launches and broken props](https://www.rc-network.de/threads/hobbyking-paramotor-v2-luftschraube.12051592/). Those accounts resemble my experience, but they do not diagnose my individual attempts.
+
+![Micro-AGU payload and folded HobbyKing V2 canopy](assets/micro-agu/build-canopy.jpg)
+
+*The actual payload and canopy. This is a build photograph, not a photograph of either flight-test session.*
 
 ## Hood River: the model was too light
 
@@ -20,7 +26,7 @@ My first flight in Hood River was much too lightly loaded. Adding weight made it
 
 Opale's [own FAQ](https://www.opale-paramodels.com/gb/content/11-faq-rc-paraglider) also discusses adding ballast when a model is too light to make progress into the wind. My observation here is narrower: the added weight improved the behavior of my particular model in those conditions. The ballast went on the **bottom of the suspended payload**. That increased wing loading, lowered the payload CG, and changed its pitch inertia. The logs do not record those physical changes, so they cannot separate their contributions to the improvement. This was not an increase in canopy mass.
 
-The notebook adds another contributor: I thought the brake lines were too tight. I recorded a persistent nose-up attitude and disappointing performance, with about 0.5 m/s climb and a minimum sink figure of 0.962 m/s, both suspected to be affected by brake trim. Those are contemporary observations, not a newly validated performance benchmark. Weight alone does not explain everything that needed attention.
+The notebook adds another contributor: I thought the brake lines were too tight. I recorded a persistent nose-up attitude and disappointing performance, with about 0.5 m/s climb and a minimum sink figure of 0.962 m/s, both suspected to be affected by brake trim. Those are contemporary observations, not a newly validated performance benchmark. Weight alone does not explain everything that needed attention. The stock V2 setup also calls for careful brake neutral and one-sided steering travel; [JohnVHRC demonstrates the mixing](https://www.youtube.com/watch?v=OqNvJ_UtPqc&t=480s). Its stock line dimensions are not directly transferable to my custom actuators. A [later WestHobbiesRC setup walkthrough](https://www.youtube.com/watch?v=HRO3tUq2NUA&t=575s) reinforces the same point; it was published after these flights and is supporting research, not a video I used at the time.
 
 ![January 3 notes on launch technique, brake trim, weight and hardware](assets/micro-agu/january-flight-notes.png)
 
@@ -48,6 +54,17 @@ One of the satisfying results is the later continuous AUTO segment. It lasts mor
 
 *The ground track is measured relative to the start of this segment. It is not a commanded-path error plot. This is real onboard data, not a simulated mission.*
 
+## Configuration context for the plots
+
+| Figure / interval | What the logs establish | Physical configuration from my recollection |
+|---|---|---|
+| January 3 overview | Mostly MANUAL and FBWA, with short CRUISE and LOITER trials; no single damper setting is asserted for the whole plot | Hood River was initially too light; ballast helped, but the change is not timestamped in the log |
+| February 15 overview | AUTO intervals are shaded; parameters changed during this flight, so it is not one fixed controller configuration | Trout Lake: another 1 kg of lead at the bottom of the payload; total loaded mass was not recorded |
+| February 15 AUTO detail | 2738.09–3360.73 s after boot, 10.38 minutes continuously in AUTO | Same day's configuration; no independent measurement of CG or inertia |
+| February 15 damper comparison | CRUISE; throttle P and I both zero; damper 0.10 before 655.79 s and zero afterward | No ballast change is documented across these short comparison windows |
+
+The February 15 log reports firmware `3a2da6cf`; the parameter names indicate that this does not uniquely identify the compiled source, as discussed below. The AUTO figure is evidence of sustained mission operation, not a controlled damper comparison. The [evidence file](assets/flight-testing/flight-evidence.json) preserves the exact comparison windows and source hashes.
+
 ## The damper that could make things worse
 
 I had added a pitch-rate damper to throttle. My initial intuition was that more throttle would pitch the model up, so adding throttle during a nose-down rotation should oppose that motion.
@@ -64,7 +81,7 @@ The articulated model showed why that assumption could fail. The thrust line is 
 
 ![Free-body diagram of the payload and canopy, showing thrust above the payload CG and the reinforcing feedback sequence](assets/flight-testing/pitch-damper-fbd.png)
 
-*The diagram shows schematic geometry, not measured dimensions. The ballast location is confirmed from the build history; the loaded CG and thrust offset have not yet been measured. The suspension forces are equal and opposite. Canopy aerodynamic moment and any joint couple also belong in the complete angular equations.*
+*The diagram shows schematic geometry, not measured dimensions. The ballast location is confirmed from the build history; the loaded CG and thrust offset have not yet been measured. The suspension forces are equal and opposite. The labeled thrust offset is the moment arm about the loaded payload CG; the suspension reaction also has a moment arm about that CG. Canopy aerodynamic moment and any joint couple also belong in the complete angular equations.*
 
 For the modeled initial response, the feedback can run in the wrong direction:
 

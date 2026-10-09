@@ -1,6 +1,16 @@
 # Micro-AGU: returning to small guided parafoils
 
-When I was in high school, I spent time working at Stara Technologies on guided parafoils. That experience stayed with me. Micro-AGU—Micro Aerial Guidance Unit—is my attempt to return to that idea and ask how much better a small guided parafoil could perform with modern open-source avionics.
+My interest in guided parafoils started in high school, when I helped with test execution at Stara Technologies. My role was mostly test support: roaming around the desert on ATVs, recovering hardware after test flights, and picking up the pieces.
+
+Stara was developing miniature autonomous parafoil systems. A [2002 company announcement](https://guidedparafoils.org/wp-content/uploads/2019/10/ProQuestDocuments-2019-10-06.pdf) describes a guidance unit weighing just over half a pound, combining GPS, a compass, and motor-driven steering under a small parafoil. Its later [Mosquito system](https://www.spacewar.com/reports/STARA_Technologies_Demos_UAV_Precision_Airdrop_Capabilities_For_US_Military.html) pursued precision delivery of small payloads from unmanned aircraft. I was helping execute tests, not designing those guidance systems, but the idea stayed with me.
+
+I'd wanted to try a project like this for years. The higher-end Opale and Hacker canopies cost more than I wanted to spend on an experiment, and I thought the original HobbyKing canopy was pretty bad. The inexpensive V2 canopy changed that: it made the experiment practical. Modern open-source avionics supplied the other key ingredient.
+
+That became **micro-AGU—Micro Aerial Guidance Unit**: an opportunity to explore how much better a small guided parafoil could perform with modern open-source avionics.
+
+![The assembled micro-AGU payload, with its printed frame, brake actuators and propeller guard](assets/micro-agu/build-assembled.jpg)
+
+*The actual build. The lower enclosure is open in this photograph; it does not document a loaded flight configuration.*
 
 The powered paraglider is the current experimental platform. It gives me a way to fly the guidance hardware, collect data, and work through the interaction between the canopy, payload, and controller. Successful powered missions are a useful milestone toward that goal; they do not yet establish the performance of an unpowered precision-delivery system.
 
@@ -8,7 +18,15 @@ This post brings together the physical design, my original notebook, and what th
 
 ## A commercial canopy and a custom payload
 
-The canopy is a **HobbyKing V2**. The custom work is concentrated in the suspended payload: a compact package containing the avionics, brake actuators, battery enclosure, motor, propeller guard, and landing structure.
+The canopy is a **HobbyKing V2**, a 2.4 m single-skin wing. [HobbyKing describes](https://hobbyking.com/en_us/h-king-paramotor-v2-w-led-light-bar-2400mm-pnf.html) a revised wing and stronger, smoother lines, with testing and feedback from JohnVHRC. The manufacturer claims easier launching and more stable flight than V1. Those documented changes help explain why V2 was worth trying; my assessment of V1 is my own, not a controlled comparison.
+
+The affordability mattered more than having a premium wing. [Opale](https://www.opale-paramodels.com/gb/rc-paramotor-paraglider-wing/1739-ultra-35.html) and [Hacker](https://www.hacker-motor-shop.com/Para-RC/Para-RC-gliders.htm?a=catalog&p=7836&shop=hacker_e) offer wings across different sizes and performance classes. The ones I had considered were beyond my budget for this experiment. Current catalog prices are not a record of what I paid or an equivalent-performance comparison.
+
+![The custom payload resting on the folded canopy with suspension lines visible](assets/micro-agu/build-canopy.jpg)
+
+*The commercial canopy and the custom payload together. Line routing and brake neutral are part of the integration work.*
+
+HobbyKing specifies a 1.6–2.0 kg flying weight for its complete stock paramotor, with heavier loading for windier conditions. That is useful context for my ballast experiments, not a validated weight target for this custom vehicle. The custom work is concentrated in the suspended payload: a compact package containing the avionics, brake actuators, battery enclosure, motor, propeller guard, and landing structure.
 
 ![Saved SolidWorks preview of the micro-AGU payload assembly](assets/micro-agu/assembly.png)
 
@@ -32,6 +50,14 @@ The component tree fills in details that are difficult to see in the overall pre
 
 Those are identities in the saved CAD, rather than a verified bill of materials for every flight. In particular, two battery-model instances do not establish how the packs were wired, their actual capacity, or which packs were carried on a particular day. The `AutoPilot` model name alone does not identify the board; the flight logs provide the evidence for the Matek H743 controller used in the tests.
 
+![The compact core held in one hand, with motor and side-mounted brake mechanisms](assets/micro-agu/build-core.jpg)
+
+*The core before the surrounding frame and propeller guard are fitted; a useful sense of scale.*
+
+![Open core showing the flight electronics, microSD card, wiring and power connections](assets/micro-agu/build-electronics.jpg)
+
+*The assembled electronics. The photos document packaging; they do not establish the wiring or component configuration of every flight. The print material has not been identified from the photographs.*
+
 ## Two brake channels, and an airplane autopilot to adapt
 
 The December 30, 2025 implementation checklist starts with the mixer: roll command to asymmetric brake output, pitch command to symmetric brake output. It also calls for a TECS patch with a gyro damper, simulation parameters, manual simulation checks, flight parameters, and trim checks.
@@ -41,6 +67,8 @@ The December 30, 2025 implementation checklist starts with the mixer: roll comma
 *My notebook, page 1. These are planned tasks, not a record that every item was completed.*
 
 That checklist captures the adaptation I was trying to make. ArduPilot supplied an existing navigation and flight-control framework, but the parafoil's controls needed different interpretation. The brake mixer was one piece. The relation between throttle and payload pitch was another, and eventually the source of a much less intuitive problem.
+
+The [V2 manual](https://manuals.plus/m/cdab9dabe4a9759fe1f47d8eb9e2d012e56b482351e1acf6d5046c899579cf24) makes the intended brake behavior concrete: turning pulls one brake, while the transmitter's up-elevator command pulls both. Its 81.5 cm brake-line measurement is tied to the stock control arms and cannot simply be copied onto my actuator geometry. [JohnVHRC's setup video](https://www.youtube.com/watch?v=OqNvJ_UtPqc&t=480s) explains the mixing, followed by line measurement around 12–15 minutes. The transcript is useful alongside the manual; it is not a substitute for checking actual neutral and travel.
 
 The same page lays out a progression through inflation and glide tests, range and failsafe checks, manual flight, FBWA/FBWB, and then LOITER and AUTO. Launch, pattern work, climb/glide, and turns were all on the list. The notebook's January 30 control-law sketches return to the lateral loop, comparing the standard ArduPlane structure with the paraglider approach. These notes connect the physical build to the later [turn-control and simulation work](paraglider.md).
 
