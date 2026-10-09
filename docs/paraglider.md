@@ -1,12 +1,95 @@
 # What does my paraglider need from its controller?
 
-I want the paraglider simulation to help me evaluate control laws. That means asking whether the model captures the motions that matter to a controller, then testing ideas against repeatable missions rather than relying on a reassuring-looking plot.
+My first approach was to reuse ArduPlane's roll controller. I wanted the existing navigation system to command turns through differential braking, without first writing a new lateral controller. Looking through the controller blocks, I realized that its rate feed-forward path could serve as an angle controller if I turned off the inner rate-feedback gains.
 
-This work started with getting the paraglider to fly an AUTO mission in SITL. It grew into questions about yaw damping, brake steering, achievable turn radii and the pitch motion between the canopy and payload. The implementation branch now contains a dedicated heading-rate controller, an optional articulated pitch model and native AUTO/hinge tests. I keep the local tuning sweeps and experimental longitudinal controllers here.
+That was the starting point for the real flights. Later, the simulation work led to a dedicated heading-rate controller, achievable-turn-radius guidance, and a model of canopy–payload pitch motion. The [flight-test post](flight-testing.md) covers the aircraft tests; this page follows the lateral-control reasoning from the original shortcut to the replacement controller.
+
+## The first approach: turn rate feed-forward into angle control
+
+My January 30 notebook page compares the standard ArduPlane loops, the first-flight configuration, a paramotor controller from the ACRA paper, and a simplified version of my own. In the first-flight diagram I crossed out the rate P, I, and D paths. The key annotation on the simplified diagram is “essentially φ P gain.”
+
+![Original lateral-control analysis comparing ArduPlane, the first-flight configuration, and the simplified angle controller](assets/micro-agu/lateral-control-notes.png)
+
+*January 30 control-law notes: keep the navigation and angle-error calculation, then use rate feed-forward to drive the brakes.*
+
+A conventional airplane roll controller has two nested loops. Bank-angle error creates a requested roll rate, then a rate controller drives the ailerons. For my parafoil, the output instead goes through the brake mixer. Differential braking produces a turn and the associated bank, so I wanted a simple angular correction rather than an inner loop tuned around aileron-driven roll dynamics.
+
+Let φ_cmd be commanded bank, φ be measured bank, τ be `RLL2SRV_TCONST`, and K_FF be `RLL_RATE_FF`. Ignoring the target filter and limits for the moment, ArduPlane's outer loop computes:
+
+```text
+e_φ   = φ_cmd − φ
+p_cmd = e_φ / τ
+```
+
+The rate feed-forward term is proportional to that requested rate. With rate P, I, D, and derivative feed-forward set to zero, it is the only active rate-controller contribution:
+
+```text
+u = K_FF p_cmd
+  = (K_FF / τ) (φ_cmd − φ)
+  = K_φ e_φ
+
+K_φ = K_FF / τ
+```
+
+**The rate feed-forward gain becomes a proportional bank-angle gain.** It is feed-forward with respect to the inner rate loop, but the complete loop still feeds back measured bank angle. There is no integration hidden in the cancellation: the requested rate is just angle error multiplied by 1/τ. Measured roll rate no longer contributes when its feedback gains are zero.
+
+### Including ArduPilot's speed scaling
+
+The implementation scales the PID inputs and rescales feed-forward on the way out. Let S be the supplied speed scaler, E be the true/equivalent airspeed ratio (`EAS2TAS`), and F be the feed-forward multiplier (`ff_scale`, normally 1). With angles expressed in degrees:
+
+```text
+PID target = radians(p_cmd) S²
+PID FF     = K_FF radians(p_cmd) S²
+
+u_FF = degrees(F × PID FF / (S E))
+     = F K_FF (S / E) p_cmd
+     = [F K_FF S / (E τ)] (φ_cmd − φ)
+
+Effective angle gain: K_φ = F K_FF S / (E τ)
+```
+
+The radians/degrees conversions cancel, as does one factor of S. The nominal speed scaler is reference speed divided by estimated airspeed; the actual supplied scaler includes ArduPlane's bounds and fallback behavior. At fixed scaling, feed-forward is still simply an angle gain. The final controller output is converted to centidegrees, limited to ±4500, and passed to the mixer—these are controller units, not measured degrees of brake travel.
+
+The Hood River log records the configuration that implements this idea:
+
+| Parameter | Logged value | Role |
+|---|---:|---|
+| `RLL2SRV_TCONST` | 1.0 s | Converts bank error to rate demand |
+| `RLL_RATE_FF` | 0.345 | Supplies the effective angle gain |
+| `RLL_RATE_P`, `RLL_RATE_I`, `RLL_RATE_D` | 0 | Removes inner rate-error feedback |
+| `RLL_RATE_D_FF` | 0 | No derivative feed-forward in this flight |
+| `RLL2SRV_RMAX` | 0 | Disables the requested-rate limit |
+| `RLL_RATE_FLTT` | 3 Hz | Filters the rate target before feed-forward |
+
+For example, with S = E = F = 1, a 10° bank error produces a 10°/s rate request and a feed-forward output of 3.45 controller degrees, or 345 centidegrees. Changing FF changes the angular correction directly; halving τ doubles it.
+
+The 3 Hz target filter means the dynamic implementation is a filtered angle controller. At constant speed scaling, with H_T(s) representing that filter:
+
+```text
+u_FF(s) = K_φ H_T(s) [φ_cmd(s) − φ(s)]
+```
+
+### Where damping fits
+
+The lower notebook sketch also explores a derivative path. If derivative feed-forward is enabled, it differentiates the requested rate—which already contains bank-angle error. At fixed scaling, its contribution reduces to:
+
+```text
+u_DFF = [F K_DFF S / (E τ)] d(φ_cmd − φ)/dt
+```
+
+For a steady bank command this becomes a negative bank-rate term, supplying damping. During a changing command it also reacts to the commanded bank rate. This is different from the inner rate-P term, which acts on requested minus measured body roll rate. The January flight had D_FF set to zero; the sketch shows how damping could be added to the basic angle-control shortcut.
+
+ArduPlane's navigation still supplies the bank command from desired lateral acceleration:
+
+```text
+φ_cmd = atan(a_lat_cmd / g)
+```
+
+That preserves the existing path-following interface. The shortcut makes the brakes respond to bank error; it does not directly regulate heading rate. Its effectiveness depends on the parafoil's relationship between differential brake, bank, and turn rate. That distinction motivated the next controller.
 
 ## Is the roll controller the right abstraction?
 
-After we substantially increased the roll-to-servo gain, I asked what that parameter actually meant on a paraglider. The original implementation used roll-controller gains as an indirect yaw/turn controller. Increasing roll-to-servo gain largely increased differential-brake authority for turning rather than identifying an ordinary aileron roll loop. I wanted to see whether a dedicated turn controller would make the behavior easier to understand and tune. We implemented and manually tuned a replacement that tracks heading rate directly, with differential-brake feedforward, PI feedback, rate/acceleration limits and coupled roll-rate damping. Feature guards keep paraglider-specific code out of standard builds; legacy/mode handover is tested.
+In simulation, increasing the roll-to-servo gain increased the differential-brake correction produced by this angle loop. That made the aircraft turn more strongly, but the quantity I ultimately wanted to control was its rate of turning. I wanted to see whether a dedicated turn controller would make the behavior easier to understand and tune. We implemented and manually tuned a replacement that tracks heading rate directly, with differential-brake feedforward, PI feedback, rate/acceleration limits and coupled roll-rate damping. Feature guards keep paraglider-specific code out of standard builds; legacy/mode handover is tested.
 
 The mission plots also made me question the waypoint radius. We could make the response better damped and still overshoot the next track if the requested turn was too tight. I asked us to base the turn geometry on achievable turn rate, then optimize for tighter turns with less overshoot and repeat the comparison across wind and turbulence. Those experiments helped separate guidance geometry from the steering-loop tuning.
 
@@ -44,4 +127,8 @@ The durable SITL throw guide is a synthetic initialization aid; it does not impl
 
 ## Where that leaves my control questions
 
-The result I find most useful is that relative canopy/payload pitch rate provides damping information unavailable to a payload-only pitch loop. Truth-state controllers demonstrate potential, but an observer and robust protection still need development. See [longitudinal control and observer design](longitudinal-observer.md). I still need to compare against my flight logs before selecting real-aircraft gains or claiming we have quantitatively reproduced the self-excitation I saw.
+The result I find most useful is that relative canopy/payload pitch rate provides damping information unavailable to a payload-only pitch loop. Truth-state controllers demonstrate potential, but an observer and robust protection still need development. See [longitudinal control and observer design](longitudinal-observer.md). The [real-flight analysis](flight-testing.md) now provides measured oscillations and damper transitions to reproduce as the model is calibrated.
+
+## Original analysis and implementation
+
+The controller sketch is from page 323 of my notebook. The Hood River parameter values come from the January 3 onboard log. The algebra follows [`AP_RollController::get_servo_out`](https://github.com/DavidIngraham/ardupilot/blob/0f1121f32035d218c624fa7e110a124fd7fc6263/libraries/APM_Control/AP_RollController.cpp), [`AP_FW_Controller::_get_rate_out`](https://github.com/DavidIngraham/ardupilot/blob/0f1121f32035d218c624fa7e110a124fd7fc6263/libraries/APM_Control/AP_FW_Controller.cpp), and [`AC_PID`](https://github.com/DavidIngraham/ardupilot/blob/0f1121f32035d218c624fa7e110a124fd7fc6263/libraries/AC_PID/AC_PID.cpp) at the revision reported by that log. The numerical example holds speed scaling constant and stays below output limits.
