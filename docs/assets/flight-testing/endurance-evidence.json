@@ -189,7 +189,16 @@
     "source": "BAT instance 0 from the same onboard logs identified in flight-evidence.json",
     "windows": "Existing selected airborne windows; not a new takeoff/landing detector",
     "integration": "Linear interpolation at window boundaries; trapezoidal integration of current and instantaneous voltage times current; compared with differences in onboard cumulative counters",
-    "limitations": "Hood River current and all derived power/energy invalid. Trout Lake current calibration has not been checked against a charger or external meter. A pre-airborne single-sample current spike is excluded by the airborne window.",
+    "limitations": "Hood River current and derived energy invalid because of missing input capacitor. Trout Lake capacity estimates confirmed accurate by pilot. Maximum endurance extrapolated, not flight-tested.",
     "pilot_history": "Two 6S Li-ion packs in parallel; second added for required mass. Missing avionics-input electrolytic capacitor caused bad current and false limiting at Hood River; repaired before Trout Lake."
+  },
+  "pilot_confirmed": {
+    "total_capacity_Ah": 6,
+    "continuous_flight": true,
+    "landing_reason": "Finished testing",
+    "capacity_estimates": "Pilot confirms accurate",
+    "configuration": "Photos and CAD match Trout Lake flight",
+    "lead": "Added before successful Trout Lake flight; pilot recalls an earlier short attempt or failed launch",
+    "damper": "Disabled during flight; explanation developed later in analysis"
   }
 }

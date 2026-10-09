@@ -12,21 +12,21 @@ I initially tried running with the model before tossing it. That produced some v
 
 Watching Opale Paramodels videos helped me learn a better technique. Getting the canopy inflated and overhead before releasing the model made much more sense than trying to solve the whole launch by running faster. It took practice to make that sequence repeatable. My January 3 notebook specifically calls for a “multi-step walk” and a better hand position—useful contemporary detail behind my recollection of learning to launch.
 
-For a visual reference, Opale's [first-flight Backpack tutorial](https://www.youtube.com/watch?v=UEoCY5cZiRg) and [Ultra 3.5: Easy take off with Mike XL](https://www.youtube.com/watch?v=Y3AK1-yno0g) show the sort of preparation and launch technique I was learning. Both are from Opale's own channel; these are useful reference videos, rather than a claim that I have recovered the exact videos I watched that day. Their [tutorial playlist](https://www.youtube.com/playlist?list=PLQ6f0XQ2TFqdJHD9zXCt2_ikhzftwdELU) collects more of the setup material.
+Opale’s [first-flight Backpack tutorial](https://www.youtube.com/watch?v=UEoCY5cZiRg) and [Ultra 3.5 launch demonstration](https://www.youtube.com/watch?v=Y3AK1-yno0g) illustrate the technique. Their [tutorial playlist](https://www.youtube.com/playlist?list=PLQ6f0XQ2TFqdJHD9zXCt2_ikhzftwdELU) is a useful starting point for setup and launching.
 
-The V2 documentation and owner reports put that learning curve in context. The [manual](https://manuals.plus/m/cdab9dabe4a9759fe1f47d8eb9e2d012e56b482351e1acf6d5046c899579cf24) describes a smooth overhead launch and establishing an inflated wing before release. [Owners also report failed launches and broken props](https://www.rc-network.de/threads/hobbyking-paramotor-v2-luftschraube.12051592/). Those accounts resemble my experience, but they do not diagnose my individual attempts.
+The [V2 manual](https://manuals.plus/m/cdab9dabe4a9759fe1f47d8eb9e2d012e56b482351e1acf6d5046c899579cf24) also describes a smooth overhead launch with the canopy inflated before release. [Other owners’ launch stories](https://www.rc-network.de/threads/hobbyking-paramotor-v2-luftschraube.12051592/) made the learning curve feel familiar.
 
 ![Micro-AGU payload and folded HobbyKing V2 canopy](assets/micro-agu/build-canopy.jpg)
 
-*The actual payload and canopy. This is a build photograph, not a photograph of either flight-test session.*
+*The payload and folded HobbyKing V2 canopy.*
 
 ## Hood River: the model was too light
 
 My first flight in Hood River was much too lightly loaded. Adding weight made it noticeably more stable. That was a practical lesson before it was a control-system lesson: I needed a model that flew reasonably well before asking an autopilot to improve it.
 
-Opale's [own FAQ](https://www.opale-paramodels.com/gb/content/11-faq-rc-paraglider) also discusses adding ballast when a model is too light to make progress into the wind. My observation here is narrower: the added weight improved the behavior of my particular model in those conditions. The ballast went on the **bottom of the suspended payload**. That increased wing loading, lowered the payload CG, and changed its pitch inertia. The logs do not record those physical changes, so they cannot separate their contributions to the improvement. This was not an increase in canopy mass.
+The ballast went on the **bottom of the payload**, increasing wing loading, lowering its CG, and changing its pitch inertia. The model flew noticeably better with the added weight. Opale’s [FAQ](https://www.opale-paramodels.com/gb/content/11-faq-rc-paraglider) discusses the same practical benefit of ballast for wind penetration.
 
-The notebook adds another contributor: I thought the brake lines were too tight. I recorded a persistent nose-up attitude and disappointing performance, with about 0.5 m/s climb and a minimum sink figure of 0.962 m/s, both suspected to be affected by brake trim. Those are contemporary observations, not a newly validated performance benchmark. There was also an electrical problem: I had omitted the electrolytic capacitor on the Matek avionics stack power input. It caused erroneous current readings and false throttle power limiting; I corrected it before Trout Lake. That repair history changes the interpretation of the early performance figures: loading, brake trim, and unintended power limiting were all involved. The stock V2 setup also calls for careful brake neutral and one-sided steering travel; [JohnVHRC demonstrates the mixing](https://www.youtube.com/watch?v=OqNvJ_UtPqc&t=480s). Its stock line dimensions are not directly transferable to my custom actuators. A [later WestHobbiesRC setup walkthrough](https://www.youtube.com/watch?v=HRO3tUq2NUA&t=575s) reinforces the same point; it was published after these flights and is supporting research, not a video I used at the time.
+My brake lines also needed loosening. The model flew nose-up and performance was disappointing: my notes recorded about 0.5 m/s climb and 0.96 m/s minimum sink. On top of that, I had omitted an electrolytic capacitor on the Matek stack power input. Bad current readings triggered false throttle power limiting. I fixed the capacitor before Trout Lake. Between loading, brake trim, and power limiting, there was plenty to sort out before tuning the controller.
 
 ![January 3 notes on launch technique, brake trim, weight and hardware](assets/micro-agu/january-flight-notes.png)
 
@@ -36,66 +36,55 @@ The sustained January 3 flight gives us a useful early baseline. It spent most o
 
 ![Successful Hood River flight: relative height, payload pitch and throttle over roughly thirteen minutes](assets/flight-testing/hood-river.png)
 
-*January 3, 2026. This is an airborne portion of the onboard log, not a launch montage. The height is relative to the estimator's home reference, not clearance above the terrain. The plot does not establish the timing of the ballast change.*
+*Hood River, January 3: height above home, payload pitch, and throttle during the sustained flight. Green marks AUTO mode.*
 
 ## Trout Lake: another kilogram, and autonomous missions
 
-At Trout Lake we added another kilogram of lead to the bottom of the payload. With the heavier configuration, we were able to fly successful autonomous missions. The February 15 log contains about 54.5 minutes of selected airborne data, including extended AUTO, LOITER and GUIDED operation.
+I remember a short attempt or failed launch at Trout Lake before adding another kilogram of lead to the bottom of the payload. With that weight aboard, the next flight lasted **54.5 minutes continuously on one charge**, including AUTO, LOITER, and GUIDED operation. I landed because I had finished testing.
 
 That did not mean the controller was finished. The early part of the flight involved a lot of tuning and some substantial oscillation. Later sections became much quieter, and the repeated waypoint messages show the aircraft making progress through the mission.
 
 ![Trout Lake flight showing height, pitch and throttle, with AUTO intervals shaded](assets/flight-testing/trout-lake.png)
 
-*February 15, 2026. Green shading marks AUTO mode. The changes in behavior within this flight include controller tuning and different maneuvers; they are not a controlled comparison of different weights.*
+*Trout Lake, February 15: tuning early in the flight, followed by quieter autonomous operation. Green marks AUTO mode.*
 
 One of the satisfying results is the later continuous AUTO segment. It lasts more than ten minutes. The recorded path shows repeated circuits, while the height and throttle traces show the controller maintaining the mission rather than simply passing through a mode switch.
 
 ![More than ten minutes of AUTO flight: relative ground track, actual and demanded height, and throttle](assets/flight-testing/trout-lake-auto.png)
 
-*The ground track is measured relative to the start of this segment. It is not a commanded-path error plot. This is real onboard data, not a simulated mission.*
+*Ten minutes of AUTO: repeated circuits, height tracking, and throttle. The track origin is the start of this segment.*
 
 ## What endurance did it actually achieve?
 
 The battery choice started with a 6S Li-ion pack I already owned from GetFPV. I bought another and connected the packs in parallel because the aircraft needed weight. The motor was a cheap Amazon purchase with a roughly suitable KV, and prop diameter was constrained by the payload and packability. The [design post](micro-agu-design.md#a-battery-i-already-owned-and-propulsion-that-fit) explains that tradeoff. The result was useful endurance without a systematically optimized propulsion installation.
 
-| Selected flight interval | Duration | Logged charge used | Logged energy used | Average battery power |
+| Flight / segment | Duration | Charge used | Energy used | Average battery power |
 |---|---:|---:|---:|---:|
 | Hood River, January 3 | 12.92 min | Invalid | Invalid | Invalid |
 | Trout Lake, February 15 | 54.53 min | 3.923 Ah | 84.97 Wh | 93.5 W |
 | Late continuous AUTO segment, within that Trout Lake flight | 10.38 min | 0.690 Ah | 13.94 Wh | 80.6 W |
 
-The AUTO row is a subset, not an additional flight. Mean current was 4.32 A over the full selected Trout Lake airborne interval and 3.99 A during the late AUTO segment. That segment ended about 10 m higher than it began, so its lower average power was not simply the result of a net descent. Different maneuvers, tuning and battery voltage prevent treating it as a controlled efficiency improvement.
+During the full flight, mean current was 4.32 A. The late AUTO segment averaged 3.99 A and 80.6 W, finishing about 10 m higher than it started.
 
 ![Trout Lake battery voltage, current and cumulative energy over the selected airborne interval](assets/flight-testing/trout-lake-endurance.png)
 
-*BAT instance 0; 202.81–3474.77 seconds after boot. Green marks the 2738.09–3360.73 s AUTO segment. This is battery-side electrical energy, not mechanical propulsive power. A brief current spike before the airborne window is excluded.*
+*Trout Lake: battery voltage, current, and energy used over 54.5 minutes. Green highlights the late AUTO segment.*
 
-Hood River cannot provide an energy comparison. Its monitor claims 11.77 Ah and 270 Wh in the selected 12.92 minutes—almost twice the configured 6 Ah capacity. The recorded power exceeds the configured `BATT_WATT_MAX = 2400` for approximately 134 seconds of that interval. The inspected ArduPlane watt-limiter code uses measured voltage times current to detect overpower and reduce allowed throttle, consistent with my account of false limiting. These are corrupt electrical measurements, not actual power consumption; the threshold duration is not a measurement of exactly how long or how severely throttle was limited.
+The missing capacitor made Hood River’s energy figures unusable: the monitor reported 11.77 Ah and 270 Wh in 12.9 minutes from a 6 Ah battery. Its false power readings exceeded the configured 2,400 W limit for about 134 seconds. That explains why a current-sensing problem could also hurt flight performance—the watt limiter responds by reducing available throttle.
 
-The missing input capacitor and its repair are established by my build history. Both logs retain the same recorded current scale (`BATT_AMP_PERVLT` about 66.7) and zero offset, so there is no logged scale adjustment explaining the change. Trout Lake's current and energy are plausible after the repair, but still lack independent calibration against a charger or external meter. Integrating the logged current and power reproduces the onboard totals; that checks the analysis, not the sensor's accuracy.
+After fixing the capacitor, the capacity estimates were accurate. Trout Lake used **3.92 Ah out of 6 Ah**, leaving about **2.08 Ah, or 35%**, when I finished flying.
 
-The supported endurance claim is **54.5 minutes of demonstrated airborne operation**, not maximum endurance. At the end of the record the monitor reports about 3.934 Ah consumed and 34% remaining against its configured 6 Ah capacity. That percentage is a capacity-counter estimate, not a measured reserve. Pack voltage was about 24.46 V at the beginning of logging and 20.12 V near the end, with a minimum of 18.94 V under load during flight. These are pack voltages; individual cell voltages were not recorded. A low-battery message also appears about 34.5 minutes into the selected flight.
+This was a **54.5-minute test flight with reserve**, rather than a flight to exhaustion. At the same average current, 6 Ah corresponds to about **83 minutes** of total flight time. That is an extrapolation; the flight itself demonstrated nearly an hour and ended when I was done testing.
 
-Dividing nominal capacity by average current would suggest about 83 minutes, but it assumes all configured capacity is usable and the current calibration and operating conditions hold. The data do not validate those assumptions or establish why the flight ended. I therefore would not claim an 80–90 minute endurance or a further half-hour of reserve from this flight. A measured recharge and an independently checked current scale would make the next endurance comparison much stronger.
+Pack voltage fell from 24.46 V near the start of logging to 20.12 V near the end. The useful result is how much flight time came from a battery I already owned, a second pack added for weight, and inexpensive propulsion sized to fit the payload.
 
-The [endurance evidence](assets/flight-testing/endurance-evidence.json) records the windows, integrations, cumulative-counter differences and limitations. The selected airborne intervals reuse the same boundaries as the earlier flight figures.
-
-## Configuration context for the plots
-
-| Figure / interval | What the logs establish | Physical configuration from my recollection |
-|---|---|---|
-| January 3 overview | Mostly MANUAL and FBWA, with short CRUISE and LOITER trials; no single damper setting is asserted for the whole plot | Hood River was initially too light; ballast helped, but the change is not timestamped in the log |
-| February 15 overview | AUTO intervals are shaded; parameters changed during this flight, so it is not one fixed controller configuration | Trout Lake: another 1 kg of lead at the bottom of the payload; total loaded mass was not recorded |
-| February 15 AUTO detail | 2738.09–3360.73 s after boot, 10.38 minutes continuously in AUTO | Same day's configuration; no independent measurement of CG or inertia |
-| February 15 damper comparison | CRUISE; throttle P and I both zero; damper 0.10 before 655.79 s and zero afterward | No ballast change is documented across these short comparison windows |
-
-The February 15 log reports firmware `3a2da6cf`; the parameter names indicate that this does not uniquely identify the compiled source, as discussed below. The AUTO figure is evidence of sustained mission operation, not a controlled damper comparison. The [evidence file](assets/flight-testing/flight-evidence.json) preserves the exact comparison windows and source hashes.
+The [endurance data](assets/flight-testing/endurance-evidence.json) contains the measurement windows and calculations.
 
 ## The damper that could make things worse
 
 I had added a pitch-rate damper to throttle. My initial intuition was that more throttle would pitch the model up, so adding throttle during a nose-down rotation should oppose that motion.
 
-The inspected controller implementations use the equivalent of:
+The throttle damper used:
 
 ```cpp
 throttle_correction = -pitch_damping_gain * filtered_payload_pitch_rate;
@@ -107,13 +96,13 @@ The articulated model showed why that assumption could fail. The thrust line is 
 
 ![Free-body diagram of the payload and canopy, showing thrust above the payload CG and the reinforcing feedback sequence](assets/flight-testing/pitch-damper-fbd-pusher.png)
 
-*The rear-mounted pusher prop is shown pushing forward into the payload; this arrow is thrust on the aircraft, not the rearward airflow. Its line of action remains above the modeled payload CG, so the direct moment is still nose-down. The diagram shows schematic geometry, not measured dimensions. The ballast location is confirmed from the build history; the loaded CG and thrust offset have not yet been measured. The suspension forces are equal and opposite. The labeled thrust offset is the moment arm about the loaded payload CG; the suspension reaction also has a moment arm about that CG. Canopy aerodynamic moment and any joint couple also belong in the complete angular equations.*
+*The pusher thrust acts above the payload CG, creating a nose-down moment. The canopy and payload react through the suspension. Schematic, not to scale.*
 
-For the modeled initial response, the feedback can run in the wrong direction:
+The later analysis explained the reinforcing loop:
 
 **Payload pitches down → controller adds throttle → payload pitches down harder.**
 
-It is tempting to summarize that as inertia beating canopy drag. The more precise explanation is that thrust, the suspension reaction, and the inertias of the two bodies together determine the response. Bottom-mounted ballast shifts the payload CG downward and changes its inertia, making the loaded geometry important. This does not by itself prove that inertia “beat” canopy drag. The direct thrust moment is nose-down in the modeled geometry; canopy forces and the moving suspension affect what happens next. The initial payload motion and the eventual climb response do not have to point the same way.
+I did not work this out at the field. Fortunately, I decided to disable the damper while testing, and the aircraft immediately became quieter. The logs and simulation later explained why: I had designed the feedback around the wrong initial pitch response. A throttle increase can rotate the payload nose-down even while the aircraft’s longer-term response is to climb. The moving suspension and the canopy’s aerodynamic forces determine how that motion develops.
 
 The flight data contains a particularly useful comparison. In CRUISE, I had already set the throttle P and I gains to zero. At 655.79 seconds after boot, I set the pitch damper to zero too. In the tightly bounded windows below, that was the only control setting changed.
 
@@ -126,28 +115,20 @@ The flight data contains a particularly useful comparison. In CRUISE, I had alre
 
 The fast oscillation reduced sharply. Later in the same flight, reintroducing the damper at 0.05 coincided with a stronger component around 1.5 Hz; reducing it to 0.02 brought the rate RMS back down. Those observations support the self-excitation concern.
 
-They do not prove that reversing one gain would fix the whole system. The response depends on frequency, motor dynamics, and the canopy–payload coupling. The earlier simulation work also found relative-rate feedback more useful than payload-only feedback. That is what led me toward the [longitudinal controller and observer investigation](longitudinal-observer.md).
-
-## What the code and logs can actually establish
-
-There are a few details worth preserving rather than smoothing out of the story.
-
-The February 15 firmware reports Git hash `3a2da6cf`, but its logged parameter naming matches later source changes. That means the exact compiled source is not established by the version string alone. The inspected implementations agree on the damper's negative pitch-rate feedback, but I cannot attribute every observed behavior to the clean tree at the reported hash.
-
-The filter code also matters. In the inspected versions, a zero pitch-rate cutoff zeros the damper signal rather than passing through unfiltered gyro data. Positive cutoff changes are copied into the filter on reset, and the 50 Hz filter update uses the throttle loop's timestep. These are additional reasons to distinguish a logged setting from the filter response that was actually running.
-
-Finally, one February 22 telemetry file begins on the real Matek controller and later switches to SITL. Its long, very smooth flight at about 60 m is simulation. I excluded that portion from the real-flight story. The figures here come from the successful January 3 and February 15 onboard logs.
+That experience led to the [longitudinal controller and observer investigation](longitudinal-observer.md). The next step is to control the relative canopy–payload motion, accounting for motor response and the different oscillation modes.
 
 ## Bringing the simulation back to the aircraft
 
-The real flights give the simulation specific behavior to reproduce. Quieter stretches repeatedly contain a slow pitch component around 0.32–0.37 Hz. The stronger damper-driven motion lives at a faster timescale. The archived articulated model has a qualitatively similar slow mode, but replaying recorded throttle through its linearization did not reproduce the measured pitch rate particularly well.
+The flights give the simulation clear targets: a slow pitch mode around 0.32–0.37 Hz and a faster oscillation excited by the damper. The articulated model captures a similar slow mode, but still needs calibration to reproduce the recorded response to throttle.
 
-That is a useful result: the simulation needs calibration, and the ballast changes mean the flights should not all be treated as one unchanged aircraft. We also have no measured canopy angle or configured pitot in these logs, so they cannot validate an absolute canopy-angle estimate or a stall margin.
+Loaded mass, CG, and inertia are the next inputs to measure. The logs record payload motion; measuring canopy motion as well would help develop the relative-pitch controller.
 
 The progression was learning to launch, finding a weight that flew well, getting autonomous missions working, and then discovering that a plausible damping rule could reinforce the motion it was meant to suppress. The next controller should earn its bandwidth by reproducing those observations first.
 
-## Data behind the figures
+## Data and methods
 
-I reviewed six onboard BIN logs, 54 timestamped telemetry logs and their 54 raw companions. Companions are not additional flights. Launch technique, the HobbyKing V2 canopy, and ballast placement are identified from my recollections; the January 3 notebook adds contemporary observations about launch, brake trim, and hardware. Modes, tuning changes and numerical comparisons come from the logs.
+The figures use the January 3 and February 15 onboard logs. Height is relative to home, and the ground track is relative to the plotted segment’s starting point. Energy is battery-side electrical energy, calculated from current and voltage and checked against the onboard counters. The AUTO endurance row is part of the full Trout Lake flight.
 
-The [curated evidence file](assets/flight-testing/flight-evidence.json) records source-log SHA-256 hashes, comparison windows and metrics. The [Hood River](assets/flight-testing/hood-river-plot-data.csv.gz) and [Trout Lake](assets/flight-testing/trout-lake-plot-data.csv.gz) overview series are available as compressed CSVs. The exported overview series are sampled at 5 Hz; the pitch-rate comparisons use the 25 Hz aligned analysis. Raw flight logs remain outside the public repository.
+The force diagram explains the mechanism identified afterward in the articulated model; loaded CG and inertia remain to be measured. The February 15 firmware reports `3a2da6cf`, while its parameter names match later source changes. The inspected implementations agree on the damper sign, but the version string does not identify the exact compiled tree. Filter behavior also matters: the inspected code zeros the signal at zero cutoff, applies positive cutoff changes on reset, and updates at 50 Hz using the throttle-loop timestep.
+
+I reviewed six onboard logs and 54 telemetry logs with their raw companions. A February 22 telemetry recording switches from hardware to SITL; that simulated section is excluded here. The [flight evidence](assets/flight-testing/flight-evidence.json) records source hashes and comparison windows. [Hood River](assets/flight-testing/hood-river-plot-data.csv.gz) and [Trout Lake](assets/flight-testing/trout-lake-plot-data.csv.gz) overview data are sampled at 5 Hz; pitch-rate comparisons use the 25 Hz analysis.
