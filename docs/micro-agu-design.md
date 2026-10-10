@@ -1,4 +1,6 @@
-# Micro-AGU: returning to small guided parafoils
+# Building Micro-AGU
+
+*Micro-AGU, chapter 1 of 4 · [Start with the flight story](flight-testing.md) · [Design](micro-agu-design.md) · [Steering](paraglider.md) · [Throttle and pitch](longitudinal-observer.md) · [Data and methods](data-and-methods.md)*
 
 My interest in guided parafoils started in high school, when I helped with test execution at Stara Technologies. My role was mostly test support: roaming around the desert on ATVs, recovering hardware after test flights, and picking up the pieces.
 
@@ -82,27 +84,15 @@ The same page lays out a progression through inflation and glide tests, range an
 
 My notebook also collects research on small paramotor guidance, longitudinal dynamics, and autonomous flight alongside my own sketches and test notes.
 
-## What the first flight sent back to the design
+## Design choices the field would test
 
-The January 3 flight notes are more specific than my memory of a difficult launch day. They call for a multi-step walk to launch, a better hand position, a stronger prop guard, and more weight for wind penetration. They also say the brake lines needed loosening: the model was flying with a persistent nose-up attitude and was not giving the performance I expected.
-
-![Original January 3 flight notes recording launch, brake trim, weight, and hardware concerns](assets/micro-agu/january-flight-notes.png)
-
-*January 3 flight notes: launch technique, brake trim, weight, and hardware fixes.*
-
-I recorded about 0.5 m/s climb and 0.96 m/s minimum sink, and suspected the tight brake lines were hurting performance. There was an electrical problem too: I had left out an electrolytic capacitor on the Matek stack power input. The resulting bad current readings triggered false throttle power limiting. I fixed that before Trout Lake.
-
-The hardware implications were direct. The shroud and skid had to work during awkward handling and landings. The brake mechanism needed usable travel and correct neutral trim. The instrumentation needed to be trustworthy before its numbers could support a performance claim. Autonomous flight did not remove those requirements.
+The prop guard and skid needed to survive awkward launches and landings. The brake mechanisms needed usable travel and a repeatable neutral position. The electronics needed reliable power and measurements. The [flight story](flight-testing.md) follows how those requirements became concrete at Barrett Park and Collin’s house.
 
 ## Ballast belongs in the mechanical model
 
-The early Hood River configuration was too light. Adding ballast improved its behavior. At Trout Lake we added another kilogram of lead and went on to fly successful AUTO missions.
+The ballast mounts at the bottom of the suspended payload. It increases wing loading, lowers the payload CG, and changes pitch inertia. Some of the necessary mass became useful battery capacity; additional lead supplied the rest. The simulation needs to represent that mass where it actually sits.
 
-The ballast was attached to the **bottom of the suspended payload**, not to the canopy. That distinction matters. It increased the weight carried by the same wing and shifted the payload CG downward; it also changed the payload's pitch inertia. Adding it cannot be represented faithfully by increasing canopy mass in the simulation.
-
-The bottom-mounted ballast makes the thrust-line question especially relevant. In the articulated model, thrust above the payload CG produces a direct nose-down moment, even though the motor sits below the suspension. A pitch-rate damper designed around the opposite initial response can reinforce the motion. The [flight-test post](flight-testing.md) shows the force diagram and the log segment where disabling the damper sharply reduced the oscillation.
-
-The next simulation work needs the loaded mass, CG, inertia, suspension geometry, and brake settings. Measuring those will help the model reproduce the motion recorded in flight.
+That layout also places the thrust line above the payload CG while remaining below the suspension. Its effect on pitch became central to the [longitudinal-controller investigation](longitudinal-observer.md). Loaded mass, CG, inertia, suspension geometry, and brake settings are the measurements needed to connect the physical build to that model.
 
 ## What better performance will mean
 
@@ -110,6 +100,4 @@ The motivation remains the same as when I started: see what modern open-source a
 
 A useful comparison needs a recorded configuration and repeatable conditions. Guidance accuracy, wind handling, trim, and the canopy–payload motion all belong in that evaluation. For now, the design, flight data, and [longitudinal-controller investigation](longitudinal-observer.md) give me a way to identify what to measure and what to improve next.
 
-## Design record
-
-The design record includes my notes on pages 1, 185, and 323 of `Paraglider.pdf`, the SolidWorks files, build photographs, and flight logs. The [design evidence](assets/micro-agu/design-evidence.json) records the assembly structure and source hashes. CAD previews were extracted with [SWFormat](https://github.com/KenM76/swformat).
+The [data and methods appendix](data-and-methods.md#design-record) links the design evidence, source notebook pages, and CAD extraction method.

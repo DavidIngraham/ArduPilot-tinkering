@@ -1,0 +1,46 @@
+[
+  {
+    "label": "60 m LOITER",
+    "start": 780,
+    "end": 825,
+    "roll_rmse": 2.576376473525042,
+    "mean_abs_roll": 2.67752,
+    "mean_abs_command": 2.2159555555555555,
+    "heading_rate_median_abs": 5.005136742828313,
+    "cross_track_rms": 1.2501667391451137,
+    "command_at_30deg_pct": 0.0
+  },
+  {
+    "label": "40 m LOITER",
+    "start": 850,
+    "end": 900,
+    "roll_rmse": 2.7166320177749506,
+    "mean_abs_roll": 2.7543919999999997,
+    "mean_abs_command": 2.092304,
+    "heading_rate_median_abs": 6.498957809594913,
+    "cross_track_rms": 1.7251702360850694,
+    "command_at_30deg_pct": 0.0
+  },
+  {
+    "label": "40 m LOITER later",
+    "start": 950,
+    "end": 1045,
+    "roll_rmse": 1.656925624859423,
+    "mean_abs_roll": 2.2597726315789473,
+    "mean_abs_command": 3.103621052631579,
+    "heading_rate_median_abs": 6.348435796179501,
+    "cross_track_rms": 0.357294093423991,
+    "command_at_30deg_pct": 0.0
+  },
+  {
+    "label": "Late AUTO",
+    "start": 2745,
+    "end": 3350,
+    "roll_rmse": 3.6137647410015203,
+    "mean_abs_roll": 2.9003305785123965,
+    "mean_abs_command": 2.27471867768595,
+    "heading_rate_median_abs": 2.0605813683127963,
+    "cross_track_rms": 3.8615165649962635,
+    "command_at_30deg_pct": 0.0
+  }
+]

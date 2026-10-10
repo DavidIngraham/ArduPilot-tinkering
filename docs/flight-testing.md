@@ -1,10 +1,17 @@
-# Learning to launch, then learning to fly
+# From First Tosses to Autonomous Missions
 
-The first problem with my powered model paraglider was getting it into the air. The next was keeping the controller from making it wobble.
+*Micro-AGU, chapter 2 of 4 · [Start with the flight story](flight-testing.md) · [Design](micro-agu-design.md) · [Steering](paraglider.md) · [Throttle and pitch](longitudinal-observer.md) · [Data and methods](data-and-methods.md)*
 
-This aircraft is part of **micro-AGU (Micro Aerial Guidance Unit)**, inspired by helping execute guided-parafoil tests at Stara Technologies in high school—mostly recovering hardware around the desert on ATVs. I wanted to explore how much better small guided parafoils could perform with modern open-source avionics. This powered test platform uses a **HobbyKing V2 canopy** and a custom suspended payload; the [design post](micro-agu-design.md) describes the hardware and original notebook. I had wanted to try this for years, but the premium canopies I considered were too expensive for the experiment and I thought the original HobbyKing wing was poor. The inexpensive V2 made the project practical.
+The first problem with Micro-AGU was getting it into the air. At the Barrett Park RC field in Hood River, I was learning to launch a lightly loaded model while discovering what needed fixing. By the next test day at my friend Collin’s house in Trout Lake, it flew autonomous missions for nearly an hour.
 
-These flight tests took me from awkward launch attempts in Hood River to sustained autonomous missions in Trout Lake. Looking back through the logs with Codex helped connect what I remembered at the field with what the aircraft actually recorded. The useful story includes the launch technique, the weight of the model, and a throttle-to-pitch response that ran against my intuition.
+Between those flights came hardware fixes, measurements, and experiments in our simple simulator. This is the sequence that made the aircraft work. The [design chapter](micro-agu-design.md) explains how an affordable HobbyKing V2 canopy and modern open-source avionics made the project practical.
+
+| Stage | What I learned or changed |
+|---|---|
+| January 3, Barrett Park | Launch technique, ballast, brake trim, and the first climb/glide measurements |
+| Between flights | Fixed the power-input capacitor problem and tuned lateral gains in the initial simulator |
+| February 15, Collin’s house | Added payload ballast, measured trim, adjusted longitudinal control, and disabled the troublesome damper |
+| Later in that flight | Tested tighter loiters, flew repeated autonomous circuits, and landed after 54.5 minutes with reserve |
 
 ## The launch was a skill I had to learn
 
@@ -15,10 +22,6 @@ Watching Opale Paramodels videos helped me learn a better technique. Getting the
 Opale’s [first-flight Backpack tutorial](https://www.youtube.com/watch?v=UEoCY5cZiRg) and [Ultra 3.5 launch demonstration](https://www.youtube.com/watch?v=Y3AK1-yno0g) illustrate the technique. Their [tutorial playlist](https://www.youtube.com/playlist?list=PLQ6f0XQ2TFqdJHD9zXCt2_ikhzftwdELU) is a useful starting point for setup and launching.
 
 The [V2 manual](https://manuals.plus/m/cdab9dabe4a9759fe1f47d8eb9e2d012e56b482351e1acf6d5046c899579cf24) also describes a smooth overhead launch with the canopy inflated before release. [Other owners’ launch stories](https://www.rc-network.de/threads/hobbyking-paramotor-v2-luftschraube.12051592/) made the learning curve feel familiar.
-
-![Micro-AGU payload and folded HobbyKing V2 canopy](assets/micro-agu/build-canopy.jpg)
-
-*The payload and folded HobbyKing V2 canopy.*
 
 ## Hood River: the model was too light
 
@@ -38,17 +41,11 @@ The sustained January 3 flight gives us a useful early baseline. It spent most o
 
 *Hood River, January 3: height above home, payload pitch, and throttle during the sustained flight. Green marks AUTO mode.*
 
-## Between the fields: tuning in the simple simulator
+## Between the fields: measurements and simulation
 
-Hood River gave me the first real measurements to work from. I used both live telemetry and later log analysis to understand the climb and glide performance. Before the next flight, I used our simple initial simulation model to tune the lateral controller.
+I used both live telemetry and later Hood River log analysis to understand climb and glide performance. I also fixed the missing capacitor on the Matek power input before the next flight.
 
-The Mission Planner recordings preserve that work on February 14 and the morning of February 15. I tried different feed-forward gains, damping, angle time constants, and navigation settings. The simulator made it easy to explore settings that produced large bank oscillations and then back them off.
-
-![Recorded simulation tuning: gain changes, bank, heading rate and flight mode](assets/flight-testing/sitl-lateral-tuning.png)
-
-*February 15, 11:20–11:50 a.m. PST: actual recorded SITL telemetry from the initial model. The gain changes sit above the simulated response; the bottom panel shows mode changes during the session.*
-
-I settled on roll feed-forward of 1.0, derivative feed-forward of 0.05, and a 1 Hz target filter, with the angle time constant at one second. The log records the final FF and D_FF selections at 11:37 a.m., just a few hours before flying at Collin’s house. The [lateral-controller article](paraglider.md) explains how these settings turn the existing roll-controller paths into angle correction and damping.
+For lateral control, I used our simple initial simulation model to explore gains and damping. Mission Planner preserved the February 14 experiments and the final tuning on the morning of February 15. By 11:37 a.m. I had selected the feed-forward and derivative feed-forward values that I flew that afternoon. The [steering chapter](paraglider.md) shows the recorded tuning plots and explains the controller workaround.
 
 ## Trout Lake: another kilogram, and autonomous missions
 
@@ -60,11 +57,25 @@ That did not mean the controller was finished. The early part of the flight invo
 
 *Trout Lake, February 15: tuning early in the flight, followed by quieter autonomous operation. Green marks AUTO mode.*
 
+Early in the flight, I repeated the throttle-versus-climb testing with the heavier configuration. I first raised trim throttle from 30% to 50%, then settled on 43%. Reconstructing the early steady runs gives a level-flight crossing near 42.7%, closely matching that choice.
+
+The pitch damper was another matter. I reduced its gain, then disabled it because the aircraft behaved better without it. I did not understand the sign error at the field. Later analysis showed how the throttle correction could reinforce the payload’s motion—the [longitudinal chapter](longitudinal-observer.md#the-damper-that-could-make-things-worse) follows that discovery.
+
 One of the satisfying results is the later continuous AUTO segment. It lasts more than ten minutes. The recorded path shows repeated circuits, while the height and throttle traces show the controller maintaining the mission rather than simply passing through a mode switch.
 
 ![More than ten minutes of AUTO flight: relative ground track, actual and demanded height, and throttle](assets/flight-testing/trout-lake-auto.png)
 
 *Ten minutes of AUTO: repeated circuits, height tracking, and throttle. The track origin is the start of this segment.*
+
+## Testing tighter turns at Trout Lake
+
+The lateral gains came from the simulator and stayed fixed throughout the long flight. I deliberately reduced the loiter-radius setting from 60 to 40 metres at 10:26 after takeoff, then to 30 metres at 35:47. The first change was in LOITER; the second was entered in GUIDED.
+
+![Trout Lake response to reducing the loiter radius from 60 to 40 metres](assets/flight-testing/lateral-loiter-response.png)
+
+*The dashed line marks the 60 → 40 m radius change. Grey shading marks a brief MANUAL interval between LOITER segments. Bank and heading-rate transients are visible alongside the eventual path tracking.*
+
+Selected settled portions of the 60 m and 40 m loiters show median heading rate increasing from about 5.0 to 6.4 degrees per second. A later 40 m segment had 0.36 m RMS logged cross-track error. That gave me a concrete result from the flight: the controller could guide the aircraft around a tighter circle, while the transitions still gave me work to do.
 
 ## What endurance did it actually achieve?
 
@@ -90,69 +101,12 @@ This was a **54.5-minute test flight with reserve**, rather than a flight to exh
 
 Pack voltage fell from 24.46 V near the start of logging to 20.12 V near the end. The useful result is how much flight time came from a battery I already owned, a second pack added for weight, and inexpensive propulsion sized to fit the payload.
 
-The [endurance data](assets/flight-testing/endurance-evidence.json) contains the measurement windows and calculations.
+The [data and methods appendix](data-and-methods.md#flight-measurements) contains the measurement windows and calculations.
 
-## The damper that could make things worse
+## What the flights left to solve
 
-I had added a pitch-rate damper to throttle. My initial intuition was that more throttle would pitch the model up, so adding throttle during a nose-down rotation should oppose that motion.
+The aircraft could fly autonomous missions and tighter circles, with useful endurance. The next questions were more specific: could I control turn rate directly, and could I control climb without exciting the motion between canopy and payload?
 
-The throttle damper used:
+The [steering chapter](paraglider.md) follows the first question from the roll-controller workaround to dedicated heading-rate control. The [throttle and pitch chapter](longitudinal-observer.md) follows the second from flight identification and the wrong-sign damper to an articulated model and relative-motion feedback.
 
-```cpp
-throttle_correction = -pitch_damping_gain * filtered_payload_pitch_rate;
-```
-
-With positive pitch rate defined as nose-up, a nose-down rotation produces a positive throttle correction. That only gives the intended damping if the relevant throttle-to-pitch response has the sign I expected.
-
-The articulated model showed why that assumption could fail. The thrust line is below the suspension point, but above the payload CG. Forward thrust therefore produces a nose-down moment about the payload CG. The suspension point moves with the system; treating it as a fixed pivot leaves out an important part of the dynamics.
-
-![Free-body diagram of the payload and canopy, showing thrust above the payload CG and the reinforcing feedback sequence](assets/flight-testing/pitch-damper-fbd-pusher.png)
-
-*The pusher thrust acts above the payload CG, creating a nose-down moment. The canopy and payload react through the suspension. Schematic, not to scale.*
-
-The later analysis explained the reinforcing loop:
-
-**Payload pitches down → controller adds throttle → payload pitches down harder.**
-
-I did not work this out at the field. Fortunately, I decided to disable the damper while testing, and the aircraft immediately became quieter. The logs and simulation later explained why: I had designed the feedback around the wrong initial pitch response. A throttle increase can rotate the payload nose-down even while the aircraft’s longer-term response is to climb. The moving suspension and the canopy’s aerodynamic forces determine how that motion develops.
-
-The flight data contains a particularly useful comparison. In CRUISE, I had already set the throttle P and I gains to zero. At 655.79 seconds after boot, I set the pitch damper to zero too. In the tightly bounded windows below, that was the only control setting changed.
-
-![Pitch rate and throttle immediately before and after the pitch damper was disabled](assets/flight-testing/damper-off.png)
-
-| February 15 comparison | Boot-time window | Payload pitch-rate RMS |
-|---|---:|---:|
-| Damper gain 0.10; throttle P = I = 0 | 635–654 s | 76.4 degrees/s |
-| Damper gain 0; throttle P = I = 0 | 659–681 s | 22.7 degrees/s |
-
-The fast oscillation reduced sharply. Later in the same flight, reintroducing the damper at 0.05 coincided with a stronger component around 1.5 Hz; reducing it to 0.02 brought the rate RMS back down. Those observations support the self-excitation concern.
-
-That experience led to the [longitudinal controller and observer investigation](longitudinal-observer.md). The next step is to control the relative canopy–payload motion, accounting for motor response and the different oscillation modes.
-
-## Testing tighter turns at Trout Lake
-
-The lateral gains came from the simulator and stayed fixed throughout the long flight. I deliberately reduced the loiter-radius setting from 60 to 40 metres at 10:26 after takeoff, then to 30 metres at 35:47. The first change was in LOITER; the second was entered in GUIDED.
-
-![Trout Lake response to reducing the loiter radius from 60 to 40 metres](assets/flight-testing/lateral-loiter-response.png)
-
-*The dashed line marks the 60 → 40 m radius change. Grey shading marks a brief MANUAL interval between LOITER segments. Bank and heading-rate transients are visible alongside the eventual path tracking.*
-
-Selected settled portions of the 60 m and 40 m loiters show median heading rate increasing from about 5.0 to 6.4 degrees per second. A later 40 m segment had 0.36 m RMS logged cross-track error. That gave me a concrete result from the flight: the controller could guide the aircraft around a tighter circle, while the transitions still gave me work to do.
-
-## Bringing the simulation back to the aircraft
-
-The flights give the simulation clear targets: a slow pitch mode around 0.32–0.37 Hz and a faster oscillation excited by the damper. The articulated model captures a similar slow mode, but still needs calibration to reproduce the recorded response to throttle.
-
-Loaded mass, CG, and inertia are the next inputs to measure. The logs record payload motion; measuring canopy motion as well would help develop the relative-pitch controller.
-
-The progression was learning to launch, finding a weight that flew well, getting autonomous missions working, and then discovering that a plausible damping rule could reinforce the motion it was meant to suppress. The next controller should earn its bandwidth by reproducing those observations first.
-
-## Data and methods
-
-The figures use the January 3 and February 15 onboard logs. Height is relative to home, and the ground track is relative to the plotted segment’s starting point. Energy is battery-side electrical energy, calculated from current and voltage and checked against the onboard counters. The AUTO endurance row is part of the full Trout Lake flight.
-
-The force diagram explains the mechanism identified afterward in the articulated model; loaded CG and inertia remain to be measured. The February 15 firmware reports `3a2da6cf`, while its parameter names match later source changes. The inspected implementations agree on the damper sign, but the version string does not identify the exact compiled tree. Filter behavior also matters: the inspected code zeros the signal at zero cutoff, applies positive cutoff changes on reset, and updates at 50 Hz using the throttle-loop timestep.
-
-I reviewed six onboard logs and 54 telemetry logs with their raw companions. A February 22 telemetry recording switches from hardware to SITL; that simulated section is excluded here. The [flight evidence](assets/flight-testing/flight-evidence.json) records source hashes and comparison windows. [Hood River](assets/flight-testing/hood-river-plot-data.csv.gz) and [Trout Lake](assets/flight-testing/trout-lake-plot-data.csv.gz) overview data are sampled at 5 Hz; pitch-rate comparisons use the 25 Hz analysis.
-
-The simulation figures use the Mission Planner SITL recording beginning February 14 at 13:43:43 PST, which continues into February 15. It is kept separate from the aircraft flight data. Recorded parameter values and timestamps are preserved in the [simulation tuning history](assets/flight-testing/sitl-lateral-tuning-history.json).
+[Data and methods](data-and-methods.md) records log provenance, measurement definitions, and the distinction between flight results and simulation experiments.
