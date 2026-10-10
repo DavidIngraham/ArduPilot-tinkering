@@ -1,0 +1,2792 @@
+{
+  "source_root": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09",
+  "policy": "Report-linked PNG/SVG figures and plotting source only. Reports, logs, datasets, parameters and binary traces remain at their existing locations. Native plotters requiring model imports should run in the ArduPilot simulation package.",
+  "files": [
+    {
+      "path": "figures/turn-model-spike/bounded-forecast.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/bounded-forecast.png",
+      "bytes": 350430,
+      "sha256": "78610d7a1ebcf491fb02066610a65fa8af3ee4fb9780bd17b1c44c9e4982e6e8",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/bounded-withheld-channels.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/bounded-withheld-channels.png",
+      "bytes": 250672,
+      "sha256": "4e2c868410d38ab5fa979352b6d50151e8779624e0deea3d1af3e2e19b9093bf",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/canopy-tilt-static-loads.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/canopy-tilt-static-loads.png",
+      "bytes": 107379,
+      "sha256": "caafa983c187d5cc6454a285aa8ea4d0bd6beb8c23b7570469052b77bfa84eb4",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/glide-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/glide-comparison.png",
+      "bytes": 360711,
+      "sha256": "7dfedef269520fadacf4d38b417f6f246c64e31f01f2dca8833f292cfd9d54ee",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/glide-force-gyro.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/glide-force-gyro.png",
+      "bytes": 436031,
+      "sha256": "7c8c59ebffaab208c2a7ecd41645444a374705de6d7b8c3e0e9ab367a19a9a51",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/glide-imu-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/glide-imu-comparison.png",
+      "bytes": 359458,
+      "sha256": "c8b058245ca7e382e9aab2ed6f6d5ef5406ebb9d8da39393f55271629cd59a86",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/glide-wind-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/glide-wind-comparison.png",
+      "bytes": 358756,
+      "sha256": "ab3ae983a1bb7e6611602f6c65fff7bcbbb3c6845d762d81cfd3b06785c7ccdb",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/gyro-refit-forecasts.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/gyro-refit-forecasts.png",
+      "bytes": 559659,
+      "sha256": "e2f28b14510b9027761a837960f82fe9f1b7a346e15e4c89f43571a306b5613f",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/atlas-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/atlas-comparison.png",
+      "bytes": 676623,
+      "sha256": "b6a340c1e65c4a5a065f0a136e47aa0e94d8a815ed0b64d509087a3ae182d47f",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/brake-events-separated.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/brake-events-separated.png",
+      "bytes": 370523,
+      "sha256": "3f0001e26d3dce2a166185a505d9fbedd95de30af35fc66e107af4a30b28027e",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/brake-events.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/brake-events.png",
+      "bytes": 610455,
+      "sha256": "75154c45b4c6f6a57f30c39f91186dde0abe22a937fb4dc870078b25d5fd9d39",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/brake-moment-audit.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/brake-moment-audit.png",
+      "bytes": 285456,
+      "sha256": "25148d2902a6c834aa81941142954ad66957c12e9fcc432cd649a9ba93f92f89",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/cad-replay-2026-01-03.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/cad-replay-2026-01-03.png",
+      "bytes": 737311,
+      "sha256": "de18b1ee93f28e8c791b049c8dfa0f8a98dcfb4cfe0a6326bdad2008d23c6520",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/controller-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/controller-comparison.png",
+      "bytes": 295581,
+      "sha256": "b6ab03e306006a15535532234d67b248699c9555e9d90b80439a65d90faa58d3",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/damping-free-response.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/damping-free-response.png",
+      "bytes": 186099,
+      "sha256": "2d2df093a4f96fed0d5c84c677c6507b0d2935981a37eda0b896954e925f7176",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/equilibrium-brake-steps.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/equilibrium-brake-steps.png",
+      "bytes": 146041,
+      "sha256": "80bacdede3e6ecc8718db0220bd596dd8e40c332d381d2a82d8f05f804c8b0a2",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/final-rate-spectra.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/final-rate-spectra.png",
+      "bytes": 295597,
+      "sha256": "79cc8b3e78bf2dea9471d235de1eec593e3875cb522747d336e6b0bbc2c958af",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/high-dof-iterative-study/report.html",
+        "turn-model-spike/high-dof-iterative-study/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/glide-contexts.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/glide-contexts.png",
+      "bytes": 651729,
+      "sha256": "6b66766606b67742624478f0dbb51eb367cb625574ea7de7550d96f981d81a9c",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/gyro-mode-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/gyro-mode-comparison.png",
+      "bytes": 314478,
+      "sha256": "912f7b8c227b0c7e6fed1263a19dbc8b6274a48d3332665d5027d1a28fc0df58",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/gyro-replay-2026-01-03.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/gyro-replay-2026-01-03.png",
+      "bytes": 705964,
+      "sha256": "fd631b10286e6e90ead39731872ba243d3acc3872da1a8f13c4fa9f8f2f6d257",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/initialization-sensitivity.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/initialization-sensitivity.png",
+      "bytes": 72425,
+      "sha256": "b1582d699d2ccb36ca6ec4a9b3b5d064b1bf813ed473dec9d5520340c6fe37bc",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/high-dof-iterative-study/report.html",
+        "turn-model-spike/high-dof-iterative-study/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/lateral-variants.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/lateral-variants.png",
+      "bytes": 356118,
+      "sha256": "81c3370a8d6701edf50c957df182dd5d9eea091b92a55c55c28357109f8cc294",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/long-replays.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/long-replays.png",
+      "bytes": 687688,
+      "sha256": "2b9e0034ef90cf1fb17f8e80750fa9f6c8cc89e860a14cf44e2353ccfe6685b6",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/native-rate-spectra.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/native-rate-spectra.png",
+      "bytes": 347495,
+      "sha256": "e8576da2bca469e5f41739d38cadaa2385b92eb0bd1a6e10feb676a673baf789",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/neutral-stability.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/neutral-stability.png",
+      "bytes": 250727,
+      "sha256": "0f8120756ed335ba3287617cafeb95c25c8689da4741a2365ee00ba745021329",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/ordinary-replay-2026-01-03.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/ordinary-replay-2026-01-03.png",
+      "bytes": 849342,
+      "sha256": "0dfb20c978cce98197cd7f0832f879ec6b92ef673b2190cc139b4b2c7e13ad7c",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/ordinary-replay-2026-02-15.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/ordinary-replay-2026-02-15.png",
+      "bytes": 934616,
+      "sha256": "a8c62288a7a7fbc1a7189700c34b8fccf409399ebba7ae60b5ebcb018145c97c",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/preload-tradeoffs.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/preload-tradeoffs.png",
+      "bytes": 188973,
+      "sha256": "ea7c939e5863f84cdb0dd66cda40ebf67ce9457b7335fbd3522b016d2ba46156",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/relative-trim-extension.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/relative-trim-extension.png",
+      "bytes": 129843,
+      "sha256": "b564e658e8b5c0f2461f6539cb2875d66a894073c835c749ac8694881ceb2744",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/retained-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/retained-comparison.png",
+      "bytes": 165974,
+      "sha256": "52d3304df1bc5ae531d0ebef78305510054899a61c5e492bdc5f126410525709",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/high-dof-iterative-study/report.html",
+        "turn-model-spike/high-dof-iterative-study/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/retained-controller-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/retained-controller-comparison.png",
+      "bytes": 253858,
+      "sha256": "328125f83bddf8a00dc4ba46a64fc138fec4a907ce0733cb6d2adf86a256a756",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/high-dof-iterative-study/report.html",
+        "turn-model-spike/high-dof-iterative-study/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/retained-long-contexts.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/retained-long-contexts.png",
+      "bytes": 679582,
+      "sha256": "d713919d842dc3965a07a6327d931b30a24c2af14b73dc9f2361909df9d7cbcd",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/high-dof-iterative-study/report.html",
+        "turn-model-spike/high-dof-iterative-study/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/roll-atlas-tradeoff.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/roll-atlas-tradeoff.png",
+      "bytes": 103834,
+      "sha256": "91b356e4d351f268a0ad5228856f140ba475678ab9eced00aacfbfbab32f8b25",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/roll-coupling.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/roll-coupling.png",
+      "bytes": 194241,
+      "sha256": "b36e40ef49979805914fb8ef7e1a8530ac1704d727480f92da11c928c31a0643",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/roll-mode-shape-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/roll-mode-shape-comparison.png",
+      "bytes": 93378,
+      "sha256": "ed8708444753f57c88ed306e7b4d5a5600751695fcc4718870d1ca54ddc4f2f7",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/roll-torque-balance.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/roll-torque-balance.png",
+      "bytes": 200852,
+      "sha256": "fc6882b86e14a44d5159dd75b836968258a448f864c35b9a76b78ed844ef4c01",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/rpm-mode-evidence.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/rpm-mode-evidence.png",
+      "bytes": 171536,
+      "sha256": "f2680d1832aa4355d8c14410604eddf3eb28a9c5e52ca1d641dd7c64a28bce5f",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/soft-free-decay.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/soft-free-decay.png",
+      "bytes": 179763,
+      "sha256": "141b90bb75a07227ef31b2d300f4aaa69b2850f98366346cd9692e9616ce4b43",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/high-dof-iterative-study/report.html",
+        "turn-model-spike/high-dof-iterative-study/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/soft-retrim-response.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/soft-retrim-response.png",
+      "bytes": 178469,
+      "sha256": "34a2d4dfd3bcfadd8c66fded2fb92df62fe10338722ccfa94a35b656e1d02c12",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/high-dof-iterative-study/report.html",
+        "turn-model-spike/high-dof-iterative-study/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/soft-retrim-spectra.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/soft-retrim-spectra.png",
+      "bytes": 303597,
+      "sha256": "d23f2a56966df4f3d62ecab3ca3543c641f3b8c1ff28319b74fab2100fb36a78",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/high-dof-iterative-study/report.html",
+        "turn-model-spike/high-dof-iterative-study/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/soft-roll-ridge-phase-check.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/soft-roll-ridge-phase-check.png",
+      "bytes": 306287,
+      "sha256": "63ff3ac884e6c9e7e1d76063f540bea3094328893ce6b4555ae74e5c8a0ce919",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/high-dof-iterative-study/report.html",
+        "turn-model-spike/high-dof-iterative-study/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/sustained-turn-crosscheck.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/sustained-turn-crosscheck.png",
+      "bytes": 195660,
+      "sha256": "a32f1fa1cdb1280b90b5861e33b509c5bd21f89a7c40d5302e00904787a8c8a3",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/high-dof-iterative-study/report.html",
+        "turn-model-spike/high-dof-iterative-study/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/tl-continuous-diagnostic.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/tl-continuous-diagnostic.png",
+      "bytes": 605569,
+      "sha256": "bd15cacdbe3fd7dbd2b0f2d131b49343bf28d53f8df15531222b9d17217150ad",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/high-dof-iterative-study/report.html",
+        "turn-model-spike/high-dof-iterative-study/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/tl-matched-840-3030.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/tl-matched-840-3030.png",
+      "bytes": 706480,
+      "sha256": "7e679e88bac63287df8a25cdd2774a44a65cc1edc44e2943878eb5c8e8c5b58b",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/high-dof-iterative-study/report.html",
+        "turn-model-spike/high-dof-iterative-study/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/v2-controller-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/v2-controller-comparison.png",
+      "bytes": 266915,
+      "sha256": "c464254badf9f103dbbbdc76f94f87f0dd546a2a34294a6c319e828a13d74abf",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/high-dof-iterative-study/yaw-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/yaw-comparison.png",
+      "bytes": 249733,
+      "sha256": "97afb1bbec3146a2997c9baf30dad42cbcad5f93653da60633fac3d2ee88c466",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-added-body-flight.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-added-body-flight.png",
+      "bytes": 216867,
+      "sha256": "4d8d97e3bab04bbb859a7ac534754c883f2476acc2724aa79c7986c277251da6",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-added-inertia-checks.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-added-inertia-checks.png",
+      "bytes": 114166,
+      "sha256": "be7bdee0d492f8110c6d695063d5433c9646ea11f6beb904a03f93890e41d033",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-balanced-body-checks.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-balanced-body-checks.png",
+      "bytes": 92220,
+      "sha256": "8dd5c99084754e2e55070e8ebb08351d0f4cdfcb55425f5d8fdacbacbde0caf3",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-bank-ablation.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-bank-ablation.png",
+      "bytes": 67352,
+      "sha256": "264a90061fc2047c7761a5f6fe51c1fec64f87ed465a152addf20534aca013de",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-brake-loading.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-brake-loading.png",
+      "bytes": 86829,
+      "sha256": "1376b9ac55cd859b9eeba7ac5dc3bbbafa7a6b97ddbc3d45b6e3db87e784bd51",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-causal-canopy-state.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-causal-canopy-state.png",
+      "bytes": 266722,
+      "sha256": "e74527861986ededfcdc83b255ca51eecfb9f5bf3fb26d81b403a6260e569f67",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-causal-lateral.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-causal-lateral.png",
+      "bytes": 333991,
+      "sha256": "1e578ebe4ad10726620e53dc72231dc13bb6b1265b4d03be29c653d0e783de1e",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-circle-wind.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-circle-wind.png",
+      "bytes": 180099,
+      "sha256": "86a78d29fc7e0f57e03d22fec2076e12260b198aa3568697b31f2d1d7992c53e",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-coupled-ablation.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-coupled-ablation.png",
+      "bytes": 119846,
+      "sha256": "26bb2183dd1abc9cf7eb6c3bba1f1763f4688b02dc1fb8d82eade6900eb5b019",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-curved-added-fit.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-curved-added-fit.png",
+      "bytes": 182207,
+      "sha256": "53da7c7c373dae2a30cb4c211225b35527dabf132c71cd98a2f43c8c82251c40",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-curved-panel-fit.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-curved-panel-fit.png",
+      "bytes": 179421,
+      "sha256": "0049243079dc347ccf40f98d747bafeae60b2b1ca6a544d2da083e418b7806a1",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-effective-bank.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-effective-bank.png",
+      "bytes": 288675,
+      "sha256": "6563f1d744526cf4355e36394c37d14da384dfd774c4ed71904e7cec90edb9df",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-effective-flight.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-effective-flight.png",
+      "bytes": 530822,
+      "sha256": "1893db12679e213a2cd64bb0efc525ba096b00dabc6bbf8240667951dd68882e",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-force-bank.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-force-bank.png",
+      "bytes": 266161,
+      "sha256": "72a226c82d70b4ab61f0c985461399610cf90f7f9b8a6febf24267b960a77cbd",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-force-inversion.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-force-inversion.png",
+      "bytes": 811444,
+      "sha256": "e7fb1813c3e7121b77dc5e3ccb6b1787171db91d16bfecbd72a848d5f69ecb76",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-force-tilt.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-force-tilt.png",
+      "bytes": 76190,
+      "sha256": "f10ae0370e6dd82e8f363c7f4608c5d4739783007ddd01714aa571ffdfe7e5a6",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-force-timing.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-force-timing.png",
+      "bytes": 354565,
+      "sha256": "0107a670cff8d3386f2556264ec96822a42e1344252863596267115db00d51dc",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-force-yaw-speed.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-force-yaw-speed.png",
+      "bytes": 414736,
+      "sha256": "e910ca940c80e2e88f7b10061fb87bbf3b02ef3cc351bb158dcb0229837095b9",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-gyro-attitude-consistency.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-gyro-attitude-consistency.png",
+      "bytes": 223246,
+      "sha256": "85711ecce61f82ab7dd622e5316f380c66147b9a23b1ffe39912aadef27c8a93",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-initial-canopy-force.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-initial-canopy-force.png",
+      "bytes": 89218,
+      "sha256": "489593fe30f07761fedb0589fea4829480d4009a04f88ceea9f45c219822ca94",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-joint-energy-correction.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-joint-energy-correction.png",
+      "bytes": 41347,
+      "sha256": "0e94cf3e97d7d8dba7ef94eaaac68de8f2c1b7a580cd82252776bc2d454c98b7",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-joint-sensitivity.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-joint-sensitivity.png",
+      "bytes": 59228,
+      "sha256": "034866bd39b45f1debe2c30d8de16b783ae45a53352d77c5c7b6359403900d91",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-panel-only-lateral.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-panel-only-lateral.png",
+      "bytes": 180329,
+      "sha256": "d86caa3ad563291cf19e9096af875bed6c33445cc08d2a5c9c71f5ed19ac833b",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-propeller-correction.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-propeller-correction.png",
+      "bytes": 55621,
+      "sha256": "5f279b0f34a240dbb9605d6d7f8639e1b536ab706714bd473c99267f99352095",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-propulsion-state-diagnostic.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-propulsion-state-diagnostic.png",
+      "bytes": 314237,
+      "sha256": "f06c02125f4d29e7d73eba014b647be744aae07ff40fd436ce566ae3fb25e401",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-quadratic-brake.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-quadratic-brake.png",
+      "bytes": 190635,
+      "sha256": "27a9d91d14b4952d31e394cd3944b443c4762095716978f3322cf707852c88ae",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-rate-initialization.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-rate-initialization.png",
+      "bytes": 276020,
+      "sha256": "710544f0151291e31261eddfcb328770f4e3e1fee3969d1715c514c91a4e33b4",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-rigging-offsets.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-rigging-offsets.png",
+      "bytes": 152570,
+      "sha256": "7bb85b932121dc3dfb7ac4bc4e2fb3e613a5aa7b85132a50b0fee3ee75b051f7",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-rpm-response.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-rpm-response.png",
+      "bytes": 334815,
+      "sha256": "cd875b0ecb08b22003bc097584c7b5cc9eadf08ff3ce498fe9cc3d5f670f5442",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-split-brake.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-split-brake.png",
+      "bytes": 39989,
+      "sha256": "2c7a548ef5bf9929bac36e6ff2e2be7f984bd3ecb4583cc72970275d822def40",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-split-full-refit.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-split-full-refit.png",
+      "bytes": 185564,
+      "sha256": "46b15c86c5e4101e5a4ff4fae47908fa01b780dfc84104ea6ace0af577156dfc",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-training-coverage.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-training-coverage.png",
+      "bytes": 63283,
+      "sha256": "476e5784dee2cb42b3cc6ad041d0ff79d73bd64fc7fde0468066e984c56b1431",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-turn-input-coverage.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-turn-input-coverage.png",
+      "bytes": 126254,
+      "sha256": "8f9dfc43bbf95e8223b9e4cadc553e24cf5ec0ffe20dbcfc2edc6cf83232ab35",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-two-body-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-two-body-comparison.png",
+      "bytes": 315576,
+      "sha256": "b069651d17eb71a38736526bff3716c2ddbd23fe96eabc2a38f556887c31e6cd",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-wind-diagnostic.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-wind-diagnostic.png",
+      "bytes": 143325,
+      "sha256": "4ce50f8152b41f449da871238c1d5f7b5b0282ba9e2adbb093851d18758bd1a0",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iteration-yaw-coupling.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iteration-yaw-coupling.png",
+      "bytes": 80052,
+      "sha256": "1afea53c60000f13a243fb460bfb695d82e8da09b03759245ddcd38d8715008e",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/HR-brake-release.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/HR-brake-release.png",
+      "bytes": 467593,
+      "sha256": "2680f06663d2670c5d05d5c2503a1b7f28de55cdde71a1cf16cc023a255fb9e1",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/iterative-truth-study/index.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/HR-glide-context.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/HR-glide-context.png",
+      "bytes": 469156,
+      "sha256": "128314c4b597e06360c0237eea01daf727d5fe96794644f39505a57b4234c60a",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/iterative-truth-study/index.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/HR-turn-reversal.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/HR-turn-reversal.png",
+      "bytes": 456581,
+      "sha256": "3529875dfe93bfde3a0fb61dc0a8553493fb53d84424d6c17ce1ff5d78f26f19",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/iterative-truth-study/index.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/TL-alternating-brakes.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/TL-alternating-brakes.png",
+      "bytes": 497691,
+      "sha256": "8bb2f910d35a9a2423b0e6c6f9ae7c96f6837a48cdc5a6e36ced9c1d00596c0e",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/iterative-truth-study/index.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/TL-glide-context.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/TL-glide-context.png",
+      "bytes": 431230,
+      "sha256": "52719fb78fa028b6f5b594c55586b9bf9901a364a49b1a187d4d5a06be294a9c",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/iterative-truth-study/index.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/TL-strong-release.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/TL-strong-release.png",
+      "bytes": 551845,
+      "sha256": "a206ae619afcfcfb17e92dcee01a0d651c26fc56e2ca946b80b4f1df3d1906a5",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/iterative-truth-study/index.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/baseline-atlas-scores.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/baseline-atlas-scores.png",
+      "bytes": 113023,
+      "sha256": "9681529d1f59311cf9401ca25cf25de4e25c061c3aee2f3ed6632b95e14c8411",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/cycle1-2026-01-03-glide.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/cycle1-2026-01-03-glide.png",
+      "bytes": 134573,
+      "sha256": "eeb0ab068902cc26a491013711951b029688a939745fa4df2185d18438df1397",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/cycle1-2026-02-15-glide.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/cycle1-2026-02-15-glide.png",
+      "bytes": 115478,
+      "sha256": "be76441f2cb2624c8696e98b9e8e6e05059fc8bb95b173c4784fec92651c5ed0",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/iterative-truth-study/outcome.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/cycle2-course-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/cycle2-course-comparison.png",
+      "bytes": 292623,
+      "sha256": "4a8338a3e4538935e561e038b01f00a177725961bc8ebc96bad9a432084bcac1",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/iterative-truth-study/outcome.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/cycle3-course-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/cycle3-course-comparison.png",
+      "bytes": 253861,
+      "sha256": "a5e1881718233130db82fb6aed3495eba6bcd1dfa53b915b17612823fa926b68",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/matched-history-audit.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/matched-history-audit.png",
+      "bytes": 400501,
+      "sha256": "0a37a3726dabc42fd8e0ccd1babdb6edf9a99af9d1b4f5e7df094c9c09662452",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/iterative-truth-study/outcome.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/speed-decomposition.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/speed-decomposition.png",
+      "bytes": 39614,
+      "sha256": "d3fe1de9182849083c58d1404336b09d77a2be339067543435ef922fad079a28",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/iterative-truth-study/outcome.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/iterative-truth-study/steering-forcing-audit.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/steering-forcing-audit.png",
+      "bytes": 525055,
+      "sha256": "bff8ee041f24e1399cac6fe9969f839c93182b3ff5741fa2f86f12a8c5c0b83b",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/long-horizon-refit-forecasts.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/long-horizon-refit-forecasts.png",
+      "bytes": 554581,
+      "sha256": "dd23a628da5fd6753a62bb1a67bf1f029b2340cd12dadda7dcd62788fbed0490",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/ablation.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/ablation.png",
+      "bytes": 218755,
+      "sha256": "98696053fb45c6789dd2b1a832d41dba8f157b9dea9995a01ec476169cfb661e",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/auto-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/auto-comparison.png",
+      "bytes": 376240,
+      "sha256": "ac50e975d468f57cccea5e3ba7bda6278680cb1eb3b163f7e65a86be4829b6b7",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/longitudinal-design/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/auto-loiter.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/auto-loiter.png",
+      "bytes": 271753,
+      "sha256": "ca68c3152617d2255d910ce5b6c94872e79a5a902f834dcbe6b8552a9baf54ad",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/longitudinal-design/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/candidate-response.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/candidate-response.png",
+      "bytes": 207050,
+      "sha256": "ed061842c94f13cb6b1a35c63c1d6d416c0e510bea2479ed862fa875f3c21624",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/longitudinal-design/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/candidate_dynamic_roll.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/candidate_dynamic_roll.png",
+      "bytes": 212859,
+      "sha256": "41948cb7df666f4c255a373097fec08ca45812321fe537e6163db74f8e8bc4ee",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/longitudinal-design/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/candidate_low_voltage.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/candidate_low_voltage.png",
+      "bytes": 191255,
+      "sha256": "8c76273a83fc0d60434e6b9a58ccd547b35f4a76760af7ba99604f86db54c625",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/longitudinal-design/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/capture-smoothing.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/capture-smoothing.png",
+      "bytes": 348729,
+      "sha256": "a437432f535e5ce50b7f1557f3e41c0eb9eeac7a696ca721baedcc25cb6fe368",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/longitudinal-design/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/final-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/final-comparison.png",
+      "bytes": 698358,
+      "sha256": "b18250a6677d8519c14dfc0f58b38124c63443f78e84d0db71ed556d5668e29c",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/longitudinal-design/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/final-dampers.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/final-dampers.png",
+      "bytes": 403730,
+      "sha256": "7876be645a94201ae351ef9778acd7079afa5569825910f346df5e4aec03ec67",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/longitudinal-design/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/fixed-baseline.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/fixed-baseline.png",
+      "bytes": 162458,
+      "sha256": "9d130ac0a7c741949bec4c8d290d28f24659f6c25f312f6a1ba63283c5eb39bf",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/fixed-tuned.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/fixed-tuned.png",
+      "bytes": 171066,
+      "sha256": "3d80a482f4fb2a7c03cd41b4df9988c279ee487e3513c7cb91cb42b27fd0079e",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/revision1-dampers.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/revision1-dampers.png",
+      "bytes": 636399,
+      "sha256": "27af24d01b7f55860947de1a49b83b2bede8244c76010492edfaeb7b71031e60",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/revision1-off.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/revision1-off.png",
+      "bytes": 739219,
+      "sha256": "d229b68ea3333bce73413148236ffc743b3b345cab5074d5ba9489f6be80f5b0",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-design/revision2-off.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/revision2-off.png",
+      "bytes": 207050,
+      "sha256": "ed061842c94f13cb6b1a35c63c1d6d416c0e510bea2479ed862fa875f3c21624",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-isolation/frequency-response.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-isolation/frequency-response.png",
+      "bytes": 152011,
+      "sha256": "a890e7df0eaf2f706f48122f825ffc9959c4ea41756fa03d9a6d622351e0a2fc",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/longitudinal-isolation/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/longitudinal-isolation/isolation.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-isolation/isolation.png",
+      "bytes": 933496,
+      "sha256": "2eceec932b221500563a34e512825beaec49aeccdf50ec9d92f0e193587f7679",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/longitudinal-isolation/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/low-power-segments.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/low-power-segments.png",
+      "bytes": 314001,
+      "sha256": "09364403b7b0177ac862b5af3ba1901ddaad5cc2961abbc79c869c1e529fd926",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/mission-envelope-inventory.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/mission-envelope-inventory.png",
+      "bytes": 294856,
+      "sha256": "a8b5a5c30e8b5c12393c45e620f01eed051c118afab7322bcc3d0f38590d96e1",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/mission-family1-development-audit.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/mission-family1-development-audit.png",
+      "bytes": 151542,
+      "sha256": "ac4e32402015e6ea54844fcd149472d5c9df202979b18c7c4bb89711a07d7797",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/mission-family1-evaluation.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/mission-family1-evaluation.png",
+      "bytes": 184874,
+      "sha256": "a5fc12485155c3dddb96ed1be71f4e260a97a0555b51ff268b1ad118b5bb3621",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/mission-init-sensitivity.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/mission-init-sensitivity.png",
+      "bytes": 101551,
+      "sha256": "cc0f5de721691bb9257327d74186f50e2af5f6126f223ae7f5d1cccf3edca96b",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/mission-performance-coverage.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/mission-performance-coverage.png",
+      "bytes": 47991,
+      "sha256": "0db924860fa5690f57e4d0a80528d1dcaa9fabe4bc7f0c3cca3f3502e80a3fa2",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/mission2-candidate-evaluation.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/mission2-candidate-evaluation.png",
+      "bytes": 180866,
+      "sha256": "b559862b13167b3796439ef0677afd260c245a5c623010fda8e093fef927e10a",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/mission2-final-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/mission2-final-comparison.png",
+      "bytes": 292425,
+      "sha256": "26951af7340b1389ef3dfaa9ad5d49a0a4dcac2478e068a2b5bbf5a87ac92759",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/mission2-inferred-performance.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/mission2-inferred-performance.png",
+      "bytes": 212168,
+      "sha256": "cfe8b32cbec76bff7707f1cc95f055392d485388c3207027788e85ac2b68908b",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/multiple-shooting-continuity.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/multiple-shooting-continuity.png",
+      "bytes": 447853,
+      "sha256": "e520b949292a5617d3ab5b5db8f7abb2ca80e9acf2a86a237d9d634b58ca230c",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/napkin-canopy-response.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/napkin-canopy-response.png",
+      "bytes": 367404,
+      "sha256": "0c475dc298e22e460d9494709bed2317b47f15fa637bebaade084088954cbc16",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/napkin-mechanics-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/napkin-mechanics-comparison.png",
+      "bytes": 319166,
+      "sha256": "14c074b7f3d7bb1373edec3cc101d2dca2581ccecb95325d1f8c79a916ef2c57",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/napkin-payload-model.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/napkin-payload-model.png",
+      "bytes": 98927,
+      "sha256": "b0e581e91502ca87ab44da3f9c92ebe16444ed32418e22ca14a2210954635036",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/native-damper-sign/damper-sign-low.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/native-damper-sign/damper-sign-low.png",
+      "bytes": 1370412,
+      "sha256": "26a882f4632e85f53b44265736c3dfdc62f676c1032a42c68cf2fce765760119",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/native-damper-sign/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/native-damper-sign/damper-sign.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/native-damper-sign/damper-sign.png",
+      "bytes": 965091,
+      "sha256": "fd1fb92f02b63d4fb303f5ce4ee9e4c77e2e8f644d2ccd4f21cf4d8ec366f60a",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/native-damper-sign/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/native-sitl-comparison/comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/native-sitl-comparison/comparison.png",
+      "bytes": 329521,
+      "sha256": "740f7b5a7ef751d5dc67c91c29ed1744ec397ec760bb6caca69fd8c79d48bcd0",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/native-sitl-comparison/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/native-sitl-comparison/loiter-detail.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/native-sitl-comparison/loiter-detail.png",
+      "bytes": 260269,
+      "sha256": "a1b55b8592957bd7dff65d6f1c7f54b25b503af7b6176d22795c6778ccb9ef5a",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/native-sitl-comparison/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/payload-inverse-torque.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/payload-inverse-torque.png",
+      "bytes": 178223,
+      "sha256": "a1f30dd2d18bd0be8dcfae0e618e5272b7b333dd7a0454bde4fa2fc4aff591a8",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/physical-mapping-validation.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/physical-mapping-validation.png",
+      "bytes": 300411,
+      "sha256": "bae162409e6d1c6fdd04d9be699957fc2417d7cba38337bbbae1df492cc3132b",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/actuator-audit-and-model-validation.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/powered-trim-investigation.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/powered-trim-investigation.png",
+      "bytes": 111627,
+      "sha256": "37369e5a13389634757c3b72e39a6cb75f2c7166c24aff527377a27de4f67b46",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/rotor-moment-scale.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/rotor-moment-scale.png",
+      "bytes": 432599,
+      "sha256": "c8edecdabc689d0244e69f3ff20b34314d2b1fc83e22b5f8d6857fda342b97f0",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/sustained-envelope-map.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/sustained-envelope-map.png",
+      "bytes": 272121,
+      "sha256": "4f330a4730f043306c064d9d33e934605e567d681a2afa6fff62823bb5d73c34",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/sustained-matched-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/sustained-matched-comparison.png",
+      "bytes": 87877,
+      "sha256": "bf2f1fc67f7ffabb35981f475543189925d88d38eaffc306c7c5962fe7f2f164",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/synthetic-recovery-errors.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/synthetic-recovery-errors.png",
+      "bytes": 66824,
+      "sha256": "fddbaed3595f5569384cb8386f4fc4d170f24f6510ef88536f443a081ea35459",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/synthetic-recovery-parameters.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/synthetic-recovery-parameters.png",
+      "bytes": 106572,
+      "sha256": "32cae7965175a75b326d123f777d167d2bc88ee4868f582980de6bd2eb080357",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/tilt-refit-forecasts.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/tilt-refit-forecasts.png",
+      "bytes": 476403,
+      "sha256": "d344872af3c7731252336604be8bf5696907e2594bc992af3db6155981b7a44b",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/torque-refit-forecasts.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/torque-refit-forecasts.png",
+      "bytes": 552178,
+      "sha256": "5e0d0894e2b33a08787bdfd144cdfdae407974f57f2f6545a406d30303e31f4b",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/turn-force-audit.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/turn-force-audit.png",
+      "bytes": 240567,
+      "sha256": "0b2f0bcbe47a4b7ac12672eb1d944893b1f4bf23f9ee16cdfc1d2d04fb17d7db",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/two-body-candidate-fbd.svg",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/two-body-candidate-fbd.svg",
+      "bytes": 2465,
+      "sha256": "ee71afc09b68a2c83ad13a4863cacc9956966a37aa329dd8d879f877a2541b99",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/up-away-A1-checks.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/up-away-A1-checks.png",
+      "bytes": 257168,
+      "sha256": "1093cb9a98b7988412ecaada1d29064c9792e3550257bebedc1f8a5281f615a3",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/up-away-A1-development-traces.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/up-away-A1-development-traces.png",
+      "bytes": 448466,
+      "sha256": "3a9c0e5659e4bc1d6fbfc87e5ab8bf2f3e6a75e223386c26ad016eb38559595f",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/up-away-report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/up-away-controller-diagnostic.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/up-away-controller-diagnostic.png",
+      "bytes": 200781,
+      "sha256": "72a4f908225c88790151cafdc29d9472bf5d1ad9c886d06ff079abc22a2d0695",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/up-away-report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/up-away-episode-coverage.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/up-away-episode-coverage.png",
+      "bytes": 197786,
+      "sha256": "c65a25604d3da3610fc1a1a9ac3fa81dc0177dafc9543083f219b0442da6e31d",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/up-away-four-fit-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/up-away-four-fit-comparison.png",
+      "bytes": 195451,
+      "sha256": "38936d5c670a3c8088d3a3e41b1bc22c7af5a7801f203431ae82d8ce9f145af9",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/up-away-report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/up-away-numerical-trim.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/up-away-numerical-trim.png",
+      "bytes": 174095,
+      "sha256": "68e1c2b9aa32fdd07fe66b3347d1bb2bad7b2e0a6ba07f11aff0232ee20059f7",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/yaw-coupling-study/sensitivity.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/yaw-coupling-study/sensitivity.png",
+      "bytes": 201663,
+      "sha256": "bfe08275f537941ab09cc34eaeef0b4cfe076287d2d2493042d443967aded5d0",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/physics-development.html",
+        "turn-model-spike/yaw-coupling-study/index.html"
+      ]
+    },
+    {
+      "path": "scripts/analyze.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/analyze.py",
+      "bytes": 5481,
+      "sha256": "ff37e72a393f65ee7ccb6dc172e9e7da7f5c05b5321156105894b50345955941",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/blog_plots.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/blog_plots.py",
+      "bytes": 4658,
+      "sha256": "5aedfead0d1715dcd6e6b92f8b80cdf4fc7b648857933c424d43c419d4a6aebf",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/compare_model.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/compare_model.py",
+      "bytes": 4091,
+      "sha256": "8ef14a08f0a4e7f4d3d09e72897ef8551472a16406bb6cd2f6d804ed8c9bcd60",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/endurance_analysis.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/endurance_analysis.py",
+      "bytes": 2468,
+      "sha256": "ca79b54e48ae6bb8ef3b981ddabbddfba5a7b4030ef99bb47ca671c73d42412d",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/lateral_sysid.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/lateral_sysid.py",
+      "bytes": 2908,
+      "sha256": "7023d634bbbc55190f25c59c54839f47c12ca4f4acb9de9f4acb54dc11402d62",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/pitch_damper_fbd.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/pitch_damper_fbd.py",
+      "bytes": 3344,
+      "sha256": "e085d30f2c39a74499c88c2ba4c6601e1aab8841e5654160e2147ce8a8c92ed5",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/plot_measured_mass_validation.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/plot_measured_mass_validation.py",
+      "bytes": 1325,
+      "sha256": "1a847a76429ceb3a5f8714ef24416d8fade40668fcf089941a59394387ed2bcf",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/plot_sitl_tracking.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/plot_sitl_tracking.py",
+      "bytes": 1765,
+      "sha256": "c389fbbd7f978cea8d1a2dbf1d11a1ae036e6aa27a8c51f47b9e0f53ff24560b",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/plot_sitl_tuning.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/plot_sitl_tuning.py",
+      "bytes": 2005,
+      "sha256": "e22f5043cb77aa032a25fefeccc26cf907eef982c7e2ba75359e87fe1d472672",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/plot_turn_spike.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/plot_turn_spike.py",
+      "bytes": 1603,
+      "sha256": "9a48c06aaa0e7da00be2e56864de4fe98b9df3cf4605adfd6c6e14b752337878",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/replay_turn_model.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/replay_turn_model.py",
+      "bytes": 4840,
+      "sha256": "ad575ef3baa482ca355880d6a76a64247c8eebd73bd26213075f626c568e375a",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/report_physical_mapping.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/report_physical_mapping.py",
+      "bytes": 8825,
+      "sha256": "f53e5e9ed23e0cca707010d6b6819c02e4d1faec351e9be727cd98185feb3464",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/system_id.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/system_id.py",
+      "bytes": 1809,
+      "sha256": "12d65cbef27850211ffb1c79861aadd5afc8e90b4cdf2e44110b17e63ff9c861",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/system_id_report.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/system_id_report.py",
+      "bytes": 2377,
+      "sha256": "93735e13527c4700da6b0d201da0bba1f59634c231a9cf769193518fb6c82b07",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/telemetry_details.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/telemetry_details.py",
+      "bytes": 2352,
+      "sha256": "245f868df0aa54f6f1207d4cecb9746ecb6d60be30d3f1eff59cb9877e20df3e",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/analyze_turn_force_gap.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/analyze_turn_force_gap.py",
+      "bytes": 2502,
+      "sha256": "a0819be8d9c3d188295683e1f1be5580b917aca8107fcafe7fa0d7c6045cb4d4",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_force_timing.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_force_timing.py",
+      "bytes": 3097,
+      "sha256": "d11f703285b7c45c70aa0636c70ba94161e36fbc80ebdd10fd0c3e92b1818f7f",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_glide_force_gyro.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_glide_force_gyro.py",
+      "bytes": 2432,
+      "sha256": "8aa55d8c80b5a4d9ad5755304853007aa5f3f820c4a2d204aa62da4d0d511c86",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_gyro_attitude_consistency.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_gyro_attitude_consistency.py",
+      "bytes": 3274,
+      "sha256": "28753e44798d640d65406d9e6cf85b751fd3c96138a8e9835cb52e7fb74e7cfa",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_low_power_segments.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_low_power_segments.py",
+      "bytes": 2240,
+      "sha256": "4de980a0421e6a871836a5566aa39db019384eae28e1c9ee74990486dcf1da02",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_mission_family1.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_mission_family1.py",
+      "bytes": 2356,
+      "sha256": "123aaaee29344d9d6e5f4cf1429ca9d99bbfa37d1687606c054d427061a9e1f0",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_napkin_response.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_napkin_response.py",
+      "bytes": 2778,
+      "sha256": "e37af84e969d793e1c7af627b1762998b24421e67819b47e15f254599f1dd4d4",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_payload_inverse_torque.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_payload_inverse_torque.py",
+      "bytes": 4474,
+      "sha256": "e90843b1f4c646a0cfbf92316914588fa08c2b48b4b1a25383ffb27d7e3dfb84",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_rotor_scale.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_rotor_scale.py",
+      "bytes": 2724,
+      "sha256": "8e805cfed16462835cccd8753b7690ea286adf339e34aac26dc594df882fc4c6",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_shooting_continuity.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_shooting_continuity.py",
+      "bytes": 3066,
+      "sha256": "f1e0122e9ce238dbba678a8271b4f2ef6d7be3b4d162bf15dd115584c9d72aac",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_tilt_continuity.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_tilt_continuity.py",
+      "bytes": 3031,
+      "sha256": "bb495375c47ddf8f86588b48366467ff482d800da0420770e25d25a8d1c08a99",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_turn_input_coverage.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_turn_input_coverage.py",
+      "bytes": 2339,
+      "sha256": "443a1c2483e75700e16e76b3f85c502f6d7280c1cdad9b3391ffba4678e3dfe4",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_up_away_B_response.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_up_away_B_response.py",
+      "bytes": 3123,
+      "sha256": "2c150c86f6b42715c5b40c365bcb09e6e9cdbde2a7470a3df98ae96904651c2d",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_up_away_response.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_up_away_response.py",
+      "bytes": 3119,
+      "sha256": "8ac1489f27b3712e86168200107b35c807a71ecefc6293749e8d6b2a9da04981",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/audit_up_away_uncertainty.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/audit_up_away_uncertainty.py",
+      "bytes": 3283,
+      "sha256": "435073af988c68957e5bcc6a554f402203858fbaa737225b00752735164fd96b",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/bounded_geometry.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/bounded_geometry.py",
+      "bytes": 1162,
+      "sha256": "9ef56a54dc6d9e11d192f6677259fbee32e1076be8480fdc12312995a95ceebe",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/build_napkin_payload.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/build_napkin_payload.py",
+      "bytes": 5424,
+      "sha256": "0154d56a696c6cafc11cd4a136c5b86182e31ccd4798572f9e32e295c7619513",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/check_bounded_withheld.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/check_bounded_withheld.py",
+      "bytes": 2830,
+      "sha256": "e25093f8db690b5776fc81c8bc43a295520894f9426d8f69ed05b68fcfef56e0",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/check_mission_initialization.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/check_mission_initialization.py",
+      "bytes": 2387,
+      "sha256": "04108921249a5749308800875c0c43a0c59a01d66b135d39044c615f46eb5375",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/check_plot_split_brake.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/check_plot_split_brake.py",
+      "bytes": 3690,
+      "sha256": "dee9484fef38ac4ef80e6452a17d995fd1f9fd85cbf79297af8a929265e48450",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/curved_panel_loads.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/curved_panel_loads.py",
+      "bytes": 3291,
+      "sha256": "891b7e86548a057228c13ad3d85055f6ca2d1436a55306ec40080a9e3dbcf73a",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/diagnose_circle_wind.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/diagnose_circle_wind.py",
+      "bytes": 2910,
+      "sha256": "1fed2acaae6f05b8ad48dce723608eb269a6253c96ba4633803e1560a4e15308",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/diagnose_force_inversion.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/diagnose_force_inversion.py",
+      "bytes": 2815,
+      "sha256": "de24e0c01862430c95e46a69ab89f7e1fdcce50fb1f6e8448179610f3710cd20",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/diagnose_heading_course.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/diagnose_heading_course.py",
+      "bytes": 3229,
+      "sha256": "87c072206d5f42224f2a195ae38cb2a2e178b1f38e48b6edbdf29ce64d3339bd",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/diagnose_initial_rates.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/diagnose_initial_rates.py",
+      "bytes": 1412,
+      "sha256": "d7cb44bd107681ddc9d37213470506b43872a36c19584eb20397e4f6dc2987e9",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/diagnose_turn_forces.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/diagnose_turn_forces.py",
+      "bytes": 3062,
+      "sha256": "23240410120db1bbbdcdbf0818754540a5459e43a1cfe59622fc8086f569349f",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/evaluate_mission2_candidate.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/evaluate_mission2_candidate.py",
+      "bytes": 2286,
+      "sha256": "758fb503729a77835fcdba72778eed166d1e4330db2537549837b7d42c624d23",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/evaluate_mission_family1.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/evaluate_mission_family1.py",
+      "bytes": 2519,
+      "sha256": "513ef2def548e03ee241e2d79841f3305b03b3d6d02e00fbb74a43a423549972",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/fast_bounded_causal.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/fast_bounded_causal.py",
+      "bytes": 2425,
+      "sha256": "a810df83d8da8e4d77b58933f017a3753e79828976053075d3f5183f9418ca1d",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/fast_canopy_tilt.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/fast_canopy_tilt.py",
+      "bytes": 2537,
+      "sha256": "f634d3900428d0b819274ef009b70ed847c2104067ba96b5c4d167d54ef74bea",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/fast_conservative_joint.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/fast_conservative_joint.py",
+      "bytes": 1287,
+      "sha256": "5f8a079328c965d72a7fe4c4af71ab1b1feda952710c7b7de5f8d8f030728b7a",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/fast_napkin_causal.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/fast_napkin_causal.py",
+      "bytes": 2473,
+      "sha256": "649e78c7667d47fe6796de066eaea2d26b30ccdad0fbeeaf40c4cede3c4e5e38",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/fast_split_brake.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/fast_split_brake.py",
+      "bytes": 1362,
+      "sha256": "5db1a2e6c021e77a765910c1f1f23d4e57dbcdf6b8531aa77f8aebc08fae8c3f",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/finalize_mission2.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/finalize_mission2.py",
+      "bytes": 3308,
+      "sha256": "19e1332f0080ed9b00636f5f17aac82c4536cd602f373794f57205f977d183bb",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/fit_mission_family1.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/fit_mission_family1.py",
+      "bytes": 3664,
+      "sha256": "f949278a38e07c4114567dfe8aac2ecdbaab397c678285785e3c2cfe85490824",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/brake_audit.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/brake_audit.py",
+      "bytes": 2651,
+      "sha256": "9c4ed99186e63c9a22bbdf12692a3f920947844c65e88758ad88712081e7f26c",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/brake_events.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/brake_events.py",
+      "bytes": 3492,
+      "sha256": "ad2704b8f195db13ef8f92a8a3cdc6947edda83fcf0ebd79ffef9e6bb197659f",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/brake_replay.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/brake_replay.py",
+      "bytes": 3823,
+      "sha256": "5c19e81447fb024a9789257f3be68d13ee21955e9ab155564dbc940a55b1c990",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/cad_replay.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/cad_replay.py",
+      "bytes": 4308,
+      "sha256": "c93789231f50e31135fe31c53f3c44aefbed2da16b6779dc5d5c6891bae9bbf8",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/combined_replay.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/combined_replay.py",
+      "bytes": 3866,
+      "sha256": "5c19c5812cbb4d68aa3c5a593fd459e248fa7c4cb12fae4cd6dc587daf2f25d1",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/damping_decay.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/damping_decay.py",
+      "bytes": 1569,
+      "sha256": "4c8cb43fb9479bed9b894652f5f1f7f5970ad5f7361635745574297d93dc143d",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/equilibrium_stability.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/equilibrium_stability.py",
+      "bytes": 1923,
+      "sha256": "746e70eabf7898da100d88be0af61cd433c204b7276310cb37084e5bb395882f",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/final_diagnostics.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/final_diagnostics.py",
+      "bytes": 1907,
+      "sha256": "eb3a9e53bc9e78abdbc01c3a8fc91d0ffd591e8b49e58cb791d155cd56c1d62d",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/final_source_updates.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/final_source_updates.py",
+      "bytes": 1380,
+      "sha256": "8fb08bbd95d2a546b41c3bc0c6da0b0f9c37b2cd7c8700bc151727aca565df71",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/fixed_event_slack.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/fixed_event_slack.py",
+      "bytes": 2335,
+      "sha256": "1d77ec163c92b9790ca61902033d35497e9d29e78e07494415c7ed143b1a8f4a",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/glide_contexts.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/glide_contexts.py",
+      "bytes": 2619,
+      "sha256": "7b4ae4b0c593200141a77ddf4e51408f70b086fa9456249712384ecbc667ea78",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/gyro_replay.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/gyro_replay.py",
+      "bytes": 3916,
+      "sha256": "86c4531ccf2ddd0536c597d42aa86dd4db3f68e68515b1e8bcb0facf5a884f0d",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/input_motion_spectra.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/input_motion_spectra.py",
+      "bytes": 3194,
+      "sha256": "a4a858dd37e61199eebf0c9286af6b7c7c0c8d643bacd2dabe041ec3c07e0681",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/lateral_variants.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/lateral_variants.py",
+      "bytes": 2125,
+      "sha256": "79c450d2cf0ce83b030a64ac194692417fde8336ba8982a05a5d274eac1b70ea",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/linear_modes.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/linear_modes.py",
+      "bytes": 2537,
+      "sha256": "028b610608504ed228202e7525ff07db204278edd7c4038c58eebfc9cd319243",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/long_replays.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/long_replays.py",
+      "bytes": 2840,
+      "sha256": "2dd9a101bee661d860d00e0a626c4b62578d8cfc04518cdee64c060e89fe541e",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/native_spectra.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/native_spectra.py",
+      "bytes": 2407,
+      "sha256": "e4c476d127e2490ad60854365a483f1ddf59141d7632cadb41f1da869341be6a",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/neutral_stability.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/neutral_stability.py",
+      "bytes": 2051,
+      "sha256": "2bd98f1c2b9ba55fe0e74296c9890c6145bf498b1893b1be1880efdcab5f2607",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/observed_mode_shapes.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/observed_mode_shapes.py",
+      "bytes": 2266,
+      "sha256": "2394a46f0c2f5f7efd37237751eddd90a7a4868884957be99cee1320821d86f7",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/ordinary_replay.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/ordinary_replay.py",
+      "bytes": 3799,
+      "sha256": "ad48ec9494f3ab60587fc119136eaf84163e67e13df0272b57a4f7f880547025",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/package_handoff.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/package_handoff.py",
+      "bytes": 5954,
+      "sha256": "9d08618100430c7f2eb7408a9117f95ae3b61404e4df6565b8e39c07bfc8bd5c",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_atlas.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_atlas.py",
+      "bytes": 1903,
+      "sha256": "e629e34d6b16a928a05d33fbfb971961addb22325d9eb9af4788820766dc4ddc",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_candidate_tradeoffs.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_candidate_tradeoffs.py",
+      "bytes": 1572,
+      "sha256": "5c64f382a4565170b34a13ef98d2bbf70f6c14ceaee2c51f454ec9d06d24c203",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_controller.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_controller.py",
+      "bytes": 1169,
+      "sha256": "fa23ce014d5d6ba6d0b013024208488b5a6b98a23d525bd4082ecc09c691b776",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_envelope.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_envelope.py",
+      "bytes": 1832,
+      "sha256": "753a4309227b1da96b4e13369a2305923c6b23f866882411bbd01f45bb46b8e9",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_final_spectra.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_final_spectra.py",
+      "bytes": 2464,
+      "sha256": "7dd4a7f52861f9f1d24071d037321256d762d66cfc49bbd1f7afc93bac9d18dc",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_initialization.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_initialization.py",
+      "bytes": 1435,
+      "sha256": "65c4e9dbf5d5b24254d3d44c766563cff0b9ae1cc820c5528363a630ee2f0cf3",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_modal_check.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_modal_check.py",
+      "bytes": 1688,
+      "sha256": "86dd783aeb0adcc9ad4950733223761e5f29a4c647197e985d5cde78c47e9c18",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_modes.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_modes.py",
+      "bytes": 1152,
+      "sha256": "7bfd37f2cd5e7936f4e3d973ee410536569493b33c4039b273b50186ff821c9f",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_observed_modes.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_observed_modes.py",
+      "bytes": 1565,
+      "sha256": "398295b6e4e7ce18cf971bc1189a8e261adeef85d8be52cd7e8a86dc84d9c36f",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_retained.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_retained.py",
+      "bytes": 3872,
+      "sha256": "67d31d8071e74410b4c16d92d7bac8345bdcaf5a4ba36024e014b43fa911202f",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_roll.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_roll.py",
+      "bytes": 1078,
+      "sha256": "edce5333bfc34b875c751865374f0d8201f5b47085df3b9f04fb1982139f9a42",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_roll_modes.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_roll_modes.py",
+      "bytes": 1349,
+      "sha256": "7632666c7f25f41b1a5758937d0894f571d0e552a599ca5f089eec89c13cb21d",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_v2.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_v2.py",
+      "bytes": 1700,
+      "sha256": "46b2ced63cd84775e5204c046917038d3180c3da2b080c6b8e7e00e7de283768",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/plot_yaw.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/plot_yaw.py",
+      "bytes": 1720,
+      "sha256": "79e269be55be61f12faf1f89d233db5df5cdeaaf4b5b08be09f5a4d9c7c3b027",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/preload_contexts.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/preload_contexts.py",
+      "bytes": 2835,
+      "sha256": "14543fe0c8d1264048bdfbe3041b0c9e96043656c247a5f5e85a76a6c1db540d",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/preload_hr_contexts.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/preload_hr_contexts.py",
+      "bytes": 2842,
+      "sha256": "36ada8928b10a9a17bebc0a898e8e631c3e0f3c5c5c04f0ab1bd2ac2abfabb4e",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/preload_summary.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/preload_summary.py",
+      "bytes": 1752,
+      "sha256": "23e589232061f351637dff218c6934ec6ba8e94076a0861a07da0d33ea4b7715",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/prepare_package.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/prepare_package.py",
+      "bytes": 1003,
+      "sha256": "24c6deb27590fb6546ed34e8cc569a392e6afac8a726f1d934531aab9b65f5fd",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/rate_spectra.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/rate_spectra.py",
+      "bytes": 1744,
+      "sha256": "e18b5f3349dcb0df59ae71a09f2b56205a6bd54c8c4a327ef0ca90368dace828",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/raw_brake_events.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/raw_brake_events.py",
+      "bytes": 3673,
+      "sha256": "a43ba777673b53e15b9f890d6a21c364a4e6aa726f3d24a71194b6033fe989f2",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/relative_trim_extension.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/relative_trim_extension.py",
+      "bytes": 1592,
+      "sha256": "258bd091623b5a196bcf929587e9140489bd8bf8c8899465490f5f8982ed7b03",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/rpm_mode_evidence.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/rpm_mode_evidence.py",
+      "bytes": 2057,
+      "sha256": "5a2edbdf8528ddc822d5e40ec05712e3c96ed51b0cc82a358c22aa3893f6872b",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/separate_brake_events.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/separate_brake_events.py",
+      "bytes": 2465,
+      "sha256": "734d7a21a78fcff7eef8cb893dbb437e5fbe5b0cb694a53101f18de588a5bec0",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/settled_response.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/settled_response.py",
+      "bytes": 2589,
+      "sha256": "b62982fe982a54e048ff429d18e39c9efabd180b91bc4b55d03e18fefd209c40",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/slack_replay.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/slack_replay.py",
+      "bytes": 3961,
+      "sha256": "06797ee30c4f1dfb6547174b6208e4069ad9ebe2330af29e09abce98376360c2",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/soft_mode_check.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/soft_mode_check.py",
+      "bytes": 5401,
+      "sha256": "ca8ef9f0b9b860174f5a3163a6d99e0fb2d19ad99109da687aa1472dbb915513",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/soft_retrim_response.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/soft_retrim_response.py",
+      "bytes": 2119,
+      "sha256": "b6abeb63db4e7cbcc3f0fb004b72a47db10d375262364e76e19a092465d1729e",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/soft_retrim_spectra.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/soft_retrim_spectra.py",
+      "bytes": 2266,
+      "sha256": "8aa53d78c6572c62a4b689375491a7ab0e1f1b2316133eaef06d43d0506be311",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/soft_roll_phase_check.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/soft_roll_phase_check.py",
+      "bytes": 3919,
+      "sha256": "c28d0d9d52555e2f119f3b5d5145ebc00fdd319fc00265798016980ef893a81e",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/sustained_turn_crosscheck.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/sustained_turn_crosscheck.py",
+      "bytes": 4291,
+      "sha256": "577e8a5ef4390342054c8da05777cb0ed2f1653ab10ba2fcc80b3faee827efcc",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/tl_continuous_diagnostic.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/tl_continuous_diagnostic.py",
+      "bytes": 2689,
+      "sha256": "2878aa5394b6e4c1f13a488dfd692e63edf14e5e8151631102c26422b28f06c9",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/tl_matched_diagnostic.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/tl_matched_diagnostic.py",
+      "bytes": 4901,
+      "sha256": "dae54268e2a425711a142e7d6d8c76f53d22b85b0a3c556b727cce685bd970a9",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/torque_balance.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/torque_balance.py",
+      "bytes": 3101,
+      "sha256": "230136f34e135b83868473bc5bb43d7dbc7c2868ff726f9f47d5034f62389c4a",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/trim_bias_diagnostic.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/trim_bias_diagnostic.py",
+      "bytes": 2289,
+      "sha256": "78bcf3e98a0f22491c66f905e7b4a2709b47278c71d5a8d6b1d4269634f8af8f",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/trim_extension.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/trim_extension.py",
+      "bytes": 1628,
+      "sha256": "d077d000d78a9364440666f0b99ed8c009be181f7fa28399d6aa6a4f513bf6bc",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/high-dof-iterative-study/v2_contexts.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/high-dof-iterative-study/v2_contexts.py",
+      "bytes": 2742,
+      "sha256": "09a01393bd4d8f2450cb8b6784355e97dd7b87aca0bf22e57b05fda5a90dfc75",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/inventory_mission_envelope.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/inventory_mission_envelope.py",
+      "bytes": 3543,
+      "sha256": "ab7ea4db01ffe7086670143a787e93cd463cb42effac07eebc63ecf425be2d0b",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/iterative-truth-study/audit_speed.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/audit_speed.py",
+      "bytes": 1318,
+      "sha256": "6f91bab22cdf0ce9da5de587a0c766dfdd54030dd0b048edbf47379423903b84",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/iterative-truth-study/build_initial_atlas.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/build_initial_atlas.py",
+      "bytes": 4063,
+      "sha256": "54861d26f587cb61e75a730a2f690399be569a94fdb72213d0183e56bed6de00",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/iterative-truth-study/cycle1.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/cycle1.py",
+      "bytes": 4455,
+      "sha256": "000be7bc3245c8dcacfcd477737218e3a308bb15fdc28a6ba55f00db301ab848",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/iterative-truth-study/decompose_speed.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/decompose_speed.py",
+      "bytes": 1882,
+      "sha256": "cc884b825d8e9af1ac5c8f0e3bd0d525273c555ae04510508bf7a8e34c3718f5",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/iterative-truth-study/matched_history.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/matched_history.py",
+      "bytes": 2230,
+      "sha256": "92b618b5b2f94d3898278e3605fea5c38fe44e79db2264ee7920f4a1147135db",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/iterative-truth-study/plot_baseline.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/plot_baseline.py",
+      "bytes": 839,
+      "sha256": "6058e690d7daf510e506150c7e984c6c5daa519b9862203e9033911939877f59",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/iterative-truth-study/plot_cycle2.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/plot_cycle2.py",
+      "bytes": 1685,
+      "sha256": "39c675def0329a89fb48d63171309b4a07ff5607d140472ae192b4f6a63b44a0",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/iterative-truth-study/plot_cycle3.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/plot_cycle3.py",
+      "bytes": 1083,
+      "sha256": "e7f932a45dc8ce4fec21d8332618d6f36843a1e5c007ae86b4d6783b9a26a0ec",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/iterative-truth-study/steering_audit.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/iterative-truth-study/steering_audit.py",
+      "bytes": 3429,
+      "sha256": "477539cb4e4ad9b5b84d96ec575a8811c4ca64ed23f909f31d8000890cd54673",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/mission2_model.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/mission2_model.py",
+      "bytes": 5196,
+      "sha256": "b0485ef6601eaa873992b8b7d74c11d88e70cbbba04c0850189e6ca263e92396",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/napkin_geometry.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/napkin_geometry.py",
+      "bytes": 915,
+      "sha256": "09ed218349fbdafea3f47c2c4b67c49636e7393e0eda6a9438be8d58a25ccac3",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/parafoil_two_body.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/parafoil_two_body.py",
+      "bytes": 2958,
+      "sha256": "2b3a968eb020ae7f6d0af71341aa4d9d6d0fa92d51889a91a16ff8851bd6f56f",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_added_body_flight.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_added_body_flight.py",
+      "bytes": 4182,
+      "sha256": "b2b5dfc523d842e6b102e7b0d8182680f3bd2f5ebbf76e4e95aea9898e25fafa",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_added_inertia_checks.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_added_inertia_checks.py",
+      "bytes": 3875,
+      "sha256": "9c6da5608f38645af3454e49dd2d0b920692dcbcde6a850c8070b3de582ef0ab",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_balanced_body.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_balanced_body.py",
+      "bytes": 4525,
+      "sha256": "197c8ddbc4001b77d305fadd90f4be22950bdb9e246d3eec912fad0024f46d42",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_bank_ablation.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_bank_ablation.py",
+      "bytes": 1975,
+      "sha256": "84958387e3e5fd714e47a5afa98b4586b5f9d167f29ca212a7b9e75278014814",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_brake_loading.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_brake_loading.py",
+      "bytes": 2868,
+      "sha256": "ea342ef93ce847b3e80ca6313f1406f4b5978b75c8e657d310db9759e93e3fcf",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_canopy_tilt_loads.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_canopy_tilt_loads.py",
+      "bytes": 1259,
+      "sha256": "d8ecd73d3af7fe0e0b037a78b3c88637a17d6ce6446092edda5bca6029d11ffe",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_causal_canopy_state.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_causal_canopy_state.py",
+      "bytes": 5397,
+      "sha256": "c44e8f3993dc9688461f9a21947e308b8b2197187c770c385b389b00ea9235cc",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_causal_lateral.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_causal_lateral.py",
+      "bytes": 4671,
+      "sha256": "498def51f22e8a19c404cb5f928afbfc33864b66487c0a054a2eee6cf962b62d",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_coupled_diagnostics.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_coupled_diagnostics.py",
+      "bytes": 5303,
+      "sha256": "25a751491bea3332d7c0ab26dca1222b47fcfe653ecdbe555c36992f623a0193",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_curved_added.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_curved_added.py",
+      "bytes": 2207,
+      "sha256": "23c5e17ddac345be152dff060d7236b9c8d5df90954881b886833cb914944964",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_curved_added_fit.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_curved_added_fit.py",
+      "bytes": 3034,
+      "sha256": "361c4d80bdc9137bcb70e9d7c07251b48df67d7dec9f3852f16864b1f88186a9",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_curved_added_hidden_state.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_curved_added_hidden_state.py",
+      "bytes": 2445,
+      "sha256": "9bdb2a2600f44ea5322601145bd97a4b63bf8da60d0a0994fd2f2b2fb4959e95",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_curved_panel_fit.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_curved_panel_fit.py",
+      "bytes": 3053,
+      "sha256": "92f64f049e8a114a23c062bbc4d5f583af4dd9d0bb97012cd133c752fbdc1657",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_development_iterations.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_development_iterations.py",
+      "bytes": 5626,
+      "sha256": "61ef094fc59c1bc8252ad0ae2b2783aae9c197cda452189825884a837787d954",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_effective_bank.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_effective_bank.py",
+      "bytes": 2965,
+      "sha256": "5669fb09dd02efe3a25ca3f6d23ce29e22de7f7d8fd740bc886ac8b528a2981d",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_effective_flight.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_effective_flight.py",
+      "bytes": 2956,
+      "sha256": "ba0a49bac61b85f96df5e2c4f58557369d649025f7276732d01d029513fc078b",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_force_bank.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_force_bank.py",
+      "bytes": 4272,
+      "sha256": "09cd80149454427ad6926d26580e51ceaa4ed2955402686fedcf12f7b884c115",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_force_yaw_speed.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_force_yaw_speed.py",
+      "bytes": 4365,
+      "sha256": "b4b9b4e0dc1f2e074eebf15d8b2f1246490953f14e1f4299191553269e8de0fb",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_initial_canopy_force.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_initial_canopy_force.py",
+      "bytes": 1303,
+      "sha256": "f7510d9fee6bf899d5ebeafbdd67eb32ef46d67f191813895f0d312658a1b856",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_joint_energy_audit.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_joint_energy_audit.py",
+      "bytes": 2624,
+      "sha256": "b77b186bdf62182e5030a63a45025fc1c992a51d5ddcf679f5260de36a5af544",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_joint_sensitivity.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_joint_sensitivity.py",
+      "bytes": 2492,
+      "sha256": "160dcdb61dd68e6ee10ade1500c13e2b6866daa6c2515a71f46ac0ff0f919b5b",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_mission_performance_coverage.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_mission_performance_coverage.py",
+      "bytes": 908,
+      "sha256": "36d5bcb046b8ab24fc8644a3326c1a31ef76304645d2b3dfabd16112d4664642",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_napkin_comparison.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_napkin_comparison.py",
+      "bytes": 2301,
+      "sha256": "6c7b537aa01a966556198aaa1c4add517d14fd5acd4121c09ae0d64c18b1cb83",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_panel_only_lateral.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_panel_only_lateral.py",
+      "bytes": 3057,
+      "sha256": "5f23b6bc839203f5a434f5868f76cbc6acb025c911da6aa5ef734929955cc56d",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_propeller_correction.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_propeller_correction.py",
+      "bytes": 2921,
+      "sha256": "3bc22e9a35d991a8a6970b5eee147ab8f06066bdefe54249b8009561c88b9ae3",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_propulsion_state_diagnostic.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_propulsion_state_diagnostic.py",
+      "bytes": 3188,
+      "sha256": "1e221e8d1027e2e6a0ae7a96a79f57bf14eee2e093990de3a1f2083f334e0556",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_quadratic_brake.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_quadratic_brake.py",
+      "bytes": 5883,
+      "sha256": "f4b716c5a2c56cc27c5ee2ab778ac8830bfb12783689d75477354a54d35c77c7",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_rigging_offsets.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_rigging_offsets.py",
+      "bytes": 2579,
+      "sha256": "1e6906522e3a49725537282e37273c7cf730335908dc4538ad8a2999d0c174c9",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_rpm_response.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_rpm_response.py",
+      "bytes": 4354,
+      "sha256": "a4ce1bc560c5bb3be32da819c4ba46d220294583f38a616b2c5338397a76ebcd",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_speed_conditioning.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_speed_conditioning.py",
+      "bytes": 2559,
+      "sha256": "557e68774dceafb752f8aae51d773b2d4aac957d61b6ab1a7e713b8cb8e1025d",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_split_full.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_split_full.py",
+      "bytes": 3027,
+      "sha256": "a96601c79e5e336dcd988fbd0ba09908c77e664c8b641b46af15aef1fe018b8a",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_sustained_envelope.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_sustained_envelope.py",
+      "bytes": 2710,
+      "sha256": "743a753579aa83298f3a4d2aaf53312037fa94851b85540510751525a8741b56",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_training_coverage.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_training_coverage.py",
+      "bytes": 947,
+      "sha256": "3003fa2287b116c4ed069b5377e71153df2f4db143311440459a685635210ddd",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_up_away_numerics.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_up_away_numerics.py",
+      "bytes": 1451,
+      "sha256": "fd012d8e8117144b2473b91eb2d38ba9a032a62893575d685d6653162dca05ed",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/plot_yaw_coupling.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/plot_yaw_coupling.py",
+      "bytes": 1957,
+      "sha256": "caef2cd86d66c8d502870c943beab9250c65fa79411ddd986f7365c8f4c311c2",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/prepare_shooting_evaluation.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/prepare_shooting_evaluation.py",
+      "bytes": 1430,
+      "sha256": "b47b5a0f99d39f9917b03e6eff3290d511d5517a1f9c2c88c7670686fde5c027",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/prepare_up_away_episodes.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/prepare_up_away_episodes.py",
+      "bytes": 3816,
+      "sha256": "d45927d8ea3d5e013d943480d55071c7a753bd4c20d9d0f5496ed1962dcb197a",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/report_bounded_diagnostic.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/report_bounded_diagnostic.py",
+      "bytes": 3338,
+      "sha256": "76d0ed2016518e48ec86e7d24babe72cd590a189afcd87fac86ec7bf6f266f01",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/report_glide_comparison.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/report_glide_comparison.py",
+      "bytes": 2377,
+      "sha256": "e164d72d45dfa9fcb3e9ba9b769948613affbb21110927d265a41059e042bc66",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/report_glide_imu_comparison.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/report_glide_imu_comparison.py",
+      "bytes": 2386,
+      "sha256": "342335354bc88bfd703fb935b551c31af4ee2bd0c04b926cc32bb954854275ef",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/report_glide_wind_comparison.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/report_glide_wind_comparison.py",
+      "bytes": 2380,
+      "sha256": "0041aa870906ce98a4a46f81ea309b81e3afe3dced814c3185779b0c208d9147",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/report_mission2_performance.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/report_mission2_performance.py",
+      "bytes": 3092,
+      "sha256": "1c59ebab2b4fdd8c108e3eb0092753a804ebceb66e7f71c8a694205d16c2e3a9",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/report_powered_trim.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/report_powered_trim.py",
+      "bytes": 3031,
+      "sha256": "79fbc7f2ed69875d20b4222e40daa6d9f28e85b49ff9d9dbce54a476a184a258",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/report_synthetic_recovery.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/report_synthetic_recovery.py",
+      "bytes": 2629,
+      "sha256": "dab9649aa510691f7f05d1f47bfe4af417720f2aa8c8756320f43ef5b903815a",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/report_up_away_A1.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/report_up_away_A1.py",
+      "bytes": 2116,
+      "sha256": "6a81ce08a80d60561ecc5f7a0833d1d56ac1f2cc616b62dbd4f65da102caa09f",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/report_up_away_controllers.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/report_up_away_controllers.py",
+      "bytes": 1808,
+      "sha256": "f8bf8aa442f26ffb0addb6c8597dd29baf394dfeafaa740fae21f7634b628fba",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/score_long_horizon.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/score_long_horizon.py",
+      "bytes": 3260,
+      "sha256": "2eb0c01e4de14034dae8799d86bd437200d46bdf3fd97b37fa4986e89040af4d",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/summarize_up_away_fits.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/summarize_up_away_fits.py",
+      "bytes": 1889,
+      "sha256": "565e720581af95f98accea4d82f855dc466756844d68e12d98d78941d2292302",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/two_body.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/two_body.py",
+      "bytes": 3131,
+      "sha256": "bfe5d1f77cde1b492aef34be5e80a430174bafd159798186aebac6b5ad8c606a",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/up_away_model.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/up_away_model.py",
+      "bytes": 4244,
+      "sha256": "280b4a118a975158f42c4242f461887f392cbf033a10e62cd76168ff1e0e62d1",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/up_away_model_B.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/up_away_model_B.py",
+      "bytes": 4420,
+      "sha256": "5cc4c7b8c4c134dc3d8bdcd5b3a7282c220b14238634ec1b73a78eaad7dade89",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn-model-spike/yaw-coupling-study/plot.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/yaw-coupling-study/plot.py",
+      "bytes": 1033,
+      "sha256": "61badd0e73301cafbdf922341abb2cb331a98340c9dd560fe39d2ec5a2aab5e8",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/turn_envelope.py",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn_envelope.py",
+      "bytes": 2915,
+      "sha256": "851b2eefc0f24379867e681b782be927cbae4f3417ce4cab3ade6c43e7bb95e9",
+      "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "scripts/native-sitl/plot_comparison.py",
+      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/plot_comparison.py",
+      "bytes": 5712,
+      "sha256": "8813ce92b124a8d339b8fea2c3835a3271e7c96dce34e2151f4f47bb500d5d2c",
+      "kind": "native_plotter"
+    },
+    {
+      "path": "scripts/native-sitl/plot_damper.py",
+      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/plot_damper.py",
+      "bytes": 4372,
+      "sha256": "ccdbe31c125fcfea509b8c933b9680f0b0c741fee5c2f533f58937cdf8654f21",
+      "kind": "native_plotter"
+    },
+    {
+      "path": "scripts/native-sitl/plot_longitudinal_isolation.py",
+      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/plot_longitudinal_isolation.py",
+      "bytes": 2053,
+      "sha256": "c90c2fa4fd74e95cea42c883fa483c2233e579fe4c6e71e5c1243c29fd4d6095",
+      "kind": "native_plotter"
+    },
+    {
+      "path": "scripts/native-sitl/longitudinal_frequency.py",
+      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/longitudinal_frequency.py",
+      "bytes": 3600,
+      "sha256": "408b2c45a000a200edd703ecd57192fccb7798c79a42674c7f9b671a01cf418f",
+      "kind": "native_plotter"
+    },
+    {
+      "path": "scripts/native-sitl/analyze_longitudinal_study.py",
+      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/analyze_longitudinal_study.py",
+      "bytes": 4447,
+      "sha256": "b1f7340bb5b000d36cdada061678d24e995b13f7f34818cb1c1d8578ba722955",
+      "kind": "native_plotter"
+    },
+    {
+      "path": "scripts/native-sitl/compare_longitudinal_study.py",
+      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/compare_longitudinal_study.py",
+      "bytes": 1662,
+      "sha256": "c12d7be6829abc0d1d4ce7bfd661af52d119bcd514d524ae6d36b153e6818f73",
+      "kind": "native_plotter"
+    }
+  ]
+}

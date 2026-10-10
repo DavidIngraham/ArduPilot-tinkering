@@ -46,3 +46,22 @@ Restore before running historical scripts that expect uncompressed filenames. So
 [Artifact manifest](provenance/artifact-manifest.json) records original names, SHA-256, sizes and permissions. [Verification](provenance/archive-verification.txt) confirms byte-for-byte restoration. [Trajectory plot bundle](artifacts/trajectory-planner-plots.zip) contains the earlier requested plot collection; newer figures are also retained in scratch.
 
 I captured this archive on 2026-10-09. [Branch provenance](provenance/branches-final.json) records exact implementation commits. Historical scratch notes are preserved verbatim and can describe obsolete code or assumptions. ArduPilot-derived source retains its upstream notices and GPL licensing; see [COPYING.txt](COPYING.txt). Third-party materials retain their own notices.
+
+## Flight-data research figures
+
+[Research figure index](research/flight-log-analysis/index.html) collects the final
+plots linked from the flight-data and simulator research reports. The
+[manifest](research/flight-log-analysis/manifest.json) records each figure and
+plotting script's original path and SHA-256. The plotting source and its local
+Python dependencies are mirrored under `research/flight-log-analysis/scripts/`.
+
+The research reports, flight logs, telemetry exports, parameters and simulation
+trace datasets remain in Mission Planner and the original native experiment
+directories. They are not added to this figure archive. Historical scripts can
+retain absolute source-data paths or require adjacent model/configuration files;
+use the manifest to locate those originals. The native SITL plotters run with the
+model package in the `paraglider-high-dof-control` ArduPilot checkout.
+
+Refresh the report-linked figures and plotting source with
+`python3 tools/archive_flight_figures.py --source <Mission-Planner-analysis>/longitudinal-2026-10-09 --native-source <ArduPilot>/Tools/simulation/paraglider`.
+Local report assets remain available so the existing research log keeps rendering.
