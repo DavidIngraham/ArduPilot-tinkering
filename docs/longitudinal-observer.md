@@ -148,3 +148,6 @@ This removes the explicit joint stiffness/damping law from the summed momentum p
 **The external canopy pitching moment `Ma` does not cancel.** Geometry, inertia ratios, thrust-per-mass/moment arm, payload drag and residual canopy moment still require modeling. Integrating the summed momentum without measurement correction drifts; this cancellation is not a complete observer and does not solve initial-state identifiability. My next step would be to benchmark an uncertainty-aware relative-rate observer against simulation truth, then test control with confidence-dependent limits and recorded flight data. The experiments give me a reason to pursue relative-rate feedback, but they have not yet answered how reliably I can estimate absolute canopy angle or protect the wing at the bandwidth I want.
 
 The [data and methods appendix](data-and-methods.md) collects the parameter chronology, measurement windows, firmware caveat, and simulation provenance.
+
+
+Continue with [A Calmer Parafoil: Getting the Controllers to Work Together](longitudinal-mission-control.md), where native SITL tests lead to calibrated feedforward, smoother altitude capture, and a mission candidate with the pitch damper off.

@@ -17,6 +17,8 @@ Start with [From First Tosses to Autonomous Missions](docs/flight-testing.md): B
 3. [Steering a Parafoil with an Airplane Autopilot](docs/paraglider.md): the angle-controller workaround, simulation tuning, and dedicated turn-rate control.
 4. [Throttle, Pitch, and the Controller That Pushed the Wrong Way](docs/longitudinal-observer.md): identification, the damper sign, and relative-motion control.
 
+The follow-up, [A Calmer Parafoil](docs/longitudinal-mission-control.md), develops the native mission controller using the higher-DOF simulator, matched experiments, and full AUTO tests.
+
 [Data and methods](docs/data-and-methods.md) collects the supporting evidence and model limitations. [Plane trajectory planning](docs/trajectory.md) is a related investigation into line-to-line turns, wind, and survey paths.
 
 ## ArduPilot implementations
