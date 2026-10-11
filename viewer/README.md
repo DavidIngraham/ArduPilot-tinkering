@@ -257,3 +257,7 @@ existing physical brake-travel mapping; it does not alter the GLB or simulator.
 The exported video uses a side-biased inspection camera to expose the drum face.
 `tools/analyze_auto_gusts.py ROOT --output DIRECTORY` compares the retained calm
 and gusty AUTO excerpts and creates the longitudinal diagnostic figure/metrics.
+
+Exported videos include a north-up wind flag pointing **toward** the horizontal
+wind direction, plus horizontal speed and vertical up/down speed. This reads the
+recorded earth-frame wind vector, not apparent wind relative to the aircraft.

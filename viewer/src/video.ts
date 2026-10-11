@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import type { Frame } from "./state";
+import { drawWindFlag } from "./wind";
 /** Record a silent, 30 fps, side-by-side view. Physics playback stays at real speed. */
 export async function recordFlight(
   scene: THREE.Scene,
@@ -138,6 +139,7 @@ export async function recordFlight(
             ctx.fillStyle = "#ffffff";
             ctx.fill();
           }
+          drawWindFlag(ctx, f);
           const deg = f.joint_rotvec_rad.map((v) =>
             ((v * 180) / Math.PI).toFixed(1),
           );
