@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import type { Frame } from "./state";
 import { drawWindFlag } from "./wind";
+import { drawControls } from "./controls";
 /** Record a silent, 30 fps, side-by-side view. Physics playback stays at real speed. */
 export async function recordFlight(
   scene: THREE.Scene,
@@ -22,7 +23,7 @@ export async function recordFlight(
   const span = Math.max(maxN - minN, maxE - minE, 1);
   const canvas = document.createElement("canvas");
   canvas.width = 1280;
-  canvas.height = 720;
+  canvas.height = 900;
   const ctx = canvas.getContext("2d")!;
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(1);
@@ -69,7 +70,7 @@ export async function recordFlight(
           const time = Math.min(end, start + (now - started) / 1000);
           const f = update(time);
           ctx.fillStyle = "#0b1520";
-          ctx.fillRect(0, 0, 1280, 720);
+          ctx.fillRect(0, 0, 1280, 900);
           const center = payload.position.clone().lerp(canopy.position, 0.5);
           panel(20, 105, 805, 465, new THREE.Vector3(2.5, 1.1, 3.8), center);
           // Payload-mounted inspection camera keeps the capstans in view while the world turns.
@@ -140,6 +141,7 @@ export async function recordFlight(
             ctx.fill();
           }
           drawWindFlag(ctx, f);
+          drawControls(ctx, f, track);
           const deg = f.joint_rotvec_rad.map((v) =>
             ((v * 180) / Math.PI).toFixed(1),
           );
@@ -147,36 +149,36 @@ export async function recordFlight(
           ctx.fillText(
             `Joint rotation   roll ${deg[0]}°    pitch ${deg[1]}°    yaw ${deg[2]}°`,
             24,
-            606,
+            812,
           );
           ctx.fillText(
             `Brake travel   L ${f.brake_mm?.[0].toFixed(1)} mm    R ${f.brake_mm?.[1].toFixed(1)} mm`,
             24,
-            639,
+            841,
           );
           ctx.fillText(
             `Propeller ${f.rpm?.toFixed(0)} RPM    Throttle ${((f.throttle ?? 0) * 100).toFixed(0)}%`,
             840,
-            606,
+            812,
           );
-          ctx.fillText(`t = ${time.toFixed(1)} s   ·   1× playback`, 840, 639);
+          ctx.fillText(`t = ${time.toFixed(1)} s   ·   1× playback`, 840, 841);
           ctx.fillStyle = "#8da4b5";
           ctx.font = "13px system-ui";
           if (f.wind_ned_m_s)
             ctx.fillText(
               `Gust velocity N / E / D: ${f.wind_ned_m_s.map((v) => v.toFixed(2)).join(" / ")} m/s`,
               24,
-              663,
+              862,
             );
           ctx.fillText(
             auto
               ? `Native AUTO · mission item ${f.mission_item} · altitude ${(-f.state[2]).toFixed(1)} m · schematic canopy/lines · no motion exaggeration`
               : "Simulation truth replay · schematic canopy/lines · no motion exaggeration",
             24,
-            685,
+            882,
           );
           ctx.fillStyle = "#70d8c6";
-          ctx.fillRect(24, 701, (1232 * (time - start)) / (end - start), 3);
+          ctx.fillRect(24, 890, (1232 * (time - start)) / (end - start), 3);
           status(
             `Recording ${Math.round((100 * (time - start)) / (end - start))}%`,
           );

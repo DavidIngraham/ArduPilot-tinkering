@@ -261,3 +261,14 @@ and gusty AUTO excerpts and creates the longitudinal diagnostic figure/metrics.
 Exported videos include a north-up wind flag pointing **toward** the horizontal
 wind direction, plus horizontal speed and vertical up/down speed. This reads the
 recorded earth-frame wind vector, not apparent wind relative to the aircraft.
+
+### Actuator overlays in exported videos
+
+Video exports are 1280 × 900 at real speed. Below the two camera views, a trailing
+10-second graph shows throttle command on a fixed 0–100% axis. Left/right bars
+show actual simulated brake travel on a common 0–100 mm axis (a display scale,
+not a physical end-stop specification). Missing signals display N/A. The graph
+uses recording timestamps and shows no future samples; scrubbing does not
+accumulate stale history. The wind flag and capstan markings remain visible.
+The published AUTO controls clip uses the two-pole gust-controller run under
+`gust-control/two-pole-native-gust`, with its metadata saved alongside the video.
