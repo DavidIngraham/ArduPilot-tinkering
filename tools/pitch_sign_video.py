@@ -9,13 +9,13 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation,FFMpegWriter
-p=argparse.ArgumentParser();p.add_argument('--model',type=Path,required=True);p.add_argument('--raw',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--model',type=Path,required=True);p.add_argument('--raw',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--states-only',action='store_true');a=p.parse_args()
 a.raw.mkdir(parents=True,exist_ok=True);a.output.mkdir(parents=True,exist_ok=True);sys.path.insert(0,str(a.model))
 from json_backend import Backend
 cases=[('Damper off',0,10,False),('Original sign',.1,10,False),('Reversed sign',-.1,10,False),('Current filter',.1,1.5,True)]
 dt=.02;duration=24;hist=[];summary=[]
 for name,g,hz,two in cases:
- b=Backend();b.sim.substeps=16;b.released=True;base=b.command.copy();q1=q2=0.;rows=[];states=[]
+ b=Backend();b.sim.substeps=16;b.released=True;base=b.command.copy();q1=q2=0.;rows=[];states=[];frames=[]
  for j in range(int(duration/dt)+1):
   t=j*dt
   if j==100:
@@ -23,13 +23,16 @@ for name,g,hz,two in cases:
   rot=R.from_quat(b.state[3:7]);q=rot.inv().apply(b.state[10:13])[1]
   alpha=dt/(dt+1/(2*np.pi*hz));q1+=alpha*(q-q1);q2+=alpha*(q1-q2)
   cmd=base.copy();cmd[0]=np.clip(base[0]+np.clip(-g*(q2 if two else q1),-.25,.25),0,.6)
+  b.time=t;b.command=cmd.copy();frames.append(b.viewer_state())
   rows.append([t,rot.as_euler('xyz')[1]*180/np.pi,R.from_quat(b.state[16:20]).as_euler('xyz')[1]*180/np.pi,q*180/np.pi,cmd[0]*100]);states.append(b.state.copy())
   b.state,b.rpm,_=b.sim.step_actuated(b.state,b.rpm,b.actuator,cmd,voltage=22.2,dt=dt)
+ (a.raw/(name.replace(' ','-')+'.jsonl')).write_text(''.join(json.dumps(f)+'\n' for f in frames))
  d=np.array(rows);hist.append(d);np.savez_compressed(a.raw/(name.replace(' ','-')+'.npz'),trace=d,state=states)
  summary.append(dict(case=name,gain=g,filter_hz=hz,stages=2 if two else 1,pitch_rate_rms_last_10s=float(np.sqrt(np.mean(d[d[:,0]>14,3]**2))),pitch_range_deg=[float(d[:,1].min()),float(d[:,1].max())]))
  print(summary[-1],flush=True)
 meta=dict(model_commit=subprocess.check_output(['git','-C',str(a.model),'rev-parse','HEAD'],text=True).strip(),mass_kg=1.758,voltage=22.2,brakes_mm=base[1:].tolist(),trim_throttle=float(base[0]),kick_time_s=2,kick_deg_s=5,description='Standalone truth-rate feedback on current plant; fixed brake trim and base throttle, calm air, no height or lateral controller. Angles are unamplified. Not a replay of the real flight.',cases=summary)
 (a.output/'pitch-sign.json').write_text(json.dumps(meta,indent=2))
+if a.states_only:sys.exit(0)
 plt.rcParams.update({'text.color':'#e6edf3','axes.labelcolor':'#e6edf3','xtick.color':'#b0becb','ytick.color':'#b0becb','axes.edgecolor':'#627080','font.size':10})
 fig,axes=plt.subplots(3,4,figsize=(16,8),gridspec_kw={'height_ratios':[2.2,1,1]},facecolor='#0b1520');fig.subplots_adjust(top=.86,bottom=.11,hspace=.36,wspace=.27)
 fig.text(.5,.96,'9-DOF pitch-feedback comparison',ha='center',fontsize=18)

@@ -291,3 +291,11 @@ loiter is unfolded; its vertical axis is altitude above the NED origin. A moving
 white dot follows the aircraft. The three published loiter-entry clips all use
 85–95 m vertically, preserving the visual difference between calm and gusty
 altitude response. Other recordings expand the axis in 5 m steps as needed.
+
+### Pitch-sign carriage comparison
+
+`tools/pitch_sign_video.py --states-only` exports the four matched full-state JSONL recordings (including RPM) into the Mission Planner `pitch-sign-video` directory. Link that directory to the ignored `viewer/public/pitch-sign` path, start `npm run dev`, then open `/pitch-comparison.html` and select **Record comparison**. The page is a local recording tool, not a published live replay; raw state recordings remain outside Git.
+
+The four views use the existing Trout Lake SolidWorks GLB and mechanism rig. The camera has a fixed side-oblique orientation and orthographic scale. Its origin advances at the initial trimmed velocity, independently of every case's actual trajectory; it does not cancel payload translation or rotate with its attitude. All cases share this reference and scale. The orange point is the modeled upper attachment at body FRD `[0.0053, 0, -0.102]` m, with a trailing 0.8-second path relative to nominal flight. The propeller uses integrated simulated RPM and can alias at the video frame rate. The clip plays 0–5.5 seconds at real speed, followed by 2–5.5 seconds at quarter speed, so the initial instability stays in frame at an inspectable scale. Neither displacement nor rotation is amplified.
+
+Encode the downloaded WebM to `docs/assets/viewer/pitch-sign/pitch-sign-carriage.mp4` with H.264, yuv420p and faststart; extract a poster from the slow replay. Keep the original browser recording in Mission Planner. The prior schematic MP4 remains available as a longer diagnostic, but the article embeds the CAD comparison.

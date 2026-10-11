@@ -2,3 +2,4 @@ node_modules/
 dist/
 *.jsonl
 *.npz
+public/pitch-sign
