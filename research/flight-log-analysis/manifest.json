@@ -1031,6 +1031,46 @@
       ]
     },
     {
+      "path": "figures/turn-model-spike/lateral-shaping/nonlinear-shaping.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/lateral-shaping/nonlinear-shaping.png",
+      "bytes": 869052,
+      "sha256": "9d449428cba539e5efae6f701e6a2a90bfb0fff68d9720cf28aba1faa43da396",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/lateral-shaping/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/lateral-shaping/shaping-bode.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/lateral-shaping/shaping-bode.png",
+      "bytes": 209297,
+      "sha256": "bce45b9f280c1cdf9ad4f59be59cb21058a4c97534010eb3323ff9be864cc6ef",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/lateral-shaping/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/lateral-shaping/shaping-step.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/lateral-shaping/shaping-step.png",
+      "bytes": 191718,
+      "sha256": "a538eed3b59a005d80a8c2d02ef397a892f79538ce128aec6076b0b90a9aa29a",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/lateral-shaping/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/lateral-shaping/trim-margins.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/lateral-shaping/trim-margins.png",
+      "bytes": 206590,
+      "sha256": "a4dbf98ee3d9150e14121c193b91389ea73cad47c39b060ae7fafcec4f30d6d7",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/lateral-shaping/report.html"
+      ]
+    },
+    {
       "path": "figures/turn-model-spike/long-horizon-refit-forecasts.png",
       "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/long-horizon-refit-forecasts.png",
       "bytes": 554581,
