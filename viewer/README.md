@@ -272,3 +272,22 @@ uses recording timestamps and shows no future samples; scrubbing does not
 accumulate stale history. The wind flag and capstan markings remain visible.
 The published AUTO controls clip uses the two-pole gust-controller run under
 `gust-control/two-pole-native-gust`, with its metadata saved alongside the video.
+
+### Calm, gust and steady-wind comparison
+
+`record_auto.py --wind-ned 0 2 0` applies a steady 2 m/s eastward air velocity
+after release. Add `--turbulence` only to superimpose the repeatable gust field.
+The vector reaches the existing aerodynamic/propulsion wind input and is also
+returned as native wind and airspeed sensor data. No controller parameters change.
+`tools/run_gust_native.sh` accepts `calm`, `gust`, or `crosswind` for these cases.
+
+`tools/prepare_wind_clip.py RUN OUTPUT [--calm]` prepares a comparison recording
+and metadata. The explicit `--calm` option adds zero-wind annotations to a known
+legacy calm recording; it never changes its physics states or timestamps.
+
+AUTO video exports include a side profile directly below the north-up ground
+track. Its horizontal axis is cumulative ground distance travelled, so a circular
+loiter is unfolded; its vertical axis is altitude above the NED origin. A moving
+white dot follows the aircraft. The three published loiter-entry clips all use
+85–95 m vertically, preserving the visual difference between calm and gusty
+altitude response. Other recordings expand the axis in 5 m steps as needed.

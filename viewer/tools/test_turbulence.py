@@ -34,5 +34,27 @@ class TurbulenceTest(unittest.TestCase):
         self.assertEqual(time, b.time)
 
 
+    @unittest.skipUnless(os.environ.get('PG_MODEL_DIR'), 'Set PG_MODEL_DIR for native adapter check')
+    def test_steady_wind_reaches_physics_and_sensors_without_gusts(self):
+        sys.path.insert(0, os.environ['PG_MODEL_DIR'])
+        from json_backend import Backend
+        b = Backend()
+        b.released = True
+        winds = []
+        step = b.sim.step_actuated
+        def observed_step(*args, **kwargs):
+            winds.append(np.array(kwargs['wind']))
+            return step(*args, **kwargs)
+        b.sim.step_actuated = observed_step
+        for i in range(20):
+            packet = struct.pack('<HHI16H', 18458, 400, i, *([1450, 1500, 800, 2322] + [1500]*12))
+            response = respond_with_wind(b, packet, Backend.respond, (0, 2, 0), False)
+        self.assertTrue(winds)
+        for wind in winds:
+            np.testing.assert_array_equal(wind, [0, 2, 0])
+        message = json.loads(response)
+        self.assertEqual(message['velocity_wind'], [0, 2, 0])
+        self.assertAlmostEqual(message['airspeed'], np.linalg.norm(b.state[7:10]-[0, 2, 0]))
+
 if __name__ == '__main__':
     unittest.main()

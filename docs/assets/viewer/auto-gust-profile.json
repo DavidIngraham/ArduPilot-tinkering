@@ -1,0 +1,151 @@
+{
+  "kind": "Native ArduPlane SITL AUTO; continuous first-loiter entry excerpt",
+  "simulation_start_s": 237.51777941811767,
+  "simulation_end_s": 292.5027794180677,
+  "duration_s": 54.98499999995002,
+  "frames": 1572,
+  "mission_item": 3,
+  "commanded_loiter_radius_m": 25.0,
+  "target_altitude_m": 90,
+  "mode_evidence": [
+    [
+      21.517255,
+      0
+    ],
+    [
+      24.577254999999997,
+      6
+    ],
+    [
+      45.516632,
+      6
+    ],
+    [
+      50.256631999999996,
+      10
+    ]
+  ],
+  "mass_kg": 1.758,
+  "voltage_v": 22.2,
+  "max_abs_payload_bank_deg": 16.90694613520158,
+  "joint_peak_abs_deg": [
+    3.3804667148377403,
+    12.866387237196067,
+    6.610246736392834
+  ],
+  "native_truth_roll_pitch_alignment_rms_deg": [
+    0.015252752461979897,
+    0.02279255234217554
+  ],
+  "source_sha256": "53774d5121e5a58501be7b390c6ee1d771b78059ecfc907ca6ddf44ffbfdc7df",
+  "clip_sha256": "ad8828c67a40f81de7fb4416af3617f91401c37960fdc8318ae0d1c2fb5cba3a",
+  "parameters": {
+    "TECS_CLMB_MAX": 1.0,
+    "TECS_SINK_MIN": 2.5,
+    "TECS_TIME_CONST": 5.0,
+    "TECS_THR_DAMP": 0.5,
+    "TECS_INTEG_GAIN": 0.30000001192092896,
+    "TECS_VERT_ACC": 7.0,
+    "TECS_HGT_OMEGA": 3.0,
+    "TECS_SPD_OMEGA": 2.0,
+    "TECS_RLL2THR": 10.0,
+    "TECS_SPDWEIGHT": 1.0,
+    "TECS_PTCH_DAMP": 0.10000000149011612,
+    "TECS_SINK_MAX": 2.5,
+    "TECS_LAND_ARSPD": -1.0,
+    "TECS_LAND_THR": -1.0,
+    "TECS_LAND_SPDWGT": -1.0,
+    "TECS_PITCH_MAX": 15.0,
+    "TECS_PITCH_MIN": 0.0,
+    "TECS_LAND_SINK": 0.25,
+    "TECS_LAND_TCONST": 2.0,
+    "TECS_LAND_DAMP": 0.5,
+    "TECS_LAND_PMAX": 10.0,
+    "TECS_APPR_SMAX": 0.0,
+    "TECS_LAND_SRC": 0.0,
+    "TECS_LAND_TDAMP": 0.0,
+    "TECS_LAND_IGAIN": 0.0,
+    "TECS_TKOFF_IGAIN": 0.0,
+    "TECS_LAND_PDAMP": 0.0,
+    "TECS_SYNAIRSPEED": 0.0,
+    "TECS_OPTIONS": 0.0,
+    "TECS_PTCH_FF_V0": 12.0,
+    "TECS_PTCH_FF_K": 0.0,
+    "TECS_THR_ERATE": 20.0,
+    "TECS_FLARE_HGT": 1.0,
+    "TECS_HDEM_TCONST": 10.0,
+    "TECS_PG_ENABLE": 1.0,
+    "TECS_PG_PR_FILT": 1.5,
+    "TECS_PG_PR_WASH": 0.0,
+    "TECS_PG_HR_TC": 0.5,
+    "TECS_PG_PR_FILT2": 1.5,
+    "FWD_BAT_VOLT_MAX": 22.200000762939453,
+    "FWD_BAT_VOLT_MIN": 18.0,
+    "FWD_BAT_IDX": 0.0,
+    "FWD_BAT_THR_CUT": 0.0,
+    "PG_TURN_ENABLE": 1.0,
+    "PG_TURN_FF": 0.008999999612569809,
+    "PG_TURN_P": 0.004999999888241291,
+    "PG_TURN_I": 0.0020000000949949026,
+    "PG_TURN_IMAX": 0.15000000596046448,
+    "PG_TURN_RMAX": 25.0,
+    "PG_TURN_ACCEL": 40.0,
+    "PG_TURN_FILT": 4.0,
+    "PG_TURN_TC": 0.10000000149011612,
+    "PG_TURN_ASPD": 5.0,
+    "PG_TURN_RDAMP": 0.003000000026077032,
+    "PG_TURN_D_FF": 0.0
+  },
+  "turn_parameters_during_mission": {
+    "PG_TURN_ENABLE": 1.0,
+    "PG_TURN_FF": 0.008999999612569809,
+    "PG_TURN_P": 0.004999999888241291,
+    "PG_TURN_I": 0.0020000000949949026,
+    "PG_TURN_IMAX": 0.15000000596046448,
+    "PG_TURN_RMAX": 25.0,
+    "PG_TURN_ACCEL": 40.0,
+    "PG_TURN_FILT": 4.0,
+    "PG_TURN_TC": 0.10000000149011612,
+    "PG_TURN_ASPD": 5.0,
+    "PG_TURN_RDAMP": 0.003000000026077032,
+    "PG_TURN_D_FF": 0.0
+  },
+  "turbulence": {
+    "seed": 20261011,
+    "rms_ned_m_s": [
+      0.5,
+      0.5,
+      0.25
+    ],
+    "frequencies_hz": [
+      0.08,
+      0.13,
+      0.21,
+      0.34,
+      0.55,
+      0.89
+    ],
+    "ramp_s": 5,
+    "mean_wind_ned_m_s": [
+      0,
+      0,
+      0
+    ],
+    "model": "Uniform smooth random-phase multisine; nominal component RMS, not a Dryden model"
+  },
+  "clip_wind_rms_ned_m_s": [
+    0.4721574121281055,
+    0.5145179522343292,
+    0.25904862141249063
+  ],
+  "original_clip_sha256": "ad8828c67a40f81de7fb4416af3617f91401c37960fdc8318ae0d1c2fb5cba3a",
+  "altitude_range_m": [
+    88.9083992754006,
+    90.82615426897699
+  ],
+  "throttle_range_pct": [
+    39.900000000000006,
+    52.900000000000006
+  ],
+  "wind_annotation": "Recorded physics wind preserved"
+}

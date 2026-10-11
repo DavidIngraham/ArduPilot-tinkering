@@ -17,6 +17,7 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--model-dir', type=Path, required=True)
 parser.add_argument('--output', type=Path, required=True)
 parser.add_argument('--turbulence', action='store_true')
+parser.add_argument('--wind-ned', type=float, nargs=3, default=[0., 0., 0.], metavar=('N', 'E', 'D'), help='Steady earth-frame air velocity in m/s, applied after release')
 args, forwarded = parser.parse_known_args()
 if forwarded[:1] == ['--']:
     forwarded = forwarded[1:]
@@ -30,11 +31,12 @@ args.output.parent.mkdir(parents=True, exist_ok=True)
 with args.output.open('x') as recording:
     def observe(self, packet):
         global last_time
-        response = respond_with_wind(self, packet, original) if args.turbulence else original(self, packet)
+        response = respond_with_wind(self, packet, original, args.wind_ned, args.turbulence) if args.turbulence or any(args.wind_ned) else original(self, packet)
         if self.time >= last_time + 1 / 30:
             state = self.viewer_state()
+            state['wind_ned_m_s'] = self._viewer_wind.tolist() if args.turbulence or any(args.wind_ned) else [0., 0., 0.]
             if args.turbulence:
-                state.update(wind_ned_m_s=self._viewer_wind.tolist(), turbulence='moderate synthetic gusts')
+                state['turbulence'] = 'moderate synthetic gusts'
             recording.write(json.dumps(state, allow_nan=False) + '\n')
             last_time = self.time
         return response
@@ -46,4 +48,6 @@ with args.output.open('x') as recording:
     finally:
         Backend.respond = original
         if args.turbulence:
-            args.output.with_suffix('.turbulence.json').write_text(json.dumps(SETTINGS, indent=2)+'\n')
+            args.output.with_suffix('.turbulence.json').write_text(json.dumps(dict(SETTINGS, mean_wind_ned_m_s=args.wind_ned), indent=2)+'\n')
+
+        args.output.with_suffix('.wind.json').write_text(json.dumps(dict(mean_wind_ned_m_s=args.wind_ned, gusts=args.turbulence), indent=2)+'\n')

@@ -39,7 +39,7 @@ def install_backend_wind(backend):
     return gusts
 
 
-def respond_with_wind(backend, packet, original):
+def respond_with_wind(backend, packet, original, mean_wind=(0., 0., 0.), gusts_enabled=True):
     # Preserve retransmission behavior and do not create a second gust clock.
     from json_backend import decode_packet
     rate, frame, _ = decode_packet(packet)
@@ -50,7 +50,7 @@ def respond_with_wind(backend, packet, original):
     if backend.released:
         if backend._gust_origin is None:
             backend._gust_origin = backend.time
-        backend._viewer_wind = backend._gusts.at(backend.time - backend._gust_origin + .5/rate)
+        backend._viewer_wind = np.asarray(mean_wind, dtype=float) + (backend._gusts.at(backend.time - backend._gust_origin + .5/rate) if gusts_enabled else np.zeros(3))
     response = original(backend, packet)
     message = json.loads(response)
     # The stock JSON adapter reports calm wind. Keep its sensors consistent with

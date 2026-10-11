@@ -78,5 +78,7 @@ if (run / 'truth.turbulence.json').exists():
     meta['turbulence'] = json.loads((run / 'truth.turbulence.json').read_text())
     wind = np.array([f['wind_ned_m_s'] for f in clip])
     meta['clip_wind_rms_ned_m_s'] = np.sqrt(np.mean(wind**2, axis=0)).tolist()
+if (run / 'truth.wind.json').exists():
+    meta['wind'] = json.loads((run / 'truth.wind.json').read_text())
 (run / 'auto-mission.json').write_text(json.dumps(meta, indent=2) + '\n')
 print(json.dumps(meta, indent=2))

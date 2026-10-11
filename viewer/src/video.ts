@@ -2,6 +2,7 @@ import * as THREE from "three";
 import type { Frame } from "./state";
 import { drawWindFlag } from "./wind";
 import { drawControls } from "./controls";
+import { flightProfile, drawProfile } from "./profile";
 /** Record a silent, 30 fps, side-by-side view. Physics playback stays at real speed. */
 export async function recordFlight(
   scene: THREE.Scene,
@@ -14,6 +15,7 @@ export async function recordFlight(
   track: Frame[] = [],
 ): Promise<Blob> {
   const auto = track.length > 0 && track.every((f) => f.mode === "AUTO");
+  const profile = flightProfile(track);
   const north = track.map((f) => f.state[0]),
     east = track.map((f) => f.state[1]);
   const minN = Math.min(...north),
@@ -85,7 +87,9 @@ export async function recordFlight(
           ctx.fillText(
             f.turbulence
               ? "MICRO-AGU / 9-DOF SIMULATION · MODERATE SYNTHETIC TURBULENCE"
-              : "MICRO-AGU / 9-DOF SIMULATION",
+              : f.wind_ned_m_s?.some((v) => Math.abs(v) > 0.001)
+                ? `MICRO-AGU / 9-DOF SIMULATION · STEADY WIND · ${Math.hypot(...f.wind_ned_m_s).toFixed(1)} m/s`
+                : "MICRO-AGU / 9-DOF SIMULATION · CALM AIR",
             24,
             30,
           );
@@ -107,13 +111,13 @@ export async function recordFlight(
           ctx.fillText("SolidWorks payload · capstans + rotor", 850, 129);
           if (auto) {
             ctx.fillStyle = "rgba(11,21,32,.9)";
-            ctx.fillRect(34, 373, 182, 183);
+            ctx.fillRect(34, 200, 240, 186);
             ctx.fillStyle = "#e1edf4";
             ctx.font = "12px system-ui";
-            ctx.fillText("Excerpt track · N ↑", 44, 392);
+            ctx.fillText("Excerpt track · N ↑", 44, 219);
             const point = (g: Frame) => [
-              48 + ((g.state[1] - (minE + maxE) / 2) / span) * 140 + 70,
-              408 - ((g.state[0] - (minN + maxN) / 2) / span) * 140 + 70,
+              78 + ((g.state[1] - (minE + maxE) / 2) / span) * 140 + 70,
+              235 - ((g.state[0] - (minN + maxN) / 2) / span) * 140 + 70,
             ];
             ctx.beginPath();
             track.forEach((g, i) => {
@@ -140,6 +144,7 @@ export async function recordFlight(
             ctx.fillStyle = "#ffffff";
             ctx.fill();
           }
+          if (auto) drawProfile(ctx, f, profile);
           drawWindFlag(ctx, f);
           drawControls(ctx, f, track);
           const deg = f.joint_rotvec_rad.map((v) =>
@@ -166,7 +171,7 @@ export async function recordFlight(
           ctx.font = "13px system-ui";
           if (f.wind_ned_m_s)
             ctx.fillText(
-              `Gust velocity N / E / D: ${f.wind_ned_m_s.map((v) => v.toFixed(2)).join(" / ")} m/s`,
+              `Wind velocity N / E / D: ${f.wind_ned_m_s.map((v) => v.toFixed(2)).join(" / ")} m/s`,
               24,
               862,
             );
