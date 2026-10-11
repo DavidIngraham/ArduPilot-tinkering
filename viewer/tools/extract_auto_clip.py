@@ -71,7 +71,7 @@ meta = dict(
     native_truth_roll_pitch_alignment_rms_deg=alignment_rms.tolist(),
     source_sha256=hashlib.sha256((run/'truth.jsonl').read_bytes()).hexdigest(),
     clip_sha256=hashlib.sha256(out.read_bytes()).hexdigest(),
-    parameters={k: v for k, v in parameters.items() if k.startswith(('PG_TURN_', 'PG_PITCH_', 'FWD_BAT_'))},
+    parameters={k: v for k, v in parameters.items() if k.startswith(('PG_TURN_', 'PG_PITCH_', 'FWD_BAT_', 'TECS_'))},
     turn_parameters_during_mission=mission['turn_controller_parameters'],
 )
 if (run / 'truth.turbulence.json').exists():

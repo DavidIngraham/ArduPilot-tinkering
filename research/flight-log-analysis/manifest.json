@@ -2987,6 +2987,36 @@
       "bytes": 2915,
       "sha256": "851b2eefc0f24379867e681b782be927cbae4f3417ce4cab3ade6c43e7bb95e9",
       "kind": "plotter_or_dependency"
+    },
+    {
+      "path": "figures/turn-model-spike/gust-control/filter-and-poles.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/gust-control/filter-and-poles.png",
+      "bytes": 222697,
+      "sha256": "5838993f2129a4ab943214c3fb6fd1925a93d67fda65983e410baef4b85421e0",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/gust-control/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/gust-control/two-pole-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/gust-control/two-pole-comparison.png",
+      "bytes": 521883,
+      "sha256": "ab8e30da38e82e44b10eddec9f90d79213b11b52e179b6a932f1e8dd7167e2c6",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/gust-control/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/gust-control/native-comparison.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/gust-control/native-comparison.png",
+      "bytes": 511570,
+      "sha256": "d3399a6e90e3e59e5993b51c6ce62206d6b800c67a1cbecb174b858a9fba1725",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/gust-control/report.html"
+      ]
     }
   ]
 }
