@@ -1,0 +1,59 @@
+{
+  "model_commit": "2588ecc44aa75594c475b3c38eeebf89583067de",
+  "mass_kg": 1.758,
+  "voltage": 22.2,
+  "brakes_mm": [
+    0.0,
+    3.7471981120878133
+  ],
+  "trim_throttle": 0.44589604562770047,
+  "kick_time_s": 2,
+  "kick_deg_s": 5,
+  "description": "Standalone truth-rate feedback on current plant; fixed brake trim and base throttle, calm air, no height or lateral controller. Angles are unamplified. Not a replay of the real flight.",
+  "cases": [
+    {
+      "case": "Damper off",
+      "gain": 0,
+      "filter_hz": 10,
+      "stages": 1,
+      "pitch_rate_rms_last_10s": 0.0010970274242909864,
+      "pitch_range_deg": [
+        7.591224342901164,
+        7.887074508549791
+      ]
+    },
+    {
+      "case": "Original sign",
+      "gain": 0.1,
+      "filter_hz": 10,
+      "stages": 1,
+      "pitch_rate_rms_last_10s": 155.7307090346816,
+      "pitch_range_deg": [
+        -6.773435859337358,
+        27.545444037481634
+      ]
+    },
+    {
+      "case": "Reversed sign",
+      "gain": -0.1,
+      "filter_hz": 10,
+      "stages": 1,
+      "pitch_rate_rms_last_10s": 0.20173002101239867,
+      "pitch_range_deg": [
+        7.50537129442468,
+        7.810496525575376
+      ]
+    },
+    {
+      "case": "Current filter",
+      "gain": 0.1,
+      "filter_hz": 1.5,
+      "stages": 2,
+      "pitch_rate_rms_last_10s": 5.825457943592472e-06,
+      "pitch_range_deg": [
+        7.619557632791647,
+        7.907681762215446
+      ]
+    }
+  ]
+}
