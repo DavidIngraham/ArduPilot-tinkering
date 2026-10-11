@@ -195,6 +195,7 @@ İ = 0.002 × error, with |I| ≤ 0.15 and conditional integration at output sa
 
 Rates here are in degrees per second. Both measured rates pass through 4 Hz low-pass filters. The airspeed multiplier is `Sᵥ = clamp(5 / max(Vair, 2), 0.25, 2.5)` for this configuration. The integral term is not multiplied by that scale. The normalized output passes through ArduPlane's brake mixer and servo mapping.
 
+Here `p` is body-axis roll rate measured by the payload gyro. It is only approximately the Euler bank-angle rate `φ̇` near level attitude. In general, `φ̇ = p + (q sinφ + r cosφ) tanθ`. The damping path uses `p`, not that Euler-angle derivative. Its gain is labeled `K_RD`, alongside `K_FF`, `K_P`, and `K_I`; the separate `Sᵥ` block applies airspeed scaling.
 This separates three jobs: feedforward supplies the expected brake input, heading-rate PI corrects tracking and trim error, and roll-rate feedback damps rocking. There is no roll-angle holding loop inside it. Heading-acceleration feedforward remains available in the implementation but is zero in this candidate.
 
 ### A mission that tracks without the repeated rocking
