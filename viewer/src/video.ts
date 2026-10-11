@@ -73,9 +73,9 @@ export async function recordFlight(
           panel(20, 105, 805, 465, new THREE.Vector3(2.5, 1.1, 3.8), center);
           // Payload-mounted inspection camera keeps the capstans in view while the world turns.
           const detailOffset = new THREE.Vector3(
-            -0.38,
-            0.42,
             -0.18,
+            0.48,
+            -0.15,
           ).applyQuaternion(payload.quaternion);
           panel(840, 105, 420, 465, detailOffset, payload.position.clone());
           ctx.fillStyle = "#70d8c6";

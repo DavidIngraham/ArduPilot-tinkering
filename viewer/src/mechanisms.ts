@@ -1,4 +1,4 @@
-import { Group, Object3D, Vector3 } from "three";
+import { Group, Object3D, Vector3, Mesh, MeshStandardMaterial } from "three";
 import type { Frame } from "./state";
 
 /** Rotor phase is integrated from RPM; shaft phase at the first sample is arbitrary. */
@@ -51,6 +51,47 @@ function pivot(
   parts.forEach((part) => group.attach(part));
   return group;
 }
+/** Visual paint only, attached to the rotating CAD geometry. */
+function markCapstan(assembly: Object3D, part: Object3D) {
+  assembly.updateWorldMatrix(true, true);
+  const toAssembly = assembly.matrixWorld.clone().invert();
+  part.traverse((node) => {
+    if (!(node instanceof Mesh)) return;
+    const transform = toAssembly.clone().multiply(node.matrixWorld);
+    const material = new MeshStandardMaterial({
+      color: 0xffffff,
+      roughness: 0.8,
+    });
+    material.onBeforeCompile = (shader) => {
+      shader.uniforms.capstanToCAD = { value: transform };
+      shader.vertexShader =
+        "uniform mat4 capstanToCAD; varying vec2 capstanXZ;\n" +
+        shader.vertexShader;
+      shader.vertexShader = shader.vertexShader.replace(
+        "#include <begin_vertex>",
+        `
+        #include <begin_vertex>
+        vec3 cad = (capstanToCAD * vec4(position, 1.0)).xyz;
+        capstanXZ = cad.xz - vec2(0.044375729, 0.1205);
+      `,
+      );
+      shader.fragmentShader =
+        "varying vec2 capstanXZ;\n" + shader.fragmentShader;
+      shader.fragmentShader = shader.fragmentShader.replace(
+        "#include <color_fragment>",
+        `
+        #include <color_fragment>
+        float angle = atan(capstanXZ.y, capstanXZ.x);
+        vec3 paint = sin(2.0 * angle) > 0.0 ? vec3(0.025) : vec3(0.95);
+        if (abs(angle) < 0.16) paint = vec3(1.0, 0.24, 0.015);
+        diffuseColor.rgb *= paint;
+      `,
+      );
+    };
+    material.customProgramCacheKey = () => "capstan-quarter-paint-v1";
+    node.material = material;
+  });
+}
 export interface Mechanisms {
   rotor: Group;
   left: Group;
@@ -72,6 +113,8 @@ export function rigPayload(root: Object3D): Mechanisms | null {
   ];
   if (!prop || !rotor || left.some((x) => !x) || right.some((x) => !x))
     return null;
+  markCapstan(assembly, left[0]!);
+  markCapstan(assembly, right[0]!);
   return {
     rotor: pivot(
       assembly,

@@ -250,3 +250,10 @@ returns matching wind and airspeed to SITL. No cosmetic joint rotations or rando
 torques are added. Native actuator commands and regression assertions stay intact.
 The recorder writes `truth.turbulence.json`; extraction carries its settings into
 the final metadata. Report the full test outcome separately from the clip.
+
+The CAD capstans receive procedural black/white quadrant markings and one orange
+index stripe in `src/mechanisms.ts`. The paint rotates with each drum using the
+existing physical brake-travel mapping; it does not alter the GLB or simulator.
+The exported video uses a side-biased inspection camera to expose the drum face.
+`tools/analyze_auto_gusts.py ROOT --output DIRECTORY` compares the retained calm
+and gusty AUTO excerpts and creates the longitudinal diagnostic figure/metrics.

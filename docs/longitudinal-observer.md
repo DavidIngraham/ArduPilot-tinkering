@@ -210,3 +210,24 @@ For now, the native candidate uses calibrated feedforward, reduced lateral feedb
 The new [articulated flight viewer](paraglider.md#watching-the-two-bodies-move) puts these relative motions back into a picture of the aircraft. Its looping turn-and-reversal clip shows the SolidWorks payload, moving brake capstans, and RPM-driven pusher propeller alongside the canopy. During controller development I can replay the same internal state used in the plots and inspect how payload pitch differs from canopy attitude. A second [AUTO mission clip](paraglider.md#the-controller-flies-the-mission) now shows native steering and throttle control working together as the aircraft enters a loiter at 90 m, taken from a passing mission test with moderate synthetic gusts. Both viewer clips now apply those gusts through the physics model, with nominal horizontal/vertical RMS speeds of 0.5/0.25 m/s.
 
 The [data and methods appendix](data-and-methods.md) collects flight chronology and earlier simulation provenance. The [current plotting scripts](../research/flight-log-analysis/scripts/native-sitl/) and [figure manifest](../research/flight-log-analysis/manifest.json) preserve this study. Native implementation and updated test instructions are recorded at [ArduPilot commit `c441b937bd`](https://github.com/DavidIngraham/ardupilot/commit/c441b937bd) on `paraglider-high-dof-control`; raw research logs remain in Mission Planner and the original SITL experiment folders.
+
+## What the gust video exposed
+
+Watching the articulated AUTO video made a problem obvious that route-completion checks had missed: the aircraft keeps pitching in the synthetic gusts. The controller holds average height reasonably well, but the motion is not well suppressed.
+
+![Calm and gusty AUTO loiter entry: height error, climb, payload and canopy pitch, throttle and vertical gust](assets/viewer/auto-longitudinal-gusts.png)
+
+*Two independent 55-second loiter-entry excerpts with the same controller, aligned by approach to mission item 3. Solid pitch lines are payload attitude; dashed lines are canopy attitude. These are simulated truth measurements, not flight data. The calm and gusty trajectories differ, so this is a descriptive comparison rather than an isolated controller ablation.*
+
+| Quantity in the excerpt | Calm | Synthetic gusts |
+|---|---:|---:|
+| Height error RMS | 0.15 m | 0.52 m |
+| Climb-rate RMS | 0.08 m/s | 0.70 m/s |
+| Payload pitch standard deviation | 1.24° | 9.69° |
+| Throttle range | 44.4–46.1% | 41.8–49.3% |
+
+In gusts, payload pitch ranges from −11.7° to +26.3° and climb rate from −1.41 to +1.34 m/s. The dominant pitch/climb response is near 0.36 Hz, or one cycle every 2.75 seconds. Height error is much smaller, −0.81 to +1.49 m: an oscillating vertical velocity integrates into a comparatively modest altitude excursion. Both bodies pitch substantially; the visible movement is not solely rotation at their joint.
+
+The gust generator includes a 0.34 Hz component, close to the modeled slow pitch/forward-speed mode. It continues supplying energy throughout this clip. The response is consistent with excitation near that mode, but this comparison does not establish whether throttle feedback amplifies it or merely responds to it. A passing AUTO mission is therefore evidence of route completion, not evidence of satisfactory longitudinal damping.
+
+The next diagnostic should replay the same gust history from the same initial state with normal throttle control and with throttle held at trim, then repeat with the near-mode gust component removed. That will separate plant resonance from feedback amplification before changing gains. Pitch-rate damping remains disabled; these videos do not justify re-enabling it. The [analysis script](../viewer/tools/analyze_auto_gusts.py) and [summary metrics](assets/viewer/auto-longitudinal-gusts.json) preserve this comparison.
