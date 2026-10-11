@@ -60,3 +60,9 @@ L(s) = H(s) [(Sᵥ KP + KI/s)Gψ(s) + Sᵥ KRD Gp(s)]
 python3 tools/report_classical_lateral.py /path/to/research/classical-lateral</pre><p>The scripts are in the tinkering repository. Raw matrices, traces and this research log remain in Mission Planner. Model source revision: '''+html.escape(m['model_source_revision'])+'''. Remove the local trim cache when changing model configuration. <a href="summary.json">All numerical results and validation</a>.</p><p>Method reference: <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.ss2tf.html">SciPy state-space to transfer-function conversion</a>.</p></html>'''
 (root/'report.html').write_text(report)
 print(root/'report.html')
+
+
+# Modal annotations are generated independently by annotate_lateral_roots.py.
+if (root/'annotated-root-locus.png').exists():
+    target=root/'report.html'
+    target.write_text(target.read_text()+'<h2>Annotated modes and zeros</h2><img src="annotated-root-locus.png"><img src="plant-zero-map.png">')

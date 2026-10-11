@@ -33,6 +33,16 @@
       ]
     },
     {
+      "path": "figures/turn-model-spike/classical-lateral/annotated-root-locus.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-lateral/annotated-root-locus.png",
+      "bytes": 599468,
+      "sha256": "63e29e05b20be497483c5269b6561b92d3f7b69f739d1b20c88f90550fc15319",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/classical-lateral/report.html"
+      ]
+    },
+    {
       "path": "figures/turn-model-spike/classical-lateral/closed-step.png",
       "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-lateral/closed-step.png",
       "bytes": 161744,
@@ -57,6 +67,16 @@
       "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-lateral/plant-bode.png",
       "bytes": 185555,
       "sha256": "4a7aa12b3aa7df2bbfbfe7103a1db8862f834276552e18675edeb788107456e2",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/classical-lateral/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/classical-lateral/plant-zero-map.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-lateral/plant-zero-map.png",
+      "bytes": 168594,
+      "sha256": "f06521f55ef1f81d17b708dc8100ac821c0b40da1a9454848edac0c2d2655428",
       "kind": "figure",
       "referenced_by": [
         "turn-model-spike/classical-lateral/report.html"
