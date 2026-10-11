@@ -136,10 +136,23 @@ node tools/prepare_asset.mjs /path/to/raw.glb \
 Use **Load payload GLB** for other self-contained GLB assets. Prepare these in
 metres with the **payload CG at the origin**, X forward, Y right, Z down. Y-up
 exports need reorientation first. Retain named rotor/drum nodes for future
-articulation. Imported payloads currently move as rigid assemblies; internal
-rotor/drum animation is not implemented. The fallback schematic propeller's phase
-is a visual indication of RPM, not a recorded shaft angle. Force arrows are absent
-until the simulator exports consistently defined force components.
+articulation. The bundled Micro-AGU asset now has explicit pivots for the propeller
+and motor rotor, and for both capstans together with their servo horns. Motor stator,
+servo cases, and payload structure remain fixed.
+
+Propeller angle integrates RPM over simulation time (trapezoidal integration and
+partial-interval interpolation), with arbitrary initial shaft phase. Positive spin
+is clockwise looking from behind, as specified for this aircraft. Pause and seeking
+are deterministic; high RPM can still alias at display refresh rates.
+
+Capstan displacement is `(travel_mm - first_recorded_travel_mm) / 27.5` radians,
+using the measured 55 mm drum diameter. The CAD assembly pose is the visual reference
+for the first valid brake sample, **not a calibrated absolute servo-zero angle**.
+Left is CAD +Y / body -Y; the mirrored winding signs are a visualization convention
+pending a physical zero/winding check. Missing channels leave their mechanisms static.
+The model-specific rig is applied only when all expected Micro-AGU part names exist;
+other uploaded GLBs remain rigid. No controller or physics changes are involved.
+Force arrows remain absent until the simulator exports consistently defined forces.
 
 ## Build and checks
 

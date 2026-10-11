@@ -10,6 +10,18 @@ import {
   orientation,
 } from "./state";
 import "./style.css";
+import { RotorPhase, rigPayload, poseMechanisms, phaseAt } from "./mechanisms";
+import type { Mechanisms } from "./mechanisms";
+let mechanisms: Mechanisms | null = null;
+let brakeReference: number[] | null = null;
+let rotorPhases: number[] = [];
+const rotorClock = new RotorPhase();
+function indexMechanisms(data: Frame[]) {
+  rotorClock.reset();
+  rotorPhases = data.map((f) => rotorClock.advance(f.time_s, f.rpm));
+  brakeReference =
+    data.find((f) => f.brake_mm !== null)?.brake_mm?.slice() ?? null;
+}
 const el = <T extends HTMLElement>(id: string) =>
   document.getElementById(id) as T;
 const scene = new THREE.Scene();
@@ -129,6 +141,7 @@ function load(data: Frame[], name: string) {
   socket = undefined;
   live = false;
   frames = data;
+  indexMechanisms(data);
   cursor = data[0].time_s;
   playing = false;
   resetView(data[0]);
@@ -178,6 +191,7 @@ el("connect").onclick = () => {
     ws.onopen = () => {
       if (socket !== ws) return;
       frames = [];
+      indexMechanisms([]);
       live = true;
       haveOrigin = false;
       playing = false;
@@ -191,11 +205,18 @@ el("connect").onclick = () => {
         const f = validate(JSON.parse(e.data));
         if (frames.length && f.time_s < frames.at(-1)!.time_s) {
           frames = [];
+          indexMechanisms([]);
           haveOrigin = false;
         }
         if (frames.length && f.time_s === frames.at(-1)!.time_s) return;
         frames.push(f);
-        if (frames.length > 1800) frames.shift();
+        rotorPhases.push(rotorClock.advance(f.time_s, f.rpm));
+        if (brakeReference === null && f.brake_mm)
+          brakeReference = f.brake_mm.slice();
+        if (frames.length > 1800) {
+          frames.shift();
+          rotorPhases.shift();
+        }
         if (!haveOrigin) resetView(f);
         if (frames.length === 1 || cursor < f.time_s - 0.25)
           cursor = Math.max(frames[0].time_s, f.time_s - 0.075);
@@ -237,6 +258,7 @@ function setPayload(model: THREE.Group, label: string) {
       });
     }
   payload.add(model);
+  mechanisms = rigPayload(model);
   el("asset-label").textContent = label;
 }
 new GLTFLoader()
@@ -269,8 +291,9 @@ function draw(f: Frame) {
   canopy.position.copy(position(f.state.slice(13, 16)).sub(origin));
   payload.quaternion.copy(orientation(f.state.slice(3, 7)));
   canopy.quaternion.copy(orientation(f.state.slice(16, 20)));
-  prop.rotation.x =
-    (((f.time_s * (f.rpm ?? 0)) / 60) * 2 * Math.PI) % (2 * Math.PI); // Visual phase only; not a measured rotor angle.
+  const phase = phaseAt(frames, rotorPhases, f.time_s);
+  prop.rotation.x = phase;
+  if (mechanisms) poseMechanisms(mechanisms, phase, f.brake_mm, brakeReference);
   const endpoints: number[] = [];
   for (const side of [-1, 1])
     for (const fore of [-1, 1]) {
@@ -319,7 +342,16 @@ function draw(f: Frame) {
     ["Altitude (NED origin)", `${(-f.state[2]).toFixed(1)} m`],
     ["Speed", `${Math.hypot(...f.state.slice(7, 10)).toFixed(2)} m/s`],
     ["Climb", `${(-f.state[9]).toFixed(2)} m/s`],
-    ["Rotor", f.rpm === null ? "Not recorded" : `${f.rpm.toFixed(0)} rpm`],
+    [
+      "Rotor",
+      f.rpm === null ? "Not recorded · static" : `${f.rpm.toFixed(0)} rpm`,
+    ],
+    [
+      "Capstans",
+      f.brake_mm
+        ? f.brake_mm.map((v) => v.toFixed(1)).join(" / ") + " mm"
+        : "Not recorded · static",
+    ],
     ["Voltage", `${f.voltage_v.toFixed(2)} V`],
     [
       "Joint roll / pitch / yaw",
