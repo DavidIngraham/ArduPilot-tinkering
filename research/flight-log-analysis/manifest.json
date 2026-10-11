@@ -93,6 +93,76 @@
       ]
     },
     {
+      "path": "figures/turn-model-spike/classical-longitudinal/closed-bode.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/closed-bode.png",
+      "bytes": 209577,
+      "sha256": "8bbe5b7cfa5c6d547a034700ae4320890d1bcdd5d49a1c72db4b1abfbcc9efaf",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/classical-longitudinal/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/classical-longitudinal/damper-root-locus.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/damper-root-locus.png",
+      "bytes": 135492,
+      "sha256": "1742dfd4f48572c36d75ab3e0826e4bdd1990ef1661b702fb844cd2977907868",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/classical-longitudinal/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/classical-longitudinal/gain-scan.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/gain-scan.png",
+      "bytes": 188653,
+      "sha256": "f6f54250495bd6152220b19c7455f465337b9849ffb0616a94bc13efdf6fdee9",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/classical-longitudinal/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/classical-longitudinal/nonlinear-dampers.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/nonlinear-dampers.png",
+      "bytes": 272848,
+      "sha256": "8e9772475b6b0ba0943c2422b9ce78004ff0694193000bc4b2c1b3106ed7fb3a",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/classical-longitudinal/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/classical-longitudinal/nonlinear-summary.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/nonlinear-summary.png",
+      "bytes": 156469,
+      "sha256": "74e4bff3169673f01341e84080ca215610438b91321fc6a436372fced6abe4ec",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/classical-longitudinal/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/classical-longitudinal/plant-bode.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/plant-bode.png",
+      "bytes": 244772,
+      "sha256": "9530785e1d1bf841f2f2172e876cc98c8a0cdd3b356a2dfb216fe8d2fb3efc4f",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/classical-longitudinal/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/classical-longitudinal/slow-pitch-poles.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/slow-pitch-poles.png",
+      "bytes": 64066,
+      "sha256": "b934f9c608599d4148b98aa379da5ec47848c5ac7089ee8260edb35db94cf963",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/classical-longitudinal/report.html"
+      ]
+    },
+    {
       "path": "figures/turn-model-spike/glide-comparison.png",
       "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/glide-comparison.png",
       "bytes": 360711,
@@ -1671,6 +1741,48 @@
       "kind": "plotter_or_dependency"
     },
     {
+      "path": "scripts/native-sitl/analyze_longitudinal_study.py",
+      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/analyze_longitudinal_study.py",
+      "bytes": 4447,
+      "sha256": "b1f7340bb5b000d36cdada061678d24e995b13f7f34818cb1c1d8578ba722955",
+      "kind": "native_plotter"
+    },
+    {
+      "path": "scripts/native-sitl/compare_longitudinal_study.py",
+      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/compare_longitudinal_study.py",
+      "bytes": 1662,
+      "sha256": "c12d7be6829abc0d1d4ce7bfd661af52d119bcd514d524ae6d36b153e6818f73",
+      "kind": "native_plotter"
+    },
+    {
+      "path": "scripts/native-sitl/longitudinal_frequency.py",
+      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/longitudinal_frequency.py",
+      "bytes": 3600,
+      "sha256": "408b2c45a000a200edd703ecd57192fccb7798c79a42674c7f9b671a01cf418f",
+      "kind": "native_plotter"
+    },
+    {
+      "path": "scripts/native-sitl/plot_comparison.py",
+      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/plot_comparison.py",
+      "bytes": 5703,
+      "sha256": "fb3ea3fcd78c95f5f7d343580343b039ccb1253789bae3b2a3d57f3159a99d3c",
+      "kind": "native_plotter"
+    },
+    {
+      "path": "scripts/native-sitl/plot_damper.py",
+      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/plot_damper.py",
+      "bytes": 4372,
+      "sha256": "ccdbe31c125fcfea509b8c933b9680f0b0c741fee5c2f533f58937cdf8654f21",
+      "kind": "native_plotter"
+    },
+    {
+      "path": "scripts/native-sitl/plot_longitudinal_isolation.py",
+      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/plot_longitudinal_isolation.py",
+      "bytes": 2053,
+      "sha256": "c90c2fa4fd74e95cea42c883fa483c2233e579fe4c6e71e5c1243c29fd4d6095",
+      "kind": "native_plotter"
+    },
+    {
       "path": "scripts/pitch_damper_fbd.py",
       "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/pitch_damper_fbd.py",
       "bytes": 3344,
@@ -2845,48 +2957,6 @@
       "bytes": 2915,
       "sha256": "851b2eefc0f24379867e681b782be927cbae4f3417ce4cab3ade6c43e7bb95e9",
       "kind": "plotter_or_dependency"
-    },
-    {
-      "path": "scripts/native-sitl/plot_comparison.py",
-      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/plot_comparison.py",
-      "bytes": 5703,
-      "sha256": "fb3ea3fcd78c95f5f7d343580343b039ccb1253789bae3b2a3d57f3159a99d3c",
-      "kind": "native_plotter"
-    },
-    {
-      "path": "scripts/native-sitl/plot_damper.py",
-      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/plot_damper.py",
-      "bytes": 4372,
-      "sha256": "ccdbe31c125fcfea509b8c933b9680f0b0c741fee5c2f533f58937cdf8654f21",
-      "kind": "native_plotter"
-    },
-    {
-      "path": "scripts/native-sitl/plot_longitudinal_isolation.py",
-      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/plot_longitudinal_isolation.py",
-      "bytes": 2053,
-      "sha256": "c90c2fa4fd74e95cea42c883fa483c2233e579fe4c6e71e5c1243c29fd4d6095",
-      "kind": "native_plotter"
-    },
-    {
-      "path": "scripts/native-sitl/longitudinal_frequency.py",
-      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/longitudinal_frequency.py",
-      "bytes": 3600,
-      "sha256": "408b2c45a000a200edd703ecd57192fccb7798c79a42674c7f9b671a01cf418f",
-      "kind": "native_plotter"
-    },
-    {
-      "path": "scripts/native-sitl/analyze_longitudinal_study.py",
-      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/analyze_longitudinal_study.py",
-      "bytes": 4447,
-      "sha256": "b1f7340bb5b000d36cdada061678d24e995b13f7f34818cb1c1d8578ba722955",
-      "kind": "native_plotter"
-    },
-    {
-      "path": "scripts/native-sitl/compare_longitudinal_study.py",
-      "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/compare_longitudinal_study.py",
-      "bytes": 1662,
-      "sha256": "c12d7be6829abc0d1d4ce7bfd661af52d119bcd514d524ae6d36b153e6818f73",
-      "kind": "native_plotter"
     }
   ]
 }
