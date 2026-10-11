@@ -66,7 +66,7 @@ fig.suptitle('Lateral root locus — every plant mode and combined-loop zero',fo
 fig,axs=plt.subplots(1,2,figsize=(17,9));zero_data={}
 for j,(ax,title) in enumerate(zip(axs,['Brake → heading rate ψ̇','Brake → body roll rate p'])):
     zz=zeros(A,B,C[j]);zz=zz[abs(zz)<1e8];gg=sorted([q for q in zz if q.imag>=-1e-7],key=lambda q:abs(q.imag));zero_data[title]=[[q.real,q.imag] for q in zz]
-    ax.scatter(v.real,v.imag,marker='x',c='black',label='Plant poles');ax.scatter(zz.real,zz.imag,facecolors='none',edgecolors='tab:orange',s=80,label='This output’s zeros');ax.axvline(0,color='black');ax.axvspan(0,12,color='#f9e2e2');ax.grid(alpha=.2)
+    ax.scatter(v.real,v.imag,marker='x',c='black',label='Plant poles');ax.scatter(zz.real,zz.imag,facecolors='none',edgecolors='tab:orange',s=80,label='This output’s zeros');ax.axvline(0,color='black');ax.axvspan(0,12,color='#f9e2e2',zorder=0);ax.grid(alpha=.2)
     for n,q in enumerate(gg):ax.annotate(f'{n+1}',(q.real,q.imag),xytext=(8,7),textcoords='offset points',color='#ad4800')
     table='\n'.join(f'{n+1}: {coord(q)}' for n,q in enumerate(gg));ax.text(.03,.97,table,transform=ax.transAxes,va='top',fontsize=10,bbox=dict(facecolor='white',alpha=.9,edgecolor='#ddd'))
     ax.set(xlim=(-23,12),ylim=(-2,41),title=title,xlabel='Real part (1/s)',ylabel='Imaginary part (rad/s)');ax.legend(loc='upper right')

@@ -17,7 +17,7 @@ base=args.runs_dir
 out=args.output or base
 out.mkdir(parents=True,exist_ok=True)
 arch=args.archive
-cases=[('Archived original',arch),('Original model rerun',base/'baseline/ParagliderAutoMission.csv'),('High DOF / original gains',base/'high-original-v3/ParagliderAutoMission.csv'),('High DOF / conservative gains',base/'high-conservative/ParagliderAutoMission.csv')]
+cases=[('Archived original',arch),('Original model rerun',base/'baseline/ParagliderAutoMission.csv'),('9-DOF / original gains',base/'high-original-v3/ParagliderAutoMission.csv'),('9-DOF / conservative gains',base/'high-conservative/ParagliderAutoMission.csv')]
 if args.candidate:cases.append(('Longitudinal mission candidate',args.candidate))
 fig,axes=plt.subplots(2,2,figsize=(13,10));summary={}
 for label,path in cases:
@@ -55,7 +55,7 @@ for folder in ['high-original-v3','high-conservative']:
  from scipy.spatial.transform import Rotation
  t=a[:,0]-a[0,0];y=a[:,2:];angles=Rotation.from_quat(y[:,3:7]).as_euler('xyz',degrees=True)
  axes[0].plot(t,-y[:,2],label=folder);axes[1].plot(t,angles[:,0],label=folder)
-axes[0].set(ylabel='Height above ground datum (m)',title='High-DOF response after physics release');axes[1].set(ylabel='Payload bank (deg)',xlabel='Time after release (s)')
+axes[0].set(ylabel='Height above ground datum (m)',title='9-DOF response after physics release');axes[1].set(ylabel='Payload bank (deg)',xlabel='Time after release (s)')
 for ax in axes:ax.grid(alpha=.25);ax.legend()
 fig.tight_layout();fig.savefig(out/'release-response.png',dpi=150);plt.close(fig)
 fig,axes=plt.subplots(2,1,figsize=(12,7),sharex=True)

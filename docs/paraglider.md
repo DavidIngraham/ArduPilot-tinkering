@@ -167,7 +167,9 @@ In that earlier simulator, we ran the selected gains through the normal calm AUT
 
 ## Tuning the dedicated loop with separate canopy and payload motion
 
-The higher-DOF simulator changed the tuning problem. It represents the heavier Trout Lake configuration at 1.758 kg, with separate canopy and payload motion. The controller could follow a route while continuously shaking the payload. That became particularly clear when I returned to the throttle damper: some of the pitch motion I was trying to suppress was being driven by steering.
+The simulator now has **nine mechanical degrees of freedom**: three shared translations, three payload rotations, and three canopy rotations. Two free rigid bodies would have twelve; the point joint removes three independent translations while allowing relative roll, pitch, and yaw. Rotor RPM and actuator states are additional dynamics, rather than extra canopy–payload mechanical freedoms.
+
+This 9-DOF simulator changed the tuning problem. It represents the heavier Trout Lake configuration at 1.758 kg, with separate canopy and payload motion. The controller could follow a route while continuously shaking the payload. That became particularly clear when I returned to the throttle damper: some of the pitch motion I was trying to suppress was being driven by steering.
 
 I limited the next study to two controller revisions and held the model coefficients fixed. Removing individual steering terms in successive settled windows pointed to heading-rate proportional feedback as the main source of fast excitation. Payload pitch-rate RMS dropped from about 16.5 to 3.3 degrees per second with that term removed; restoring the original settings brought the motion back. Removing roll damping or acceleration feedforward alone had much less effect.
 
@@ -204,10 +206,97 @@ The revised lateral settings and the [longitudinal changes](longitudinal-observe
 
 ![Settled bank motion and loiter radius across controller generations](../research/flight-log-analysis/figures/turn-model-spike/longitudinal-design/auto-loiter.png)
 
-*The final 30 seconds of the first AUTO loiter. Purple is the current candidate; green is the high-DOF model with original gains; red is an earlier conservative-gain trial. Older simple-model runs provide context, not a claim of equal model fidelity.*
+*The final 30 seconds of the first AUTO loiter. Purple is the current candidate; green is the 9-DOF model with original gains; red is an earlier conservative-gain trial. Older simple-model runs provide context, not a claim of equal model fidelity.*
 
-First-loiter bank standard deviation fell from 2.60 degrees with the high-DOF original gains to 0.039 degrees. Median radii were 26.74 and 26.68 m for the 25 m requests. Maximum corner overshoot was 0.66 m. The slightly wider circle and larger corner error were a worthwhile trade for much steadier motion. The same candidate remained well behaved with a softer roll model and at lower voltage; those checks did not include wind.
+First-loiter bank standard deviation fell from 2.60 degrees with the 9-DOF original gains to 0.039 degrees. Median radii were 26.74 and 26.68 m for the 25 m requests. Maximum corner overshoot was 0.66 m. The slightly wider circle and larger corner error were a worthwhile trade for much steadier motion. The same candidate remained well behaved with a softer roll model and at lower voltage; those checks did not include wind.
 
 The progression is now clearer to me: the angle-controller workaround got the aircraft flying missions; direct heading-rate feedback separated steering from bank; the articulated model exposed how those corrections excited the payload. The latest gains are a simulator development candidate. The real Trout Lake flight still used the original angle workaround.
+
+## What the linear analysis tells me
+
+After getting the native mission controller to fly a much calmer route, I wanted to understand how much stability margin remained. I linearized the 9-DOF model at the Trout Lake straight, level trim: 1.758 kg, 4.383 m/s, 44.59% throttle, left brake released and right brake at 3.747 mm. That nonzero brake trim matters: small corrections stay on the right-brake branch rather than crossing the mixer’s change of side.
+
+The local model keeps fourteen internal states after removing global position and heading. That is a state count, not fourteen mechanical degrees of freedom. Throttle and equilibrium rotor speed are held fixed for this lateral analysis. With differential brake command `u`, heading rate `ψ̇`, and body roll rate `p`, the plant is:
+
+```text
+Δẋ = A Δx + B Δu
+Gψ(s) = Δψ̇/Δu = Cψ (sI − A)⁻¹ B
+Gp(s) = Δp /Δu = Cp (sI − A)⁻¹ B
+
+Gψ(0) = 98.00 deg/s per brake fraction
+Gp(0) = −13.05 deg/s per brake fraction
+```
+
+A one-percent brake-command increment therefore produces about 0.98 deg/s of steady heading rate locally. Inverting that gain, including the speed multiplier, gives a feedforward gain of **0.00894**—almost exactly the 0.009 selected in the preceding nonlinear study.
+
+![Linear plant Bode plots checked against nonlinear sine tests](../research/flight-log-analysis/figures/turn-model-spike/classical-lateral/plant-bode.png)
+
+*The full plant has several coupled modes. Small-amplitude nonlinear sine tests match the sampled linear response within 0.005%; the slight difference from the continuous curve at high frequency is the input hold. This checks the linearization against the simulator.*
+
+### Writing the feedback loop explicitly
+
+At fixed speed scaling, below the command and actuator limits, the implemented controller becomes:
+
+```text
+e(s) = r(s) − H(s) ψ̇(s)
+u(s) = S K_FF r(s) + [S K_P + K_I/s] e(s) − S K_RD H(s) p(s)
+
+K_FF = 0.009; K_P = 0.005; K_I = 0.002; K_RD = 0.003
+S = 5 / 4.383 = 1.1408
+H(s) = 25.133 / (s + 25.133)       [4 Hz measurement filter]
+r(s) = r_requested(s) / (0.1s + 1) [when command limits are inactive]
+
+L(s) = H(s){[S K_P + K_I/s] Gψ(s) + S K_RD Gp(s)}
+ψ̇(s)/r_requested(s) = Gψ(s)[S(K_FF + K_P) + K_I/s]
+                       / {(1 + L(s))(0.1s + 1)}
+```
+
+The integrator is not speed-scaled. Feedforward affects command response but does not move the feedback poles. Also, body roll rate is not zero in every steady banked turn: `p = φ̇ − ψ̇ sinθ`. Roll-rate damping therefore supplies a small steady-turn correction as well as opposing oscillation.
+
+### The poles explain why more P was not helping
+
+The selected gains are locally stable, but the original larger feedback gains are unstable in this model. With the selected gains, a lightly damped pair sits at `−0.986 ± j15.969 s⁻¹`: about 2.54 Hz, with damping ratio 0.062. Scaling all feedback gains together reaches instability at **1.524 times nominal**, a gain margin of **3.66 dB**. Increasing heading-rate P alone reaches the boundary near 0.00791, with I and roll damping held fixed.
+
+![Root locus annotated with physical mode participation and combined-loop zeros](../research/flight-log-analysis/figures/turn-model-spike/classical-lateral/annotated-root-locus.png)
+
+*Crosses are open-loop poles, circles are combined-loop zeros, and green squares are the selected closed-loop poles. The mode labels come from eigenvector participation: several motions mix pitch, yaw, and translation. The red star marks the gain-induced instability boundary. The lower-half-plane branches mirror the upper half.*
+
+The slow oscillatory plant mode mixes pitch and forward speed at about 0.34 Hz. Another mixes sideways velocity and canopy yaw around 0.59 Hz; the fastest pair is predominantly relative canopy/payload roll at 5.86 Hz. Feedback changes these coupled motions rather than merely adding damping to a single isolated roll mode.
+
+Zeros need a different interpretation: they describe cancellation in an input–output response, not another natural motion. The combined loop has a right-half-plane zero pair at `+6.944 ± j19.054 s⁻¹`. The individual heading-rate and roll-rate plants have different zeros, so those cannot be substituted as endpoints of this root locus. [The separate pole–zero maps](../research/flight-log-analysis/figures/turn-model-spike/classical-lateral/plant-zero-map.png) show all of them. These are properties of the modeled plant, not modes or zeros identified directly from flight.
+
+## Less feedback at the troublesome frequencies
+
+The next experiment kept every gain and model coefficient fixed and changed only measurement filtering. I compared six filters across level flight, climb and descent at ±0.5 m/s, and level turns at ±10 deg/s. Two candidates stood out: lowering the existing low-pass cutoff from 4 to 1 Hz, and adding a broad notch at 2.5 Hz.
+
+```text
+1 Hz candidate: H₁(s) = 6.283 / (s + 6.283)
+Notch candidate: H_N(s) = H(s) (s² + 6.283s + 246.740)
+                              / (s² + 21.991s + 246.740)
+```
+
+Both retain unity DC gain. Feedforward bypasses the measurement filters, so reducing feedback near the troublesome modes need not make every turn command sluggish.
+
+| Measurement filter | Level-flight gain margin | Lowest margin across five trims |
+|---|---:|---:|
+| Existing 4 Hz low-pass | 3.66 dB | 2.31 dB |
+| 1 Hz low-pass | 8.41 dB | 6.87 dB |
+| Broad 2.5 Hz notch | 14.83 dB | 7.04 dB |
+
+![Feedback magnitude and sensitivity with six measurement filters](../research/flight-log-analysis/figures/turn-model-spike/lateral-shaping/shaping-bode.png)
+
+*Both candidates reduce the sensitivity peak near the troublesome mode. The notch has the strongest straight-flight margin, but its advantage over the simpler filter narrows in left turns.*
+
+Local command tracking stayed similar. I then ran eighteen nonlinear tests: level flight and both turn directions, each with three filters and either zero or 80 ms of added sensing delay. These used the actual modeled brake travel limits, asymmetric PWM mapping, changing speed scaling, and integral limits. The requested increments were 2 deg/s, continuing in the existing turn direction.
+
+![Nonlinear command tracking and brake effort with zero and 80 ms sensing delay](../research/flight-log-analysis/figures/turn-model-spike/lateral-shaping/nonlinear-shaping.png)
+
+*Solid lines have no added delay; dashed lines have 80 ms. The existing filter develops a large oscillation in the right turn, while both candidates keep tracking. The left-turn baseline remains well behaved, consistent with the asymmetric plant.*
+
+In the delayed right-turn case, final-ten-second heading-rate RMS error was 26.65 deg/s with the existing filter, versus about 0.016 deg/s with either candidate. Without added delay, the 1 Hz filter’s integrated right-turn tracking error changed from 5.10 to 5.12 degrees over the 30-second run. The benefit is more tolerance of feedback phase lag, with little tracking cost in these tests.
+
+**My next implementation trial is the 1 Hz filter with the gains unchanged.** It is a simple change with a substantial improvement across the tested trims. The notch remains an alternative if a modal peak persists or the simpler filter loses useful disturbance rejection.
+
+This filter comparison ran against the standalone nonlinear simulator with truth measurements and controlled delay. It has not yet run through the native SITL controller, estimator, navigation and altitude loops together. The native AUTO results above still use 4 Hz; the new filter is a research candidate, not a change already flown or deployed. [Data and methods](data-and-methods.md#classical-lateral-analysis-and-frequency-shaping) records the scripts and scope.
 
 The [longitudinal chapter](longitudinal-observer.md) picks up the same experiment from the throttle side. [Data and methods](data-and-methods.md#lateral-controller-evidence) preserves the earlier tuning records. The [current plotting source](../research/flight-log-analysis/scripts/native-sitl/), [figure manifest](../research/flight-log-analysis/manifest.json), and [diagram generator](../tools/draw_control_loops.py) preserve this update. Native implementation and reproduction instructions are recorded at local ArduPilot commit `af6b2ca963` on `paraglider-high-dof-control`.

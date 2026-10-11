@@ -75,8 +75,8 @@
     {
       "path": "figures/turn-model-spike/classical-lateral/plant-zero-map.png",
       "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-lateral/plant-zero-map.png",
-      "bytes": 168594,
-      "sha256": "f06521f55ef1f81d17b708dc8100ac821c0b40da1a9454848edac0c2d2655428",
+      "bytes": 171203,
+      "sha256": "94895deb7ba45f7c1963467187b1705d972ae3ea53696b261abe166fd6f09baf",
       "kind": "figure",
       "referenced_by": [
         "turn-model-spike/classical-lateral/report.html"
@@ -1113,8 +1113,8 @@
     {
       "path": "figures/turn-model-spike/longitudinal-design/auto-comparison.png",
       "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/auto-comparison.png",
-      "bytes": 376240,
-      "sha256": "ac50e975d468f57cccea5e3ba7bda6278680cb1eb3b163f7e65a86be4829b6b7",
+      "bytes": 375773,
+      "sha256": "0777f1cba1ff73faf0e7131dc694b7488d42fa2ca2c82f4da9be53214c4937f0",
       "kind": "figure",
       "referenced_by": [
         "turn-model-spike/longitudinal-design/report.html"
@@ -1123,8 +1123,8 @@
     {
       "path": "figures/turn-model-spike/longitudinal-design/auto-loiter.png",
       "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-design/auto-loiter.png",
-      "bytes": 271753,
-      "sha256": "ca68c3152617d2255d910ce5b6c94872e79a5a902f834dcbe6b8552a9baf54ad",
+      "bytes": 271623,
+      "sha256": "61c729e73e07e076ee58b78088c8bb650c9bf00609249eded84c5ec6e90a9796",
       "kind": "figure",
       "referenced_by": [
         "turn-model-spike/physics-development.html",
@@ -2849,8 +2849,8 @@
     {
       "path": "scripts/native-sitl/plot_comparison.py",
       "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/plot_comparison.py",
-      "bytes": 5712,
-      "sha256": "8813ce92b124a8d339b8fea2c3835a3271e7c96dce34e2151f4f47bb500d5d2c",
+      "bytes": 5703,
+      "sha256": "fb3ea3fcd78c95f5f7d343580343b039ccb1253789bae3b2a3d57f3159a99d3c",
       "kind": "native_plotter"
     },
     {

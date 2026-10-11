@@ -17,7 +17,7 @@ Start with [From First Tosses to Autonomous Missions](docs/flight-testing.md): B
 3. [Steering a Parafoil with an Airplane Autopilot](docs/paraglider.md): the angle-controller workaround, simulation tuning, and dedicated turn-rate control.
 4. [Throttle, Pitch, and the Controller That Pushed the Wrong Way](docs/longitudinal-observer.md): identification, the damper sign, and relative-motion control.
 
-The steering and longitudinal chapters also follow the latest native mission-controller study: evolving control loops, higher-DOF simulation, smoother altitude capture, and full AUTO validation.
+The steering and longitudinal chapters also follow the latest native mission-controller study: evolving control loops, 9-DOF simulation, smoother altitude capture, and full AUTO validation.
 
 [Data and methods](docs/data-and-methods.md) collects the supporting evidence and model limitations. [Plane trajectory planning](docs/trajectory.md) is a related investigation into line-to-line turns, wind, and survey paths.
 
