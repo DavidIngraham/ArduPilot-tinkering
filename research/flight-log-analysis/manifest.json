@@ -94,72 +94,72 @@
     },
     {
       "path": "figures/turn-model-spike/classical-longitudinal/closed-bode.png",
-      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/closed-bode.png",
-      "bytes": 209577,
-      "sha256": "8bbe5b7cfa5c6d547a034700ae4320890d1bcdd5d49a1c72db4b1abfbcc9efaf",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal-compensated/closed-bode.png",
+      "bytes": 210495,
+      "sha256": "ad570ac1e9b1e50df77d088c0d1e77a15ecf4f7bd3599af8e03244953e922ad6",
       "kind": "figure",
       "referenced_by": [
-        "turn-model-spike/classical-longitudinal/report.html"
+        "turn-model-spike/classical-longitudinal-compensated/report.html"
       ]
     },
     {
       "path": "figures/turn-model-spike/classical-longitudinal/damper-root-locus.png",
-      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/damper-root-locus.png",
-      "bytes": 135492,
-      "sha256": "1742dfd4f48572c36d75ab3e0826e4bdd1990ef1661b702fb844cd2977907868",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal-compensated/damper-root-locus.png",
+      "bytes": 135059,
+      "sha256": "eb9b07b0be5eadf5c8d398426d9e24596c96ce00106f801b1eb57ebd15622126",
       "kind": "figure",
       "referenced_by": [
-        "turn-model-spike/classical-longitudinal/report.html"
+        "turn-model-spike/classical-longitudinal-compensated/report.html"
       ]
     },
     {
       "path": "figures/turn-model-spike/classical-longitudinal/gain-scan.png",
-      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/gain-scan.png",
-      "bytes": 188653,
-      "sha256": "f6f54250495bd6152220b19c7455f465337b9849ffb0616a94bc13efdf6fdee9",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal-compensated/gain-scan.png",
+      "bytes": 185180,
+      "sha256": "a73f65fd3c46ccdc23f80c3f1cd1c2c868a47ee0c0897ccb5b762d26924883c0",
       "kind": "figure",
       "referenced_by": [
-        "turn-model-spike/classical-longitudinal/report.html"
+        "turn-model-spike/classical-longitudinal-compensated/report.html"
       ]
     },
     {
       "path": "figures/turn-model-spike/classical-longitudinal/nonlinear-dampers.png",
-      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/nonlinear-dampers.png",
-      "bytes": 272848,
-      "sha256": "8e9772475b6b0ba0943c2422b9ce78004ff0694193000bc4b2c1b3106ed7fb3a",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal-compensated/nonlinear-dampers.png",
+      "bytes": 271792,
+      "sha256": "f19cfd86f032b1020363025c9d9da3775bc893a3918a0846992f217852d7985e",
       "kind": "figure",
       "referenced_by": [
-        "turn-model-spike/classical-longitudinal/report.html"
+        "turn-model-spike/classical-longitudinal-compensated/report.html"
       ]
     },
     {
       "path": "figures/turn-model-spike/classical-longitudinal/nonlinear-summary.png",
-      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/nonlinear-summary.png",
-      "bytes": 156469,
-      "sha256": "74e4bff3169673f01341e84080ca215610438b91321fc6a436372fced6abe4ec",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal-compensated/nonlinear-summary.png",
+      "bytes": 155640,
+      "sha256": "09653f718a83a89e46e755896d842db10ecb264fa4d4783bd74dd0eeae27f29c",
       "kind": "figure",
       "referenced_by": [
-        "turn-model-spike/classical-longitudinal/report.html"
+        "turn-model-spike/classical-longitudinal-compensated/report.html"
       ]
     },
     {
       "path": "figures/turn-model-spike/classical-longitudinal/plant-bode.png",
-      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/plant-bode.png",
-      "bytes": 244772,
-      "sha256": "9530785e1d1bf841f2f2172e876cc98c8a0cdd3b356a2dfb216fe8d2fb3efc4f",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal-compensated/plant-bode.png",
+      "bytes": 244945,
+      "sha256": "54dfb00078f70c0805b44417fc2006fb4ab0abbe2736d9256fa2fc16a42a7dab",
       "kind": "figure",
       "referenced_by": [
-        "turn-model-spike/classical-longitudinal/report.html"
+        "turn-model-spike/classical-longitudinal-compensated/report.html"
       ]
     },
     {
       "path": "figures/turn-model-spike/classical-longitudinal/slow-pitch-poles.png",
-      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal/slow-pitch-poles.png",
-      "bytes": 64066,
-      "sha256": "b934f9c608599d4148b98aa379da5ec47848c5ac7089ee8260edb35db94cf963",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/classical-longitudinal-compensated/slow-pitch-poles.png",
+      "bytes": 64990,
+      "sha256": "d3b25862bb554bb210d8050e9a4cdd2e04204700f12175f2d1f0f73a213b18a0",
       "kind": "figure",
       "referenced_by": [
-        "turn-model-spike/classical-longitudinal/report.html"
+        "turn-model-spike/classical-longitudinal-compensated/report.html"
       ]
     },
     {
@@ -1695,6 +1695,36 @@
       ]
     },
     {
+      "path": "figures/turn-model-spike/voltage-compensation/voltage-auto.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/voltage-compensation/voltage-auto.png",
+      "bytes": 230427,
+      "sha256": "c2021a8a778db1f40c78d4c52a7d01829eca4edd61ab760a209accebdf5117d4",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/voltage-compensation/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/voltage-compensation/voltage-metrics.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/voltage-compensation/voltage-metrics.png",
+      "bytes": 68737,
+      "sha256": "1783a99633f55bddc5de1a788a3c29555aa64253a3932cbf65520ef8e23801cf",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/voltage-compensation/report.html"
+      ]
+    },
+    {
+      "path": "figures/turn-model-spike/voltage-compensation/voltage-response.png",
+      "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/voltage-compensation/voltage-response.png",
+      "bytes": 479764,
+      "sha256": "945f3c8890f8ab1445bd085fe20925b3a194f9d1fbf0dff233b8fcd4e795cbf9",
+      "kind": "figure",
+      "referenced_by": [
+        "turn-model-spike/voltage-compensation/report.html"
+      ]
+    },
+    {
       "path": "figures/turn-model-spike/yaw-coupling-study/sensitivity.png",
       "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/yaw-coupling-study/sensitivity.png",
       "bytes": 201663,
@@ -1743,8 +1773,8 @@
     {
       "path": "scripts/native-sitl/analyze_longitudinal_study.py",
       "source": "/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider/analyze_longitudinal_study.py",
-      "bytes": 4447,
-      "sha256": "b1f7340bb5b000d36cdada061678d24e995b13f7f34818cb1c1d8578ba722955",
+      "bytes": 5317,
+      "sha256": "fe48979aa12bc1d4ae583db14c3cbadfbc999d2ad67251e52afb22f3c7327d19",
       "kind": "native_plotter"
     },
     {
