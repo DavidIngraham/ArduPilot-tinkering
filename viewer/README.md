@@ -164,8 +164,9 @@ python tools/make_showcase.py --model-dir /path/to/ardupilot/Tools/simulation/pa
   --output /path/to/Mission-Planner/analysis/viewer-showcase/reversing-turn.jsonl
 ```
 
-Open that recording, wait for the CAD asset, and select **Record video**. Keep the
-viewer visible during capture. This exports a silent WebM with a full-aircraft view,
+Open that recording, wait for the CAD asset, and select **Record video**, then
+**Save video** when recording finishes. Keep the viewer visible during capture.
+This exports a silent WebM with a full-aircraft view,
 a payload-mounted detail camera, joint angles and actuation readouts. Capture uses
 real elapsed time at 1×; the browser requests 30 fps but may drop frames under load.
 The propeller can alias at that sampling rate. Convert the downloaded file for the
@@ -177,6 +178,40 @@ bash tools/encode_showcase.sh /path/to/microagu-flight.webm ../docs/assets/viewe
 
 The raw JSONL stays outside Git. Preserve the generator's small metrics JSON next
 to the final videos to identify the input schedule and trace checksum.
+
+### Native AUTO mission recording
+
+Run from the ArduPilot feature checkout with the autotest Python environment active.
+Use a fresh run directory in the existing research data location:
+
+```sh
+PG_GAINS=original PG_VOLTAGE=22.2 \
+PG_CONTROLLER_CONFIG=Tools/simulation/paraglider/mission-controller-candidate.json \
+BUILDLOGS=/path/to/research/viewer-auto-mission \
+python /path/to/ArduPilot-tinkering/viewer/tools/record_auto.py \
+  --model-dir "$PWD/Tools/simulation/paraglider" \
+  --output /path/to/research/viewer-auto-mission/truth.jsonl -- \
+  --no-check-parameter-leaks --speedup 10 test.Plane.ParagliderAutoMission
+```
+
+This observes `Backend.respond` while the existing AUTO harness runs. All native
+controller outputs, mission items and assertions are unchanged. After a successful
+test, run `extract_auto_clip.py /path/to/research/viewer-auto-mission`. It selects
+55 continuous seconds of the first loiter entry, checks native MODE records for
+AUTO throughout, and checks truth/native SIM attitude alignment before creating
+`auto-clip.jsonl` and `auto-mission.json`. The optional replay annotations `mode`
+and `mission_item` come from this check, not from recognizing a circular trajectory.
+The video renderer adds an AUTO title and an inset of the excerpt's actual track.
+
+Load that clip and record/save it as above. Encode with:
+
+```sh
+bash tools/encode_showcase.sh /path/to/auto-mission.webm ../docs/assets/viewer auto-mission
+```
+
+The test includes airborne initialization, a complete route, altitude changes,
+opposing two-turn loiters and controller handover. The published excerpt covers
+only the first loiter entry, with the heading-rate controller enabled.
 
 ## Build and checks
 

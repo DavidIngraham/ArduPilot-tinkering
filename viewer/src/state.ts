@@ -10,6 +10,9 @@ export interface Frame {
   joint_rotvec_rad: number[];
   joint_rate_rad_s: number[];
   released: boolean;
+  // Optional native-log annotations added to a replay, not inferred from motion.
+  mode?: "AUTO";
+  mission_item?: number;
 }
 const vector = (x: unknown, n: number): x is number[] =>
   Array.isArray(x) && x.length === n && x.every(Number.isFinite);
@@ -25,7 +28,10 @@ export function validate(x: unknown): Frame {
     !vector(f.joint_rate_rad_s, 3) ||
     !Number.isFinite(f.voltage_v) ||
     ![f.rpm, f.throttle].every((v) => v === null || Number.isFinite(v)) ||
-    typeof f.released !== "boolean"
+    typeof f.released !== "boolean" ||
+    (f.mode !== undefined && f.mode !== "AUTO") ||
+    (f.mission_item !== undefined &&
+      (!Number.isInteger(f.mission_item) || f.mission_item < 0))
   )
     throw Error("Unsupported or incomplete microagu.state.v1 frame");
   for (const k of [3, 16])

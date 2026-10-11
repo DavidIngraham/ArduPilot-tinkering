@@ -530,14 +530,17 @@ el("export-video").onclick = async () => {
       (text) => {
         el("status").textContent = text;
       },
+      frames,
     );
     const url = URL.createObjectURL(blob),
-      a = document.createElement("a");
+      a = el<HTMLAnchorElement>("video-download");
+    if (a.href.startsWith("blob:")) URL.revokeObjectURL(a.href);
     a.href = url;
-    a.download = "microagu-flight.webm";
-    a.click();
-    setTimeout(() => URL.revokeObjectURL(url), 60000);
-    el("status").textContent = "Video ready · downloaded WebM";
+    a.download = frames.every((f) => f.mode === "AUTO")
+      ? "auto-mission.webm"
+      : "microagu-flight.webm";
+    a.hidden = false;
+    el("status").textContent = "Video ready · use Save video";
   } catch (e) {
     error(e);
   } finally {

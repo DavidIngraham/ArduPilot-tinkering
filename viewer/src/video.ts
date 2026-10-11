@@ -9,7 +9,16 @@ export async function recordFlight(
   end: number,
   update: (time: number) => Frame,
   status: (text: string) => void,
+  track: Frame[] = [],
 ): Promise<Blob> {
+  const auto = track.length > 0 && track.every((f) => f.mode === "AUTO");
+  const north = track.map((f) => f.state[0]),
+    east = track.map((f) => f.state[1]);
+  const minN = Math.min(...north),
+    maxN = Math.max(...north);
+  const minE = Math.min(...east),
+    maxE = Math.max(...east);
+  const span = Math.max(maxN - minN, maxE - minE, 1);
   const canvas = document.createElement("canvas");
   canvas.width = 1280;
   canvas.height = 720;
@@ -75,7 +84,9 @@ export async function recordFlight(
           ctx.fillStyle = "#e1edf4";
           ctx.font = "28px system-ui";
           ctx.fillText(
-            "Canopy, payload, and the motion between",
+            auto
+              ? "ArduPilot AUTO · the controller flies the mission"
+              : "Canopy, payload, and the motion between",
             24,
             66,
           );
@@ -86,6 +97,41 @@ export async function recordFlight(
             129,
           );
           ctx.fillText("SolidWorks payload · capstans + rotor", 850, 129);
+          if (auto) {
+            ctx.fillStyle = "rgba(11,21,32,.9)";
+            ctx.fillRect(34, 373, 182, 183);
+            ctx.fillStyle = "#e1edf4";
+            ctx.font = "12px system-ui";
+            ctx.fillText("Excerpt track · N ↑", 44, 392);
+            const point = (g: Frame) => [
+              48 + ((g.state[1] - (minE + maxE) / 2) / span) * 140 + 70,
+              408 - ((g.state[0] - (minN + maxN) / 2) / span) * 140 + 70,
+            ];
+            ctx.beginPath();
+            track.forEach((g, i) => {
+              const [x, y] = point(g);
+              if (i) ctx.lineTo(x, y);
+              else ctx.moveTo(x, y);
+            });
+            ctx.strokeStyle = "#557788";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+            ctx.beginPath();
+            track
+              .filter((g) => g.time_s <= time)
+              .forEach((g, i) => {
+                const [x, y] = point(g);
+                if (i) ctx.lineTo(x, y);
+                else ctx.moveTo(x, y);
+              });
+            ctx.strokeStyle = "#70d8c6";
+            ctx.stroke();
+            const [x, y] = point(f);
+            ctx.beginPath();
+            ctx.arc(x, y, 4, 0, 2 * Math.PI);
+            ctx.fillStyle = "#ffffff";
+            ctx.fill();
+          }
           const deg = f.joint_rotvec_rad.map((v) =>
             ((v * 180) / Math.PI).toFixed(1),
           );
@@ -109,7 +155,9 @@ export async function recordFlight(
           ctx.fillStyle = "#8da4b5";
           ctx.font = "13px system-ui";
           ctx.fillText(
-            "Simulation truth replay · schematic canopy/lines · no motion exaggeration",
+            auto
+              ? `Native AUTO · mission item ${f.mission_item} · altitude ${(-f.state[2]).toFixed(1)} m · schematic canopy/lines · no motion exaggeration`
+              : "Simulation truth replay · schematic canopy/lines · no motion exaggeration",
             24,
             685,
           );

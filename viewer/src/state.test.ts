@@ -24,6 +24,14 @@ const frame = (t = 0): Frame => ({
   joint_rate_rad_s: [0, 0, 0],
   released: true,
 });
+test("native mission annotations remain discrete during replay interpolation", () => {
+  const a = { ...frame(0), mode: "AUTO" as const, mission_item: 2 };
+  const b = { ...frame(2), mode: "AUTO" as const, mission_item: 3 };
+  assert.equal(sample([a, b], 1).mission_item, 2);
+  assert.equal(sample([a, b], 2).mission_item, 3);
+  assert.equal(sample([a, b], 1).mode, "AUTO");
+  assert.throws(() => validate({ ...a, mission_item: 2.5 }));
+});
 function close(a: number[], b: number[]) {
   a.forEach((v, i) => assert.ok(Math.abs(v - b[i]) < 1e-9, `${a} != ${b}`));
 }

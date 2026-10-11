@@ -317,4 +317,20 @@ The viewer can replay recordings or receive a live truth-state stream from the P
 
 The payload geometry comes from CAD; the canopy and suspension lines are schematic. The [viewer source and setup guide](../viewer/README.md) cover the live connection and CAD export, and [data and methods](data-and-methods.md#articulated-flight-viewer) records how this clip was generated.
 
+### The controller flies the mission
+
+Next I connected the viewer to a full native ArduPlane SITL AUTO run. Here the mission supplies navigation targets, the heading-rate controller commands the brakes, and the longitudinal controller commands throttle. The aircraft's changing motion feeds back through the simulated sensors and estimator. I recorded the resulting state and actuator motion while the complete mission test ran.
+
+<video autoplay muted loop playsinline controls preload="metadata" width="1280" height="720" poster="assets/viewer/auto-mission.jpg" aria-label="Native ArduPilot AUTO mission entering a clockwise loiter, with aircraft articulation, CAD mechanisms and a track inset">
+  <source src="assets/viewer/auto-mission.mp4" type="video/mp4">
+  <source src="assets/viewer/auto-mission.webm" type="video/webm">
+  Your browser does not support inline video.
+</video>
+
+*A continuous 55-second excerpt at real speed, entering mission item 3: a clockwise loiter with a requested 25 m radius at 90 m altitude. The inset shows the excerpt's actual ground track, with north up. Brake, throttle and propeller motion come from the native controller-driven simulation. [Download the AUTO clip](https://raw.githubusercontent.com/DavidIngraham/ArduPilot-tinkering/main/docs/assets/viewer/auto-mission.mp4).*
+
+The turn entry reaches 16.6° of payload bank before the aircraft settles into the orbit. The relative canopy/payload motion remains visible, but the controller makes much smaller corrections once established. This is the behavior I wanted the revised gains to produce: establish the turn, then fly it without continuously exciting the suspended payload.
+
+The full run passed the existing AUTO regression, including its altitude changes, corner checks, opposing two-turn loiters, home loiter and controller handover. This excerpt uses the heading-rate controller throughout; it ends well before the handover test. The native log confirms AUTO mode throughout the clip. The model remains the calm-air, constant-22.2 V, 1.758 kg Trout Lake configuration, with an airborne start. [Reproduction and recording checks](data-and-methods.md#native-auto-mission-video) accompany the clip.
+
 The [longitudinal chapter](longitudinal-observer.md) picks up the same experiment from the throttle side. [Data and methods](data-and-methods.md#lateral-controller-evidence) preserves the earlier tuning records. The [current plotting source](../research/flight-log-analysis/scripts/native-sitl/), [figure manifest](../research/flight-log-analysis/manifest.json), and [diagram generator](../tools/draw_control_loops.py) preserve this update. Native implementation and reproduction instructions are recorded at local ArduPilot commit `af6b2ca963` on `paraglider-high-dof-control`.
