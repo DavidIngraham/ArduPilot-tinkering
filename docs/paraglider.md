@@ -6,7 +6,7 @@ I initially thought I would need to design a yaw-rate controller for the parafoi
 
 As I worked through my notes, I figured out that I could get much of the same behavior by changing the gains in the controller that was already there. The trick was to turn off the inner roll-rate feedback and use its feed-forward path as an angle gain. With bank angle standing in for turn rate, that gave me a practical route to the first flights without writing the new controller immediately.
 
-The flights got me to working autonomous missions. Thinking through the flight behavior afterward and testing the loops in simulation brought me back to the original idea: a dedicated turn-rate controller would make the response easier to tune and the achievable turns easier to express. The [flight-test post](flight-testing.md) covers the aircraft tests; this page follows that progression in the lateral controller.
+The flights got me to working autonomous missions. Later, a model with separate canopy and payload motion exposed how steering corrections could excite the suspended payload, and gave me a way to tune turn tracking and damping separately. Thinking through the flight behavior afterward and testing the loops in simulation brought me back to the original idea: a dedicated turn-rate controller would make the response easier to tune and the achievable turns easier to express. The [flight-test post](flight-testing.md) covers the aircraft tests; this page follows that progression in the lateral controller.
 
 ## Getting the first controller by changing the gains
 
@@ -15,6 +15,10 @@ I started by breaking ArduPlane's roll controller into its individual paths. It 
 ![Original lateral-control analysis comparing ArduPlane, the first-flight configuration, and the simplified angle controller](assets/micro-agu/lateral-control-notes.png)
 
 *January 30 control-law notes: keep the navigation and angle-error calculation, then use rate feed-forward to drive the brakes.*
+
+![Original nested bank-angle and roll-rate loops](assets/control-loops/original-roll.png)
+
+*The starting architecture: bank-angle error generates a roll-rate target; rate feedback and feedforward drive the actuators. This diagram omits implementation details to show the two loops.*
 
 A conventional airplane roll controller has two nested loops. Bank-angle error creates a requested roll rate, then a rate controller drives the ailerons. For my parafoil, the output instead goes through the brake mixer. Differential braking produces a turn and the associated bank, so I wanted a simple angular correction rather than an inner loop tuned around aileron-driven roll dynamics.
 
@@ -36,6 +40,10 @@ K_φ = K_FF / τ
 ```
 
 **The rate feed-forward gain becomes a proportional bank-angle gain.** It is feed-forward with respect to the inner rate loop, but the complete loop still feeds back measured bank angle. There is no integration hidden in the cancellation: the requested rate is just angle error multiplied by 1/τ. Measured roll rate no longer contributes when its feedback gains are zero.
+
+![Flight-tested angle-control workaround using rate feedforward](assets/control-loops/flight-angle-workaround.png)
+
+*The flight configuration removes the measured-roll-rate inner loop. Rate feedforward acts on bank-angle error through the outer angle gain. Trout Lake adds derivative feedforward to this same path.*
 
 ### Including ArduPilot's speed scaling
 
@@ -147,18 +155,58 @@ I therefore returned to the yaw-rate-controller idea, implementing it as a dedic
 
 The mission plots also made me question the waypoint radius. We could make the response better damped and still overshoot the next track if the requested turn was too tight. I asked us to base the turn geometry on achievable turn rate, then optimize for tighter turns with less overshoot and repeat the comparison across wind and turbulence. Those experiments helped separate guidance geometry from the steering-loop tuning.
 
-The selected model-specific gains and navigation settings are listed in the [appendix](data-and-methods.md#lateral-controller-evidence).
+These earlier simple-model gains and navigation settings are listed in the [appendix](data-and-methods.md#lateral-controller-evidence).
 
 ![Mission controller comparison](../scratch/paraglider-tests/yaw-controller/mission-controller-comparison.png)
 
 ![Loiter controller comparison](../scratch/paraglider-tests/yaw-controller/loiter-controller-comparison.png)
 
-We ran the selected gains through the normal calm AUTO mission and controller handover test; both passed. Calm corner overshoot was approximately 0.31 m in the selected validation. Results are not universally robust: the 3 m/s steady-wind case exceeded the 4 m corner limit, and turbulence 0.5 caused altitude aborts with both controllers. Each wind condition had a single comparison flight. Failed tuning candidates are retained.
+In that earlier simulator, we ran the selected gains through the normal calm AUTO mission and controller handover test; both passed. Calm corner overshoot was approximately 0.31 m in the selected validation. Results are not universally robust: the 3 m/s steady-wind case exceeded the 4 m corner limit, and turbulence 0.5 caused altitude aborts with both controllers. Each wind condition had a single comparison flight. Failed tuning candidates are retained.
 
 [Yaw validation and selected comparisons](../scratch/paraglider-tests/yaw-controller/validation.json) records the exact settings and limitations. I also explored a Lua quicktuner based on Plane autotune and the other tuning scripts, including L1 tuning. I decided it had not yet proven its value, so I kept its source and binding patches separately in provenance and out of the durable branch.
 
-## What the workaround taught me
+## Tuning the dedicated loop with separate canopy and payload motion
 
-The original controller got me to autonomous flight. Simulation then let me separate turn-rate tracking, roll damping, and navigation geometry, and develop a controller that expresses those jobs directly. The replacement remains a simulation result; the Trout Lake flight used the original workaround.
+The higher-DOF simulator changed the tuning problem. It represents the heavier Trout Lake configuration at 1.758 kg, with separate canopy and payload motion. The controller could follow a route while continuously shaking the payload. That became particularly clear when I returned to the throttle damper: some of the pitch motion I was trying to suppress was being driven by steering.
 
-The companion [longitudinal chapter](longitudinal-observer.md) follows the pitch problem. [Data and methods](data-and-methods.md#lateral-controller-evidence) links the source revision behind the derivation, exact tuning selections, validation records, and model assumptions.
+I limited the next study to two controller revisions and held the model coefficients fixed. Removing individual steering terms in successive settled windows pointed to heading-rate proportional feedback as the main source of fast excitation. Payload pitch-rate RMS dropped from about 16.5 to 3.3 degrees per second with that term removed; restoring the original settings brought the motion back. Removing roll damping or acceleration feedforward alone had much less effect.
+
+The first revision reduced heading-rate P from 0.04 to 0.005 and roll damping from 0.03 to 0.003. Straight flight became much quieter, but a roughly 10-degree-per-second turn request now produced about 35 degrees per second. Removing the fast oscillation exposed excessive feedforward.
+
+Steady-turn calculations gave equivalent feedforward gains of about 0.0056 left and 0.0123 right, including the asymmetric trim. I selected 0.009, left the integrator to correct the residual bias, and disabled heading-acceleration feedforward. Final sustained-turn tracking errors were 0.31 degrees per second right and 0.14 left, measured as RMS error over each phase's final 20 seconds.
+
+### The current loop, one operation at a time
+
+![Current heading-rate controller with separate roll-rate filtering, gain and speed scaling](assets/control-loops/current-lateral.png)
+
+*The current native SITL candidate. Roll-rate feedback is expanded into its low-pass filter, damping gain, and airspeed scaling. It enters the output sum with a negative sign. The heading-rate P path is a different feedback term.*
+
+Navigation still encodes its request as bank, but bank is no longer the feedback target. The code converts that request to heading rate using airspeed and, in automatic navigation, the heading/course projection. It limits the request to ±25 degrees per second, smooths it with a 0.1-second time constant, and limits its acceleration to 40 degrees per second squared.
+
+The measured heading rate comes from the payload gyro and attitude:
+
+```text
+heading_rate = (q sinφ + r cosφ) / cosθ
+error = shaped_heading_rate_target − filtered_heading_rate
+
+u = clip[Sᵥ (0.009 × target + 0.005 × error − 0.003 × filtered_roll_rate) + I, −1, +1]
+İ = 0.002 × error, with |I| ≤ 0.15 and conditional integration at output saturation
+```
+
+Rates here are in degrees per second. Both measured rates pass through 4 Hz low-pass filters. The airspeed multiplier is `Sᵥ = clamp(5 / max(Vair, 2), 0.25, 2.5)` for this configuration. The integral term is not multiplied by that scale. The normalized output passes through ArduPlane's brake mixer and servo mapping.
+
+This separates three jobs: feedforward supplies the expected brake input, heading-rate PI corrects tracking and trim error, and roll-rate feedback damps rocking. There is no roll-angle holding loop inside it. Heading-acceleration feedforward remains available in the implementation but is zero in this candidate.
+
+### A mission that tracks without the repeated rocking
+
+The revised lateral settings and the [longitudinal changes](longitudinal-observer.md#returning-to-native-mission-control) passed the existing native AUTO test, with its original altitude, corner, opposing-loiter, home-loiter and controller-handover checks unchanged.
+
+![Settled bank motion and loiter radius across controller generations](../research/flight-log-analysis/figures/turn-model-spike/longitudinal-design/auto-loiter.png)
+
+*The final 30 seconds of the first AUTO loiter. Purple is the current candidate; green is the high-DOF model with original gains; red is an earlier conservative-gain trial. Older simple-model runs provide context, not a claim of equal model fidelity.*
+
+First-loiter bank standard deviation fell from 2.60 degrees with the high-DOF original gains to 0.039 degrees. Median radii were 26.74 and 26.68 m for the 25 m requests. Maximum corner overshoot was 0.66 m. The slightly wider circle and larger corner error were a worthwhile trade for much steadier motion. The same candidate remained well behaved with a softer roll model and at lower voltage; those checks did not include wind.
+
+The progression is now clearer to me: the angle-controller workaround got the aircraft flying missions; direct heading-rate feedback separated steering from bank; the articulated model exposed how those corrections excited the payload. The latest gains are a simulator development candidate. The real Trout Lake flight still used the original angle workaround.
+
+The [longitudinal chapter](longitudinal-observer.md) picks up the same experiment from the throttle side. [Data and methods](data-and-methods.md#lateral-controller-evidence) preserves the earlier tuning records. The [current plotting source](../research/flight-log-analysis/scripts/native-sitl/), [figure manifest](../research/flight-log-analysis/manifest.json), and [diagram generator](../tools/draw_control_loops.py) preserve this update. Native implementation and reproduction instructions are recorded at local ArduPilot commit `af6b2ca963` on `paraglider-high-dof-control`.
