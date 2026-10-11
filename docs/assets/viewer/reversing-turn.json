@@ -1,0 +1,54 @@
+{
+  "kind": "Scripted open-loop actuator demonstration; not a flight log or native AUTO test",
+  "duration_s": 30,
+  "flight": "trout_lake",
+  "profile": "mission",
+  "mass_kg": 1.758,
+  "voltage_v": 22.2,
+  "maneuver": "Right turn, left reversal, release",
+  "command_knots_s": [
+    0,
+    2,
+    5,
+    11,
+    15,
+    21,
+    25,
+    30
+  ],
+  "left_increment_mm": [
+    0,
+    0,
+    0,
+    0,
+    20,
+    20,
+    0,
+    0
+  ],
+  "right_increment_mm": [
+    0,
+    0,
+    22,
+    22,
+    0,
+    0,
+    0,
+    0
+  ],
+  "throttle_increment_max": 0.06,
+  "max_abs_payload_bank_deg": 28.77005681682678,
+  "heading_change_range_deg": 378.95290504472905,
+  "altitude_range_m": [
+    100.0,
+    103.93238242815788
+  ],
+  "joint_peak_abs_deg": [
+    3.355155644814179,
+    7.324527265418775,
+    4.378627310342065
+  ],
+  "trace_sha256": "4458c2eb28f731b73d8055e49796aad63336b6421c31174c699a2df1dcd078df",
+  "model_commit": "b7a675aecb2889d230ba6cbe6617a22459ed0506",
+  "video_note": "30-second open-loop simulation at real speed; browser video starts at its first captured animation frame."
+}

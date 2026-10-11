@@ -299,4 +299,22 @@ In the delayed right-turn case, final-ten-second heading-rate RMS error was 26.6
 
 This filter comparison ran against the standalone nonlinear simulator with truth measurements and controlled delay. It has not yet run through the native SITL controller, estimator, navigation and altitude loops together. The native AUTO results above still use 4 Hz; the new filter is a research candidate, not a change already flown or deployed. [Data and methods](data-and-methods.md#classical-lateral-analysis-and-frequency-shaping) records the scripts and scope.
 
+## Watching the two bodies move
+
+After working through the mode shapes and controller plots, I wanted to see what those motions actually looked like. I built a Three.js viewer around the simulator's internal state and brought in my SolidWorks payload assembly. The canopy and payload now move independently, the servo capstans rotate as the brakes pull in, and the pusher propeller spins with the modeled motor RPM.
+
+<video autoplay muted loop playsinline controls preload="metadata" width="1280" height="720" poster="assets/viewer/reversing-turn.jpg" aria-label="Simulated powered right turn, left reversal and brake release, with an articulated SolidWorks payload close-up">
+  <source src="assets/viewer/reversing-turn.mp4" type="video/mp4">
+  <source src="assets/viewer/reversing-turn.webm" type="video/webm">
+  Your browser does not support inline video.
+</video>
+
+*Thirty seconds at real speed: a powered right turn, a reversal to the left, then brake release. This is a scripted open-loop run of the 9-DOF model at the 1.758 kg Trout Lake mass and 22.2 V. Peak payload bank is 28.8°. The left view follows the aircraft; the right rides with the payload so the mechanisms stay visible. Joint motion is shown at its actual simulated amplitude. [Download the clip](https://raw.githubusercontent.com/DavidIngraham/ArduPilot-tinkering/main/docs/assets/viewer/reversing-turn.mp4).*
+
+The reversal is the interesting part. The payload and canopy do not behave like one rigid airplane, and brake release does not instantly erase their relative motion. In this run the largest relative rotation-vector components are 3.4° in roll, 7.3° in pitch, and 4.4° in yaw. Seeing that motion alongside brake travel makes the connection between the coupled modes and the physical aircraft much easier to follow.
+
+The viewer can replay recordings or receive a live truth-state stream from the Python simulator running behind ArduPilot SITL. I can pause, scrub through a transition, change camera angles, and inspect joint angles alongside actuator inputs. All the physics stays in the simulator; the browser draws its results. This clip demonstrates the model and viewer, rather than an autonomous-controller test or a recreation of a recorded flight.
+
+The payload geometry comes from CAD; the canopy and suspension lines are schematic. The [viewer source and setup guide](../viewer/README.md) cover the live connection and CAD export, and [data and methods](data-and-methods.md#articulated-flight-viewer) records how this clip was generated.
+
 The [longitudinal chapter](longitudinal-observer.md) picks up the same experiment from the throttle side. [Data and methods](data-and-methods.md#lateral-controller-evidence) preserves the earlier tuning records. The [current plotting source](../research/flight-log-analysis/scripts/native-sitl/), [figure manifest](../research/flight-log-analysis/manifest.json), and [diagram generator](../tools/draw_control_loops.py) preserve this update. Native implementation and reproduction instructions are recorded at local ArduPilot commit `af6b2ca963` on `paraglider-high-dof-control`.

@@ -10,6 +10,8 @@ import {
   orientation,
 } from "./state";
 import "./style.css";
+import { recordFlight } from "./video";
+let exporting = false;
 import { RotorPhase, rigPayload, poseMechanisms, phaseAt } from "./mechanisms";
 import type { Mechanisms } from "./mechanisms";
 let mechanisms: Mechanisms | null = null;
@@ -448,6 +450,10 @@ let chartTime = 0;
 function animate(now: number) {
   const dt = Math.min(0.1, (now - previous) / 1000);
   previous = now;
+  if (exporting) {
+    requestAnimationFrame(animate);
+    return;
+  }
   if (frames.length) {
     if (live) cursor = Math.min(frames.at(-1)!.time_s, cursor + dt);
     if (playing && !live) {
@@ -494,3 +500,48 @@ if (source)
     })
     .then((t) => load(parseRecording(t), source.split("/").pop()!))
     .catch(error);
+
+el("export-video").onclick = async () => {
+  if (!frames.length || live || exporting) {
+    error("Load a recording before exporting a video.");
+    return;
+  }
+  if (!mechanisms) {
+    error("Wait for the Micro-AGU CAD asset to load.");
+    return;
+  }
+  const saved = cursor;
+  playing = false;
+  exporting = true;
+  el("play").textContent = "Play";
+  try {
+    const blob = await recordFlight(
+      scene,
+      payload,
+      canopy,
+      frames[0].time_s,
+      frames.at(-1)!.time_s,
+      (t) => {
+        cursor = t;
+        const f = sample(frames, t);
+        draw(f);
+        return f;
+      },
+      (text) => {
+        el("status").textContent = text;
+      },
+    );
+    const url = URL.createObjectURL(blob),
+      a = document.createElement("a");
+    a.href = url;
+    a.download = "microagu-flight.webm";
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+    el("status").textContent = "Video ready · downloaded WebM";
+  } catch (e) {
+    error(e);
+  } finally {
+    exporting = false;
+    cursor = saved;
+  }
+};

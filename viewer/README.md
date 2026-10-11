@@ -154,6 +154,30 @@ The model-specific rig is applied only when all expected Micro-AGU part names ex
 other uploaded GLBs remain rigid. No controller or physics changes are involved.
 Force arrows remain absent until the simulator exports consistently defined forces.
 
+## Recording a showcase clip
+
+Generate a 30-second powered right turn, left reversal and brake release using the
+real physics backend (scripted actuators, without a native autopilot):
+
+```sh
+python tools/make_showcase.py --model-dir /path/to/ardupilot/Tools/simulation/paraglider \
+  --output /path/to/Mission-Planner/analysis/viewer-showcase/reversing-turn.jsonl
+```
+
+Open that recording, wait for the CAD asset, and select **Record video**. Keep the
+viewer visible during capture. This exports a silent WebM with a full-aircraft view,
+a payload-mounted detail camera, joint angles and actuation readouts. Capture uses
+real elapsed time at 1×; the browser requests 30 fps but may drop frames under load.
+The propeller can alias at that sampling rate. Convert the downloaded file for the
+blog, including an MP4 fallback and poster, with:
+
+```sh
+bash tools/encode_showcase.sh /path/to/microagu-flight.webm ../docs/assets/viewer
+```
+
+The raw JSONL stays outside Git. Preserve the generator's small metrics JSON next
+to the final videos to identify the input schedule and trace checksum.
+
 ## Build and checks
 
 ```sh
