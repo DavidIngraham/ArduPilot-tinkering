@@ -1,0 +1,20 @@
+{
+  "generator": "tools/prepare_asset.mjs",
+  "source_name": "microAGU.SLDASM exported by SOLIDWORKS 2026",
+  "source_sha256": "a5085db7032bf372eff021a63d2250dd2246f5c22d45d61b59e6cfa9dfa7751c",
+  "sha256": "10cd498d78de60020ad97f4febc46010a585496b124575c25bc9ec6998596288",
+  "bytes": 1678216,
+  "frame": "body FRD",
+  "CG_cad_m": [
+    0.03872470663265306,
+    -0.00008380102040816326,
+    0.05198155612244899
+  ],
+  "CG_basis": "nominal with-lead case from napkin-payload-model.json",
+  "processing": "Removed cameras and internal m3 fasteners; deduplicated, welded and quantized meshes; no change to source CAD.",
+  "notes": [
+    "Canopy and suspension lines remain schematic.",
+    "CAD prop is 9x6, real flight prop was 9x4.5.",
+    "Ballast is not represented in CAD; CG uses the existing estimated Trout Lake model."
+  ]
+}

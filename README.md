@@ -67,3 +67,8 @@ model package in the `paraglider-high-dof-control` ArduPilot checkout.
 Refresh the report-linked figures and plotting source with
 `python3 tools/archive_flight_figures.py --source <Mission-Planner-analysis>/longitudinal-2026-10-09 --native-source <ArduPilot>/Tools/simulation/paraglider`.
 Local report assets remain available so the existing research log keeps rendering.
+
+## Interactive simulator viewer
+
+[Micro-AGU flight viewer](viewer/README.md) provides a local Three.js replay and live
+SITL view of the canopy, payload, joint motion, and actuator states.

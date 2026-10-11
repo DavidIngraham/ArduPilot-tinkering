@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Micro-AGU · Flight laboratory</title>
+  </head>
+  <body>
+    <div id="app">
+      <header>
+        <div>
+          <small>MICRO-AGU / FLIGHT LABORATORY</small>
+          <h1>Inside the flight</h1>
+        </div>
+        <span id="status">Load a simulation recording to begin</span>
+      </header>
+      <main>
+        <section id="scene">
+          <div class="scene-label">
+            9-DOF · NED truth state<span id="asset-label"
+              >Loading SolidWorks payload…</span
+            >
+          </div>
+          <div id="empty">
+            Load a recording<br /><small
+              >Both bodies, one flight. Inspect the motion behind the
+              controller.</small
+            >
+          </div>
+          <div id="view-controls">
+            <select id="camera" aria-label="Camera">
+              <option value="follow">Follow flight</option>
+              <option value="inspect">Inspect joint</option>
+              <option value="payload">Inspect payload</option>
+              <option value="ground">Ground camera</option></select
+            ><label><input id="axes" type="checkbox" checked />Body axes</label
+            ><label
+              ><input id="path" type="checkbox" checked />Flight path</label
+            >
+          </div>
+        </section>
+        <aside>
+          <h2>Recording & connection</h2>
+          <label class="file"
+            >Open recording<input
+              id="recording"
+              type="file"
+              accept=".json,.jsonl"
+          /></label>
+          <p>
+            JSONL truth stream or converted simulation trace. Files stay on this
+            device.
+          </p>
+          <div class="connect">
+            <input
+              id="url"
+              value="ws://127.0.0.1:8765"
+              aria-label="WebSocket URL"
+            /><button id="connect">Connect live</button>
+          </div>
+          <h2>Aircraft assets</h2>
+          <label class="file secondary"
+            >Load payload GLB<input id="asset" type="file" accept=".glb"
+          /></label>
+          <p>
+            Default: your SolidWorks assembly at the estimated Trout Lake CG.
+            Custom GLB: metres, body FRD, payload CG at the origin. The canopy
+            remains schematic.
+          </p>
+          <h2>At the cursor</h2>
+          <dl id="numbers">
+            <dt>Time</dt>
+            <dd>—</dd>
+          </dl>
+          <p id="error" role="alert"></p>
+        </aside>
+      </main>
+      <section class="transport">
+        <button id="play" disabled>Play</button
+        ><select id="speed" aria-label="Playback speed">
+          <option value="0.25">¼×</option>
+          <option value="0.5">½×</option>
+          <option value="1" selected>1×</option>
+          <option value="2">2×</option>
+          <option value="4">4×</option></select
+        ><input
+          id="scrub"
+          aria-label="Replay time"
+          type="range"
+          min="0"
+          max="1"
+          step="0.001"
+          value="0"
+        /><output id="clock">0.00 s</output>
+      </section>
+      <section class="charts">
+        <div>
+          <h2>
+            Joint rotation vector <small>payload → canopy · degrees</small>
+          </h2>
+          <canvas id="joint-chart"></canvas>
+          <p>
+            <i class="roll"></i>Roll <i class="pitch"></i>Pitch
+            <i class="yaw"></i>Yaw
+          </p>
+        </div>
+        <div>
+          <h2>Actuation <small>throttle % · brake travel mm</small></h2>
+          <canvas id="control-chart"></canvas>
+          <p>
+            <i class="roll"></i>Throttle <i class="pitch"></i>Left brake
+            <i class="yaw"></i>Right brake
+          </p>
+        </div>
+      </section>
+      <footer>
+        Truth-state viewer · physics stays in the simulator · X forward / Y
+        right / Z down
+      </footer>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
