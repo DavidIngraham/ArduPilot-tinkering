@@ -30,7 +30,11 @@ export async function recordFlight(
   const renderer = new THREE.WebGLRenderer({ antialias: true });
   renderer.setPixelRatio(1);
   const camera = new THREE.PerspectiveCamera(40, 1, 0.005, 20000);
-  const stream = canvas.captureStream(30);
+  const output = document.createElement("canvas");
+  output.width = 1280;
+  output.height = 852;
+  const outputContext = output.getContext("2d")!;
+  const stream = output.captureStream(30);
   const mime = ["video/webm;codecs=vp9", "video/webm;codecs=vp8"].find((t) =>
     MediaRecorder.isTypeSupported(t),
   );
@@ -94,14 +98,6 @@ export async function recordFlight(
             30,
           );
           ctx.fillStyle = "#e1edf4";
-          ctx.font = "28px system-ui";
-          ctx.fillText(
-            auto
-              ? "ArduPilot AUTO · the controller flies the mission"
-              : "Canopy, payload, and the motion between",
-            24,
-            66,
-          );
           ctx.font = "14px system-ui";
           ctx.fillText(
             "Canopy + payload · actual simulated articulation",
@@ -184,6 +180,9 @@ export async function recordFlight(
           );
           ctx.fillStyle = "#70d8c6";
           ctx.fillRect(24, 890, (1232 * (time - start)) / (end - start), 3);
+          // Omit the former title band while preserving telemetry and camera sizes.
+          outputContext.drawImage(canvas, 0, 0, 1280, 40, 0, 0, 1280, 40);
+          outputContext.drawImage(canvas, 0, 88, 1280, 812, 0, 40, 1280, 812);
           status(
             `Recording ${Math.round((100 * (time - start)) / (end - start))}%`,
           );

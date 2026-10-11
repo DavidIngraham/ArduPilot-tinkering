@@ -264,7 +264,7 @@ recorded earth-frame wind vector, not apparent wind relative to the aircraft.
 
 ### Actuator overlays in exported videos
 
-Video exports are 1280 × 900 at real speed. Below the two camera views, a trailing
+Video exports are 1280 × 852 at real speed. Below the two camera views, a trailing
 10-second graph shows throttle command on a fixed 0–100% axis. Left/right bars
 show actual simulated brake travel on a common 0–100 mm axis (a display scale,
 not a physical end-stop specification). Missing signals display N/A. The graph
