@@ -74,5 +74,9 @@ meta = dict(
     parameters={k: v for k, v in parameters.items() if k.startswith(('PG_TURN_', 'PG_PITCH_', 'FWD_BAT_'))},
     turn_parameters_during_mission=mission['turn_controller_parameters'],
 )
+if (run / 'truth.turbulence.json').exists():
+    meta['turbulence'] = json.loads((run / 'truth.turbulence.json').read_text())
+    wind = np.array([f['wind_ned_m_s'] for f in clip])
+    meta['clip_wind_rms_ned_m_s'] = np.sqrt(np.mean(wind**2, axis=0)).tolist()
 (run / 'auto-mission.json').write_text(json.dumps(meta, indent=2) + '\n')
 print(json.dumps(meta, indent=2))

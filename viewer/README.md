@@ -235,3 +235,18 @@ recording integration (400 lockstep responses, 29 truth frames). Browser inspect
 used the 432-second `voltage_22_2_on` native SITL recording and the exported CAD;
 playback, timeline seeking, camera switching, and plots were checked. No controller
 parameters or physics equations were changed.
+
+### Repeatable synthetic turbulence
+
+Add `--turbulence` to either `make_showcase.py` or `record_auto.py`. Both use
+`tools/turbulence.py`: zero mean wind, nominal RMS gust speeds of 0.5 m/s north,
+0.5 m/s east and 0.25 m/s down, frequencies 0.08–0.89 Hz, seed 20261011 and a
+five-second cosine ramp after release. “Moderate” describes this demonstration's
+chosen amplitude; it is not a validated atmospheric turbulence category.
+
+This is a spatially uniform smooth multisine velocity field, not a Dryden model.
+It enters the existing aerodynamic/propulsion wind input. The native adapter also
+returns matching wind and airspeed to SITL. No cosmetic joint rotations or random
+torques are added. Native actuator commands and regression assertions stay intact.
+The recorder writes `truth.turbulence.json`; extraction carries its settings into
+the final metadata. Report the full test outcome separately from the clip.

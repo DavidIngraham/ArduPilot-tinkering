@@ -1,0 +1,103 @@
+{
+  "kind": "Native ArduPlane SITL AUTO; continuous first-loiter entry excerpt",
+  "simulation_start_s": 257.4327794180996,
+  "simulation_end_s": 312.3827794180496,
+  "duration_s": 54.94999999995002,
+  "frames": 1571,
+  "mission_item": 3,
+  "commanded_loiter_radius_m": 25.0,
+  "target_altitude_m": 90,
+  "mode_evidence": [
+    [
+      21.497255,
+      0
+    ],
+    [
+      24.577254999999997,
+      6
+    ],
+    [
+      46.516632,
+      6
+    ],
+    [
+      51.236632,
+      10
+    ]
+  ],
+  "mass_kg": 1.758,
+  "voltage_v": 22.2,
+  "max_abs_payload_bank_deg": 15.377802155574773,
+  "joint_peak_abs_deg": [
+    3.5734044140966756,
+    9.752520881820415,
+    7.051876081284192
+  ],
+  "native_truth_roll_pitch_alignment_rms_deg": [
+    0.010058850633336013,
+    0.028025682364051795
+  ],
+  "source_sha256": "0bbb59790482677657c0d24aaa0e8625389383ea35dd7e2eff7cc41fe5d4e658",
+  "clip_sha256": "bdc80194989d79bc51f9ba21d9fb8d3239abcc560d52d3067dc9c7d4d1d3fc51",
+  "parameters": {
+    "FWD_BAT_VOLT_MAX": 22.200000762939453,
+    "FWD_BAT_VOLT_MIN": 18.0,
+    "FWD_BAT_IDX": 0.0,
+    "FWD_BAT_THR_CUT": 0.0,
+    "PG_TURN_ENABLE": 1.0,
+    "PG_TURN_FF": 0.008999999612569809,
+    "PG_TURN_P": 0.004999999888241291,
+    "PG_TURN_I": 0.0020000000949949026,
+    "PG_TURN_IMAX": 0.15000000596046448,
+    "PG_TURN_RMAX": 25.0,
+    "PG_TURN_ACCEL": 40.0,
+    "PG_TURN_FILT": 4.0,
+    "PG_TURN_TC": 0.10000000149011612,
+    "PG_TURN_ASPD": 5.0,
+    "PG_TURN_RDAMP": 0.003000000026077032,
+    "PG_TURN_D_FF": 0.0
+  },
+  "turn_parameters_during_mission": {
+    "PG_TURN_ENABLE": 1.0,
+    "PG_TURN_FF": 0.008999999612569809,
+    "PG_TURN_P": 0.004999999888241291,
+    "PG_TURN_I": 0.0020000000949949026,
+    "PG_TURN_IMAX": 0.15000000596046448,
+    "PG_TURN_RMAX": 25.0,
+    "PG_TURN_ACCEL": 40.0,
+    "PG_TURN_FILT": 4.0,
+    "PG_TURN_TC": 0.10000000149011612,
+    "PG_TURN_ASPD": 5.0,
+    "PG_TURN_RDAMP": 0.003000000026077032,
+    "PG_TURN_D_FF": 0.0
+  },
+  "turbulence": {
+    "seed": 20261011,
+    "rms_ned_m_s": [
+      0.5,
+      0.5,
+      0.25
+    ],
+    "frequencies_hz": [
+      0.08,
+      0.13,
+      0.21,
+      0.34,
+      0.55,
+      0.89
+    ],
+    "ramp_s": 5,
+    "mean_wind_ned_m_s": [
+      0,
+      0,
+      0
+    ],
+    "model": "Uniform smooth random-phase multisine; nominal component RMS, not a Dryden model"
+  },
+  "clip_wind_rms_ned_m_s": [
+    0.49352540731873423,
+    0.5040144182980895,
+    0.2516710738885578
+  ],
+  "full_native_regression": "PASS: test.Plane.ParagliderAutoMission; existing assertions unchanged"
+}

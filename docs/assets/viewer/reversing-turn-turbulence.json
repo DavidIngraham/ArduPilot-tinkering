@@ -1,0 +1,75 @@
+{
+  "kind": "Scripted open-loop actuator demonstration; not a flight log or native AUTO test",
+  "duration_s": 30,
+  "flight": "trout_lake",
+  "profile": "mission",
+  "mass_kg": 1.758,
+  "voltage_v": 22.2,
+  "maneuver": "Right turn, left reversal, release",
+  "command_knots_s": [
+    0,
+    2,
+    5,
+    11,
+    15,
+    21,
+    25,
+    30
+  ],
+  "left_increment_mm": [
+    0,
+    0,
+    0,
+    0,
+    20,
+    20,
+    0,
+    0
+  ],
+  "right_increment_mm": [
+    0,
+    0,
+    22,
+    22,
+    0,
+    0,
+    0,
+    0
+  ],
+  "throttle_increment_max": 0.06,
+  "max_abs_payload_bank_deg": 36.23367385292226,
+  "heading_change_range_deg": 439.3020866336254,
+  "altitude_range_m": [
+    99.62087860222826,
+    105.0432387191812
+  ],
+  "joint_peak_abs_deg": [
+    4.549052191952366,
+    11.375053654530292,
+    7.172413801066099
+  ],
+  "trace_sha256": "1e53095119dbf9aa83b90df8c11417247070348099d8592f1b09e231474622f5",
+  "turbulence": {
+    "seed": 20261011,
+    "rms_ned_m_s": [
+      0.5,
+      0.5,
+      0.25
+    ],
+    "frequencies_hz": [
+      0.08,
+      0.13,
+      0.21,
+      0.34,
+      0.55,
+      0.89
+    ],
+    "ramp_s": 5,
+    "mean_wind_ned_m_s": [
+      0,
+      0,
+      0
+    ],
+    "model": "Uniform smooth random-phase multisine; nominal component RMS, not a Dryden model"
+  }
+}

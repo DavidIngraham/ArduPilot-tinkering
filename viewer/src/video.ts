@@ -80,7 +80,13 @@ export async function recordFlight(
           panel(840, 105, 420, 465, detailOffset, payload.position.clone());
           ctx.fillStyle = "#70d8c6";
           ctx.font = "13px system-ui";
-          ctx.fillText("MICRO-AGU / 9-DOF SIMULATION", 24, 30);
+          ctx.fillText(
+            f.turbulence
+              ? "MICRO-AGU / 9-DOF SIMULATION · MODERATE SYNTHETIC TURBULENCE"
+              : "MICRO-AGU / 9-DOF SIMULATION",
+            24,
+            30,
+          );
           ctx.fillStyle = "#e1edf4";
           ctx.font = "28px system-ui";
           ctx.fillText(
@@ -154,6 +160,12 @@ export async function recordFlight(
           ctx.fillText(`t = ${time.toFixed(1)} s   ·   1× playback`, 840, 639);
           ctx.fillStyle = "#8da4b5";
           ctx.font = "13px system-ui";
+          if (f.wind_ned_m_s)
+            ctx.fillText(
+              `Gust velocity N / E / D: ${f.wind_ned_m_s.map((v) => v.toFixed(2)).join(" / ")} m/s`,
+              24,
+              663,
+            );
           ctx.fillText(
             auto
               ? `Native AUTO · mission item ${f.mission_item} · altitude ${(-f.state[2]).toFixed(1)} m · schematic canopy/lines · no motion exaggeration`

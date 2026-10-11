@@ -13,6 +13,8 @@ export interface Frame {
   // Optional native-log annotations added to a replay, not inferred from motion.
   mode?: "AUTO";
   mission_item?: number;
+  wind_ned_m_s?: number[];
+  turbulence?: string;
 }
 const vector = (x: unknown, n: number): x is number[] =>
   Array.isArray(x) && x.length === n && x.every(Number.isFinite);
@@ -29,6 +31,8 @@ export function validate(x: unknown): Frame {
     !Number.isFinite(f.voltage_v) ||
     ![f.rpm, f.throttle].every((v) => v === null || Number.isFinite(v)) ||
     typeof f.released !== "boolean" ||
+    (f.wind_ned_m_s !== undefined && !vector(f.wind_ned_m_s, 3)) ||
+    (f.turbulence !== undefined && typeof f.turbulence !== "string") ||
     (f.mode !== undefined && f.mode !== "AUTO") ||
     (f.mission_item !== undefined &&
       (!Number.isInteger(f.mission_item) || f.mission_item < 0))

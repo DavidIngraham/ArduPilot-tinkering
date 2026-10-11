@@ -303,15 +303,15 @@ This filter comparison ran against the standalone nonlinear simulator with truth
 
 After working through the mode shapes and controller plots, I wanted to see what those motions actually looked like. I built a Three.js viewer around the simulator's internal state and brought in my SolidWorks payload assembly. The canopy and payload now move independently, the servo capstans rotate as the brakes pull in, and the pusher propeller spins with the modeled motor RPM.
 
-<video autoplay muted loop playsinline controls preload="metadata" width="1280" height="720" poster="assets/viewer/reversing-turn.jpg" aria-label="Simulated powered right turn, left reversal and brake release, with an articulated SolidWorks payload close-up">
-  <source src="assets/viewer/reversing-turn.mp4" type="video/mp4">
-  <source src="assets/viewer/reversing-turn.webm" type="video/webm">
+<video autoplay muted loop playsinline controls preload="metadata" width="1280" height="720" poster="assets/viewer/reversing-turn-turbulence.jpg" aria-label="Simulated powered right turn, left reversal and brake release, with an articulated SolidWorks payload close-up">
+  <source src="assets/viewer/reversing-turn-turbulence.mp4" type="video/mp4">
+  <source src="assets/viewer/reversing-turn-turbulence.webm" type="video/webm">
   Your browser does not support inline video.
 </video>
 
-*Thirty seconds at real speed: a powered right turn, a reversal to the left, then brake release. This is a scripted open-loop run of the 9-DOF model at the 1.758 kg Trout Lake mass and 22.2 V. Peak payload bank is 28.8°. The left view follows the aircraft; the right rides with the payload so the mechanisms stay visible. Joint motion is shown at its actual simulated amplitude. [Download the clip](https://raw.githubusercontent.com/DavidIngraham/ArduPilot-tinkering/main/docs/assets/viewer/reversing-turn.mp4).*
+*Thirty seconds at real speed: a powered right turn, a reversal to the left, then brake release. This is a scripted open-loop run of the 9-DOF model at the 1.758 kg Trout Lake mass and 22.2 V. Moderate synthetic gusts act on the physics throughout, with nominal RMS speeds of 0.5 m/s in each horizontal direction and 0.25 m/s vertically. Peak payload bank is 36.2°. The left view follows the aircraft; the right rides with the payload so the mechanisms stay visible. Joint motion is shown at its actual simulated amplitude. [Download the clip](https://raw.githubusercontent.com/DavidIngraham/ArduPilot-tinkering/main/docs/assets/viewer/reversing-turn-turbulence.mp4).*
 
-The reversal is the interesting part. The payload and canopy do not behave like one rigid airplane, and brake release does not instantly erase their relative motion. In this run the largest relative rotation-vector components are 3.4° in roll, 7.3° in pitch, and 4.4° in yaw. Seeing that motion alongside brake travel makes the connection between the coupled modes and the physical aircraft much easier to follow.
+The reversal is the interesting part. The payload and canopy do not behave like one rigid airplane, and brake release does not instantly erase their relative motion. In this run the largest relative rotation-vector components are 4.5° in roll, 11.4° in pitch, and 7.2° in yaw. Seeing that motion alongside brake travel makes the connection between the coupled modes and the physical aircraft much easier to follow.
 
 The viewer can replay recordings or receive a live truth-state stream from the Python simulator running behind ArduPilot SITL. I can pause, scrub through a transition, change camera angles, and inspect joint angles alongside actuator inputs. All the physics stays in the simulator; the browser draws its results. This clip demonstrates the model and viewer, rather than an autonomous-controller test or a recreation of a recorded flight.
 
@@ -321,16 +321,16 @@ The payload geometry comes from CAD; the canopy and suspension lines are schemat
 
 Next I connected the viewer to a full native ArduPlane SITL AUTO run. Here the mission supplies navigation targets, the heading-rate controller commands the brakes, and the longitudinal controller commands throttle. The aircraft's changing motion feeds back through the simulated sensors and estimator. I recorded the resulting state and actuator motion while the complete mission test ran.
 
-<video autoplay muted loop playsinline controls preload="metadata" width="1280" height="720" poster="assets/viewer/auto-mission.jpg" aria-label="Native ArduPilot AUTO mission entering a clockwise loiter, with aircraft articulation, CAD mechanisms and a track inset">
-  <source src="assets/viewer/auto-mission.mp4" type="video/mp4">
-  <source src="assets/viewer/auto-mission.webm" type="video/webm">
+<video autoplay muted loop playsinline controls preload="metadata" width="1280" height="720" poster="assets/viewer/auto-mission-turbulence.jpg" aria-label="Native ArduPilot AUTO mission entering a clockwise loiter, with aircraft articulation, CAD mechanisms and a track inset">
+  <source src="assets/viewer/auto-mission-turbulence.mp4" type="video/mp4">
+  <source src="assets/viewer/auto-mission-turbulence.webm" type="video/webm">
   Your browser does not support inline video.
 </video>
 
-*A continuous 55-second excerpt at real speed, entering mission item 3: a clockwise loiter with a requested 25 m radius at 90 m altitude. The inset shows the excerpt's actual ground track, with north up. Brake, throttle and propeller motion come from the native controller-driven simulation. [Download the AUTO clip](https://raw.githubusercontent.com/DavidIngraham/ArduPilot-tinkering/main/docs/assets/viewer/auto-mission.mp4).*
+*A continuous 55-second excerpt at real speed, entering mission item 3: a clockwise loiter with a requested 25 m radius at 90 m altitude. The inset shows the excerpt's actual ground track, with north up. Brake, throttle and propeller motion come from the native controller-driven simulation. [Download the AUTO clip](https://raw.githubusercontent.com/DavidIngraham/ArduPilot-tinkering/main/docs/assets/viewer/auto-mission-turbulence.mp4).*
 
-The turn entry reaches 16.6° of payload bank before the aircraft settles into the orbit. The relative canopy/payload motion remains visible, but the controller makes much smaller corrections once established. This is the behavior I wanted the revised gains to produce: establish the turn, then fly it without continuously exciting the suspended payload.
+The turn entry reaches 15.4° of payload bank. The controller continues correcting for the changing air velocity while the canopy and payload move relative to each other. Peak relative rotation-vector components in this excerpt are 3.6° in roll, 9.8° in pitch and 7.1° in yaw. The gust velocity readout shows the disturbance that drives the physics; the articulation is not an added animation.
 
-The full run passed the existing AUTO regression, including its altitude changes, corner checks, opposing two-turn loiters, home loiter and controller handover. This excerpt uses the heading-rate controller throughout; it ends well before the handover test. The native log confirms AUTO mode throughout the clip. The model remains the calm-air, constant-22.2 V, 1.758 kg Trout Lake configuration, with an airborne start. [Reproduction and recording checks](data-and-methods.md#native-auto-mission-video) accompany the clip.
+With the same synthetic gust settings as the scripted clip, the full run passed the existing AUTO regression, including its altitude changes, corner checks, opposing two-turn loiters, home loiter and controller handover. This excerpt uses the heading-rate controller throughout; it ends well before the handover test. The native log confirms AUTO mode throughout the clip. The model uses constant 22.2 V and the 1.758 kg Trout Lake configuration, with an airborne start. These are repeatable synthetic gusts with zero mean wind, not a recreation of measured weather. The earlier calm-air run also passed. [Reproduction and recording checks](data-and-methods.md#native-auto-mission-video) accompany the clip.
 
 The [longitudinal chapter](longitudinal-observer.md) picks up the same experiment from the throttle side. [Data and methods](data-and-methods.md#lateral-controller-evidence) preserves the earlier tuning records. The [current plotting source](../research/flight-log-analysis/scripts/native-sitl/), [figure manifest](../research/flight-log-analysis/manifest.json), and [diagram generator](../tools/draw_control_loops.py) preserve this update. Native implementation and reproduction instructions are recorded at local ArduPilot commit `af6b2ca963` on `paraglider-high-dof-control`.
