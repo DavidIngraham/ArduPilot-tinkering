@@ -50,7 +50,7 @@ The component tree fills in details that are difficult to see in the overall pre
 | Battery packaging | Two instances of `Nav6S300Lion` in `BatteryBoxAssm`, plus two battery gates in the main assembly |
 | Structure | Spreader assembly, core block, top block, battery enclosure, propeller shroud, and skid |
 
-The CAD and build photographs show the configuration flown at Trout Lake. The avionics use a Matek H743 flight controller, and the two 6S Li-ion packs are connected in parallel for 6 Ah total capacity.
+The CAD and build photographs show the configuration flown at Trout Lake. The avionics use a Matek H743-WLITE flight controller, and the two 6S Li-ion packs are connected in parallel for 6 Ah total capacity.
 
 ![The compact core held in one hand, with motor and side-mounted brake mechanisms](assets/micro-agu/build-core.jpg)
 
@@ -62,13 +62,13 @@ The CAD and build photographs show the configuration flown at Trout Lake. The av
 
 ## Avionics and power
 
-The Matek H743 runs ArduPlane, taking navigation input from the M10Q-5883 GNSS/compass and pilot commands through a RadioMaster RP1 configured in MAVLink mode. The bidirectional receiver link also carries telemetry. It commands the motor through the ESC and drives the two brake servos independently. The onboard IMU and barometer provide motion and altitude measurements; the microSD card records the flight logs used throughout this series.
+The Matek H743-WLITE runs ArduPlane, taking navigation input from the M10Q-5883 GNSS/compass and pilot commands through a RadioMaster RP1 configured in MAVLink mode. The bidirectional receiver link also carries telemetry. It commands the motor through the ESC and drives the two brake servos independently. The onboard IMU and barometer provide motion and altitude measurements; the microSD card records the flight logs used throughout this series.
 
-![Micro-AGU avionics overview showing battery power, Matek H743 flight controller, GNSS and compass, RadioMaster RP1 in MAVLink mode, ESC, motor and two brake servos](assets/micro-agu/avionics.png)
+![Micro-AGU avionics overview showing battery power, Matek H743-WLITE flight controller, GNSS and compass, RadioMaster RP1 in MAVLink mode, ESC, motor and two brake servos](assets/micro-agu/avionics.png)
 
-*Orange lines show power; blue lines show control and navigation signals. This is a functional overview, with supply regulation grouped together rather than a connector-level wiring diagram. [Open the vector diagram](assets/micro-agu/avionics.svg).*
+*Orange lines show power; blue lines show control and navigation signals. This is a functional overview, with power distribution and regulation inside the H743-WLITE board boundary; connector-level wiring is omitted. [Open the vector diagram](assets/micro-agu/avionics.svg).*
 
-The parallel battery packs supply the propulsion system and the regulated avionics and servo supplies. The 50 A BLHeli ESC drives the FFTY 3115 900 KV motor; each DS339HV servo rotates a brake capstan. Independent left and right brake commands let the controller steer through differential pull.
+The parallel battery packs feed the integrated power distribution on the H743-WLITE, which supplies the ESC and the regulated avionics and servo power. The 50 A BLHeli ESC drives the FFTY 3115 900 KV motor; each DS339HV servo rotates a brake capstan. Independent left and right brake commands let the controller steer through differential pull.
 
 Power integrity became part of the flight-test story too. At Hood River, I was missing an electrolytic capacitor at the Matek stack's power input. The resulting erroneous current readings triggered false throttle power limiting. I corrected that before Trout Lake.
 
