@@ -1,5 +1,7 @@
 # Steering a Parafoil with an Airplane Autopilot
 
+This earlier axis-specific page is retained for existing links. Read the consolidated story in [part 1: through Trout Lake](first-flight-controller.md) and [part 2: the subsequent controller design](controller-design.md).
+
 *Micro-AGU · Flight-tested lateral background · [Start with the flight story](flight-testing.md) · [Design](micro-agu-design.md) · [Steering](paraglider.md) · [Throttle and pitch](longitudinal-observer.md) · [Final controller](controller-design.md) · [Data and methods](data-and-methods.md)*
 
 I initially thought I would need to design a yaw-rate controller for the parafoil. Differential braking makes it turn, so controlling the rate of that turn seemed more natural than asking an airplane roll controller to do the job. I wanted to keep ArduPlane's navigation and replace the part that translated its demands into brake movement.

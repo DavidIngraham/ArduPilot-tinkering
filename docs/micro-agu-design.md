@@ -1,6 +1,6 @@
 # Building Micro-AGU
 
-*Micro-AGU · [Start with the flight story](flight-testing.md) · [Design](micro-agu-design.md) · [Steering](paraglider.md) · [Throttle and pitch](longitudinal-observer.md) · [Final controller](controller-design.md) · [Data and methods](data-and-methods.md)*
+*Micro-AGU · [Start with the flight story](flight-testing.md) · [Design](micro-agu-design.md) · [Steering](paraglider.md) · [Throttle and pitch](longitudinal-observer.md) · [First controller](first-flight-controller.md) · [After Trout Lake](controller-design.md) · [Data and methods](data-and-methods.md)*
 
 My interest in guided parafoils started when I was 18, helping run tests at Stara Technologies. My job mostly involved riding an ATV around the Yuma desert in 115°F heat, recovering hardware after test flights. Some landings required a wider search pattern than others, especially on flights where we learned a bit more than we had planned.
 

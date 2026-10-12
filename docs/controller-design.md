@@ -1,10 +1,10 @@
 # Designing the Micro-AGU Flight Controller
 
-*Micro-AGU · [Build](micro-agu-design.md) · [Flight tests](flight-testing.md) · [Controller design](controller-design.md) · [Data and methods](data-and-methods.md)*
+*Micro-AGU · Controller design, part 2 · [Through Trout Lake](first-flight-controller.md) · [Build](micro-agu-design.md) · [Flight tests](flight-testing.md) · [Controller design](controller-design.md) · [Data and methods](data-and-methods.md)*
 
 The controller has two jobs: turn the aircraft along its route and use throttle to follow the requested altitude. Both jobs act on the same suspended system. A brake correction can excite payload pitch, and a throttle correction changes the motion seen by the steering loop. The design uses feedforward for the expected effort, modest feedback for tracking, and separate damping paths shaped around the coupled modes.
 
-The first flights established a useful starting point. The [original lateral controller](paraglider.md) adapted ArduPlane's roll loop through its gains. The [original longitudinal controller](longitudinal-observer.md) adapted TECS to throttle-only altitude control and exposed the pitch-damper sign problem. This article describes the controller developed afterward: its architecture, the classical analysis behind its tuning, and its behavior in the 9-DOF simulator.
+[Part 1](first-flight-controller.md) follows my independent preflight design work through the Trout Lake missions: adapting the roll loop, changing TECS to throttle-only altitude control, and disabling a pitch damper that made the motion worse. This second phase uses those flights to inform the articulated model and design the replacement controller. It brings steering and altitude together around the resulting architecture, its classical analysis and its simulation evidence.
 
 ## One aircraft, two control paths
 
@@ -70,11 +70,13 @@ A 0.5 s first-order filter smooths the trajectory derivative used for feedforwar
 
 The original ACRA-inspired damper assumed that adding throttle would oppose a nose-down rotation. Thrust above the payload CG initially pitches this payload down. A fast minus-sign damper can reinforce the motion it is intended to suppress.
 
-<video controls muted loop playsinline preload="metadata" poster="assets/viewer/pitch-fbd/pitch-fbd.jpg"><source src="assets/viewer/pitch-fbd/pitch-fbd.mp4" type="video/mp4"></video>
+The [free-body diagram and conceptual animation in part 1](first-flight-controller.md#the-damper-that-could-make-things-worse) show the original assumption and the independent payload response.
 
-*Left: the original locked-relative-pitch picture. Right: the independently pitching payload. This is a conceptual animation with the CAD carriage, not a simulated trajectory or a depiction of the ACRA aircraft's construction.*
+### Why reversing the damper was only half the answer
 
-Reversing the sign suppresses the fast response but can excite slower motion. The selected damper retains negative pitch-rate feedback and shapes its frequency response with two 1.5 Hz first-order low-pass stages:
+The later simulation reproduced the distinction the flight had exposed: the immediate payload rotation and the aircraft’s eventual climb are different responses. I first tested the obvious correction—reverse the damper sign. It suppressed the fast pitching but could excite slower motion. Disabling the damper, reversing it, and filtering the original sign therefore became separate design alternatives, not steps toward an assumed correct sign.
+
+The sign-comparison and altitude-command animations below show that result directly. The useful design retained negative pitch-rate feedback but reduced its action around the troublesome fast modes with two 1.5 Hz first-order low-pass stages:
 
 ![Pitch damping uses gain −0.1 and two cascaded 1.5 Hz filters](assets/control-loops/tecs-damper.png)
 
@@ -188,6 +190,16 @@ These diagnostic videos retain the earlier climb-feedback setting to isolate the
 </video>
 
 *A 100 → 105 m altitude command separates the fast-sign problem from slower instability. Off and two-stage-filtered cases settle; simply reversing the fast damper does not. These are diagnostic alternatives, not flight recordings.*
+
+## Watching the coupled aircraft move
+
+<video autoplay muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/reversing-turn-controls-plain.jpg" aria-label="Simulated powered right turn, left reversal and brake release, with an articulated SolidWorks payload close-up">
+  <source src="assets/viewer/reversing-turn-controls-plain.mp4" type="video/mp4">
+  <source src="assets/viewer/reversing-turn-controls-plain.webm" type="video/webm">
+  Your browser does not support inline video.
+</video>
+
+*Scripted inputs in the 9-DOF simulator, with CAD payload articulation. This demonstrates the viewer; it is not an AUTO mission. [Viewer documentation](../viewer/README.md).*
 
 ## The controller flying the aircraft
 

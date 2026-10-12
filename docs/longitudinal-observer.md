@@ -1,5 +1,7 @@
 # Throttle, Pitch, and the Controller That Pushed the Wrong Way
 
+This earlier axis-specific page is retained for existing links. Read the consolidated story in [part 1: through Trout Lake](first-flight-controller.md) and [part 2: the subsequent controller design](controller-design.md).
+
 *Micro-AGU · Flight-tested longitudinal background · [Start with the flight story](flight-testing.md) · [Design](micro-agu-design.md) · [Steering](paraglider.md) · [Throttle and pitch](longitudinal-observer.md) · [Final controller](controller-design.md) · [Data and methods](data-and-methods.md)*
 
 ArduPlane already had a controller for managing altitude and airspeed: TECS, the Total Energy Control System. I wanted to keep its connection to the navigation and flight-mode machinery, but change how it controlled the aircraft. A parafoil does not have an elevator, and the suspended payload's pitch is not something I can command like an airplane's attitude.

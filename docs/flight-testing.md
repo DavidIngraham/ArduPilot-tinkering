@@ -1,6 +1,6 @@
 # From First Tosses to Autonomous Missions
 
-*Micro-AGU · [Start with the flight story](flight-testing.md) · [Design](micro-agu-design.md) · [Steering](paraglider.md) · [Throttle and pitch](longitudinal-observer.md) · [Final controller](controller-design.md) · [Data and methods](data-and-methods.md)*
+*Micro-AGU · [Start with the flight story](flight-testing.md) · [Design](micro-agu-design.md) · [Steering](paraglider.md) · [Throttle and pitch](longitudinal-observer.md) · [First controller](first-flight-controller.md) · [After Trout Lake](controller-design.md) · [Data and methods](data-and-methods.md)*
 
 The first problem with Micro-AGU was getting it into the air. At the Barrett Park RC field in Hood River, I was learning to launch a lightly loaded model while discovering what needed fixing. By the next test day at my friend Collin’s house in Trout Lake, it flew autonomous missions for nearly an hour.
 
