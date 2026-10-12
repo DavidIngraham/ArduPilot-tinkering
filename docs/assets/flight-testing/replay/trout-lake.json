@@ -1,0 +1,294 @@
+{
+  "schema": "microagu.flight.v1",
+  "title": "Trout Lake \u00b7 February 15, 2026",
+  "source": "2026-02-15 15-38-50",
+  "position_source": "XKF1 core 0 local NED; horizontal origin shifted to selected flight start",
+  "attitude_source": "ATT estimator payload attitude",
+  "altitude_datum": "EKF origin, not terrain",
+  "control_source": "RCOU; fractions use time-varying SERVO MIN/MAX/REVERSED",
+  "wing_attitude": null,
+  "propeller_rpm": null,
+  "channels": {
+    "throttle": 1,
+    "left": 3,
+    "right": 4
+  },
+  "start_boot_s": 202.81,
+  "end_boot_s": 3474.77,
+  "duration_s": 3271.96,
+  "mode_seconds": {
+    "MANUAL": 468.5600000000921,
+    "CRUISE": 279.5999999999954,
+    "FBWA": 32.039999999999495,
+    "LOITER": 515.0400000001115,
+    "AUTO": 1305.3599999993928,
+    "GUIDED": 671.3599999999693
+  },
+  "mode_segments": [
+    {
+      "start": 202.81,
+      "end": 247.60999999999999,
+      "mode": "MANUAL"
+    },
+    {
+      "start": 247.61,
+      "end": 266.65000000000003,
+      "mode": "CRUISE"
+    },
+    {
+      "start": 266.65,
+      "end": 339.45000000000005,
+      "mode": "MANUAL"
+    },
+    {
+      "start": 339.45,
+      "end": 371.49,
+      "mode": "FBWA"
+    },
+    {
+      "start": 371.49,
+      "end": 420.93,
+      "mode": "MANUAL"
+    },
+    {
+      "start": 420.93,
+      "end": 435.61,
+      "mode": "CRUISE"
+    },
+    {
+      "start": 435.61,
+      "end": 468.65000000000003,
+      "mode": "MANUAL"
+    },
+    {
+      "start": 468.65,
+      "end": 529.8499999999999,
+      "mode": "CRUISE"
+    },
+    {
+      "start": 529.85,
+      "end": 578.9699999999999,
+      "mode": "MANUAL"
+    },
+    {
+      "start": 578.97,
+      "end": 763.65,
+      "mode": "CRUISE"
+    },
+    {
+      "start": 763.65,
+      "end": 903.77,
+      "mode": "LOITER"
+    },
+    {
+      "start": 903.77,
+      "end": 926.17,
+      "mode": "MANUAL"
+    },
+    {
+      "start": 926.17,
+      "end": 1052.8899999999999,
+      "mode": "LOITER"
+    },
+    {
+      "start": 1052.89,
+      "end": 1075.97,
+      "mode": "AUTO"
+    },
+    {
+      "start": 1075.97,
+      "end": 1087.17,
+      "mode": "LOITER"
+    },
+    {
+      "start": 1087.17,
+      "end": 1106.09,
+      "mode": "MANUAL"
+    },
+    {
+      "start": 1106.09,
+      "end": 1140.85,
+      "mode": "LOITER"
+    },
+    {
+      "start": 1140.85,
+      "end": 1766.4099999999999,
+      "mode": "AUTO"
+    },
+    {
+      "start": 1766.41,
+      "end": 1985.29,
+      "mode": "GUIDED"
+    },
+    {
+      "start": 1985.29,
+      "end": 2018.73,
+      "mode": "MANUAL"
+    },
+    {
+      "start": 2018.73,
+      "end": 2054.73,
+      "mode": "LOITER"
+    },
+    {
+      "start": 2054.73,
+      "end": 2086.77,
+      "mode": "AUTO"
+    },
+    {
+      "start": 2086.77,
+      "end": 2101.49,
+      "mode": "MANUAL"
+    },
+    {
+      "start": 2101.49,
+      "end": 2104.13,
+      "mode": "LOITER"
+    },
+    {
+      "start": 2104.13,
+      "end": 2106.37,
+      "mode": "MANUAL"
+    },
+    {
+      "start": 2106.37,
+      "end": 2267.45,
+      "mode": "LOITER"
+    },
+    {
+      "start": 2267.45,
+      "end": 2485.49,
+      "mode": "GUIDED"
+    },
+    {
+      "start": 2485.49,
+      "end": 2499.13,
+      "mode": "MANUAL"
+    },
+    {
+      "start": 2499.13,
+      "end": 2733.57,
+      "mode": "GUIDED"
+    },
+    {
+      "start": 2733.57,
+      "end": 2736.09,
+      "mode": "LOITER"
+    },
+    {
+      "start": 2736.09,
+      "end": 3360.77,
+      "mode": "AUTO"
+    },
+    {
+      "start": 3360.77,
+      "end": 3474.77,
+      "mode": "MANUAL"
+    }
+  ],
+  "max_sample_age_s": {
+    "ATT": 0.03632399996092772,
+    "XKF1": 0.0369689996246052,
+    "RCOU": 0.03616399994967878
+  },
+  "invalid_frames": 0,
+  "parameter_history": {
+    "SERVO1_MIN": [
+      [
+        140.574258,
+        1000.0
+      ]
+    ],
+    "SERVO1_MAX": [
+      [
+        140.57428,
+        2000.0
+      ]
+    ],
+    "SERVO1_TRIM": [
+      [
+        140.574299,
+        1000.0
+      ]
+    ],
+    "SERVO1_REVERSED": [
+      [
+        140.574319,
+        0.0
+      ]
+    ],
+    "SERVO1_FUNCTION": [
+      [
+        140.57434,
+        70.0
+      ]
+    ],
+    "SERVO3_MIN": [
+      [
+        140.574511,
+        800.0
+      ]
+    ],
+    "SERVO3_MAX": [
+      [
+        140.574531,
+        2100.0
+      ]
+    ],
+    "SERVO3_TRIM": [
+      [
+        140.574552,
+        800.0
+      ]
+    ],
+    "SERVO3_REVERSED": [
+      [
+        140.574573,
+        0.0
+      ]
+    ],
+    "SERVO3_FUNCTION": [
+      [
+        140.57461,
+        190.0
+      ]
+    ],
+    "SERVO4_MIN": [
+      [
+        140.574636,
+        900.0
+      ]
+    ],
+    "SERVO4_MAX": [
+      [
+        140.574661,
+        2400.0
+      ]
+    ],
+    "SERVO4_TRIM": [
+      [
+        140.574684,
+        2400.0
+      ]
+    ],
+    "SERVO4_REVERSED": [
+      [
+        140.57471,
+        1.0
+      ]
+    ],
+    "SERVO4_FUNCTION": [
+      [
+        140.574738,
+        191.0
+      ]
+    ]
+  },
+  "input_sha256": {
+    "ATT": "61088d9ee8a6bf0e2533fd04c48889e38ec6ae9e939a01f2924b2488bc17da1f",
+    "XKF1": "0be500069f668ba49e56b85ded4e8d73410c53bfa64dbf702b8d22850461ca29",
+    "RCOU": "0ee2797ce0f68011609feedb95992ccba60383b26f93bcf586b637dac74f0b33",
+    "MODE": "91450d262ecfec3e85c1460a7d1181c8a5e6426fa6c9e9b3c09553192f405f2a",
+    "PARM": "d1d5c30cbf7f57a6420206a690f6ea4d1d6feae6b8297127c133b33ba6ed81d4"
+  }
+}

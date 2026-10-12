@@ -305,3 +305,21 @@ Encode the downloaded WebM to `docs/assets/viewer/pitch-sign/pitch-sign-carriage
 Run `tools/altitude_comparison.py` with `--model`, `--raw` (Mission Planner) and `--output docs/assets/viewer/altitude-comparison`. Link the raw directory to ignored `viewer/public/altitude-comparison`, then use `/altitude-comparison.html` under the Vite development server to record the four cases. This is a local recording tool. It reuses the actual carriage rig and schematic canopy; the pitch glyphs display world-referenced Euler pitch, not angle of attack or a full three-axis joint rotation. The pitch difference readout is the difference between those two Euler angles.
 
 The fixed-orientation camera follows a centered one-second boxcar average of translation, keeping the complete glider in view. The reference is interpolated at the same replay timestamp as the aircraft. Linear extrapolation at the recording boundaries preserves constant-velocity travel. This replaces the original rounded 50 Hz camera index and two-endpoint average, which introduced visible tracking jitter. The corrected published asset is `altitude-comparison-smooth-camera.mp4`; simulation trajectories and reported metrics are unchanged. Absolute altitude remains in the plot and readout. All graphs use common ranges that include the observed excursions. The raw WebM and JSONL/NPZ traces stay in Mission Planner; final MP4, poster, summary and scripts go in Git. Encode H.264/yuv420p with faststart, at 30 fps, and use a mid-climb frame for the poster.
+
+### Real flight-log replay
+
+Open `/flight-replay.html` in the viewer for onboard-log replay. Convert a DataFlash BIN with Python, NumPy, SciPy and pymavlink:
+
+```sh
+python tools/convert_flight.py flight.BIN /path/outside/git/flight.json --bin \
+  --start 298.44 --end 1073.56 --title "Hood River · January 3" \
+  --summary ../docs/assets/flight-testing/replay/hood-river.json
+```
+
+Omit `--bin` to read a directory containing decoded ATT, XKF1, RCOU, MODE and PARM JSON arrays. Open the converted file with the page's file picker, or serve it locally using `?recording=/flight-replays/hood-river.json`. Raw recordings stay in Mission Planner; `public/flight-replays` is ignored. Only final videos, images, metadata and generating scripts belong in Git.
+
+The `microagu.flight.v1` format carries estimator payload attitude, core-0 XKF1 local position, flight mode, raw servo PWM, and normalized commands. The converter resamples at 25 Hz, interpolates position and quaternion attitude, and holds discrete outputs/modes. It applies the time-varying SERVO MIN/MAX/REVERSED parameters independently for each flight. A source-sample age over 0.25 seconds marks a gap. Horizontal position is relative to the selected start; altitude is above the EKF origin, not AGL. No canopy attitude or propeller RPM is inferred. The current CAD carriage is illustrative of the build, capstan motion represents estimated commanded position rather than measured travel, and the propeller remains stationary.
+
+The page provides playback, speed selection, scrubbing, a 3D overview PNG, and browser WebM recording. The payload close-up uses a fixed world orientation; the route view preserves real spatial scale. Graphs show the preceding 15 seconds of attitude and output commands. Published recap schedules are specified in `src/flight-replay.ts`: full-flight overview in 45 seconds, then real-speed excerpts. Hood River uses boot 298.44–1073.56 s, with excerpts 755–785 and 625–645 s; Trout Lake uses 202.81–3474.77 s, with excerpts 635–680 and 2800–2820 s. The selected source directory names identify those schedules; other recordings receive a full-flight overview.
+
+Encode downloaded WebM as H.264/yuv420p, CRF 20, 30 fps, with faststart. Keep browser captures outside Git. Final media and provenance are under `docs/assets/flight-testing/replay/`.

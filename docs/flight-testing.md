@@ -35,11 +35,21 @@ My brake lines also needed loosening. The model flew nose-up and performance was
 
 *Original flight notes, notebook page 185. I also flagged the current reading, Yaapu crashes, and the need for a stronger prop guard.*
 
-The sustained January 3 flight gives us a useful early baseline. It spent most of its time in MANUAL and FBWA, followed by brief CRUISE and LOITER trials. There is recurring pitch motion even in the longer stretches of flight.
+A big part of that first flight was simply flying it by hand to feel out the platform. I wanted to see how it responded to brake and throttle inputs, what a turn felt like, and how much confidence I could build before handing more of the flying to the autopilot. Of the selected 12.9-minute flight, **8.1 minutes (63%) were in MANUAL**, with another **3.8 minutes (29%) in FBWA**. Brief CRUISE and LOITER trials came later; there was no AUTO mission in this flight.
+
+![Three-dimensional overview of the first sustained Hood River flight, coloured by flight mode](assets/flight-testing/replay/hood-river-3d-overview.png)
+
+*The first sustained Hood River flight in 3D. Orange is MANUAL, blue is FBWA, purple is CRUISE, and yellow is LOITER. The white point marks the selected flight start. The grid spacing is 50 m, with equal horizontal and vertical spatial scale; height is referenced to the estimator origin, not terrain.*
+
+<video controls playsinline preload="metadata" poster="assets/flight-testing/replay/hood-river-recap.jpg" style="width:100%;height:auto"><source src="assets/flight-testing/replay/hood-river-recap.mp4" type="video/mp4"></video>
+
+*Hood River replay: the complete flight in 45 seconds, then a manual banking manoeuvre and a MANUAL-to-FBWA transition at real speed. The payload view follows the logged attitude; the lower plots show payload roll/pitch and throttle/left/right brake commands. The manual excerpt includes the roughly 55° bank near boot time 766 s.*
+
+This replay uses the flight log, rather than a simulation of what might have happened. The canopy attitude was not measured, so it is omitted. The carriage uses the current CAD model to illustrate the measured attitude. Capstan motion represents commanded position, and the prop stays still because RPM was not logged. Recurring pitch motion is visible even in the longer stretches of flight.
 
 ![Successful Hood River flight: relative height, payload pitch and throttle over roughly thirteen minutes](assets/flight-testing/hood-river.png)
 
-*Hood River, January 3: height above home, payload pitch, and throttle during the sustained flight. Green marks AUTO mode.*
+*Hood River, January 3: height above home, payload pitch, and throttle during the sustained flight. The flight was predominantly MANUAL and FBWA.*
 
 ## Between the fields: measurements and simulation
 
@@ -47,15 +57,21 @@ I used both live telemetry and later Hood River log analysis to understand climb
 
 For lateral control, I used our simple initial simulation model to explore gains and damping. Mission Planner preserved the February 14 experiments and the final tuning on the morning of February 15. By 11:37 a.m. I had selected the feed-forward and derivative feed-forward values that I flew that afternoon. The [steering chapter](paraglider.md) shows the recorded tuning plots and explains the controller workaround.
 
-## Trout Lake: another kilogram, and autonomous missions
+## Trout Lake: more ballast, and autonomous missions
 
-At my friend Collin’s house in Trout Lake, I remember a short attempt or failed launch before adding another kilogram of lead to the bottom of the payload. With that weight aboard, the next flight lasted **54.5 minutes continuously on one charge**, including AUTO, LOITER, and GUIDED operation. I landed because I had finished testing.
+At my friend Collin’s house in Trout Lake, I remember a short attempt or failed launch before adding lead to the bottom of the payload. The corrected all-up weights are 1,385 g without that lead and 1,758 g with it—a 373 g difference. With that weight aboard, the next flight lasted **54.5 minutes continuously on one charge**, including AUTO, LOITER, and GUIDED operation. I landed because I had finished testing.
 
 That did not mean the controller was finished. The early part of the flight involved a lot of tuning and some substantial oscillation. Later sections became much quieter, and the repeated waypoint messages show the aircraft making progress through the mission.
 
 ![Trout Lake flight showing height, pitch and throttle, with AUTO intervals shaded](assets/flight-testing/trout-lake.png)
 
 *Trout Lake, February 15: tuning early in the flight, followed by quieter autonomous operation. Green marks AUTO mode.*
+
+<video controls playsinline preload="metadata" poster="assets/flight-testing/replay/trout-lake-recap.jpg" style="width:100%;height:auto"><source src="assets/flight-testing/replay/trout-lake-recap.mp4" type="video/mp4"></video>
+
+*Trout Lake replay: the full 54.5-minute flight in 45 seconds, followed by real-time excerpts around disabling the pitch damper (boot time 655.8 s) and a later AUTO circuit. The same attitude and control-output plots make the early oscillation and later behaviour directly visible.*
+
+Both recaps use each flight's logged servo ranges and reversal settings, including the asymmetric left/right brake ranges. The percentages are normalized output commands, not measured brake travel. Position comes from the onboard estimator, with a local horizontal origin; the displayed height is above the estimator origin. The [replay tool](https://github.com/DavidIngraham/ArduPilot-tinkering/tree/main/viewer#real-flight-log-replay) also supports scrubbing and playback at different speeds. [Hood River metadata](assets/flight-testing/replay/hood-river.json) and [Trout Lake metadata](assets/flight-testing/replay/trout-lake.json) record the exact windows, mode durations, parameter histories, and source hashes. The short launch attempts remain part of the launch story rather than being presented as controller tests.
 
 Early in the flight, I repeated the throttle-versus-climb testing with the heavier configuration. I first raised trim throttle from 30% to 50%, then settled on 43%. Reconstructing the early steady runs gives a level-flight crossing near 42.7%, closely matching that choice.
 

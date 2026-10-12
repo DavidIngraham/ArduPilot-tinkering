@@ -1,0 +1,172 @@
+{
+  "schema": "microagu.flight.v1",
+  "title": "Hood River \u00b7 January 3, 2026",
+  "source": "2026-01-03 15-41-42",
+  "position_source": "XKF1 core 0 local NED; horizontal origin shifted to selected flight start",
+  "attitude_source": "ATT estimator payload attitude",
+  "altitude_datum": "EKF origin, not terrain",
+  "control_source": "RCOU; fractions use time-varying SERVO MIN/MAX/REVERSED",
+  "wing_attitude": null,
+  "propeller_rpm": null,
+  "channels": {
+    "throttle": 1,
+    "left": 3,
+    "right": 4
+  },
+  "start_boot_s": 298.44,
+  "end_boot_s": 1073.56,
+  "duration_s": 775.1199999999999,
+  "mode_seconds": {
+    "MANUAL": 488.1200000001021,
+    "FBWA": 227.47999999998902,
+    "CRUISE": 47.35999999999917,
+    "LOITER": 12.159999999999917
+  },
+  "mode_segments": [
+    {
+      "start": 298.44,
+      "end": 625.64,
+      "mode": "MANUAL"
+    },
+    {
+      "start": 625.64,
+      "end": 745.5999999999999,
+      "mode": "FBWA"
+    },
+    {
+      "start": 745.6,
+      "end": 881.9599999999999,
+      "mode": "MANUAL"
+    },
+    {
+      "start": 881.96,
+      "end": 989.48,
+      "mode": "FBWA"
+    },
+    {
+      "start": 989.48,
+      "end": 1029.68,
+      "mode": "CRUISE"
+    },
+    {
+      "start": 1029.68,
+      "end": 1041.84,
+      "mode": "LOITER"
+    },
+    {
+      "start": 1041.84,
+      "end": 1049.0,
+      "mode": "CRUISE"
+    },
+    {
+      "start": 1049.0,
+      "end": 1073.56,
+      "mode": "MANUAL"
+    }
+  ],
+  "max_sample_age_s": {
+    "ATT": 0.03584300016416364,
+    "XKF1": 0.03645300036112076,
+    "RCOU": 0.03570700016416595
+  },
+  "invalid_frames": 0,
+  "parameter_history": {
+    "SERVO1_MIN": [
+      [
+        40.344884,
+        1000.0
+      ]
+    ],
+    "SERVO1_MAX": [
+      [
+        40.344901,
+        2000.0
+      ]
+    ],
+    "SERVO1_TRIM": [
+      [
+        40.344919,
+        1000.0
+      ]
+    ],
+    "SERVO1_REVERSED": [
+      [
+        40.344939,
+        0.0
+      ]
+    ],
+    "SERVO1_FUNCTION": [
+      [
+        40.344957,
+        70.0
+      ]
+    ],
+    "SERVO3_MIN": [
+      [
+        40.345138,
+        800.0
+      ]
+    ],
+    "SERVO3_MAX": [
+      [
+        40.345158,
+        2100.0
+      ]
+    ],
+    "SERVO3_TRIM": [
+      [
+        40.345179,
+        800.0
+      ]
+    ],
+    "SERVO3_REVERSED": [
+      [
+        40.345199,
+        0.0
+      ]
+    ],
+    "SERVO3_FUNCTION": [
+      [
+        40.34522,
+        190.0
+      ]
+    ],
+    "SERVO4_MIN": [
+      [
+        40.345241,
+        900.0
+      ]
+    ],
+    "SERVO4_MAX": [
+      [
+        40.345268,
+        2400.0
+      ]
+    ],
+    "SERVO4_TRIM": [
+      [
+        40.34529,
+        2400.0
+      ]
+    ],
+    "SERVO4_REVERSED": [
+      [
+        40.345313,
+        1.0
+      ]
+    ],
+    "SERVO4_FUNCTION": [
+      [
+        40.345335,
+        191.0
+      ]
+    ]
+  },
+  "input_sha256": {
+    "ATT": "e17ac631cfc34411ae8762682d80a583bdefb2bdce8d28bacadff2e0bbbf9e4c",
+    "XKF1": "25d998078b60fad921a08ef07f6c0c09f76128dd18cd92080d4db8c4723d7e95",
+    "RCOU": "2fc80588ad8426c7f3ba6a8e9814e6fd4eee8fa3e184fbc0b67ed3667480a694",
+    "MODE": "a06b14ec88022bf3fc1ab14cbe14fafacecd1459f03f61d9047776c65629e641",
+    "PARM": "50ada991da0db1b0b0b0d68a3f8095fb0f5480f7555527504e5fbca3f5573d05"
+  }
+}

@@ -4,3 +4,4 @@ dist/
 *.npz
 public/pitch-sign
 public/altitude-comparison
+public/flight-replays
