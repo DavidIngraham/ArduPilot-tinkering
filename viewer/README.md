@@ -336,7 +336,7 @@ Open `joint-tour.html`; it defaults to the 9-degree disturbance response. A scro
 response mode replays 30 actual-model releases (three axes, two profiles, five amplitudes).
 The disturbance slider selects 3–15 degrees in 3-degree steps, defaulting to 9. Each canopy perturbation preserves attachment position/velocity. Trim
 actuators remain fixed: no native controller, turbulence or artificial animation
-is included in the response trajectories. The camera follows the initial trimmed attachment velocity, independently of the disturbed trajectory. Relative to that straight-flight reference, payload and canopy translation remain visible; the gray canopy marks the nominal position and initial attitude. Model amplitudes are unscaled. Torque is canopy-side, payload-frame,
+is included in the response trajectories. The camera follows nominal forward/vertical motion and actual lateral attachment drift, projected perpendicular to the initial horizontal flight track. Fore–aft and vertical excursions remain visible. The ground grid includes lateral camera travel, and the gray canopy stays on the nominal trajectory. Framing uses the same reference transform. Model amplitudes are unscaled. Torque is canopy-side, payload-frame,
 using the same log-Jacobian spring law and relative-rate damper as dynamics.cpp.
 
 Generate final playback samples at 20 Hz while keeping 100 Hz raw output outside Git:

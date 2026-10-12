@@ -228,6 +228,21 @@ async function main() {
       y + h + 20,
     );
   }
+  // Fixed flight-track axes: follow actual cross-track displacement only.
+  function reference(c: Case, f: Frame) {
+    const base = c.frames[0];
+    const hp = new T.Vector3(...(c.hinge as [number, number, number]));
+    const lever = hp.clone().applyQuaternion(new T.Quaternion().fromArray(base.state, 3));
+    const start = new T.Vector3().fromArray(base.state).add(lever);
+    const velocity = new T.Vector3().fromArray(base.state, 7)
+      .add(new T.Vector3().fromArray(base.state, 10).cross(lever));
+    const nominal = start.clone().addScaledVector(velocity, f.time_s);
+    const lateral = new T.Vector3(-velocity.y, velocity.x, 0).normalize();
+    const actual = new T.Vector3().fromArray(f.state)
+      .add(hp.applyQuaternion(new T.Quaternion().fromArray(f.state, 3)));
+    const shift = lateral.multiplyScalar(actual.sub(nominal).dot(lateral));
+    return { origin: nominal.clone().add(shift), nominal, shift, start, velocity };
+  }
   let framingKey = "";
   function draw() {
     const tour = sel("mode").value === "tour",
@@ -246,14 +261,9 @@ async function main() {
       orbit.target.set(0, 0.4, 0);
       setCamera();
       if (!tour) {
-        const q = new T.Quaternion().fromArray(base.state, 3);
-        const lever = new T.Vector3(...(c.hinge as [number, number, number])).applyQuaternion(q);
-        const origin = new T.Vector3().fromArray(base.state).add(lever);
-        const velocity = new T.Vector3().fromArray(base.state, 7)
-          .add(new T.Vector3().fromArray(base.state, 10).cross(lever));
         const bounds = new T.Box3();
         for (const frame of c.frames) {
-          const ref = origin.clone().addScaledVector(velocity, frame.time_s);
+          const ref = reference(c, frame).origin;
           for (const offset of [0, 13]) bounds.expandByPoint(position(new T.Vector3().fromArray(frame.state, offset).sub(ref).toArray()));
         }
         bounds.expandByScalar(1.1);
@@ -272,6 +282,7 @@ async function main() {
     const hp = new T.Vector3(...(c.hinge as [number, number, number])),
       hc = new T.Vector3(0, 0, 0.85);
     let H = new T.Vector3();
+    const ghostOffset = new T.Vector3();
     let nominalSpeed = 0;
     grid.position.set(0, -0.3, 0);
     const unit = new T.Vector3().setComponent(tour && n < 3 ? n : axis, 1);
@@ -287,19 +298,14 @@ async function main() {
     } else {
       rp.fromArray(f.state, 3);
       rc.fromArray(f.state, 16);
-      // Follow the undisturbed straight-flight reference, never the disturbed CG.
-      const baseRp = new T.Quaternion().fromArray(base.state, 3);
-      const lever = hp.clone().applyQuaternion(baseRp);
-      const nominalVelocity = new T.Vector3().fromArray(base.state, 7)
-        .add(new T.Vector3().fromArray(base.state, 10).cross(lever));
-      nominalSpeed = nominalVelocity.length();
-      const travel = position(nominalVelocity.clone().multiplyScalar(t).toArray());
-      // A nearby reference plane, not terrain at the simulated 100 m altitude.
-      // Wrap on the 0.5 m grid spacing for continuous world-locked optical flow.
+      const tracking = reference(c, f);
+      const origin = tracking.origin;
+      ghostOffset.copy(tracking.shift).negate();
+      nominalSpeed = tracking.velocity.length();
+      const travel = position(origin.clone().sub(tracking.start).toArray());
+      // Grid includes lateral camera travel, retaining cross-track optical flow.
       grid.position.x = -((travel.x % 0.5 + 0.5) % 0.5);
       grid.position.z = -((travel.z % 0.5 + 0.5) % 0.5);
-      const origin = new T.Vector3().fromArray(base.state)
-        .add(lever).addScaledVector(nominalVelocity, t);
       pp.fromArray(f.state).sub(origin);
       pc.fromArray(f.state, 13).sub(origin);
       H.copy(pp).add(hp.clone().applyQuaternion(rp));
@@ -316,7 +322,7 @@ async function main() {
       : new T.Quaternion().fromArray(base.state, 16);
     ghost.quaternion.copy(worldBasis).multiply(gq);
     ghost.position.copy(
-      position((tour ? H.clone() : new T.Vector3()).sub(hc.clone().applyQuaternion(gq)).toArray()),
+      position((tour ? H.clone() : ghostOffset).sub(hc.clone().applyQuaternion(gq)).toArray()),
     );
     axisArrow.setDirection(
       position(
@@ -384,7 +390,7 @@ async function main() {
     );
     el("description").textContent = tour
       ? "The selected coordinate is animated while the others are held fixed. Yellow marks its axis. This is a kinematic illustration; no spring response is implied."
-      : `Release from a +${c.amplitude_deg}° relative deflection about the selected payload axis. Each slider step selects a separately simulated response, not an amplified animation. All axes are free to respond. The camera follows the initial trimmed flight velocity; disturbance-driven translation remains visible. The gray canopy marks nominal flight. The scrolling 0.5 m reference grid conveys horizontal speed; it is not terrain or an altitude cue. Curves show eight seconds; white marks playback time.`;
+      : `Release from a +${c.amplitude_deg}° relative deflection about the selected payload axis. Each slider step selects a separately simulated response, not an amplified animation. All axes are free to respond. The camera follows nominal forward motion and actual lateral drift. Fore–aft and vertical disturbance motion remain visible. The gray canopy marks nominal flight. The scrolling 0.5 m reference grid conveys horizontal speed; it is not terrain or an altitude cue. Curves show eight seconds; white marks playback time.`;
     if (!tour) {
       graph(
         22,
