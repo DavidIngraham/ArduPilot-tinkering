@@ -1,4 +1,4 @@
-"""Matched joint releases through native ArduPilot CRUISE, with a fixed-trim shadow.
+"""Matched joint releases through settled native ArduPilot AUTO, with a frozen-command shadow.
 
 AI-assisted research harness. Does not modify firmware or controller equations.
 Run from the built ArduPilot checkout in its autotest environment.
@@ -32,6 +32,7 @@ os.environ['PG_GAINS'] = 'original'
 original_respond = Backend.respond
 lock = threading.RLock()
 active = False
+flying = False
 start = None
 shadow = None
 traces = {'closed': [], 'open': []}
@@ -61,8 +62,8 @@ def record(b, elapsed):
 def observe(b, packet):
     global last_sample
     with lock:
-        # Keep the moving trim until CRUISE has locked its track and altitude.
-        if not active: b.released = False
+        # Keep moving trim during setup, then let AUTO fly before perturbing.
+        if not flying: b.released = False
         old_time = b.time
         response = original_respond(b, packet)
         if active and b.time > old_time and b.time-start <= 8.003:
@@ -78,12 +79,19 @@ def observe(b, packet):
 Backend.respond = observe
 
 def test(self):
-    global active, start, shadow, last_sample
+    global active, flying, start, shadow, last_sample
     try:
         harness.airborne(self, altitude=100)
         b = self._pg_backend[0]
-        self.change_mode('CRUISE')
-        self.delay_sim_time(3, reason='Lock CRUISE track and height before disturbance')
+        waypoint = harness.mavutil.mavlink.MAV_CMD_NAV_WAYPOINT
+        route = [(waypoint, 1000, 0, 100), (waypoint, 2000, 0, 100)]
+        self.check_mission_upload_download(self.create_simple_relhome_mission(route))
+        self.change_mode('AUTO')
+        with lock:
+            b.released = True; flying = True
+        self.delay_sim_time(100, reason='Settle native AUTO on the straight northbound mission leg')
+        self.wait_current_waypoint(1, timeout=5)
+        self.wait_mode('AUTO')
         parameters = self.get_parameters(list(json.loads((a.model_dir/'mission-controller-candidate.json').read_text())['parameters']))
         with lock:
             perturb(b)
@@ -98,7 +106,7 @@ def test(self):
             assert not self._pg_backend[3], self._pg_backend[3]
             assert b.clipped_packets == 0, b.clipped_packets
             result = dict(body=a.body, axis=a.axis, amplitude_deg=a.amplitude, profile=a.profile,
-                          hinge=b.sim.geometry['hinge'], parameters=parameters, mode='CRUISE',
+                          hinge=b.sim.geometry['hinge'], parameters=parameters, mode='AUTO', settle_s=100, route=route,
                           traces=traces, k=[b.sim.parameters['joint_k_'+x] for x in ['roll','pitch','yaw']],
                           c=[b.sim.parameters['joint_c_'+x] for x in ['roll','pitch','yaw']])
             a.output.write_text(json.dumps(result, allow_nan=False, default=lambda x: x.tolist()))
@@ -109,7 +117,7 @@ def test(self):
             stop.set(); thread.join(timeout=2)
 
 test.__name__ = 'ParagliderAutoMission'
-test.__doc__ = 'Native CRUISE joint release (not the AUTO mission acceptance test)'
+test.__doc__ = 'Settled native AUTO joint release (not the AUTO mission acceptance test)'
 harness.arduplane.AutoTestPlane.ParagliderAutoMission = test
 sys.argv = [str(harness.ROOT/'Tools/autotest/autotest.py'), *forwarded]
 runpy.run_path(sys.argv[0], run_name='__main__')

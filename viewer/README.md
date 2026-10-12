@@ -362,29 +362,29 @@ presentation samples are copied. Other local recordings are excluded.
 
 ### Native closed-loop release comparison
 
-The control-loop selector adds 12 native CRUISE releases at 9 degrees (two bodies,
-three axes and two stiffness profiles). The 9-degree open-loop cases are paired
-shadow simulations with identical release state, RPM, brake positions and physics
-time steps. Other amplitudes remain open-loop only; choosing closed loop sets and
-locks the slider to 9 degrees. Camera framing is shared within each comparison.
+The selector includes equilibrium-trim open loop, frozen-AUTO open loop, and
+native AUTO closed loop. The last two have 12 matched releases at 9 degrees (two
+bodies, three axes, two stiffness profiles). Choosing either locks the amplitude
+to 9 degrees. Their release state, RPM, brake positions and physics time steps
+match; the open-loop shadow freezes pre-disturbance commands. The original trim
+cases remain separate so their earlier rotor-coupling experiment is reproducible.
+Camera framing is shared within each body/axis/profile/amplitude comparison.
 
-`make_closed_joint_tour.py` uses the existing airborne SITL harness and the branch's
-`mission-controller-candidate.json`. The EKF and CRUISE track/height lock initialize
-on translating equilibrium before the perturbation. At release native PWM takes
-over; the shadow keeps equilibrium commands. This includes controller handover
-transients and is not a disturbance response about a fully settled closed-loop
-operating point. The controller holds a GPS ground track, not fuselage yaw.
+`make_closed_joint_tour.py` uses the airborne SITL harness and the branch's
+`mission-controller-candidate.json`. AUTO flies a straight northbound leg toward
+waypoints 1 km and 2 km from home, at 100 m relative altitude. Physics runs under
+native control for 100 seconds before the disturbance; mission item 1 and AUTO
+mode are verified before release. This replaces the CRUISE examples that enabled
+control simultaneously with the disturbance. It changes both guidance mode and
+initialization, so differences cannot be attributed to the mode switch alone.
 
-Plots show truth altitude and ground-track deviations from the release references,
-not internal EKF/control errors; throttle is commanded and brake pulls are actuator
-positions. These eight-second comparisons are illustrative diagnostics, not
-stability or mission acceptance tests. Raw autotest logs remain in Mission Planner.
-The short packaged traces record the actual parameter readback, source revision
-and executable SHA-256. No firmware/controller changes are required.
-
-Run in the ArduPilot Python environment:
+Plots show truth deviations from release altitude and ground track, not internal
+EKF errors; throttle is commanded, brake pulls are actuator positions. These
+eight-second diagnostics are not mission acceptance or stability tests. Raw
+logs remain in Mission Planner. Packaged traces record parameter readback, source
+revision and executable SHA-256. No firmware/controller changes are required.
 
 ```sh
-python viewer/tools/run_closed_joint_tour.py --repo /path/to/ardupilot --raw /path/to/Mission-Planner/joint-tour/closed-suite
-python viewer/tools/package_closed_joint_tour.py --repo /path/to/ardupilot --raw /path/to/Mission-Planner/joint-tour/closed-suite --output viewer/public/joint-tour/responses.json
+python viewer/tools/run_closed_joint_tour.py --repo /path/to/ardupilot --raw /path/to/Mission-Planner/joint-tour/auto-suite
+python viewer/tools/package_closed_joint_tour.py --repo /path/to/ardupilot --raw /path/to/Mission-Planner/joint-tour/auto-suite --output viewer/public/joint-tour/responses.json
 ```
