@@ -1,0 +1,236 @@
+{
+  "calm-4": {
+    "test_passed": true,
+    "filter_hz": 4,
+    "loiters": {
+      "3": {
+        "duration_s": 84.30000000000001,
+        "radial_error_rms_m": 1.722157584513713,
+        "height_error_rms_m": 0.06338943308019655,
+        "truth_heading_rate_error_rms_deg_s": 0.36382235356245174,
+        "truth_rate_error_above_1hz_rms_deg_s": 0.26239680106927527,
+        "truth_rate_error_below_1hz_rms_deg_s": 0.28270804619404766,
+        "truth_heading_rate_mean_deg_s": 9.240865712288834,
+        "target_heading_rate_mean_deg_s": 9.253734311457913,
+        "bank_std_deg": 0.18381982519515816,
+        "brake_output_std": 0.005757761290419642,
+        "brake_output_above_1hz_rms": 0.0012342192117950517,
+        "output_saturation_pct": 0.0,
+        "throttle_std_pct": 0.13815072981896048
+      },
+      "8": {
+        "duration_s": 72.80000000000007,
+        "radial_error_rms_m": 1.654808431079249,
+        "height_error_rms_m": 0.08639895041444837,
+        "truth_heading_rate_error_rms_deg_s": 0.38774571732506474,
+        "truth_rate_error_above_1hz_rms_deg_s": 0.20163421280857663,
+        "truth_rate_error_below_1hz_rms_deg_s": 0.33515249606957875,
+        "truth_heading_rate_mean_deg_s": -9.488082799232954,
+        "target_heading_rate_mean_deg_s": -9.393624635712131,
+        "bank_std_deg": 0.1343317248357082,
+        "brake_output_std": 0.004051727834202374,
+        "brake_output_above_1hz_rms": 0.001006989181413697,
+        "output_saturation_pct": 0.0,
+        "throttle_std_pct": 0.19786591986702137
+      }
+    },
+    "max_waypoint_height_error_m": 1.7090000000000032,
+    "max_corner_overshoot_m": 0.44522613150826373,
+    "mission_end_s": 1249.016
+  },
+  "calm-1": {
+    "test_passed": true,
+    "filter_hz": 1,
+    "loiters": {
+      "3": {
+        "duration_s": 84.19999999999999,
+        "radial_error_rms_m": 1.7278398872735719,
+        "height_error_rms_m": 0.06225044688748983,
+        "truth_heading_rate_error_rms_deg_s": 0.25931548987853176,
+        "truth_rate_error_above_1hz_rms_deg_s": 0.22720089831800566,
+        "truth_rate_error_below_1hz_rms_deg_s": 0.21126568218683078,
+        "truth_heading_rate_mean_deg_s": 9.254494843473351,
+        "target_heading_rate_mean_deg_s": 9.266183713382894,
+        "bank_std_deg": 0.09637810500045665,
+        "brake_output_std": 0.0038232705991109984,
+        "brake_output_above_1hz_rms": 0.0005011158989493662,
+        "output_saturation_pct": 0.0,
+        "throttle_std_pct": 0.13324111321897783
+      },
+      "8": {
+        "duration_s": 72.60000000000002,
+        "radial_error_rms_m": 1.647366135407356,
+        "height_error_rms_m": 0.0747612752259354,
+        "truth_heading_rate_error_rms_deg_s": 0.3062632504865773,
+        "truth_rate_error_above_1hz_rms_deg_s": 0.2278776352905566,
+        "truth_rate_error_below_1hz_rms_deg_s": 0.2282557061651657,
+        "truth_heading_rate_mean_deg_s": -9.479200717507313,
+        "target_heading_rate_mean_deg_s": -9.384890405534057,
+        "bank_std_deg": 0.09584463250569326,
+        "brake_output_std": 0.0029840924442107453,
+        "brake_output_above_1hz_rms": 0.0006005474697673999,
+        "output_saturation_pct": 0.0,
+        "throttle_std_pct": 0.1771566423631281
+      }
+    },
+    "max_waypoint_height_error_m": 1.679000000000002,
+    "max_corner_overshoot_m": 0.4007481611207879,
+    "mission_end_s": 1248.936
+  },
+  "gust-4": {
+    "test_passed": true,
+    "filter_hz": 4,
+    "loiters": {
+      "3": {
+        "duration_s": 86.30000000000007,
+        "radial_error_rms_m": 1.9514520322830848,
+        "height_error_rms_m": 0.4081659025253756,
+        "truth_heading_rate_error_rms_deg_s": 9.933329512925487,
+        "truth_rate_error_above_1hz_rms_deg_s": 3.555037799078164,
+        "truth_rate_error_below_1hz_rms_deg_s": 8.769631248682979,
+        "truth_heading_rate_mean_deg_s": 9.186435114243954,
+        "target_heading_rate_mean_deg_s": 9.045188810986273,
+        "bank_std_deg": 4.4215424654081215,
+        "brake_output_std": 0.18172845733668436,
+        "brake_output_above_1hz_rms": 0.022239131321843422,
+        "output_saturation_pct": 0.0,
+        "throttle_std_pct": 2.898376464846976
+      },
+      "8": {
+        "duration_s": 78.69999999999993,
+        "radial_error_rms_m": 2.5458668538254736,
+        "height_error_rms_m": 0.4362698032449191,
+        "truth_heading_rate_error_rms_deg_s": 9.430425521976424,
+        "truth_rate_error_above_1hz_rms_deg_s": 3.282297094435139,
+        "truth_rate_error_below_1hz_rms_deg_s": 8.363386357206101,
+        "truth_heading_rate_mean_deg_s": -8.908571166213115,
+        "target_heading_rate_mean_deg_s": -8.708359449325553,
+        "bank_std_deg": 5.271551404472152,
+        "brake_output_std": 0.2093921889267895,
+        "brake_output_above_1hz_rms": 0.021084476179527935,
+        "output_saturation_pct": 0.0,
+        "throttle_std_pct": 2.8268940129605333
+      }
+    },
+    "max_waypoint_height_error_m": 2.3329999999999984,
+    "max_corner_overshoot_m": 1.379263515176632,
+    "mission_end_s": 1277.936
+  },
+  "gust-1": {
+    "test_passed": true,
+    "filter_hz": 1,
+    "loiters": {
+      "3": {
+        "duration_s": 86.0,
+        "radial_error_rms_m": 1.8999286061365261,
+        "height_error_rms_m": 0.4129604042106467,
+        "truth_heading_rate_error_rms_deg_s": 9.659548992272136,
+        "truth_rate_error_above_1hz_rms_deg_s": 3.0891084599882452,
+        "truth_rate_error_below_1hz_rms_deg_s": 8.412854732134608,
+        "truth_heading_rate_mean_deg_s": 9.155952395363762,
+        "target_heading_rate_mean_deg_s": 9.066535576426013,
+        "bank_std_deg": 4.135057380347731,
+        "brake_output_std": 0.16870796821064615,
+        "brake_output_above_1hz_rms": 0.012150110698391291,
+        "output_saturation_pct": 0.0,
+        "throttle_std_pct": 2.9053688045982047
+      },
+      "8": {
+        "duration_s": 79.19999999999993,
+        "radial_error_rms_m": 2.2949800696220493,
+        "height_error_rms_m": 0.41196516861067606,
+        "truth_heading_rate_error_rms_deg_s": 10.44223493071324,
+        "truth_rate_error_above_1hz_rms_deg_s": 3.290854044622079,
+        "truth_rate_error_below_1hz_rms_deg_s": 9.209239211055246,
+        "truth_heading_rate_mean_deg_s": -8.750797873141579,
+        "target_heading_rate_mean_deg_s": -8.728221104373082,
+        "bank_std_deg": 5.447110793882759,
+        "brake_output_std": 0.21162890711610985,
+        "brake_output_above_1hz_rms": 0.013870609632859389,
+        "output_saturation_pct": 0.0,
+        "throttle_std_pct": 3.0033941567701907
+      }
+    },
+    "max_waypoint_height_error_m": 1.5900000000000034,
+    "max_corner_overshoot_m": 1.3570245295878465,
+    "mission_end_s": 1275.936
+  },
+  "crosswind-4": {
+    "test_passed": true,
+    "filter_hz": 4,
+    "loiters": {
+      "3": {
+        "duration_s": 94.89999999999998,
+        "radial_error_rms_m": 1.7499772328780667,
+        "height_error_rms_m": 0.1871514797548329,
+        "truth_heading_rate_error_rms_deg_s": 2.3863639460796735,
+        "truth_rate_error_above_1hz_rms_deg_s": 0.7233279004899177,
+        "truth_rate_error_below_1hz_rms_deg_s": 2.234355563014311,
+        "truth_heading_rate_mean_deg_s": 7.692835900096776,
+        "target_heading_rate_mean_deg_s": 7.661972342029575,
+        "bank_std_deg": 3.2530997128053225,
+        "brake_output_std": 0.0718018417383319,
+        "brake_output_above_1hz_rms": 0.004706387520195607,
+        "output_saturation_pct": 0.0,
+        "throttle_std_pct": 0.4826837050142063
+      },
+      "8": {
+        "duration_s": 91.5,
+        "radial_error_rms_m": 1.7556541346748404,
+        "height_error_rms_m": 0.2850823993049341,
+        "truth_heading_rate_error_rms_deg_s": 3.7517544013445905,
+        "truth_rate_error_above_1hz_rms_deg_s": 0.6187748235456235,
+        "truth_rate_error_below_1hz_rms_deg_s": 3.6756947576595227,
+        "truth_heading_rate_mean_deg_s": -7.126337230842412,
+        "target_heading_rate_mean_deg_s": -7.191162219464453,
+        "bank_std_deg": 4.420358352192594,
+        "brake_output_std": 0.10942607468659975,
+        "brake_output_above_1hz_rms": 0.003910734416642002,
+        "output_saturation_pct": 0.0,
+        "throttle_std_pct": 0.7064185705761079
+      }
+    },
+    "max_waypoint_height_error_m": 1.6750000000000043,
+    "max_corner_overshoot_m": 0.7889135841836044,
+    "mission_end_s": 1453.936
+  },
+  "crosswind-1": {
+    "test_passed": true,
+    "filter_hz": 1,
+    "loiters": {
+      "3": {
+        "duration_s": 94.5,
+        "radial_error_rms_m": 1.7482903897790738,
+        "height_error_rms_m": 0.1771517246580046,
+        "truth_heading_rate_error_rms_deg_s": 1.9343546034305599,
+        "truth_rate_error_above_1hz_rms_deg_s": 0.40669821968746483,
+        "truth_rate_error_below_1hz_rms_deg_s": 1.8631965304873779,
+        "truth_heading_rate_mean_deg_s": 7.749004697078973,
+        "target_heading_rate_mean_deg_s": 7.77072325133142,
+        "bank_std_deg": 3.2148006688481043,
+        "brake_output_std": 0.06500908205125855,
+        "brake_output_above_1hz_rms": 0.0014630158546497065,
+        "output_saturation_pct": 0.0,
+        "throttle_std_pct": 0.4504079297203884
+      },
+      "8": {
+        "duration_s": 90.5,
+        "radial_error_rms_m": 1.7023945385295807,
+        "height_error_rms_m": 0.26493402830109,
+        "truth_heading_rate_error_rms_deg_s": 3.2462961794217513,
+        "truth_rate_error_above_1hz_rms_deg_s": 0.5018787498038736,
+        "truth_rate_error_below_1hz_rms_deg_s": 3.1750033459296403,
+        "truth_heading_rate_mean_deg_s": -7.344358626529738,
+        "target_heading_rate_mean_deg_s": -7.437918480605875,
+        "bank_std_deg": 4.11122145934247,
+        "brake_output_std": 0.09736276704284998,
+        "brake_output_above_1hz_rms": 0.002504213086754656,
+        "output_saturation_pct": 0.0,
+        "throttle_std_pct": 0.6445092467059208
+      }
+    },
+    "max_waypoint_height_error_m": 1.7019999999999982,
+    "max_corner_overshoot_m": 0.6256900832967144,
+    "mission_end_s": 1452.016
+  }
+}

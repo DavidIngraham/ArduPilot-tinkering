@@ -323,3 +323,9 @@ The `microagu.flight.v1` format carries estimator payload attitude, core-0 XKF1 
 The page provides playback, speed selection, scrubbing, a 3D overview PNG, and browser WebM recording. The payload close-up uses a fixed world orientation; the route view preserves real spatial scale. Graphs show the preceding 15 seconds of attitude and output commands. Published recap schedules are specified in `src/flight-replay.ts`: full-flight overview in 45 seconds, then real-speed excerpts. Hood River uses boot 298.44–1073.56 s, with excerpts 755–785 and 625–645 s; Trout Lake uses 202.81–3474.77 s, with excerpts 635–680 and 2800–2820 s. The selected source directory names identify those schedules; other recordings receive a full-flight overview.
 
 Encode downloaded WebM as H.264/yuv420p, CRF 20, 30 fps, with faststart. Keep browser captures outside Git. Final media and provenance are under `docs/assets/flight-testing/replay/`.
+
+### Pitch-damper mechanical illustration
+
+`/pitch-fbd.html` renders a 14-second looping side-view comparison with the existing SolidWorks carriage: locked relative pitch on the left, independent payload pitch on the right. Motion stays in one plane. The moving hinge, payload CG, assumed combined CG, incremental pusher thrust and curved thrust-moment arrows explain the sign distinction. The prop is stationary; rotor dynamics are not represented in this illustration.
+
+This is a keyframed mechanical explanation, not a solver trajectory or a reconstruction of the ACRA vehicle. Geometry, timing and angular excursions are illustrative. Use **Record animation**, download the WebM, encode H.264/yuv420p at 30 fps with faststart, and extract a poster at 7 s. Raw captures stay in Mission Planner; the final MP4/poster are in `docs/assets/viewer/pitch-fbd`.

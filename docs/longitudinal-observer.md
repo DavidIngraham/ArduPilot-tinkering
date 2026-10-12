@@ -34,6 +34,10 @@ The limits therefore set feed-forward slopes as well as bounding the requested v
 
 I had added a pitch-rate damper to throttle. My initial intuition was that more throttle would pitch the model up, so adding throttle during a nose-down rotation should oppose that motion.
 
+I believe that intuition came from Umenberger and Göktogan’s [ACRA 2012 paramotor paper](https://www.araa.asn.au/acra/acra2012/papers/pap151.pdf). Figure 6 feeds pitch rate back into throttle, and Figures 8–9 show a simulated nose-up throttle-step response and improved damping. But §2.1 treats canopy and fuselage as one rigid body, while §2.2 holds their relative pitch fixed. That removes the independent payload-pitch mode that matters here.
+
+The distinction is in the model and the response being controlled. Their §5 pitch transfer function was fitted to their six-DOF simulation; the paper’s flight-data identification concerns lateral dynamics. I did not find evidence establishing that a physically locked suspension made that damper sign valid on their real aircraft. The feedback makes sense for their modeled nose-up response; importing that sign into my payload-gyro loop was the mistake.
+
 The throttle damper used:
 
 ```cpp
@@ -47,6 +51,10 @@ The articulated model showed why that assumption could fail. The thrust line is 
 ![Free-body diagram of the payload and canopy, showing thrust above the payload CG and the reinforcing feedback sequence](assets/flight-testing/pitch-damper-fbd-pusher.png)
 
 *The pusher thrust acts above the payload CG, creating a nose-down moment. The canopy and payload react through the suspension. Schematic, not to scale.*
+
+<video controls muted loop playsinline preload="metadata" poster="assets/viewer/pitch-fbd/pitch-fbd.jpg" style="width:100%;height:auto"><source src="assets/viewer/pitch-fbd/pitch-fbd.mp4" type="video/mp4"></video>
+
+*Left: my original whole-aircraft picture, with relative pitch locked and thrust below an assumed combined CG. Right: the payload can pitch independently; thrust acts above its CG, and its initial response is nose-down while the upper attachment moves forward. The side view uses the carriage CAD with schematic suspension and canopy. Geometry, angles and timing illustrate the mechanism rather than reproducing a simulation trace. The arrows isolate the incremental thrust moment; suspension reactions and aerodynamic forces also enter the full dynamics. The locked connection illustrates my assumption, not the ACRA aircraft’s construction.*
 
 The later analysis explained the reinforcing loop:
 
@@ -155,7 +163,7 @@ Working with Codex, I bounded this study to two controller revisions with the mo
 
 The first surprise was lateral: the brakes were exciting payload motion. Reducing heading-rate feedback made straight flight much quieter; correcting excessive steering feedforward then made sustained turns predictable. The [lateral chapter](paraglider.md#tuning-the-dedicated-loop-with-separate-canopy-and-payload-motion) shows those changes and the evolving control loops. A pitch-rate signal alone could not tell me where the motion originated.
 
-The later [linear lateral analysis](paraglider.md#what-the-linear-analysis-tells-me) put that coupling into frequency-domain terms. The 9-DOF plant contains mixed pitch, yaw and translational modes, and the selected steering feedback leaves a lightly damped closed-loop pair near 2.54 Hz. Lowering the lateral measurement filter to 1 Hz, or adding a broad notch, improved modeled stability margins without changing throttle control. Those filter candidates have passed standalone nonlinear delay tests; the native longitudinal and AUTO results below still use the 4 Hz lateral filter. This reinforces the sequence: quiet the steering-driven motion before asking a throttle damper to suppress it.
+The later [linear lateral analysis](paraglider.md#what-the-linear-analysis-tells-me) put that coupling into frequency-domain terms. The 9-DOF plant contains mixed pitch, yaw and translational modes, and the selected steering feedback leaves a lightly damped closed-loop pair near 2.54 Hz. Lowering the lateral measurement filter to 1 Hz, or adding a broad notch, improved modeled stability margins without changing throttle control. The 1 Hz candidate subsequently passed six matched native AUTO trials in calm air, gusts and steady crosswind, reducing rapid brake activity with mixed gust-rate tracking results. The historical native longitudinal and AUTO results below still use the 4 Hz lateral filter. This reinforces the sequence: quiet the steering-driven motion before asking a throttle damper to suppress it.
 
 ### Match throttle feedforward to the simulated aircraft
 

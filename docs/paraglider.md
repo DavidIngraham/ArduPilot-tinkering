@@ -295,9 +295,27 @@ Local command tracking stayed similar. I then ran eighteen nonlinear tests: leve
 
 In the delayed right-turn case, final-ten-second heading-rate RMS error was 26.65 deg/s with the existing filter, versus about 0.016 deg/s with either candidate. Without added delay, the 1 Hz filter’s integrated right-turn tracking error changed from 5.10 to 5.12 degrees over the 30-second run. The benefit is more tolerance of feedback phase lag, with little tracking cost in these tests.
 
-**My next implementation trial is the 1 Hz filter with the gains unchanged.** It is a simple change with a substantial improvement across the tested trims. The notch remains an alternative if a modal peak persists or the simpler filter loses useful disturbance rejection.
+### Taking the 1 Hz candidate through native SITL
 
-This filter comparison ran against the standalone nonlinear simulator with truth measurements and controlled delay. It has not yet run through the native SITL controller, estimator, navigation and altitude loops together. The native AUTO results above still use 4 Hz; the new filter is a research candidate, not a change already flown or deployed. [Data and methods](data-and-methods.md#classical-lateral-analysis-and-frequency-shaping) records the scripts and scope.
+I then ran the missing implementation trial: the full ArduPlane controller, estimator, navigation and altitude loops together. I compared `PG_TURN_FILT = 4` and `1` Hz in calm air, moderate repeatable gusts, and a steady 2 m/s eastward wind. All gains and model coefficients stayed fixed. The 1.758 kg Trout Lake model flew the same mission at 22.2 V, including altitude changes and clockwise and counterclockwise loiters. **All six native AUTO tests passed.**
+
+| Condition | Right-turn heading-rate RMS error, 4 → 1 Hz | Left-turn heading-rate RMS error, 4 → 1 Hz |
+|---|---:|---:|
+| Calm | 0.36 → 0.26 deg/s | 0.39 → 0.31 deg/s |
+| Moderate gusts | 9.93 → 9.66 deg/s | 9.43 → 10.44 deg/s |
+| Steady crosswind | 2.39 → 1.93 deg/s | 3.75 → 3.25 deg/s |
+
+These errors compare the requested rate with the unfiltered simulated payload heading rate, rather than rewarding the filter for making its own feedback signal smoother. Across the six settled-loiter comparisons, brake-command content above 1 Hz fell by **34–69%**. Radial tracking stayed essentially unchanged or improved slightly. In gusts, altitude RMS error remained around 0.41 m, and none of the settled loiters saturated the differential-brake command.
+
+![Native 4 Hz versus 1 Hz filter comparison: heading-rate error, radial error and rapid brake-command activity](assets/lateral-native-filter/metrics.png)
+
+*Blue is 1 Hz. Quieter commands are a consistent benefit; better heading-rate tracking is not universal. In particular, the gusty left turn had higher rate error even though radial tracking improved.*
+
+![Native AUTO loiter-entry responses in calm air, gusts and crosswind](assets/lateral-native-filter/comparison.png)
+
+*Matched settings, with each first-loiter entry aligned independently. Most of the remaining gust-driven rate error is below 1 Hz. Reducing high-frequency feedback does not remove that slower motion.*
+
+I would use **1 Hz for the next SITL configuration, with the gains unchanged**. This is an incremental improvement, not a cure for gust response. These are single paired runs; the repeatable gust field has a different arrival phase when the trajectory changes. They also do not reproduce the earlier artificial 80 ms delay test or remeasure a stability margin. The existing mission videos and published default parameters still use 4 Hz. [Data and methods](data-and-methods.md#native-lateral-filter-trial) records the exact configurations, analysis and scope.
 
 ## Watching the two bodies move
 
