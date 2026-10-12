@@ -333,10 +333,9 @@ This is a keyframed mechanical explanation, not a solver trajectory or a reconst
 ## Interactive DOF and joint-response tour
 
 Open `joint-tour.html`; it defaults to the 9-degree disturbance response. A scrolling 0.5 m reference grid shows horizontal translation speed (not terrain height). Motion-tour mode prescribes nine independent coordinates;
-response mode replays 60 actual-model releases (two disturbed bodies, three axes, two profiles, five amplitudes).
+response mode offers 60 open-loop actual-model releases (two disturbed bodies, three axes, two profiles, five amplitudes).
 The disturbance slider selects 3–15 degrees in 3-degree steps, defaulting to 9. Select canopy-only or payload-only deflection. The selected body rotates about an initial payload axis while the other body retains its attitude. Each perturbation preserves attachment position/velocity by repositioning the selected body about the hinge; both bodies then evolve freely. Trim
-actuators remain fixed: no native controller, turbulence or artificial animation
-is included in the response trajectories. The camera follows nominal forward/vertical motion and actual lateral attachment drift, projected perpendicular to the initial horizontal flight track. Fore–aft and vertical excursions remain visible. The ground grid includes lateral camera travel, and the gray canopy stays on the nominal trajectory. Framing uses the same reference transform. Model amplitudes are unscaled. Torque is canopy-side, payload-frame,
+actuators remain fixed in open loop. The additional native closed-loop comparisons are described below. Neither mode adds turbulence or artificial animation to the response trajectories. The camera follows nominal forward/vertical motion and actual lateral attachment drift, projected perpendicular to the initial horizontal flight track. Fore–aft and vertical excursions remain visible. The ground grid includes lateral camera travel, and the gray canopy stays on the nominal trajectory. Framing uses the same reference transform. Model amplitudes are unscaled. Torque is canopy-side, payload-frame,
 using the same log-Jacobian spring law and relative-rate damper as dynamics.cpp.
 
 Generate final playback samples at 20 Hz while keeping 100 Hz raw output outside Git:
@@ -360,3 +359,32 @@ python tools/publish_joint_tour.py /path/to/website/assets/microagu-viewer
 
 Only the tour entry point, its JavaScript dependencies, the payload GLB and final
 presentation samples are copied. Other local recordings are excluded.
+
+### Native closed-loop release comparison
+
+The control-loop selector adds 12 native CRUISE releases at 9 degrees (two bodies,
+three axes and two stiffness profiles). The 9-degree open-loop cases are paired
+shadow simulations with identical release state, RPM, brake positions and physics
+time steps. Other amplitudes remain open-loop only; choosing closed loop sets and
+locks the slider to 9 degrees. Camera framing is shared within each comparison.
+
+`make_closed_joint_tour.py` uses the existing airborne SITL harness and the branch's
+`mission-controller-candidate.json`. The EKF and CRUISE track/height lock initialize
+on translating equilibrium before the perturbation. At release native PWM takes
+over; the shadow keeps equilibrium commands. This includes controller handover
+transients and is not a disturbance response about a fully settled closed-loop
+operating point. The controller holds a GPS ground track, not fuselage yaw.
+
+Plots show truth altitude and ground-track deviations from the release references,
+not internal EKF/control errors; throttle is commanded and brake pulls are actuator
+positions. These eight-second comparisons are illustrative diagnostics, not
+stability or mission acceptance tests. Raw autotest logs remain in Mission Planner.
+The short packaged traces record the actual parameter readback, source revision
+and executable SHA-256. No firmware/controller changes are required.
+
+Run in the ArduPilot Python environment:
+
+```sh
+python viewer/tools/run_closed_joint_tour.py --repo /path/to/ardupilot --raw /path/to/Mission-Planner/joint-tour/closed-suite
+python viewer/tools/package_closed_joint_tour.py --repo /path/to/ardupilot --raw /path/to/Mission-Planner/joint-tour/closed-suite --output viewer/public/joint-tour/responses.json
+```

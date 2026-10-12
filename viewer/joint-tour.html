@@ -60,7 +60,7 @@
         <select id="mode">
           <option value="tour">Prescribed motion tour</option>
           <option value="response" selected>Simulated deflection release</option></select
-        ><select id="body" aria-label="Disturbed body"><option value="canopy">Canopy-only deflection</option><option value="payload">Payload-only deflection</option></select><select id="motion"></select
+        ><select id="loop" aria-label="Control loop"><option value="open">Open loop · fixed trim</option><option value="closed">Closed loop · CRUISE · 9°</option></select><select id="body" aria-label="Disturbed body"><option value="canopy">Canopy-only deflection</option><option value="payload">Payload-only deflection</option></select><select id="motion"></select
         ><select id="profile">
           <option value="mission">Mission profile</option>
           <option value="dynamic_roll">Softer-roll profile</option></select
@@ -106,8 +106,7 @@
       <p>
         Drag to orbit; scroll to zoom. Dot/line axes use body forward (red),
         right (green), down (blue). The canopy is schematic; payload geometry
-        comes from CAD. Response mode replays the actual simulator, with fixed
-        trim actuators and no controller. Gray geometry marks the initial
+        comes from CAD. Response mode replays the actual simulator. Open loop holds trim commands; closed loop uses native ArduPilot CRUISE at 9°. Gray geometry marks the initial
         orientation. No rotation is amplified.
       </p>
     </main>

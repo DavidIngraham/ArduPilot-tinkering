@@ -5,6 +5,8 @@ import { sample, position, orientation, worldBasis, type Frame } from "./state";
 import { rigPayload, poseMechanisms, type Mechanisms } from "./mechanisms";
 type Case = {
   body?: string;
+  loop?: string;
+  performance?: number[][];
   amplitude_deg: number;
   profile: string;
   axis: string;
@@ -26,7 +28,7 @@ async function main() {
   );
   const canvas = document.createElement("canvas");
   canvas.width = 1280;
-  canvas.height = 850;
+  canvas.height = 1100;
   el("view").append(canvas);
   const ctx = canvas.getContext("2d")!;
   const renderer = new T.WebGLRenderer({ antialias: true });
@@ -137,9 +139,10 @@ async function main() {
     )
       .map((n, i) => `<option value="${i}">${n}</option>`)
       .join("");
+    sel("loop").disabled = sel("mode").value === "tour";
     sel("body").disabled = sel("mode").value === "tour";
     sel("profile").disabled = sel("mode").value === "tour";
-    el<HTMLInputElement>("amplitude").disabled = sel("mode").value === "tour";
+    el<HTMLInputElement>("amplitude").disabled = sel("mode").value === "tour" || sel("loop").value === "closed";
     t = 0;
     setCamera();
   }
@@ -161,6 +164,14 @@ async function main() {
   el<HTMLInputElement>("amplitude").oninput = () => {
     el("amplitude-value").textContent =
       el<HTMLInputElement>("amplitude").value + "°";
+    t = 0;
+  };
+  sel("loop").onchange = () => {
+    if (sel("loop").value === "closed") {
+      el<HTMLInputElement>("amplitude").value = "9";
+      el("amplitude-value").textContent = "9°";
+    }
+    el<HTMLInputElement>("amplitude").disabled = sel("loop").value === "closed";
     t = 0;
   };
   options();
@@ -192,10 +203,10 @@ async function main() {
     values: number[][],
     cursor: number,
     unit: string,
+    y = 685,
+    w = 375,
   ) {
-    const y = 685,
-      w = 375,
-      h = 100;
+    const h = 100;
     let range = Math.max(0.001, ...values.flat().map(Math.abs)) * 1.12;
     ctx.fillStyle = "#0d1d29";
     ctx.fillRect(x, y, w, h);
@@ -209,7 +220,7 @@ async function main() {
     ctx.moveTo(x, y + h / 2);
     ctx.lineTo(x + w, y + h / 2);
     ctx.stroke();
-    for (let j = 0; j < 3; j++) {
+    for (let j = 0; j < values[0].length; j++) {
       ctx.strokeStyle = colors[j];
       ctx.beginPath();
       values.forEach((v, i) => {
@@ -225,11 +236,8 @@ async function main() {
     ctx.lineTo(x + (w * cursor) / 8, y + h);
     ctx.stroke();
     ctx.fillStyle = "#a8c1d1";
-    ctx.fillText(
-      "0 s                                                 8 s",
-      x,
-      y + h + 20,
-    );
+    ctx.fillText("0 s", x, y + h + 20);
+    ctx.fillText("8 s", x + w - 22, y + h + 20);
   }
   // Fixed flight-track axes: follow actual cross-track displacement only.
   function reference(c: Case, f: Frame) {
@@ -253,21 +261,24 @@ async function main() {
       axis = tour ? Math.max(0, (n - 3) % 3) : n;
     const c = data.cases.find(
       (c) =>
+        (c.loop ?? "open") === sel("loop").value &&
         (c.body ?? "canopy") === sel("body").value &&
         c.profile === sel("profile").value &&
         c.axis === ["roll", "pitch", "yaw"][axis] &&
         c.amplitude_deg === +el<HTMLInputElement>("amplitude").value,
     )!;
     const base = c.frames[0];
-    const key = `${tour}:${c.body}:${c.profile}:${c.axis}:${c.amplitude_deg}:${sel("camera").value}`;
+    const key = `${tour}:${c.loop}:${c.body}:${c.profile}:${c.axis}:${c.amplitude_deg}:${sel("camera").value}`;
     if (key !== framingKey) {
       framingKey = key;
       orbit.target.set(0, 0.4, 0);
       setCamera();
       if (!tour) {
         const bounds = new T.Box3();
-        for (const frame of c.frames) {
-          const ref = reference(c, frame).origin;
+        const peers = data.cases.filter(peer => peer.profile === c.profile && peer.axis === c.axis &&
+          (peer.body ?? "canopy") === (c.body ?? "canopy") && peer.amplitude_deg === c.amplitude_deg);
+        for (const peer of peers) for (const frame of peer.frames) {
+          const ref = reference(peer, frame).origin;
           for (const offset of [0, 13]) bounds.expandByPoint(position(new T.Vector3().fromArray(frame.state, offset).sub(ref).toArray()));
         }
         bounds.expandByScalar(1.1);
@@ -372,14 +383,14 @@ async function main() {
     orbit.update();
     renderer.render(scene, camera);
     ctx.fillStyle = "#10202c";
-    ctx.fillRect(0, 0, 1280, 850);
+    ctx.fillRect(0, 0, 1280, 1100);
     ctx.drawImage(renderer.domElement, 0, 60);
     ctx.fillStyle = "#edf5fc";
     ctx.font = "25px system-ui";
     ctx.fillText(
       tour
         ? `${n + 1} / 9 · ${names[n]}`
-        : `${["Roll", "Pitch", "Yaw"][n]} ${c.body ?? "canopy"} deflection release · ${c.profile.replace("_", " ")}`,
+        : `${["Roll", "Pitch", "Yaw"][n]} ${c.body ?? "canopy"} deflection release · ${c.profile.replace("_", " ")} · ${c.loop === "closed" ? "CRUISE" : "open loop"}`,
       22,
       35,
     );
@@ -394,7 +405,7 @@ async function main() {
     );
     el("description").textContent = tour
       ? "The selected coordinate is animated while the others are held fixed. Yellow marks its axis. This is a kinematic illustration; no spring response is implied."
-      : `Release from a +${c.amplitude_deg}° ${c.body ?? "canopy"}-only deflection about the selected initial payload axis, with the other body’s attitude unchanged. Each slider step selects a separately simulated response, not an amplified animation. All axes are free to respond. The camera follows nominal forward motion and actual lateral drift. Fore–aft and vertical disturbance motion remain visible. The gray canopy marks nominal flight. The scrolling 0.5 m reference grid conveys horizontal speed; it is not terrain or an altitude cue. Curves show eight seconds; white marks playback time.`;
+      : `Release from a +${c.amplitude_deg}° ${c.body ?? "canopy"}-only deflection about the selected initial payload axis, with the other body’s attitude unchanged. Each slider step selects a separately simulated response, not an amplified animation. ${c.loop === "closed" ? "Native ArduPilot CRUISE holds initial ground track and altitude (9° comparisons)." : "Throttle and brakes remain at trim."} All axes are free to respond. The camera follows nominal forward motion and actual lateral drift. Fore–aft and vertical disturbance motion remain visible. The gray canopy marks nominal flight. The scrolling 0.5 m reference grid conveys horizontal speed; it is not terrain or an altitude cue. Curves show eight seconds; white marks playback time.`;
     if (!tour) {
       graph(
         22,
@@ -464,6 +475,19 @@ async function main() {
         837,
       );
     });
+    if (!tour) {
+      const metrics = c.performance ?? c.frames.map(f => {
+        const angle = Math.atan2(f.state[8], f.state[7]) - Math.atan2(base.state[8], base.state[7]);
+        return [base.state[2] - f.state[2], Math.atan2(Math.sin(angle), Math.cos(angle)) * 180 / Math.PI];
+      });
+      graph(22, "Altitude deviation", metrics.map(v => [v[0]]), t, "m", 920, 285);
+      graph(340, "Ground-track deviation", metrics.map(v => [v[1]]), t, "deg", 920, 285);
+      graph(658, "Throttle command", c.frames.map(f => [100 * (f.throttle ?? 0)]), t, "%", 920, 285);
+      graph(976, "Brake pull · left / right", c.frames.map(f => f.brake_mm ?? [0, 0]), t, "mm", 920, 285);
+      ctx.fillStyle = "#b9d0de";
+      ctx.font = "16px system-ui";
+      ctx.fillText("Truth deviations from release altitude and initial ground track; throttle is commanded, brakes show actuator position.", 22, 1080);
+    }
     el<HTMLInputElement>("scrub").value = String(t);
   }
   function loop(now: number) {
