@@ -130,3 +130,118 @@ The AUTO comparison now shows three conditions with the same two-pole pitch damp
 The new steady-wind run uses `record_auto.py --wind-ned 0 2 0`: 2 m/s eastward, applied to the physics after release, with no gust component. It passed the unchanged complete `ParagliderAutoMission` test, including opposing loiters, altitude and corner checks, home loiter and handover. Native SIM/truth roll and pitch alignment RMS is 0.0072°/0.0071° for its excerpt. The wind flag uses the recorded physics vector. The model, mass (1.758 kg), voltage (22.2 V), and controller parameters match the calm and gust runs; the longer overall route time in steady wind is retained in the raw log.
 
 [prepare_wind_clip.py](../viewer/tools/prepare_wind_clip.py) preserves states and timestamps, adds explicit zero-wind annotations to the legacy calm recording, and records both original and prepared clip hashes. Prepared clips and browser captures stay under `viewer-wind-comparison/{calm,gust,crosswind}` in Mission Planner. Only final videos, posters, metadata and their generating scripts are committed here. [run_gust_native.sh](../tools/run_gust_native.sh) reproduces the three conditions using `calm`, `gust`, or `crosswind`.
+
+## Longitudinal joint-control and observer research
+
+These early experiments support the [longitudinal controller story](longitudinal-observer.md). They used the earlier pitch-joint model, before the current 9-DOF Trout Lake plant. Their numerical results describe those historical configurations, not the current mission controller.
+
+### Modeling the moving suspension
+
+The damper problem made canopy–payload coupling central: the longitudinal canopy/payload hinge was tricky, and my throttle pitch damper caused enough self-excitation that I zeroed it out. My thrust line is below the hinge, with the CG below that. I asked us to add the joint to SITL and investigate the coupling before the flight logs were available.
+
+The first optional pitch joint we implemented separates canopy and payload pitch, with coupled inertias, translation and thrust moment. The payload IMU acceleration includes the moving lever-arm contribution. In that early model, roll/yaw remain shared; it predates the 9-DOF model used in the [later native mission study](longitudinal-observer.md#returning-to-native-mission-control). Representative settings are total mass 1.55 kg, canopy 0.19 kg, payload 1.36 kg, inertias 0.025/0.03 kg m² and joint damping 0.015 N m per rad/s. The payload CG is 0.35 m below the hinge. The modeled thrust line is 0.10 m above that CG, hence still 0.25 m below the hinge.
+
+Pitch-sign conventions and aerodynamic blending were corrected during the experiments. Earlier directories explicitly marked before the aero-sign correction are historical results. The 15-degree linear-aerodynamic boundary and high-angle blend are numerical approximations, not a validated stall or collapse envelope.
+
+The native `ParagliderPitchJoint` test and 20 model unit tests passed; the rigid-model extended AUTO test remains part of normal coverage. Local articulated AUTO runs completed, but those use different configurations and should not be pooled with lateral comparisons. [Physics review](../scratch/paraglider-tests/pitch-joint/physics-review/summary.json) records the model assumptions and trim analysis.
+
+### From damping to relative-motion control
+
+The longitudinal problem I want to solve is how to use as much control bandwidth as possible without stalling the canopy or driving the canopy and payload into large oscillations. After the flight evidence and articulated-model analysis, I was not convinced that motion-profile limiting alone would get me the performance I wanted. I suspected the controller needed some awareness of the relative angles and rates.
+
+Before taking on an observer, I asked us to try controllers that could read the simulated joint state directly. That gave us a way to ask whether the information was useful at all, and what remained difficult even with perfect access to it. These local truth-state prototypes are research; they are not included in the durable ArduPilot branch.
+
+### First, test whether joint-state feedback helps
+
+We first kept TECS and added canopy/payload rate feedback ahead of motor lag, working through 44 trials. A useful correction was approximately `Δthrottle = -0.56 q_canopy + 0.16 q_payload`, with rates in rad/s. In a matched faster-TECS case, payload pitch-rate RMS fell from 4.69 to 2.95 deg/s. Relative-rate information supplied most of the benefit; matched payload-only feedback achieved 5.02 deg/s. This reduced oscillation but did not demonstrate a large usable bandwidth increase.
+
+I then asked us to try a controller update that treated the longitudinal system more directly. We tested integrated longitudinal control in a subsequent 21-trial study. Strong direct-throttle LQI gains became unstable with actuator timing/slew. The final conservative prototype commands throttle rate at 50 Hz, including motor lag, command state, saturation and conditional integral antiwindup. Its states include payload pitch, relative angle/rate, payload rate, air-relative velocity, motor throttle, previous command and climb-error integral.
+
+| Matched step case | Climb tracking RMS | Payload rate RMS | Settling time |
+|---|---:|---:|---:|
+| Faster TECS baseline | 0.12851 m/s | 4.6922 deg/s | 12.04 s |
+| Prior joint feedback | 0.09708 m/s | 2.9541 deg/s | 5.46 s |
+| Conservative integrated | 0.07978 m/s | 2.3915 deg/s | 2.70 s |
+| Faster integrated | 0.07123 m/s | 3.5172 deg/s | 2.20 s |
+
+![Step comparisons](../scratch/paraglider-tests/pitch-joint/integrated-control/step-comparison.png)
+
+The conservative setting was encouraging: it also improved rate RMS in zero-joint-damping, slower-motor and shifted-thrust-line checks. The severe gust cases showed how much work remained: about 38 deg/s rate RMS and angles of attack outside the calibrated model. At 0.32 Hz the whole-loop gain peak fell from 3.35 to 2.11, with more phase lag; the height outer loop still amplified the inner response. This is not proof of a safe high-bandwidth controller.
+
+![Frequency comparison](../scratch/paraglider-tests/pitch-joint/integrated-control/frequency-comparison.png)
+
+A local native AUTO course completed in 1103.6 s with maximum corner overshoot 1.079 m. It used an **airborne preparation fixture**, not a normal launch, and reached 20.16 degrees modeled angle of attack. Course assertions passing therefore do not establish stall protection.
+
+![AUTO longitudinal behavior](../scratch/paraglider-tests/pitch-joint/integrated-control/auto-mission-longitudinal.png)
+
+[Integrated summary](../scratch/paraglider-tests/pitch-joint/integrated-control/summary.json), [validation](../scratch/paraglider-tests/pitch-joint/integrated-control/validation.json), [oracle study](../scratch/paraglider-tests/pitch-joint/oracle-control/summary.json) and archived scripts provide provenance. Production sources/binaries were restored after these local trials. A payload-pitch transfer had a right-half-plane zero, while the CG climb transfer did not; inverse pitch response alone does not prove a fundamental climb-bandwidth limit.
+
+### Can I estimate what I cannot measure?
+
+The next question was how to get relative pitch information without a hinge-angle sensor. I asked us to assess observability with and without airspeed, rather than assuming an observer would work.
+
+The nominal nine-state linearization we assessed uses payload pitch, relative pitch, payload/relative rates, two air-relative velocity components, motor state and horizontal/vertical wind. With a known model and constant wind, the local PBH assessment gives rank nine with attitude/gyro/GNSS measurements, with or without a pitot sensor. This nominal result is weaker than it sounds: modeling unknown constant force/moment biases adds ambiguous modes.
+
+With four independent constant acceleration/angular disturbances, the thirteen-state assessment gives zero-frequency PBH rank ten without airspeed and eleven with scalar airspeed: respectively three and two unobservable constant directions. This deliberately permissive bias model exposes ambiguity rather than asserting those biases are a physical plant. Relative rate appears more useful than absolute relative angle; a scalar pitot does not measure airflow direction or vertical wind.
+
+I also questioned whether we needed raw IMU data when ArduPilot already has an AHRS interface. Checking those interfaces clarified what is available and where the lever-arm correction still belongs. AHRS gyro is corrected payload angular rate. AHRS earth-frame acceleration is bias-corrected specific force at the IMU, not automatically translated to the payload CG. The corrected delta-velocity interface includes gravity but likewise does not supply that moving-origin correction. EKF navigation position/velocity handle configured rigid-body IMU lever arms; canopy articulation still requires its own geometry. A practical observer should predict specific force at the actual sensor position and use AHRS correction rather than duplicating calibration or differentiating noisy gyro. AHRS/IMU-derived measurements also have correlated errors.
+
+[Assessment script](../scratch/paraglider-tests/pitch-joint/observer-design/assess.py) and [ranks/results](../scratch/paraglider-tests/pitch-joint/observer-design/assessment.json) are archived. No flight-ready observer or reliable absolute-angle limiter has been implemented.
+
+### How much model identification can we avoid?
+
+Finally, I wanted to revisit the free-body diagram. If this eventually needs to work on a variety of platforms, every inertia, mass and aerodynamic coefficient we ask a user to identify is a practical obstacle. We looked for terms that cancel and ratios that can replace absolute values.
+
+![Normalized force balance and observer equations](../scratch/paraglider-tests/pitch-joint/diagrams/normalized-observer-fbd.png)
+
+Let `R` be suspension force on the payload, `T` forward thrust, `Dp` payload aerodynamic force, and `fp = ap - g` payload-CG specific force. Define `τ = T/mp`, `dp = Dp/mp`, `κp = Ip/mp`, `κc = Ic/mp`, and `ma = Ma/mp`. Vectors `a` and `b(δ)` run from the hinge to payload and canopy CG in one frame; `zT` is the signed thrust moment arm using the diagram convention.
+
+The payload force balance yields:
+
+```text
+R/mp = fp - τ ex - dp
+```
+
+Adding payload and canopy pitch equations cancels their equal-and-opposite internal hinge torque:
+
+```text
+κc q̇c + κp q̇p = [(b-a) × (fp-τ ex-dp)]y + zT τ + ma
+s = κc qc + κp qp
+ṡ = [(b-a) × (fp-τ ex-dp)]y + zT τ + ma
+qrel = (s-κp qp)/κc - qp
+```
+
+This removes the explicit joint stiffness/damping law from the summed momentum propagation and replaces canopy lift/drag force modeling with measured suspension loading. Uniform gravity cancels when translation is eliminated. Absolute mass can be reduced to inertia/mass ratios; `κc = (mc/mp) kc²` if `kc` is canopy radius of gyration. Scaling lengths by a reference suspension length and time by `sqrt(L/g)` improves numerical conditioning.
+
+**The external canopy pitching moment `Ma` does not cancel.** Geometry, inertia ratios, thrust-per-mass/moment arm, payload drag and residual canopy moment still require modeling. Integrating the summed momentum without measurement correction drifts; this cancellation is not a complete observer and does not solve initial-state identifiability. That suggested benchmarking an uncertainty-aware relative-rate observer against simulation truth, then test control with confidence-dependent limits and recorded flight data. Those experiments gave me a reason to pursue relative-rate feedback, but left open how reliably I could estimate absolute canopy angle or protect the wing at the bandwidth I wanted. Before adding that complexity to native control, I returned to the existing loops in the improved simulator.
+
+
+### Calm-air baseline and voltage-study record
+
+The following records the intermediate damper-off candidate, before the frequency-shaped gust controller described in the main article.
+
+#### Why I still left the pitch damper off
+
+Each revision compared damping off, a small reversed-sign gain, and a reversed-sign gain with filtering that rejects slow motion. Reversing the sign did not fix the excessive turn command in the first revision. Once steering was calibrated, all three tracked similarly, but damping off generally produced less settled pitch-rate variation. The filtered alternative reduced a few transient peaks without enough mission-level benefit to select it.
+
+The wrong-sign flight damper and this result are compatible. Correcting a sign is necessary for the intended feedback action, but it does not establish a useful gain or account for the phase of a coupled canopy–payload system. For this candidate, the larger gains came from removing brake-driven excitation and improving feedforward.
+
+#### The selected candidate and the next limitation
+
+The combined controller passed the existing native AUTO test, including opposing multi-turn loiters, altitude and corner checks, home loiter, and controller handover. Over its roughly 20-minute mission record, maximum waypoint altitude error was 1.67 m and corner overshoot was 0.66 m. The [lateral results](paraglider.md#a-mission-that-tracks-without-the-repeated-rocking) show how much steadier the loiters became.
+
+The same gains remained well behaved with a softer roll model. The first low-voltage test exposed a setup mistake: ArduPlane already had voltage compensation, but the simulation disabled the battery monitor, left compensation off, and did not send the motor model's voltage to the flight controller. Our initial standalone analysis omitted that output scaling too. We corrected the setup and reran both analyses.
+
+With the existing compensation enabled, reducing supply voltage from 22.2 to 20.4 V now increases the throttle command automatically. We kept 22.2 V as the reference because that is where we calibrated these simulator throttle settings; it is not the full-charge voltage of a 6S pack. In matched native runs at 20.4 V, climb height RMS error fell from **0.486 to 0.250 m**, and level-phase error from **0.633 to 0.016 m**. At 22.2 V, compensation on/off gave essentially the same result.
+
+![Native voltage-compensation comparison, showing altitude error, payload pitch rate, TECS demand and final motor command](../research/flight-log-analysis/figures/turn-model-spike/voltage-compensation/voltage-response.png)
+
+There is a tradeoff: climb-capture height RMS error increased from **0.096 to 0.169 m**. Native compensation also raises the maximum throttle returned to TECS, changing its climb feedforward slope before the final output scaling. The corrected linear and nonlinear analysis includes that interaction. This fixes the missing battery path and improves low-voltage tracking; it does not eliminate every capture transient or justify enabling the pitch damper.
+
+Both voltage settings passed the full AUTO regression with the original checks unchanged. Maximum waypoint altitude error was 1.67/1.68 m at 22.2/20.4 V, while corner overshoot was 0.95/2.89 m. The lower-voltage case still turns wider at the worst corner, despite its steady loiter motion.
+
+That calm-flight candidate used calibrated feedforward, reduced lateral feedback, smoother altitude capture, and no pitch-rate throttle damping. The [gust study in the main article](longitudinal-observer.md#shaping-the-damper-around-the-gust-response) adds frequency-shaped damping to that starting point. Relative-motion feedback remains a longer-term avenue. These are powered, up-and-away SITL results; wind, launch, landing and flight validation remain separate work.
+
+The new [articulated flight viewer](paraglider.md#watching-the-two-bodies-move) puts these relative motions back into a picture of the aircraft. Its looping turn-and-reversal clip shows the SolidWorks payload, moving brake capstans, and RPM-driven pusher propeller alongside the canopy. During controller development I can replay the same internal state used in the plots and inspect how payload pitch differs from canopy attitude. A second [AUTO mission clip](paraglider.md#the-controller-flies-the-mission) now shows native steering and throttle control working together as the aircraft enters a loiter at 90 m, taken from a passing mission test with moderate synthetic gusts. Both viewer clips now apply those gusts through the physics model, with nominal horizontal/vertical RMS speeds of 0.5/0.25 m/s.
+
+The [data and methods appendix](data-and-methods.md) collects flight chronology and earlier simulation provenance. The [current plotting scripts](../research/flight-log-analysis/scripts/native-sitl/) and [figure manifest](../research/flight-log-analysis/manifest.json) preserve this study. Native implementation and updated test instructions are recorded at [ArduPilot commit `c441b937bd`](https://github.com/DavidIngraham/ardupilot/commit/c441b937bd) on `paraglider-high-dof-control`; raw research logs remain in Mission Planner and the original SITL experiment folders.
