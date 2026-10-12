@@ -62,9 +62,9 @@ The CAD and build photographs show the configuration flown at Trout Lake. The av
 
 ## Avionics and power
 
-The Matek H743 runs ArduPlane, taking navigation input from the M10Q-5883 GNSS/compass and pilot commands from the RC receiver. It commands the motor through the ESC and drives the two brake servos independently. The onboard IMU and barometer provide motion and altitude measurements; the microSD card records the flight logs used throughout this series.
+The Matek H743 runs ArduPlane, taking navigation input from the M10Q-5883 GNSS/compass and pilot commands through a RadioMaster RP1 configured in MAVLink mode. The bidirectional receiver link also carries telemetry. It commands the motor through the ESC and drives the two brake servos independently. The onboard IMU and barometer provide motion and altitude measurements; the microSD card records the flight logs used throughout this series.
 
-![Micro-AGU avionics overview showing battery power, Matek H743 flight controller, GNSS and compass, RC receiver, ESC, motor and two brake servos](assets/micro-agu/avionics.png)
+![Micro-AGU avionics overview showing battery power, Matek H743 flight controller, GNSS and compass, RadioMaster RP1 in MAVLink mode, ESC, motor and two brake servos](assets/micro-agu/avionics.png)
 
 *Orange lines show power; blue lines show control and navigation signals. This is a functional overview, with supply regulation grouped together rather than a connector-level wiring diagram. [Open the vector diagram](assets/micro-agu/avionics.svg).*
 
