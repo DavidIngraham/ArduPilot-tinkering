@@ -8,13 +8,13 @@ My first adaptation used throttle to control climb and descent while letting the
 
 ## What TECS normally controls
 
-[TECS](https://ardupilot.org/plane/docs/tecs-total-energy-control-system-for-speed-height-tuning-guide.html) coordinates throttle and pitch demands to manage height and airspeed. The useful starting point is the aircraft's specific energy: potential energy per unit mass is $gh$, and kinetic energy per unit mass is $V^2/2$.
+[TECS](https://ardupilot.org/plane/docs/tecs-total-energy-control-system-for-speed-height-tuning-guide.html) coordinates throttle and pitch demands to manage height and airspeed. The useful starting point is the aircraft's specific energy: potential energy per unit mass is gh, and kinetic energy per unit mass is V²/2.
 
-$$
-E_T = gh + rac{V^2}{2}.
-$$
+![Specific energy: E_T = gh + V²/2.](assets/control-loops/tecs-energy.png)
 
 Throttle controls the rate at which energy is added to the aircraft. Pitch helps determine how that energy is divided between speed and height. Climbing by pitching up alone can spend airspeed; adding power allows a sustained climb without that continuing loss of speed. TECS coordinates those demands, and the airplane's pitch controller uses the elevator to follow the requested attitude.
+
+![Standard TECS control loop: energy control drives throttle; energy balance commands pitch through the elevator.](assets/control-loops/tecs-standard.png)
 
 That second actuator was the mismatch for my aircraft. Symmetric brake pull was not a reliable substitute for elevator-based pitch control. Using it continuously that way would compromise efficiency and wing stability. I wanted to reserve symmetric braking primarily for a landing flare, which I still intend to add. Landing was outside the scope of the initial project phases.
 
@@ -30,22 +30,17 @@ I retained TECS's altitude and climb-rate estimates, throttle limits and connect
 4. Correct vertical-speed error with proportional and integral feedback.
 5. Add a separate pitch-rate damping correction.
 
-Let $h_c$ be the shaped altitude demand, $h$ measured altitude, and $v_z$ measured upward velocity. Before the climb/sink limits, the outer loop requests
+![Parafoil TECS control loop with altitude and climb-rate feedback, throttle feedforward and a separate negative pitch-rate feedback path.](assets/control-loops/tecs-parafoil.png)
 
-$$
-v_{z,c} = dot h_c + rac{h_c-h}{T_h}.
-$$
+Let h<sub>c</sub> be the shaped altitude demand, h measured altitude, and v<sub>z</sub> measured upward velocity. Before the climb/sink limits, the outer loop requests
 
-The first term anticipates a moving altitude target; the second closes the remaining height error over the height-demand time constant $T_h$. With $e_v=v_{z,c}-v_z$, the inner control law can be summarized as
+![Requested climb rate = altitude trajectory rate + altitude error / height time constant.](assets/control-loops/tecs-height.png)
 
-$$
-u_T = u_{mathrm{FF}}(v_{z,c})
-      + K_P e_v
-      + K_I int e_v,dt
-      - K_q F_q(s),q_{mathrm{payload}}.
-$$
+The first term anticipates a moving altitude target; the second closes the remaining height error over the height-demand time constant T<sub>h</sub>. With e<sub>v</sub> = v<sub>z,c</sub> − v<sub>z</sub>, the inner control law can be summarized as
 
-Here $u_T$ is throttle fraction, $u_{mathrm{FF}}$ is the climb/descent feedforward map, and $F_q$ filters the payload gyro's pitch rate. This equation shows the signal paths; the implementation also applies throttle limits, slew limiting to the proportional-plus-feedforward path, integrator bounds and a bounded damper correction.
+![Throttle = feedforward + proportional correction + integral correction − filtered pitch-rate damping.](assets/control-loops/tecs-throttle.png)
+
+Here u<sub>T</sub> is throttle fraction, u<sub>FF</sub> is the climb/descent feedforward map, and F<sub>q</sub> filters the payload gyro's pitch rate. This equation shows the signal paths; the implementation also applies throttle limits, slew limiting to the proportional-plus-feedforward path, integrator bounds and a bounded damper correction.
 
 The feedforward map was an important part of the design. I did not want the integrator to discover the throttle required for every sustained climb. Trim throttle supplied the level-flight baseline, while the configured climb and sink rates set the slopes toward the throttle limits. The flight measurements below let me calibrate that relationship.
 
@@ -245,11 +240,9 @@ A small pitch-rate feedback term helped when its frequency response was shaped a
 
 The selected configuration uses two cascaded **1.5 Hz** first-order stages and a pitch-rate gain of **0.1**:
 
-$$
-\Delta u_T(s)=-0.1\left(\frac{2\pi(1.5)}{s+2\pi(1.5)}\right)^2q_{\mathrm{payload}}(s).
-$$
+![Pitch damping: gain −0.1 with two cascaded first-order 1.5 Hz low-pass filters.](assets/control-loops/tecs-damper.png)
 
-Here $q$ is body pitch rate in rad/s and $u_T$ is throttle fraction. Each stage has a 1.5 Hz cutoff; the combined continuous-time filter reaches −3 dB at about 0.97 Hz. Native code applies the discrete first-order filters at the measured update interval, limits the correction to ±0.25, and retains the final throttle limits. Height feedforward, height feedback, integration, voltage compensation and lateral gains are unchanged. Washout is off.
+Here q is body pitch rate in rad/s and u<sub>T</sub> is throttle fraction. Each stage has a 1.5 Hz cutoff; the combined continuous-time filter reaches −3 dB at about 0.97 Hz. Native code applies the discrete first-order filters at the measured update interval, limits the correction to ±0.25, and retains the final throttle limits. Height feedforward, height feedback, integration, voltage compensation and lateral gains are unchanged. Washout is off.
 
 ![Filter magnitude and phase, with movement of the slow pitch/forward-speed poles](../research/flight-log-analysis/figures/turn-model-spike/gust-control/filter-and-poles.png)
 
