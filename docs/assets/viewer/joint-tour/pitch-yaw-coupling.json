@@ -1,0 +1,40 @@
+{
+  "profile": "mission",
+  "amplitude_deg": 9,
+  "duration_s": 8,
+  "dt_s": 0.01,
+  "columns": [
+    "payload Euler yaw",
+    "canopy Euler yaw",
+    "relative rotation-vector yaw component"
+  ],
+  "intervention": "Set rotor_spin_inertia=0; removes gyroscopic and spin-acceleration reaction terms. Thrust, shaft reaction torque, locked-body inertia, initial state, RPM and controls retained.",
+  "cases": [
+    {
+      "disturbed_body": "payload",
+      "normal_max_abs_change_deg": [
+        7.1012351607444755,
+        0.7975714726019757,
+        7.335367799956286
+      ],
+      "no_rotor_momentum_max_abs_change_deg": [
+        0.7087425740085029,
+        0.0258870314251618,
+        0.17533886175529784
+      ]
+    },
+    {
+      "disturbed_body": "canopy",
+      "normal_max_abs_change_deg": [
+        11.674649564363577,
+        0.6353808601928297,
+        12.009733370414839
+      ],
+      "no_rotor_momentum_max_abs_change_deg": [
+        0.8191680726873881,
+        0.2341013808663439,
+        0.5716298865167568
+      ]
+    }
+  ]
+}

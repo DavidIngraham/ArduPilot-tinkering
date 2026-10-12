@@ -38,6 +38,21 @@ A curved five-panel canopy supplies aerodynamic forces and moments. Effective jo
 
 This is what makes the articulated animation relevant to control design: steering can excite pitch, and the payload gyro can see a motion quite different from the wing’s. Rotor and actuator dynamics add states to the equations without changing the nine mechanical freedoms.
 
+### Why a pitch disturbance also produces yaw
+
+In the [interactive joint-response viewer](https://davidingraham.github.io/assets/microagu-viewer/joint-tour.html), select **Open loop**, **Payload-only deflection**, **Pitch release**, **Mission profile**, and **9°**. The carriage pitches and also yaws, even though the brake commands stay fixed. Switch to **Canopy-only deflection** to see the same coupling excited through the wing.
+
+The spinning propeller is the main source of that yaw in these simulated cases. Its angular momentum lies along the motor shaft. When the payload pitches, changing the direction of that momentum produces a gyroscopic reaction torque about the yaw axis. The model applies $\boldsymbol{\tau}_{\mathrm{gyro}}=-\boldsymbol{\omega}_{\mathrm{payload}}\times\mathbf{H}_{\mathrm{rotor}}$.
+
+I checked this by replaying both releases with the rotor angular-momentum terms disabled, while retaining thrust, shaft reaction torque, body inertia, initial state, RPM, and fixed trim controls. Over the eight-second release, the maximum absolute change in **payload yaw from its initial heading** was:
+
+| Initial pitch disturbance | Normal model | Rotor momentum disabled |
+|---|---:|---:|
+| Payload only, +9° | 7.1° | 0.7° |
+| Canopy only, +9° | 11.7° | 0.8° |
+
+That large reduction identifies gyroscopic coupling as the dominant source of the visible yaw in these cases. A canopy disturbance also drives payload pitch, which then excites the rotor coupling. The smaller remaining yaw comes from the rest of the coupled model. This establishes the mechanism in the simulator; its magnitude depends on the estimated rotor inertia and has not been isolated in flight data. The intervention removes both gyroscopic and spin-acceleration reaction terms, rather than switching off propeller thrust or shaft torque. [Numerical results](assets/viewer/joint-tour/pitch-yaw-coupling.json) and the [reproduction script](https://github.com/DavidIngraham/ArduPilot-tinkering/blob/main/viewer/tools/check_pitch_yaw_coupling.py) record the comparison.
+
 <a id="watching-the-coupled-aircraft-move"></a>
 
 ### Fit useful behavior, retain competing explanations
