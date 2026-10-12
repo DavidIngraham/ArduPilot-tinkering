@@ -2,9 +2,54 @@
 
 *Micro-AGU, chapter 4 of 4 · [Start with the flight story](flight-testing.md) · [Design](micro-agu-design.md) · [Steering](paraglider.md) · [Throttle and pitch](longitudinal-observer.md) · [Data and methods](data-and-methods.md)*
 
-The pitch damper began with an idea from a paramotor paper: use throttle to oppose pitch motion. In flight, turning it off made the aircraft quieter. Understanding why took me from the flight logs to an articulated simulator, then from a simple sign reversal to a controller shaped around two very different kinds of motion.
+ArduPlane already had a controller for managing altitude and airspeed: TECS, the Total Energy Control System. I wanted to keep its connection to the navigation and flight-mode machinery, but change how it controlled the aircraft. A parafoil does not have an elevator, and the suspended payload's pitch is not something I can command like an airplane's attitude.
 
-This is the story of that change. The field tests established what throttle could do; the simulator let me separate the payload's immediate rotation from the slower motion of the whole aircraft. The resulting controller now completes simulated missions with less pitching in gusts, using the payload gyro we already have.
+My first adaptation used throttle to control climb and descent while letting the canopy fly near its trimmed airspeed. I also borrowed a pitch-rate damper from the ACRA paramotor paper to suppress pitching during altitude changes. The altitude controller got me to autonomous missions; the damper exposed a mistake in how I pictured the aircraft's response to thrust. The rest of this story follows that separation—from the original TECS changes, through flight measurements, to the frequency-shaped controller now running in simulation.
+
+## What TECS normally controls
+
+[TECS](https://ardupilot.org/plane/docs/tecs-total-energy-control-system-for-speed-height-tuning-guide.html) coordinates throttle and pitch demands to manage height and airspeed. The useful starting point is the aircraft's specific energy: potential energy per unit mass is $gh$, and kinetic energy per unit mass is $V^2/2$.
+
+$$
+E_T = gh + rac{V^2}{2}.
+$$
+
+Throttle controls the rate at which energy is added to the aircraft. Pitch helps determine how that energy is divided between speed and height. Climbing by pitching up alone can spend airspeed; adding power allows a sustained climb without that continuing loss of speed. TECS coordinates those demands, and the airplane's pitch controller uses the elevator to follow the requested attitude.
+
+That second actuator was the mismatch for my aircraft. Symmetric brake pull was not a reliable substitute for elevator-based pitch control. Using it continuously that way would compromise efficiency and wing stability. I wanted to reserve symmetric braking primarily for a landing flare, which I still intend to add. Landing was outside the scope of the initial project phases.
+
+## Adapting TECS to throttle-only altitude control
+
+In my [original paraglider TECS implementation](https://github.com/DavidIngraham/ardupilot/commit/8ed5b0689e31aa9a27fa2cf78057dce15f9b0d16), I replaced the kinetic-energy and energy-balance control with a vertical-speed controller. Pitch demand stayed at trim. Approximately constant airspeed was the operating assumption for this first version, not a claim that brakes, turns or gusts could never change it.
+
+I retained TECS's altitude and climb-rate estimates, throttle limits and connection to the flight modes. The control path became:
+
+1. Shape the requested altitude into a climb/sink-limited trajectory.
+2. Convert altitude error into a vertical-speed demand, adding the trajectory's own rate of change.
+3. Estimate the required throttle from trim and the configured climb/sink performance.
+4. Correct vertical-speed error with proportional and integral feedback.
+5. Add a separate pitch-rate damping correction.
+
+Let $h_c$ be the shaped altitude demand, $h$ measured altitude, and $v_z$ measured upward velocity. Before the climb/sink limits, the outer loop requests
+
+$$
+v_{z,c} = dot h_c + rac{h_c-h}{T_h}.
+$$
+
+The first term anticipates a moving altitude target; the second closes the remaining height error over the height-demand time constant $T_h$. With $e_v=v_{z,c}-v_z$, the inner control law can be summarized as
+
+$$
+u_T = u_{mathrm{FF}}(v_{z,c})
+      + K_P e_v
+      + K_I int e_v,dt
+      - K_q F_q(s),q_{mathrm{payload}}.
+$$
+
+Here $u_T$ is throttle fraction, $u_{mathrm{FF}}$ is the climb/descent feedforward map, and $F_q$ filters the payload gyro's pitch rate. This equation shows the signal paths; the implementation also applies throttle limits, slew limiting to the proportional-plus-feedforward path, integrator bounds and a bounded damper correction.
+
+The feedforward map was an important part of the design. I did not want the integrator to discover the throttle required for every sustained climb. Trim throttle supplied the level-flight baseline, while the configured climb and sink rates set the slopes toward the throttle limits. The flight measurements below let me calibrate that relationship.
+
+The pitch-rate path had a different job: suppress oscillation while preserving a responsive altitude change. The ACRA paper describes stabilizing pitch during altitude control and reports reduced altitude oscillations without degrading transient response. That was the behavior I wanted. It was also where the difference between a rigid aircraft model and my suspended payload became important.
 
 ## The damper that could make things worse
 
