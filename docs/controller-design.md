@@ -6,6 +6,60 @@ The controller has two jobs: turn the aircraft along its route and use throttle 
 
 [Part 1](first-flight-controller.md) follows my independent preflight design work through the Trout Lake missions: adapting the roll loop, changing TECS to throttle-only altitude control, and disabling a pitch damper that made the motion worse. This second phase uses those flights to inform the articulated model and design the replacement controller. It brings steering and altitude together around the resulting architecture, its classical analysis and its simulation evidence.
 
+## From flight logs to a model for controller design
+
+The simple simulator had been useful for choosing the gains I took to Trout Lake. After the flights, I wanted it to answer a harder question: would a controller that looked good in simulation behave sensibly on the actual suspended aircraft? The achievable turn radius looked optimistic, sustained bank was harder to maintain in flight, and the pitch damper had exposed motion that a single rigid aircraft could not explain.
+
+The starting evidence was the Hood River and Trout Lake logs: actuator commands, logged parameter ranges, payload attitude and rates, navigation velocity, altitude and battery measurements. Hood River included substantial manual flying to feel out the platform. Early Trout Lake throttle tests and the later sustained turns supplied more ordinary operating points. The powered, high-bank Hood River turn was useful as a stress case, but reproducing that maneuver stopped being the main objective. The controller needed a useful model of everyday glide, climb and sustained turns first.
+
+### Reconstruct the aircraft before fitting its response
+
+The two flights were not the same aircraft configuration. All-up mass was 1.385 kg without the added ballast and 1.758 kg with it—a 373 g difference, carried at the bottom of the payload. I had also adjusted the rigging. We therefore kept separate flight configurations instead of asking one set of coefficients to explain both through mass alone.
+
+The logged PWM ranges mattered just as much as mass. Both main flights used 800–2100 μs on the left brake and a reversed 900–2400 μs range on the right, with no recorded in-flight changes to those ranges. The nominal conversion using the 55 mm drums and servo mapping gives about 62.4 mm of configured left travel and 72.0 mm on the right. The asymmetry is real; treating both outputs as identical normalized brakes would fit the wrong inputs. Effective slack and preload are separate from physical drum travel. Their fitted values can absorb rigging and canopy asymmetry, so they are not measurements of line length.
+
+![Flight-derived throttle and climb relationships for the two configurations](assets/flight-testing/throttle-climb-fit.png)
+
+*Steady flight windows establish useful throttle/climb relationships. They do not identify the complete transient dynamics. Hood River’s erroneous current readings and false power limiting also prevent treating that flight as a clean propulsion calibration; the missing input capacitor was fixed before Trout Lake.*
+
+The propulsion model uses the reported FFTY 3115-900KV motor and 9×4.5 propeller geometry, with an APC 9×4.5 aerodynamic map as a proxy. It includes rotor speed dynamics, reaction torque, rotor angular momentum and precession, and the reaction to spin acceleration. Rotation is clockwise viewed from behind. Component weights and CAD-informed dimensions supplied approximate mass distribution and inertia; these were engineering estimates where direct measurements were unavailable.
+
+### Let the payload and canopy move independently
+
+The important structural change was moving to two rigid bodies connected by a point joint. Each body has its own attitude and angular velocity. Their shared attachment constrains relative translation while allowing relative roll, pitch and yaw: twelve free-body degrees of freedom minus three positional constraints gives **nine mechanical degrees of freedom**.
+
+A curved five-panel canopy supplies aerodynamic forces and moments. Effective joint stiffness and damping represent the suspension’s resistance to relative rotation, including a mass-dependent yaw restoring term. Thrust acts at the motor’s location relative to the payload CG. That geometry lets the carriage pitch nose-down immediately after a throttle increase while the aircraft eventually climbs. The simulated IMU follows the payload, including its offset from the CG; it does not report canopy attitude.
+
+This is what makes the articulated animation relevant to control design: steering can excite pitch, and the payload gyro can see a motion quite different from the wing’s. Rotor and actuator dynamics add states to the equations without changing the nine mechanical freedoms.
+
+<a id="watching-the-coupled-aircraft-move"></a>
+
+### Seeing the modeled motion
+
+<video autoplay muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/reversing-turn-controls-plain.jpg" aria-label="Simulated powered right turn, left reversal and brake release, with an articulated SolidWorks payload close-up">
+  <source src="assets/viewer/reversing-turn-controls-plain.mp4" type="video/mp4">
+  <source src="assets/viewer/reversing-turn-controls-plain.webm" type="video/webm">
+  Your browser does not support inline video.
+</video>
+
+*Scripted inputs in the 9-DOF simulator, with CAD payload articulation. This demonstrates the viewer; it is not an AUTO mission. [Viewer documentation](../viewer/README.md).*
+
+### Fit useful behavior, retain competing explanations
+
+We compared recorded-input responses over ordinary flight windows, examined steady glide/climb and turn equilibria, and checked attitude-rate spectra as well as trajectory error. A good ground track alone could hide the wrong rocking motion. Conversely, matching a rate RMS did not establish that the right physical mode produced it. Trim solving became part of the process so a controller comparison did not begin with an arbitrary force or moment imbalance.
+
+Two profiles survived that work. The **mission profile** better represents ordinary trajectory performance and is the baseline used below. The **dynamic-roll profile** uses a softer roll joint with a corresponding trim correction; it better represents the observed faster roll motion. Keeping both exposes a real uncertainty: joint mechanics, damping, rigging and external excitation are not uniquely recoverable from these flights. The longitudinal screening includes that alternative, while the lateral filter study uses the mission profile.
+
+The resulting model is more useful for controller design because it represents asymmetric brake authority, configuration-dependent trim, propulsion dynamics and the coupled motions missing from the original approximation. It is not a unique identification of the aircraft. Cross-axis phase errors and missing low-frequency yaw energy remain, and the powered Hood River equilibrium has a slow instability in the model. The same two flights guided development, so replay agreement is not independent flight validation.
+
+### Connect the model to the real controller
+
+The retained dynamics run through ArduPilot’s JSON SITL backend. Native navigation, TECS, steering code and the estimator receive simulated payload sensor data and return PWM commands through the flight-specific actuator mapping. Tests start from a solved airborne trim. This allows the full mission controller to be evaluated against the same mechanics used in the analysis, rather than relying only on a standalone ideal-sensor controller.
+
+The model assumes an inflated canopy and a taut point connection. It does not simulate inflation, slack lines, collapse or landing. The canopy is rigid, the stall law is approximate, and the mission comparisons use constant voltage rather than battery discharge. Those limits set the scope of this article: up-and-away control, ordinary maneuvers and sensitivity to modeled disturbances.
+
+[Model mechanics and configuration notes](https://github.com/DavidIngraham/ardupilot/blob/5f483ade60/Tools/simulation/paraglider/README.txt) preserve the calibration assumptions, competing profiles and reproduction details. The [data and methods appendix](data-and-methods.md) separates flight evidence from subsequent model and controller tests.
+
 ## One aircraft, two control paths
 
 Navigation supplies a turn request and an altitude trajectory. Differential brake pull controls turning; throttle controls climb and descent. Symmetric braking is reserved for future landing work, rather than acting as an elevator during normal flight.
@@ -299,16 +353,6 @@ These diagnostic videos retain the earlier climb-feedback setting to isolate the
 </video>
 
 *A 100 → 105 m altitude command separates the fast-sign problem from slower instability. Off and two-stage-filtered cases settle; simply reversing the fast damper does not. These are diagnostic alternatives, not flight recordings.*
-
-## Watching the coupled aircraft move
-
-<video autoplay muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/reversing-turn-controls-plain.jpg" aria-label="Simulated powered right turn, left reversal and brake release, with an articulated SolidWorks payload close-up">
-  <source src="assets/viewer/reversing-turn-controls-plain.mp4" type="video/mp4">
-  <source src="assets/viewer/reversing-turn-controls-plain.webm" type="video/webm">
-  Your browser does not support inline video.
-</video>
-
-*Scripted inputs in the 9-DOF simulator, with CAD payload articulation. This demonstrates the viewer; it is not an AUTO mission. [Viewer documentation](../viewer/README.md).*
 
 ## The controller flying the aircraft
 
