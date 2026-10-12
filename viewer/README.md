@@ -333,8 +333,8 @@ This is a keyframed mechanical explanation, not a solver trajectory or a reconst
 ## Interactive DOF and joint-response tour
 
 Open `joint-tour.html`; it defaults to the 9-degree disturbance response. A scrolling 0.5 m reference grid shows horizontal translation speed (not terrain height). Motion-tour mode prescribes nine independent coordinates;
-response mode replays 30 actual-model releases (three axes, two profiles, five amplitudes).
-The disturbance slider selects 3–15 degrees in 3-degree steps, defaulting to 9. Each canopy perturbation preserves attachment position/velocity. Trim
+response mode replays 60 actual-model releases (two disturbed bodies, three axes, two profiles, five amplitudes).
+The disturbance slider selects 3–15 degrees in 3-degree steps, defaulting to 9. Select canopy-only or payload-only deflection. The selected body rotates about an initial payload axis while the other body retains its attitude. Each perturbation preserves attachment position/velocity by repositioning the selected body about the hinge; both bodies then evolve freely. Trim
 actuators remain fixed: no native controller, turbulence or artificial animation
 is included in the response trajectories. The camera follows nominal forward/vertical motion and actual lateral attachment drift, projected perpendicular to the initial horizontal flight track. Fore–aft and vertical excursions remain visible. The ground grid includes lateral camera travel, and the gray canopy stays on the nominal trajectory. Framing uses the same reference transform. Model amplitudes are unscaled. Torque is canopy-side, payload-frame,
 using the same log-Jacobian spring law and relative-rate damper as dynamics.cpp.

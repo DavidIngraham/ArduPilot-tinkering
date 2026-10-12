@@ -4,6 +4,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { sample, position, orientation, worldBasis, type Frame } from "./state";
 import { rigPayload, poseMechanisms, type Mechanisms } from "./mechanisms";
 type Case = {
+  body?: string;
   amplitude_deg: number;
   profile: string;
   axis: string;
@@ -136,6 +137,7 @@ async function main() {
     )
       .map((n, i) => `<option value="${i}">${n}</option>`)
       .join("");
+    sel("body").disabled = sel("mode").value === "tour";
     sel("profile").disabled = sel("mode").value === "tour";
     el<HTMLInputElement>("amplitude").disabled = sel("mode").value === "tour";
     t = 0;
@@ -167,6 +169,7 @@ async function main() {
   sel("motion").onchange = () => {
     t = 0;
   };
+  sel("body").onchange = () => { t = 0; };
   sel("profile").onchange = () => {
     t = 0;
   };
@@ -250,12 +253,13 @@ async function main() {
       axis = tour ? Math.max(0, (n - 3) % 3) : n;
     const c = data.cases.find(
       (c) =>
+        (c.body ?? "canopy") === sel("body").value &&
         c.profile === sel("profile").value &&
         c.axis === ["roll", "pitch", "yaw"][axis] &&
         c.amplitude_deg === +el<HTMLInputElement>("amplitude").value,
     )!;
     const base = c.frames[0];
-    const key = `${tour}:${c.profile}:${c.axis}:${c.amplitude_deg}:${sel("camera").value}`;
+    const key = `${tour}:${c.body}:${c.profile}:${c.axis}:${c.amplitude_deg}:${sel("camera").value}`;
     if (key !== framingKey) {
       framingKey = key;
       orbit.target.set(0, 0.4, 0);
@@ -375,7 +379,7 @@ async function main() {
     ctx.fillText(
       tour
         ? `${n + 1} / 9 · ${names[n]}`
-        : `${["Roll", "Pitch", "Yaw"][n]} deflection release · ${c.profile.replace("_", " ")}`,
+        : `${["Roll", "Pitch", "Yaw"][n]} ${c.body ?? "canopy"} deflection release · ${c.profile.replace("_", " ")}`,
       22,
       35,
     );
@@ -390,7 +394,7 @@ async function main() {
     );
     el("description").textContent = tour
       ? "The selected coordinate is animated while the others are held fixed. Yellow marks its axis. This is a kinematic illustration; no spring response is implied."
-      : `Release from a +${c.amplitude_deg}° relative deflection about the selected payload axis. Each slider step selects a separately simulated response, not an amplified animation. All axes are free to respond. The camera follows nominal forward motion and actual lateral drift. Fore–aft and vertical disturbance motion remain visible. The gray canopy marks nominal flight. The scrolling 0.5 m reference grid conveys horizontal speed; it is not terrain or an altitude cue. Curves show eight seconds; white marks playback time.`;
+      : `Release from a +${c.amplitude_deg}° ${c.body ?? "canopy"}-only deflection about the selected initial payload axis, with the other body’s attitude unchanged. Each slider step selects a separately simulated response, not an amplified animation. All axes are free to respond. The camera follows nominal forward motion and actual lateral drift. Fore–aft and vertical disturbance motion remain visible. The gray canopy marks nominal flight. The scrolling 0.5 m reference grid conveys horizontal speed; it is not terrain or an altitude cue. Curves show eight seconds; white marks playback time.`;
     if (!tour) {
       graph(
         22,
