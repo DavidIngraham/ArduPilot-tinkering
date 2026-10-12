@@ -35,7 +35,112 @@ Here p is body roll rate, q body pitch rate and r body yaw rate; controller rate
 
 The small P gain is deliberate. Large heading-rate feedback excited the payload instead of simply making turns more accurate. Feedforward carries most of the steady demand; feedback corrects the residual.
 
-The [lateral frequency analysis](data-and-methods.md#classical-lateral-analysis-and-frequency-shaping) identified a lightly damped coupled mode near 2.54 Hz. A separate six-run native experiment found that reducing the lateral measurement filter from 4 to 1 Hz reduced rapid brake activity, with mixed gust-rate tracking results. This longitudinal optimization holds steering at the tested 4 Hz baseline. Combining the lateral candidate with new longitudinal tuning remains a separate comparison.
+## Lateral classical analysis: why this steering loop works
+
+The steering design needs enough low-frequency authority to track a turn without feeding the suspended modes. To quantify that tradeoff, I linearized the 9-DOF model at the Trout Lake straight, level trim: 1.758 kg, 4.383 m/s, 44.59% throttle, left brake released and right brake at 3.747 mm. That nonzero brake trim matters: small corrections stay on the right-brake branch rather than crossing the mixer’s change of side.
+
+The local model keeps fourteen internal states after removing global position and heading. That is a state count, not fourteen mechanical degrees of freedom. Throttle and equilibrium rotor speed are held fixed for this lateral analysis. With differential brake command `u`, heading rate `ψ̇`, and body roll rate `p`, the plant is:
+
+```text
+Δẋ = A Δx + B Δu
+Gψ(s) = Δψ̇/Δu = Cψ (sI − A)⁻¹ B
+Gp(s) = Δp /Δu = Cp (sI − A)⁻¹ B
+
+Gψ(0) = 98.00 deg/s per brake fraction
+Gp(0) = −13.05 deg/s per brake fraction
+```
+
+A one-percent brake-command increment therefore produces about 0.98 deg/s of steady heading rate locally. Inverting that gain, including the speed multiplier, gives a feedforward gain of **0.00894**—almost exactly the selected 0.009. The linear plant therefore gives a physical basis for the feedforward setting, rather than leaving it as an empirical gain.
+
+![Linear plant Bode plots checked against nonlinear sine tests](../research/flight-log-analysis/figures/turn-model-spike/classical-lateral/plant-bode.png)
+
+*The full plant has several coupled modes. Small-amplitude nonlinear sine tests match the sampled linear response within 0.005%; the slight difference from the continuous curve at high frequency is the input hold. This checks the linearization against the simulator.*
+
+### The plant and closed-loop transfer functions
+
+At fixed speed scaling, below the command and actuator limits, the implemented controller becomes:
+
+```text
+e(s) = r(s) − H(s) ψ̇(s)
+u(s) = S K_FF r(s) + [S K_P + K_I/s] e(s) − S K_RD H(s) p(s)
+
+K_FF = 0.009; K_P = 0.005; K_I = 0.002; K_RD = 0.003
+S = 5 / 4.383 = 1.1408
+H(s) = 25.133 / (s + 25.133)       [4 Hz measurement filter]
+r(s) = r_requested(s) / (0.1s + 1) [when command limits are inactive]
+
+L(s) = H(s){[S K_P + K_I/s] Gψ(s) + S K_RD Gp(s)}
+ψ̇(s)/r_requested(s) = Gψ(s)[S(K_FF + K_P) + K_I/s]
+                       / {(1 + L(s))(0.1s + 1)}
+```
+
+The integrator is not speed-scaled. Feedforward affects command response but does not move the feedback poles. Also, body roll rate is not zero in every steady banked turn: `p = φ̇ − ψ̇ sinθ`. Roll-rate damping therefore supplies a small steady-turn correction as well as opposing oscillation.
+
+### Poles, zeros and the feedback-gain limit
+
+The selected gains are locally stable, but the original larger feedback gains are unstable in this model. With the selected gains, a lightly damped pair sits at `−0.986 ± j15.969 s⁻¹`: about 2.54 Hz, with damping ratio 0.062. Scaling all feedback gains together reaches instability at **1.524 times nominal**, a gain margin of **3.66 dB**. Increasing heading-rate P alone reaches the boundary near 0.00791, with I and roll damping held fixed.
+
+![Root locus annotated with physical mode participation and combined-loop zeros](../research/flight-log-analysis/figures/turn-model-spike/classical-lateral/annotated-root-locus.png)
+
+*Crosses are open-loop poles, circles are combined-loop zeros, and green squares are the selected closed-loop poles. The mode labels come from eigenvector participation: several motions mix pitch, yaw, and translation. The red star marks the gain-induced instability boundary. The lower-half-plane branches mirror the upper half.*
+
+The slow oscillatory plant mode mixes pitch and forward speed at about 0.34 Hz. Another mixes sideways velocity and canopy yaw around 0.59 Hz; the fastest pair is predominantly relative canopy/payload roll at 5.86 Hz. Feedback changes these coupled motions rather than merely adding damping to a single isolated roll mode.
+
+Zeros need a different interpretation: they describe cancellation in an input–output response, not another natural motion. The combined loop has a right-half-plane zero pair at `+6.944 ± j19.054 s⁻¹`. The individual heading-rate and roll-rate plants have different zeros, so those cannot be substituted as endpoints of this root locus. The output-specific maps below show the distinction. These are properties of the modeled plant, not modes or zeros identified directly from flight.
+
+![Heading-rate and roll-rate plant poles and zeros](../research/flight-log-analysis/figures/turn-model-spike/classical-lateral/plant-zero-map.png)
+
+### Shape feedback without sacrificing feedforward
+
+The filter comparison keeps every gain and model coefficient fixed and changes only measurement filtering. It compares six filters across level flight, climb and descent at ±0.5 m/s, and level turns at ±10 deg/s. Two candidates stood out: lowering the existing low-pass cutoff from 4 to 1 Hz, and adding a broad notch at 2.5 Hz.
+
+```text
+1 Hz candidate: H₁(s) = 6.283 / (s + 6.283)
+Notch candidate: H_N(s) = H(s) (s² + 6.283s + 246.740)
+                              / (s² + 21.991s + 246.740)
+```
+
+Both retain unity DC gain. Feedforward bypasses the measurement filters, so reducing feedback near the troublesome modes need not make every turn command sluggish.
+
+| Measurement filter | Level-flight gain margin | Lowest margin across five trims |
+|---|---:|---:|
+| Existing 4 Hz low-pass | 3.66 dB | 2.31 dB |
+| 1 Hz low-pass | 8.41 dB | 6.87 dB |
+| Broad 2.5 Hz notch | 14.83 dB | 7.04 dB |
+
+![Feedback magnitude and sensitivity with six measurement filters](../research/flight-log-analysis/figures/turn-model-spike/lateral-shaping/shaping-bode.png)
+
+*Both candidates reduce the sensitivity peak near the troublesome mode. The notch has the strongest straight-flight margin, but its advantage over the simpler filter narrows in left turns.*
+
+Local command tracking stayed similar. Eighteen nonlinear tests check that result: level flight and both turn directions, each with three filters and either zero or 80 ms of added sensing delay. These used the actual modeled brake travel limits, asymmetric PWM mapping, changing speed scaling, and integral limits. The requested increments were 2 deg/s, continuing in the existing turn direction.
+
+![Nonlinear command tracking and brake effort with zero and 80 ms sensing delay](../research/flight-log-analysis/figures/turn-model-spike/lateral-shaping/nonlinear-shaping.png)
+
+*Solid lines have no added delay; dashed lines have 80 ms. The existing filter develops a large oscillation in the right turn, while both candidates keep tracking. The left-turn baseline remains well behaved, consistent with the asymmetric plant.*
+
+In the delayed right-turn case, final-ten-second heading-rate RMS error was 26.65 deg/s with the existing filter, versus about 0.016 deg/s with either candidate. Without added delay, the 1 Hz filter’s integrated right-turn tracking error changed from 5.10 to 5.12 degrees over the 30-second run. The benefit is more tolerance of feedback phase lag, with little tracking cost in these tests.
+
+### What the native 1 Hz experiment establishes
+
+The native implementation trial includes the full ArduPlane controller, estimator, navigation and altitude loops together. It compares `PG_TURN_FILT = 4` and `1` Hz in calm air, moderate repeatable gusts, and a steady 2 m/s eastward wind. All gains and model coefficients stayed fixed. The 1.758 kg Trout Lake model flew the same mission at 22.2 V, including altitude changes and clockwise and counterclockwise loiters. **All six native AUTO tests passed.**
+
+| Condition | Right-turn heading-rate RMS error, 4 → 1 Hz | Left-turn heading-rate RMS error, 4 → 1 Hz |
+|---|---:|---:|
+| Calm | 0.36 → 0.26 deg/s | 0.39 → 0.31 deg/s |
+| Moderate gusts | 9.93 → 9.66 deg/s | 9.43 → 10.44 deg/s |
+| Steady crosswind | 2.39 → 1.93 deg/s | 3.75 → 3.25 deg/s |
+
+These errors compare the requested rate with the unfiltered simulated payload heading rate, rather than rewarding the filter for making its own feedback signal smoother. Across the six settled-loiter comparisons, brake-command content above 1 Hz fell by **34–69%**. Radial tracking stayed essentially unchanged or improved slightly. In gusts, altitude RMS error remained around 0.41 m, and none of the settled loiters saturated the differential-brake command.
+
+![Native 4 Hz versus 1 Hz filter comparison: heading-rate error, radial error and rapid brake-command activity](assets/lateral-native-filter/metrics.png)
+
+*Blue is 1 Hz. Quieter commands are a consistent benefit; better heading-rate tracking is not universal. In particular, the gusty left turn had higher rate error even though radial tracking improved.*
+
+![Native AUTO loiter-entry responses in calm air, gusts and crosswind](assets/lateral-native-filter/comparison.png)
+
+*Matched settings, with each first-loiter entry aligned independently. Most of the remaining gust-driven rate error is below 1 Hz. Reducing high-frequency feedback does not remove that slower motion.*
+
+**The 1 Hz filter is the preferred lateral candidate for the next combined SITL comparison, with the gains unchanged.** The selected full-loop longitudinal study retains the 4 Hz steering baseline so that its results isolate the climb-PI change; the two improvements have not yet been validated together. This is an incremental improvement, not a cure for gust response. These are single paired runs; the repeatable gust field has a different arrival phase when the trajectory changes. They also do not reproduce the earlier artificial 80 ms delay test or remeasure a stability margin. The existing mission videos and published default parameters still use 4 Hz. [Data and methods](data-and-methods.md#native-lateral-filter-trial) records the exact configurations, analysis and scope.
 
 ## Altitude: keep TECS's framework, use throttle as the actuator
 
@@ -82,7 +187,9 @@ The sign-comparison and altitude-command animations below show that result direc
 
 The combined filter reaches −3 dB near 0.97 Hz. Washout is disabled. The correction is bounded to ±0.25 throttle fraction before final throttle limits. This is a frequency-dependent design choice, not a claim that the original fast feedback was correct.
 
-## The classical analysis that sets the tuning
+<a id="the-classical-analysis-that-sets-the-tuning"></a>
+
+## Longitudinal classical analysis: tune the coupled altitude loop
 
 The full-loop analysis keeps the motor, steering feedback, altitude loop, climb PI and pitch-rate filters together. Seven cases span level flight, climb, descent, lower voltage, a softer roll model and both feedforward slopes. Each is checked at three frozen lateral airspeed scales. A further sensitivity check varies the rotor response rate by ±30%.
 
@@ -134,7 +241,9 @@ Changing TECS_VERT_ACC from 7 to 3.5 doubles both gains while preserving their r
 
 The outer height time constant remains 10 s, derivative-feedforward smoothing remains 0.5 s, and feedforward calibration is unchanged. Faster altitude feedback improved the small-command tracking score but did not address gust disturbances as directly.
 
-## What the selected tuning achieves
+<a id="what-the-selected-tuning-achieves"></a>
+
+## What the selected longitudinal tuning achieves
 
 For a 0.1 m altitude ramp over two seconds, linear prediction differs from the nonlinear candidate by about 0.2 mm height RMS and 0.011°/s pitch-rate RMS. The nonlinear diagnostic includes discrete updates and piecewise feedforward, using simulated truth rather than the native estimator.
 
@@ -230,6 +339,12 @@ The calm, gust and crosswind clips below show native AUTO with the same two-stag
 </video>
 
 
+
+## Bringing the two axes together
+
+The lateral analysis supports strong feedforward, modest heading-rate feedback and less measurement feedback near the coupled modes. The longitudinal analysis supports calibrated throttle feedforward, two-stage pitch filtering and stronger climb-rate PI. Both designs separate command tracking from damping instead of asking a large feedback gain to do everything.
+
+The remaining integration experiment is specific: compare the 1 Hz lateral candidate against the 4 Hz baseline with the selected doubled climb PI, using the same native missions and wind cases. The separate successful trials motivate that combination; they do not establish its combined performance.
 
 ## Scope and next steps
 
