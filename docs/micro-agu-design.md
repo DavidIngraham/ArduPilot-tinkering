@@ -60,11 +60,23 @@ The CAD and build photographs show the configuration flown at Trout Lake. The av
 
 *Inside the core: flight controller, power electronics, and brake-servo wiring.*
 
+## Avionics and power
+
+The Matek H743 runs ArduPlane, taking navigation input from the M10Q-5883 GNSS/compass and pilot commands from the RC receiver. It commands the motor through the ESC and drives the two brake servos independently. The onboard IMU and barometer provide motion and altitude measurements; the microSD card records the flight logs used throughout this series.
+
+![Micro-AGU avionics overview showing battery power, Matek H743 flight controller, GNSS and compass, RC receiver, ESC, motor and two brake servos](assets/micro-agu/avionics.png)
+
+*Orange lines show power; blue lines show control and navigation signals. This is a functional overview, with supply regulation grouped together rather than a connector-level wiring diagram. [Open the vector diagram](assets/micro-agu/avionics.svg).*
+
+The parallel battery packs supply the propulsion system and the regulated avionics and servo supplies. The 50 A BLHeli ESC drives the FFTY 3115 900 KV motor; each DS339HV servo rotates a brake capstan. Independent left and right brake commands let the controller steer through differential pull.
+
+Power integrity became part of the flight-test story too. At Hood River, I was missing an electrolytic capacitor at the Matek stack's power input. The resulting erroneous current readings triggered false throttle power limiting. I corrected that before Trout Lake.
+
 ## A battery I already owned, and propulsion that fit
 
 I already had a 6S Li-ion pack bought from GetFPV for an earlier project, so I built around it. When the aircraft needed more weight, I bought a second pack and connected them in parallel: 6S2P at the pack level, keeping the voltage and adding capacity. That let some of the required mass carry useful energy, although the later lead ballast was still necessary.
 
-The motor was an inexpensive Amazon purchase with a KV close enough for the job. Propeller diameter was a hard constraint imposed by the payload design and my desire to keep it packable. The build uses the 3115 motor and APC 9×6 CW propeller shown in the CAD. I chose a propulsion system that fit the project rather than designing the whole aircraft around maximum endurance.
+The motor was an inexpensive Amazon purchase with a KV close enough for the job. Propeller diameter was a hard constraint imposed by the payload design and my desire to keep it packable. The flown build uses an FFTY 3115 900 KV motor and a 9×4.5 propeller. The saved CAD contains an APC 9×6 CW model; that propeller designation differs from the actual flight hardware. I chose a propulsion system that fit the project rather than designing the whole aircraft around maximum endurance.
 
 The two packs provide **6 Ah total at 6S**, roughly 130 Wh of nominal energy. At Trout Lake they powered a continuous **54.5-minute flight**, using about **85 Wh**. I landed because I had finished testing, with capacity still available. The [flight post](flight-testing.md#what-endurance-did-it-actually-achieve) breaks down the results.
 
