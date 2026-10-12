@@ -1,0 +1,38 @@
+[
+  {
+    "controller": "baseline",
+    "output_column": 1,
+    "rmse": 0.00018135816493781366,
+    "peak_expected": 0.10672315856657083
+  },
+  {
+    "controller": "baseline",
+    "output_column": 4,
+    "rmse": 0.010022951312138572,
+    "peak_expected": 1.3625739043202896
+  },
+  {
+    "controller": "baseline",
+    "output_column": 5,
+    "rmse": 2.006268140252847e-05,
+    "peak_expected": 0.008026185436323965
+  },
+  {
+    "controller": "climb-2",
+    "output_column": 1,
+    "rmse": 0.00019531120606071852,
+    "peak_expected": 0.10653132710288518
+  },
+  {
+    "controller": "climb-2",
+    "output_column": 4,
+    "rmse": 0.011162564374538124,
+    "peak_expected": 1.4481370963549043
+  },
+  {
+    "controller": "climb-2",
+    "output_column": 5,
+    "rmse": 2.211859851387895e-05,
+    "peak_expected": 0.008059418051655696
+  }
+]

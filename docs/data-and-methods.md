@@ -245,3 +245,32 @@ That calm-flight candidate used calibrated feedforward, reduced lateral feedback
 The new [articulated flight viewer](paraglider.md#watching-the-two-bodies-move) puts these relative motions back into a picture of the aircraft. Its looping turn-and-reversal clip shows the SolidWorks payload, moving brake capstans, and RPM-driven pusher propeller alongside the canopy. During controller development I can replay the same internal state used in the plots and inspect how payload pitch differs from canopy attitude. A second [AUTO mission clip](paraglider.md#the-controller-flies-the-mission) now shows native steering and throttle control working together as the aircraft enters a loiter at 90 m, taken from a passing mission test with moderate synthetic gusts. Both viewer clips now apply those gusts through the physics model, with nominal horizontal/vertical RMS speeds of 0.5/0.25 m/s.
 
 The [data and methods appendix](data-and-methods.md) collects flight chronology and earlier simulation provenance. The [current plotting scripts](../research/flight-log-analysis/scripts/native-sitl/) and [figure manifest](../research/flight-log-analysis/manifest.json) preserve this study. Native implementation and updated test instructions are recorded at [ArduPilot commit `c441b937bd`](https://github.com/DavidIngraham/ardupilot/commit/c441b937bd) on `paraglider-high-dof-control`; raw research logs remain in Mission Planner and the original SITL experiment folders.
+## Full-loop longitudinal design
+
+The [consolidated controller article](controller-design.md) describes the selected architecture and tuning. The [post-flight research record](controller-research-record.md) preserves the chronological studies and their historical figures/videos.
+
+The full-loop study reuses the rotor-inclusive plants from the compensated longitudinal analysis: seven local operating cases, each checked at lateral airspeed scales 0.9, 1.15 and 1.4. Ten settings explore three tuning directions. Both baseline and selected settings also pass 126 combined rotor-response sensitivity checks (±30% rotor rate, including nominal), with no unstable closed-loop poles in that set. This tests local model sensitivity; it does not establish flight robustness.
+
+The 15-state plant retains body and relative attitude/rate dynamics, body velocity and rotor RPM. Translation and absolute heading are removed. Frozen-scale steering adds three states; the full longitudinal closure adds altitude, climb PI integration, two pitch filters and the smoothed altitude reference. The height reference is the shaped trajectory: a small 0.1 m ramp over two seconds avoids command and actuator saturation in the linear-validation comparison.
+
+The plant transfer functions are supplied as modal residues and poles. Finite transmission zeros are computed by a generalized eigenvalue problem, with right-half-plane zeros checked directly against the state-space resolvent. No unstable pole-zero cancellation is used to simplify the controller. Loop frequency responses include all feedback paths; the saved crossover phase distances are not standalone stability guarantees for this multiple-crossing loop.
+
+- [Screen and operating-case results](assets/longitudinal-final-design/screen.json)
+- [Plant modes and zeros](assets/longitudinal-final-design/plant-modes-zeros.json), [transfer functions](assets/longitudinal-final-design/transfer-functions.json), [zero verification](assets/longitudinal-final-design/zero-check.json)
+- [Loop crossings](assets/longitudinal-final-design/loop-margins.json) and [Nyquist plot](assets/longitudinal-final-design/nyquist.png)
+- [Rotor sensitivity](assets/longitudinal-final-design/rotor-uncertainty.json) and [full-loop nonlinear validation](assets/longitudinal-final-design/full-loop-validation.json)
+- [Matched gust results](assets/longitudinal-final-design/nonlinear-summary.json) and [stronger independent realization](assets/longitudinal-final-design/nonlinear-strong-summary.json)
+- [Native comparison](assets/longitudinal-final-design/native-results.json), [selected parameters](assets/longitudinal-final-design/native-candidate.json) and [diagnostic candidates](assets/longitudinal-final-design/candidates.json)
+
+Native runs used the feature branch at 2588ecc44a with a parameter override, then selected TECS_VERT_ACC = 3.5 in both mission-development files. The baseline is the archived passing two-stage-damper experiment; comparing logged TECS, steering and battery parameters confirms that TECS_VERT_ACC is the only change. Both new native AUTO tests pass with original assertions unchanged, no backend errors and no clipped packets. Their full BINs and state histories remain in Mission Planner.
+
+For the native settled-loiter metrics, measurement starts 20 seconds after entering a 60 m radius around the loiter center and ends when the mission item changes. Baseline and candidate encounter different gust phases because trajectory timing changes. Matched truth-sensed simulations provide the causal comparison; native runs verify integration. Calm corner overshoot increases from 0.36 to 0.63 m, while gust height error improves. That tradeoff is retained in the recommendation.
+
+Reproduction scripts:
+
+- [Full-loop linear analysis](../tools/longitudinal_final_design.py): --plants PATH_TO_CLASSICAL_LONGITUDINAL_COMPENSATED --output OUTPUT
+- [Nonlinear screen](../tools/gust_control_study.py): --model MODEL_DIR --output OUTPUT --candidates candidates.json; use --seed 20261012 --scale 1.5 for the second realization, or --scale 0 --height-ramp 0.1 for small-command validation.
+- [Native runner](../tools/run_gust_native.sh): ARDUPILOT_REPO OUTPUT native-candidate.json gust (then calm).
+- [Native summarizer](../tools/summarize_gust_mission.py) on each run, then [comparison report](../tools/report_longitudinal_final_native.py) on the study root.
+
+Raw outputs are under Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-final-design. The parent classical-longitudinal-compensated directory contains cached plants and trim states; [the original plant generator](../tools/longitudinal_classical.py) reproduces those. Run the linear analysis again after the nonlinear checks to generate the overlay figure. Final figures, numerical summaries and scripts are archived here; raw logs remain outside Git.

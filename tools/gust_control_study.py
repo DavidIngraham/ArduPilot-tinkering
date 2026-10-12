@@ -11,7 +11,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-p=argparse.ArgumentParser();p.add_argument('--model',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--seed',type=int,default=20261011);p.add_argument('--scale',type=float,default=1.0);p.add_argument('--validation-only',action='store_true');p.add_argument('--two-pole',action='store_true');p.add_argument('--two-pole-hz',type=float,default=.75);p.add_argument('--gain-check',action='store_true');p.add_argument('--cutoff-check',action='store_true');a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--model',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--seed',type=int,default=20261011);p.add_argument('--scale',type=float,default=1.0);p.add_argument('--validation-only',action='store_true');p.add_argument('--two-pole',action='store_true');p.add_argument('--two-pole-hz',type=float,default=.75);p.add_argument('--gain-check',action='store_true');p.add_argument('--cutoff-check',action='store_true');p.add_argument('--candidates',type=Path);p.add_argument('--height-ramp',type=float,default=0);a=p.parse_args()
 sys.path.insert(0,str(a.model));sys.path.insert(0,str(Path(__file__).parents[1]/'viewer/tools'))
 from json_backend import Backend
 from controllers import Turn
@@ -30,6 +30,7 @@ if a.two_pole:cases.update({'two_pole_010':{'q_gain':.1,'q_hz':a.two_pole_hz,'q2
 if a.validation_only:cases={k:cases[k] for k in (['baseline','two_pole_010'] if a.two_pole else ['baseline','slow_pitch_010'])}
 if a.gain_check:cases={f'two_pole_{int(g*1000):03d}':{'q_gain':g,'q_hz':.75,'q2_hz':.75} for g in (.15,.2)}
 if a.cutoff_check:cases={f'two_pole_hz_{int(hz*100):03d}':{'q_gain':.1,'q_hz':hz,'q2_hz':hz} for hz in (1.,1.5)}
+if a.candidates:cases=json.loads(a.candidates.read_text())
 SETTINGS['seed']=a.seed
 SETTINGS['rms_ned_m_s']=[v*a.scale for v in SETTINGS['rms_ned_m_s']]
 rows=[];histories={};dt=.02
@@ -38,10 +39,10 @@ for name,cfg in cases.items():
  if cfg.get('remove034'):gust.amplitude[:,3]=0
  lat=Turn(dt=dt,p=.005,i=.002,rdamp=.003,dff=0,filter_hz=4)
  lat.integral=base[2]/(np.pi*55/360*.1*1500)
- integral=base[0]-.45;last=.45;qf=0;qf2=0;kv=cfg.get('kv',.6/35);trace=[]
+ rateff=0.;integral=base[0]-.45;last=.45;qf=0;qf2=0;kv=cfg.get('kv',.6/35);trace=[]
  for j in range(6001):
   t=j*dt;y=b.state;rot=Rotation.from_quat(y[3:7]);phi,theta,_=rot.as_euler('xyz');rates=rot.inv().apply(y[10:13]);wind=gust.at(t+.5*dt) if t<80 else np.zeros(3)
-  climb=-y[9];height=-y[2];vdes=np.clip((100-height)/10,-2.5,1);err=vdes-climb
+  climb=-y[9];height=-y[2];target=100+a.height_ramp*np.clip((t-2)/2,0,1);targetrate=a.height_ramp/2 if 2<t<4 else 0.;rateff+=dt/(dt+.5)*(targetrate-rateff);vdes=np.clip((target-height)/10+rateff,-2.5,1);err=vdes-climb
   ff=.45+vdes*(.15 if vdes>=0 else .18);pd=np.clip(ff+kv*err,0,.6);pd=np.clip(pd,last-.6*dt,last+.6*dt);last=pd
   integral=np.clip(integral+.3*kv*err*dt,np.clip(-pd-.1,-.3,.3),np.clip(.6-pd+.1,-.3,.3))
   hz=cfg.get('q_hz',.5);qf+=dt/(dt+1/(2*np.pi*hz))*(rates[1]-qf)

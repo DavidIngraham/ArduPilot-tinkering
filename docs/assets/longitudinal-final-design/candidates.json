@@ -1,0 +1,1 @@
+{"current":{"q_gain":0.1,"q_hz":1.5,"q2_hz":1.5},"filter_1hz":{"q_gain":0.1,"q_hz":1.0,"q2_hz":1.0},"climb_x2":{"kv":0.03428571428571429,"q_gain":0.1,"q_hz":1.5,"q2_hz":1.5},"filter_1hz_climb_x2":{"kv":0.03428571428571429,"q_gain":0.1,"q_hz":1.0,"q2_hz":1.0}}

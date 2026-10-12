@@ -1,0 +1,97 @@
+{
+  "gusts": {
+    "seed": 20261011,
+    "rms_ned_m_s": [
+      0.5,
+      0.5,
+      0.25
+    ],
+    "frequencies_hz": [
+      0.08,
+      0.13,
+      0.21,
+      0.34,
+      0.55,
+      0.89
+    ],
+    "ramp_s": 5,
+    "mean_wind_ned_m_s": [
+      0,
+      0,
+      0
+    ],
+    "model": "Uniform smooth random-phase multisine; nominal component RMS, not a Dryden model"
+  },
+  "rows": [
+    {
+      "case": "current",
+      "config": {
+        "q_gain": 0.1,
+        "q_hz": 1.5,
+        "q2_hz": 1.5
+      },
+      "height_rms": 0.40396181212925875,
+      "climb_rms": 0.45531435817535154,
+      "pitch_std": 6.167817790763008,
+      "pitch_rate_rms": 18.027412216191436,
+      "throttle_std": 0.026488613895871583,
+      "throttle_min": 0.40000245754917196,
+      "throttle_max": 0.5179878960394959,
+      "saturation_fraction": 0.0,
+      "recovery_pitch_std": 0.0003174648793106993
+    },
+    {
+      "case": "filter_1hz",
+      "config": {
+        "q_gain": 0.1,
+        "q_hz": 1.0,
+        "q2_hz": 1.0
+      },
+      "height_rms": 0.4029446031554808,
+      "climb_rms": 0.4622206978592652,
+      "pitch_std": 6.634672005357872,
+      "pitch_rate_rms": 19.137013224746163,
+      "throttle_std": 0.026709904331900194,
+      "throttle_min": 0.39723977327243215,
+      "throttle_max": 0.5190699603040694,
+      "saturation_fraction": 0.0,
+      "recovery_pitch_std": 0.00035301343854825853
+    },
+    {
+      "case": "climb_x2",
+      "config": {
+        "kv": 0.03428571428571429,
+        "q_gain": 0.1,
+        "q_hz": 1.5,
+        "q2_hz": 1.5
+      },
+      "height_rms": 0.36548154104573005,
+      "climb_rms": 0.42035339345544664,
+      "pitch_std": 6.235563918532542,
+      "pitch_rate_rms": 18.768641642378068,
+      "throttle_std": 0.03073902883440657,
+      "throttle_min": 0.39111581236435794,
+      "throttle_max": 0.5249695566821855,
+      "saturation_fraction": 0.0,
+      "recovery_pitch_std": 0.0005017682833442469
+    },
+    {
+      "case": "filter_1hz_climb_x2",
+      "config": {
+        "kv": 0.03428571428571429,
+        "q_gain": 0.1,
+        "q_hz": 1.0,
+        "q2_hz": 1.0
+      },
+      "height_rms": 0.36430381649002486,
+      "climb_rms": 0.4268256345527101,
+      "pitch_std": 6.747964116303222,
+      "pitch_rate_rms": 20.09528487786377,
+      "throttle_std": 0.03238511691655986,
+      "throttle_min": 0.38459833843569724,
+      "throttle_max": 0.5295030728033243,
+      "saturation_fraction": 0.0,
+      "recovery_pitch_std": 0.0004712549930044787
+    }
+  ]
+}

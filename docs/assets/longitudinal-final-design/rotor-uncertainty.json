@@ -1,0 +1,884 @@
+[
+  {
+    "case": "climb",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.030945292100869007
+  },
+  {
+    "case": "climb",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.05668579479515706
+  },
+  {
+    "case": "climb",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.030948930212107126
+  },
+  {
+    "case": "climb",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.05672013274489266
+  },
+  {
+    "case": "climb",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.03095089058530449
+  },
+  {
+    "case": "climb",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.05673870233380315
+  },
+  {
+    "case": "climb",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.030945788824787178
+  },
+  {
+    "case": "climb",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.056696230055515
+  },
+  {
+    "case": "climb",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.030949428293618728
+  },
+  {
+    "case": "climb",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.05673066807000345
+  },
+  {
+    "case": "climb",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.030951389399278058
+  },
+  {
+    "case": "climb",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.056749292109483415
+  },
+  {
+    "case": "climb",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.030946306779630763
+  },
+  {
+    "case": "climb",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.05670767438617243
+  },
+  {
+    "case": "climb",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.030949947667448588
+  },
+  {
+    "case": "climb",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.05674222331573996
+  },
+  {
+    "case": "climb",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.030951909538701344
+  },
+  {
+    "case": "climb",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.05676090771680409
+  },
+  {
+    "case": "descent",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.02689491304218968
+  },
+  {
+    "case": "descent",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.052144741117651223
+  },
+  {
+    "case": "descent",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.026897207733567963
+  },
+  {
+    "case": "descent",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.05217417237903085
+  },
+  {
+    "case": "descent",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.02689844392180223
+  },
+  {
+    "case": "descent",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.05219008434728665
+  },
+  {
+    "case": "descent",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.0268950987265433
+  },
+  {
+    "case": "descent",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.05215462230424947
+  },
+  {
+    "case": "descent",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.026897393913901238
+  },
+  {
+    "case": "descent",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.05218415817058219
+  },
+  {
+    "case": "descent",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.026898630369598053
+  },
+  {
+    "case": "descent",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.052200127072406295
+  },
+  {
+    "case": "descent",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.026895292319436076
+  },
+  {
+    "case": "descent",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.052165728514333334
+  },
+  {
+    "case": "descent",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.02689758802486327
+  },
+  {
+    "case": "descent",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.052195383702121435
+  },
+  {
+    "case": "descent",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.026898824759933857
+  },
+  {
+    "case": "descent",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.05221141755868402
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.03082255565963945
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.05593800361603794
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.030825886758118048
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.055966473738935804
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.03082768155759069
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.05598185684855415
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.0308224932334423
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.05593523614338268
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.030825824233361058
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.05596368493244029
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.03082761897971057
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.05597905645490338
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.03082242831712093
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.0559322482427345
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.017167686575312063
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.043487826483706415
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.0031921131116662282
+  },
+  {
+    "case": "dynamic_climb",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.030942003226412496
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.03215269954833657
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.06652500600339457
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.032157193673627724
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.06671529291923768
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.03215961555130464
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.06682208805917256
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.032153252889902416
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.06660393878490263
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.032157748684229194
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.06679935756642184
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.032160171462649594
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.06690923606514221
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.03215383291554252
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.0666965534427608
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.032158330464617094
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.0668983259410699
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.03216075419004627
+  },
+  {
+    "case": "dynamic_roll",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.06701204492010392
+  },
+  {
+    "case": "level",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.032265284289208496
+  },
+  {
+    "case": "level",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.07127745010331962
+  },
+  {
+    "case": "level",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.03227010842678691
+  },
+  {
+    "case": "level",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.07122021375102999
+  },
+  {
+    "case": "level",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.03227270834937447
+  },
+  {
+    "case": "level",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.07118947882877241
+  },
+  {
+    "case": "level",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.03226629042092917
+  },
+  {
+    "case": "level",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.07116989430267005
+  },
+  {
+    "case": "level",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.03227111784127404
+  },
+  {
+    "case": "level",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.0711130036671596
+  },
+  {
+    "case": "level",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.032273719535818896
+  },
+  {
+    "case": "level",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.07108245451978332
+  },
+  {
+    "case": "level",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.032267346902882174
+  },
+  {
+    "case": "level",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.07103949705149248
+  },
+  {
+    "case": "level",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.0322721777818255
+  },
+  {
+    "case": "level",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.07098312564202408
+  },
+  {
+    "case": "level",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.032274781343260305
+  },
+  {
+    "case": "level",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.07095285503889645
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.025481456825966822
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.045555806119617126
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.025482983513121858
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.04556606689758267
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.025483805862067485
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.045571599567744196
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.025481680180541002
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.04555967422319005
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.025483207317704926
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.0455699538351514
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.02548402990923095
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.045575496685260404
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.025481911747162668
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.045563860247616855
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.02548343935156354
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.04557416037724108
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.025484262194958772
+  },
+  {
+    "case": "level_descent_slope",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.04557971431774858
+  },
+  {
+    "case": "low_voltage",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.024334664414343656
+  },
+  {
+    "case": "low_voltage",
+    "scale": 0.9,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.04266165889030103
+  },
+  {
+    "case": "low_voltage",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.0243357960998956
+  },
+  {
+    "case": "low_voltage",
+    "scale": 0.9,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.042668209076914924
+  },
+  {
+    "case": "low_voltage",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.024336405635960415
+  },
+  {
+    "case": "low_voltage",
+    "scale": 0.9,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.04267173934155063
+  },
+  {
+    "case": "low_voltage",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.02433481978699734
+  },
+  {
+    "case": "low_voltage",
+    "scale": 1.15,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.042663851067076215
+  },
+  {
+    "case": "low_voltage",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.024335951756885965
+  },
+  {
+    "case": "low_voltage",
+    "scale": 1.15,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.04267040990840495
+  },
+  {
+    "case": "low_voltage",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.02433656144619722
+  },
+  {
+    "case": "low_voltage",
+    "scale": 1.15,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.04267394484573827
+  },
+  {
+    "case": "low_voltage",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "baseline",
+    "max_real": -0.024334980551957715
+  },
+  {
+    "case": "low_voltage",
+    "scale": 1.4,
+    "rotor_rate": 0.7,
+    "controller": "climb-2",
+    "max_real": -0.042666205673112814
+  },
+  {
+    "case": "low_voltage",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "baseline",
+    "max_real": -0.02433611281639594
+  },
+  {
+    "case": "low_voltage",
+    "scale": 1.4,
+    "rotor_rate": 1,
+    "controller": "climb-2",
+    "max_real": -0.04267277385499376
+  },
+  {
+    "case": "low_voltage",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "baseline",
+    "max_real": -0.02433672266445723
+  },
+  {
+    "case": "low_voltage",
+    "scale": 1.4,
+    "rotor_rate": 1.3,
+    "controller": "climb-2",
+    "max_real": -0.04267631383542035
+  }
+]
