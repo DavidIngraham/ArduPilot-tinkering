@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Micro-AGU joint motions</title>
+    <style>
+      body {
+        margin: 0;
+        background: #10202c;
+        color: #edf5fc;
+        font: 16px system-ui;
+      }
+      main {
+        max-width: 1280px;
+        margin: auto;
+        padding: 14px;
+      }
+      header {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      button,
+      select,
+      input {
+        font: inherit;
+        padding: 8px;
+        background: #233d50;
+        color: white;
+        border: 1px solid #7691a2;
+        border-radius: 5px;
+      }
+      canvas {
+        max-width: 100%;
+        height: auto;
+      }
+      #view {
+        margin-top: 12px;
+      }
+      p {
+        line-height: 1.5;
+      }
+      a {
+        color: #8dd9ff;
+      }
+      #scrub {
+        width: 240px;
+      }
+      #error {
+        color: #ffafa6;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Micro-AGU: motion and joint response</h1>
+      <header>
+        <select id="mode">
+          <option value="tour">Prescribed motion tour</option>
+          <option value="response">Simulated deflection release</option></select
+        ><select id="motion"></select
+        ><select id="profile">
+          <option value="mission">Mission profile</option>
+          <option value="dynamic_roll">Softer-roll profile</option></select
+        ><button id="play">Pause</button><button id="restart">Replay</button
+        ><select id="speed">
+          <option value="1">1×</option>
+          <option value="0.25">¼ speed</option>
+          <option value="0.5">½ speed</option></select
+        ><select id="camera">
+          <option value="oblique">Oblique</option>
+          <option value="front">Front</option>
+          <option value="side">Side</option>
+          <option value="top">Top</option></select
+        ><label
+          ><input id="advance" type="checkbox" checked />Advance through
+          motions</label
+        ><input
+          id="scrub"
+          aria-label="Playback time"
+          type="range"
+          min="0"
+          max="8"
+          step="0.01"
+          value="0"
+        /><button id="record">Record overview</button
+        ><a id="save" hidden download="joint-tour.webm">Save video</a>
+      </header>
+      <p id="description"></p>
+      <div id="view"></div>
+      <p id="error" role="alert"></p>
+      <p>
+        Drag to orbit; scroll to zoom. Dot/line axes use body forward (red),
+        right (green), down (blue). The canopy is schematic; payload geometry
+        comes from CAD. Response mode replays the actual simulator, with fixed
+        trim actuators and no controller. Gray geometry marks the initial
+        orientation. No rotation is amplified.
+      </p>
+    </main>
+    <script type="module" src="/src/joint-tour.ts"></script>
+  </body>
+</html>

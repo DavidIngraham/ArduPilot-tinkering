@@ -1,0 +1,17 @@
+{
+  "kind": "Nine prescribed coordinates followed by three actual-model joint release responses",
+  "duration_s": 96,
+  "response_duration_s": 8,
+  "initial_relative_deflection_deg": 3,
+  "model_commit": "5f483ade60",
+  "response_controls": "fixed trim; no autopilot",
+  "profiles_interactive": [
+    "mission",
+    "dynamic_roll"
+  ],
+  "profile_video": "mission",
+  "raw_hz": 100,
+  "presentation_hz": 20,
+  "camera": "shared attachment translation removed; fixed orientation unless user orbits",
+  "video_sha256": "7d92a31edbaf06b98cdf59e08a425cd02e120d2e7fb76a7b904ae741c63c9e81"
+}

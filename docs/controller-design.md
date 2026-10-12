@@ -28,72 +28,17 @@ The propulsion model uses the reported FFTY 3115-900KV motor and 9×4.5 propelle
 
 The important structural change was moving to two rigid bodies connected by a point joint. Each body has its own attitude and angular velocity. Their shared attachment constrains relative translation while allowing relative roll, pitch and yaw: twelve free-body degrees of freedom minus three positional constraints gives **nine mechanical degrees of freedom**.
 
-![Nine degrees of freedom: three attachment translations, three payload rotations and three canopy rotations relative to the payload](assets/model-mechanics/nine-dof.png)
+[Open the interactive 3D motion tour](https://davidingraham.github.io/assets/microagu-viewer/joint-tour.html) to step through the three translations, three payload rotations and three relative canopy rotations. Use front, side or top views, pause, scrub, or slow playback. The second mode releases a small joint deflection in the actual simulator and compares the mission and softer-roll profiles.
 
-One convenient coordinate choice is attachment position (north, east, down), payload attitude (roll, pitch, yaw), and canopy orientation relative to the payload (three rotations). The implementation stores both bodies’ quaternions and velocities and enforces the attachment constraint. The diagram counts independent motions, not stored state variables. At finite angles, relative rotation uses a rotation vector rather than subtracting Euler angles.
+<video autoplay muted loop playsinline controls preload="metadata" poster="assets/viewer/joint-tour/joint-tour.jpg" style="width:100%;height:auto"><source src="assets/viewer/joint-tour/joint-tour.mp4" type="video/mp4"></video>
+
+*The first nine segments prescribe one coordinate at a time to explain the degrees of freedom. The final three replay simulated roll, pitch and yaw deflection releases with the mission profile. Prescribed motion is labeled separately from physics. The response view removes shared translation, preserving all rotations and relative displacement at their simulated amplitudes. The canopy is schematic; the carriage uses the SolidWorks model.*
 
 A curved five-panel canopy supplies aerodynamic forces and moments. Effective joint stiffness and damping represent the suspension’s resistance to relative rotation, including a mass-dependent yaw restoring term. Thrust acts at the motor’s location relative to the payload CG. That geometry lets the carriage pitch nose-down immediately after a throttle increase while the aircraft eventually climbs. The simulated IMU follows the payload, including its offset from the CG; it does not report canopy attitude.
 
 This is what makes the articulated animation relevant to control design: steering can excite pitch, and the payload gyro can see a motion quite different from the wing’s. Rotor and actuator dynamics add states to the equations without changing the nine mechanical freedoms.
 
 <a id="watching-the-coupled-aircraft-move"></a>
-
-### What the joint spring actually represents
-
-The point constraint keeps the two attachment positions together. It does not lock their orientations. A separate rotational spring and damper apply equal-and-opposite torques to the bodies, representing the net effect of suspension geometry and losses. They are an effective model of a distributed line system, not a literal metal hinge in the aircraft.
-
-For small relative angles, the canopy-side torque has the familiar form, expressed in the payload frame:
-
-~~~text
-relative rotation = log(R_payloadᵀ R_canopy)
-relative angular velocity = R_payloadᵀ (ω_canopy − ω_payload)
-
-τ_canopy ≈ −K × relative rotation − C × relative angular velocity
-τ_payload = −τ_canopy
-~~~
-
-K and C are diagonal in roll, pitch and yaw. At larger angles the implementation maps the spring-energy gradient through the rotation-log Jacobian transpose, rather than applying the small-angle equation blindly. Both torques are transformed into the same world frame before entering the equations of motion.
-
-| Relative axis | Mission stiffness, N m/rad | Joint damping, N m s/rad | How it entered the retained model |
-|---|---:|---:|---|
-| Roll | 4.862 | 0.00103 | Retained fitted values in the aerodynamic base; compared against a softer 1.0 N m/rad alternative |
-| Pitch | 0 | 0.015 | No explicit torsional pitch spring; damping retained as an engineering assumption |
-| Yaw, Hood River | 0.331 | 0.020 | Mass-dependent suspension approximation with calibrated effective attachment spacing |
-| Yaw, Trout Lake | 0.435 | 0.020 | Same geometry/calibration, with the heavier supported payload |
-
-Zero pitch spring does **not** mean zero pitch dynamics or zero restoring action. Gravity, aerodynamic moments and joint reaction forces act through the bodies’ lever arms. The zero removes an additional torque proportional directly to relative pitch. Likewise, the damping values above describe only the explicit joint damper; aerodynamic damping and propulsion coupling also affect the observed modes.
-
-### How the stiffness values were selected
-
-The mission model inherited roll stiffness and roll damping from the retained aerodynamic fit. Those values favored ordinary trajectory agreement, but underrepresented the faster roll motion. The competing dynamic-roll profile reduces roll stiffness to 1.0 N m/rad and adjusts the effective brake zero to recover the nominal straight-flight trim. That is a deliberate alternate explanation of the data, not a measurement showing that the suspension has exactly either stiffness.
-
-Yaw received a more physical treatment after the original weak yaw spring became suspect. The small-twist approximation is
-
-~~~text
-K_yaw = m_payload g a b / h
-
-a = 0.0743 m       payload attachment half-spacing
-b = 0.3236 m       calibrated effective canopy half-spacing
-h = 0.85 m         modeled vertical separation
-~~~
-
-Twisting a separated pair of suspension lines raises the supported payload, giving a restoring moment. This reduced bifilar-suspension relationship uses supported payload mass, not total aircraft mass: 1.195 kg at Hood River and 1.568 kg at Trout Lake. It produces the two yaw stiffnesses in the table. The default uses this constant small-angle stiffness; an optional nonlinear geometric potential is retained for sensitivity work. It does not multiply the stiffness by instantaneous maneuver load.
-
-The effective canopy spacing was calibrated jointly with rotor spin inertia (4.22 × 10⁻⁵ kg m²) against coupled pitch/yaw frequency features in six development windows spanning both flights. The recorded lower peaks were about 1.45–1.75 Hz and the upper peaks about 3.3–4.55 Hz. Their phase relationships helped interpret the coupling. These are calibration targets for the plant modes, distinct from the closed-loop poles discussed later. Rotor speeds used in this comparison are model estimates, not measured flight RPM.
-
-This selection narrows plausible behavior, but it does not uniquely separate suspension stiffness from inertia, aerodynamic moments or damping. Pitch and yaw joint damping were not independently identified by that calibration. That is why the controller studies retain alternative mechanics and inspect both trajectory and rate response rather than treating every coefficient as measured hardware truth.
-
-The [resolved model factory](https://github.com/DavidIngraham/ardupilot/blob/5f483ade60/Tools/simulation/paraglider/simulator.py), [calibration record](https://github.com/DavidIngraham/ardupilot/blob/5f483ade60/Tools/simulation/paraglider/modal-calibration.json) and [profile provenance](https://github.com/DavidIngraham/ardupilot/blob/5f483ade60/Tools/simulation/paraglider/configuration-provenance.json) preserve the values and selection history. Raw defaults alone do not describe the configured model.
-
-### Seeing the modeled motion
-
-<video autoplay muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/reversing-turn-controls-plain.jpg" aria-label="Simulated powered right turn, left reversal and brake release, with an articulated SolidWorks payload close-up">
-  <source src="assets/viewer/reversing-turn-controls-plain.mp4" type="video/mp4">
-  <source src="assets/viewer/reversing-turn-controls-plain.webm" type="video/webm">
-  Your browser does not support inline video.
-</video>
-
-*Scripted inputs in the 9-DOF simulator, with CAD payload articulation. This demonstrates the viewer; it is not an AUTO mission. [Viewer documentation](../viewer/README.md).*
 
 ### Fit useful behavior, retain competing explanations
 

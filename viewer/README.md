@@ -329,3 +329,35 @@ Encode downloaded WebM as H.264/yuv420p, CRF 20, 30 fps, with faststart. Keep br
 `/pitch-fbd.html` renders a 14-second looping side-view comparison with the existing SolidWorks carriage: locked relative pitch on the left, independent payload pitch on the right. Motion stays in one plane. The moving hinge, payload CG, assumed combined CG, incremental pusher thrust and curved thrust-moment arrows explain the sign distinction. The prop is stationary; rotor dynamics are not represented in this illustration.
 
 This is a keyframed mechanical explanation, not a solver trajectory or a reconstruction of the ACRA vehicle. Geometry, timing and angular excursions are illustrative. Use **Record animation**, download the WebM, encode H.264/yuv420p at 30 fps with faststart, and extract a poster at 7 s. Raw captures stay in Mission Planner; the final MP4/poster are in `docs/assets/viewer/pitch-fbd`.
+
+## Interactive DOF and joint-response tour
+
+Open `joint-tour.html`. Motion-tour mode prescribes nine independent coordinates;
+response mode replays six actual-model releases (three axes, two profiles).
+The +3 degree canopy perturbation preserves attachment position/velocity. Trim
+actuators remain fixed: no native controller, turbulence or artificial animation
+is included in the response trajectories. Camera tracking removes only shared
+translation. Model amplitudes are unscaled. Torque is canopy-side, payload-frame,
+using the same log-Jacobian spring law and relative-rate damper as dynamics.cpp.
+
+Generate final playback samples at 20 Hz while keeping 100 Hz raw output outside Git:
+
+```sh
+python tools/make_joint_tour.py --model-dir /path/to/Tools/simulation/paraglider \
+  --output public/joint-tour/responses.json --raw /path/to/Mission-Planner/joint-tour
+```
+
+The generator checks attachment residuals and nonpositive damper power. It records
+the model revision and resolved stiffness/damping in each case. These are short
+presentation datasets, not relocated flight logs. `Record overview` exports the
+nine-motion tour followed by three mission-profile responses as a 96-second WebM.
+The interactive page additionally supports the softer-roll alternative.
+
+Publish the bounded web bundle after `npm run build`:
+
+```sh
+python tools/publish_joint_tour.py /path/to/website/assets/microagu-viewer
+```
+
+Only the tour entry point, its JavaScript dependencies, the payload GLB and final
+presentation samples are copied. Other local recordings are excluded.
