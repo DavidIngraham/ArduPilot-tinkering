@@ -362,12 +362,11 @@ presentation samples are copied. Other local recordings are excluded.
 
 ### Native closed-loop release comparison
 
-The selector includes equilibrium-trim open loop, frozen-AUTO open loop, and
-native AUTO closed loop. The last two have 12 matched releases at 9 degrees (two
-bodies, three axes, two stiffness profiles). Choosing either locks the amplitude
-to 9 degrees. Their release state, RPM, brake positions and physics time steps
-match; the open-loop shadow freezes pre-disturbance commands. The original trim
-cases remain separate so their earlier rotor-coupling experiment is reproducible.
+The selector includes equilibrium-trim open loop and native AUTO closed loop.
+AUTO provides 12 releases at 9 degrees (two bodies, three axes, two profiles).
+Choosing AUTO locks the amplitude to 9 degrees. The original trim cases remain
+available, including the earlier rotor-coupling example. The frozen-command
+shadow remains a raw research diagnostic and is not offered in the widget.
 Camera framing is shared within each body/axis/profile/amplitude comparison.
 
 `make_closed_joint_tour.py` uses the airborne SITL harness and the branch's

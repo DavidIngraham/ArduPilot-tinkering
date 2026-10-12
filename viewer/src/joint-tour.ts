@@ -390,7 +390,7 @@ async function main() {
     ctx.fillText(
       tour
         ? `${n + 1} / 9 · ${names[n]}`
-        : `${["Roll", "Pitch", "Yaw"][n]} ${c.body ?? "canopy"} deflection release · ${c.profile.replace("_", " ")} · ${c.loop === "closed" ? "AUTO" : c.loop === "held" ? "frozen AUTO commands" : "open loop"}`,
+        : `${["Roll", "Pitch", "Yaw"][n]} ${c.body ?? "canopy"} deflection release · ${c.profile.replace("_", " ")} · ${c.loop === "closed" ? "AUTO" : "open loop"}`,
       22,
       35,
     );
@@ -405,7 +405,7 @@ async function main() {
     );
     el("description").textContent = tour
       ? "The selected coordinate is animated while the others are held fixed. Yellow marks its axis. This is a kinematic illustration; no spring response is implied."
-      : `Release from a +${c.amplitude_deg}° ${c.body ?? "canopy"}-only deflection about the selected initial payload axis, with the other body’s attitude unchanged. Each slider step selects a separately simulated response, not an amplified animation. ${c.loop === "closed" ? "Native ArduPilot AUTO follows a straight waypoint leg at 100 m, after 100 seconds of settling (9° comparisons)." : c.loop === "held" ? "Commands are frozen at their pre-disturbance AUTO values, from the same settled state as the closed-loop case." : "Throttle and brakes remain at equilibrium trim."} All axes are free to respond. The camera follows nominal forward motion and actual lateral drift. Fore–aft and vertical disturbance motion remain visible. The gray canopy marks nominal flight. The scrolling 0.5 m reference grid conveys horizontal speed; it is not terrain or an altitude cue. Curves show eight seconds; white marks playback time.`;
+      : `Release from a +${c.amplitude_deg}° ${c.body ?? "canopy"}-only deflection about the selected initial payload axis, with the other body’s attitude unchanged. Each slider step selects a separately simulated response, not an amplified animation. ${c.loop === "closed" ? "Native ArduPilot AUTO follows a straight waypoint leg at 100 m, after 100 seconds of settling (9° comparisons)." : "Throttle and brakes remain at equilibrium trim."} All axes are free to respond. The camera follows nominal forward motion and actual lateral drift. Fore–aft and vertical disturbance motion remain visible. The gray canopy marks nominal flight. The scrolling 0.5 m reference grid conveys horizontal speed; it is not terrain or an altitude cue. Curves show eight seconds; white marks playback time.`;
     if (!tour) {
       graph(
         22,

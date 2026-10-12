@@ -14,6 +14,7 @@ for path in files:
  paired=d['traces'];assert paired['open'][0]['state']==paired['closed'][0]['state']
  assert d['mode']=='AUTO' and d['settle_s']==100
  for loop,frames in paired.items():
+  if loop=='open': continue  # Keep the frozen-command diagnostic in raw research only.
   assert len(frames)==161 and abs(frames[-1]['time_s']-8)<1e-6
   assert all(np.isfinite(f['state']).all() for f in frames)
   k,c=np.array(d['k']),np.array(d['c']);torques=[];performance=[]
