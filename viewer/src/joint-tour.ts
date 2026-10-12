@@ -109,7 +109,8 @@ async function main() {
     0.035,
   );
   scene.add(axisArrow);
-  const grid = new T.GridHelper(40, 80, 0x577384, 0x284554);
+  // All lines must match so wrapping by one grid cell is visually seamless.
+  const grid = new T.GridHelper(40, 80, 0x284554, 0x284554);
   grid.position.y = -0.3;
   scene.add(grid);
   let t = 0,
