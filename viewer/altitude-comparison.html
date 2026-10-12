@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Altitude-command comparison</title>
+    <style>
+      body {
+        background: #0b1520;
+        color: #dce9f2;
+        font: 16px system-ui;
+        margin: 20px;
+      }
+      canvas {
+        max-width: 100%;
+        height: auto;
+      }
+      button,
+      a {
+        margin: 10px;
+        padding: 10px;
+      }
+      a {
+        color: #70d8c6;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="record" disabled>Record comparison</button
+    ><a id="save" hidden>Save video</a
+    ><span id="status">Loading states and CAD</span>
+    <div id="view"></div>
+    <script type="module" src="/src/altitude-comparison.ts"></script>
+  </body>
+</html>

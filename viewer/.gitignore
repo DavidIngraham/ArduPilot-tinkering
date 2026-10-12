@@ -3,3 +3,4 @@ dist/
 *.jsonl
 *.npz
 public/pitch-sign
+public/altitude-comparison

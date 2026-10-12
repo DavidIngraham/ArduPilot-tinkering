@@ -1,0 +1,63 @@
+{
+  "model_commit": "2588ecc44aa75594c475b3c38eeebf89583067de",
+  "description": "Standalone height-loop algebra with truth sensing, not native SITL. Same lateral controller, initial trim, 22.2 V, 1.758 kg, calm air. Height step 100 to 105 m at 5 s. Pitch damping enabled at that instant in all nonzero cases. No artificial pitch kick.",
+  "height_time_constant_s": 10,
+  "feedforward_filter_s": 0.5,
+  "climb_limit_m_s": 1,
+  "sink_limit_m_s": 2.5,
+  "throttle_limit": 0.6,
+  "cases": [
+    {
+      "case": "Damper off",
+      "gain": 0,
+      "filter_hz": 10,
+      "stages": 1,
+      "final_altitude_m": 104.97556802195608,
+      "altitude_minmax_m": [
+        100.0,
+        104.97556802195608
+      ],
+      "pitch_rate_rms_last_10s": 0.008115856986110111,
+      "throttle_saturation_fraction": 0.0
+    },
+    {
+      "case": "Original sign",
+      "gain": 0.1,
+      "filter_hz": 10,
+      "stages": 1,
+      "final_altitude_m": 103.12150760465354,
+      "altitude_minmax_m": [
+        100.0,
+        103.12150760465354
+      ],
+      "pitch_rate_rms_last_10s": 136.04547834071514,
+      "throttle_saturation_fraction": 0.38960462016881386
+    },
+    {
+      "case": "Reversed sign",
+      "gain": -0.1,
+      "filter_hz": 10,
+      "stages": 1,
+      "final_altitude_m": 101.84314651544571,
+      "altitude_minmax_m": [
+        100.0,
+        104.88403706192568
+      ],
+      "pitch_rate_rms_last_10s": 73.53653974514869,
+      "throttle_saturation_fraction": 0.17103509551310528
+    },
+    {
+      "case": "Current filter",
+      "gain": 0.1,
+      "filter_hz": 1.5,
+      "stages": 2,
+      "final_altitude_m": 104.97610473179188,
+      "altitude_minmax_m": [
+        100.0,
+        104.97610473179188
+      ],
+      "pitch_rate_rms_last_10s": 0.008005100488245454,
+      "throttle_saturation_fraction": 0.0
+    }
+  ]
+}
