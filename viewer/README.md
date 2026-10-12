@@ -332,12 +332,11 @@ This is a keyframed mechanical explanation, not a solver trajectory or a reconst
 
 ## Interactive DOF and joint-response tour
 
-Open `joint-tour.html`. Motion-tour mode prescribes nine independent coordinates;
-response mode replays six actual-model releases (three axes, two profiles).
-The +3 degree canopy perturbation preserves attachment position/velocity. Trim
+Open `joint-tour.html`; it defaults to the 9-degree disturbance response. A scrolling 0.5 m reference grid shows horizontal translation speed (not terrain height). Motion-tour mode prescribes nine independent coordinates;
+response mode replays 30 actual-model releases (three axes, two profiles, five amplitudes).
+The disturbance slider selects 3–15 degrees in 3-degree steps, defaulting to 9. Each canopy perturbation preserves attachment position/velocity. Trim
 actuators remain fixed: no native controller, turbulence or artificial animation
-is included in the response trajectories. Camera tracking removes only shared
-translation. Model amplitudes are unscaled. Torque is canopy-side, payload-frame,
+is included in the response trajectories. The camera follows the initial trimmed attachment velocity, independently of the disturbed trajectory. Relative to that straight-flight reference, payload and canopy translation remain visible; the gray canopy marks the nominal position and initial attitude. Model amplitudes are unscaled. Torque is canopy-side, payload-frame,
 using the same log-Jacobian spring law and relative-rate damper as dynamics.cpp.
 
 Generate final playback samples at 20 Hz while keeping 100 Hz raw output outside Git:
@@ -351,7 +350,7 @@ The generator checks attachment residuals and nonpositive damper power. It recor
 the model revision and resolved stiffness/damping in each case. These are short
 presentation datasets, not relocated flight logs. `Record overview` exports the
 nine-motion tour followed by three mission-profile responses as a 96-second WebM.
-The interactive page additionally supports the softer-roll alternative.
+The interactive page additionally supports the softer-roll alternative and the disturbance-size slider. The existing article video records the original 3-degree cases.
 
 Publish the bounded web bundle after `npm run build`:
 

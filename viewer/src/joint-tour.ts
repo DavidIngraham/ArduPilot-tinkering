@@ -4,6 +4,7 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { sample, position, orientation, worldBasis, type Frame } from "./state";
 import { rigPayload, poseMechanisms, type Mechanisms } from "./mechanisms";
 type Case = {
+  amplitude_deg: number;
   profile: string;
   axis: string;
   hinge: number[];
@@ -38,7 +39,7 @@ async function main() {
   const camera = orbit.object as T.PerspectiveCamera;
   orbit.enablePan = false;
   orbit.minDistance = 1.4;
-  orbit.maxDistance = 8;
+  orbit.maxDistance = 100;
   orbit.target.set(0, 0.4, 0);
   const scene = new T.Scene();
   scene.background = new T.Color("#142735");
@@ -108,7 +109,7 @@ async function main() {
     0.035,
   );
   scene.add(axisArrow);
-  const grid = new T.GridHelper(4, 20, 0x577384, 0x284554);
+  const grid = new T.GridHelper(40, 80, 0x577384, 0x284554);
   grid.position.y = -0.3;
   scene.add(grid);
   let t = 0,
@@ -135,6 +136,7 @@ async function main() {
       .map((n, i) => `<option value="${i}">${n}</option>`)
       .join("");
     sel("profile").disabled = sel("mode").value === "tour";
+    el<HTMLInputElement>("amplitude").disabled = sel("mode").value === "tour";
     t = 0;
     setCamera();
   }
@@ -153,6 +155,11 @@ async function main() {
     camera.lookAt(orbit.target);
     orbit.update();
   }
+  el<HTMLInputElement>("amplitude").oninput = () => {
+    el("amplitude-value").textContent =
+      el<HTMLInputElement>("amplitude").value + "°";
+    t = 0;
+  };
   options();
   sel("mode").onchange = options;
   sel("camera").onchange = setCamera;
@@ -220,6 +227,7 @@ async function main() {
       y + h + 20,
     );
   }
+  let framingKey = "";
   function draw() {
     const tour = sel("mode").value === "tour",
       n = +sel("motion").value,
@@ -227,9 +235,34 @@ async function main() {
     const c = data.cases.find(
       (c) =>
         c.profile === sel("profile").value &&
-        c.axis === ["roll", "pitch", "yaw"][axis],
+        c.axis === ["roll", "pitch", "yaw"][axis] &&
+        c.amplitude_deg === +el<HTMLInputElement>("amplitude").value,
     )!;
     const base = c.frames[0];
+    const key = `${tour}:${c.profile}:${c.axis}:${c.amplitude_deg}:${sel("camera").value}`;
+    if (key !== framingKey) {
+      framingKey = key;
+      orbit.target.set(0, 0.4, 0);
+      setCamera();
+      if (!tour) {
+        const q = new T.Quaternion().fromArray(base.state, 3);
+        const lever = new T.Vector3(...(c.hinge as [number, number, number])).applyQuaternion(q);
+        const origin = new T.Vector3().fromArray(base.state).add(lever);
+        const velocity = new T.Vector3().fromArray(base.state, 7)
+          .add(new T.Vector3().fromArray(base.state, 10).cross(lever));
+        const bounds = new T.Box3();
+        for (const frame of c.frames) {
+          const ref = origin.clone().addScaledVector(velocity, frame.time_s);
+          for (const offset of [0, 13]) bounds.expandByPoint(position(new T.Vector3().fromArray(frame.state, offset).sub(ref).toArray()));
+        }
+        bounds.expandByScalar(1.1);
+        const sphere = bounds.getBoundingSphere(new T.Sphere());
+        const direction = camera.position.clone().sub(orbit.target).normalize();
+        orbit.target.copy(sphere.center);
+        camera.position.copy(orbit.target).addScaledVector(direction, sphere.radius / Math.sin(T.MathUtils.degToRad(camera.fov / 2)));
+        camera.lookAt(orbit.target);
+      }
+    }
     let f = sample(c.frames, t),
       rp = new T.Quaternion(),
       rc = new T.Quaternion(),
@@ -238,6 +271,8 @@ async function main() {
     const hp = new T.Vector3(...(c.hinge as [number, number, number])),
       hc = new T.Vector3(0, 0, 0.85);
     let H = new T.Vector3();
+    let nominalSpeed = 0;
+    grid.position.set(0, -0.3, 0);
     const unit = new T.Vector3().setComponent(tour && n < 3 ? n : axis, 1);
     if (tour) {
       const amp = Math.sin((t / 8) * Math.PI * 2);
@@ -251,12 +286,22 @@ async function main() {
     } else {
       rp.fromArray(f.state, 3);
       rc.fromArray(f.state, 16);
-      const origin = new T.Vector3()
-        .fromArray(f.state)
-        .add(hp.clone().applyQuaternion(rp));
+      // Follow the undisturbed straight-flight reference, never the disturbed CG.
+      const baseRp = new T.Quaternion().fromArray(base.state, 3);
+      const lever = hp.clone().applyQuaternion(baseRp);
+      const nominalVelocity = new T.Vector3().fromArray(base.state, 7)
+        .add(new T.Vector3().fromArray(base.state, 10).cross(lever));
+      nominalSpeed = nominalVelocity.length();
+      const travel = position(nominalVelocity.clone().multiplyScalar(t).toArray());
+      // A nearby reference plane, not terrain at the simulated 100 m altitude.
+      // Wrap on the 0.5 m grid spacing for continuous world-locked optical flow.
+      grid.position.x = -((travel.x % 0.5 + 0.5) % 0.5);
+      grid.position.z = -((travel.z % 0.5 + 0.5) % 0.5);
+      const origin = new T.Vector3().fromArray(base.state)
+        .add(lever).addScaledVector(nominalVelocity, t);
       pp.fromArray(f.state).sub(origin);
       pc.fromArray(f.state, 13).sub(origin);
-      H.set(0, 0, 0);
+      H.copy(pp).add(hp.clone().applyQuaternion(rp));
     }
     payload.position.copy(position(pp.toArray()));
     payload.quaternion.copy(worldBasis).multiply(rp);
@@ -270,7 +315,7 @@ async function main() {
       : new T.Quaternion().fromArray(base.state, 16);
     ghost.quaternion.copy(worldBasis).multiply(gq);
     ghost.position.copy(
-      position(H.clone().sub(hc.clone().applyQuaternion(gq)).toArray()),
+      position((tour ? H.clone() : new T.Vector3()).sub(hc.clone().applyQuaternion(gq)).toArray()),
     );
     axisArrow.setDirection(
       position(
@@ -332,13 +377,13 @@ async function main() {
     ctx.fillText(
       tour
         ? "Prescribed motion · not a physics response"
-        : `Actual simulator · +3° initial deflection · fixed trim controls · ${t.toFixed(2)} s`,
+        : `Actual simulator · +${c.amplitude_deg}° initial deflection · trim speed ${nominalSpeed.toFixed(1)} m/s · ${t.toFixed(2)} s`,
       22,
       615,
     );
     el("description").textContent = tour
       ? "The selected coordinate is animated while the others are held fixed. Yellow marks its axis. This is a kinematic illustration; no spring response is implied."
-      : "Release from a +3° relative deflection about the selected payload axis. All axes are free to respond. The camera removes shared translation but preserves every rotation and relative displacement. Curves show the full eight-second response; white marks playback time.";
+      : `Release from a +${c.amplitude_deg}° relative deflection about the selected payload axis. Each slider step selects a separately simulated response, not an amplified animation. All axes are free to respond. The camera follows the initial trimmed flight velocity; disturbance-driven translation remains visible. The gray canopy marks nominal flight. The scrolling 0.5 m reference grid conveys horizontal speed; it is not terrain or an altitude cue. Curves show eight seconds; white marks playback time.`;
     if (!tour) {
       graph(
         22,

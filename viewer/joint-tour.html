@@ -59,12 +59,24 @@
       <header>
         <select id="mode">
           <option value="tour">Prescribed motion tour</option>
-          <option value="response">Simulated deflection release</option></select
+          <option value="response" selected>Simulated deflection release</option></select
         ><select id="motion"></select
         ><select id="profile">
           <option value="mission">Mission profile</option>
           <option value="dynamic_roll">Softer-roll profile</option></select
-        ><button id="play">Pause</button><button id="restart">Replay</button
+        ><label
+          >Disturbance
+          <input
+            id="amplitude"
+            type="range"
+            min="3"
+            max="15"
+            step="3"
+            value="9"
+            aria-label="Disturbance angle"
+          /><output id="amplitude-value">9°</output></label
+        >
+        <button id="play">Pause</button><button id="restart">Replay</button
         ><select id="speed">
           <option value="1">1×</option>
           <option value="0.25">¼ speed</option>
