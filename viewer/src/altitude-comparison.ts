@@ -1,3 +1,4 @@
+import { cameraPath, cameraAt } from "./camera-path";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import {
@@ -113,13 +114,7 @@ const scenes = await Promise.all(
       new THREE.LineBasicMaterial({ color: 0xa8c7cf }),
     );
     scene.add(lines);
-    const centers = frames.map((f, i) => {
-      const lo = Math.max(0, i - 25),
-        hi = Math.min(frames.length - 1, i + 25);
-      return position(frames[lo].state.slice(0, 3))
-        .add(position(frames[hi].state.slice(0, 3)))
-        .multiplyScalar(0.5);
-    });
+    const centers = cameraPath(frames);
     camera.left = -2.1;
     camera.right = 2.1;
     camera.top = 1.35;
@@ -219,8 +214,7 @@ function draw(t: number) {
       y = 92 + Math.floor(i / 2) * 455,
       s = scenes[i],
       f = sample(tracks[i], t),
-      index = Math.min(s.centers.length - 1, Math.round(t / 0.02)),
-      origin = s.centers[index];
+      origin = cameraAt(tracks[i], s.centers, t);
     s.body.position.copy(position(f.state.slice(0, 3)).sub(origin));
     s.body.quaternion.copy(orientation(f.state.slice(3, 7)));
     s.canopy.position.copy(position(f.state.slice(13, 16)).sub(origin));
