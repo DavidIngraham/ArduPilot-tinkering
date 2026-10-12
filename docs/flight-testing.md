@@ -41,7 +41,7 @@ A big part of that first flight was simply flying it by hand to feel out the pla
 
 *The first sustained Hood River flight in 3D. Orange is MANUAL, blue is FBWA, purple is CRUISE, and yellow is LOITER. The white point marks the selected flight start. The grid spacing is 50 m, with equal horizontal and vertical spatial scale; height is referenced to the estimator origin, not terrain.*
 
-<video controls playsinline preload="metadata" poster="assets/flight-testing/replay/hood-river-recap.jpg" style="width:100%;height:auto"><source src="assets/flight-testing/replay/hood-river-recap.mp4" type="video/mp4"></video>
+<video controls playsinline preload="metadata" poster="assets/flight-testing/replay/hood-river-recap.jpg" style="width:100%;height:auto" autoplay muted><source src="assets/flight-testing/replay/hood-river-recap.mp4" type="video/mp4"></video>
 
 *Hood River replay: the complete flight in 45 seconds, then a manual banking manoeuvre and a MANUAL-to-FBWA transition at real speed. The payload view follows the logged attitude; the lower plots show payload roll/pitch and throttle/left/right brake commands. The manual excerpt includes the roughly 55° bank near boot time 766 s.*
 
@@ -67,7 +67,7 @@ That did not mean the controller was finished. The early part of the flight invo
 
 *Trout Lake, February 15: tuning early in the flight, followed by quieter autonomous operation. Green marks AUTO mode.*
 
-<video controls playsinline preload="metadata" poster="assets/flight-testing/replay/trout-lake-recap.jpg" style="width:100%;height:auto"><source src="assets/flight-testing/replay/trout-lake-recap.mp4" type="video/mp4"></video>
+<video controls playsinline preload="metadata" poster="assets/flight-testing/replay/trout-lake-recap.jpg" style="width:100%;height:auto" autoplay muted><source src="assets/flight-testing/replay/trout-lake-recap.mp4" type="video/mp4"></video>
 
 *Trout Lake replay: the full 54.5-minute flight in 45 seconds, followed by real-time excerpts around disabling the pitch damper (boot time 655.8 s) and a later AUTO circuit. The same attitude and control-output plots make the early oscillation and later behaviour directly visible.*
 

@@ -288,13 +288,13 @@ The [feature branch’s paired mission-development parameter files](https://gith
 
 These diagnostic videos retain the earlier climb-feedback setting to isolate the damper configurations. They explain the architecture; they are not recordings of the doubled-PI candidate.
 
-<video controls muted loop playsinline preload="metadata" poster="assets/viewer/pitch-sign/pitch-sign-carriage.jpg" style="width:100%">
+<video controls muted loop playsinline preload="metadata" poster="assets/viewer/pitch-sign/pitch-sign-carriage.jpg" style="width:100%" autoplay>
   <source src="assets/viewer/pitch-sign/pitch-sign-carriage.mp4" type="video/mp4">
 </video>
 
 *Identical small pitch-rate disturbances: damper off, fast original sign, reversed sign, and two-stage filtering. The camera preserves carriage translation and rotation. Standalone truth-sensed simulation.*
 
-<video controls muted loop playsinline preload="metadata" poster="assets/viewer/altitude-comparison/altitude-comparison-smooth-camera.jpg" style="width:100%">
+<video controls muted loop playsinline preload="metadata" poster="assets/viewer/altitude-comparison/altitude-comparison-smooth-camera.jpg" style="width:100%" autoplay>
   <source src="assets/viewer/altitude-comparison/altitude-comparison-smooth-camera.mp4" type="video/mp4">
 </video>
 
@@ -316,7 +316,7 @@ The calm, gust and crosswind clips below show native AUTO with the same two-stag
 
 **Calm air**
 
-<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-calm-profile-plain.jpg" aria-label="Calm-air native AUTO mission with ground track, altitude side profile, throttle history and brake pull">
+<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-calm-profile-plain.jpg" aria-label="Calm-air native AUTO mission with ground track, altitude side profile, throttle history and brake pull" autoplay>
   <source src="assets/viewer/auto-calm-profile-plain.mp4" type="video/mp4">
   <source src="assets/viewer/auto-calm-profile-plain.webm" type="video/webm">
   Your browser does not support inline video.
@@ -324,7 +324,7 @@ The calm, gust and crosswind clips below show native AUTO with the same two-stag
 
 **Moderate synthetic gusts**
 
-<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-gust-profile-plain.jpg" aria-label="Gusty native AUTO mission with ground track, altitude side profile, throttle history and brake pull">
+<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-gust-profile-plain.jpg" aria-label="Gusty native AUTO mission with ground track, altitude side profile, throttle history and brake pull" autoplay>
   <source src="assets/viewer/auto-gust-profile-plain.mp4" type="video/mp4">
   <source src="assets/viewer/auto-gust-profile-plain.webm" type="video/webm">
   Your browser does not support inline video.
@@ -332,7 +332,7 @@ The calm, gust and crosswind clips below show native AUTO with the same two-stag
 
 **Steady 2 m/s eastward wind**
 
-<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-crosswind-profile-plain.jpg" aria-label="Native AUTO mission in steady 2 m/s eastward wind with ground track, altitude side profile, throttle history and brake pull">
+<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-crosswind-profile-plain.jpg" aria-label="Native AUTO mission in steady 2 m/s eastward wind with ground track, altitude side profile, throttle history and brake pull" autoplay>
   <source src="assets/viewer/auto-crosswind-profile-plain.mp4" type="video/mp4">
   <source src="assets/viewer/auto-crosswind-profile-plain.webm" type="video/webm">
   Your browser does not support inline video.

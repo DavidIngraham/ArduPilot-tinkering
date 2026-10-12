@@ -70,7 +70,7 @@ The articulated model showed why that assumption could fail. The thrust line is 
 
 *The pusher thrust acts above the payload CG, creating a nose-down moment. The canopy and payload react through the suspension. Schematic, not to scale.*
 
-<video controls muted loop playsinline preload="metadata" poster="assets/viewer/pitch-fbd/pitch-fbd.jpg" style="width:100%;height:auto"><source src="assets/viewer/pitch-fbd/pitch-fbd.mp4" type="video/mp4"></video>
+<video controls muted loop playsinline preload="metadata" poster="assets/viewer/pitch-fbd/pitch-fbd.jpg" style="width:100%;height:auto" autoplay><source src="assets/viewer/pitch-fbd/pitch-fbd.mp4" type="video/mp4"></video>
 
 *Left: my original whole-aircraft picture, with relative pitch locked and thrust below an assumed combined CG. Right: the payload can pitch independently; thrust acts above its CG, and its initial response is nose-down while the upper attachment moves forward. The side view uses the carriage CAD with schematic suspension and canopy. Geometry, angles and timing illustrate the mechanism rather than reproducing a simulation trace. The arrows isolate the incremental thrust moment; suspension reactions and aerodynamic forces also enter the full dynamics. The locked connection illustrates my assumption, not the ACRA aircraft’s construction.*
 

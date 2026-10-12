@@ -202,7 +202,7 @@ The following three clips show the same mission segment and controller configura
 
 **Calm air**
 
-<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-calm-profile-plain.jpg" aria-label="Calm-air native AUTO mission with ground track, altitude side profile, throttle history and brake pull">
+<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-calm-profile-plain.jpg" aria-label="Calm-air native AUTO mission with ground track, altitude side profile, throttle history and brake pull" autoplay>
   <source src="assets/viewer/auto-calm-profile-plain.mp4" type="video/mp4">
   <source src="assets/viewer/auto-calm-profile-plain.webm" type="video/webm">
   Your browser does not support inline video.
@@ -212,7 +212,7 @@ The following three clips show the same mission segment and controller configura
 
 **Moderate synthetic gusts**
 
-<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-gust-profile-plain.jpg" aria-label="Gusty native AUTO mission with ground track, altitude side profile, throttle history and brake pull">
+<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-gust-profile-plain.jpg" aria-label="Gusty native AUTO mission with ground track, altitude side profile, throttle history and brake pull" autoplay>
   <source src="assets/viewer/auto-gust-profile-plain.mp4" type="video/mp4">
   <source src="assets/viewer/auto-gust-profile-plain.webm" type="video/webm">
   Your browser does not support inline video.
@@ -222,7 +222,7 @@ The following three clips show the same mission segment and controller configura
 
 **Steady crosswind**
 
-<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-crosswind-profile-plain.jpg" aria-label="Native AUTO mission in steady 2 m/s eastward wind with ground track, altitude side profile, throttle history and brake pull">
+<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-crosswind-profile-plain.jpg" aria-label="Native AUTO mission in steady 2 m/s eastward wind with ground track, altitude side profile, throttle history and brake pull" autoplay>
   <source src="assets/viewer/auto-crosswind-profile-plain.mp4" type="video/mp4">
   <source src="assets/viewer/auto-crosswind-profile-plain.webm" type="video/webm">
   Your browser does not support inline video.
@@ -302,7 +302,7 @@ To understand what the damper should add to that baseline, I separated two quest
 
 This comparison uses the current 9-DOF plant, Trout Lake mass (1.758 kg), 22.2 V and the same asymmetric brake trim. At two seconds, each run receives the same +5°/s payload pitch-rate disturbance. The base throttle stays at its level-flight trim; only the pitch-feedback correction changes. Holding the brakes fixed removes steering excitation from this experiment.
 
-<video controls muted loop playsinline preload="metadata" poster="assets/viewer/pitch-sign/pitch-sign-carriage.jpg" style="width:100%">
+<video controls muted loop playsinline preload="metadata" poster="assets/viewer/pitch-sign/pitch-sign-carriage.jpg" style="width:100%" autoplay>
   <source src="assets/viewer/pitch-sign/pitch-sign-carriage.mp4" type="video/mp4">
 </video>
 
@@ -316,7 +316,7 @@ The large oscillation is a diagnostic result, not a prediction of the exact Hood
 
 The small-disturbance comparison leaves a practical question: what happens when the controller deliberately asks the aircraft to climb? This experiment commands **100 → 105 m at five seconds**, with the same height loop and lateral controller in every run. There is no injected pitch kick. Each nonzero pitch damper is enabled with the altitude command, after the same initial settling period. The height loop converts altitude error to a limited climb-rate demand and uses the same 0.5-second feedforward smoothing; throttle is capped at 60%.
 
-<video controls muted loop playsinline preload="metadata" poster="assets/viewer/altitude-comparison/altitude-comparison-smooth-camera.jpg" style="width:100%">
+<video controls muted loop playsinline preload="metadata" poster="assets/viewer/altitude-comparison/altitude-comparison-smooth-camera.jpg" style="width:100%" autoplay>
   <source src="assets/viewer/altitude-comparison/altitude-comparison-smooth-camera.mp4" type="video/mp4">
 </video>
 
