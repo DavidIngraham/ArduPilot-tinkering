@@ -1,0 +1,17 @@
+{
+  "feature_commit": "76c18af01d",
+  "selected_trial": 1,
+  "replay_seconds": 22,
+  "video_seconds": 24.033333,
+  "video_end_hold_seconds": 2,
+  "endpoint": "First payload-CG ground-plane crossing; no impact physics",
+  "files": {
+    "landing-iteration.png": "ffc0806b1b23dd05d94462a139c4f853334d358a8f4ba822d9269272675b3022",
+    "summary.json": "9d140cc38f9e89ba75d213b4597ce72b8634c14f9da03778ece9497c1ef4de95",
+    "experiment.json": "1ff0ca8592fa0cf1fcd56dac3f8fd02f05403b298732600ed38daa2697397da2",
+    "spot-landing.mp4": "ffbe5fa0509959245194da265047d8eabf09ecd9291372de25621f69d69b5c46",
+    "source-sha256.json": "206debf7bb15f4d97c189d231d7c9aa817690f980d8c1b90b9711b721b46737f",
+    "replay.json": "8434c5af4193e9db7b87e98329c370db6a2a2b0d561bf47aa3e88fefd14f7351",
+    "spot-landing.jpg": "07524392eed570877e84b1ca77df8a78e212c82cf9f30d5beff3542dcdf180fa"
+  }
+}

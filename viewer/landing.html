@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Micro-AGU spot landing</title>
+    <style>
+      body {
+        margin: 0;
+        background: #102330;
+        color: #edf5ff;
+        font: 15px system-ui;
+      }
+      canvas {
+        width: 100%;
+        display: block;
+        touch-action: none;
+      }
+      header {
+        padding: 12px;
+      }
+      button,
+      input {
+        margin: 4px;
+      }
+      #time {
+        width: 45%;
+      }
+      a {
+        color: #8fdac6;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <button id="play">Pause</button><button id="restart">Restart</button
+      ><button id="record">Record clip</button
+      ><a id="save" hidden download="spot-landing.webm">Save clip</a
+      ><input aria-label="Replay time" id="time" type="range" min="0" step=".01" /><span id="status"
+        >Loading…</span
+      >
+      <div>
+        Drag to orbit · scroll / pinch to zoom · bullseye rings: 1, 2 and 5 m
+      </div>
+    </header>
+    <div id="view"></div>
+    <script type="module" src="/src/landing.ts"></script>
+  </body>
+</html>

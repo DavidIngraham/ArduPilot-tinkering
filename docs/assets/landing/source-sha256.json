@@ -1,0 +1,10 @@
+{
+  "Tools/simulation/paraglider/landing_autotest.py": "444b30479c9f6ed3e7f33eae645753013cacacd7e51cd08d4ed3cc8ca883595c",
+  "Tools/simulation/paraglider/landing_monte_carlo.py": "82b68bf96d6bfcdacaf0bd6316db1a0fd36fbceed19a8e0e344139c4af23d2a8",
+  "Tools/simulation/paraglider/landing-spot-candidate.parm": "9b9caa0b2e745ed148693ce3539b8fbb4aa88cb7bd58d81a86046cd1f3a47376",
+  "Tools/simulation/paraglider/json_backend.py": "daee7d03d31fc2badcfa669c6246e4fa3d20c2eac22981095538cde9254f5324",
+  "Tools/simulation/paraglider/compare_autotest.py": "1065f6c01f505414365d18ac31fa5134ad1325c46650d7a18df3f8da00bcb89a",
+  "Tools/simulation/paraglider/sitl.parm": "5f482f96e6ccb3c3cbc1d46a674e645ba52eacb2d044d69762cf4d7a375cb8ba",
+  "build/sitl/bin/arduplane": "228fc434eddea12e8c0cfa0016003e88ee69693555da0a0fdba0269a7f017503",
+  "Tools/simulation/paraglider/libdynamics.so": "19d488f1d1dc3867e831607cb8b506296db3ed051e615b4566c19afce877092e"
+}

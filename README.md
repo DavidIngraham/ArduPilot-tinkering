@@ -72,3 +72,10 @@ Local report assets remain available so the existing research log keeps renderin
 
 [Micro-AGU flight viewer](viewer/README.md) provides a local Three.js replay and live
 SITL view of the canopy, payload, joint motion, and actuator states.
+
+## Spot-landing study
+
+[Spot Landing: Fixing the Approach Before Tuning the Flare](docs/spot-landing.md)
+covers the moderate native AUTO flare, one bounded aiming-parameter iteration,
+and 12 fresh paired conditions. It includes an orbitable 3D replay with an
+earth-fixed bullseye, moving ground reference and actuator histories.

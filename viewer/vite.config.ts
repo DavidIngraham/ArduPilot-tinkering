@@ -9,6 +9,7 @@ export default defineConfig({
         "pitch-fbd.html",
         "trim-launch.html",
         "joint-tour.html",
+        "landing.html",
       ],
       output: { manualChunks: { three: ["three"] } },
     },

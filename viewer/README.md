@@ -393,3 +393,23 @@ python viewer/tools/package_closed_joint_tour.py --repo /path/to/ardupilot --raw
 `trim-launch.html` illustrates the pilot-confirmed inverted start, arcing inflation, upright release and passive glide. It uses the payload GLB with a schematic canopy and explicitly keyframed motion, not the flight solver. No active control or propeller rotation is applied. Use **Start pose**, **Release pose**, pause/scrub and **Record animation** to inspect or export the 18-second sequence. Encode the downloaded WebM with `tools/encode_showcase.sh input.webm ../docs/assets/flight-testing trim-launch`.
 
 The Opale reference is `UEoCY5cZiRg`: French automatic captions reviewed at 6:37–7:53 (temporary knots and symmetry marks), 8:15–9:55 (released-brake inflation/lengthening), and 10:00–10:25 (full-brake inflation check). The pilot’s powered-off drum/glide method is personal testimony, not attributed to that video.
+
+## Spot-landing replay
+
+Open `landing.html` for the native AUTO final-approach replay. Drag to orbit,
+scroll/pinch to zoom, pause or scrub. The earth-fixed 1 m floor grid moves through
+the following camera; bullseye radii are 1, 2 and 5 m at the uploaded mission
+target. Attitude, RPM, applied brake travel and throttle use the recorded backend
+state. The side profile exaggerates height and is accompanied by actuator plots.
+
+The presentation stops at first payload-CG ground-plane crossing. It does not
+animate an impact or canopy collapse. The packaged 22-second excerpt is selected
+near the median successful miss, using `tools/landing_iteration_report.py`.
+Raw logs and full recordings stay in Mission Planner.
+
+Build with `npm run build`, then publish the bounded bundle using
+`python tools/publish_landing.py /path/to/website/assets/microagu-viewer`.
+`tools/capture_landing.mjs URL OUTPUT_DIRECTORY 24` renders deterministic 30 Hz
+PNG frames using an installed Playwright; set PLAYWRIGHT_MODULE when necessary.
+Encode those frames with ffmpeg as H.264/yuv420p, CRF 20, faststart. This produces
+the same replay as the interactive applet, with its default camera.
