@@ -408,3 +408,5 @@ This is an up-and-away simulator controller, evaluated on a model informed by th
 A relative-motion observer remains a possible extension. The present result uses the existing payload gyro and navigation estimates. Next comes aircraft validation and, separately, testing the lateral 1 Hz candidate alongside this longitudinal tuning.
 
 [Data and methods](data-and-methods.md#full-loop-longitudinal-design) records reproduction commands, numerical results, parameter provenance and the archived experimental sequence. Raw trajectories and flight logs remain in Mission Planner.
+
+The [next flight test card](next-flight-test-card.md) turns that validation into a staged sequence, with configuration records, ordinary throttle/turn maneuvers, takeover criteria and a postflight analysis plan.
