@@ -73,7 +73,7 @@ The model assumes an inflated canopy and a taut point connection. It does not si
 
 ## One aircraft, two control paths
 
-Navigation supplies a turn request and an altitude trajectory. Differential brake pull controls turning; throttle controls climb and descent. Symmetric braking is reserved for future landing work, rather than acting as an elevator during normal flight.
+Navigation supplies a turn request and an altitude trajectory. Differential brake pull controls turning; throttle controls climb and descent. Symmetric braking is reserved for the landing flare, rather than acting as an elevator during normal flight.
 
 The analysis uses the 1.758 kg Trout Lake configuration, asymmetric brake trim, and modeled 9×4.5 pusher propulsion. Canopy and payload have separate attitudes. Rotor dynamics and active steering remain in the longitudinal plant.
 
@@ -143,7 +143,7 @@ The integrator is not speed-scaled. Feedforward affects command response but doe
 
 ### Poles, zeros and the feedback-gain limit
 
-The selected gains are locally stable, but the original larger feedback gains are unstable in this model. With the selected gains, a lightly damped pair sits at `−0.986 ± j15.969 s⁻¹`: about 2.54 Hz, with damping ratio 0.062. Scaling all feedback gains together reaches instability at **1.524 times nominal**, a gain margin of **3.66 dB**. Increasing heading-rate P alone reaches the boundary near 0.00791, with I and roll damping held fixed.
+The 4 Hz baseline is locally stable, but the original larger feedback gains are unstable in this model. With that baseline, a lightly damped pair sits at `−0.986 ± j15.969 s⁻¹`: about 2.54 Hz, with damping ratio 0.062. Scaling all feedback gains together reaches instability at **1.524 times nominal**, a gain margin of **3.66 dB**. Increasing heading-rate P alone reaches the boundary near 0.00791, with I and roll damping held fixed.
 
 ![Root locus annotated with physical mode participation and combined-loop zeros](../research/flight-log-analysis/figures/turn-model-spike/classical-lateral/annotated-root-locus.png)
 
@@ -205,7 +205,82 @@ These errors compare the requested rate with the unfiltered simulated payload he
 
 *Matched settings, with each first-loiter entry aligned independently. Most of the remaining gust-driven rate error is below 1 Hz. Reducing high-frequency feedback does not remove that slower motion.*
 
-**The 1 Hz filter is the preferred lateral candidate for the next combined SITL comparison, with the gains unchanged.** The selected full-loop longitudinal study retains the 4 Hz steering baseline so that its results isolate the climb-PI change; the two improvements have not yet been validated together. This is an incremental improvement, not a cure for gust response. These are single paired runs; the repeatable gust field has a different arrival phase when the trajectory changes. They also do not reproduce the earlier artificial 80 ms delay test or remeasure a stability margin. The existing mission videos and published default parameters still use 4 Hz. [Data and methods](data-and-methods.md#native-lateral-filter-trial) records the exact configurations, analysis and scope.
+The earlier study favored 1 Hz, but the subsequent longitudinal comparison retained 4 Hz to isolate its climb-PI change. That left a promising lateral improvement outside the combined configuration. The landing work below closes that integration gap. The older mission videos above retain their original settings; the before/after landing applets explicitly identify theirs.
+
+### Landing exposed a gap in the operating envelope
+
+Watching the landing replay, the problem was hard to miss: the controller repeatedly pulled one brake and then the other. The aircraft could still land near the target, so a footprint plot alone made the result look much better than its control response deserved.
+
+There were two separate issues. The landing harness had been loading the original, aggressive lateral preset rather than the mission controller settings developed in the classical analysis. And the analysis had not been carried far enough into the actual descending, slowing, braking approach. I had considered more than level flight—the earlier filter study included shallow climb/descent and left/right turning trims—but that did not establish performance throughout landing.
+
+I therefore treated the landing as another operating condition for the same controller, rather than designing a special gain set around one recovery. First I replaced the older lateral preset while leaving the longitudinal controller, weather, actuator uncertainties and flare settings unchanged. Then I evaluated the 1 Hz measurement filter. The distinction matters: most of the difference from the old replay comes from using the mission gains; it is not all attributable to changing one filter.
+
+| Lateral parameter | Original landing preset | Selected mission configuration |
+|---|---:|---:|
+| Heading-rate feedforward | 0.051 | 0.009 |
+| Heading-rate P | 0.040 | 0.005 |
+| Heading-rate I | 0.002 | 0.002 |
+| Roll-rate damping | 0.030 | 0.003 |
+| Heading-acceleration feedforward | 0.020 | 0 |
+| Measurement low-pass cutoff | 4 Hz | 1 Hz |
+
+The final filter is therefore $H(s)=6.283/(s+6.283)$ for both heading-rate and body-roll-rate feedback. The gains, command shaping, airspeed scaling and anti-windup law shown above remain otherwise unchanged from the mission design. The preceding root-locus numbers describe its **4 Hz baseline**, not newly measured margins for the final configuration.
+
+### Linearizing the descending aircraft
+
+I solved straight-flight equilibria at three descent rates, letting throttle, speed and differential trim move together. All use the 1.758 kg mission model, zero common brake and 22.2 V.
+
+| Sink rate | Throttle | Airspeed | Right brake trim |
+|---|---:|---:|---:|
+| 0 m/s | 44.6% | 4.38 m/s | 3.75 mm |
+| 0.5 m/s | 35.6% | 4.46 m/s | 1.85 mm |
+| 1.0 m/s | 24.2% | 4.54 m/s | 0.56 mm |
+
+![Heading-rate and roll-rate plant responses at three descending trims](../research/flight-log-analysis/figures/lateral-landing-2026-10-13/descent-bode.png)
+
+The resonances and low-frequency authority shift with trim. The old landing feedback predicts a growing oscillatory mode even at level trim: its real part is +3.86/s at 2.79 Hz, increasing to +4.79/s at 2.52 Hz at 1 m/s sink. Both mission-filter choices are locally stable at these three equilibria. Descending trim sharpens the diagnosis, but it does not explain away the original gain mismatch.
+
+This numerical calculation retains motor RPM and the neutral absolute-heading coordinate, giving 16 plant perturbation states plus three controller states. The neutral heading pole is excluded when assessing stability. Small nonlinear sine tests at 0.35 and 2.5 Hz reproduced the local heading-rate and roll-rate transfer responses at all three trims. A separate 0–120 ms command-delay sensitivity check retained stable non-neutral poles for the mission configurations; the level-flight 4 Hz case became lightly damped near 2 Hz at the longest delay.
+
+![Closed-loop pole sensitivity to command delay across descent trims](../research/flight-log-analysis/figures/lateral-landing-2026-10-13/descent-delay-poles.png)
+
+This is a local inner-loop calculation with throttle held at each trim, not a model of the whole flare. The brake actuator’s travel-rate limit is inactive for infinitesimal inputs; the delay sweep is an explicit sensitivity assumption. Partial common brake, transitions between left and right pull, actuator saturation, navigation and changing throttle still require nonlinear tests. Attempts to solve 1.5 and 2.0 m/s straight-descent trims did not balance, so those points were excluded rather than presented as valid linear models.
+
+### Check the approach, not just the touchdown
+
+The candidate was fixed before examining eight reserved landing conditions. Across the complete set of twelve, unfiltered truth heading-rate error and brake-command variation improved in every matched case compared with the original landing preset. Measuring simulator truth avoids rewarding a filter merely for smoothing its own reported feedback.
+
+![Matched landing tracking, saturation and brake activity over all twelve conditions](assets/lateral-landing/landing-control-comparison.png)
+
+On the difficult development case, changing only the mission filter from 4 to 1 Hz reduced truth heading-rate RMSE from 32.9 to 13.2 deg/s and brake-command variation from 3.12 to 0.74 normalized units per second. That remains a substantial rate error; a small touchdown miss would have hidden it.
+
+The selected configuration's median miss is **1.28 m**, with **11/12 within 5 m** and a **7.01 m worst case**. Its median downward speed at the modeled ground crossing is 1.41 m/s. The worst case is 7.01 m long but only 0.04 m off the centerline. Removing oscillatory brake activity changes the trajectory too, so I did not tune the lateral loop to reclaim a particular touchdown. The [landing article](spot-landing.md) reports the complete final footprint and the architecture that manages approach and flare.
+
+### Keep the mission behavior in the evaluation
+
+I also combined the 1 Hz lateral filter with the current longitudinal settings and reran the complete native AUTO mission. Calm, gusty and steady 2 m/s crosswind runs all completed, including altitude changes and loiters in both directions. In calm air, right/left loiter truth-rate errors changed from 0.38/0.64 to 0.27/0.34 deg/s, while radial errors were essentially unchanged. Maximum corner overrun fell from 0.63 to 0.43 m.
+
+In gusts the result was mixed: right-turn rate error changed from 10.03 to 9.92 deg/s, while left-turn error increased from 9.79 to 10.80 deg/s. Radial errors improved from 1.99/2.46 to 1.91/2.25 m, and brake-command content above 1 Hz fell by about 42–44%. Neither settled loiter saturated the differential command. The archived gust baseline was checked against the current parameter set; the different trajectories encounter the repeatable gust field at different phases.
+
+In steady crosswind, right/left loiter truth-rate errors were 1.83/3.27 deg/s, radial errors 1.75/1.70 m, and maximum corner overrun 0.64 m. Neither settled loiter saturated. These are fresh checks of the combined configuration, rather than a new paired crosswind comparison.
+
+This supports a quieter controller with useful margin across operating conditions, not a claim that lower bandwidth improves every tracking metric. The objective remains ordinary mission flight and a controlled landing approach, with touchdown placement assessed separately.
+
+[Combined-controller mission metrics and parameter audits](assets/lateral-landing/mission-results.json)
+
+### Watch the same landing before and after
+
+These applets use the previously published trial, fixed before this tuning work, with matched weather, actuator, longitudinal and flare settings. The camera convention, physical motion scale and final 22-second duration are the same. Each excerpt ends at its own ground crossing. The original configuration misses by 1.70 m; the updated one by 2.39 m. The point of this comparison is the control response, not a claim that this individual landing became more accurate.
+
+[Before: original landing gains](https://davidingraham.github.io/assets/microagu-viewer/landing.html?case=before)
+
+[After: mission lateral gains and 1 Hz filtering](https://davidingraham.github.io/assets/microagu-viewer/landing.html?case=after)
+
+![Matched heading rate, brake demand and roll-damping response before flare](assets/lateral-landing/matched-response.png)
+
+Drag to orbit or zoom, and use the flare close-up to inspect the transition. Wind direction, throttle, actual brake pull, sink rate and ground speed remain visible. Neither animation amplifies the aircraft motion.
+
+[Selected development parameters](https://github.com/DavidIngraham/ardupilot/blob/00e192e0c8/Tools/simulation/paraglider/mission-controller-candidate.parm) · [Landing comparison data and parameter audits](assets/lateral-landing/results.json) · [Descent analysis and reproduction notes](../research/flight-log-analysis/lateral-landing-2026-10-13.md)
 
 ## Altitude: keep TECS's framework, use throttle as the actuator
 

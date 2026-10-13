@@ -11,9 +11,12 @@ import {
 import { rigPayload, poseMechanisms, RotorPhase, phaseAt } from "./mechanisms";
 
 async function main() {
-  const response = await fetch("landing/replay.json");
+  const selected = new URLSearchParams(location.search).get("case");
+  const replayFile = selected === "before" ? "replay-before.json" : "replay.json";
+  const response = await fetch("landing/" + replayFile, { cache: "no-store" });
   if (!response.ok) throw Error("Could not load landing replay");
   const data = await response.json();
+  document.querySelector("#case-label")!.textContent = data.label ?? "AUTO landing";
   const frames: Frame[] = parseRecording(JSON.stringify(data.frames));
   const first = frames[0].time_s,
     end = frames.at(-1)!.time_s,

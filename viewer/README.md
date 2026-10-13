@@ -414,3 +414,11 @@ the replay packaging script. The article uses the interactive applet alone.
 
 Build with npm run build, then run tools/publish_landing.py with the website's
 assets/microagu-viewer destination to publish the bounded viewer bundle.
+
+
+The landing applet accepts `?case=before` and `?case=after`. These select a
+bounded matched replay pair (the previously published trial 1), with explicit
+configuration labels. The plain URL shows the selected after configuration.
+`tools/report_landing_lateral.py` at the repository root audits the 12 native
+logs and creates the summary plots and bounded replays; `publish_landing.py`
+copies both excerpts with the viewer bundle. Raw logs stay in Mission Planner.

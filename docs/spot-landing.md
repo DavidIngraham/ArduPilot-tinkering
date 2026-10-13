@@ -104,31 +104,31 @@ At 60% common brake, 40% of normalized travel remains above the floor on either 
 
 ## Final Monte Carlo results
 
-The final evaluation used **12 fresh randomized conditions**, with the settings fixed before the runs. All flights reached the ground plane.
+The selected lateral configuration was evaluated in **12 matched randomized conditions**. Conditions 0–3 informed the diagnosis; the 1 Hz candidate was fixed before examining conditions 4–11. All flights reached the ground plane. These are the final configuration’s results, not a claim of twelve independent validation cases.
 
 | Metric | Final configuration |
 |---|---:|
-| Within 5 m of target | **12 / 12** |
-| Median miss | **1.73 m** |
-| 90th-percentile miss | **3.77 m** |
-| Worst miss | **4.60 m** |
+| Within 5 m of target | **11 / 12** |
+| Median miss | **1.28 m** |
+| 90th-percentile miss | **3.50 m** |
+| Worst miss | **7.01 m** |
 | Median downward speed at crossing | 1.41 m/s |
-| 90th-percentile downward speed | 1.55 m/s |
-| Median ground speed | 3.73 m/s |
+| 90th-percentile downward speed | 1.50 m/s |
+| Median ground speed | 3.63 m/s |
 
 ![Final Monte Carlo landing footprint and arrival speeds](assets/landing/landing-final.png)
 
 The trials varied horizontal wind from 0–2 m/s in any direction, smooth gust amplitudes up to 0.45 m/s, initial cross-track error ±10 m, height ±5 m, heading ±15°, speed ±10%, voltage 20.4–22.2 V, independent brake lift and drag scales of 0.6–1.4, actuator rates of 80–220 mm/s, command delay up to 0.12 s, and landing-datum error ±0.5 m. These are engineering test ranges, not measured environmental probabilities.
 
-Each run used the 1,758 g Trout Lake configuration, the mission-profile 9-DOF model and the landing harness's original turn-gain preset. A fresh native SITL process flew an AUTO waypoint followed by a LAND item. Log audits confirmed the planning parameters, flare activation, common-brake bound and allocated output bounds.
+Each run used the 1,758 g Trout Lake configuration, the mission-profile 9-DOF model and the mission lateral gains with 1 Hz heading-rate and roll-rate measurement filtering. A fresh native SITL process flew an AUTO waypoint followed by a LAND item. Log audits confirmed the planning parameters, flare activation, common-brake bound and allocated output bounds.
 
-These results establish simulated placement under the sampled conditions. Twelve successes do not establish a 100% success probability, and the arrival speeds remain part of the landing problem.
+The smoother steering improves the approach response without guaranteeing the smallest miss on every run. One trial lands 7.01 m beyond the target with only 0.04 m cross-track error; arrival speed and approach/flare placement still need attention. The [controller-design article](controller-design.md#landing-exposed-a-gap-in-the-operating-envelope) explains the gain mismatch, descent-trim analysis and matched comparisons. All 12 are retained in the results.
 
 ## Watch the complete control response
 
 [Open the interactive spot-landing replay](https://davidingraham.github.io/assets/microagu-viewer/landing.html). Drag to orbit, scroll or pinch to zoom, and scrub to inspect the brake application. The moving floor conveys translation; its grid and the 1, 2 and 5 m bullseye rings are fixed to the ground at the intended target.
 
-This flight missed by **1.70 m**, making it the successful trial closest to the final batch's median miss. The applet shows the last 22 seconds, with an altitude profile and synchronized throttle, applied-brake, sink-rate and ground-speed traces. Flare entry is marked so the response can be read against the command change. Use **Flare close-up** to jump to the transition; **Slow flare** plays it at 0.35× speed. The highlighted response includes both throttle cutoff and the brake ramp. The active alternating steering commands are from the original turn-gain preset used in this evaluation.
+This is the same trial shown before the lateral update, chosen before the tuning work. With the updated lateral configuration it misses by **2.39 m**. Keeping the case fixed makes the change in control response visible without selecting a more flattering landing. The applet shows the last 22 seconds, with an altitude profile and synchronized throttle, applied-brake, sink-rate and ground-speed traces. Flare entry is marked so the response can be read against the command change. Use **Flare close-up** to jump to the transition; **Slow flare** plays it at 0.35× speed. The highlighted response includes both throttle cutoff and the brake ramp. The current replay uses the updated lateral configuration; the controller-design article retains the matched before/after applets.
 
 Carriage and canopy attitudes, propeller RPM, throttle and brake travel come from the simulator. The carriage uses the exported SolidWorks assembly; the canopy and suspension lines are schematic. The 3D scene keeps physical scale, while the side profile exaggerates height for readability.
 
@@ -138,6 +138,6 @@ The simulation ends at the first crossing of a flat ground plane by the payload 
 
 Automatic brake flare remains disabled by default in the firmware. The explicit simulation parameter file and the [next flight test card](next-flight-test-card.md) preserve the distinction between a working control architecture and a flight-validated landing procedure.
 
-[Final results and log audits](assets/landing/final-results.json) · [Final sampled configurations](assets/landing/final-conditions.json) · [Implementation snapshot](https://github.com/DavidIngraham/ardupilot/commit/76c18af01d) · [Plotting and replay scripts](https://github.com/DavidIngraham/ArduPilot-tinkering/tree/main/viewer/tools)
+[Final results and log audits](assets/landing/final-results.json) · [Final sampled configurations](assets/landing/final-conditions.json) · [Implementation snapshot](https://github.com/DavidIngraham/ardupilot/commit/76c18af01d) · [Plotting and replay scripts](https://github.com/DavidIngraham/ArduPilot-tinkering/blob/main/tools/report_landing_lateral.py)
 
 The implementation paths are [native slope landing](https://github.com/DavidIngraham/ardupilot/blob/76c18af01d/libraries/AP_Landing/AP_Landing_Slope.cpp), [parafoil TECS](https://github.com/DavidIngraham/ardupilot/blob/76c18af01d/libraries/AP_TECS/AP_TECS_Paraglider.cpp), and the [brake mixer](https://github.com/DavidIngraham/ardupilot/blob/76c18af01d/ArduPlane/servos.cpp). Raw telemetry and full truth recordings stay in Mission Planner. Implementation and analysis were assisted by Codex.
