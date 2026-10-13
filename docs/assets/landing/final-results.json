@@ -1,0 +1,97 @@
+{
+  "attempted": 12,
+  "completed": 12,
+  "within_5m": 12,
+  "median_m": 1.7284874723849808,
+  "p90_m": 3.7675602287773846,
+  "worst_m": 4.603458185982404,
+  "median_sink_m_s": 1.4077987138630674,
+  "p90_sink_m_s": 1.5482093195040463,
+  "median_groundspeed_m_s": 3.7348164621941553,
+  "log_audits": [
+    {
+      "suite": "heldout-candidate",
+      "trial": 0,
+      "flare_samples": 126,
+      "max_common": 60.0,
+      "sink_parameter": 1.399999976158142
+    },
+    {
+      "suite": "heldout-candidate",
+      "trial": 1,
+      "flare_samples": 131,
+      "max_common": 60.0,
+      "sink_parameter": 1.399999976158142
+    },
+    {
+      "suite": "heldout-candidate",
+      "trial": 2,
+      "flare_samples": 111,
+      "max_common": 60.0,
+      "sink_parameter": 1.399999976158142
+    },
+    {
+      "suite": "heldout-candidate",
+      "trial": 3,
+      "flare_samples": 126,
+      "max_common": 60.0,
+      "sink_parameter": 1.399999976158142
+    },
+    {
+      "suite": "heldout-candidate",
+      "trial": 4,
+      "flare_samples": 131,
+      "max_common": 60.0,
+      "sink_parameter": 1.399999976158142
+    },
+    {
+      "suite": "heldout-candidate",
+      "trial": 5,
+      "flare_samples": 121,
+      "max_common": 60.0,
+      "sink_parameter": 1.399999976158142
+    },
+    {
+      "suite": "heldout-candidate",
+      "trial": 6,
+      "flare_samples": 150,
+      "max_common": 60.0,
+      "sink_parameter": 1.399999976158142
+    },
+    {
+      "suite": "heldout-candidate",
+      "trial": 7,
+      "flare_samples": 135,
+      "max_common": 60.0,
+      "sink_parameter": 1.399999976158142
+    },
+    {
+      "suite": "heldout-candidate",
+      "trial": 8,
+      "flare_samples": 145,
+      "max_common": 60.0,
+      "sink_parameter": 1.399999976158142
+    },
+    {
+      "suite": "heldout-candidate",
+      "trial": 9,
+      "flare_samples": 140,
+      "max_common": 60.0,
+      "sink_parameter": 1.399999976158142
+    },
+    {
+      "suite": "heldout-candidate",
+      "trial": 10,
+      "flare_samples": 140,
+      "max_common": 60.0,
+      "sink_parameter": 1.399999976158142
+    },
+    {
+      "suite": "heldout-candidate",
+      "trial": 11,
+      "flare_samples": 131,
+      "max_common": 60.0,
+      "sink_parameter": 1.399999976158142
+    }
+  ]
+}

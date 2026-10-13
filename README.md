@@ -75,7 +75,7 @@ SITL view of the canopy, payload, joint motion, and actuator states.
 
 ## Spot-landing study
 
-[Spot Landing: Fixing the Approach Before Tuning the Flare](docs/spot-landing.md)
-covers the moderate native AUTO flare, one bounded aiming-parameter iteration,
-and 12 fresh paired conditions. It includes an orbitable 3D replay with an
+[Landing Micro-AGU: From TECS Approach to Brake Flare](docs/spot-landing.md)
+covers the native landing supervisor, TECS comparison, common-brake allocation,
+and final Monte Carlo results. It includes an orbitable 3D replay with an
 earth-fixed bullseye, moving ground reference and actuator histories.

@@ -18,10 +18,16 @@ async function main() {
   const first = frames[0].time_s,
     end = frames.at(-1)!.time_s,
     duration = end - first;
+  const flareTime = Number(data.flare_time_s);
+  if (!Number.isFinite(flareTime) || flareTime < first || flareTime > end)
+    throw Error("Missing recorded flare event");
+  const flareOffset = flareTime - first;
+  const entry = sample(frames, flareTime);
+  const entryGroundSpeed = Math.hypot(entry.state[7], entry.state[8]);
   const target = position(data.target_ned_m);
   const canvas = document.createElement("canvas");
   canvas.width = 1280;
-  canvas.height = 1080;
+  canvas.height = 1320;
   document.querySelector("#view")!.append(canvas);
   const ctx = canvas.getContext("2d")!;
   const renderer = new T.WebGLRenderer({ antialias: true });
@@ -113,8 +119,7 @@ async function main() {
   const phases = frames.map((f) => rotor.advance(f.time_s, f.rpm));
   let time = 0,
     playing = true,
-    last = performance.now(),
-    recording = false;
+    last = performance.now();
   const slider = document.querySelector<HTMLInputElement>("#time")!;
   slider.max = String(duration);
   const play = document.querySelector<HTMLButtonElement>("#play")!;
@@ -158,7 +163,7 @@ async function main() {
     lines.geometry = new T.BufferGeometry().setFromPoints(points);
     renderer.render(scene, camera);
     ctx.fillStyle = "#102330";
-    ctx.fillRect(0, 0, 1280, 1080);
+    ctx.fillRect(0, 0, 1280, 1320);
     ctx.drawImage(renderer.domElement, 0, 0);
     ctx.fillStyle = "#edf5ff";
     ctx.font = "22px system-ui";
@@ -204,6 +209,39 @@ async function main() {
       850,
       713,
     );
+    const speed = Math.hypot(f.state[7], f.state[8]);
+    const flaring = f.time_s >= flareTime;
+    ctx.fillStyle = "rgba(10,26,36,.88)";
+    ctx.fillRect(20, 52, 655, 88);
+    ctx.fillStyle = "#edf5ff";
+    ctx.font = "26px system-ui";
+    ctx.fillText("Sink ↓ " + f.state[9].toFixed(2) + " m/s", 36, 88);
+    ctx.fillText("Ground speed " + speed.toFixed(2) + " m/s", 325, 88);
+    ctx.font = "17px system-ui";
+    const formatDelta = (value: number) => (value >= 0 ? "+" : "") + value.toFixed(2);
+    ctx.fillText(
+      flaring
+        ? "Since flare: " + formatDelta(f.state[9] - entry.state[9]) + " m/s"
+        : "Downward velocity · world frame",
+      36,
+      120,
+    );
+    ctx.fillText(
+      flaring
+        ? "Since flare: " + formatDelta(speed - entryGroundSpeed) + " m/s"
+        : "Horizontal velocity · world frame",
+      325,
+      120,
+    );
+    ctx.fillStyle = flaring ? "#ffba68" : "#edf5ff";
+    ctx.font = "22px system-ui";
+    ctx.fillText(
+      flaring
+        ? "FLARE · " + (f.time_s - flareTime).toFixed(1) + " s"
+        : "APPROACH",
+      990,
+      36,
+    );
     // Entire final-approach profile stays in earth coordinates, with a moving current-position marker.
     const x0 = frames[0].state[0],
       x1 = Math.max(data.target_ned_m[0] + 5, ...frames.map((x) => x.state[0]));
@@ -239,59 +277,138 @@ async function main() {
     );
     function graph(
       left: number,
-      width: number,
+      top: number,
       title: string,
       channels: { values: number[]; color: string }[],
-      max: number,
+      low: number,
+      high: number,
+      start = first,
+      reference?: number,
     ) {
+      const width = 550,
+        height = 100;
+      const x = (stamp: number) =>
+        left + ((stamp - start) / (end - start)) * width;
+      const y = (value: number) =>
+        top + height - ((value - low) / (high - low)) * height;
       ctx.fillStyle = "#edf5ff";
       ctx.font = "17px system-ui";
-      ctx.fillText(title, left, 920);
+      ctx.fillText(title, left, top - 18);
+      const shade = Math.max(left, x(flareTime));
+      ctx.fillStyle = "rgba(255,186,104,.12)";
+      ctx.fillRect(shade, top, left + width - shade, height);
       ctx.strokeStyle = "#506b7a";
-      ctx.strokeRect(left, 935, width, 100);
+      ctx.strokeRect(left, top, width, height);
+      ctx.font = "14px system-ui";
+      ctx.fillStyle = "#b9cfd9";
+      ctx.fillText(high.toFixed(1), left - 36, top + 10);
+      ctx.fillText(low.toFixed(1), left - 36, top + height);
+      if (reference !== undefined) {
+        ctx.save();
+        ctx.setLineDash([5, 5]);
+        ctx.strokeStyle = "#a9b9c4";
+        ctx.beginPath();
+        ctx.moveTo(left, y(reference));
+        ctx.lineTo(left + width, y(reference));
+        ctx.stroke();
+        ctx.restore();
+      }
       for (const channel of channels) {
         ctx.strokeStyle = channel.color;
         ctx.beginPath();
+        let began = false;
         frames.forEach((r, i) => {
-          const x = left + ((r.time_s - first) / duration) * width,
-            y = 1035 - (channel.values[i] / max) * 100;
-          i ? ctx.lineTo(x, y) : ctx.moveTo(x, y);
+          if (r.time_s < start) return;
+          began
+            ? ctx.lineTo(x(r.time_s), y(channel.values[i]))
+            : ctx.moveTo(x(r.time_s), y(channel.values[i]));
+          began = true;
         });
         ctx.stroke();
       }
-      ctx.strokeStyle = "#ffffff";
+      ctx.strokeStyle = "#ffba68";
       ctx.beginPath();
-      ctx.moveTo(left + (t / duration) * width, 935);
-      ctx.lineTo(left + (t / duration) * width, 1035);
+      ctx.moveTo(x(flareTime), top);
+      ctx.lineTo(x(flareTime), top + height);
       ctx.stroke();
+      if (f.time_s >= start) {
+        ctx.strokeStyle = "#ffffff";
+        ctx.beginPath();
+        ctx.moveTo(x(f.time_s), top);
+        ctx.lineTo(x(f.time_s), top + height);
+        ctx.stroke();
+      }
+      ctx.fillStyle = "#b9cfd9";
+      ctx.fillText((start - first).toFixed(1) + " s", left, top + 119);
+      ctx.fillText(duration.toFixed(1) + " s", left + width - 40, top + 119);
     }
     graph(
-      24,
-      590,
-      "Throttle · 0–100%",
+      64,
+      935,
+      "Throttle · %",
       [
         {
           values: frames.map((r) => (r.throttle ?? 0) * 100),
           color: "#f2bd6b",
         },
       ],
+      0,
       100,
     );
     graph(
-      654,
-      590,
-      "Applied brake pull · left cyan / right pink · 0–90 mm",
+      704,
+      935,
+      "Brake pull · mm · left cyan / right pink",
       [
         { values: frames.map((r) => r.brake_mm?.[0] ?? 0), color: "#70c6ad" },
         { values: frames.map((r) => r.brake_mm?.[1] ?? 0), color: "#e495b8" },
       ],
+      0,
       90,
+    );
+    const start = Math.max(first, end - 8);
+    const sinks = frames.map((r) => r.state[9]),
+      speeds = frames.map((r) => Math.hypot(r.state[7], r.state[8]));
+    const lower = (values: number[]) =>
+      Math.min(0, Math.floor(Math.min(...values) * 2) / 2);
+    const upper = (values: number[]) =>
+      Math.ceil((Math.max(...values) + 0.1) * 2) / 2;
+    graph(
+      64,
+      1135,
+      "Sink rate ↓ · m/s · final 8 s",
+      [{ values: sinks, color: "#f2bd6b" }],
+      lower(sinks),
+      upper(sinks),
+      start,
+      entry.state[9],
+    );
+    graph(
+      704,
+      1135,
+      "Ground speed · m/s · final 8 s",
+      [{ values: speeds, color: "#70c6ad" }],
+      lower(speeds),
+      upper(speeds),
+      start,
+      entryGroundSpeed,
+    );
+    ctx.fillStyle = "#b9cfd9";
+    ctx.font = "17px system-ui";
+    ctx.fillText(
+      "Orange line / shading: logged flare entry · dashed: speed at entry · white: playback time",
+      64,
+      1290,
     );
   }
   function loop(now: number) {
     if (playing) {
-      time += Math.min(0.1, (now - last) / 1000);
-      if (time > duration + 2 && !recording) time = 0;
+      const slow =
+        document.querySelector<HTMLInputElement>("#slow")!.checked &&
+        time >= flareOffset - 1 &&
+        time < duration;
+      time += Math.min(0.1, (now - last) / 1000) * (slow ? 0.35 : 1);
+      if (time > duration + 2) time = 0;
     }
     last = now;
     slider.value = String(Math.min(time, duration));
@@ -313,28 +430,12 @@ async function main() {
     playing = true;
     play.textContent = "Pause";
   };
-  document.querySelector("#status")!.textContent = "Replay ready";
-  document.querySelector<HTMLButtonElement>("#record")!.onclick = () => {
-    if (recording) return;
-    recording = true;
-    time = 0;
+  document.querySelector<HTMLButtonElement>("#flare")!.onclick = () => {
+    time = Math.max(0, flareOffset - 3);
     playing = true;
-    last = performance.now();
-    const chunks: BlobPart[] = [];
-    const rec = new MediaRecorder(canvas.captureStream(30), {
-      mimeType: "video/webm",
-      videoBitsPerSecond: 6000000,
-    });
-    rec.ondataavailable = (e) => chunks.push(e.data);
-    rec.onstop = () => {
-      const a = document.querySelector<HTMLAnchorElement>("#save")!;
-      a.href = URL.createObjectURL(new Blob(chunks, { type: "video/webm" }));
-      a.hidden = false;
-      recording = false;
-    };
-    rec.start();
-    setTimeout(() => rec.stop(), (duration + 1) * 1000);
+    play.textContent = "Pause";
   };
+  document.querySelector("#status")!.textContent = "Replay ready";
   (window as unknown as { landingDraw: (t: number) => void }).landingDraw = (
     t: number,
   ) => {

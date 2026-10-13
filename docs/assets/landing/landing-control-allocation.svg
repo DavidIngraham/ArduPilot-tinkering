@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="930" viewBox="0 0 1220 930" role="img"><title>Micro-AGU flare control and allocation</title><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#315a6e"/></marker></defs><rect width="100%" height="100%" fill="#f5f8fa"/>
+<text x="30" y="38" font-family="Arial, sans-serif" font-size="25" fill="#183c50">Flare supervisor and brake allocation</text>
+<rect x="35" y="78" width="345" height="94" rx="12" fill="#e4f1f2" stroke="#315a6e" stroke-width="2"/>
+<text x="53" y="108" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Native AP_Landing supervisor</text>
+<text x="53" y="134" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Estimated height + sink rate</text>
+<text x="53" y="160" font-family="Arial, sans-serif" font-size="18" fill="#183c50">→ flare state (not a sink servo)</text>
+<path d="M380 122H455" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="389" y="106" font-family="Arial, sans-serif" font-size="16" fill="#183c50">Enable</text>
+<rect x="455" y="78" width="335" height="94" rx="12" fill="#e4f1f2" stroke="#315a6e" stroke-width="2"/>
+<text x="473" y="108" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Common-brake schedule</text>
+<text x="473" y="134" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Reserve cap → rate-limited ramp</text>
+<text x="473" y="160" font-family="Arial, sans-serif" font-size="18" fill="#183c50">b = 0 whenever gate is inactive</text>
+<path d="M623 172V255" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="641" y="212" font-family="Arial, sans-serif" font-size="16" fill="#183c50">Common pull b</text>
+<rect x="35" y="255" width="345" height="110" rx="12" fill="#e4f1f2" stroke="#315a6e" stroke-width="2"/>
+<text x="53" y="285" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Existing turn-rate controller</text>
+<text x="53" y="311" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Desired turn rate − measured rate</text>
+<text x="53" y="337" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Output / integrator limit: 1 − b</text>
+<path d="M380 310H455" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="389" y="293" font-family="Arial, sans-serif" font-size="16" fill="#183c50">Signed u</text>
+<rect x="455" y="255" width="335" height="135" rx="12" fill="#e4f1f2" stroke="#315a6e" stroke-width="2"/>
+<text x="473" y="285" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Brake allocator</text>
+<text x="473" y="311" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Left = sat[b + max(−u, 0)]</text>
+<text x="473" y="337" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Right = sat[b + max(u, 0)]</text>
+<text x="473" y="363" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Normalized commands: 0 to 1</text>
+<path d="M790 317H865" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="865" y="255" width="315" height="135" rx="12" fill="#e4f1f2" stroke="#315a6e" stroke-width="2"/>
+<text x="883" y="285" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Servo calibration + dynamics</text>
+<text x="883" y="311" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Per-side PWM limits / reversal</text>
+<text x="883" y="337" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Drums, rate limits and delay</text>
+<text x="883" y="363" font-family="Arial, sans-serif" font-size="18" fill="#183c50">→ actual line pull</text>
+<path d="M1020 390V635" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="455" y="635" width="725" height="105" rx="12" fill="#e4f1f2" stroke="#315a6e" stroke-width="2"/>
+<text x="473" y="665" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Parafoil + suspended payload</text>
+<text x="473" y="691" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Common brake changes lift / drag and arrival speed.</text>
+<text x="473" y="717" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Differential brake steers; motions remain coupled.</text>
+<path d="M623 255V220H205V255" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="45" y="210" font-family="Arial, sans-serif" font-size="16" fill="#183c50">Remaining travel (previous mixer cycle)</text>
+<rect x="35" y="440" width="345" height="100" rx="12" fill="#e4f1f2" stroke="#315a6e" stroke-width="2"/>
+<text x="53" y="470" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Throttle path during flare</text>
+<text x="53" y="496" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Demand idle; reset throttle I.</text>
+<text x="53" y="522" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Existing output suppression / slew</text>
+<path d="M380 489H435V685H455" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="450" y="584" font-family="Arial, sans-serif" font-size="16" fill="#183c50">Thrust</text>
+<path d="M35 140H15V489H35" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M800 740V785H410V378H205V365" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="480" y="778" font-family="Arial, sans-serif" font-size="16" fill="#183c50">Measured turn rate</text>
+<text x="35" y="833" font-family="Arial, sans-serif" font-size="20" fill="#183c50">Common brake has no sink-rate feedback loop in this implementation.</text>
+<text x="35" y="863" font-family="Arial, sans-serif" font-size="17" fill="#183c50">The existing altitude loop operates before flare; its throttle feedback is bypassed during flare.</text>
+<text x="35" y="891" font-family="Arial, sans-serif" font-size="17" fill="#183c50">Command reset is immediate; physical servo motion still follows actuator dynamics.</text>
+</svg>

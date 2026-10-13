@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1140" height="920" viewBox="0 0 1140 920" role="img"><title>Micro-AGU landing state machine</title><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="#315a6e"/></marker></defs><rect width="100%" height="100%" fill="#f5f8fa"/>
+<text x="30" y="38" font-family="Arial, sans-serif" font-size="25" fill="#183c50">AUTO landing: shared supervisor, parafoil-specific flare</text>
+<rect x="40" y="75" width="640" height="82" rx="12" fill="#e4f1f2" stroke="#315a6e" stroke-width="2"/>
+<text x="58" y="105" font-family="Arial, sans-serif" font-size="18" fill="#183c50">LAND mission item • NORMAL / line-up</text>
+<text x="58" y="131" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Existing navigation aligns with the final approach line.</text>
+<path d="M360 157V192" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="40" y="192" width="640" height="105" rx="12" fill="#e4f1f2" stroke="#315a6e" stroke-width="2"/>
+<text x="58" y="222" font-family="Arial, sans-serif" font-size="18" fill="#183c50">APPROACH</text>
+<text x="58" y="248" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Follow the landing slope with throttle-only height control.</text>
+<text x="58" y="274" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Differential brakes track the extended landing line.</text>
+<path d="M360 297V365" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="380" y="338" font-family="Arial, sans-serif" font-size="16" fill="#183c50">Native flare conditions</text>
+<rect x="40" y="365" width="640" height="135" rx="12" fill="#fff1d9" stroke="#315a6e" stroke-width="2"/>
+<text x="58" y="395" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Flare trigger / FINAL entry</text>
+<text x="58" y="421" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Approach + altitude threshold, or time-to-ground gate;</text>
+<text x="58" y="447" font-family="Arial, sans-serif" font-size="18" fill="#183c50">also existing past-target / no-rangefinder and crash guards.</text>
+<text x="58" y="473" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Optional fixed-wing PREFLARE is not used in this setup.</text>
+<path d="M360 500V538" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="40" y="538" width="640" height="108" rx="12" fill="#e4f1f2" stroke="#315a6e" stroke-width="2"/>
+<text x="58" y="568" font-family="Arial, sans-serif" font-size="18" fill="#183c50">FINAL / flare</text>
+<text x="58" y="594" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Command idle throttle and clear throttle integrator.</text>
+<text x="58" y="620" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Ramp common brake; keep differential steering available.</text>
+<path d="M360 646V700" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="380" y="680" font-family="Arial, sans-serif" font-size="16" fill="#183c50">Existing landed detection</text>
+<rect x="40" y="700" width="640" height="100" rx="12" fill="#e4f1f2" stroke="#315a6e" stroke-width="2"/>
+<text x="58" y="730" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Landed → optional automatic disarm</text>
+<text x="58" y="756" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Requires not-flying detection and LAND_DISARMDELAY.</text>
+<text x="58" y="782" font-family="Arial, sans-serif" font-size="18" fill="#183c50">FINAL entry itself does not mean touchdown.</text>
+<rect x="755" y="192" width="345" height="130" rx="12" fill="#e8edf9" stroke="#315a6e" stroke-width="2"/>
+<text x="773" y="222" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Commanded go-around</text>
+<text x="773" y="248" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Clear automatic common brake.</text>
+<text x="773" y="274" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Existing abort logic restores</text>
+<text x="773" y="300" font-family="Arial, sans-serif" font-size="18" fill="#183c50">throttle and climb / mission flow.</text>
+<path d="M680 230H755" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="688" y="217" font-family="Arial, sans-serif" font-size="16" fill="#183c50">Abort</text>
+<path d="M680 582H718V290H755" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="755" y="390" width="345" height="154" rx="12" fill="#e8edf9" stroke="#315a6e" stroke-width="2"/>
+<text x="773" y="420" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Mode change / disarm / safety</text>
+<text x="773" y="446" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Automatic flare gate goes false.</text>
+<text x="773" y="472" font-family="Arial, sans-serif" font-size="18" fill="#183c50">Clear its stored brake command.</text>
+<text x="773" y="498" font-family="Arial, sans-serif" font-size="18" fill="#183c50">MANUAL uses the existing</text>
+<text x="773" y="524" font-family="Arial, sans-serif" font-size="18" fill="#183c50">pitch-stick brake command.</text>
+<path d="M680 615H736V467H755" fill="none" stroke="#315a6e" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="40" y="857" font-family="Arial, sans-serif" font-size="17" fill="#183c50">Diagram summarizes the configured slope landing. Detailed trigger guards are listed in the text.</text>
+<text x="40" y="885" font-family="Arial, sans-serif" font-size="17" fill="#183c50">9-DOF replay stops at first CG ground crossing; native ground/disarm logic is tested separately.</text>
+</svg>

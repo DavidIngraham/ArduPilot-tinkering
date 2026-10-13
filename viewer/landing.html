@@ -33,12 +33,17 @@
   </head>
   <body>
     <header>
-      <button id="play">Pause</button><button id="restart">Restart</button
-      ><button id="record">Record clip</button
-      ><a id="save" hidden download="spot-landing.webm">Save clip</a
-      ><input aria-label="Replay time" id="time" type="range" min="0" step=".01" /><span id="status"
-        >Loading…</span
-      >
+      <button id="play">Pause</button><button id="flare">Flare close-up</button
+      ><label
+        ><input id="slow" type="checkbox" checked />Slow flare (0.35×)</label
+      ><button id="restart">Restart</button
+      ><input
+        aria-label="Replay time"
+        id="time"
+        type="range"
+        min="0"
+        step=".01"
+      /><span id="status">Loading…</span>
       <div>
         Drag to orbit · scroll / pinch to zoom · bullseye rings: 1, 2 and 5 m
       </div>

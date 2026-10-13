@@ -6,8 +6,15 @@
     "strict": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "lib": ["ES2022", "DOM"],
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
     "skipLibCheck": true
   },
-  "include": ["src/main.ts", "src/state.ts"]
+  "include": [
+    "src/main.ts",
+    "src/state.ts",
+    "src/landing.ts"
+  ]
 }
