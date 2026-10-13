@@ -2,9 +2,9 @@
 
 [Build](micro-agu-design.md) · [Flight history](flight-testing.md) · [Controller design](controller-design.md) · [Data and methods](data-and-methods.md)
 
-**Phase 3 · Model validation and staged controller evaluation · Revision 1, October 12, 2026**
+**Phase 3 · Model validation and staged controller evaluation · Revision 2 · Landing-development characterization added**
 
-The next flight should measure ordinary up-and-away behavior: throttle-to-climb response, payload pitch motion, and sustained turns in both directions. Those measurements will tell us whether the flight-informed simulator is useful for choosing controller settings. Reproducing the powered, high-bank Hood River turn is outside this card.
+The next flight should measure ordinary up-and-away behavior: throttle-to-climb response, payload pitch motion, and sustained turns in both directions. Those measurements will tell us whether the flight-informed simulator is useful for choosing controller settings. Reproducing the powered, high-bank Hood River turn is outside this card. An optional landing-development extension adds symmetric-brake measurements and approach rehearsals at recovery altitude; automatic flare and touchdown remain a later phase.
 
 This is a published test plan, not a record of a completed test or a released flight configuration. The sequence below is a menu for several short sorties; completing every item in one flight is not the objective. **The minimum useful sortie is a stable baseline, repeatable small throttle changes, and one ordinary turn in each direction.**
 
@@ -82,6 +82,52 @@ The durations and increments below are **initial test proposals**, subject to gr
 | **09 — Closeout baseline** | Repeat one straight steady segment, then land with the prebriefed reserve. | Detect voltage, weather or trim drift across the sortie. Save logs before changing settings. |
 
 For a first outing, prioritize 01–05 and 09. Items 06–08 belong to a controller-evaluation sortie after its configuration has cleared the simulation and ground checks. The original flight-tested aircraft is already capable of autonomous missions; this separation is about evaluating the new design without mixing several changes at once.
+
+## Landing-development extension
+
+**Purpose:** measure the approach and symmetric-brake response needed to develop landing and flare control. This extension follows a successful baseline sortie. Automatic flare, intentional stall, collapse testing and automatic touchdown are outside this phase. Keep the new landing experiments separate from first trials of the replacement up-and-away controller.
+
+The existing simulator supports airborne approach work, but its rigid, inflated canopy and taut suspension do not establish large-brake, stall or touchdown behavior. Use these measurements to improve that model before selecting an automatic flare law.
+
+### Additional cover-sheet entries and ground checks
+
+| Item | Record before this extension |
+| --- | --- |
+| Symmetric-brake command path, firmware and tested release action | __________ |
+| Left/right released reference and pull-versus-PWM calibration, mm | __________ |
+| Initial common-pull increment, ramp rate, hold time and maximum tested pull | __________ |
+| Differential steering authority retained at that common pull | __________ |
+| Recovery altitude floor and approach-rehearsal termination altitude | __________ |
+| Fixed throttle setting / controller modes for each brake-response run | __________ |
+| Height sensor, mounting, valid range, quality flag and log fields, if fitted | __________ |
+
+- [ ] Confirm that this firmware actually provides an independently controllable common-brake input. Do not assume the existing differential steering mixer supports it. If it does not, defer airborne brake tests until that input, its bounds and the pilot override have been implemented and bench/SITL checked.
+- [ ] With the propeller removed, check common and differential commands together across the proposed test range. Verify release, clipping, remaining steering travel and takeover. Equal PWM increments are not equal line pull on the asymmetric servos; define the common input as equal additional pull from each side's measured trim reference.
+- [ ] Begin with the mechanically established inflation/glide trim described in the [flight story](flight-testing.md#finding-trim-with-the-power-off). Record any change to knots, slack or rigging; do not change them between comparison runs.
+- [ ] Choose a small initial pull, ramp and duration from ground checks and simulation review; fill them in above before launch. Servo hard travel is not an aerodynamic brake limit. Do not use the full-brake ground inflation check as an airborne command.
+- [ ] If a downward rangefinder is installed, check known heights over representative surfaces and several payload attitudes. Verify distance, signal validity and timestamps. Record the sensor's position and pointing direction relative to the payload; a slant-range reading is not automatically vertical height above ground.
+
+### Additional maneuvers
+
+Perform these on a dedicated sortie or after the baseline measurements, with adequate reserve, before closeout item 09. An unsuccessful or unavailable sensor test does not prevent collecting useful high-altitude brake-response data.
+
+| ID | Maneuver and execution | Useful record / decision |
+| --- | --- | --- |
+| **LD-01 — Unbraked glide reference** | At recovery altitude, establish a straight, settled low-power glide with the brakes at the established released references. Use a known, fixed throttle setting; log any pilot corrections. Repeat on a comparable heading if conditions allow. | Baseline sink, ground velocity, payload attitude/rates and actual brake outputs. Establish the reference before adding common braking. |
+| **LD-02 — Small symmetric-brake response** | From the same settled condition, apply the prebriefed small common-pull ramp, hold only for the prebriefed interval, then return using the tested release action. Recover and settle fully before repeating. Keep throttle fixed during the measurement unless recovery requires intervention; avoid altitude hold adding power and masking the response. | Initial pitch response, change in descent rate and speed proxy, response delay, and motion during release. Mark every recovery intervention. Repeat the smallest input before considering a larger one; review its data on the ground before expanding the range. |
+| **LD-03 — Steering with common brake** | Only after LD-02 is repeatable, apply a small differential correction in each direction at an already evaluated common-brake setting. Keep the maneuver within the ordinary turning envelope and return to trim between trials. | Remaining steering authority, left/right asymmetry and mixer clipping. Defer if common braking gives poor canopy behavior or insufficient control margin. |
+| **LD-04 — Approach rehearsal aloft** | Fly a straight into-wind descending leg representing a final approach, using a virtual landing plane well above the actual ground. Terminate at the prebriefed altitude and recover with the established pilot-controlled procedure. Do not activate a flare or ground-contact state. | Glide-path tracking, throttle demand, path repeatability and recovery transient. Any automated approach logic must first be exercised with its exact mission and abort path in SITL. |
+| **LD-05 — Height-sensing observation** | If fitted, record rangefinder data when ordinary pilot-controlled flight or landing naturally enters its valid range. Do not descend solely to acquire readings. Use synchronized video and ground reference measurements where practical. | Dropouts, surface dependence, attitude sensitivity, latency and consistency with independent observations. These data inform a later flare-entry estimate; they do not authorize automatic flare. |
+
+Stop a brake maneuver immediately for unexpected roll/yaw, rapid sink increase, loss of canopy shape, growing pitch motion, poor steering response or exhausted actuator margin. Use the pretested release/takeover action and recover; do not increase braking to rescue an unfamiliar response. If there is no dependable recovery response, end the extension and land using the established procedure.
+
+### Logging and analysis for landing development
+
+Record common and differential brake requests, actual left/right PWM, mixer limit flags where available, throttle request/output, mode, payload attitude/body rates, altitude, vertical velocity, GPS velocity and battery voltage. Record measured airspeed if available; otherwise label ground speed as ground speed and retain the wind uncertainty. Do not infer a stall speed or a lift/drag polar from GPS speed alone. For a rangefinder, include raw range, validity/quality and sample times alongside the estimator's height output.
+
+Produce aligned plots of each brake ramp and release: inferred left/right line pull, common/differential input, throttle, pitch/rates, vertical velocity and speed. Distinguish line pull inferred from the bench calibration from travel measured in flight. Compare repeat runs and show the recovery interval, not just the momentary reduction in sink. A short reduction in descent rate can consume speed; it does not establish a sustainable glide improvement or a successful flare.
+
+The deliverable is a first measured small-brake response, its repeatability and steering margin, an approach-rehearsal result, and a height-sensing assessment or explicit sensor gap. Use those to set the next model and sensor tasks. Automatic flare trials require a separate card after the flare law, height estimator, mode transitions and recovery behavior have been evaluated together. Touchdown speed and attitude predictions remain unvalidated until ground-contact behavior is addressed.
 
 ## Stop a maneuver or end the sortie
 
