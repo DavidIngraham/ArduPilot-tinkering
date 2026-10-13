@@ -12,7 +12,7 @@ import { rigPayload, poseMechanisms, RotorPhase, phaseAt } from "./mechanisms";
 
 async function main() {
   const selected = new URLSearchParams(location.search).get("case");
-  const replayFile = selected === "before" ? "replay-before.json" : "replay.json";
+  const replayFile = selected === "calm" ? "replay-calm.json" : selected === "before" ? "replay-before.json" : "replay.json";
   const response = await fetch("landing/" + replayFile, { cache: "no-store" });
   if (!response.ok) throw Error("Could not load landing replay");
   const data = await response.json();

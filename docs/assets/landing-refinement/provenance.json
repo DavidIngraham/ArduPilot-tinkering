@@ -18,5 +18,23 @@
     "Tools/simulation/paraglider/landing_autotest.py": "4d0acaeb73146c23097fea1777754a7b4fef69a4c253571b35a1dc433a0b36b3",
     "Tools/simulation/paraglider/compare_autotest.py": "60c51671d664e987d4ae280ddade9552ba48f804950bc92243cb79aa7a981df3"
   },
-  "default_loader_commit": "377cd08561"
+  "default_loader_commit": "377cd08561",
+  "environment_previews": {
+    "calm": {
+      "source": "preview-calm",
+      "log_sha256": "7400f2006bb8174440b15a4c6e25965fdc66cac38334c40d473aee89d2628253",
+      "wind_ned_m_s": [
+        0,
+        0,
+        0
+      ],
+      "gust_amplitude_m_s": 0
+    },
+    "turbulent": {
+      "source": "preview-1hz",
+      "gust_amplitude_m_s": 0.25
+    },
+    "controller": "controller-1hz.json",
+    "excluded_from_statistics": true
+  }
 }

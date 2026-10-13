@@ -2,11 +2,11 @@
   "math": 17,
   "mathErrors": 0,
   "iframes": [
-    "http://127.0.0.1:8075/assets/microagu-viewer/landing.html?case=before",
-    "http://127.0.0.1:8075/assets/microagu-viewer/landing.html?case=after"
+    "http://127.0.0.1:8075/assets/microagu-viewer/landing.html?case=calm",
+    "http://127.0.0.1:8075/assets/microagu-viewer/landing.html?case=turbulent"
   ],
   "placeholders": false,
-  "before": "Before · 4 Hz feedback, gentle gusts",
-  "after": "After · 1 Hz feedback, gentle gusts",
+  "calm": "Calm air · final controller",
+  "turbulent": "Gentle turbulence · final controller",
   "errors": []
 }

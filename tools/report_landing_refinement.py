@@ -85,13 +85,17 @@ fig.tight_layout();fig.savefig(a.output/'landing-final.png',dpi=150);plt.close(f
 # Illustration condition 1, with user-requested gentle gusts. Separate from both statistical sets.
 trial=1
 fig,axes=plt.subplots(3,1,figsize=(11,9),sharex=True)
-for hz in [4,1]:
- directory=a.root/f'preview-{hz}hz'
+for name in ['preview-calm','preview-1hz']:
+ directory=a.root/name
  assert 'PASSED STEP: test.Plane.ParagliderLandingStudy' in (directory/'run.log').read_text()
  result=read(directory)
- for k,v in expected.items():assert abs(result['parameters'][k]-(hz if k=='PG_TURN_FILT' else v))<1e-5
-assert cache[str(a.root/'preview-4hz')][0]['config']==cache[str(a.root/'preview-1hz')][0]['config']
-for key,directory,label in [('before',a.root/'preview-4hz','Mission baseline · 4 Hz'),('after',a.root/'preview-1hz','Refined · 1 Hz')]:
+ for k,v in expected.items():assert abs(result['parameters'][k]-v)<1e-5
+calm_config=cache[str(a.root/'preview-calm')][0]['config']
+gust_config=cache[str(a.root/'preview-1hz')][0]['config']
+assert calm_config['wind_ned_m_s']==[0,0,0] and calm_config['gust_amplitude_m_s']==0
+assert gust_config['gust_amplitude_m_s']==.25
+assert all(calm_config[k]==v for k,v in gust_config.items() if k not in ['wind_ned_m_s','gust_amplitude_m_s'])
+for key,directory,label in [('calm',a.root/'preview-calm','Calm air'),('turbulent',a.root/'preview-1hz','Gentle turbulence')]:
  land,frames,trace,times,truth,result=cache[str(directory)];flare=result['flare_time_s'];end=land['contact']['time']
  axes[0].plot(times-flare,truth,label=label);axes[0].plot(trace[:,0]-flare,trace[:,1],ls='--',alpha=.5)
  axes[1].plot(trace[:,0]-flare,trace[:,3],label=label)
@@ -105,10 +109,10 @@ for key,directory,label in [('before',a.root/'preview-4hz','Mission baseline · 
  for k in ['rpm','throttle']:endpoint[k]=left[k]+fraction*(right[k]-left[k])
  endpoint['brake_mm']=(np.array(left['brake_mm'])+fraction*(np.array(right['brake_mm'])-left['brake_mm'])).tolist()
  clipped=[f for f in frames if end-22<=f['time_s']<end]+[endpoint]
- replay=dict(frames=clipped,target_ned_m=land['target_ned_m'],result=land,selected_trial=trial,selection='Illustration based on condition 1 with user-requested 0.25 m/s gust amplitude; excluded from statistical sets',label=('Before · 4 Hz feedback, gentle gusts' if key=='before' else 'After · 1 Hz feedback, gentle gusts'),flare_time_s=flare,flare_event_source='First active native PGFL sample; SITL simulation timestamp',flare_log_sha256=result['log_sha256'])
- (a.output/('replay-before.json' if key=='before' else 'replay.json')).write_text(json.dumps(replay,separators=(',',':')))
+ replay=dict(frames=clipped,target_ned_m=land['target_ned_m'],result=land,selected_trial=trial,selection='Final 1 Hz controller; calm versus steady wind plus gentle synthetic gusts; excluded from statistical sets',label=('Calm air · final controller' if key=='calm' else 'Gentle turbulence · final controller'),flare_time_s=flare,flare_event_source='First active native PGFL sample; SITL simulation timestamp',flare_log_sha256=result['log_sha256'])
+ (a.output/('replay-calm.json' if key=='calm' else 'replay.json')).write_text(json.dumps(replay,separators=(',',':')))
 for ax,label in zip(axes,['Truth heading rate (deg/s)','Differential brake command','Roll damping contribution']):ax.set_ylabel(label);ax.grid(alpha=.25);ax.legend()
-axes[0].set_title('Gentle-gust illustration, matched conditions · dashed lines: heading-rate target');axes[-1].set_xlabel('Seconds before native flare entry')
+axes[0].set_title('Final controller, calm versus gentle turbulence · dashed lines: heading-rate target');axes[-1].set_xlabel('Seconds before native flare entry')
 fig.tight_layout();fig.savefig(a.output/'matched-response.png',dpi=150)
 print({k:v for k,v in summary.items() if k not in ['trials','parameters','validation']})
 

@@ -54,3 +54,10 @@ The new 4 Hz baseline passed the native 2 m/s eastward-crosswind AUTO mission. R
 The default landing loader now selects the complete mission JSON when no explicit study overrides are provided. A native smoke flight with no PG_GAINS or PG_CONTROLLER_CONFIG override passed and logged all 32 configured parameters correctly. Explicit archived-study overrides retain their earlier behavior. Commit 377cd08561 records this setup change; the compiled vehicle and physics binaries are unchanged.
 
 At the user's request, the two final applet illustrations use condition 1 with horizontal gust amplitude raised to 0.25 m/s per component, vertical amplitude 0.0625 m/s. They share one preview-config.json and are excluded from both statistical sets. Wind, throttle, applied brake and velocity are recorded from those native flights, not added as visual motion. The earlier no-extra-gust condition-1 statistics above refer to the matched study.
+
+
+## Calm and gentle-turbulence illustrations
+
+The published applets now compare environments with the same final 1 Hz controller. A new native run, preview-calm, uses the preview geometry and aircraft configuration with zero mean wind and zero gust amplitude. The existing preview-1hz recording supplies the gentle-turbulence case (1.51 m/s mean wind, 0.25 m/s horizontal gust amplitude). Both are excluded from the statistical sets. The earlier 4 Hz preview remains archived but is no longer embedded in the article.
+
+The original mission gains already work well. Both filters are locally stable at all nine trims without added delay. The linear study explains a delay-sensitive mode and supports a bandwidth refinement; the nonlinear matched runs supply the practical evidence. Median spot error is essentially unchanged (1.00 versus 0.98 m), despite reduced command activity in every matched case and improved truth-rate tracking in nine. The fresh validation set evaluates the chosen configuration, not superiority over the baseline.

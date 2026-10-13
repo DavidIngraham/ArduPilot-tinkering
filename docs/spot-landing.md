@@ -117,7 +117,7 @@ For this study I reran the baseline landings with the complete current mission c
 | PG_TURN_D_FF | 0 | 0 |
 | PG_TURN_FILT | 4 Hz | **1 Hz** |
 
-The refinement is in the frequency response of the feedback paths. Increasing or decreasing every gain is unnecessary if the problem is excessive control activity around a coupled oscillation mode.
+The mission controller already transferred well to landing. This is a modest refinement of its feedback bandwidth, not a rescue of a bad gain set. The feedforward, PI and roll-damping gains remain unchanged.
 
 ## Check the operating conditions used during landing
 
@@ -157,7 +157,7 @@ The implementation also enforces integral and available-brake limits. Those nonl
 
 ## Refine the feedback bandwidth
 
-Both filter settings have decaying non-neutral modes at all nine sampled trims with no added command delay. The difference appears when the actuator path is delayed. In the 0.5 m/s descending right turn, the 4 Hz configuration develops a growing mode around 2 Hz with 80–120 ms of added delay. At 120 ms its pole pair has real part **+0.022/s** and frequency **2.00 Hz**. The 1 Hz configuration retains decaying modes throughout the sampled 0–120 ms delay range at all nine trims.
+The descending-trim analysis is a robustness check: descent alone did not reveal a bad tune. Both filter settings have decaying non-neutral modes at all nine sampled trims with no added command delay. The difference appears when the actuator path is delayed. In the 0.5 m/s descending right turn, the 4 Hz configuration develops a growing mode around 2 Hz with 80–120 ms of added delay. At 120 ms its pole pair has real part **+0.022/s** and frequency **2.00 Hz**. The 1 Hz configuration retains decaying modes throughout the sampled 0–120 ms delay range at all nine trims.
 
 ![Dominant non-neutral poles across landing trims with zero and 120 ms command delay](assets/landing-refinement/landing-envelope.png)
 
@@ -173,17 +173,21 @@ Twelve established conditions were rerun with each filter setting, using fresh n
 
 The refined filter reduced brake-command activity in **all 12 conditions** and actual heading-rate RMSE in **9 of 12**. Median command variation fell from 0.081 to 0.025 normalized travel per second. The largest tracking error across the set fell from **29.6 to 10.6 deg/s**. In the previously identified difficult condition 2, error fell from **22.95 to 5.95 deg/s**; the original condition 1 changed only from 0.54 to 0.51 deg/s.
 
-The landing distance is a separate outcome from steering quality. Smoother braking changes drag and arrival timing, so a smaller heading-rate error does not guarantee a smaller miss in every condition.
+Spot accuracy was essentially unchanged: the matched median miss was **1.00 m at 4 Hz and 0.98 m at 1 Hz**, with a smaller miss in six of twelve cases. The benefit is quieter brake commands and better tracking in several difficult conditions. Smoother braking changes drag and arrival timing, so a smaller heading-rate error does not guarantee a smaller miss.
 
-### Watch the same approach with both configurations
+The nonlinear landing runs provide the practical evidence for the filter change; they could have identified its benefit without the linear study. The linear analysis adds an explanation of the delay-sensitive mode and checks whether the refinement remains reasonable across the sampled trims.
 
-[Before: mission baseline with 4 Hz feedback](https://davidingraham.github.io/assets/microagu-viewer/landing.html?case=before)
+### Watch the final controller in calm air and gentle turbulence
 
-[After: refined controller with 1 Hz feedback](https://davidingraham.github.io/assets/microagu-viewer/landing.html?case=after)
+[Calm air: final controller](https://davidingraham.github.io/assets/microagu-viewer/landing.html?case=calm)
 
-Both applets use the same approach geometry and initial conditions as the original condition-1 replay, with gentle gusts added for the illustration: 0.25 m/s amplitude per horizontal component and 0.0625 m/s vertically, on top of the steady wind. The wind history is identical for both controllers. These two extra runs are separate from the matched study and the fresh Monte Carlo set. The scene shows the final 22 seconds, with synchronized altitude, throttle, applied brake, sink-rate and ground-speed traces. The floor and bullseye are fixed to the ground, and the wind arrow shows the flow direction. Drag to orbit, pinch or scroll to zoom, and use **Flare close-up** or **Slow flare** to inspect the transition.
+[Gentle turbulence: final controller](https://davidingraham.github.io/assets/microagu-viewer/landing.html?case=turbulent)
 
-![Heading-rate tracking and controller contributions in the matched replay](assets/landing-refinement/matched-response.png)
+Both applets use the final 1 Hz controller, the same approach geometry, initial errors, actuator model and flare settings. The calm run has no wind. The turbulent run adds a steady horizontal wind of about 1.51 m/s and smooth gusts with 0.25 m/s amplitude per horizontal component and 0.0625 m/s vertically. These are gentle, repeatable synthetic disturbances. This comparison shows the combined effect of steady wind and gusts, rather than isolating gusts alone.
+
+These illustrative runs are separate from the matched controller study and the fresh Monte Carlo set. The scene shows the final 22 seconds, with synchronized altitude, throttle, applied brake, sink-rate and ground-speed traces. The floor and bullseye are fixed to the ground, and the wind arrow shows the flow direction. Drag to orbit, pinch or scroll to zoom, and use **Flare close-up** or **Slow flare** to inspect the transition.
+
+![Final-controller heading-rate tracking and brake response in calm air and gentle turbulence](assets/landing-refinement/matched-response.png)
 
 Carriage and canopy attitudes, propeller RPM, throttle and brake travel come from the simulator. The carriage uses the exported SolidWorks assembly; the canopy and suspension lines are schematic. The 3D scene keeps physical scale, while the side profile exaggerates height for readability.
 
@@ -191,7 +195,7 @@ Carriage and canopy attitudes, propeller RPM, throttle and brake travel come fro
 
 After fixing the refined configuration, I tested twelve fresh randomized conditions with a new seed. These cases were not used to select the filter. The table and landing footprint show only the final configuration on that fresh set; the twelve matched comparison conditions above remain separate.
 
-All twelve fresh runs reached the modeled ground plane, and all twelve finished within 5 m of the target.
+All twelve fresh runs reached the modeled ground plane, and all twelve finished within 5 m of the target. This validates the selected configuration within these simulated conditions; without a baseline run on the same fresh set, it does not establish an improvement over the original gains.
 
 | Metric | Final configuration: fresh validation |
 |---|---:|

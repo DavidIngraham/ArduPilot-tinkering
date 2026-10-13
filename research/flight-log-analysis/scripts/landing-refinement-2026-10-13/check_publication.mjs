@@ -13,9 +13,9 @@ await page.goto('http://127.0.0.1:8075/research/?collection=ardupilot-tinkering&
 await page.waitForSelector('mjx-container');await page.waitForTimeout(4000);
 const report=await page.evaluate(()=>({math:document.querySelectorAll('mjx-container').length,mathErrors:document.querySelectorAll('mjx-merror').length,iframes:[...document.querySelectorAll('iframe')].map(x=>x.src),placeholders:document.body.innerText.includes('FINAL_RESULTS')}));
 await page.screenshot({path:out+'article-check.png',fullPage:true});
-for(const kind of ['before','after']){
+for(const kind of ['calm','turbulent']){
  await page.goto('http://127.0.0.1:8075/assets/microagu-viewer/landing.html?case='+kind);
- await page.waitForFunction(()=>document.querySelector('#case-label')?.textContent?.includes('gentle gusts'));
+ await page.waitForFunction(()=>document.querySelector('#case-label')?.textContent?.includes('final controller'));
  await page.locator('#flare').click();await page.waitForTimeout(1000);await page.locator('#play').click();
  report[kind]=await page.locator('#case-label').innerText();
  if(!(await page.locator('canvas').count())||(await page.locator('#status').innerText()).includes('NaN'))throw Error('Invalid replay rendering');
