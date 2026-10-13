@@ -7,6 +7,7 @@ export default defineConfig({
         "index.html",
         "flight-replay.html",
         "pitch-fbd.html",
+        "trim-launch.html",
         "joint-tour.html",
       ],
       output: { manualChunks: { three: ["three"] } },

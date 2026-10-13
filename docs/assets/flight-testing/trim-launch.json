@@ -1,0 +1,23 @@
+{
+  "kind": "keyframed technique illustration",
+  "duration_s": 18,
+  "source": "Pilot recollection confirmed in conversation, October 12, 2026",
+  "sequence": [
+    "Power off; manually select fixed drum positions",
+    "Carriage starts inverted",
+    "Arc to inflate canopy",
+    "Release upright into passive unpowered glide"
+  ],
+  "geometry": "microagu-payload-tl.glb; schematic canopy",
+  "physics_solver": false,
+  "opale_reference": {
+    "video": "https://www.youtube.com/watch?v=UEoCY5cZiRg",
+    "transcript": "French automatic captions, read October 12, 2026",
+    "reviewed_ranges": [
+      "6:37–7:53: temporary knots and symmetry marks",
+      "8:15–9:55: released-brake inflation and line lengthening",
+      "10:00–10:25: full-brake inflation check"
+    ],
+    "scope": "Related brake-length setup, not the exact powered-off drum/glide method"
+  }
+}

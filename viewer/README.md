@@ -387,3 +387,9 @@ revision and executable SHA-256. No firmware/controller changes are required.
 python viewer/tools/run_closed_joint_tour.py --repo /path/to/ardupilot --raw /path/to/Mission-Planner/joint-tour/auto-suite
 python viewer/tools/package_closed_joint_tour.py --repo /path/to/ardupilot --raw /path/to/Mission-Planner/joint-tour/auto-suite --output viewer/public/joint-tour/responses.json
 ```
+
+## Manual trim and launch illustration
+
+`trim-launch.html` illustrates the pilot-confirmed inverted start, arcing inflation, upright release and passive glide. It uses the payload GLB with a schematic canopy and explicitly keyframed motion, not the flight solver. No active control or propeller rotation is applied. Use **Start pose**, **Release pose**, pause/scrub and **Record animation** to inspect or export the 18-second sequence. Encode the downloaded WebM with `tools/encode_showcase.sh input.webm ../docs/assets/flight-testing trim-launch`.
+
+The Opale reference is `UEoCY5cZiRg`: French automatic captions reviewed at 6:37–7:53 (temporary knots and symmetry marks), 8:15–9:55 (released-brake inflation/lengthening), and 10:00–10:25 (full-brake inflation check). The pilot’s powered-off drum/glide method is personal testimony, not attributed to that video.
