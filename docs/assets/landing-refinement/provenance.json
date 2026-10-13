@@ -1,0 +1,22 @@
+{
+  "ardupilot_commit": "00e192e0c834eb354bd6d1d5cb3625155b0d0753",
+  "raw_directory": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/landing-refinement-2026-10-13",
+  "controller_update_hz": 50,
+  "controller_config_sha256": {
+    "controller-1hz.json": "0b27024e8089580c8dadf7d3bd7b8a3212e966a118447096b4e49d85c12e1522",
+    "controller-4hz.json": "af2d84479ba5c456a328a334fd284c9d6c243bab8a99db1beb7a40aac0ab7109"
+  },
+  "replay_trial": 1,
+  "matched_cases": 12,
+  "validation_cases": 12,
+  "validation_seed": 2026101307,
+  "preview_gust_amplitude_m_s": 0.25,
+  "preview_selection": "Condition 1 with requested gentle gusts, outside both statistical sets",
+  "source_sha256": {
+    "build/sitl/bin/arduplane": "228fc434eddea12e8c0cfa0016003e88ee69693555da0a0fdba0269a7f017503",
+    "Tools/simulation/paraglider/libdynamics.so": "19d488f1d1dc3867e831607cb8b506296db3ed051e615b4566c19afce877092e",
+    "Tools/simulation/paraglider/landing_autotest.py": "4d0acaeb73146c23097fea1777754a7b4fef69a4c253571b35a1dc433a0b36b3",
+    "Tools/simulation/paraglider/compare_autotest.py": "60c51671d664e987d4ae280ddade9552ba48f804950bc92243cb79aa7a981df3"
+  },
+  "default_loader_commit": "377cd08561"
+}

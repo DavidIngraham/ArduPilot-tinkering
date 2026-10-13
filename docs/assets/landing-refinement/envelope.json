@@ -1,0 +1,686 @@
+[
+  {
+    "index": 0,
+    "sink": 0,
+    "turn": 0,
+    "common": 0,
+    "residual": 3.619932378971747e-14,
+    "accepted": true,
+    "command": [
+      0.44589604562570223,
+      0.0,
+      3.747198112000712
+    ],
+    "differential": 0.05204815437988634,
+    "tas": 4.382873735057582,
+    "branch": 1,
+    "integral_trim": 0.052048154379886476,
+    "jacobian_error": 6.117813241964209e-08,
+    "modes": [
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0,
+        "real": -0.15740807919158545,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.04,
+        "real": -0.15820597511252762,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.08,
+        "real": -0.15901503100865166,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 1.2525911252980996e-05,
+        "cutoff": 4,
+        "delay": 0.12,
+        "real": -0.1130415438239126,
+        "hz": 1.977749754068793
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0,
+        "real": -0.15986642566868764,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.04,
+        "real": -0.16069928444372622,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.08,
+        "real": -0.161544145214298,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 2.2439144004774737e-06,
+        "cutoff": 1,
+        "delay": 0.12,
+        "real": -0.16240130126873503,
+        "hz": 0.0
+      }
+    ]
+  },
+  {
+    "index": 1,
+    "sink": 0.5,
+    "turn": 0,
+    "common": 0,
+    "residual": 1.445000003441783e-10,
+    "accepted": true,
+    "command": [
+      0.35587839556580997,
+      0.0,
+      1.8509578448793935
+    ],
+    "differential": 0.025709593349871458,
+    "tas": 4.455560687314377,
+    "branch": 1,
+    "integral_trim": 0.025709593349856404,
+    "jacobian_error": 6.51058252870784e-08,
+    "modes": [
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0,
+        "real": -0.11854932339798975,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.04,
+        "real": -0.11899015418918911,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.08,
+        "real": -0.11943545049180443,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 1.0585777432471282e-05,
+        "cutoff": 4,
+        "delay": 0.12,
+        "real": -0.11988528839398663,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0,
+        "real": -0.11989609365091056,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.04,
+        "real": -0.12035073228771312,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.08,
+        "real": -0.12081007435798355,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 2.366228573313093e-06,
+        "cutoff": 1,
+        "delay": 0.12,
+        "real": -0.1212742017229589,
+        "hz": 0.0
+      }
+    ]
+  },
+  {
+    "index": 2,
+    "sink": 1,
+    "turn": 0,
+    "common": 0,
+    "residual": 3.899548755217457e-11,
+    "accepted": true,
+    "command": [
+      0.24209115973276435,
+      0.0,
+      0.5609537118149237
+    ],
+    "differential": 0.007791583076167998,
+    "tas": 4.5355106645704115,
+    "branch": 1,
+    "integral_trim": 0.0077915830761864585,
+    "jacobian_error": 7.000221013844534e-08,
+    "modes": [
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0,
+        "real": -0.10014799998177928,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.04,
+        "real": -0.10046541454827607,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.08,
+        "real": -0.10078558593680717,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 9.601827742376391e-06,
+        "cutoff": 4,
+        "delay": 0.12,
+        "real": -0.10110855464937438,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0,
+        "real": -0.10111426206578415,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.04,
+        "real": -0.10144015547126001,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.08,
+        "real": -0.10176893146030502,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 2.3185904929886305e-06,
+        "cutoff": 1,
+        "delay": 0.12,
+        "real": -0.1021006331763338,
+        "hz": 0.0
+      }
+    ]
+  },
+  {
+    "index": 3,
+    "sink": 0.5,
+    "turn": -10,
+    "common": 0,
+    "residual": 4.41658679077862e-14,
+    "accepted": true,
+    "command": [
+      0.35857169864815314,
+      7.088768451191564,
+      0.0
+    ],
+    "differential": -0.11361021376189258,
+    "tas": 4.402892016130954,
+    "branch": -1,
+    "integral_trim": -0.007845166806053433,
+    "jacobian_error": 6.823988881069027e-08,
+    "modes": [
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0,
+        "real": -0.12525357307067356,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.04,
+        "real": -0.1257446070138961,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.08,
+        "real": -0.12624086461752282,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 9.088029424497939e-06,
+        "cutoff": 4,
+        "delay": 0.12,
+        "real": -0.12674243892813247,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0,
+        "real": -0.12673923536550777,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.04,
+        "real": -0.12724620273919493,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.08,
+        "real": -0.12775867982861822,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 1.8879515139381935e-06,
+        "cutoff": 1,
+        "delay": 0.12,
+        "real": -0.1282767668761202,
+        "hz": 0.0
+      }
+    ]
+  },
+  {
+    "index": 4,
+    "sink": 0.5,
+    "turn": 10,
+    "common": 0,
+    "residual": 8.840949289052424e-14,
+    "accepted": true,
+    "command": [
+      0.36015121205115735,
+      0.0,
+      10.068931691969292
+    ],
+    "differential": 0.13985631276493563,
+    "tas": 4.354465857163418,
+    "branch": 1,
+    "integral_trim": 0.03321471380891705,
+    "jacobian_error": 6.681409212170712e-08,
+    "modes": [
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0,
+        "real": -0.14753630616014105,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.04,
+        "real": -0.1290945819849397,
+        "hz": 2.364314546315544
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.08,
+        "real": 0.047399964107286106,
+        "hz": 2.163908886810572
+      },
+      {
+        "nonlinear_response_relative_error": 1.4516374829186852e-05,
+        "cutoff": 4,
+        "delay": 0.12,
+        "real": 0.021752013246071934,
+        "hz": 1.9983271359252517
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0,
+        "real": -0.14947843678489145,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.04,
+        "real": -0.15014143273115024,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.08,
+        "real": -0.1508121093650119,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 2.3170988729796685e-06,
+        "cutoff": 1,
+        "delay": 0.12,
+        "real": -0.1514906099431139,
+        "hz": 0.0
+      }
+    ]
+  },
+  {
+    "index": 5,
+    "sink": 1,
+    "turn": -10,
+    "common": 0,
+    "residual": 4.430368712690627e-14,
+    "accepted": true,
+    "command": [
+      0.24399639697732148,
+      9.220925449547995,
+      0.0
+    ],
+    "differential": -0.1477818493605235,
+    "tas": 4.426018259736966,
+    "branch": -1,
+    "integral_trim": -0.04377860028685651,
+    "jacobian_error": 7.24547255526686e-08,
+    "modes": [
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0,
+        "real": -0.11301586048916125,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.04,
+        "real": -0.11341098022217158,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.08,
+        "real": -0.11380983528238595,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 8.591039666754988e-06,
+        "cutoff": 4,
+        "delay": 0.12,
+        "real": -0.11421248473391324,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0,
+        "real": -0.11420464790556087,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.04,
+        "real": -0.11461105933032399,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.08,
+        "real": -0.11502138540138614,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 2.0100868405963207e-06,
+        "cutoff": 1,
+        "delay": 0.12,
+        "real": -0.11543568917044963,
+        "hz": 0.0
+      }
+    ]
+  },
+  {
+    "index": 6,
+    "sink": 1,
+    "turn": 10,
+    "common": 0,
+    "residual": 1.3296285849643726e-13,
+    "accepted": true,
+    "command": [
+      0.2444859536890067,
+      0.0,
+      10.07059833567977
+    ],
+    "differential": 0.13987946225598108,
+    "tas": 4.412081212950206,
+    "branch": 1,
+    "integral_trim": 0.03574795458806855,
+    "jacobian_error": 7.214003356988218e-08,
+    "modes": [
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0,
+        "real": -0.12789372290501017,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.04,
+        "real": -0.12837716724002748,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.08,
+        "real": -0.1288654301396704,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 1.0138854027397333e-05,
+        "cutoff": 4,
+        "delay": 0.12,
+        "real": -0.1293585901782879,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0,
+        "real": -0.1293485608731108,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.04,
+        "real": -0.1298465652636139,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.08,
+        "real": -0.13034962634533453,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 2.1870445369800245e-06,
+        "cutoff": 1,
+        "delay": 0.12,
+        "real": -0.13085782800808482,
+        "hz": 0.0
+      }
+    ]
+  },
+  {
+    "index": 7,
+    "sink": 1,
+    "turn": 0,
+    "common": 0.15,
+    "residual": 7.103850162700448e-11,
+    "accepted": true,
+    "command": [
+      0.2431535706871011,
+      10.327239248489276,
+      10.799224746714915
+    ],
+    "differential": -0.015512509918962695,
+    "tas": 4.233359277227075,
+    "branch": -1,
+    "integral_trim": -0.015512509919367923,
+    "jacobian_error": 7.44523672191298e-08,
+    "modes": [
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0,
+        "real": -0.11179804202912111,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.04,
+        "real": -0.1121748360052273,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.08,
+        "real": -0.11255501782986757,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 9.075901601692056e-06,
+        "cutoff": 4,
+        "delay": 0.12,
+        "real": -0.11293863788524529,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0,
+        "real": -0.11294694711252913,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.04,
+        "real": -0.11333418320070025,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.08,
+        "real": -0.11372496396938735,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 2.0360427329825888e-06,
+        "cutoff": 1,
+        "delay": 0.12,
+        "real": -0.11411934306082608,
+        "hz": 0.0
+      }
+    ]
+  },
+  {
+    "index": 8,
+    "sink": 1,
+    "turn": 0,
+    "common": 0.3,
+    "residual": 1.851832112984938e-10,
+    "accepted": true,
+    "command": [
+      0.2550971650001595,
+      21.063159169638368,
+      21.59844949342983
+    ],
+    "differential": -0.03757485975735894,
+    "tas": 3.9391282217872607,
+    "branch": -1,
+    "integral_trim": -0.037574859757367386,
+    "jacobian_error": 7.803569611158134e-08,
+    "modes": [
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0,
+        "real": -0.11842278590188926,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.04,
+        "real": -0.11882550412466758,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 4,
+        "delay": 0.08,
+        "real": -0.11923176698213449,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 8.975524787450672e-06,
+        "cutoff": 4,
+        "delay": 0.12,
+        "real": -0.11964162457556164,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0,
+        "real": -0.11965142880448125,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.04,
+        "real": -0.12006507742219215,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": null,
+        "cutoff": 1,
+        "delay": 0.08,
+        "real": -0.12048242665489509,
+        "hz": 0.0
+      },
+      {
+        "nonlinear_response_relative_error": 1.9332921762029565e-06,
+        "cutoff": 1,
+        "delay": 0.12,
+        "real": -0.12090352957496153,
+        "hz": 0.0
+      }
+    ]
+  }
+]

@@ -2,7 +2,7 @@
 
 Landing needs a different use of the controls than ordinary flight. I left symmetric braking out of the up-and-away pitch controller because it costs efficiency and can compromise wing stability. Near the ground, slowing the aircraft becomes the objective, and a controlled pull on both brakes becomes useful.
 
-The landing architecture keeps ArduPilot's existing mission handling, approach geometry, height reference and flare triggers. The parafoil-specific work is in the response to the flare: command idle throttle, ramp common brake, and preserve differential steering. This article describes that division of responsibility and the final simulation results.
+The landing architecture keeps ArduPilot's existing mission handling, approach geometry, height reference and flare triggers. The parafoil-specific work is in the response to the flare: command idle throttle, ramp common brake, and preserve differential steering. Starting with the established mission controller, I use descending-flight analysis to refine the steering response, then test the complete approach and flare across wind, actuator and aerodynamic uncertainty.
 
 ## What stays from fixed-wing TECS—and what changes
 
@@ -102,35 +102,115 @@ Common brake consumes steering travel. The turn controller's output and anti-win
 
 At 60% common brake, 40% of normalized travel remains above the floor on either side. The 20% reserve would cap a larger common request at 80%. Starting from zero, the configured ramp takes two seconds to reach 60%; a low trigger or fast descent may leave less time than that.
 
-## Final Monte Carlo results
+## Start with the mission controller
 
-The selected lateral configuration was evaluated in **12 matched randomized conditions**. Conditions 0–3 informed the diagnosis; the 1 Hz candidate was fixed before examining conditions 4–11. All flights reached the ground plane. These are the final configuration’s results, not a claim of twelve independent validation cases.
+The starting point is the controller from the [up-and-away design study](controller-design.md): heading-rate feedforward and PI feedback, body-roll-rate damping, and the throttle-only longitudinal loop. Landing should extend that design rather than depend on a separate aggressive steering tune.
 
-| Metric | Final configuration |
-|---|---:|
-| Within 5 m of target | **11 / 12** |
-| Median miss | **1.28 m** |
-| 90th-percentile miss | **3.50 m** |
-| Worst miss | **7.01 m** |
-| Median downward speed at crossing | 1.41 m/s |
-| 90th-percentile downward speed | 1.50 m/s |
-| Median ground speed | 3.63 m/s |
+For this study I reran the baseline landings with the complete current mission configuration. The baseline and refined versions share the same longitudinal settings, approach geometry and flare schedule. The lateral coefficients are also unchanged:
 
-![Final Monte Carlo landing footprint and arrival speeds](assets/landing/landing-final.png)
+| Lateral parameter | Baseline | Refined |
+|---|---:|---:|
+| PG_TURN_FF | 0.009 | 0.009 |
+| PG_TURN_P | 0.005 | 0.005 |
+| PG_TURN_I | 0.002 | 0.002 |
+| PG_TURN_RDAMP | 0.003 | 0.003 |
+| PG_TURN_D_FF | 0 | 0 |
+| PG_TURN_FILT | 4 Hz | **1 Hz** |
 
-The trials varied horizontal wind from 0–2 m/s in any direction, smooth gust amplitudes up to 0.45 m/s, initial cross-track error ±10 m, height ±5 m, heading ±15°, speed ±10%, voltage 20.4–22.2 V, independent brake lift and drag scales of 0.6–1.4, actuator rates of 80–220 mm/s, command delay up to 0.12 s, and landing-datum error ±0.5 m. These are engineering test ranges, not measured environmental probabilities.
+The refinement is in the frequency response of the feedback paths. Increasing or decreasing every gain is unnecessary if the problem is excessive control activity around a coupled oscillation mode.
 
-Each run used the 1,758 g Trout Lake configuration, the mission-profile 9-DOF model and the mission lateral gains with 1 Hz heading-rate and roll-rate measurement filtering. A fresh native SITL process flew an AUTO waypoint followed by a LAND item. Log audits confirmed the planning parameters, flare activation, common-brake bound and allocated output bounds.
+## Check the operating conditions used during landing
 
-The smoother steering improves the approach response without guaranteeing the smallest miss on every run. One trial lands 7.01 m beyond the target with only 0.04 m cross-track error; arrival speed and approach/flare placement still need attention. The [research record](https://github.com/DavidIngraham/ArduPilot-tinkering/blob/main/research/flight-log-analysis/lateral-landing-2026-10-13.md) documents the gain mismatch, descent-trim analysis and matched comparisons. All 12 are retained in the results.
+The earlier controller study already considered several flight trims. Landing extends the question: how does the feedback behave while descending and turning, with delayed brake response and common brake consuming steering travel?
 
-## Watch the complete control response
+I solved nine balanced operating points in the 1,758 g, 9-DOF mission model:
 
-[Open the interactive spot-landing replay](https://davidingraham.github.io/assets/microagu-viewer/landing.html). Drag to orbit, scroll or pinch to zoom, and scrub to inspect the brake application. The moving floor conveys translation; its grid and the 1, 2 and 5 m bullseye rings are fixed to the ground at the intended target.
+- Straight flight at 0, 0.5 and 1.0 m/s sink.
+- Left and right turns at 10 deg/s, each at 0.5 and 1.0 m/s sink.
+- Straight flight at 1.0 m/s sink with 15% and 30% common brake.
 
-This is the same trial shown before the lateral update, chosen before the tuning work. With the updated lateral configuration it misses by **2.39 m**. Keeping the case fixed makes the change in control response visible without selecting a more flattering landing. The applet shows the last 22 seconds, with an altitude profile and synchronized throttle, applied-brake, sink-rate and ground-speed traces. Flare entry is marked so the response can be read against the command change. Use **Flare close-up** to jump to the transition; **Slow flare** plays it at 0.35× speed. The highlighted response includes both throttle cutoff and the brake ramp. The current replay uses the updated lateral configuration.
+The calculation retains the unequal left/right line travel, the active side of the brake mixer, propeller dynamics, and the controller's airspeed scaling. Turning cases are linearized in a rotating reference frame. The controller updates and holds its output at 50 Hz, verified from the logged scheduler parameter and heading-rate samples; the model integrates the physics at finer substeps. The partial-brake trims have powered, steady flight; they characterize the plant while braking, not an equilibrium representation of the idle-throttle flare.
+
+![Heading-rate plant frequency response at representative landing trims](assets/landing-refinement/landing-bode.png)
+
+In each case, the local discrete plant is
+
+$$
+x_{k+1}=A x_k+B\,\delta u_k,\qquad
+\begin{bmatrix}\delta\dot\psi_k\\\delta p_k\end{bmatrix}=C x_k.
+$$
+
+Here \(u\) is normalized differential brake demand, \(\dot\psi\) is heading rate and \(p\) is body roll rate. The plant transfer matrix is \(G(z)=C(zI-A)^{-1}B\). Its 16 perturbation states describe the articulated mechanical dynamics and motor RPM; two measurement filters and the integral state complete the local feedback model. Absolute heading contributes a neutral mode because waypoint guidance is outside this inner-loop calculation.
+
+The native controller applies the same first-order filter to measured heading rate and body roll rate. With target \(r_c\), airspeed scale \(s_v\), and the already-defined target shaping omitted here for clarity, the unsaturated law is
+
+$$
+e_k=r_{c,k}-\widehat{\dot\psi}_k,\qquad
+I_k=I_{k-1}+K_I e_k\Delta t,
+$$
+
+$$
+u_k=s_v\left(K_{FF}r_{c,k}+K_P e_k-K_R\hat p_k\right)+I_k.
+$$
+
+The implementation also enforces integral and available-brake limits. Those nonlinear limits are exercised in the native landing runs below.
+
+## Refine the feedback bandwidth
+
+Both filter settings have decaying non-neutral modes at all nine sampled trims with no added command delay. The difference appears when the actuator path is delayed. In the 0.5 m/s descending right turn, the 4 Hz configuration develops a growing mode around 2 Hz with 80–120 ms of added delay. At 120 ms its pole pair has real part **+0.022/s** and frequency **2.00 Hz**. The 1 Hz configuration retains decaying modes throughout the sampled 0–120 ms delay range at all nine trims.
+
+![Dominant non-neutral poles across landing trims with zero and 120 ms command delay](assets/landing-refinement/landing-envelope.png)
+
+Lowering the measurement cutoff reduces how strongly the controller reacts to the faster coupled motion. It also introduces phase lag, so the decision has to come from the combined plant and controller, not the filter alone. The delay values are sensitivity cases within the actuator uncertainty used for the landing tests; they are not a measured servo transfer function.
+
+Small nonlinear perturbation runs reproduce the corresponding local predictions. This verifies the linear calculation against the simulator. The complete flare is still evaluated as a changing trajectory: fixed-throttle linear models omit the altitude loop, navigation, estimator, brake saturation and the common-brake ramp.
+
+## Compare the complete landing response
+
+Twelve established conditions were rerun with each filter setting, using fresh native SITL processes and the same complete controller configuration. The plotted tracking error uses heading rate reconstructed from simulator attitude and angular velocity, rather than the newly filtered feedback signal. Reducing the reporting bandwidth therefore cannot manufacture an apparent tracking improvement.
+
+![Matched landing steering response with 4 Hz and 1 Hz measurement filters](assets/landing-refinement/landing-control-comparison.png)
+
+The refined filter reduced brake-command activity in **all 12 conditions** and actual heading-rate RMSE in **9 of 12**. Median command variation fell from 0.081 to 0.025 normalized travel per second. The largest tracking error across the set fell from **29.6 to 10.6 deg/s**. In the previously identified difficult condition 2, error fell from **22.95 to 5.95 deg/s**; the original condition 1 changed only from 0.54 to 0.51 deg/s.
+
+The landing distance is a separate outcome from steering quality. Smoother braking changes drag and arrival timing, so a smaller heading-rate error does not guarantee a smaller miss in every condition.
+
+### Watch the same approach with both configurations
+
+[Before: mission baseline with 4 Hz feedback](https://davidingraham.github.io/assets/microagu-viewer/landing.html?case=before)
+
+[After: refined controller with 1 Hz feedback](https://davidingraham.github.io/assets/microagu-viewer/landing.html?case=after)
+
+Both applets use the same approach geometry and initial conditions as the original condition-1 replay, with gentle gusts added for the illustration: 0.25 m/s amplitude per horizontal component and 0.0625 m/s vertically, on top of the steady wind. The wind history is identical for both controllers. These two extra runs are separate from the matched study and the fresh Monte Carlo set. The scene shows the final 22 seconds, with synchronized altitude, throttle, applied brake, sink-rate and ground-speed traces. The floor and bullseye are fixed to the ground, and the wind arrow shows the flow direction. Drag to orbit, pinch or scroll to zoom, and use **Flare close-up** or **Slow flare** to inspect the transition.
+
+![Heading-rate tracking and controller contributions in the matched replay](assets/landing-refinement/matched-response.png)
 
 Carriage and canopy attitudes, propeller RPM, throttle and brake travel come from the simulator. The carriage uses the exported SolidWorks assembly; the canopy and suspension lines are schematic. The 3D scene keeps physical scale, while the side profile exaggerates height for readability.
+
+## Final Monte Carlo results
+
+After fixing the refined configuration, I tested twelve fresh randomized conditions with a new seed. These cases were not used to select the filter. The table and landing footprint show only the final configuration on that fresh set; the twelve matched comparison conditions above remain separate.
+
+All twelve fresh runs reached the modeled ground plane, and all twelve finished within 5 m of the target.
+
+| Metric | Final configuration: fresh validation |
+|---|---:|
+| Within 5 m of target | **12 / 12** |
+| Median miss | **1.84 m** |
+| 90th-percentile miss | **2.55 m** |
+| Worst miss | **2.60 m** |
+| Median downward speed at crossing | 1.37 m/s |
+| 90th-percentile downward speed | 1.43 m/s |
+| Median ground speed | 2.96 m/s |
+
+
+![Final Monte Carlo landing footprint and arrival speeds](assets/landing-refinement/landing-final.png)
+
+The trials varied horizontal wind from 0–2 m/s in any direction, smooth gust amplitudes up to 0.45 m/s per horizontal component (one-quarter of that vertically), initial cross-track error ±10 m, height ±5 m, heading ±15°, speed ±10%, voltage 20.4–22.2 V, independent brake lift and drag scales of 0.6–1.4, actuator rates of 80–220 mm/s, command delay up to 0.12 s, and landing-datum error ±0.5 m. These are repeatable synthetic gusts and engineering test ranges, not a calibrated atmospheric turbulence spectrum or measured environmental probabilities.
+
+Each run used a fresh native SITL process flying an AUTO waypoint followed by a LAND item. Log audits check the complete configured controller, flare activation, common-brake bounds and allocated output bounds. The same refined controller also retains the ordinary mission tests in calm air, gusts and steady crosswind.
+
+The completed 2 m/s crosswind comparison preserves the ordinary mission response: right/left loiter heading-rate RMSE changes from 2.29/3.71 to 1.83/3.27 deg/s. The existing gust runs show the tradeoff: less high-frequency brake activity and better radial tracking, but left-loiter heading-rate error rises from 9.79 to 10.80 deg/s. The [mission regression results](assets/landing-refinement/mission-results.json) retain those outcomes alongside the calm-air tests; the landing refinement is not claimed to improve every tracking metric.
 
 ## What remains for flight validation
 
@@ -138,6 +218,6 @@ The simulation ends at the first crossing of a flat ground plane by the payload 
 
 Automatic brake flare remains disabled by default in the firmware. The explicit simulation parameter file and the [next flight test card](next-flight-test-card.md) preserve the distinction between a working control architecture and a flight-validated landing procedure.
 
-[Final results and log audits](assets/landing/final-results.json) · [Final sampled configurations](assets/landing/final-conditions.json) · [Implementation snapshot](https://github.com/DavidIngraham/ardupilot/commit/76c18af01d) · [Plotting and replay scripts](https://github.com/DavidIngraham/ArduPilot-tinkering/blob/main/tools/report_landing_lateral.py)
+[Final results and log audits](assets/landing-refinement/final-results.json) · [Final sampled configurations](assets/landing-refinement/final-conditions.json) · [Selected controller and test setup](https://github.com/DavidIngraham/ardupilot/commit/377cd08561) · [Plotting and replay scripts](https://github.com/DavidIngraham/ArduPilot-tinkering/blob/main/tools/report_landing_refinement.py)
 
 The implementation paths are [native slope landing](https://github.com/DavidIngraham/ardupilot/blob/76c18af01d/libraries/AP_Landing/AP_Landing_Slope.cpp), [parafoil TECS](https://github.com/DavidIngraham/ardupilot/blob/76c18af01d/libraries/AP_TECS/AP_TECS_Paraglider.cpp), and the [brake mixer](https://github.com/DavidIngraham/ardupilot/blob/76c18af01d/ArduPlane/servos.cpp). Raw telemetry and full truth recordings stay in Mission Planner. Implementation and analysis were assisted by Codex.

@@ -5,9 +5,10 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 from scipy.signal import butter,sosfiltfilt
 from pymavlink import mavutil
-p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--root',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--crosswind-baseline',type=Path);a=p.parse_args()
 base=a.root.parent/'longitudinal-2026-10-09/turn-model-spike/longitudinal-final-design/native-gust'
 runs={'calm_4hz':a.root/'mission-regression','calm_1hz':a.root/'mission-1hz','gust_4hz':base,'gust_1hz':a.root/'mission-1hz-gust','crosswind_1hz':a.root/'mission-1hz-crosswind'}
+if a.crosswind_baseline:runs['crosswind_4hz']=a.crosswind_baseline
 results={}
 for name,d in runs.items():
  if not (d/'ParagliderAutoMission.csv.json').exists():continue

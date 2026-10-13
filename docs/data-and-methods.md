@@ -274,3 +274,10 @@ Reproduction scripts:
 - [Native summarizer](../tools/summarize_gust_mission.py) on each run, then [comparison report](../tools/report_longitudinal_final_native.py) on the study root.
 
 Raw outputs are under Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike/longitudinal-final-design. The parent classical-longitudinal-compensated directory contains cached plants and trim states; [the original plant generator](../tools/longitudinal_classical.py) reproduces those. Run the linear analysis again after the nonlinear checks to generate the overlay figure. Final figures, numerical summaries and scripts are archived here; raw logs remain outside Git.
+
+
+## Landing-envelope refinement
+
+The [landing article](spot-landing.md) extends the established mission controller to approach and flare. Its current comparison uses the complete longitudinal profile on both sides, changing only the lateral measurement cutoff from 4 Hz to 1 Hz. Twelve established conditions are paired, followed by twelve fresh validation cases at seed 2026101307. Two additional illustration flights use the original replay geometry with 0.25 m/s horizontal gust amplitude; they are excluded from both statistical sets.
+
+The local analysis covers nine straight, turning and partially braked equilibria. It uses the logged 50 Hz controller update, command hold, live airspeed scaling and separate 0–120 ms delay cases. Native tests evaluate the complete changing approach/flare trajectory. The [research record](../research/flight-log-analysis/landing-refinement-2026-10-13.md), [exact configurations and scripts](https://github.com/DavidIngraham/ArduPilot-tinkering/tree/main/research/flight-log-analysis/scripts/landing-refinement-2026-10-13), and [parameter audits](assets/landing-refinement/results.json) preserve the distinction. Raw logs remain in Mission Planner/analysis/landing-refinement-2026-10-13.
