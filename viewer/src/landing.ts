@@ -209,6 +209,45 @@ async function main() {
       850,
       713,
     );
+    // North-up wind compass: velocity points toward, not meteorological "from".
+    // Keep this earth-referenced when the user orbits the aircraft.
+    ctx.save();
+    ctx.fillStyle = "rgba(10,26,36,.88)";
+    ctx.fillRect(1020, 52, 240, 200);
+    ctx.translate(1140, 148);
+    ctx.strokeStyle = "#68818f";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(0, 0, 49, 0, Math.PI * 2);
+    ctx.moveTo(-49, 0); ctx.lineTo(49, 0);
+    ctx.moveTo(0, -49); ctx.lineTo(0, 49);
+    ctx.stroke();
+    ctx.fillStyle = "#edf5ff";
+    ctx.textAlign = "center";
+    ctx.font = "16px system-ui";
+    ctx.fillText("N", 0, -58);
+    ctx.fillText("S", 0, 70);
+    ctx.fillText("E", 65, 6);
+    ctx.fillText("W", -65, 6);
+    const windSpeed = Math.hypot(wind[0], wind[1]);
+    if (f.wind_ned_m_s && windSpeed > 0.01) {
+      const dx = wind[1] / windSpeed, dy = -wind[0] / windSpeed;
+      ctx.strokeStyle = ctx.fillStyle = "#7bd9ee";
+      ctx.lineWidth = 5;
+      ctx.beginPath();
+      ctx.moveTo(-dx * 32, -dy * 32);
+      ctx.lineTo(dx * 37, dy * 37);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(dx * 49, dy * 49);
+      ctx.lineTo(dx * 30 - dy * 10, dy * 30 + dx * 10);
+      ctx.lineTo(dx * 30 + dy * 10, dy * 30 - dx * 10);
+      ctx.closePath(); ctx.fill();
+    }
+    ctx.fillStyle = "#edf5ff";
+    ctx.font = "17px system-ui";
+    ctx.fillText(f.wind_ned_m_s ? "Wind " + windSpeed.toFixed(1) + " m/s · toward" : "Wind unavailable", 0, 94);
+    ctx.restore();
     const speed = Math.hypot(f.state[7], f.state[8]);
     const flaring = f.time_s >= flareTime;
     ctx.fillStyle = "rgba(10,26,36,.88)";
