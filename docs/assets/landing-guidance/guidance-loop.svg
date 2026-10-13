@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="490" viewBox="0 0 1000 490" role="img" aria-labelledby="title desc">
+<title id="title">Landing guidance and inner steering loops</title><desc id="desc">L1 guidance and target conversion feed the heading-rate controller, brake allocation and aircraft. Heading rate and body roll rate feed back to the inner controller. Position and ground velocity feed back to L1.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8" fill="#334b5a"/></marker></defs>
+<rect width="1000" height="490" fill="#f8fafc"/>
+<g font-family="Arial,sans-serif" font-size="18" fill="#193346" text-anchor="middle">
+<text x="500" y="32" font-size="23" font-weight="bold">Landing guidance wraps around the steering controller</text>
+<g fill="#e3f1f4" stroke="#466777" stroke-width="2">
+<rect x="25" y="100" width="150" height="108" rx="8"/><rect x="205" y="100" width="190" height="108" rx="8"/>
+<rect x="430" y="100" width="200" height="108" rx="8"/><rect x="665" y="100" width="150" height="108" rx="8"/><rect x="850" y="100" width="125" height="108" rx="8"/>
+<rect x="445" y="278" width="250" height="66" rx="8"/></g>
+<text x="100" y="128">L1 guidance</text><text x="100" y="158">period 10 s</text><text x="100" y="188">damping 1.0</text>
+<text x="300" y="127">Plane bank limits</text><text x="300" y="156">+ parafoil target</text><text x="300" y="185">conversion</text>
+<text x="530" y="127">Heading-rate control</text><text x="530" y="156">feedforward + PI</text><text x="530" y="185">+ roll-rate damping</text>
+<text x="740" y="137">Brake mixer</text><text x="740" y="170">+ actuators</text>
+<text x="912" y="140">9-DOF</text><text x="912" y="174">aircraft</text>
+<text x="570" y="304">Heading rate + body roll rate</text><text x="570" y="330">1 Hz measurement filters</text>
+<text x="510" y="401">Position + ground velocity → L1 path feedback</text>
+<text x="500" y="452" font-size="17">Descending-trim linear analysis closes the inner steering loop.</text>
+<text x="500" y="476" font-size="17">Native AUTO regression includes guidance, path capture, altitude control and flare.</text>
+<text x="100" y="69" font-size="16">Approach line</text><text x="412" y="85" font-size="16">Heading-rate target</text>
+</g>
+<g fill="none" stroke="#334b5a" stroke-width="2.3" marker-end="url(#arrow)">
+<path d="M100,76 V100"/><path d="M175,153 H205"/><path d="M395,153 H430"/><path d="M630,153 H665"/><path d="M815,153 H850"/>
+<path d="M912,208 V311 H695"/><path d="M445,311 H415 V223 H495 V208"/>
+<path d="M945,208 V375 H100 V208"/>
+</g></svg>
