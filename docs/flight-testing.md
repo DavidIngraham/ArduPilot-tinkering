@@ -26,6 +26,8 @@ The [V2 manual](https://manuals.plus/m/cdab9dabe4a9759fe1f47d8eb9e2d012e56b48235
 
 ## Finding trim with the power off
 
+I used the brake-setup sections of Opale's [first-flight Backpack tutorial](https://www.youtube.com/watch?v=UEoCY5cZiRg&t=397s) to guide the process: the knots and line marks at **6:37–7:53**, the inflation check with the brakes released at **8:15–9:55**, and the full-brake check at **10:00–10:25**. I adapted that approach to my drum-driven payload by testing trim with the power off.
+
 Before asking the controller to fly the model, I needed a mechanical trim that let it inflate and glide well. I did that with the system powered off. I rotated the brake drums by hand to try different line positions, started with the carriage upside down, and swept it through an arc to inflate the canopy. Then I released it upright into an unpowered glide and watched how it behaved.
 
 I repeated that inflation-and-toss sequence, changing the drum positions until I found the best practical balance between inflation and glide. This was an empirical setup exercise: the electronics were off, so the result came from the rigging and the aircraft rather than a controller correcting it.
@@ -35,10 +37,6 @@ Once I was happy, I marked each line where it passed through the spreader bar. I
 <video autoplay loop muted playsinline controls preload="metadata" poster="assets/flight-testing/trim-launch.jpg" aria-label="Inverted carriage swings through an inflation arc and is released upright into a passive glide, with a close view of carriage attitude"><source src="assets/flight-testing/trim-launch.mp4" type="video/mp4"><source src="assets/flight-testing/trim-launch.webm" type="video/webm"></video>
 
 *The payload CAD illustrates the inverted start, arcing inflation and upright release. Power stays off, the drums stay fixed and the propeller stays stopped. This is a keyframed explanation of the technique, not a flight replay or an inflation calculation. The current simulator begins with an inflated canopy.* [Open the animation with pause and scrub controls](https://davidingraham.github.io/assets/microagu-viewer/trim-launch.html).
-
-Opale's [first-flight Backpack tutorial, starting at the brake-length check](https://www.youtube.com/watch?v=UEoCY5cZiRg&t=495s), explains the related setup principle. From about **8:15–9:55**, the presenter tests inflation with the brake arms up, observes slow inflation and a folded trailing edge, lengthens the brake lines and tries again. At **10:00–10:25**, he checks that pulling the brakes fully prevents inflation. Earlier, around **6:37–7:53**, he explains the temporary knots and the line marks used to match the two sides. I checked those passages against the video's French automatic transcript. Opale's [written brake-setup instructions](https://www.opale-paramodels.com/notices/OP12123%20Rc%20Paraglider%20Manuel%20Power%201.1%20EN.pdf) describe the same two-inflation check.
-
-My powered-off drum adjustments, glide trials and marks at the spreader bar were my adaptation to this payload. The tutorial uses powered servo arms and does not prescribe that exact procedure. The common lesson was to establish the line geometry physically before trying to solve flight behavior with gains.
 
 
 ## Hood River: the model was too light
