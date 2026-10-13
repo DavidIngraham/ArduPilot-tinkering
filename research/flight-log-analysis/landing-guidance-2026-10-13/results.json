@@ -1,0 +1,134 @@
+{
+  "preview-calm": {
+    "period": 8.0,
+    "filter": 1.0,
+    "roll_90pct_span": 18.81158882972417,
+    "pitch_90pct_span": 11.148985571802754,
+    "target_rms": 18.939684747341953,
+    "rate_error_rms": 10.182034415310065,
+    "command_travel_per_s": 0.5075418226980933,
+    "miss_m": 1.8197149386769296,
+    "sink_m_s": 1.3640596472068367
+  },
+  "preview-1hz": {
+    "period": 8.0,
+    "filter": 1.0,
+    "roll_90pct_span": 0.3551064929367346,
+    "pitch_90pct_span": 1.2255133089046106,
+    "target_rms": 0.8468510335650345,
+    "rate_error_rms": 0.536953210992435,
+    "command_travel_per_s": 0.009849687045188734,
+    "miss_m": 0.47839155434152025,
+    "sink_m_s": 1.514971735743414
+  },
+  "landing-1hz-06": {
+    "period": 8.0,
+    "filter": 1.0,
+    "roll_90pct_span": 0.4065990881429411,
+    "pitch_90pct_span": 1.5496889650960046,
+    "target_rms": 0.779083539933799,
+    "rate_error_rms": 0.9795514385668646,
+    "command_travel_per_s": 0.03286874330763584,
+    "miss_m": 2.688462781682969,
+    "sink_m_s": 1.5108383675876385
+  },
+  "landing-1hz-02": {
+    "period": 8.0,
+    "filter": 1.0,
+    "roll_90pct_span": 17.85710301340511,
+    "pitch_90pct_span": 11.407736035957234,
+    "target_rms": 18.718035604208033,
+    "rate_error_rms": 5.948915786965732,
+    "command_travel_per_s": 0.5494635957812464,
+    "miss_m": 1.966790750440335,
+    "sink_m_s": 1.2779155725666325
+  },
+  "calm-12": {
+    "period": 12.0,
+    "filter": 1.0,
+    "roll_90pct_span": 0.06738582422451822,
+    "pitch_90pct_span": 0.29384924473721785,
+    "target_rms": 0.04752124652678208,
+    "rate_error_rms": 0.6772966540208998,
+    "command_travel_per_s": 0.01978314231281324,
+    "miss_m": 1.1728400500373146,
+    "sink_m_s": 1.4387392757122632
+  },
+  "calm-16": {
+    "period": 16.0,
+    "filter": 1.0,
+    "roll_90pct_span": 0.053360003205798034,
+    "pitch_90pct_span": 0.25090257086703627,
+    "target_rms": 0.031298900990516555,
+    "rate_error_rms": 0.7555198575480201,
+    "command_travel_per_s": 0.024693599238995414,
+    "miss_m": 1.1802132414895616,
+    "sink_m_s": 1.4380552891009672
+  },
+  "calm-20": {
+    "period": 20.0,
+    "filter": 1.0,
+    "roll_90pct_span": 0.05273959699783226,
+    "pitch_90pct_span": 0.2589325142666832,
+    "target_rms": 0.03168682867084031,
+    "rate_error_rms": 0.7416776819945154,
+    "command_travel_per_s": 0.022168311625541563,
+    "miss_m": 1.0465473673080412,
+    "sink_m_s": 1.4285729529328652
+  },
+  "check-gust-12": {
+    "period": 12.0,
+    "filter": 1.0,
+    "roll_90pct_span": 0.5042524595766068,
+    "pitch_90pct_span": 1.2468352013804753,
+    "target_rms": 0.9862658905340093,
+    "rate_error_rms": 0.6128587072728796,
+    "command_travel_per_s": 0.011734419607831123,
+    "miss_m": 0.4480081178072848,
+    "sink_m_s": 1.4957004506291125
+  },
+  "check-steady-12": {
+    "period": 12.0,
+    "filter": 1.0,
+    "roll_90pct_span": 0.05718683260831359,
+    "pitch_90pct_span": 0.21446402727978775,
+    "target_rms": 0.044259605537710224,
+    "rate_error_rms": 0.5434111068818134,
+    "command_travel_per_s": 0.012928733918993518,
+    "miss_m": 0.6979783536726345,
+    "sink_m_s": 1.4678350063417516
+  },
+  "check-steady-8": {
+    "period": 8.0,
+    "filter": 1.0,
+    "roll_90pct_span": 0.07428826770410735,
+    "pitch_90pct_span": 0.1990932859505694,
+    "target_rms": 0.0649006852035551,
+    "rate_error_rms": 0.5286781765684223,
+    "command_travel_per_s": 0.013097238412487836,
+    "miss_m": 0.594326800455613,
+    "sink_m_s": 1.4825267952220738
+  },
+  "check-stress02-12": {
+    "period": 12.0,
+    "filter": 1.0,
+    "roll_90pct_span": 0.2673364917516225,
+    "pitch_90pct_span": 1.5499033830878535,
+    "target_rms": 0.9440591257314296,
+    "rate_error_rms": 0.5318338938839949,
+    "command_travel_per_s": 0.035341216578434954,
+    "miss_m": 0.5007403574405522,
+    "sink_m_s": 1.3262166551906265
+  },
+  "check-stress06-12": {
+    "period": 12.0,
+    "filter": 1.0,
+    "roll_90pct_span": 0.4023341495255319,
+    "pitch_90pct_span": 1.5702637795977434,
+    "target_rms": 0.5522088449029057,
+    "rate_error_rms": 1.3023745020536202,
+    "command_travel_per_s": 0.06764560555802791,
+    "miss_m": 2.5800879428134804,
+    "sink_m_s": 1.4320163183184684
+  }
+}

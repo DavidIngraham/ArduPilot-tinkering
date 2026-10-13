@@ -1,0 +1,74 @@
+{
+  "mission_cases": [
+    {
+      "name": "standard-calm-12",
+      "weather": "calm",
+      "config": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/standard-calm-12.json"
+    },
+    {
+      "name": "standard-crosswind-12",
+      "weather": "crosswind",
+      "config": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/standard-crosswind-12.json"
+    },
+    {
+      "name": "standard-gust-12",
+      "weather": "gust",
+      "config": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/standard-gust-12.json"
+    },
+    {
+      "name": "tight-calm-8",
+      "weather": "calm",
+      "config": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/tight-calm-8.json"
+    },
+    {
+      "name": "tight-calm-12",
+      "weather": "calm",
+      "config": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/tight-calm-12.json"
+    },
+    {
+      "name": "wide-crosswind-8",
+      "weather": "crosswind",
+      "config": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/wide-crosswind-8.json"
+    },
+    {
+      "name": "wide-crosswind-12",
+      "weather": "crosswind",
+      "config": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/wide-crosswind-12.json"
+    },
+    {
+      "name": "standard-calm-10",
+      "weather": "calm",
+      "config": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/standard-calm-10.json"
+    },
+    {
+      "name": "standard-crosswind-10",
+      "weather": "crosswind",
+      "config": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/standard-crosswind-10.json"
+    },
+    {
+      "name": "standard-gust-10",
+      "weather": "gust",
+      "config": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/standard-gust-10.json"
+    },
+    {
+      "name": "tight-calm-10",
+      "weather": "calm",
+      "config": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/tight-calm-10.json"
+    },
+    {
+      "name": "wide-crosswind-10",
+      "weather": "crosswind",
+      "config": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/wide-crosswind-10.json"
+    }
+  ],
+  "landing_validation": "All 12 previously held-out randomized conditions, paired against recorded 8 s results; now a regression set, not new held-out evidence.",
+  "candidate": "NAVL1_PERIOD=12; all existing inner-loop gains unchanged",
+  "checks": "Native assertions unmodified; compare corners, altitude tracking, loiter radius/rate tracking, brake activity, saturation and landing pre-flare oscillation.",
+  "adaptive_extension": "12 s showed a severe landing oscillation in condition 08, not reproduced on its immediate repeat. 16/20 s settled but increased miss. 10 s settled calm and two case08 repeats; now run the full landing set and, if acceptable, all five mission profiles.",
+  "selected": {
+    "NAVL1_PERIOD": 10,
+    "NAVL1_DAMPING": 1,
+    "inner_gains": "unchanged",
+    "fresh_native_runs": 42
+  }
+}

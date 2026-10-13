@@ -1,0 +1,10 @@
+{
+  "feature_commit": "377cd08561a5c309aafade5a0abca076661d5c57",
+  "files": {
+    "build/sitl/bin/arduplane": "228fc434eddea12e8c0cfa0016003e88ee69693555da0a0fdba0269a7f017503",
+    "Tools/simulation/paraglider/compare_autotest.py": "60c51671d664e987d4ae280ddade9552ba48f804950bc92243cb79aa7a981df3",
+    "Tools/simulation/paraglider/landing_autotest.py": "4d0acaeb73146c23097fea1777754a7b4fef69a4c253571b35a1dc433a0b36b3",
+    "Tools/autotest/arduplane.py": "2ac7644ce7fa5b7f20699d0138a96359b92a6e7433ee283de6b6cf4d146df40d"
+  },
+  "raw_root": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13"
+}

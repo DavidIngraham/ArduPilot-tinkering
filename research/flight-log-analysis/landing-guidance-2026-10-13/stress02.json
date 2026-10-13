@@ -1,0 +1,25 @@
+{
+  "trial": 2,
+  "flare_pct": 60,
+  "wind_ned_m_s": [
+    1.7155126265447835,
+    -0.20366136686978545,
+    0.0
+  ],
+  "gust_amplitude_m_s": 0.3928605125579387,
+  "gust_period_s": 19.689393571314785,
+  "gust_phase_rad": 1.539443629218952,
+  "cross_track_error_m": 1.5968509606950665,
+  "height_error_m": 1.703699057056765,
+  "heading_error_deg": -6.72307003770735,
+  "speed_scale": 0.9364914199573575,
+  "voltage_v": 21.90908614149497,
+  "brake_lift_scale": 0.7663852784323834,
+  "brake_drag_scale": 1.1968685564094497,
+  "actuator_rate_mm_s": 189.28886755486778,
+  "actuator_delay_s": 0.022693722299507297,
+  "landing_datum_error_m": -0.31584819017815047,
+  "flare_aim_pct": 50,
+  "flare_sink_m_s": 1.4,
+  "record_viewer": true
+}

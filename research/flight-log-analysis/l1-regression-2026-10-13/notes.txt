@@ -1,0 +1,6 @@
+L1 source: libraries/AP_L1_Control/AP_L1_Control.cpp, update_waypoint.
+K_L1 = 4*damping^2
+L1_dist = max((1/pi)*damping*period*groundspeed, dist_min)
+latAccDem = K_L1 * groundspeed^2 / L1_dist * sin(Nu)
+At fixed speed/damping, outside the minimum-lookahead clamp, 8 -> 12 s increases lookahead 50%, reduces acceleration response per sin(Nu) to 2/3, and reduces small-cross-track restoring gain to 4/9. This explains why increasing the period is more than just changing a visual turn radius.
+The native mission keeps explicit corner acceptance radii (WP_RADIUS22 scaled by corner angle), so the regression does not secretly compensate for a slower controller by enlarging waypoint acceptance.

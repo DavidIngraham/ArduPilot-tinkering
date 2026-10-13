@@ -1,0 +1,1598 @@
+{
+  "standard-calm-8": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 8
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/lateral-tuning-2026-10-13/mission-1hz",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 0.2368474654161584,
+        "command_travel_per_s": 0.005827456799970366,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.7263995064363344
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 0.3436205427181747,
+        "command_travel_per_s": 0.006243085205622813,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.6605867307687714
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 0.80526290979337,
+        "command_travel_per_s": 0.02516524244624666,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.033554895667699924
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 0.5134009415648704,
+        "command_travel_per_s": 0.020086147693972024,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.052744526070590325
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 0.4959993012592709,
+        "command_travel_per_s": 0.017845495680138185,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.020585937358592425
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 0.18279373371153032,
+        "command_travel_per_s": 0.004058295661606764,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.03729812588989578
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 0.8250610163258542,
+        "command_travel_per_s": 0.025272387910073232,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.07677016649748494
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 0.9869171084536604,
+        "command_travel_per_s": 0.03211248474033958,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.04367947497484774
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 0.26629019135348175,
+        "command_travel_per_s": 0.005057376017429484,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.030535774781619854
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 0.22541440535578774,
+        "command_travel_per_s": 0.004323447710661909,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.02815872766911315
+      }
+    },
+    "log_sha256": "518bdcde2abdfa34d2d29e57ad27040c4c537f4e8a45a82148e4dacfa82a667c",
+    "max_corner_overrun_m": 0.434106638713871,
+    "max_waypoint_height_error_m": 1.676000000000002
+  },
+  "standard-crosswind-8": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 8
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/lateral-tuning-2026-10-13/mission-1hz-crosswind",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 1.7814244887316426,
+        "command_travel_per_s": 0.03258143109925513,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.754894912365812
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 2.698787857775806,
+        "command_travel_per_s": 0.02669148667663346,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.6942384306191325
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 0.8102487547531212,
+        "command_travel_per_s": 0.026631650259698415,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.02368589650302544
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 0.6659098200057003,
+        "command_travel_per_s": 0.019452969545195854,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.04403976752048435
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 0.7488549095400028,
+        "command_travel_per_s": 0.02154552022655612,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.016849986468658935
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 1.3645147953782533,
+        "command_travel_per_s": 0.0694351010724049,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.06454824590079884
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 1.043688449850461,
+        "command_travel_per_s": 0.03228561924389839,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.03674914484051074
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 0.4914189262356493,
+        "command_travel_per_s": 0.011710539205841534,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.027725128222399892
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 0.2708031069196922,
+        "command_travel_per_s": 0.004004239024378787,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.08882936090978104
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 0.3551538914852375,
+        "command_travel_per_s": 0.005527071067749204,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.05082573704564702
+      }
+    },
+    "log_sha256": "83364d285e147cbf30fea4d0ca7fa26661bb0bf45dd910ce338baa0376c42026",
+    "max_corner_overrun_m": 0.6438260266942476,
+    "max_waypoint_height_error_m": 1.671999999999997
+  },
+  "standard-gust-8": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 8
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/lateral-tuning-2026-10-13/mission-1hz-gust",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 9.889904361030666,
+        "command_travel_per_s": 0.2504921717708129,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.883039449985483
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 10.866122214323058,
+        "command_travel_per_s": 0.26525354473064017,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 2.27477659993298
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 11.239790344637864,
+        "command_travel_per_s": 0.17297247082300327,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.6176176691453211
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 6.635768607122678,
+        "command_travel_per_s": 0.1569402467968016,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.5232292510894312
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 8.928124988832423,
+        "command_travel_per_s": 0.16669191111218612,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.6360112781981856
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 6.385269797212386,
+        "command_travel_per_s": 0.1617474185097537,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.426491751860468
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 9.193567678424305,
+        "command_travel_per_s": 0.12568699356208554,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.6692640161979896
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 11.05525967116041,
+        "command_travel_per_s": 0.17453258474510897,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.6949249728116067
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 10.470950086473092,
+        "command_travel_per_s": 0.21238630535428302,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.7064269975519072
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 6.576532536847854,
+        "command_travel_per_s": 0.14114646469926295,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.4668680850801712
+      }
+    },
+    "log_sha256": "2cc02225b13a32374caa5ad3b1c777fcb512267795403969eebdf02f0c481cfd",
+    "max_corner_overrun_m": 1.3681440223822392,
+    "max_waypoint_height_error_m": 1.4470000000000027
+  },
+  "standard-calm-12": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 12
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/standard-calm-12",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 0.2710589824903896,
+        "command_travel_per_s": 0.00439104938805909,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.7388560304149256
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 0.3708320072290706,
+        "command_travel_per_s": 0.004726842434528617,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.6727359694832156
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 0.9390513404994384,
+        "command_travel_per_s": 0.026266325910138333,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.033792425989924484
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 0.700313778077685,
+        "command_travel_per_s": 0.01976820184698073,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.10837949634229992
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 0.7066085445273104,
+        "command_travel_per_s": 0.01750454850305274,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.029966726480653075
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 0.19269685144701196,
+        "command_travel_per_s": 0.003277542314012984,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.056509018570235874
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 0.9232347819825228,
+        "command_travel_per_s": 0.024074390872258048,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.12254190604281319
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 1.0617725060353536,
+        "command_travel_per_s": 0.03193766999310839,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.07131614526788592
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 0.252874864198663,
+        "command_travel_per_s": 0.004791284178534985,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.05368306283240165
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 0.24517865215147483,
+        "command_travel_per_s": 0.004534727304318698,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.04682821466239335
+      }
+    },
+    "log_sha256": "6b9819ec23a81b884d8e312ef8cdc8c2d33cff517b2fb40ec5b142902cfdfc98",
+    "max_corner_overrun_m": 0.356270189943217,
+    "max_waypoint_height_error_m": 1.6659999999999968
+  },
+  "standard-crosswind-12": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 12
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/standard-crosswind-12",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 1.154418444131668,
+        "command_travel_per_s": 0.010170353849598874,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.8075773458249371
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 0.8311846386742646,
+        "command_travel_per_s": 0.011994309975652222,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.6491386327546327
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 0.8089274664539975,
+        "command_travel_per_s": 0.029147702928549374,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.04571823163838035
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 0.4941374848689093,
+        "command_travel_per_s": 0.014113191717883174,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.08806867192438458
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 0.7582597775824865,
+        "command_travel_per_s": 0.022624640796174027,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.023199455545811848
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 0.21924877876076052,
+        "command_travel_per_s": 0.005437729381886318,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.054075086561335486
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 1.0318290911650994,
+        "command_travel_per_s": 0.03315623106029318,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.0647661090450172
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 0.4659420988182352,
+        "command_travel_per_s": 0.010916180454050144,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.09026822724899834
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 0.24211965109174727,
+        "command_travel_per_s": 0.003158442281122527,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.14264379465694788
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 0.3265853022029264,
+        "command_travel_per_s": 0.00491239910045208,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.1041705476537132
+      }
+    },
+    "log_sha256": "3ab925749b68017668dc6c24b19927d8557dba02812dd23e8a20ed39a3622942",
+    "max_corner_overrun_m": 0.6528940009702869,
+    "max_waypoint_height_error_m": 1.686
+  },
+  "standard-gust-12": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 12
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/standard-gust-12",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 7.127050425465031,
+        "command_travel_per_s": 0.15389172396420064,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.7243774441540556
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 7.627569405142948,
+        "command_travel_per_s": 0.1565496112044356,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.905436560156288
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 9.460506219208037,
+        "command_travel_per_s": 0.15769516019752194,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.7195961332755517
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 6.106039937359355,
+        "command_travel_per_s": 0.09183654754390969,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.8509134651573314
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 6.705459355934729,
+        "command_travel_per_s": 0.07151413899526476,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.919864860701878
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 6.413728840048253,
+        "command_travel_per_s": 0.0945770815407087,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.7864105762274478
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 6.95766584100105,
+        "command_travel_per_s": 0.08977981011950407,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.6452833651967527
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 8.77918762890019,
+        "command_travel_per_s": 0.13798719612041116,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.7902607119568202
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 7.885295916439356,
+        "command_travel_per_s": 0.12853226664656858,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.9133799595113705
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 6.306659542707405,
+        "command_travel_per_s": 0.09559556427929151,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.7651105157881136
+      }
+    },
+    "log_sha256": "b7254f1208daadf2639fa3601335684d875904d241f7be852a09a38ee9bdd2f2",
+    "max_corner_overrun_m": 1.41262199355981,
+    "max_waypoint_height_error_m": 2.2890000000000015
+  },
+  "tight-calm-8": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 8,
+      "WP_LOITER_RAD": 20
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/tight-calm-8",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 0.2902479565508604,
+        "command_travel_per_s": 0.006079797301280091,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.40074344138963
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 0.4257716071872499,
+        "command_travel_per_s": 0.005636366209151539,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.34955834604302
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 0.934733265621631,
+        "command_travel_per_s": 0.024140866443205105,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.032630841102730165
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 0.7113490648902122,
+        "command_travel_per_s": 0.019919313654790185,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.05593088137782299
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 0.7158673920007053,
+        "command_travel_per_s": 0.017928748846350005,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.01952768492441836
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 0.20844592308212131,
+        "command_travel_per_s": 0.003969979278849117,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.03786681710938254
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 0.9495514858729762,
+        "command_travel_per_s": 0.0248906199686457,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.06541947963104543
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 1.0532544671919228,
+        "command_travel_per_s": 0.03181409351221266,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.043415585251192615
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 0.3170563065692358,
+        "command_travel_per_s": 0.006213489996588516,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.03873561673052161
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 0.26027127991704213,
+        "command_travel_per_s": 0.00464421704223188,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.028874497880391176
+      }
+    },
+    "log_sha256": "604aaa8f031b31ee1c3a3296b56eb4b1f1627a3c08672f051a1f8d9bd583e938",
+    "max_corner_overrun_m": 0.4229871459194783,
+    "max_waypoint_height_error_m": 1.6469999999999985
+  },
+  "tight-calm-12": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 12,
+      "WP_LOITER_RAD": 20
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/tight-calm-12",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 0.3157161571285938,
+        "command_travel_per_s": 0.00536774914935426,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.422800238971758
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 0.4704021189665048,
+        "command_travel_per_s": 0.004235345109051599,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.3649780224787451
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 0.9425613809457363,
+        "command_travel_per_s": 0.026240962550484106,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.03342030825433776
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 0.7083713424272033,
+        "command_travel_per_s": 0.019920226538787212,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.1077051484873377
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 0.712600516190887,
+        "command_travel_per_s": 0.018067834460271597,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.026007652187840343
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 0.19561007293119062,
+        "command_travel_per_s": 0.0034907180491432497,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.05644239949832154
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 0.9469908384656185,
+        "command_travel_per_s": 0.02486481515204337,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.09882851359985657
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 1.0359244919108406,
+        "command_travel_per_s": 0.0313563329432737,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.08110258083076499
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 0.29525566923858665,
+        "command_travel_per_s": 0.006056920151743136,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.05510029940332448
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 0.24335323159818284,
+        "command_travel_per_s": 0.004453872318889356,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.04728399143565998
+      }
+    },
+    "log_sha256": "ddc33a1caa45567a443ebd2404680b6f0cabdd231f645bce9bd62b907d474f58",
+    "max_corner_overrun_m": 0.356270189943217,
+    "max_waypoint_height_error_m": 1.6730000000000018
+  },
+  "wide-crosswind-8": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 8,
+      "WP_LOITER_RAD": 45
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/wide-crosswind-8",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 0.6225408910406188,
+        "command_travel_per_s": 0.008419645168027106,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 3.0355146527166803
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 1.7927031110754863,
+        "command_travel_per_s": 0.013507429434202148,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 3.008382944235264
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 0.7863984717670394,
+        "command_travel_per_s": 0.02595770566231355,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.023844334728719146
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 1.2813443882581448,
+        "command_travel_per_s": 0.02972007716372425,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 1.7752635140919248
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 0.7314274655794608,
+        "command_travel_per_s": 0.020197425715525727,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.03816740257139274
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 1.2673824150577118,
+        "command_travel_per_s": 0.06260014924709043,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.05474331738575422
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 1.0192748567922925,
+        "command_travel_per_s": 0.02989743735863802,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.043741406416861923
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 1.1205276763708165,
+        "command_travel_per_s": 0.01699293241101532,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 1.8546316283220048
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 0.28432787541567145,
+        "command_travel_per_s": 0.004394532400065798,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.04505028971146353
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 0.33641432120682085,
+        "command_travel_per_s": 0.005292280230650942,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.041543011405967466
+      }
+    },
+    "log_sha256": "0118d2fd791c3c2901cf48694bb3d10f34f1553c229997420f1d4e7213248fa5",
+    "max_corner_overrun_m": 0.571282250526842,
+    "max_waypoint_height_error_m": 1.6809999999999974
+  },
+  "wide-crosswind-12": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 12,
+      "WP_LOITER_RAD": 45
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/wide-crosswind-12",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 0.5658779691954474,
+        "command_travel_per_s": 0.006354370805402662,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 3.039379364476169
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 0.5047360409653698,
+        "command_travel_per_s": 0.00653380787731119,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 2.9985180482172127
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 0.8095062285094957,
+        "command_travel_per_s": 0.029231911963399713,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.045848118359782704
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 0.7732295923908055,
+        "command_travel_per_s": 0.0184572780369289,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 1.758450376918728
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 0.7413099189123896,
+        "command_travel_per_s": 0.021200237944372376,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.05885204166761287
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 0.1980405559137372,
+        "command_travel_per_s": 0.004598660864040482,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.04477199751095764
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 1.0118240477087381,
+        "command_travel_per_s": 0.03074515475118137,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.07339596520532957
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 0.7361682316062097,
+        "command_travel_per_s": 0.014874106116407403,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 1.8554898710114556
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 0.3066672247464875,
+        "command_travel_per_s": 0.004882655536120819,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.10125820962980409
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 0.33370155757614695,
+        "command_travel_per_s": 0.0045494829408241335,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.09366258319496637
+      }
+    },
+    "log_sha256": "65a98b93bc83571f819ec9dcb89cdde3ef5b03e4c03e3d4bb246a7d384397248",
+    "max_corner_overrun_m": 0.5531463045520361,
+    "max_waypoint_height_error_m": 1.6700000000000017
+  },
+  "standard-calm-10": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 10
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/standard-calm-10",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 0.28481281423279453,
+        "command_travel_per_s": 0.004913122061718662,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.7304747584058264
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 0.3693090911419912,
+        "command_travel_per_s": 0.0053681171767576185,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.663500635808955
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 0.9390972616154032,
+        "command_travel_per_s": 0.026661350883081875,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.03966198446585304
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 0.7172192759243299,
+        "command_travel_per_s": 0.02008820024414736,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.08020326478460774
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 0.7267627878671596,
+        "command_travel_per_s": 0.01821314788719411,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.022092726612555253
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 0.19866943631081171,
+        "command_travel_per_s": 0.003608657181280277,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.042815763841359544
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 0.9209061767584784,
+        "command_travel_per_s": 0.023987217905969027,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.09506338969685316
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 1.0925295709617053,
+        "command_travel_per_s": 0.03251519934707459,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.05793225251037189
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 0.2615311949766348,
+        "command_travel_per_s": 0.0047507923065004285,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.03854908721918304
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 0.2405757546639682,
+        "command_travel_per_s": 0.004388488452477723,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.03409841060846293
+      }
+    },
+    "log_sha256": "fc62036403b6ba203f79471477ff894ba95d9e59c06fb6cad1266ccf88d5818a",
+    "max_corner_overrun_m": 0.36738968273760975,
+    "max_waypoint_height_error_m": 1.6529999999999987
+  },
+  "standard-crosswind-10": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 10
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/standard-crosswind-10",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 1.1996598115393469,
+        "command_travel_per_s": 0.010121588035282696,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.7837528746360585
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 0.953433614739332,
+        "command_travel_per_s": 0.012784271668616372,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.6541015075767203
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 0.7934320236430656,
+        "command_travel_per_s": 0.027334514374538075,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.03284566062843203
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 0.4897236288808196,
+        "command_travel_per_s": 0.013931420591272706,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.06170929894297142
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 0.751756978188216,
+        "command_travel_per_s": 0.022310181802435738,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.019685570036443178
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 0.2389948767424806,
+        "command_travel_per_s": 0.006464469658562344,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.051909739005263286
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 1.0257620909433995,
+        "command_travel_per_s": 0.03261250435436558,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.049682521838963226
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 0.47468655240820007,
+        "command_travel_per_s": 0.011049009891615079,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.05829026796296098
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 0.23262328861367756,
+        "command_travel_per_s": 0.003194516474090909,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.1105008439489515
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 0.33754327739232176,
+        "command_travel_per_s": 0.004924537218961257,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.07045357653526313
+      }
+    },
+    "log_sha256": "3536e9d5fc111b5c7666b6e4d2749f8c89612e63b806814b680d61a3fb98a1ed",
+    "max_corner_overrun_m": 0.6710299443678203,
+    "max_waypoint_height_error_m": 1.668999999999997
+  },
+  "standard-gust-10": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 10
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/standard-gust-10",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 8.061787139793251,
+        "command_travel_per_s": 0.19418954646407724,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.7602854278719737
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 10.400960289801636,
+        "command_travel_per_s": 0.2495235065124328,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 2.484586713930219
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 10.114777300204716,
+        "command_travel_per_s": 0.18399531603557923,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.5971293747013904
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 5.918188577465908,
+        "command_travel_per_s": 0.13479343493844367,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.5519277077166094
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 7.399357285400997,
+        "command_travel_per_s": 0.09234321341953945,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.8364484633326252
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 6.459236044689776,
+        "command_travel_per_s": 0.11201673161110545,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.6465120064410171
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 7.824077233399514,
+        "command_travel_per_s": 0.09494658483663526,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.6894547277670392
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 9.701821183542657,
+        "command_travel_per_s": 0.2360055624002583,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.5333286989423905
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 8.73252169479967,
+        "command_travel_per_s": 0.1387627550025534,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.9483227200287521
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 7.168079889449623,
+        "command_travel_per_s": 0.09767648837688471,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.8494730088603633
+      }
+    },
+    "log_sha256": "0efec09f44f816be1b8166662286cf082cd5a64d99d0c86fb49f9fbc143333b8",
+    "max_corner_overrun_m": 1.2060403055223232,
+    "max_waypoint_height_error_m": 1.4620000000000033
+  },
+  "tight-calm-10": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 10,
+      "WP_LOITER_RAD": 20
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/tight-calm-10",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 0.3150717792727748,
+        "command_travel_per_s": 0.005276479050711612,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.4063226333998402
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 0.45519777926625427,
+        "command_travel_per_s": 0.004983985456272922,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 1.3542992870037875
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 0.9341006343431896,
+        "command_travel_per_s": 0.025070957261389505,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.0362479001435979
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 0.7091901257822226,
+        "command_travel_per_s": 0.02010182261304534,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.08052074588656073
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 0.7041848427453757,
+        "command_travel_per_s": 0.01785722446941258,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.020155861879906724
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 0.19302744061369523,
+        "command_travel_per_s": 0.003516079715164281,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.04223718244972841
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 0.9353559291533441,
+        "command_travel_per_s": 0.024523810897525394,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.07752060497984506
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 1.0596468347315582,
+        "command_travel_per_s": 0.03182059288173957,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.06131361268465414
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 0.28712571810008997,
+        "command_travel_per_s": 0.006078423211293086,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.04315499448598868
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 0.24414089776779088,
+        "command_travel_per_s": 0.0045867001818592195,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.034637264784295074
+      }
+    },
+    "log_sha256": "6a1f2c2b05304000578f1af3f1dc5741bf1806650ac5b8059fd787fc4ebada42",
+    "max_corner_overrun_m": 0.356270189943217,
+    "max_waypoint_height_error_m": 1.6640000000000015
+  },
+  "wide-crosswind-10": {
+    "passed": true,
+    "parameters": {
+      "PG_TURN_ENABLE": 1,
+      "PG_TURN_FF": 0.009,
+      "PG_TURN_P": 0.005,
+      "PG_TURN_I": 0.002,
+      "PG_TURN_IMAX": 0.15,
+      "PG_TURN_RMAX": 25,
+      "PG_TURN_ACCEL": 40,
+      "PG_TURN_FILT": 1,
+      "PG_TURN_TC": 0.1,
+      "PG_TURN_ASPD": 5,
+      "PG_TURN_RDAMP": 0.003,
+      "PG_TURN_D_FF": 0,
+      "TECS_PG_ENABLE": 1,
+      "TECS_PG_HR_TC": 0.5,
+      "TECS_PG_PR_FILT": 1.5,
+      "TECS_PG_PR_WASH": 0,
+      "TECS_PTCH_DAMP": 0.1,
+      "TECS_HDEM_TCONST": 10,
+      "TECS_CLMB_MAX": 1,
+      "TECS_SINK_MAX": 2.5,
+      "TECS_SINK_MIN": 2.5,
+      "TECS_TIME_CONST": 5,
+      "TECS_INTEG_GAIN": 0.3,
+      "TECS_VERT_ACC": 3.5,
+      "THR_MAX": 60,
+      "THR_MIN": 0,
+      "THR_SLEWRATE": 100,
+      "TRIM_THROTTLE": 45,
+      "FWD_BAT_VOLT_MAX": 22.2,
+      "FWD_BAT_VOLT_MIN": 18,
+      "FWD_BAT_IDX": 0,
+      "TECS_PG_PR_FILT2": 1.5,
+      "NAVL1_PERIOD": 10,
+      "WP_LOITER_RAD": 45
+    },
+    "source": "/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/l1-regression-2026-10-13/wide-crosswind-10",
+    "loiters": {
+      "3": {
+        "truth_rate_rmse_deg_s": 0.4402065542953645,
+        "command_travel_per_s": 0.0060519663570908775,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 3.0292671533094557
+      },
+      "8": {
+        "truth_rate_rmse_deg_s": 0.6787043008893713,
+        "command_travel_per_s": 0.008372851839854957,
+        "saturation_pct": 0.0,
+        "radial_rmse_m": 2.9918530290856817
+      }
+    },
+    "legs": {
+      "2": {
+        "truth_rate_rmse_deg_s": 0.7874108553334533,
+        "command_travel_per_s": 0.0262361429357444,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.03171798155010206
+      },
+      "4": {
+        "truth_rate_rmse_deg_s": 0.995751134123452,
+        "command_travel_per_s": 0.016688898533991303,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 1.807461736805378
+      },
+      "5": {
+        "truth_rate_rmse_deg_s": 0.7277358317483151,
+        "command_travel_per_s": 0.019046854527541655,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.04860612308244719
+      },
+      "6": {
+        "truth_rate_rmse_deg_s": 0.21407898933121988,
+        "command_travel_per_s": 0.0046064234410617575,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.033145114936226336
+      },
+      "7": {
+        "truth_rate_rmse_deg_s": 0.9935005696039153,
+        "command_travel_per_s": 0.02746374977077605,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.05596212620984489
+      },
+      "9": {
+        "truth_rate_rmse_deg_s": 0.8111903108423164,
+        "command_travel_per_s": 0.016075535525947322,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 1.8265031288517293
+      },
+      "10": {
+        "truth_rate_rmse_deg_s": 0.29633250087258617,
+        "command_travel_per_s": 0.004659013941869822,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.0675385891477172
+      },
+      "11": {
+        "truth_rate_rmse_deg_s": 0.32743758158992325,
+        "command_travel_per_s": 0.004294722495452503,
+        "saturation_pct": 0.0,
+        "xtrack_rmse_m": 0.06127662263586274
+      }
+    },
+    "log_sha256": "34ebeb36e7b78ad54d387d8c3d86f9af3bf485d2350be8efa6fb31b6c003680a",
+    "max_corner_overrun_m": 0.6075541398991812,
+    "max_waypoint_height_error_m": 1.6640000000000015
+  }
+}

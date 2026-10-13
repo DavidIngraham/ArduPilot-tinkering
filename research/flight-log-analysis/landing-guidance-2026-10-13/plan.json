@@ -1,0 +1,23 @@
+{
+  "question": "Does reducing waypoint-guidance bandwidth remove the calm landing limit cycle without spoiling windy approaches?",
+  "baseline": {
+    "NAVL1_PERIOD": 8,
+    "PG_TURN_FILT": 1
+  },
+  "calm_periods_s": [
+    12,
+    16,
+    20
+  ],
+  "candidate_period_s": 12,
+  "selection_reason": "Shortest tested period that removes the large calm oscillation; selected before wind/stress outcomes.",
+  "checks": [
+    "calm",
+    "steady wind",
+    "steady wind plus gentle gusts",
+    "established uncertainty condition 06",
+    "established uncertainty condition 02"
+  ],
+  "metrics_window": "20 simulated seconds before first active PGFL; truth attitude and heading rate, commanded turn rate and brake activity, plus ground-crossing miss/sink",
+  "scope": "Parameter-only native SITL experiment. No firmware or published defaults changed. Not an independent Monte Carlo validation."
+}
