@@ -186,7 +186,7 @@ After working through the mode shapes and controller plots, I wanted to see what
   Your browser does not support inline video.
 </video>
 
-*Thirty seconds at real speed: a powered right turn, a reversal to the left, then brake release. This is a scripted open-loop run of the 9-DOF model at the 1.758 kg Trout Lake mass and 22.2 V. Moderate synthetic gusts act on the physics throughout, with nominal RMS speeds of 0.5 m/s in each horizontal direction and 0.25 m/s vertically. Peak payload bank is 36.2°. The left view follows the aircraft; the right rides with the payload so the mechanisms stay visible. Joint motion is shown at its actual simulated amplitude. [Download the clip](https://raw.githubusercontent.com/DavidIngraham/ArduPilot-tinkering/main/docs/assets/viewer/reversing-turn-controls-plain.mp4).*
+*Thirty seconds at real speed: a powered right turn, a reversal to the left, then brake release. This is a scripted open-loop run of the 9-DOF model at the 1.758 kg Trout Lake mass and 22.2 V. Moderate synthetic gusts act on the physics throughout, with nominal RMS speeds of 0.5 m/s in each horizontal direction and 0.25 m/s vertically. Peak payload bank is 36.2°. The left view follows the aircraft; the right rides with the payload so the mechanisms stay visible. Joint motion is shown at its actual simulated amplitude. [Download the clip](https://raw.githubusercontent.com/DavidIngraham/micro-agu/main/docs/assets/viewer/reversing-turn-controls-plain.mp4).*
 
 The reversal is the interesting part. The payload and canopy do not behave like one rigid airplane, and brake release does not instantly erase their relative motion. In this run the largest relative rotation-vector components are 4.5° in roll, 11.4° in pitch, and 7.2° in yaw. Seeing that motion alongside brake travel makes the connection between the coupled modes and the physical aircraft much easier to follow.
 
@@ -208,7 +208,7 @@ The following three clips show the same mission segment and controller configura
   Your browser does not support inline video.
 </video>
 
-*With no wind, altitude stays between 89.45 and 90.11 m in the excerpt. Throttle ranges from 43.0% to 46.8%. [Download calm-air video](https://raw.githubusercontent.com/DavidIngraham/ArduPilot-tinkering/main/docs/assets/viewer/auto-calm-profile-plain.mp4).*
+*With no wind, altitude stays between 89.45 and 90.11 m in the excerpt. Throttle ranges from 43.0% to 46.8%. [Download calm-air video](https://raw.githubusercontent.com/DavidIngraham/micro-agu/main/docs/assets/viewer/auto-calm-profile-plain.mp4).*
 
 **Moderate synthetic gusts**
 
@@ -218,7 +218,7 @@ The following three clips show the same mission segment and controller configura
   Your browser does not support inline video.
 </video>
 
-*The same controller now handles the repeatable gust field: nominal RMS 0.5 m/s north/east and 0.25 m/s vertically, with zero mean wind. Altitude ranges from 88.91 to 90.83 m and throttle from 39.9% to 52.9%. [Download gust video](https://raw.githubusercontent.com/DavidIngraham/ArduPilot-tinkering/main/docs/assets/viewer/auto-gust-profile-plain.mp4).*
+*The same controller now handles the repeatable gust field: nominal RMS 0.5 m/s north/east and 0.25 m/s vertically, with zero mean wind. Altitude ranges from 88.91 to 90.83 m and throttle from 39.9% to 52.9%. [Download gust video](https://raw.githubusercontent.com/DavidIngraham/micro-agu/main/docs/assets/viewer/auto-gust-profile-plain.mp4).*
 
 **Steady crosswind**
 
@@ -228,7 +228,7 @@ The following three clips show the same mission segment and controller configura
   Your browser does not support inline video.
 </video>
 
-*A steady 2 m/s wind blows east, with no gusts. It is a crosswind on north/south legs; its headwind, tailwind and crosswind components change around the loiter. Altitude ranges from 89.22 to 90.22 m and throttle from 42.9% to 46.9%. The full native AUTO test also passed in this condition. [Download crosswind video](https://raw.githubusercontent.com/DavidIngraham/ArduPilot-tinkering/main/docs/assets/viewer/auto-crosswind-profile-plain.mp4).*
+*A steady 2 m/s wind blows east, with no gusts. It is a crosswind on north/south legs; its headwind, tailwind and crosswind components change around the loiter. Altitude ranges from 89.22 to 90.22 m and throttle from 42.9% to 46.9%. The full native AUTO test also passed in this condition. [Download crosswind video](https://raw.githubusercontent.com/DavidIngraham/micro-agu/main/docs/assets/viewer/auto-crosswind-profile-plain.mp4).*
 
 In the gust clip, the turn entry reaches 16.9° of payload bank. The controller continues correcting for the changing air velocity while the canopy and payload move relative to each other. Peak relative rotation-vector components in this excerpt are 3.4° in roll, 12.9° in pitch and 6.6° in yaw. The wind flag points downwind on a north-up compass, with horizontal speed and a separate up/down vertical-wind readout. It uses the same earth-frame wind vector that drives the physics, not aircraft-relative airflow. The articulation is not an added animation.
 

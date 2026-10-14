@@ -51,7 +51,7 @@ I checked this by replaying both releases with the rotor angular-momentum terms 
 | Payload only, +9° | 7.1° | 0.7° |
 | Canopy only, +9° | 11.7° | 0.8° |
 
-That large reduction identifies gyroscopic coupling as the dominant source of the visible yaw in these cases. A canopy disturbance also drives payload pitch, which then excites the rotor coupling. The smaller remaining yaw comes from the rest of the coupled model. This establishes the mechanism in the simulator; its magnitude depends on the estimated rotor inertia and has not been isolated in flight data. The intervention removes both gyroscopic and spin-acceleration reaction terms, rather than switching off propeller thrust or shaft torque. [Numerical results](assets/viewer/joint-tour/pitch-yaw-coupling.json) and the [reproduction script](https://github.com/DavidIngraham/ArduPilot-tinkering/blob/main/viewer/tools/check_pitch_yaw_coupling.py) record the comparison.
+That large reduction identifies gyroscopic coupling as the dominant source of the visible yaw in these cases. A canopy disturbance also drives payload pitch, which then excites the rotor coupling. The smaller remaining yaw comes from the rest of the coupled model. This establishes the mechanism in the simulator; its magnitude depends on the estimated rotor inertia and has not been isolated in flight data. The intervention removes both gyroscopic and spin-acceleration reaction terms, rather than switching off propeller thrust or shaft torque. [Numerical results](assets/viewer/joint-tour/pitch-yaw-coupling.json) and the [reproduction script](https://github.com/DavidIngraham/micro-agu/blob/main/viewer/tools/check_pitch_yaw_coupling.py) record the comparison.
 
 <a id="watching-the-coupled-aircraft-move"></a>
 

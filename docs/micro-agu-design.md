@@ -113,3 +113,7 @@ The motivation remains the same as when I started: see what modern open-source a
 A useful comparison needs a recorded configuration and repeatable conditions. Guidance accuracy, wind handling, trim, and the canopy–payload motion all belong in that evaluation. For now, the design, flight data, and [longitudinal-controller investigation](longitudinal-observer.md) give me a way to identify what to measure and what to improve next.
 
 The [data and methods appendix](data-and-methods.md#design-record) links the design evidence, source notebook pages, and CAD extraction method.
+
+## CAD source
+
+The [complete native SolidWorks design](../cad/README.md) is now versioned alongside the simulator, viewer and research in the Micro-AGU repository. Start with `cad/solidworks/microAGU.SLDASM`; the neighboring files contain the payload parts and subassemblies.
