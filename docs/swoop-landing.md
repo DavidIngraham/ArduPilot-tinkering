@@ -58,13 +58,47 @@ All eight runs arrive within 5 m of the target; the largest miss is 3.26 m. Hori
 
 The dramatic gust and crosswind cases also spend about a quarter of the flare at the remaining differential-command limit. Pulling almost all the common brake leaves little steering reserve. The simulator retains those actuator limits rather than allowing full steering on top of full flare.
 
+## A sustained spiral before the landing
+
+I also wanted to descend through several tight turns, build speed, then straighten out for the flare. A sustained spiral gives the aircraft time to settle into the turn and tests whether the model can actually store useful speed for the landing.
+
+[Explore the descending spiral and spot landing](https://davidingraham.github.io/assets/microagu-viewer/landing.html?case=spiral)
+
+This calm-air replay shows the entire native AUTO maneuver: roughly 2.3 turns, a tangent exit, final approach and brake flare. The aircraft starts at 50 m. ArduPilot's existing **loiter-to-altitude** command requests a 6 m clockwise orbit down to 12 m, then waits for its heading-exit condition before advancing to LAND. The actual exit altitude and number of turns depend on that native logic.
+
+During the orbit, L1 uses an 8-second period and the heading-rate demand limit is 65 deg/s. When the mission advances to LAND, the research harness restores the 10-second period and 25 deg/s limit. The target lies 40 m east and 6 m north of the orbit center. The inner-loop gains, aircraft mass, rigging and aerodynamic coefficients remain unchanged. Flare uses the same 95% common brake, 5% steering reserve, 100 percentage points/s ramp and 1.1 m trigger as the dramatic approach above.
+
+| Final spiral result | Calm | Gentle gusts |
+|---|---:|---:|
+| Heading swept before LAND | 826 degrees | 832 degrees |
+| Peak bank | 17.5 degrees | 18.4 degrees |
+| Airspeed entering LAND | 4.24 m/s | 4.43 m/s |
+| Airspeed at flare | 4.60 m/s | 4.57 m/s |
+| Target miss | 2.15 m | 1.96 m |
+| Horizontal speed at ground crossing | 3.21 m/s | 3.17 m/s |
+| Downward speed at ground crossing | 0.81 m/s | 0.85 m/s |
+
+The gust case uses the same frozen configuration with smooth gusts of 0.25 m/s horizontal amplitude and 0.0625 m/s vertically. Both cases reach the target area, but they still arrive with substantial forward speed and about 18 degrees of payload pitch. Two runs establish a useful demonstration, not a reliability estimate.
+
+![Calm spiral: track, altitude, speeds, attitude and actuator response](../research/spiral-swoop-2026-10-13/spiral06.png)
+
+The key question is whether the spiral itself builds speed. I checked that separately with fourteen open-loop cases: six asymmetric brake pulls and a zero-extra-pull baseline in each of the two retained model profiles. Throttle stays idle, the brake pull is held long enough to settle, then released.
+
+![Sustained spiral and brake-release response in both model profiles](../research/spiral-swoop-2026-10-13/authority.png)
+
+At the strongest tested pull, the mission model settles at **4.58 m/s airspeed**, compared with **4.55 m/s** in the matched idle-glide baseline. The alternative model gives 4.54 versus 4.56 m/s. Bank and sink increase, but horizontal speed decreases. Releasing the brake briefly raises airspeed to about 5 m/s. The baseline retains the level-trim brake positions and a small turning bias; it is not a separately solved straight-glide trim.
+
+That explains the distinction visible in the replay: the model can make a descending spiral and a transient recovery arc, but this study does not demonstrate sustained high-energy acceleration. The native traces also contain brief throttle and pitch transients around altitude capture and rollout, so their 5.3–5.4 m/s speed peaks cannot all be attributed to energy gained in the spiral. I have kept the model unchanged rather than tuning its aerodynamics to produce the maneuver I hoped to see.
+
+The [spiral study record](../research/spiral-swoop-2026-10-13/README.md) includes the gentle-gust plot, all seven native attempts, configurations and scripts. Two early routes failed to reach LAND; those failures remain in the record alongside the five completed landings.
+
 ## What needs a better terminal controller?
 
 The flare is currently a scheduled brake ramp. It can trade speed for lift and drag, but it cannot independently choose arrival position, forward speed, sink rate and payload swing phase. In the simulated response, the reduction in sink comes before the forward-speed minimum; by the time the aircraft has slowed further, downward motion and pitch motion have returned.
 
 I screened 32 open-loop turn and flare combinations as well as the native mission runs. Those screens show useful transient braking, but no demonstrated near-stop touchdown. They do not prove that the existing architecture has reached its limit. The aerodynamic model is unchanged throughout this study, and its high-brake response is an extrapolation beyond the flight-test evidence. It includes a smooth lift rolloff with angle of attack, but no validated stall or canopy-collapse dynamics.
 
-The next useful step is to optimize the short terminal brake schedule while explicitly penalizing pitch motion and residual speed. A small terminal MPC controller is worth comparing against that schedule using the same entry states and actuator limits. The approach guidance and TECS can remain responsible for getting to the maneuver; the open question is how much prediction is needed for the last few seconds.
+The next useful step is to isolate an unpowered recovery arc from TECS altitude recapture, then optimize the short terminal brake schedule while explicitly penalizing pitch motion and residual speed. A matched approach without the spiral will help distinguish energy gained in the turn from transition transients. A small terminal MPC controller is worth comparing against that schedule using the same entry states and actuator limits. The approach guidance and TECS can remain responsible for getting to the maneuver; the open question is how much prediction is needed for the last few seconds.
 
 For now, this is a reproducible precision turning-landing demonstration and a clear target for further control work. A settled swoop still needs improvement in simulation, followed by measurements that establish whether the predicted high-brake response is real.
 
