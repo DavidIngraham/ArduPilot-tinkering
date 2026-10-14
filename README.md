@@ -1,82 +1,89 @@
 # Micro-AGU
 
-Micro-AGU is my micro aerial guidance unit: an affordable powered parafoil built to explore autonomous flight with modern open-source avionics. This repository brings together the mechanical design, project articles, simulation viewer, analysis scripts, plots and experimental results.
+**Micro Aerial Guidance Unit** is an experimental autonomous parafoil project built around an affordable HobbyKing V2 canopy, a custom printed payload and ArduPilot avionics. The powered aircraft provides a repeatable platform for studying guidance, canopy–payload dynamics and control.
 
-## Project map
+This repository contains the mechanical design, flight-test articles, interactive visualizations, analysis scripts and simulation results. Start with the [project articles](https://davidingraham.github.io/research/?collection=ardupilot-tinkering), explore an [interactive landing replay](https://davidingraham.github.io/assets/microagu-viewer/landing.html), or open the [CAD assembly](cad/solidworks/microAGU.SLDASM).
+
+![Micro-AGU assembled payload](docs/assets/micro-agu/build-assembled.jpg)
+
+## Project status
+
+The original controller flew autonomous missions at Trout Lake after initial testing in Hood River. Subsequent work uses a 9-degree-of-freedom canopy–payload simulator to develop dedicated steering and longitudinal controllers, approach guidance and brake flare. These newer controller and landing results are simulation studies; they have not yet been validated in flight. The [next flight test card](docs/next-flight-test-card.md) describes the planned validation.
+
+## Explore the project
 
 | Directory | Contents |
 |---|---|
-| [cad/](cad/) | Editable SolidWorks parts and assemblies, copy manifest and CAD workflow |
+| [cad/](cad/) | Native SolidWorks parts, assemblies and file manifest |
 | [docs/](docs/) | Build, flight tests, controller design and landing articles |
-| [viewer/](viewer/) | Three.js live/replay viewer, articulated CAD assets and export tools |
-| [research/](research/) | Reproducible studies, final plots, configurations and bounded replays |
-| [tools/](tools/) | Archive and analysis utilities |
-| [provenance/](provenance/) | Historical source and result manifests |
-| [scratch/](scratch/) | Retained historical experiments |
+| [viewer/](viewer/) | Three.js replay/live viewer, articulated models and export tools |
+| [research/](research/) | Study scripts, final plots, configurations and compact replay excerpts |
+| [tools/](tools/) | Analysis and archive utilities |
+| [provenance/](provenance/) | Source revisions, artifact manifests and historical implementation records |
+| [scratch/](scratch/) | Historical experiments, including superseded approaches |
 
-## Read the project story
+### Read the design story
 
-1. [Building Micro-AGU](docs/micro-agu-design.md)
-2. [From First Tosses to Autonomous Missions](docs/flight-testing.md)
-3. [Controllers through Trout Lake](docs/first-flight-controller.md)
-4. [Simulation and controller refinement](docs/controller-design.md)
-5. [Spot landing](docs/spot-landing.md)
-6. [Toward a precision swoop landing](docs/swoop-landing.md)
+1. [Building Micro-AGU](docs/micro-agu-design.md): canopy, payload, propulsion and avionics.
+2. [From First Tosses to Autonomous Missions](docs/flight-testing.md): launch technique, trim and flight measurements.
+3. [Controllers through Trout Lake](docs/first-flight-controller.md): the original steering and altitude-control design.
+4. [Simulation and controller refinement](docs/controller-design.md): articulated dynamics and classical control analysis.
+5. [Spot landing](docs/spot-landing.md): approach guidance, brake allocation and flare.
+6. [Toward a precision swoop landing](docs/swoop-landing.md): turning approaches and remaining touchdown limitations.
 
-The [project site](https://davidingraham.github.io/research/?collection=ardupilot-tinkering) renders these articles directly from this repository. The existing collection identifier remains stable so saved blog links continue to work. [Data and methods](docs/data-and-methods.md) explains the evidence and model limitations; [the next flight test card](docs/next-flight-test-card.md) covers flight validation.
+[Data and methods](docs/data-and-methods.md) explains the evidence and model assumptions. [Plane trajectory planning](docs/trajectory.md) covers a related investigation into waypoint transitions.
 
-## Firmware and simulation
+## Run the viewer
 
-The active flight controller, native autotests and 9-DOF simulator remain in the [paraglider-high-dof-control ArduPilot feature branch](https://github.com/DavidIngraham/ardupilot/tree/paraglider-high-dof-control). Keeping that code in the ArduPilot fork preserves its upstream build and development workflow. This project repository contains the associated hardware, viewers, experiments and documentation. Earlier implementation snapshots are recorded under provenance; [Plane trajectory planning](docs/trajectory.md) is a related investigation.
-
-The Windows CAD originals remain in place while [cad/](cad/) provides the versioned project copy. Raw flight logs and full simulation traces remain in Mission Planner; final plots, scripts and compact replay excerpts belong here. The original controller flew real missions; subsequent controller and landing studies remain simulation work.
-
-## Archive and restore
-
-This research snapshot contains **2,155 artifacts** (474,539,635 original bytes). Sources, notes, figures, parameters and measured results are preserved. I omitted the raw flight/console logs and built ELF binaries to keep the archive focused on the work and its results; [the omission manifest](provenance/omitted-raw-artifacts.json) records their original names and checksums. I kept the scripts and configuration files to support rerunning the experiments. Generated Python runtime caches were also excluded. Older results are retained even when superseded; consult the write-ups before interpreting a plot.
-
-Large retained data files are losslessly compressed. Everything is stored in ordinary Git; Git LFS is not required. To clone and verify the retained artifacts, run:
+The packaged replays run locally with **Node.js 22 or newer**. No ArduPilot build is needed to view them.
 
 ```sh
 git clone https://github.com/DavidIngraham/micro-agu.git
-cd micro-agu
-python3 tools/restore_artifacts.py --verify
-python3 tools/restore_artifacts.py --destination ../restored-tinkering
+cd micro-agu/viewer
+npm ci
+npm run dev -- --strictPort
 ```
 
-Restore before running historical scripts that expect uncompressed filenames. Some runners contain original absolute workspace paths and require adjustment. They are archived provenance, not a portable turnkey test suite. Use a separate ArduPilot checkout for runners that temporarily modify production sources.
+Open [the landing replay](http://127.0.0.1:5173/landing.html) or [the joint-motion visualization](http://127.0.0.1:5173/joint-tour.html). Drag to orbit and scroll to zoom. The main page at `http://127.0.0.1:5173/` supports opening recordings and connecting to a live simulator.
 
-[Artifact manifest](provenance/artifact-manifest.json) records original names, SHA-256, sizes and permissions. [Verification](provenance/archive-verification.txt) confirms byte-for-byte restoration. [Trajectory plot bundle](artifacts/trajectory-planner-plots.zip) contains the earlier requested plot collection; newer figures are also retained in scratch.
+See the [viewer guide](viewer/README.md) for recording formats, Python dependencies, live streaming and CAD export. To check the viewer from its directory:
 
-I captured this archive on 2026-10-09. [Branch provenance](provenance/branches-final.json) records exact implementation commits. Historical scratch notes are preserved verbatim and can describe obsolete code or assumptions. ArduPilot-derived source retains its upstream notices and GPL licensing; see [COPYING.txt](COPYING.txt). Third-party materials retain their own notices.
+```sh
+npm test
+npm run build
+```
 
-## Flight-data research figures
+## Work with the CAD
 
-[Research figure index](research/flight-log-analysis/index.html) collects the final
-plots linked from the flight-data and simulator research reports. The
-[manifest](research/flight-log-analysis/manifest.json) records each figure and
-plotting script's original path and SHA-256. The plotting source and its local
-Python dependencies are mirrored under `research/flight-log-analysis/scripts/`.
+Open `cad/solidworks/microAGU.SLDASM` in SolidWorks, keeping the neighboring parts and subassemblies together. The [CAD guide](cad/README.md) describes the assembly, derived rendering assets and known reference limitations. Native files are stored in ordinary Git; Git LFS is not required.
 
-The research reports, flight logs, telemetry exports, parameters and simulation
-trace datasets remain in Mission Planner and the original native experiment
-directories. They are not added to this figure archive. Historical scripts can
-retain absolute source-data paths or require adjacent model/configuration files;
-use the manifest to locate those originals. The native SITL plotters run with the
-model package in the `paraglider-high-dof-control` ArduPilot checkout.
+## Firmware and simulator
 
-Refresh the report-linked figures and plotting source with
-`python3 tools/archive_flight_figures.py --source <Mission-Planner-analysis>/longitudinal-2026-10-09 --native-source <ArduPilot>/Tools/simulation/paraglider`.
-Local report assets remain available so the existing research log keeps rendering.
+The flight controller, native autotests and 9-DOF simulator are developed in the [paraglider-high-dof-control branch of the ArduPilot fork](https://github.com/DavidIngraham/ardupilot/tree/paraglider-high-dof-control). They use ArduPilot's build and SITL infrastructure. This repository supplies the hardware design, viewer and supporting experiments rather than a second copy of the firmware.
 
-## Interactive simulator viewer
+For simulator setup and native tests, follow the [paraglider simulator README](https://github.com/DavidIngraham/ardupilot/blob/paraglider-high-dof-control/Tools/simulation/paraglider/README.md). Individual study directories record their configurations and source revisions; the current branch may be newer than a published result.
 
-[Micro-AGU flight viewer](viewer/README.md) provides a local Three.js replay and live
-SITL view of the canopy, payload, joint motion, and actuator states.
+## Research data and reproducibility
 
-## Spot-landing study
+Study directories contain the retained scripts, configurations, final plots, summaries and selected replay excerpts. Raw flight logs, full simulation traces and compiled binaries are not included. Some historical scripts require those external inputs or contain machine-specific paths that must be adjusted. Consult each study's reproduction instructions before running it; the repository is not a single turnkey experiment suite.
 
-[Landing Micro-AGU: From TECS Approach to Brake Flare](docs/spot-landing.md)
-covers the native landing supervisor, TECS comparison, common-brake allocation,
-and final Monte Carlo results. It includes an orbitable 3D replay with an
-earth-fixed bullseye, moving ground reference and actuator histories.
+The [flight-data figure index](research/flight-log-analysis/index.html) and its [manifest](research/flight-log-analysis/manifest.json) connect retained figures to their generating scripts. Older experiments remain available as evidence, even when superseded by later designs.
+
+### Historical archive
+
+The initial research archive was captured on October 9, 2026. Its [artifact manifest](provenance/artifact-manifest.json), [omission manifest](provenance/omitted-raw-artifacts.json) and [branch provenance](provenance/branches-final.json) describe that snapshot, not the entire current repository. Large archived artifacts are losslessly compressed and do not require Git LFS.
+
+To verify or restore those archived artifacts, run from the repository root with Python 3:
+
+```sh
+python3 tools/restore_artifacts.py --verify
+python3 tools/restore_artifacts.py --destination ../micro-agu-restored
+```
+
+Restore before running historical scripts that expect the original uncompressed filenames. Use a separate ArduPilot checkout for historical runners that modify firmware sources.
+
+## Licensing and acknowledgments
+
+See [COPYING.txt](COPYING.txt) for the included GNU GPL v3 license. ArduPilot-derived code retains its upstream notices; third-party materials retain their own notices. The viewer declares GPL-3.0-or-later in its package metadata. Component CAD and other third-party assets should be checked for their individual reuse terms.
+
+Development, analysis and documentation were assisted by Codex.
