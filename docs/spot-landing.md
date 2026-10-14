@@ -247,3 +247,7 @@ Automatic brake flare remains disabled by default in the firmware. The explicit 
 [Final regression results, configurations and log audits](assets/landing-guidance/final-results.json) · [Full L1 research report](https://github.com/DavidIngraham/ArduPilot-tinkering/blob/main/research/flight-log-analysis/l1-regression-2026-10-13/report.md) · [Selected controller profile](https://github.com/DavidIngraham/ardupilot/commit/c44434dee6) · [Plotting and replay script](https://github.com/DavidIngraham/ArduPilot-tinkering/blob/main/tools/report_landing_guidance.py)
 
 The implementation paths are [native slope landing](https://github.com/DavidIngraham/ardupilot/blob/76c18af01d/libraries/AP_Landing/AP_Landing_Slope.cpp), [parafoil TECS](https://github.com/DavidIngraham/ardupilot/blob/76c18af01d/libraries/AP_TECS/AP_TECS_Paraglider.cpp), and the [brake mixer](https://github.com/DavidIngraham/ardupilot/blob/76c18af01d/ArduPlane/servos.cpp). Raw telemetry and full truth recordings stay in Mission Planner. Implementation and analysis were assisted by Codex.
+
+## Toward a turning approach
+
+The next study explores a tighter turning descent with soft and dramatic approach settings. [Toward a Precision Swoop Landing](swoop-landing.md) includes interactive native-SITL replays, target accuracy across eight cases, and the remaining speed and payload-motion limits.
