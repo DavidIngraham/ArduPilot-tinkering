@@ -1,0 +1,15 @@
+{
+  "record_viewer": true,
+  "entry_alt_m": 20,
+  "corner_alt_m": 8,
+  "corner_distance_m": 45,
+  "final_distance_m": 40,
+  "flare_pct": 95,
+  "flare_rate": 100,
+  "flare_alt_m": 1.1,
+  "flare_sink_m_s": 0.5,
+  "turn_rate_limit_dps": 45,
+  "flare_reserve": 5,
+  "turn_l1_period": 6,
+  "name": "dramatic-calm"
+}

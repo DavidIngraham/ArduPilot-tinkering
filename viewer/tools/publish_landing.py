@@ -23,6 +23,6 @@ def bundle(name):
         bundle(dependency)
 for name in re.findall(r'\./assets/([^\"\']+\.js)', (source / 'landing.html').read_text()):
     bundle(name)
-for name in ['models/microagu-payload-tl.glb', 'landing/replay.json', 'landing/replay-before.json', 'landing/replay-calm.json']:
+for name in ['models/microagu-payload-tl.glb', 'landing/replay.json', 'landing/replay-before.json', 'landing/replay-calm.json', 'landing/swoop-soft.json', 'landing/swoop-dramatic.json']:
     shutil.copy2(source / name, destination / name)
 print('Published landing replay with', len(seen), 'JavaScript assets')

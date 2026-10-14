@@ -8,16 +8,31 @@ import {
   parseRecording,
   type Frame,
 } from "./state";
+import { flightProfile } from "./profile";
 import { rigPayload, poseMechanisms, RotorPhase, phaseAt } from "./mechanisms";
 
 async function main() {
   const selected = new URLSearchParams(location.search).get("case");
-  const replayFile = selected === "calm" ? "replay-calm.json" : selected === "before" ? "replay-before.json" : "replay.json";
+  const replayFile =
+    selected === "swoop-soft"
+      ? "swoop-soft.json"
+      : selected === "swoop-dramatic"
+        ? "swoop-dramatic.json"
+        : selected === "calm"
+          ? "replay-calm.json"
+          : selected === "before"
+            ? "replay-before.json"
+            : "replay.json";
   const response = await fetch("landing/" + replayFile, { cache: "no-store" });
   if (!response.ok) throw Error("Could not load landing replay");
   const data = await response.json();
-  document.querySelector("#case-label")!.textContent = data.label ?? "AUTO landing";
+  const swoop = selected === "swoop-soft" || selected === "swoop-dramatic";
+  document.querySelector<HTMLElement>("#swoop-styles")!.hidden = !swoop;
+  document.querySelector("#case-label")!.textContent =
+    data.label ?? "AUTO landing";
   const frames: Frame[] = parseRecording(JSON.stringify(data.frames));
+  // Cumulative travel gives a meaningful altitude profile through a 90-degree turn.
+  const distanceAlong = flightProfile(frames).map((p) => p.distance);
   const first = frames[0].time_s,
     end = frames.at(-1)!.time_s,
     duration = end - first;
@@ -73,6 +88,21 @@ async function main() {
     new T.MeshStandardMaterial({ color: 0x70c6ad, side: T.DoubleSide }),
   );
   scene.add(wing);
+  if (swoop) {
+    const path = new T.BufferGeometry().setFromPoints(
+      frames.map((f) => position(f.state.slice(0, 3))),
+    );
+    scene.add(
+      new T.Line(
+        path,
+        new T.LineBasicMaterial({
+          color: 0x70c6ad,
+          transparent: true,
+          opacity: 0.5,
+        }),
+      ),
+    );
+  }
   const lines = new T.LineSegments(
     new T.BufferGeometry(),
     new T.LineBasicMaterial({ color: 0xc8d7e2 }),
@@ -128,7 +158,9 @@ async function main() {
   const play = document.querySelector<HTMLButtonElement>("#play")!;
   const startPos = position(frames[0].state.slice(0, 3));
   let previous = startPos.clone();
-  camera.position.copy(startPos).add(new T.Vector3(8, 5, 6));
+  camera.position
+    .copy(startPos)
+    .add(swoop ? new T.Vector3(6, 4, 5) : new T.Vector3(8, 5, 6));
   orbit.target.copy(startPos);
   function draw(t: number) {
     const f = sample(frames, first + t),
@@ -168,6 +200,45 @@ async function main() {
     ctx.fillStyle = "#102330";
     ctx.fillRect(0, 0, 1280, 1320);
     ctx.drawImage(renderer.domElement, 0, 0);
+    if (swoop) {
+      const north = frames.map((r) => r.state[0]),
+        east = frames.map((r) => r.state[1]);
+      const n0 = Math.min(...north, data.target_ned_m[0]),
+        n1 = Math.max(...north, data.target_ned_m[0]);
+      const e0 = Math.min(...east, data.target_ned_m[1]),
+        e1 = Math.max(...east, data.target_ned_m[1]);
+      const scale = 200 / Math.max(n1 - n0, e1 - e0, 1);
+      const mx = (e: number) => 44 + (e - e0) * scale;
+      const my = (n: number) => 612 - (n - n0) * scale;
+      ctx.fillStyle = "rgba(10,26,36,.88)";
+      ctx.fillRect(20, 365, 250, 270);
+      ctx.fillStyle = "#edf5ff";
+      ctx.font = "17px system-ui";
+      ctx.fillText("Ground track · north up", 34, 389);
+      ctx.strokeStyle = "#70c6ad";
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      frames.forEach((r, i) =>
+        i
+          ? ctx.lineTo(mx(r.state[1]), my(r.state[0]))
+          : ctx.moveTo(mx(r.state[1]), my(r.state[0])),
+      );
+      ctx.stroke();
+      ctx.strokeStyle = "#ffba68";
+      ctx.beginPath();
+      ctx.arc(
+        mx(data.target_ned_m[1]),
+        my(data.target_ned_m[0]),
+        5 * scale,
+        0,
+        Math.PI * 2,
+      );
+      ctx.stroke();
+      ctx.fillStyle = "#fff";
+      ctx.beginPath();
+      ctx.arc(mx(f.state[1]), my(f.state[0]), 4, 0, Math.PI * 2);
+      ctx.fill();
+    }
     ctx.fillStyle = "#edf5ff";
     ctx.font = "22px system-ui";
     const distance = Math.hypot(
@@ -175,7 +246,7 @@ async function main() {
       f.state[1] - data.target_ned_m[1],
     );
     ctx.fillText(
-      "Native AUTO landing · " +
+      (swoop ? "Native AUTO turning landing · " : "Native AUTO landing · ") +
         t.toFixed(1) +
         " s / " +
         duration.toFixed(1) +
@@ -222,8 +293,10 @@ async function main() {
     ctx.lineWidth = 1;
     ctx.beginPath();
     ctx.arc(0, 0, 49, 0, Math.PI * 2);
-    ctx.moveTo(-49, 0); ctx.lineTo(49, 0);
-    ctx.moveTo(0, -49); ctx.lineTo(0, 49);
+    ctx.moveTo(-49, 0);
+    ctx.lineTo(49, 0);
+    ctx.moveTo(0, -49);
+    ctx.lineTo(0, 49);
     ctx.stroke();
     ctx.fillStyle = "#edf5ff";
     ctx.textAlign = "center";
@@ -234,7 +307,8 @@ async function main() {
     ctx.fillText("W", -65, 6);
     const windSpeed = Math.hypot(wind[0], wind[1]);
     if (f.wind_ned_m_s && windSpeed > 0.01) {
-      const dx = wind[1] / windSpeed, dy = -wind[0] / windSpeed;
+      const dx = wind[1] / windSpeed,
+        dy = -wind[0] / windSpeed;
       ctx.strokeStyle = ctx.fillStyle = "#7bd9ee";
       ctx.lineWidth = 5;
       ctx.beginPath();
@@ -245,11 +319,18 @@ async function main() {
       ctx.moveTo(dx * 49, dy * 49);
       ctx.lineTo(dx * 30 - dy * 10, dy * 30 + dx * 10);
       ctx.lineTo(dx * 30 + dy * 10, dy * 30 - dx * 10);
-      ctx.closePath(); ctx.fill();
+      ctx.closePath();
+      ctx.fill();
     }
     ctx.fillStyle = "#edf5ff";
     ctx.font = "17px system-ui";
-    ctx.fillText(f.wind_ned_m_s ? "Wind " + windSpeed.toFixed(1) + " m/s · toward" : "Wind unavailable", 0, 94);
+    ctx.fillText(
+      f.wind_ned_m_s
+        ? "Wind " + windSpeed.toFixed(1) + " m/s · toward"
+        : "Wind unavailable",
+      0,
+      94,
+    );
     ctx.restore();
     const speed = Math.hypot(f.state[7], f.state[8]);
     const flaring = f.time_s >= flareTime;
@@ -260,7 +341,8 @@ async function main() {
     ctx.fillText("Sink ↓ " + f.state[9].toFixed(2) + " m/s", 36, 88);
     ctx.fillText("Ground speed " + speed.toFixed(2) + " m/s", 325, 88);
     ctx.font = "17px system-ui";
-    const formatDelta = (value: number) => (value >= 0 ? "+" : "") + value.toFixed(2);
+    const formatDelta = (value: number) =>
+      (value >= 0 ? "+" : "") + value.toFixed(2);
     ctx.fillText(
       flaring
         ? "Since flare: " + formatDelta(f.state[9] - entry.state[9]) + " m/s"
@@ -284,12 +366,36 @@ async function main() {
       990,
       36,
     );
-    // Entire final-approach profile stays in earth coordinates, with a moving current-position marker.
-    const x0 = frames[0].state[0],
-      x1 = Math.max(data.target_ned_m[0] + 5, ...frames.map((x) => x.state[0]));
+    // Ordinary replays use north distance; swoops use distance along the recorded track.
+    const profileX = frames.map((r, i) =>
+      swoop ? distanceAlong[i] : r.state[0],
+    );
+    const lastFrame = frames.at(-1)!;
+    const finalSpeed = Math.max(
+      0.01,
+      Math.hypot(lastFrame.state[7], lastFrame.state[8]),
+    );
+    const targetX = swoop
+      ? distanceAlong.at(-1)! +
+        ((data.target_ned_m[0] - lastFrame.state[0]) * lastFrame.state[7] +
+          (data.target_ned_m[1] - lastFrame.state[1]) * lastFrame.state[8]) /
+          finalSpeed
+      : data.target_ned_m[0];
+    const x0 = Math.min(...profileX, targetX),
+      x1 = Math.max(...profileX, targetX) + 5;
     const hmax = Math.max(...frames.map((x) => -x.state[2])) + 1;
     const px = (n: number) => 30 + ((n - x0) / (x1 - x0)) * 1200,
       py = (h: number) => 844 - (h / hmax) * 95;
+    let index = frames.findIndex((r) => r.time_s >= f.time_s);
+    if (index < 0) index = frames.length - 1;
+    const prev = Math.max(0, index - 1);
+    const fraction =
+      index === prev
+        ? 0
+        : (f.time_s - frames[prev].time_s) /
+          (frames[index].time_s - frames[prev].time_s);
+    const currentX =
+      profileX[prev] + fraction * (profileX[index] - profileX[prev]);
     ctx.strokeStyle = "#749da9";
     ctx.beginPath();
     ctx.moveTo(30, 844);
@@ -299,21 +405,23 @@ async function main() {
     ctx.beginPath();
     frames.forEach((r, i) =>
       i
-        ? ctx.lineTo(px(r.state[0]), py(-r.state[2]))
-        : ctx.moveTo(px(r.state[0]), py(-r.state[2])),
+        ? ctx.lineTo(px(profileX[i]), py(-r.state[2]))
+        : ctx.moveTo(px(profileX[i]), py(-r.state[2])),
     );
     ctx.stroke();
     ctx.fillStyle = "#ffba68";
     ctx.beginPath();
-    ctx.arc(px(data.target_ned_m[0]), 844, 5, 0, Math.PI * 2);
+    ctx.arc(px(targetX), 844, 5, 0, Math.PI * 2);
     ctx.fill();
     ctx.fillStyle = "#ffffff";
     ctx.beginPath();
-    ctx.arc(px(f.state[0]), py(-f.state[2]), 5, 0, Math.PI * 2);
+    ctx.arc(px(currentX), py(-f.state[2]), 5, 0, Math.PI * 2);
     ctx.fill();
     ctx.font = "16px system-ui";
     ctx.fillText(
-      "Side profile · height exaggerated for readability · replay ends at first CG ground-plane crossing",
+      swoop
+        ? "Height vs distance along flight path · target projected onto final track · first CG ground crossing"
+        : "Side profile · height exaggerated for readability · replay ends at first CG ground-plane crossing",
       24,
       880,
     );

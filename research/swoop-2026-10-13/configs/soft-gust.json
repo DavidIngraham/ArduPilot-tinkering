@@ -1,0 +1,16 @@
+{
+  "record_viewer": true,
+  "entry_alt_m": 25,
+  "corner_alt_m": 10,
+  "corner_distance_m": 55,
+  "final_distance_m": 40,
+  "flare_pct": 85,
+  "flare_rate": 100,
+  "flare_alt_m": 1.1,
+  "flare_sink_m_s": 0.5,
+  "flare_reserve": 10,
+  "gust_amplitude_m_s": 0.25,
+  "gust_period_s": 12,
+  "gust_phase_rad": 0.7,
+  "name": "soft-gust"
+}

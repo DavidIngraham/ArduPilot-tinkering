@@ -1,0 +1,22 @@
+{
+  "replays": {
+    "soft": "soft-calm",
+    "dramatic": "dramatic2-calm"
+  },
+  "validation": [
+    "soft-calm",
+    "soft-gust",
+    "soft-crosswind",
+    "soft-entry",
+    "dramatic2-calm",
+    "dramatic2-gust",
+    "dramatic2-crosswind",
+    "dramatic2-entry"
+  ],
+  "excluded_schedule_bug": [
+    "dev06",
+    "dramatic-calm",
+    "dramatic-gust"
+  ],
+  "development_runs": 8
+}

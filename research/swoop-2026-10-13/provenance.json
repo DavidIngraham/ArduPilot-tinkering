@@ -1,0 +1,14 @@
+{
+  "ardupilot_commit": "c44434dee6d68340fa463c0341d245f77451cd19",
+  "files": {
+    "Tools/simulation/paraglider/dynamics.cpp": "1093c4641a4c248b468fb3152d28d9270a003b1ec56a1e3f5b7f1b8bceedfdf6",
+    "Tools/simulation/paraglider/libdynamics.so": "19d488f1d1dc3867e831607cb8b506296db3ed051e615b4566c19afce877092e",
+    "Tools/simulation/paraglider/parameters.json": "408ced75e166d8ad20b7684cd3d3fa9d0c66712fd6a9216983b29f42f58adb1a",
+    "Tools/simulation/paraglider/mission-controller-candidate.json": "502037fc05ed96e408da496e7011d56f898e5abfaea93c9c95894b4b28071974",
+    "build/sitl/bin/arduplane": "228fc434eddea12e8c0cfa0016003e88ee69693555da0a0fdba0269a7f017503"
+  },
+  "model": "9-DOF Trout Lake mission, unchanged",
+  "mass_kg": 1.758,
+  "raw_root": "Mission Planner/analysis/swoop-2026-10-13",
+  "scope": "Native AUTO missions with existing controllers and scheduled symmetric flare; dramatic style restores L1 from 6 s to 10 s at estimated heading 65 degrees."
+}

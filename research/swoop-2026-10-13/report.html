@@ -1,0 +1,148 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Swoop landing study</title><style>body{max-width:1100px;margin:30px auto;padding:0 20px;font:18px/1.6 system-ui;color:#203440;background:#faf9f5}img{max-width:100%}iframe{width:100%;height:1050px;border:0;background:#102330}table{border-collapse:collapse;font-size:15px;display:block;overflow:auto}td,th{padding:7px 12px;border-bottom:1px solid #ccd2d8}a{color:#237783}code{font-size:15px}</style><h1>Native turning-descent and flare demonstration</h1>
+<p>The simulator now completes a tight right-turning descent, rollout and brake flare with two approach settings. This is a precision turning-landing demonstration, <strong>not yet a settled, near-zero-speed swoop</strong>. The report retains the remaining forward speed and pitch motion rather than equating target accuracy with touchdown quality.</p>
+<h2>Watch the native runs</h2><iframe title="Soft approach" src="../../viewer/dist/landing.html?case=swoop-soft"></iframe><iframe title="Dramatic approach" src="../../viewer/dist/landing.html?case=swoop-dramatic"></iframe>
+<p><a href="../../viewer/dist/landing.html?case=swoop-soft">Soft approach</a> · <a href="../../viewer/dist/landing.html?case=swoop-dramatic">Dramatic approach</a></p>
+<p>The recordings use native ArduPilot outputs, the unchanged 9-DOF Trout Lake model and actual simulated gusts. Nothing is animated into the motion. The floor and bullseye are earth-fixed; the flight path is shown in 3D, and the altitude profile uses distance traveled through the turn. The animation ends at first payload-CG ground crossing, not a modeled physical landing or slide.</p>
+<h2>Architecture and style settings</h2>
+<p>Both versions use AUTO waypoint guidance, the existing heading-rate controller, throttle-only parafoil TECS and native AP_Landing scheduled common-brake flare. No MPC or firmware changes were required for this demonstration. A short research harness specifies the mission and, for the dramatic style, changes the L1 period using native estimated heading.</p>
+<table>
+<thead>
+<tr>
+<th>Setting</th>
+<th align="right">Soft</th>
+<th align="right">Dramatic</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Entry / corner altitude</td>
+<td align="right">25 / 10 m</td>
+<td align="right">20 / 8 m</td>
+</tr>
+<tr>
+<td>Distance to corner / final leg</td>
+<td align="right">55 / 40 m</td>
+<td align="right">45 / 40 m</td>
+</tr>
+<tr>
+<td>Heading-rate command limit</td>
+<td align="right">25 deg/s</td>
+<td align="right">45 deg/s</td>
+</tr>
+<tr>
+<td>L1 period</td>
+<td align="right">10 s</td>
+<td align="right">6 s, restored to 10 s after estimated heading passes 65°</td>
+</tr>
+<tr>
+<td>L1 damping / measurement cutoff</td>
+<td align="right">1.0 / 1 Hz</td>
+<td align="right">1.0 / 1 Hz</td>
+</tr>
+<tr>
+<td>Flare trigger</td>
+<td align="right">1.1 m</td>
+<td align="right">1.1 m</td>
+</tr>
+<tr>
+<td>Common-brake target / reserve</td>
+<td align="right">85% / 10%</td>
+<td align="right">95% / 5%</td>
+</tr>
+<tr>
+<td>Flare ramp</td>
+<td align="right">100 percentage points/s</td>
+<td align="right">100 percentage points/s</td>
+</tr>
+</tbody></table>
+<p>In the calm recordings, the soft turn reaches roughly 11° of bank and the dramatic turn roughly 19°. The dramatic turn accelerates from about 3.7 to 4.5 m/s airspeed between 30° and 90° heading, close to ordinary flight speed rather than a sustained high-energy dive.</p>
+<p>All other selected inner lateral and longitudinal gains are unchanged. These are tested presets, not a validated continuum obtained by interpolating controller gains. The dramatic schedule handles heading wrap at north; the earlier incorrect schedule and its affected recordings remain classified as development evidence, not final validation.</p>
+<p><img src="styles.png" alt="Tracks, height, flare velocities and residual pitch motion"></p>
+<p>All eight final runs finish within 5 m; worst miss is 3.26 m. Horizontal crossing speeds span 2.12–2.86 m/s; downward speeds span 0.92–1.28 m/s. Payload pitch-rate magnitude reaches 33.7 deg/s at crossing. These velocities and residual motion fall short of the settled touchdown objective.</p>
+<h2>Frozen-style robustness results</h2>
+<p>The four cases per style are calm air; synthetic gusts of 0.25 m/s horizontal amplitude and one-quarter that vertically; a 1 m/s northerly velocity component, crosswind to the eastbound final leg; and a combined entry perturbation (2 m lateral offset, +1 m height, +5° heading, +5% initial speed, 150 mm/s actuator rate and 60 ms command delay). These are engineering checks, not statistical reliability estimates.</p>
+<table>
+<thead>
+<tr>
+<th>Run</th>
+<th align="right">Miss (m)</th>
+<th align="right">Horizontal speed (m/s)</th>
+<th align="right">Downward speed (m/s)</th>
+<th align="right">Bank at crossing (deg)</th>
+<th align="right">Pitch rate (deg/s)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>soft-calm</td>
+<td align="right">2.41</td>
+<td align="right">2.86</td>
+<td align="right">0.92</td>
+<td align="right">1.5</td>
+<td align="right">-17.2</td>
+</tr>
+<tr>
+<td>soft-gust</td>
+<td align="right">2.32</td>
+<td align="right">2.64</td>
+<td align="right">0.98</td>
+<td align="right">2.0</td>
+<td align="right">-13.7</td>
+</tr>
+<tr>
+<td>soft-crosswind</td>
+<td align="right">1.44</td>
+<td align="right">2.59</td>
+<td align="right">0.99</td>
+<td align="right">0.5</td>
+<td align="right">-23.6</td>
+</tr>
+<tr>
+<td>soft-entry</td>
+<td align="right">1.92</td>
+<td align="right">2.85</td>
+<td align="right">0.96</td>
+<td align="right">2.0</td>
+<td align="right">-15.6</td>
+</tr>
+<tr>
+<td>dramatic2-calm</td>
+<td align="right">2.28</td>
+<td align="right">2.41</td>
+<td align="right">1.13</td>
+<td align="right">0.5</td>
+<td align="right">-32.3</td>
+</tr>
+<tr>
+<td>dramatic2-gust</td>
+<td align="right">3.26</td>
+<td align="right">2.12</td>
+<td align="right">1.28</td>
+<td align="right">-1.6</td>
+<td align="right">-33.7</td>
+</tr>
+<tr>
+<td>dramatic2-crosswind</td>
+<td align="right">1.94</td>
+<td align="right">2.30</td>
+<td align="right">1.14</td>
+<td align="right">1.7</td>
+<td align="right">-32.1</td>
+</tr>
+<tr>
+<td>dramatic2-entry</td>
+<td align="right">0.59</td>
+<td align="right">2.56</td>
+<td align="right">1.08</td>
+<td align="right">0.3</td>
+<td align="right">-23.0</td>
+</tr>
+</tbody></table>
+<p><img src="validation.png" alt="Precision and speed objectives across the eight final cases"></p>
+<p>The dramatic gust and crosswind cases spend about a quarter of the flare at the remaining differential-command limit. The bank remains small at crossing, but the narrow steering reserve is a real tradeoff. The <a href="results.json">complete metrics</a> include physical travel limits, body rates and canopy–payload relative rotation and rate.</p>
+<p>The aspirational 1 m/s horizontal and 0.5 m/s downward speeds were not achieved together. The flare produces a transient reduction in sink, but the forward-speed minimum occurs later and is accompanied by renewed sink and payload pitch motion. Simply increasing brake or changing the trigger cannot independently set position, both velocities and swing phase.</p>
+<h2>Why the study stops here</h2>
+<p>The open-loop authority screen examined 20 turning/flare combinations, followed by 12 faster-flare sensitivity cases. It is a feasibility screen, not proof that no better control law exists. It found useful transient braking but did not demonstrate a near-stop touchdown. Full brake in this screen is an extrapolation: the model uses empirical lift and drag versus brake with a smooth angle-of-attack lift rolloff; it has no validated high-brake stall or canopy-collapse behavior.</p>
+<p><img src="fast-flare.png" alt="Transient authority with fixed actuator limits"></p>
+<p>This bounded result supports continued terminal-control work, but does not justify replacing all of TECS with MPC. The next useful comparison is a short optimized brake schedule with explicit pitch/swing penalties against a small terminal predictive controller. Both must use the same model, entry states and actuator limits. Real high-brake measurements remain necessary to establish whether the predicted recovery arc and flare are physical.</p>
+<h2>Reproduction</h2>
+<p><code>run.py</code> and <code>native.py</code> run the named native cases; <code>analyze.py</code> audits logs and computes crossing metrics; <code>publish.py</code> exports bounded replays and plots. <code>selection.json</code> identifies the final cases. <code>provenance.json</code> pins the unchanged simulator and native binary. Raw logs, full recordings, intermediate numerical traces and browser screenshots remain in Mission Planner/analysis/swoop-2026-10-13. Run the viewer build, then serve the tinkering repository over localhost to open the report and replay links.</p>
+<p>Implementation and analysis assisted by Codex.</p>

@@ -1,0 +1,19 @@
+{
+  "record_viewer": true,
+  "entry_alt_m": 25,
+  "corner_alt_m": 10,
+  "corner_distance_m": 55,
+  "final_distance_m": 40,
+  "flare_pct": 85,
+  "flare_rate": 100,
+  "flare_alt_m": 1.1,
+  "flare_sink_m_s": 0.5,
+  "flare_reserve": 10,
+  "cross_track_error_m": 2.0,
+  "height_error_m": 1.0,
+  "heading_error_deg": 5.0,
+  "speed_scale": 1.05,
+  "actuator_rate_mm_s": 150.0,
+  "actuator_delay_s": 0.06,
+  "name": "soft-entry"
+}
