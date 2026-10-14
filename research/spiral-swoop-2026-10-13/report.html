@@ -1,0 +1,55 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Spiral landing</title><style>body{max-width:1100px;margin:30px auto;padding:0 20px;font:18px/1.6 system-ui;background:#faf9f5;color:#203440}img{max-width:100%}iframe{width:100%;height:1100px;border:0}table{display:block;overflow:auto;border-collapse:collapse;font-size:15px}td,th{padding:8px;border-bottom:1px solid #bbb}</style><h1>Descending spiral to spot landing</h1>
+<p>Native AUTO now demonstrates a sustained descending orbit, tangent exit and scheduled brake flare. The final calm run turns about 826 degrees before LAND and reaches the ground plane 2.15 m from the target. A matched gentle-gust run turns 832 degrees and misses by 1.96 m. This is a spiral landing demonstration, not yet a settled, high-energy swoop.</p>
+<iframe title="Spiral landing replay" src="../../viewer/dist/landing.html?case=spiral"></iframe><h2>Results</h2>
+<table>
+<thead>
+<tr>
+<th>Final case</th>
+<th align="right">Peak bank</th>
+<th align="right">Airspeed entering LAND</th>
+<th align="right">Airspeed at flare</th>
+<th align="right">Target miss</th>
+<th align="right">Horizontal crossing speed</th>
+<th align="right">Downward crossing speed</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Calm</td>
+<td align="right">17.5 deg</td>
+<td align="right">4.24 m/s</td>
+<td align="right">4.60 m/s</td>
+<td align="right">2.15 m</td>
+<td align="right">3.21 m/s</td>
+<td align="right">0.81 m/s</td>
+</tr>
+<tr>
+<td>Gentle gust</td>
+<td align="right">18.4 deg</td>
+<td align="right">4.43 m/s</td>
+<td align="right">4.57 m/s</td>
+<td align="right">1.96 m</td>
+<td align="right">3.17 m/s</td>
+<td align="right">0.85 m/s</td>
+</tr>
+</tbody></table>
+<p><img src="spiral06.png" alt="Final calm spiral, rollout and flare"></p>
+<p><img src="spiral06-gust.png" alt="Matched gentle-gust check"></p>
+<p>The target and floor are earth-fixed. The replay follows actual simulated states and includes the entire descending orbit. It ends at first payload-CG ground-plane crossing, not modeled impact, sliding or canopy collapse. The pitch attitude is still about 18 degrees at crossing; position accuracy alone does not establish a settled landing. Full body and joint rates are retained in results.json.</p>
+<h2>Does the spiral build speed?</h2>
+<p>Fourteen actuator-limited open-loop screens compare six asymmetric brake pulls and zero extra pull in each retained profile. Throttle is idle; brake ramps in over 1.5 s, holds until 22.5 s and releases by 24 s. Sustained metrics use 14–22 s; rollout peaks use 24–28 s. These free-flight screens do not implement ground contact.</p>
+<p>At 65 mm additional right pull, the mission model settles at 4.58 m/s airspeed versus 4.55 m/s with zero extra pull. The alternative dynamic-roll profile gives 4.54 versus 4.56 m/s. Bank reaches about 22–23 degrees and sink increases to about 1.9 m/s, but horizontal speed decreases. Release briefly raises airspeed to about 5.0 m/s. The zero-extra-pull case retains level-trim line positions and a small glide turning bias; it is not an independently solved straight-glide trim.</p>
+<p><img src="authority.png" alt="Sustained spiral authority and matched idle-glide baseline"></p>
+<p>In the final native runs, mean pre-LAND airspeed is about 4.4 m/s. Peaks around 5.3–5.4 m/s are transient. Read them alongside throttle and pitch: altitude capture and the transition to LAND can introduce powered pitch motion, so those peaks cannot all be credited to energy gained in the spiral. The model supports descending turns and transient recovery, but this experiment does not demonstrate sustained high-energy acceleration.</p>
+<h2>Native architecture</h2>
+<p>MAV_CMD_NAV_LOITER_TO_ALT requests a 6 m clockwise orbit from 50 m entry altitude to 12 m, followed by LAND with native tangent-exit tracking. Actual exit height and total turns depend on the native altitude and heading-exit conditions. The final target is 40 m east and 6 m north of the orbit center.</p>
+<p>The research harness changes L1 from 8 s to 10 s and the heading-rate cap from 65 to 25 deg/s when native mission sequence enters LAND. It uses mission status, not simulator truth feedback. Other inner-loop gains, aircraft mass, rigging, physical travel and aerodynamics are unchanged.</p>
+<p>Flare uses 95% common brake, 5% steering reserve, 100 percentage points/s, a 1.1 m altitude trigger, LAND_FLARE_AIM=50 and TECS_LAND_SINK=0.5 m/s. The time trigger is disabled; other native flare conditions remain active. This is an experimental mission configuration, not an updated aircraft default.</p>
+<h2>Development and limits</h2>
+<p>Seven native cases were attempted. The initial polygonal route failed to reach LAND; it skipped short segments without producing the intended continuous spiral. A 6 m loiter with 4 s L1 also failed, with repeatedly reversing heading-rate demands. A 10 m orbit with 10 s L1 completed but overshot by 11.4 m. Returning to a 6 m orbit with 8 s L1 completed the spiral. Adjusting exit altitude and final-leg distance produced the selected result. Every attempt is retained in attempts.json; five completed crossings are audited in results.json.</p>
+<p>The final geometry was frozen for the gentle-gust check: 0.25 m/s horizontal amplitude, 0.0625 m/s vertical, 12 s base period and phase 0.7. These two checks are not a statistical reliability estimate. High-bank and high-brake dynamics remain extrapolations beyond the ordinary-flight calibration. Neither retained profile has validated canopy-collapse or aggressive-spiral behavior. No coefficients were changed to create the maneuver.</p>
+<h2>Next useful step</h2>
+<p>Separate the recovery arc from altitude recapture: compare a deliberately unpowered terminal segment against the present TECS transition, then schedule brake onset against the resulting speed and swing phase. Keep a matched no-spiral approach as the energy baseline. A more aggressive spiral model needs evidence about turn loading and brake drag before changing its physics; both retained profiles currently predict nearly the same limitation.</p>
+<h2>Reproduce</h2>
+<p>Run screen.py for authority checks. Run run.py configs/<case>.json sequentially for native cases, then analyze.py and package.py. The existing ArduPilot feature-branch binary, simulator and Python dependencies are required; paths at the top of the research scripts identify their inputs. Completed native runs are not overwritten. Raw logs and full traces remain in Mission Planner/analysis/spiral-swoop-2026-10-13; scripts, final plots, configurations, summaries and a compact replay are retained here.</p>
+<p>Build viewer/ and serve the repository to open report.html, or use the viewer development server at landing.html?case=spiral. No firmware or simulator source changes are required.</p>
+<p>Implementation and analysis assisted by Codex.</p>

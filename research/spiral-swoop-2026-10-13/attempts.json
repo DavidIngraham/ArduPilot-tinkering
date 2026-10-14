@@ -1,0 +1,258 @@
+[
+  {
+    "name": "spiral01",
+    "config": {
+      "name": "spiral01",
+      "record_viewer": true,
+      "entry_alt_m": 40,
+      "exit_alt_m": 15,
+      "radius_m": 7,
+      "spiral_degrees": 450,
+      "final_distance_m": 38,
+      "flare_pct": 95,
+      "flare_rate": 100,
+      "flare_alt_m": 1.1,
+      "flare_sink_m_s": 0.5,
+      "turn_rate_limit_dps": 65,
+      "flare_reserve": 5,
+      "turn_l1_period": 4,
+      "wp_radius_m": 1
+    },
+    "completion": {
+      "returncode": 1
+    },
+    "contact": null
+  },
+  {
+    "name": "spiral02",
+    "config": {
+      "name": "spiral02",
+      "record_viewer": true,
+      "entry_alt_m": 40,
+      "exit_alt_m": 12,
+      "radius_m": 6,
+      "spiral_degrees": 450,
+      "final_distance_m": 38,
+      "flare_pct": 95,
+      "flare_rate": 100,
+      "flare_alt_m": 1.1,
+      "flare_sink_m_s": 0.5,
+      "turn_rate_limit_dps": 65,
+      "flare_reserve": 5,
+      "turn_l1_period": 4,
+      "wp_radius_m": 1,
+      "route_type": "loiter_to_alt"
+    },
+    "completion": {
+      "returncode": 1
+    },
+    "contact": null
+  },
+  {
+    "name": "spiral03",
+    "config": {
+      "name": "spiral03",
+      "record_viewer": true,
+      "entry_alt_m": 45,
+      "exit_alt_m": 10,
+      "radius_m": 10,
+      "spiral_degrees": 450,
+      "final_distance_m": 30,
+      "flare_pct": 95,
+      "flare_rate": 100,
+      "flare_alt_m": 1.1,
+      "flare_sink_m_s": 0.5,
+      "turn_rate_limit_dps": 45,
+      "flare_reserve": 5,
+      "turn_l1_period": 10,
+      "wp_radius_m": 1,
+      "route_type": "loiter_to_alt"
+    },
+    "completion": {
+      "returncode": 0
+    },
+    "contact": {
+      "time": 60.27075736144256,
+      "position": [
+        136.22804282146913,
+        47.59990708767699,
+        0.0
+      ],
+      "velocity": [
+        -0.6242501910972981,
+        2.639990195897037,
+        1.4836377449760145
+      ],
+      "brake_mm": [
+        62.39552075879729,
+        68.3950900625278
+      ]
+    }
+  },
+  {
+    "name": "spiral04",
+    "config": {
+      "name": "spiral04",
+      "record_viewer": true,
+      "entry_alt_m": 50,
+      "exit_alt_m": 6,
+      "radius_m": 6,
+      "spiral_degrees": 450,
+      "final_distance_m": 30,
+      "flare_pct": 95,
+      "flare_rate": 100,
+      "flare_alt_m": 1.1,
+      "flare_sink_m_s": 0.5,
+      "turn_rate_limit_dps": 65,
+      "flare_reserve": 5,
+      "turn_l1_period": 8,
+      "wp_radius_m": 1,
+      "route_type": "loiter_to_alt"
+    },
+    "completion": {
+      "returncode": 0
+    },
+    "contact": {
+      "time": 64.69007484331988,
+      "position": [
+        128.87805297028652,
+        12.868343905445427,
+        0.0
+      ],
+      "velocity": [
+        -0.6774747528133012,
+        2.176411616228342,
+        1.0337064961215743
+      ],
+      "brake_mm": [
+        62.39552075879729,
+        68.3950900625278
+      ]
+    }
+  },
+  {
+    "name": "spiral05",
+    "config": {
+      "name": "spiral05",
+      "record_viewer": true,
+      "entry_alt_m": 50,
+      "exit_alt_m": 12,
+      "radius_m": 6,
+      "spiral_degrees": 450,
+      "final_distance_m": 30,
+      "flare_pct": 95,
+      "flare_rate": 100,
+      "flare_alt_m": 1.1,
+      "flare_sink_m_s": 0.5,
+      "turn_rate_limit_dps": 65,
+      "flare_reserve": 5,
+      "turn_l1_period": 8,
+      "wp_radius_m": 1,
+      "route_type": "loiter_to_alt"
+    },
+    "completion": {
+      "returncode": 0
+    },
+    "contact": {
+      "time": 62.47599849151236,
+      "position": [
+        132.61023050163305,
+        39.21340596048652,
+        0.0
+      ],
+      "velocity": [
+        -0.40463837787380114,
+        2.5644063547953695,
+        1.7961619443252423
+      ],
+      "brake_mm": [
+        62.39552075879729,
+        68.3950900625278
+      ]
+    }
+  },
+  {
+    "name": "spiral06-gust",
+    "config": {
+      "name": "spiral06-gust",
+      "record_viewer": true,
+      "entry_alt_m": 50,
+      "exit_alt_m": 12,
+      "radius_m": 6,
+      "spiral_degrees": 450,
+      "final_distance_m": 40,
+      "flare_pct": 95,
+      "flare_rate": 100,
+      "flare_alt_m": 1.1,
+      "flare_sink_m_s": 0.5,
+      "turn_rate_limit_dps": 65,
+      "flare_reserve": 5,
+      "turn_l1_period": 8,
+      "wp_radius_m": 1,
+      "route_type": "loiter_to_alt",
+      "gust_amplitude_m_s": 0.25,
+      "gust_phase_rad": 0.7
+    },
+    "completion": {
+      "returncode": 0
+    },
+    "contact": {
+      "time": 62.23102964606592,
+      "position": [
+        133.26982459960985,
+        44.25505445424949,
+        1.0842021724855044e-19
+      ],
+      "velocity": [
+        0.126566283701995,
+        3.1625760256973185,
+        0.8467758152104194
+      ],
+      "brake_mm": [
+        59.4677309385768,
+        68.3950900625278
+      ]
+    }
+  },
+  {
+    "name": "spiral06",
+    "config": {
+      "name": "spiral06",
+      "record_viewer": true,
+      "entry_alt_m": 50,
+      "exit_alt_m": 12,
+      "radius_m": 6,
+      "spiral_degrees": 450,
+      "final_distance_m": 40,
+      "flare_pct": 95,
+      "flare_rate": 100,
+      "flare_alt_m": 1.1,
+      "flare_sink_m_s": 0.5,
+      "turn_rate_limit_dps": 65,
+      "flare_reserve": 5,
+      "turn_l1_period": 8,
+      "wp_radius_m": 1,
+      "route_type": "loiter_to_alt"
+    },
+    "completion": {
+      "returncode": 0
+    },
+    "contact": {
+      "time": 62.81494864042793,
+      "position": [
+        132.76926286472627,
+        44.3730028037242,
+        0.0
+      ],
+      "velocity": [
+        0.025358866897930307,
+        3.2134496844756484,
+        0.810379850630292
+      ],
+      "brake_mm": [
+        61.531582779060095,
+        67.67514174608013
+      ]
+    }
+  }
+]

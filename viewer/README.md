@@ -422,3 +422,7 @@ configuration labels. The plain URL shows the selected after configuration.
 `tools/report_landing_lateral.py` at the repository root audits the 12 native
 logs and creates the summary plots and bounded replays; `publish_landing.py`
 copies both excerpts with the viewer bundle. Raw logs stay in Mission Planner.
+
+### Descending spiral research replay
+
+`landing.html?case=spiral` shows the complete native descending-loiter, tangent-exit and flare experiment. [The study](../research/spiral-swoop-2026-10-13/README.md) includes the matched gentle-gust check, speed-retention plots and failed development cases. This recording is a spiral landing demonstration, not a validated high-energy swoop.

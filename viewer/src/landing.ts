@@ -14,7 +14,9 @@ import { rigPayload, poseMechanisms, RotorPhase, phaseAt } from "./mechanisms";
 async function main() {
   const selected = new URLSearchParams(location.search).get("case");
   const replayFile =
-    selected === "swoop-soft"
+    selected === "spiral"
+      ? "spiral.json"
+      : selected === "swoop-soft"
       ? "swoop-soft.json"
       : selected === "swoop-dramatic"
         ? "swoop-dramatic.json"
@@ -26,12 +28,12 @@ async function main() {
   const response = await fetch("landing/" + replayFile, { cache: "no-store" });
   if (!response.ok) throw Error("Could not load landing replay");
   const data = await response.json();
-  const swoop = selected === "swoop-soft" || selected === "swoop-dramatic";
-  document.querySelector<HTMLElement>("#swoop-styles")!.hidden = !swoop;
+  const swoop = selected === "spiral" || selected === "swoop-soft" || selected === "swoop-dramatic";
+  document.querySelector<HTMLElement>("#swoop-styles")!.hidden = !swoop || selected === "spiral";
   document.querySelector("#case-label")!.textContent =
     data.label ?? "AUTO landing";
   const frames: Frame[] = parseRecording(JSON.stringify(data.frames));
-  // Cumulative travel gives a meaningful altitude profile through a 90-degree turn.
+  // Cumulative travel gives a meaningful altitude profile through turns and descending spirals.
   const distanceAlong = flightProfile(frames).map((p) => p.distance);
   const first = frames[0].time_s,
     end = frames.at(-1)!.time_s,
