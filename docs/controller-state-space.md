@@ -385,7 +385,9 @@ Start with **Falling voltage** and the **IMU + navigation observer** to see whet
 
 [Open the controller comparison applet](https://davidingraham.github.io/assets/controller-comparison/index.html)
 
-The cards compare full-resolution RMS values against the unchanged acceptance limits. The synchronized plots show height error, pitch rate and heading-rate error; move across a plot to inspect the same instant in every trace. The retuned conventional candidate is available as an optional third curve. Zero height and heading-rate error mean perfect tracking of the shared shaped reference.
+The two 3D views replay the baseline and refined controller at the same instant using the existing payload CAD model and schematic canopy. Play, pause or scrub the timeline; drag to orbit both views and scroll to zoom. The rendered motion is the simulated physical aircraft, including when the controller uses estimated states. Cameras follow each payload at the same physical scale.
+
+The cards compare full-resolution RMS values against the unchanged acceptance limits. The synchronized plots show height error, pitch rate and heading-rate error; move across a plot to scrub both aircraft to that instant. The retuned conventional candidate is available as an optional third curve. Zero height and heading-rate error mean perfect tracking of the shared shaped reference.
 
 ## Checking the original conventional tunes against model uncertainty
 

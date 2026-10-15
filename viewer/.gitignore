@@ -5,3 +5,5 @@ dist/
 public/pitch-sign
 public/altitude-comparison
 public/flight-replays
+
+dist-comparison/

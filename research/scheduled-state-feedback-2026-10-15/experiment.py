@@ -262,7 +262,7 @@ def run_case(case,name,duration=80.):
     if name.endswith('_observer'):
         from observer import Observer
         observer=Observer(sim,chart,grid,chart.encode(state,rpm),case['seed'])
-    ref=Reference();act=Actuation(sim,p['command']);trace=[];previous_command=p['command'].copy()
+    ref=Reference();act=Actuation(sim,p['command']);trace=[];poses=[];previous_command=p['command'].copy()
     SETTINGS['seed']=case['seed'];SETTINGS['rms_ned_m_s']=[.5*case['gust'],.5*case['gust'],.25*case['gust']];gust=Gusts()
     for j in range(round(duration/DT)+1):
         t=j*DT;wind=gust.at(t+DT/2)
@@ -294,6 +294,7 @@ def run_case(case,name,duration=80.):
         if observer is not None:observer.predict(command,voltage,climb,turn)
         trace.append([t,obs[5],h,obs[0],climb,obs[3],turn,np.rad2deg(obs[1]),np.rad2deg(obs[2]),
                       applied[0],applied[1],voltage,float(np.linalg.norm(state[7:10]-wind)),float(np.max(abs(raw-applied))),limits(voltage)-applied[0]])
+        if j % 5 == 0:poses.append(np.r_[t,state,rpm,voltage,previous_command])
         state,rpm=sim.step(state,rpm,command,voltage=voltage,wind=wind,dt=DT)
         previous_command=command.copy()
         if not np.isfinite(state).all():raise RuntimeError((case,name,t))
@@ -309,7 +310,7 @@ def run_case(case,name,duration=80.):
              gains_sha256=hashlib.sha256((HERE/'gains.npz').read_bytes()).hexdigest(),
              sensing='noisy attitude/gyro 50 Hz, navigation velocity/height 5 Hz; inferred canopy/rotor/wind' if observer else 'truth state and airspeed')
     (HERE/'traces').mkdir(exist_ok=True)
-    np.savez_compressed(HERE/'traces'/f'{case["name"]}-{name}.npz',trace=d)
+    np.savez_compressed(HERE/'traces'/f'{case["name"]}-{name}.npz',trace=d,poses=np.array(poses))
     save(f'{case["name"]}-{name}.json',row);print(row,flush=True)
     return row
 
