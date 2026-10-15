@@ -1,0 +1,13 @@
+{
+  "disabled_derivative_bitwise_equal": true,
+  "geometry_invariants": true,
+  "slack_before_clip": true,
+  "integration_relative_metric_difference": {
+    "roll_rate": 2.3790151182782627e-07,
+    "pitch_rate": 1.3540671258371942e-08,
+    "yaw_rate": 6.151355672197118e-09,
+    "bank": 1.7760758163735526e-09,
+    "course": 7.48369389736369e-09,
+    "climb": 9.015286125726679e-10
+  }
+}

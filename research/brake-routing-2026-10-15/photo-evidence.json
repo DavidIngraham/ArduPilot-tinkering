@@ -1,0 +1,19 @@
+{
+  "images_reviewed": [
+    "docs/assets/micro-agu/build-assembled.jpg",
+    "docs/assets/micro-agu/build-canopy.jpg",
+    "research/tension-stiffness-2026-10-15/photo-analysis/manual-22.png",
+    "research/tension-stiffness-2026-10-15/photo-analysis/manual-16.png"
+  ],
+  "observations": [
+    "Manufacturer manual printed page 20 step 4 shows D-ring attached along flexible white riser, approximately 5\u20136 visible webbing widths from lower strap end.",
+    "MicroAGU canopy-attached build photo shows unloaded/folded riser; loaded bolt-to-line-contact height and articulation cannot be measured reliably from this view.",
+    "No metric ring-height estimate is claimed. 20\u201380 mm sweep and 60 mm example are assumed sensitivity cases.",
+    "CAD guide coordinate relative bolt axis: 22.5 mm fore-aft; lateral inward offset 20.5 mm original,47 mm widened. Guide/bolt line contact height difference omitted in simplified calculation."
+  ],
+  "limitations": [
+    "Upper canopy brake cascade endpoint is not measured.",
+    "Riser tilt/roll, elastic extension, guide and ring friction, finite contact points and slack are omitted.",
+    "No pitch-brake coupling has been added to production simulation; no additional CAD edits."
+  ]
+}

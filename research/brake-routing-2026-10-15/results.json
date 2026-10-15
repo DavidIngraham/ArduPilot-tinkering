@@ -1,0 +1,77 @@
+{
+  "lower_segment_sensitivity": [
+    {
+      "ring_height_mm": 0,
+      "lower_segment_increase_mm": 21.669598286322316,
+      "old_mm_per_deg": 0.0,
+      "wide_mm_per_deg": 0.0,
+      "old_change_at_20deg_mm": 0.0,
+      "wide_change_at_20deg_mm": 0.0
+    },
+    {
+      "ring_height_mm": 20,
+      "lower_segment_increase_mm": 19.393276955915326,
+      "old_mm_per_deg": 0.2156434414981006,
+      "wide_mm_per_deg": 0.14071598304520344,
+      "old_change_at_20deg_mm": 4.0055529909381065,
+      "wide_change_at_20deg_mm": 2.6925674787694973
+    },
+    {
+      "ring_height_mm": 40,
+      "lower_segment_increase_mm": 15.426261040628624,
+      "old_mm_per_deg": 0.31250734249975826,
+      "wide_mm_per_deg": 0.23912054750330242,
+      "old_change_at_20deg_mm": 5.790459795341334,
+      "wide_change_at_20deg_mm": 4.529707078381861
+    },
+    {
+      "ring_height_mm": 60,
+      "lower_segment_increase_mm": 12.189278513525139,
+      "old_mm_per_deg": 0.35021107317137967,
+      "wide_mm_per_deg": 0.296493968004454,
+      "old_change_at_20deg_mm": 6.544537646431962,
+      "wide_change_at_20deg_mm": 5.6120286128126935
+    },
+    {
+      "ring_height_mm": 80,
+      "lower_segment_increase_mm": 9.878841912539059,
+      "old_mm_per_deg": 0.3670300270514373,
+      "wide_mm_per_deg": 0.3290527922960349,
+      "old_change_at_20deg_mm": 6.913252961882819,
+      "wide_change_at_20deg_mm": 6.244039008817296
+    }
+  ],
+  "upper_segment_sensitivity": [
+    {
+      "canopy_endpoint_halfspan_mm": 100,
+      "vertical_gap_mm": 800,
+      "upper_segment_change_mm": -0.6870185628519039
+    },
+    {
+      "canopy_endpoint_halfspan_mm": 100,
+      "vertical_gap_mm": 1400,
+      "upper_segment_change_mm": -0.39270714385725114
+    },
+    {
+      "canopy_endpoint_halfspan_mm": 250,
+      "vertical_gap_mm": 800,
+      "upper_segment_change_mm": -5.530807675629376
+    },
+    {
+      "canopy_endpoint_halfspan_mm": 250,
+      "vertical_gap_mm": 1400,
+      "upper_segment_change_mm": -3.2081401191785517
+    },
+    {
+      "canopy_endpoint_halfspan_mm": 500,
+      "vertical_gap_mm": 800,
+      "upper_segment_change_mm": -12.334294071999807
+    },
+    {
+      "canopy_endpoint_halfspan_mm": 500,
+      "vertical_gap_mm": 1400,
+      "upper_segment_change_mm": -7.626903844076651
+    }
+  ],
+  "assumptions": "Illustrative geometry, not measured ring height or canopy brake endpoint. Ring follows canopy; payload rotates around riser bolt axis. Guides at same height as bolt; fore-aft offset 22.5 mm. No friction, slack, elasticity or dynamic tension."
+}

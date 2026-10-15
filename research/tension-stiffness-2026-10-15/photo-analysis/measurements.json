@@ -1,0 +1,62 @@
+{
+  "source": "https://cdn-global-hk.hobbyking.com/media/catalog/product/9/3/9310670504-4-re.jpg",
+  "image_pixels": [
+    1130,
+    828
+  ],
+  "points": {
+    "tip_left": [
+      190,
+      396
+    ],
+    "tip_right": [
+      955,
+      270
+    ],
+    "riser_left": [
+      607,
+      624
+    ],
+    "riser_right": [
+      709,
+      604
+    ],
+    "crown": [
+      620,
+      105
+    ],
+    "prop_tip_a": [
+      666,
+      625
+    ],
+    "prop_tip_b": [
+      636,
+      724
+    ]
+  },
+  "prop_diameter_m": 0.254,
+  "prop_pixel_estimate": 103.4456378974,
+  "prop_pixel_sensitivity_range": [
+    90,
+    110
+  ],
+  "assumptions": "Stock advertised 10-inch prop; approximate common image scale; no camera calibration or perspective correction. Ranges are endpoint/scale sensitivity, not statistical confidence intervals.",
+  "tip_to_tip_pixels": 775.3070359541438,
+  "crown_to_upper_riser_midpoint_pixels": 510.4164965986111,
+  "tip_to_tip_m": [
+    1.7902544284759319,
+    2.188088745915028
+  ],
+  "crown_to_upper_riser_midpoint_m": [
+    1.1785980921458838,
+    1.4405087792894136
+  ],
+  "model_effective_span_m": 0.6471071388,
+  "model_canopy_cg_joint_offset_m": 0.85,
+  "limitations": [
+    "Crown is not canopy CG",
+    "Stock riser geometry is not custom microAGU geometry",
+    "Effective tension-weighted support spacing cannot be recovered without tensions",
+    "Perspective can add error outside quoted scale sensitivity"
+  ]
+}

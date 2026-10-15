@@ -1,0 +1,422 @@
+[
+  {
+    "label": "Legacy",
+    "split": "fit",
+    "alpha": 0.25,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 17.181704924266157,
+      "pitch_rate": 20.81602983488269,
+      "yaw_rate": 34.053602878242536,
+      "bank": 6.310922504989657,
+      "course": 67.48973329711256,
+      "climb": 0.4984109591829793
+    }
+  },
+  {
+    "label": "Legacy",
+    "split": "fit",
+    "alpha": 0.35,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 16.218451658106588,
+      "pitch_rate": 22.820957801584466,
+      "yaw_rate": 35.24169048687634,
+      "bank": 6.302877196705948,
+      "course": 67.22857861532776,
+      "climb": 0.4979555797605253
+    }
+  },
+  {
+    "label": "Legacy",
+    "split": "fit",
+    "alpha": 0.45,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 16.08657248683084,
+      "pitch_rate": 26.06666515310075,
+      "yaw_rate": 37.25445878045638,
+      "bank": 6.303616803762264,
+      "course": 66.96759763084603,
+      "climb": 0.4986391400331406
+    }
+  },
+  {
+    "label": "Legacy",
+    "split": "check",
+    "alpha": 0.25,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 13.08427472381078,
+      "pitch_rate": 15.708805446340252,
+      "yaw_rate": 24.237611195234887,
+      "bank": 5.737261972088751,
+      "course": 59.97255137647968,
+      "climb": 0.3369125573850512
+    }
+  },
+  {
+    "label": "Legacy",
+    "split": "check",
+    "alpha": 0.35,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 13.172134202991444,
+      "pitch_rate": 18.778066856069923,
+      "yaw_rate": 25.958115375655687,
+      "bank": 5.73266182019254,
+      "course": 59.65418176392885,
+      "climb": 0.3385648204400774
+    }
+  },
+  {
+    "label": "Legacy",
+    "split": "check",
+    "alpha": 0.45,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 14.129496766141987,
+      "pitch_rate": 23.719946832505382,
+      "yaw_rate": 29.193166764467566,
+      "bank": 5.734936862911976,
+      "course": 59.32947966162729,
+      "climb": 0.3415621705975767
+    }
+  },
+  {
+    "label": "132 mm only",
+    "split": "fit",
+    "alpha": 0.25,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 17.157736778299203,
+      "pitch_rate": 20.820282912270358,
+      "yaw_rate": 34.02911801392428,
+      "bank": 6.345639204096189,
+      "course": 67.58962198772684,
+      "climb": 0.4982620521724377
+    }
+  },
+  {
+    "label": "132 mm only",
+    "split": "fit",
+    "alpha": 0.35,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 16.19108199822977,
+      "pitch_rate": 22.900289956311276,
+      "yaw_rate": 35.17404595755081,
+      "bank": 6.337945039612965,
+      "course": 67.33445450678295,
+      "climb": 0.4978615186102812
+    }
+  },
+  {
+    "label": "132 mm only",
+    "split": "fit",
+    "alpha": 0.45,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 16.061904928886115,
+      "pitch_rate": 26.186353166531372,
+      "yaw_rate": 37.16075314208052,
+      "bank": 6.339552966802826,
+      "course": 67.06404971924346,
+      "climb": 0.498605101008695
+    }
+  },
+  {
+    "label": "132 mm only",
+    "split": "check",
+    "alpha": 0.25,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 13.09806724829769,
+      "pitch_rate": 15.643669396035104,
+      "yaw_rate": 24.310333705766183,
+      "bank": 5.794831566605312,
+      "course": 60.949758121780725,
+      "climb": 0.3369792817474441
+    }
+  },
+  {
+    "label": "132 mm only",
+    "split": "check",
+    "alpha": 0.35,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 13.191976618330589,
+      "pitch_rate": 18.72674562465129,
+      "yaw_rate": 26.010178182672018,
+      "bank": 5.790717784973705,
+      "course": 60.640249596647614,
+      "climb": 0.3386294672025869
+    }
+  },
+  {
+    "label": "132 mm only",
+    "split": "check",
+    "alpha": 0.45,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 14.167716404206576,
+      "pitch_rate": 23.68628605882948,
+      "yaw_rate": 29.22989731686151,
+      "bank": 5.793876825997309,
+      "course": 60.328804075637066,
+      "climb": 0.3416246025089764
+    }
+  },
+  {
+    "label": "132 mm + routing",
+    "split": "fit",
+    "alpha": 0.25,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 17.152771702720433,
+      "pitch_rate": 21.080921031082887,
+      "yaw_rate": 34.27341692773125,
+      "bank": 6.374829636889018,
+      "course": 63.21924731930485,
+      "climb": 0.5030089284033876
+    }
+  },
+  {
+    "label": "132 mm + routing",
+    "split": "fit",
+    "alpha": 0.35,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 16.18354359521376,
+      "pitch_rate": 23.10876850233323,
+      "yaw_rate": 35.36315620749171,
+      "bank": 6.369607064514657,
+      "course": 62.95580328653557,
+      "climb": 0.5026699979767771
+    }
+  },
+  {
+    "label": "132 mm + routing",
+    "split": "fit",
+    "alpha": 0.45,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 16.06570762314886,
+      "pitch_rate": 26.322431149169265,
+      "yaw_rate": 37.26099963547354,
+      "bank": 6.372553741031313,
+      "course": 62.714274193021346,
+      "climb": 0.5035113392776317
+    }
+  },
+  {
+    "label": "132 mm + routing",
+    "split": "check",
+    "alpha": 0.25,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 13.095873062931656,
+      "pitch_rate": 15.604576738636608,
+      "yaw_rate": 24.3411738899909,
+      "bank": 5.731221153197786,
+      "course": 59.276220856135396,
+      "climb": 0.3374877466378165
+    }
+  },
+  {
+    "label": "132 mm + routing",
+    "split": "check",
+    "alpha": 0.35,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 13.192013213137596,
+      "pitch_rate": 18.56733513719634,
+      "yaw_rate": 25.927427239995357,
+      "bank": 5.727883837841,
+      "course": 58.80226823002718,
+      "climb": 0.339378361028966
+    }
+  },
+  {
+    "label": "132 mm + routing",
+    "split": "check",
+    "alpha": 0.45,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 14.201716487947877,
+      "pitch_rate": 23.369731747905384,
+      "yaw_rate": 28.97326007549519,
+      "bank": 5.731454217344347,
+      "course": 58.22539007485416,
+      "climb": 0.34266188477164766
+    }
+  },
+  {
+    "label": "Legacy retuned",
+    "split": "fit",
+    "alpha": 0.25,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 17.243229312049802,
+      "pitch_rate": 21.005104407544827,
+      "yaw_rate": 32.937898314635994,
+      "bank": 6.090252615501091,
+      "course": 64.99482373726696,
+      "climb": 0.5005511320941679
+    }
+  },
+  {
+    "label": "Legacy retuned",
+    "split": "fit",
+    "alpha": 0.35,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 16.226152978937687,
+      "pitch_rate": 22.244135020080435,
+      "yaw_rate": 33.102523147356116,
+      "bank": 6.078969381833995,
+      "course": 64.63114909951587,
+      "climb": 0.5000943528891356
+    }
+  },
+  {
+    "label": "Legacy retuned",
+    "split": "fit",
+    "alpha": 0.45,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 15.595580290718686,
+      "pitch_rate": 24.46904719024322,
+      "yaw_rate": 33.4807814574891,
+      "bank": 6.0720613195615645,
+      "course": 64.28163804458939,
+      "climb": 0.5007090457712298
+    }
+  },
+  {
+    "label": "Legacy retuned",
+    "split": "check",
+    "alpha": 0.25,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 13.075341127252916,
+      "pitch_rate": 15.709291898930406,
+      "yaw_rate": 23.58142870789063,
+      "bank": 5.548959080448988,
+      "course": 58.82044735218215,
+      "climb": 0.33927530807933554
+    }
+  },
+  {
+    "label": "Legacy retuned",
+    "split": "check",
+    "alpha": 0.35,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 13.105254549143202,
+      "pitch_rate": 17.64199370433903,
+      "yaw_rate": 23.805705016911467,
+      "bank": 5.540262615728312,
+      "course": 58.47409551201228,
+      "climb": 0.34093252778135463
+    }
+  },
+  {
+    "label": "Legacy retuned",
+    "split": "check",
+    "alpha": 0.45,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 13.478747191546447,
+      "pitch_rate": 21.065461726922116,
+      "yaw_rate": 24.401795203906826,
+      "bank": 5.534928004602105,
+      "course": 58.11699295215318,
+      "climb": 0.3437824909968117
+    }
+  },
+  {
+    "label": "Routed retuned",
+    "split": "fit",
+    "alpha": 0.25,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 17.253752941352474,
+      "pitch_rate": 20.907562699527276,
+      "yaw_rate": 33.22578084439414,
+      "bank": 6.387538795885072,
+      "course": 63.80287912279957,
+      "climb": 0.502570603166645
+    }
+  },
+  {
+    "label": "Routed retuned",
+    "split": "fit",
+    "alpha": 0.35,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 16.22929514359992,
+      "pitch_rate": 22.16096635960922,
+      "yaw_rate": 33.38305424597168,
+      "bank": 6.379607239490374,
+      "course": 63.536196508527965,
+      "climb": 0.5021462038954104
+    }
+  },
+  {
+    "label": "Routed retuned",
+    "split": "fit",
+    "alpha": 0.45,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 15.599431194605682,
+      "pitch_rate": 24.380107580166285,
+      "yaw_rate": 33.74901284875905,
+      "bank": 6.375031607169274,
+      "course": 63.29398173614722,
+      "climb": 0.5028674581404157
+    }
+  },
+  {
+    "label": "Routed retuned",
+    "split": "check",
+    "alpha": 0.25,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 13.083832952656834,
+      "pitch_rate": 15.438523643951644,
+      "yaw_rate": 23.57366015480796,
+      "bank": 5.67882923022316,
+      "course": 58.34636068972386,
+      "climb": 0.3373333378332256
+    }
+  },
+  {
+    "label": "Routed retuned",
+    "split": "check",
+    "alpha": 0.35,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 13.11680501735091,
+      "pitch_rate": 17.332475454699065,
+      "yaw_rate": 23.787186113722974,
+      "bank": 5.672381112291253,
+      "course": 57.91563376319053,
+      "climb": 0.3391251230019076
+    }
+  },
+  {
+    "label": "Routed retuned",
+    "split": "check",
+    "alpha": 0.45,
+    "count": 8,
+    "metrics": {
+      "roll_rate": 13.51580596737304,
+      "pitch_rate": 20.696846163442533,
+      "yaw_rate": 24.359596933289207,
+      "bank": 5.669362429237499,
+      "course": 57.43252717532109,
+      "climb": 0.34215994513481385
+    }
+  }
+]

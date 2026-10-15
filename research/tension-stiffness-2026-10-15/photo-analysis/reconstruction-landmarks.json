@@ -1,0 +1,97 @@
+{
+  "arc_points_px": [
+    [
+      190.0,
+      396.0
+    ],
+    [
+      207.0,
+      335.0
+    ],
+    [
+      245.0,
+      275.0
+    ],
+    [
+      300.0,
+      223.0
+    ],
+    [
+      370.0,
+      177.0
+    ],
+    [
+      445.0,
+      144.0
+    ],
+    [
+      525.0,
+      120.0
+    ],
+    [
+      610.0,
+      110.0
+    ],
+    [
+      695.0,
+      116.0
+    ],
+    [
+      775.0,
+      139.0
+    ],
+    [
+      847.0,
+      173.0
+    ],
+    [
+      910.0,
+      219.0
+    ],
+    [
+      955.0,
+      270.0
+    ]
+  ],
+  "stock_holes_px": [
+    [
+      632.0,
+      674.0
+    ],
+    [
+      703.0,
+      663.0
+    ]
+  ],
+  "upper_junctions_px": [
+    [
+      607.0,
+      624.0
+    ],
+    [
+      709.0,
+      604.0
+    ]
+  ],
+  "arc_px": 938.9424241700993,
+  "flat_span_assumption_m": 2.4,
+  "scale_m_px": 0.0025560672712400677,
+  "projected_span_m": 1.9817369397645332,
+  "stock_spacing_m": 0.1836459180557253,
+  "crown_upper_m": 1.2940871557639473,
+  "crown_bar_m": 1.4351094268779627,
+  "alternative_projected_span_stock_spacing_m": 0.2224060088349112,
+  "kit_prop_px": 177,
+  "kit_bar_px": 128,
+  "kit_estimate_m": 0.18368361581920903,
+  "kit_ring_corrected_m": 0.17397346872744465,
+  "custom_cad_fastener_spacing_m": 0.1486,
+  "custom_cad_slot_center_spacing_m": 0.132,
+  "user_reported_spacing_m_approx": 0.13,
+  "model_spacing_m": 0.1486,
+  "custom_slot_inner_y_mm": [
+    60,
+    72
+  ],
+  "correction": "User clarified nylon straps bear on bolt within each slot, near \u00b165 mm. CAD fastener reference locations \u00b174.3 mm are not line force locations."
+}

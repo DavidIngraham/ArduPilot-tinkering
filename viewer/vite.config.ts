@@ -11,6 +11,7 @@ export default defineConfig({
         "joint-tour.html",
         "landing.html",
         "controller-comparison.html",
+        "rigging-comparison.html",
       ],
       output: { manualChunks: { three: ["three"] } },
     },

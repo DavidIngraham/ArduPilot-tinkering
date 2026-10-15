@@ -1,12 +1,12 @@
 # Micro-AGU: Next Flight Test Card
 
-[Build](micro-agu-design.md) · [Flight history](flight-testing.md) · [Controller design](controller-design.md) · [Data and methods](data-and-methods.md)
+[Build](micro-agu-design.md) · [Flight history](flight-testing.md) · [Controller design](controller-design.md) · [Data and methods](data-and-methods.md) · [Rigging and wider-spreader study](rigging-refinement.md)
 
-**Phase 3 · Model validation and staged controller evaluation · Revision 2 · Landing-development characterization added**
+**Phase 3 · Rigging validation and staged controller evaluation · Revision 3 · 185 mm spreader and routed-brake study**
 
-The next flight should measure ordinary up-and-away behavior: throttle-to-climb response, payload pitch motion, and sustained turns in both directions. Those measurements will tell us whether the flight-informed simulator is useful for choosing controller settings. Reproducing the powered, high-bank Hood River turn is outside this card. An optional landing-development extension adds symmetric-brake measurements and approach rehearsals at recovery altitude; automatic flare and touchdown remain a later phase.
+The next flight introduces the planned 185 mm riser-spacing configuration, with the existing 91 mm brake guides and lines re-trimmed under load. Establish that hardware with one frozen controller before evaluating software changes. Measure ordinary up-and-away behavior: throttle-to-climb response, payload pitch motion, and sustained turns in both directions. Those measurements will tell us whether the flight-informed simulator is useful for choosing controller settings. Reproducing the powered, high-bank Hood River turn is outside this card. An optional landing-development extension adds symmetric-brake measurements and approach rehearsals at recovery altitude; automatic flare and touchdown remain a later phase.
 
-This is a published test plan, not a record of a completed test or a released flight configuration. The sequence below is a menu for several short sorties; completing every item in one flight is not the objective. **The minimum useful sortie is a stable baseline, repeatable small throttle changes, and one ordinary turn in each direction.**
+This is a published test plan, not a record of a completed test or a released flight configuration. The sequence below is a menu for several short sorties; completing every item in one flight is not the objective. **The minimum useful sortie is the documented H1 ground setup, a stable airborne baseline, repeatable small throttle changes, and one ordinary turn in each direction.**
 
 ## Test-day cover sheet
 
@@ -19,7 +19,11 @@ Fill these fields before launch. The pilot sets the operating limits for the act
 | Firmware commit and build identifier | __________ |
 | Saved parameter file and mission file | __________ |
 | All-up mass, battery and ballast | __________ |
-| Left/right brake setup and rigging revision | __________ |
+| Spreader configuration / actual loaded riser spacing / guide spacing | __________ |
+| Loaded ring distance and contact location, left/right | __________ |
+| Left/right brake zero, slack, line lengths and servo mapping | __________ |
+| Ground pitch/roll sweep and inflated-canopy photo IDs | __________ |
+| Hardware / software comparison identity (H0/H1 + F/S/T) | __________ |
 | Mean wind, direction and gust range | __________ |
 | Working altitude band and minimum recovery altitude | __________ |
 | Test-area boundary and landing area | __________ |
@@ -30,6 +34,20 @@ Fill these fields before launch. The pilot sets the operating limits for the act
 
 **Historical comparison:** Trout Lake's ballasted configuration was 1.758 kg; the unballasted configuration was 1.385 kg. The reported battery was 6S, 6 Ah total. These are reference values, not substitutes for weighing and checking the next aircraft. The reported propulsion was an FFTY 900 KV motor and 9×4.5 pusher propeller, clockwise viewed from behind.
 
+## Hardware setup and a ground test of brake coupling
+
+**H0** identifies the existing 132 mm slot-center rig. **H1** identifies the planned `HK-estimate-185mm` configuration in `SpreaderBarSpar.SLDPRT`. The saved H1 sketch has `D2@Sketch1 = 173 mm`, giving 185 mm slot centers with 12 mm slots. Brake guides remain 91 mm apart. The CAD rebuild passed; printing, assembly selection, physical clearance and loaded trim are still test-day checks. Do not infer that the aircraft has already been modified from the saved configuration.
+
+1. Record the installed part/configuration and measure loaded strap spacing. Reweigh the aircraft and record CG/ballast. Photograph left/right slots, white straps, ring contact, and the full servo → guide → D-ring → brake cascade route.
+2. With the propeller removed, support and tension the rig appropriately, fix both servos at the intended neutral, and establish brake slack/engagement separately on each side. Re-tie for the new geometry; do not blindly copy the old knots or add an assumed length from the simulation.
+3. Record a gentle, repeatable relative pitch sweep around neutral (target ±10° initially, only if the setup permits it without binding), then a small roll sweep. Measure left/right line travel or engagement at each pose. Compare common and differential changes. Photograph the ring as it follows the strap; measure distance along the loaded riser rather than from an unloaded hanging strap.
+4. Check routing clearance, friction, return to neutral and full commanded servo travel, including motor/shroud clearance. Stop the ground test if a line catches or trim does not return. Moving the guide holes is a separate hardware revision and would require repeating this check.
+5. Obtain a front view of the inflated canopy, with a scale reference and the riser attachment locations visible when practical. Archive original images. A single oblique image cannot identify projected span, incidence and line lengths independently.
+
+Use **H1+F** for the first hardware characterization where the recovered F build is compatible and ground-checked. If it is not, nominate and freeze another already-qualified configuration explicitly; do not substitute an untested controller silently. Compare H0/H1 only if a practical matched sortie is available. Otherwise label the old-flight comparison as confounded by conditions and setup. Keep the installed hardware fixed during later S/T software comparisons.
+
+The model predicts a small mechanical-only width effect and potentially much larger canopy/trim effects. The purpose of this ground work and first sortie is to distinguish those explanations, not confirm an assumed improvement.
+
 ## Configuration decision before flight
 
 The flight-tested Trout Lake controller and the dedicated simulation-development controller are different implementations. Switching between them is not necessarily a gain change or a flight-mode change. Verify the actual firmware behavior, and use separate sorties/builds when needed. Do not assume a switch restores the old controller.
@@ -37,14 +55,13 @@ The flight-tested Trout Lake controller and the dedicated simulation-development
 | Configuration | Evidence and purpose |
 | --- | --- |
 | **F — flight baseline** | Recovered Trout Lake flight-tested configuration, including the damper being disabled. Reconfirm hardware compatibility and exact settings before using it. Establish ordinary aircraft response. |
-| **S — simulation baseline** | Dedicated heading-rate controller, 4 Hz lateral measurement filtering, two-stage 1.5 Hz pitch damping, and the preceding climb-PI scaling (`TECS_VERT_ACC = 7`). This is a simulation baseline, not an aircraft-proven fallback. |
-| **L — lateral candidate** | Change only `PG_TURN_FILT` from 4 to 1 Hz relative to S. Native AUTO trials passed separately; the main consistent benefit was quieter brake commands. |
-| **V — longitudinal candidate** | Change only `TECS_VERT_ACC` from 7 to 3.5 relative to S. This doubles climb PI gains with the other settings fixed. Native AUTO trials improved gusty altitude tracking with more throttle/rate activity. |
-| **C — combined candidate** | Both L and V changes. The published studies have not yet established combined performance. Complete the combined SITL study before nominating C for flight. |
+| **S — current development baseline** | Dedicated heading-rate control; steering P/I 0.005/0.002, roll damping 0.003, 1 Hz steering filter, pitch damping 0.1 with two 1.5 Hz stages, and `TECS_VERT_ACC = 3.5`. This supersedes the historical 4 Hz / 7 baseline. These are identifiers, not a complete upload file. |
+| **T — retuned conventional candidate** | The eight-setting candidate in the state-space article: steering P/I 0.00278/0.00169, roll damping 0.00106, steering filter 0.762 Hz, pitch damping 0.0971, each pitch-filter stage 1.106 Hz, nominal-voltage climb P 0.0435, height feedback 0.0787 s⁻¹. Existing native calm/gust trials passed, with tradeoffs; repeat on the exact intended build and new rigging profiles before flight. |
+| **R — simulation research only** | `routed_research` / `wide_research` plant profiles, including the 2.5× exploratory pitch/yaw joint damping. These are aircraft-model coefficients, not controller gains to upload. Scheduled state feedback/LQI also remains simulation research and is not a flight option on this card. |
 
 These rows describe comparison identities, **not complete parameter files to load**. Record a full parameter export for every sortie. Keep feedforward calibration, limits, damping configuration and actuator mapping explicit. Simulator trim values and performance limits must not silently replace flight-derived values.
 
-Before flying any new controller, rehearse its exact firmware, parameters, mode transitions and mission in native SITL. Review calm-air, gust and crosswind cases, both turn directions, actuator limits and oscillation. Include the retained alternative stiffness profile and plausible brake-trim/authority and propulsion-response variations. Select a candidate because the tracking/effort tradeoff is acceptable across those cases; a completed AUTO mission alone is insufficient.
+Before flying any new controller, rehearse its exact firmware, parameters, mode transitions and mission in native SITL. Review calm-air, gust and crosswind cases, both turn directions, actuator limits and oscillation. Include the retained alternative stiffness profile, `routed_research` and `wide_research`, plus canopy-flattening sensitivities, brake-trim/authority and propulsion-response variations. The new routing profiles have passed numerical/backend checks; full native mission regression on them is a prerequisite for a new controller flight, not a result claimed by the rigging study. Select a candidate because the tracking/effort tradeoff is acceptable across those cases; a completed AUTO mission alone is insufficient.
 
 **Do not fly the deliberately bad damper sign as a comparison.** Its excitation mechanism can be investigated in simulation. A new filtered damper is a separate experimental change and should first be evaluated with the other controller changes held fixed.
 
@@ -81,7 +98,7 @@ The durations and increments below are **initial test proposals**, subject to gr
 | **08 — Route and loiter** | Fly a short prechecked AUTO route with a broad loiter in each direction at constant altitude. Add no altitude changes inside the first loiters. | Combined path/height tracking, sustained-turn capability and actuator activity. This follows successful straight-leg and altitude tests. |
 | **09 — Closeout baseline** | Repeat one straight steady segment, then land with the prebriefed reserve. | Detect voltage, weather or trim drift across the sortie. Save logs before changing settings. |
 
-For a first outing, prioritize 01–05 and 09. Items 06–08 belong to a controller-evaluation sortie after its configuration has cleared the simulation and ground checks. The original flight-tested aircraft is already capable of autonomous missions; this separation is about evaluating the new design without mixing several changes at once.
+For the first H1 outing, prioritize 01–05 and 09 after the loaded-routing ground check. Repeat turns at comparable power in both directions and retain synchronized canopy video if available. The simulator’s 5 mm brake pulse is an analysis input, not a new automatic flight-test command; start with the previously demonstrated broad-turn regime. Items 06–08 belong to a controller-evaluation sortie after its configuration has cleared the simulation and ground checks. The original flight-tested aircraft is already capable of autonomous missions; this separation is about evaluating the new design without mixing several changes at once.
 
 ## Landing-development extension
 
@@ -139,7 +156,7 @@ Do not deliberately seek stronger gusts to improve the dataset. If weather chang
 
 ## Comparison discipline
 
-Use separate, labeled sorties for configuration changes, with a full parameter export each time. Once the dedicated-controller baseline is acceptable, compare one change at a time: S versus L for steering, S versus V for altitude, then the combined C if justified. Do not require the whole matrix in one day. An A–B–A repeat is useful when batteries, weather and time permit, but it is optional.
+Use separate, labeled sorties for configuration changes, with a full parameter export each time. Once the hardware and dedicated-controller baseline are acceptable, compare S versus T as the declared eight-setting package on the same installed rig. If individual settings are isolated later, give those configurations new identifiers and export their complete parameters. Do not require the whole matrix in one day. An A–B–A repeat is useful when batteries, weather and time permit, but it is optional.
 
 Record mass, rigging, battery voltage and wind for every pair. Compare left and right turns separately. Use comparable maneuver windows and demand amplitudes; do not compare a gentle baseline with a tighter candidate mission. A change in firmware architecture must be labeled as such, rather than presented as evidence for one gain or filter.
 
@@ -168,3 +185,11 @@ If repeatable response disagrees with the model, identify which feature is wrong
 | __________ | __________ | __________ | __________ |
 
 Keep raw logs in Mission Planner. Publish the final plots, analysis scripts and configuration provenance in the tinkering repository, following the existing [data and methods](data-and-methods.md) convention.
+
+## Post-flight model update for the new rigging
+
+Archive the exact firmware/parameter files, hardware/configuration ID, loaded-rigging photos, measured mass/CG, neutral settings and complete BIN log together. Keep the raw servo outputs, battery voltage, IMU rates and navigation streams. Mark maneuver times and camera synchronization. Record whether any software change occurred between sorties.
+
+First replace the assumed ring contact and brake zeros with measured geometry, then replay the new flight without tuning on the comparison windows. Compare the old model, routed 132 mm model and measured H1 model using the same initialization and wind estimate. Evaluate both turn directions, pitch-rate response, climb and brake activity separately. Only then refit on a declared subset and reserve other windows for checking. A better aggregate score alone does not identify ring height, canopy incidence or damping.
+
+The 185 mm/flattening predictions and the controller candidates remain hypotheses until those measurements exist. A successful hardware sortie does not validate the 2.5× damping fit or authorize automatic landing/flare development.

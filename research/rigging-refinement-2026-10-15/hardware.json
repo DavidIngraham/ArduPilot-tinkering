@@ -1,0 +1,20 @@
+{
+  "part": "cad/solidworks/SpreaderBarSpar.SLDPRT",
+  "configuration": "HK-estimate-185mm",
+  "dimension": "D2@Sketch1",
+  "original_m": 0.12,
+  "new_m": 0.173,
+  "slot_width_m": 0.012,
+  "spacing_m": 0.185,
+  "guide_span_m": 0.091,
+  "guide_x_from_bolt_m": -0.0225,
+  "original_sha256": "40de59f4c2a8736b40d74fda43afc4211b357cf91fad9bbc3f8a311c41c97ef5",
+  "saved_sha256": "18e872e1222d2d2bd58683059f37355086557140e332a5d428adf47be0a40e36",
+  "rebuild": true,
+  "feature_errors": 0,
+  "solid_bodies": 1,
+  "body_check_code": 0,
+  "default_configuration_unchanged": true,
+  "assembly_selection_changed": false,
+  "installed": false
+}
