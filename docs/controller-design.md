@@ -76,7 +76,7 @@ These details describe the [mechanics](https://github.com/DavidIngraham/ardupilo
 
 [Open the interactive 3D motion tour](https://davidingraham.github.io/assets/microagu-viewer/joint-tour.html) to step through the three translations, three payload rotations and three relative canopy rotations. Use front, side or top views, pause, scrub, or slow playback. The default disturbance view releases either the canopy or payload, with a 3°–15° amplitude slider and both stiffness profiles. Select **Closed loop · AUTO** at 9° to see the native autopilot respond after flying a straight waypoint leg at 100 m altitude for 100 seconds. **Open loop · fixed trim** shows the original natural response with throttle and brakes held at equilibrium trim. Throttle, brake pull, altitude deviation and ground-track deviation appear below the motion.
 
-<video autoplay muted loop playsinline controls preload="metadata" poster="assets/viewer/joint-tour/joint-tour.jpg" style="width:100%;height:auto"><source src="assets/viewer/joint-tour/joint-tour.mp4" type="video/mp4"></video>
+[Explore the joint motions](https://davidingraham.github.io/assets/microagu-viewer/joint-tour.html)
 
 *The first nine segments prescribe one coordinate at a time to explain the degrees of freedom. The final three replay simulated roll, pitch and yaw deflection releases with the mission profile. Prescribed motion is labeled separately from physics. The response view removes shared translation, preserving all rotations and relative displacement at their simulated amplitudes. The canopy is schematic; the carriage uses the SolidWorks model.*
 
@@ -251,7 +251,7 @@ These errors compare the requested rate with the unfiltered simulated payload he
 
 *Matched settings, with each first-loiter entry aligned independently. Most of the remaining gust-driven rate error is below 1 Hz. Reducing high-frequency feedback does not remove that slower motion.*
 
-**The 1 Hz filter is the preferred lateral candidate for the next combined SITL comparison, with the gains unchanged.** The selected full-loop longitudinal study retains the 4 Hz steering baseline so that its results isolate the climb-PI change; the two improvements have not yet been validated together. This is an incremental improvement, not a cure for gust response. These are single paired runs; the repeatable gust field has a different arrival phase when the trajectory changes. They also do not reproduce the earlier artificial 80 ms delay test or remeasure a stability margin. The existing mission videos and published default parameters still use 4 Hz. [Data and methods](data-and-methods.md#native-lateral-filter-trial) records the exact configurations, analysis and scope.
+**The 1 Hz filter is the preferred lateral candidate for the next combined SITL comparison, with the gains unchanged.** The selected full-loop longitudinal study retains the 4 Hz steering baseline so that its results isolate the climb-PI change; the two improvements have not yet been validated together. This is an incremental improvement, not a cure for gust response. These are single paired runs; the repeatable gust field has a different arrival phase when the trajectory changes. They also do not reproduce the earlier artificial 80 ms delay test or remeasure a stability margin. The existing mission replays and published default parameters still use 4 Hz. [Data and methods](data-and-methods.md#native-lateral-filter-trial) records the exact configurations, analysis and scope.
 
 ## Altitude: keep TECS's framework, use throttle as the actuator
 
@@ -397,47 +397,31 @@ The [feature branch’s paired mission-development parameter files](https://gith
 
 ## Seeing why the damping path matters
 
-These diagnostic videos retain the earlier climb-feedback setting to isolate the damper configurations. They explain the architecture; they are not recordings of the doubled-PI candidate.
+These interactive diagnostics retain the earlier climb-feedback setting to isolate the damper configurations. They explain the architecture; they are not recordings of the doubled-PI candidate.
 
-<video controls muted loop playsinline preload="metadata" poster="assets/viewer/pitch-sign/pitch-sign-carriage.jpg" style="width:100%" autoplay>
-  <source src="assets/viewer/pitch-sign/pitch-sign-carriage.mp4" type="video/mp4">
-</video>
+[Compare damper off, original sign, reversed sign and filtered feedback](https://davidingraham.github.io/assets/microagu-viewer/pitch-comparison.html)
 
 *Identical small pitch-rate disturbances: damper off, fast original sign, reversed sign, and two-stage filtering. The camera preserves carriage translation and rotation. Standalone truth-sensed simulation.*
 
-<video controls muted loop playsinline preload="metadata" poster="assets/viewer/altitude-comparison/altitude-comparison-smooth-camera.jpg" style="width:100%" autoplay>
-  <source src="assets/viewer/altitude-comparison/altitude-comparison-smooth-camera.mp4" type="video/mp4">
-</video>
+[Compare the four dampers during an altitude command](https://davidingraham.github.io/assets/microagu-viewer/altitude-comparison.html)
 
 *A 100 → 105 m altitude command separates the fast-sign problem from slower instability. Off and two-stage-filtered cases settle; simply reversing the fast damper does not. These are diagnostic alternatives, not flight recordings.*
 
 ## The controller flying the aircraft
 
-The calm, gust and crosswind clips below show native AUTO with the same two-stage damper and the preceding climb-feedback gains. They retain the CAD payload, articulated suspension, rotating capstans and propeller, throttle history, brake pull, wind indicator, ground track and altitude side profile. The numerical comparisons above document the subsequent PI refinement.
+The calm, gust and crosswind replays below show native AUTO with the same two-stage damper and the preceding climb-feedback gains. They retain the CAD payload, articulated suspension, rotating capstans and propeller, throttle history, brake pull, wind indicator, ground track and altitude side profile. The numerical comparisons above document the subsequent PI refinement.
 
 **Calm air**
 
-<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-calm-profile-plain.jpg" aria-label="Calm-air native AUTO mission with ground track, altitude side profile, throttle history and brake pull" autoplay>
-  <source src="assets/viewer/auto-calm-profile-plain.mp4" type="video/mp4">
-  <source src="assets/viewer/auto-calm-profile-plain.webm" type="video/webm">
-  Your browser does not support inline video.
-</video>
+[Replay native AUTO in calm air](https://davidingraham.github.io/assets/microagu-viewer/simulation-replay.html?case=calm)
 
 **Moderate synthetic gusts**
 
-<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-gust-profile-plain.jpg" aria-label="Gusty native AUTO mission with ground track, altitude side profile, throttle history and brake pull" autoplay>
-  <source src="assets/viewer/auto-gust-profile-plain.mp4" type="video/mp4">
-  <source src="assets/viewer/auto-gust-profile-plain.webm" type="video/webm">
-  Your browser does not support inline video.
-</video>
+[Replay native AUTO in synthetic gusts](https://davidingraham.github.io/assets/microagu-viewer/simulation-replay.html?case=gust)
 
 **Steady 2 m/s eastward wind**
 
-<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-crosswind-profile-plain.jpg" aria-label="Native AUTO mission in steady 2 m/s eastward wind with ground track, altitude side profile, throttle history and brake pull" autoplay>
-  <source src="assets/viewer/auto-crosswind-profile-plain.mp4" type="video/mp4">
-  <source src="assets/viewer/auto-crosswind-profile-plain.webm" type="video/webm">
-  Your browser does not support inline video.
-</video>
+[Replay native AUTO in steady crosswind](https://davidingraham.github.io/assets/microagu-viewer/simulation-replay.html?case=crosswind)
 
 
 

@@ -1,3 +1,5 @@
+import {playback} from './playback';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import {canopyGeometry, canopyMaterial, updateSuspension} from './paraglider';
 import { cameraPath, cameraAt } from "./camera-path";
 import * as THREE from "three";
@@ -71,14 +73,7 @@ const scenes = await Promise.all(
     );
     body.add(marker);
     marker.position.set(0.0053, 0, -0.102);
-    const camera = new THREE.OrthographicCamera(
-      (-0.525 * 530) / 340,
-      (0.525 * 530) / 340,
-      0.525,
-      -0.525,
-      0.01,
-      100,
-    );
+    const camera=new THREE.PerspectiveCamera(40,530/340,.01,1000);
     const canopy = new THREE.Group();
     scene.add(canopy);
     canopy.add(new THREE.Mesh(canopyGeometry(),canopyMaterial()));
@@ -88,10 +83,6 @@ const scenes = await Promise.all(
     );
     scene.add(lines);
     const centers = cameraPath(frames);
-    camera.left = -2.1;
-    camera.right = 2.1;
-    camera.top = 1.35;
-    camera.bottom = -1.35;
     camera.updateProjectionMatrix();
     ref.visible = false;
     trail.visible = false;
@@ -99,6 +90,10 @@ const scenes = await Promise.all(
     return { scene, body, canopy, lines, rig, phases, camera, centers };
   }),
 );
+const orbitCamera=new THREE.PerspectiveCamera(40,530/340,.01,1000);
+const orbit=new OrbitControls(orbitCamera,canvas);orbit.enablePan=false;orbit.minDistance=.3;orbit.maxDistance=12;
+function resetCamera(){const close=(document.querySelector('#framing') as HTMLSelectElement).value==='payload';orbitCamera.position.set(close?-.8:3,close?0:1.8,close?-1.1:3);orbit.target.set(0,close?-.22:.45,0);orbit.update();}
+document.querySelector('#framing')!.addEventListener('change',resetCamera);document.querySelector('#reset-camera')!.addEventListener('click',resetCamera);resetCamera();
 function angle(f: Frame, k: number) {
   return (
     (new THREE.Euler().setFromQuaternion(
@@ -178,7 +173,7 @@ function draw(t: number) {
   ctx.fillText("Altitude-command response · current 9-DOF plant", 24, 32);
   ctx.font = "18px system-ui";
   ctx.fillText(
-    `Time ${t.toFixed(1)} s · target ${t < 5 ? 100 : 105} m · +5 m command at 5 s · real-time playback`,
+    `Time ${t.toFixed(1)} s · target ${t < 5 ? 100 : 105} m · +5 m command at 5 s · ${(document.querySelector('#speed') as HTMLSelectElement)?.value||'1'}× playback`,
     24,
     65,
   );
@@ -199,15 +194,7 @@ function draw(t: number) {
       tracks[i][0].brake_mm,
     );
     updateSuspension(s.lines,s.body,s.canopy);
-    const target = new THREE.Vector3(0, 0.65, 0);
-    s.camera.position
-      .copy(target)
-      .add(
-        new THREE.Vector3(-0.7, -4, -0.6).applyQuaternion(
-          orientation(tracks[0][0].state.slice(3, 7)),
-        ),
-      );
-    s.camera.lookAt(target);
+    s.camera.position.copy(orbitCamera.position);s.camera.quaternion.copy(orbitCamera.quaternion);
     renderer.render(s.scene, s.camera);
     ctx.drawImage(renderer.domElement, x, y + 52, 530, 340);
     // Pitch-angle glyph in the body longitudinal plane, independent of camera projection.
@@ -267,44 +254,10 @@ function draw(t: number) {
     1010,
   );
   ctx.fillText(
-    "SolidWorks carriage; schematic canopy. Camera follows smoothed translation at fixed orientation. Angles are attitudes, not angle of attack.",
+    "SolidWorks carriage; schematic canopy. Linked orbit follows smoothed translation. Angles are attitudes, not angle of attack.",
     24,
     1034,
   );
 }
-draw(12);
-const button = document.querySelector<HTMLButtonElement>("#record")!;
-button.disabled = false;
-document.querySelector("#status")!.textContent = "Ready";
-button.onclick = () => {
-  button.disabled = true;
-  const chunks: Blob[] = [];
-  const stream = canvas.captureStream(30);
-  const recorder = new MediaRecorder(stream, {
-    mimeType: "video/webm;codecs=vp9",
-    videoBitsPerSecond: 8000000,
-  });
-  recorder.ondataavailable = (e) => {
-    if (e.data.size) chunks.push(e.data);
-  };
-  recorder.onstop = () => {
-    const a = document.querySelector<HTMLAnchorElement>("#save")!;
-    a.href = URL.createObjectURL(new Blob(chunks, { type: "video/webm" }));
-    a.download = "altitude-comparison.webm";
-    a.hidden = false;
-    document.querySelector("#status")!.textContent = "Video ready";
-    button.disabled = false;
-    stream.getTracks().forEach((t) => t.stop());
-  };
-  recorder.start();
-  const start = performance.now();
-  function tick(now: number) {
-    const t = Math.min(50, (now - start) / 1000);
-    draw(t);
-    document.querySelector("#status")!.textContent =
-      `Recording ${t.toFixed(1)} / 50 s`;
-    if (t < 50) requestAnimationFrame(tick);
-    else recorder.stop();
-  }
-  requestAnimationFrame(tick);
-};
+playback(0,50,draw);
+document.querySelector('#status')!.textContent='Ready · drag either 3D panel to orbit all four views';

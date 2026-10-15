@@ -34,7 +34,7 @@ I repeated that inflation-and-toss sequence, changing the drum positions until I
 
 Once I was happy, I marked each line where it passed through the spreader bar. I then adjusted the knots so that the same line position occurred at the servo's fully released, or “fully slack,” position. That transferred the trim I had found by hand into a repeatable mechanical reference for the powered system. Here, “fully slack” describes the servo's released endpoint; it does not mean the suspension lines were slack in flight.
 
-<video autoplay loop muted playsinline controls preload="metadata" poster="assets/flight-testing/trim-launch.jpg" aria-label="Inverted carriage swings through an inflation arc and is released upright into a passive glide, with a close view of carriage attitude"><source src="assets/flight-testing/trim-launch.mp4" type="video/mp4"><source src="assets/flight-testing/trim-launch.webm" type="video/webm"></video>
+[Explore the inflation and release sequence](https://davidingraham.github.io/assets/microagu-viewer/trim-launch.html)
 
 *The payload CAD illustrates the inverted start, arcing inflation and upright release. Power stays off, the drums stay fixed and the propeller stays stopped. This is a keyframed explanation of the technique, not a flight replay or an inflation calculation. The current simulator begins with an inflated canopy.* [Open the animation with pause and scrub controls](https://davidingraham.github.io/assets/microagu-viewer/trim-launch.html).
 
@@ -57,9 +57,9 @@ A big part of that first flight was simply flying it by hand to feel out the pla
 
 *The first sustained Hood River flight in 3D. Orange is MANUAL, blue is FBWA, purple is CRUISE, and yellow is LOITER. The white point marks the selected flight start. The grid spacing is 50 m, with equal horizontal and vertical spatial scale; height is referenced to the estimator origin, not terrain.*
 
-<video controls playsinline preload="metadata" poster="assets/flight-testing/replay/hood-river-recap.jpg" style="width:100%;height:auto" autoplay muted><source src="assets/flight-testing/replay/hood-river-recap.mp4" type="video/mp4"></video>
+[Explore the recorded Hood River flight](https://davidingraham.github.io/assets/microagu-viewer/flight-replay.html?recording=flight-replays/hood-river.json)
 
-*Hood River replay: the complete flight in 45 seconds, then a manual banking manoeuvre and a MANUAL-to-FBWA transition at real speed. The payload view follows the logged attitude; the lower plots show payload roll/pitch and throttle/left/right brake commands. The manual excerpt includes the roughly 55° bank near boot time 766 s.*
+*Hood River replay: the complete flight starts at accelerated speed. Buttons jump to a manual banking manoeuvre or a MANUAL-to-FBWA transition at real speed; the time slider allows arbitrary inspection. The payload view follows the logged attitude; the lower plots show payload roll/pitch and throttle/left/right brake commands. The manual excerpt includes the roughly 55° bank near boot time 766 s.*
 
 This replay uses the flight log, rather than a simulation of what might have happened. The canopy attitude was not measured, so it is omitted. The carriage uses the current CAD model to illustrate the measured attitude. Capstan motion represents commanded position, and the prop stays still because RPM was not logged. Recurring pitch motion is visible even in the longer stretches of flight.
 
@@ -83,9 +83,9 @@ That did not mean the controller was finished. The early part of the flight invo
 
 *Trout Lake, February 15: tuning early in the flight, followed by quieter autonomous operation. Green marks AUTO mode.*
 
-<video controls playsinline preload="metadata" poster="assets/flight-testing/replay/trout-lake-recap.jpg" style="width:100%;height:auto" autoplay muted><source src="assets/flight-testing/replay/trout-lake-recap.mp4" type="video/mp4"></video>
+[Explore the recorded Trout Lake flight](https://davidingraham.github.io/assets/microagu-viewer/flight-replay.html?recording=flight-replays/trout-lake.json)
 
-*Trout Lake replay: the full 54.5-minute flight in 45 seconds, followed by real-time excerpts around disabling the pitch damper (boot time 655.8 s) and a later AUTO circuit. The same attitude and control-output plots make the early oscillation and later behaviour directly visible.*
+*Trout Lake replay: the full 54.5-minute flight starts at accelerated speed. Buttons jump to real-time excerpts around disabling the pitch damper (boot time 655.8 s) or a later AUTO circuit; the time slider allows arbitrary inspection. The same attitude and control-output plots make the early oscillation and later behaviour directly visible.*
 
 Both recaps use each flight's logged servo ranges and reversal settings, including the asymmetric left/right brake ranges. The percentages are normalized output commands, not measured brake travel. Position comes from the onboard estimator, with a local horizontal origin; the displayed height is above the estimator origin. The [replay tool](https://github.com/DavidIngraham/micro-agu/tree/main/viewer#real-flight-log-replay) also supports scrubbing and playback at different speeds. [Hood River metadata](assets/flight-testing/replay/hood-river.json) and [Trout Lake metadata](assets/flight-testing/replay/trout-lake.json) record the exact windows, mode durations, parameter histories, and source hashes. The short launch attempts remain part of the launch story rather than being presented as controller tests.
 

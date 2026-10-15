@@ -1,3 +1,6 @@
+import {canopyGeometry,canopyMaterial,updateSuspension} from './paraglider';
+import {playback} from './playback';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import {
@@ -69,17 +72,16 @@ const scenes = await Promise.all(
     );
     body.add(marker);
     marker.position.set(0.0053, 0, -0.102);
-    const camera = new THREE.OrthographicCamera(
-      (-0.525 * 530) / 340,
-      (0.525 * 530) / 340,
-      0.525,
-      -0.525,
-      0.01,
-      100,
-    );
-    return { scene, body, rig, phases, camera, ref, trail };
+    const camera=new THREE.PerspectiveCamera(40,530/340,.01,1000);
+    const canopy=new THREE.Mesh(canopyGeometry(),canopyMaterial());scene.add(canopy);
+    const lines=new THREE.LineSegments(new THREE.BufferGeometry(),new THREE.LineBasicMaterial({color:0xc8d7e2}));scene.add(lines);
+    return { scene, body, canopy, lines, rig, phases, camera, ref, trail };
   }),
 );
+const orbitCamera=new THREE.PerspectiveCamera(40,530/340,.01,1000);
+const orbit=new OrbitControls(orbitCamera,canvas);orbit.enablePan=false;orbit.minDistance=.3;orbit.maxDistance=12;
+function resetCamera(){const close=(document.querySelector('#framing') as HTMLSelectElement).value==='payload';orbitCamera.position.set(close?-.8:3,close?0:1.8,close?-1.1:3);orbit.target.set(0,close?-.22:.45,0);orbit.update();}
+document.querySelector('#framing')!.addEventListener('change',resetCamera);document.querySelector('#reset-camera')!.addEventListener('click',resetCamera);resetCamera();
 const first = tracks[0][0];
 const initial = position(first.state.slice(0, 3));
 const velocity = position(first.state.slice(7, 10));
@@ -157,7 +159,7 @@ function draw(t: number, slow = false) {
   );
   ctx.font = "18px system-ui";
   ctx.fillText(
-    `Simulated time ${t.toFixed(2)} s · ${slow ? "¼-speed replay" : "real-time playback"} · identical +5°/s disturbance at 2 s`,
+    `Simulated time ${t.toFixed(2)} s · ${(document.querySelector('#speed') as HTMLSelectElement)?.value||'1'}× playback · identical +5°/s disturbance at 2 s`,
     24,
     65,
   );
@@ -175,9 +177,9 @@ function draw(t: number, slow = false) {
       f.brake_mm,
       tracks[i][0].brake_mm,
     );
-    const target = new THREE.Vector3(0, -0.22, 0);
-    s.camera.position.copy(target).add(offset);
-    s.camera.lookAt(target);
+    s.canopy.position.copy(position(f.state.slice(13,16)).sub(nominal));s.canopy.quaternion.copy(orientation(f.state.slice(16,20)));
+    updateSuspension(s.lines,s.body,s.canopy);
+    s.camera.position.copy(orbitCamera.position);s.camera.quaternion.copy(orbitCamera.quaternion);
     s.ref.position.set(-0.5, -0.22, 0);
     const points = tracks[i]
       .filter((g) => g.time_s >= t - 0.8 && g.time_s <= t)
@@ -216,7 +218,7 @@ function draw(t: number, slow = false) {
   ctx.fillStyle = "#b1c3cf";
   ctx.font = "16px system-ui";
   ctx.fillText(
-    "Fixed side-oblique camera follows the nominal straight path. Grid spacing 10 cm. Translation and rotation are unamplified.",
+    "Linked orbit follows the nominal straight path. Grid spacing 10 cm. Motion is unamplified; canopy details illustrative.",
     24,
     1010,
   );
@@ -226,42 +228,5 @@ function draw(t: number, slow = false) {
     1034,
   );
 }
-draw(4.5);
-const button = document.querySelector<HTMLButtonElement>("#record")!;
-button.disabled = false;
-document.querySelector("#status")!.textContent = "Ready";
-button.onclick = async () => {
-  button.disabled = true;
-  const chunks: Blob[] = [];
-  const stream = canvas.captureStream(30);
-  const recorder = new MediaRecorder(stream, {
-    mimeType: "video/webm;codecs=vp9",
-    videoBitsPerSecond: 8000000,
-  });
-  recorder.ondataavailable = (e) => {
-    if (e.data.size) chunks.push(e.data);
-  };
-  recorder.onstop = () => {
-    const a = document.querySelector<HTMLAnchorElement>("#save")!;
-    a.href = URL.createObjectURL(new Blob(chunks, { type: "video/webm" }));
-    a.download = "pitch-sign-carriage.webm";
-    a.hidden = false;
-    document.querySelector("#status")!.textContent = "Video ready";
-    button.disabled = false;
-    stream.getTracks().forEach((t) => t.stop());
-  };
-  recorder.start();
-  const start = performance.now();
-  function tick(now: number) {
-    const elapsed = (now - start) / 1000;
-    const slow = elapsed >= 5.5;
-    const t = slow ? 2 + (elapsed - 5.5) * 0.25 : elapsed;
-    draw(Math.min(t, 5.5), slow);
-    if (!slow) draw(t, false);
-    document.querySelector("#status")!.textContent =
-      `Recording ${elapsed.toFixed(1)} / 19.5 s`;
-    if (elapsed < 19.5) requestAnimationFrame(tick);
-    else recorder.stop();
-  }
-  requestAnimationFrame(tick);
-};
+playback(0,5.5,t=>draw(t,Number((document.querySelector('#speed') as HTMLSelectElement)?.value)<1));
+document.querySelector('#status')!.textContent='Ready · drag either 3D panel to orbit all four views';

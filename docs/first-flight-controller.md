@@ -210,7 +210,7 @@ The articulated model showed why that assumption could fail. The thrust line is 
 
 *The pusher thrust acts above the payload CG, creating a nose-down moment. The canopy and payload react through the suspension. Schematic, not to scale.*
 
-<video controls muted loop playsinline preload="metadata" poster="assets/viewer/pitch-fbd/pitch-fbd.jpg" style="width:100%;height:auto" autoplay><source src="assets/viewer/pitch-fbd/pitch-fbd.mp4" type="video/mp4"></video>
+[Explore the pitch mechanics](https://davidingraham.github.io/assets/microagu-viewer/pitch-fbd.html)
 
 *Left: my original whole-aircraft picture, with relative pitch locked and thrust below an assumed combined CG. Right: the payload can pitch independently; thrust acts above its CG, and its initial response is nose-down while the upper attachment moves forward. The side view uses the carriage CAD with schematic suspension and canopy. Geometry, angles and timing illustrate the mechanism rather than reproducing a simulation trace. The arrows isolate the incremental thrust moment; suspension reactions and aerodynamic forces also enter the full dynamics. The locked connection illustrates my assumption, not the ACRA aircraft’s construction.*
 
@@ -264,7 +264,7 @@ The limits therefore set feed-forward slopes as well as bounding the requested v
 
 The first phase ended with autonomous missions using the adapted roll loop and throttle-only altitude controller. The lateral gains came from my initial simulation work; flight measurements supplied the climb, sink and trim settings. Disabling the pitch damper in the field helped even before I understood the sign problem.
 
-<video controls playsinline preload="metadata" poster="assets/flight-testing/replay/trout-lake-recap.jpg" style="width:100%;height:auto" autoplay muted><source src="assets/flight-testing/replay/trout-lake-recap.mp4" type="video/mp4"></video>
+[Explore the recorded Trout Lake flight](https://davidingraham.github.io/assets/microagu-viewer/flight-replay.html?recording=flight-replays/trout-lake.json)
 
 *Trout Lake flight-log replay with control responses. Payload attitude comes from the log; canopy attitude is not measured truth. The [flight-test article](flight-testing.md) contains the full field story and Hood River replay.*
 

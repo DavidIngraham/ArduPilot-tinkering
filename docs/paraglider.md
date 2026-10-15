@@ -166,10 +166,6 @@ The real flights used the roll-loop adaptation above. The [final controller desi
 
 The [post-flight research record](controller-research-record.md#lateral-experiments) retains detailed experiments and original figures. The [controller article's flight videos](controller-design.md#the-controller-flying-the-aircraft) show calm, gusty and crosswind AUTO; the scripted articulation clip remains below.
 
-<video autoplay muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/reversing-turn-controls-plain.jpg" aria-label="Simulated powered right turn, left reversal and brake release, with an articulated SolidWorks payload close-up">
-  <source src="assets/viewer/reversing-turn-controls-plain.mp4" type="video/mp4">
-  <source src="assets/viewer/reversing-turn-controls-plain.webm" type="video/webm">
-  Your browser does not support inline video.
-</video>
+[Replay the powered turn and reversal](https://davidingraham.github.io/assets/microagu-viewer/simulation-replay.html?case=turn)
 
 *Scripted inputs in the 9-DOF simulator, with CAD payload articulation. This demonstrates the viewer; it is not an AUTO mission. [Viewer documentation](../viewer/README.md).*

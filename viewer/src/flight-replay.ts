@@ -329,7 +329,7 @@ async function main() {
     last = performance.now();
   };
   el<HTMLInputElement>("time").oninput = () => {
-    playing = false;
+    playing = false;el('play').textContent='Play';
     draw(Number(el<HTMLInputElement>("time").value), "Scrubbing");
   };
   function tick(now: number) {
@@ -339,8 +339,8 @@ async function main() {
         cursor +
           ((now - last) / 1000) * Number(el<HTMLSelectElement>("speed").value),
       );
-      draw(cursor, `${el<HTMLSelectElement>("speed").value}× playback`);
-      if (cursor >= frames.at(-1)!.t) playing = false;
+      draw(cursor, `${Number(el<HTMLSelectElement>("speed").value).toFixed(1)}× playback`);
+      if (cursor >= frames.at(-1)!.t) cursor = frames[0].t;
     }
     last = now;
     requestAnimationFrame(tick);
@@ -425,7 +425,13 @@ async function main() {
     }, "image/png");
   };
   const path = new URLSearchParams(location.search).get("recording");
-  if (path) load(await (await fetch(path)).text());
+  if (path) {const response=await fetch(path);if(!response.ok)throw Error('Recording unavailable');load(await response.text());
+      const chapters=document.createElement('div');el('view').before(chapters);
+      for(const step of schedule()) {
+        const button=document.createElement('button');button.textContent=step.label;chapters.append(button);
+        button.onclick=()=>{cursor=step.start;const speed=el<HTMLSelectElement>('speed');let option=Array.from(speed.options).find(o=>Number(o.value)===step.speed);if(!option){option=new Option(step.speed.toFixed(1),String(step.speed));speed.add(option);}speed.value=String(step.speed);playing=true;el('play').textContent='Pause';last=performance.now();};
+      }
+      chapters.querySelector('button')!.click();}
 }
 main().catch((error) => {
   document.getElementById("status")!.textContent = String(error);

@@ -180,11 +180,7 @@ I would use **1 Hz for the next SITL configuration, with the gains unchanged**. 
 
 After working through the mode shapes and controller plots, I wanted to see what those motions actually looked like. I built a Three.js viewer around the simulator's internal state and brought in my SolidWorks payload assembly. The canopy and payload now move independently, the servo capstans rotate as the brakes pull in, with black-and-white quadrants and an orange index stripe to make their motion visible, and the pusher propeller spins with the modeled motor RPM.
 
-<video autoplay muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/reversing-turn-controls-plain.jpg" aria-label="Simulated powered right turn, left reversal and brake release, with an articulated SolidWorks payload close-up">
-  <source src="assets/viewer/reversing-turn-controls-plain.mp4" type="video/mp4">
-  <source src="assets/viewer/reversing-turn-controls-plain.webm" type="video/webm">
-  Your browser does not support inline video.
-</video>
+[Replay the powered turn and reversal](https://davidingraham.github.io/assets/microagu-viewer/simulation-replay.html?case=turn)
 
 *Thirty seconds at real speed: a powered right turn, a reversal to the left, then brake release. This is a scripted open-loop run of the 9-DOF model at the 1.758 kg Trout Lake mass and 22.2 V. Moderate synthetic gusts act on the physics throughout, with nominal RMS speeds of 0.5 m/s in each horizontal direction and 0.25 m/s vertically. Peak payload bank is 36.2°. The left view follows the aircraft; the right rides with the payload so the mechanisms stay visible. Joint motion is shown at its actual simulated amplitude. [Download the clip](https://raw.githubusercontent.com/DavidIngraham/micro-agu/main/docs/assets/viewer/reversing-turn-controls-plain.mp4).*
 
@@ -202,31 +198,19 @@ The following three clips show the same mission segment and controller configura
 
 **Calm air**
 
-<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-calm-profile-plain.jpg" aria-label="Calm-air native AUTO mission with ground track, altitude side profile, throttle history and brake pull" autoplay>
-  <source src="assets/viewer/auto-calm-profile-plain.mp4" type="video/mp4">
-  <source src="assets/viewer/auto-calm-profile-plain.webm" type="video/webm">
-  Your browser does not support inline video.
-</video>
+[Replay native AUTO in calm air](https://davidingraham.github.io/assets/microagu-viewer/simulation-replay.html?case=calm)
 
 *With no wind, altitude stays between 89.45 and 90.11 m in the excerpt. Throttle ranges from 43.0% to 46.8%. [Download calm-air video](https://raw.githubusercontent.com/DavidIngraham/micro-agu/main/docs/assets/viewer/auto-calm-profile-plain.mp4).*
 
 **Moderate synthetic gusts**
 
-<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-gust-profile-plain.jpg" aria-label="Gusty native AUTO mission with ground track, altitude side profile, throttle history and brake pull" autoplay>
-  <source src="assets/viewer/auto-gust-profile-plain.mp4" type="video/mp4">
-  <source src="assets/viewer/auto-gust-profile-plain.webm" type="video/webm">
-  Your browser does not support inline video.
-</video>
+[Replay native AUTO in synthetic gusts](https://davidingraham.github.io/assets/microagu-viewer/simulation-replay.html?case=gust)
 
 *The same controller now handles the repeatable gust field: nominal RMS 0.5 m/s north/east and 0.25 m/s vertically, with zero mean wind. Altitude ranges from 88.91 to 90.83 m and throttle from 39.9% to 52.9%. [Download gust video](https://raw.githubusercontent.com/DavidIngraham/micro-agu/main/docs/assets/viewer/auto-gust-profile-plain.mp4).*
 
 **Steady crosswind**
 
-<video muted loop playsinline controls preload="metadata" width="1280" height="852" poster="assets/viewer/auto-crosswind-profile-plain.jpg" aria-label="Native AUTO mission in steady 2 m/s eastward wind with ground track, altitude side profile, throttle history and brake pull" autoplay>
-  <source src="assets/viewer/auto-crosswind-profile-plain.mp4" type="video/mp4">
-  <source src="assets/viewer/auto-crosswind-profile-plain.webm" type="video/webm">
-  Your browser does not support inline video.
-</video>
+[Replay native AUTO in steady crosswind](https://davidingraham.github.io/assets/microagu-viewer/simulation-replay.html?case=crosswind)
 
 *A steady 2 m/s wind blows east, with no gusts. It is a crosswind on north/south legs; its headwind, tailwind and crosswind components change around the loiter. Altitude ranges from 89.22 to 90.22 m and throttle from 42.9% to 46.9%. The full native AUTO test also passed in this condition. [Download crosswind video](https://raw.githubusercontent.com/DavidIngraham/micro-agu/main/docs/assets/viewer/auto-crosswind-profile-plain.mp4).*
 
@@ -302,11 +286,9 @@ To understand what the damper should add to that baseline, I separated two quest
 
 This comparison uses the current 9-DOF plant, Trout Lake mass (1.758 kg), 22.2 V and the same asymmetric brake trim. At two seconds, each run receives the same +5°/s payload pitch-rate disturbance. The base throttle stays at its level-flight trim; only the pitch-feedback correction changes. Holding the brakes fixed removes steering excitation from this experiment.
 
-<video controls muted loop playsinline preload="metadata" poster="assets/viewer/pitch-sign/pitch-sign-carriage.jpg" style="width:100%" autoplay>
-  <source src="assets/viewer/pitch-sign/pitch-sign-carriage.mp4" type="video/mp4">
-</video>
+[Compare damper off, original sign, reversed sign and filtered feedback](https://davidingraham.github.io/assets/microagu-viewer/pitch-comparison.html)
 
-*Matched standalone simulation, with truth-rate feedback rather than native AUTO. The SolidWorks carriage is shown from a fixed side-oblique angle, with the propeller animated from simulated RPM. The camera follows the nominal straight-flight path rather than the actual payload, preserving both translation and rotation against a 10 cm grid. An orange marker and short trail track the upper suspension attachment. The first 5.5 seconds play at real speed, followed by a quarter-speed replay of the oscillation onset. Angles and displacements are unamplified; the plots share scales.*
+*Matched standalone simulation, with truth-rate feedback rather than native AUTO. The new cell canopy and SolidWorks carriage share linked orbit controls; a payload close-up is also available, with the propeller animated from simulated RPM. The camera follows the nominal straight-flight path rather than the actual payload, preserving both translation and rotation against a 10 cm grid. An orange marker and short trail track the upper suspension attachment. The 5.5-second trace loops automatically; use the speed selector for a quarter-speed replay and scrub to inspect the oscillation onset. Angles and displacements are unamplified; the plots share scales.*
 
 With gain 0.10 and a single 10 Hz filter, the original minus-sign feedback turns the small disturbance into a sustained, throttle-limited oscillation. Reversing that sign keeps this fast motion small. Turning the damper off also lets the disturbance decay. The fourth panel previews the solution developed below: it retains the minus sign but applies two 1.5 Hz filter stages, and this disturbance decays too. The plant therefore reproduces the sign-sensitive excitation, while also showing why the feedback's frequency response matters alongside its sign.
 
@@ -316,9 +298,7 @@ The large oscillation is a diagnostic result, not a prediction of the exact Hood
 
 The small-disturbance comparison leaves a practical question: what happens when the controller deliberately asks the aircraft to climb? This experiment commands **100 → 105 m at five seconds**, with the same height loop and lateral controller in every run. There is no injected pitch kick. Each nonzero pitch damper is enabled with the altitude command, after the same initial settling period. The height loop converts altitude error to a limited climb-rate demand and uses the same 0.5-second feedforward smoothing; throttle is capped at 60%.
 
-<video controls muted loop playsinline preload="metadata" poster="assets/viewer/altitude-comparison/altitude-comparison-smooth-camera.jpg" style="width:100%" autoplay>
-  <source src="assets/viewer/altitude-comparison/altitude-comparison-smooth-camera.mp4" type="video/mp4">
-</video>
+[Compare the four dampers during an altitude command](https://davidingraham.github.io/assets/microagu-viewer/altitude-comparison.html)
 
 *Current 9-DOF plant, actual SolidWorks carriage and schematic canopy. Orange is payload pitch; green is canopy pitch. The angle indicator compares both attitudes against the horizon, not against the airflow. Altitude, pitch and throttle plots use common scales. The camera follows smoothed translation to keep the whole glider visible throughout the climb; the altitude trace shows its vertical progress. Playback is real time.*
 

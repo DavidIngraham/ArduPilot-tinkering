@@ -1,3 +1,4 @@
+import {playback} from './playback';
 import {canopyGeometry, canopyMaterial, canopyPoint} from './paraglider';
 import * as T from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
@@ -225,33 +226,9 @@ async function main() {
       977,
     );
   }
-  function loop(now: number) {
-    draw(((now - epoch) / 1000) % 14);
-    requestAnimationFrame(loop);
-  }
-  requestAnimationFrame(loop);
-  document.querySelector("#status")!.textContent = "Ready";
-  document.querySelector("#record")!.addEventListener("click", () => {
-    if (recording) return;
-    recording = true;
-    epoch = performance.now();
-    const chunks: BlobPart[] = [];
-    const rec = new MediaRecorder(canvas.captureStream(30), {
-      mimeType: "video/webm;codecs=vp9",
-      videoBitsPerSecond: 6500000,
-    });
-    rec.ondataavailable = (e) => chunks.push(e.data);
-    rec.onstop = () => {
-      const a = document.querySelector<HTMLAnchorElement>("#save")!;
-      a.href = URL.createObjectURL(new Blob(chunks, { type: "video/webm" }));
-      a.hidden = false;
-      recording = false;
-      document.querySelector("#status")!.textContent = "Video ready";
-    };
-    rec.start();
-    document.querySelector("#status")!.textContent = "Recording";
-    setTimeout(() => rec.stop(), 14000);
-  });
+  playback(0,14,draw);
+  document.querySelector('#status')!.textContent='Mechanical illustration · scrub or change playback speed';
+
 }
 main().catch(
   (e) => (document.querySelector("#status")!.textContent = String(e)),

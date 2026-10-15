@@ -443,6 +443,18 @@ White risers and rings use a nominal 60 mm extension; their exact construction
 and routing remain schematic. Rigging comparisons show 132 / 185 mm anchor
 spacing, while the payload CAD itself remains the existing configuration.
 No fabric dynamics or extra aerodynamic effects are introduced by this renderer.
-Actual-flight replay and the payload-pitch closeup intentionally remain
-payload-only; measured flight data does not include canopy attitude.
+Actual-flight replay intentionally remains payload-only; measured flight data
+does not include canopy attitude. The damper diagnostic now offers both whole
+aircraft and payload-closeup framing with linked orbit.
 The FBD and launch illustration use the same canopy in their explanatory frame.
+
+### Native article replays
+
+`pitch-comparison.html` and `altitude-comparison.html` replay the original four
+matched damper trajectories with a shared time slider, speed control, looping
+playback and linked orbit. `simulation-replay.html?case=turn|calm|gust|crosswind`
+replaces the exported turn/AUTO clips while retaining their source recordings,
+telemetry plots, ground track and distance/altitude profile. No new simulation is
+run in the browser. `pitch-fbd.html` remains an explicitly illustrative animation.
+The real-flight replay links load the original converted flight logs, with
+buttons for the full overview and the previously featured excerpts.
