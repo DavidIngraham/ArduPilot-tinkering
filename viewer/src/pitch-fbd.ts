@@ -1,3 +1,4 @@
+import {canopyGeometry, canopyMaterial, canopyPoint} from './paraglider';
 import * as T from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 async function main() {
@@ -22,15 +23,9 @@ async function main() {
     const body = new T.Group();
     body.add(asset.scene.clone(true));
     scene.add(body);
-    const shape = new T.Shape();
-    shape.moveTo(-0.34, 0);
-    shape.quadraticCurveTo(0, 0.13, 0.34, 0);
-    shape.quadraticCurveTo(0, 0.025, -0.34, 0);
-    const wing = new T.Mesh(
-      new T.ExtrudeGeometry(shape, { depth: 0.25, bevelEnabled: false }),
-      new T.MeshStandardMaterial({ color: 0x76bbd3, roughness: 0.8 }),
-    );
-    wing.geometry.translate(0, 0, -0.125);
+    const geometry=canopyGeometry();
+    geometry.rotateX(Math.PI/2); // FRD -> explanatory x-forward, y-up, z-span frame.
+    const wing=new T.Mesh(geometry,canopyMaterial());
     scene.add(wing);
     const lines = new T.LineSegments(
       new T.BufferGeometry(),
@@ -119,7 +114,7 @@ async function main() {
       s.wing.rotation.z = wingTheta;
       const pts = [-0.23, 0.23].flatMap((a) => [
         H.clone(),
-        new T.Vector3(a, 0, 0).applyAxisAngle(z, wingTheta).add(W),
+        canopyPoint(0,(.27-a)/.54).applyAxisAngle(new T.Vector3(1,0,0),Math.PI/2).applyAxisAngle(z, wingTheta).add(W),
       ]);
       s.lines.geometry.dispose();
       s.lines.geometry = new T.BufferGeometry().setFromPoints(pts);

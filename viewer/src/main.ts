@@ -1,3 +1,4 @@
+import {canopyGeometry, canopyMaterial, updateSuspension} from './paraglider';
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
@@ -71,24 +72,7 @@ const prop = new THREE.Mesh(
 );
 prop.position.x = -0.14;
 placeholder.add(prop);
-// Canopy cross-section is schematic; body local axes remain FRD.
-const geo = new THREE.BufferGeometry(),
-  verts: number[] = [],
-  indices: number[] = [];
-for (let i = 0; i <= 24; i++) {
-  const u = (i / 24 - 0.5) * Math.PI * 0.8,
-    y = Math.sin(u) * 1.05,
-    z = (1 - Math.cos(u)) * 0.45;
-  for (const x of [-0.3, 0.3]) verts.push(x, y, z + (x < 0 ? 0.04 : 0));
-}
-for (let i = 0; i < 24; i++) {
-  const k = i * 2;
-  indices.push(k, k + 1, k + 2, k + 1, k + 3, k + 2);
-}
-geo.setAttribute("position", new THREE.Float32BufferAttribute(verts, 3));
-geo.setIndex(indices);
-geo.computeVertexNormals();
-canopy.add(new THREE.Mesh(geo, solid(0x77dfb5)));
+canopy.add(new THREE.Mesh(canopyGeometry(),canopyMaterial()));
 const axes = [new THREE.AxesHelper(0.4), new THREE.AxesHelper(0.6)];
 payload.add(axes[0]);
 canopy.add(axes[1]);
@@ -296,23 +280,7 @@ function draw(f: Frame) {
   const phase = phaseAt(frames, rotorPhases, f.time_s);
   prop.rotation.x = phase;
   if (mechanisms) poseMechanisms(mechanisms, phase, f.brake_mm, brakeReference);
-  const endpoints: number[] = [];
-  for (const side of [-1, 1])
-    for (const fore of [-1, 1]) {
-      const p = payload.localToWorld(
-          new THREE.Vector3(0.0053, side * 0.1, -0.102),
-        ),
-        c = canopy.localToWorld(
-          new THREE.Vector3(fore * 0.22, side * 0.72, 0.15),
-        );
-      endpoints.push(...p.toArray(), ...c.toArray());
-    }
-  lines.geometry.dispose();
-  lines.geometry = new THREE.BufferGeometry();
-  lines.geometry.setAttribute(
-    "position",
-    new THREE.Float32BufferAttribute(endpoints, 3),
-  );
+  updateSuspension(lines,payload,canopy);
   axes.forEach((a) => (a.visible = el<HTMLInputElement>("axes").checked));
   path.visible = el<HTMLInputElement>("path").checked;
   const mode = el<HTMLSelectElement>("camera").value,

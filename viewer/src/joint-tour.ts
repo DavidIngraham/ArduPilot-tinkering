@@ -1,3 +1,4 @@
+import {canopyGeometry, canopyMaterial, updateSuspension} from './paraglider';
 import * as T from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -56,31 +57,8 @@ async function main() {
   const rig: Mechanisms | null = rigPayload(asset.scene);
   const wing = new T.Group();
   scene.add(wing);
-  const vertices: number[] = [],
-    indices: number[] = [];
-  for (let i = 0; i <= 24; i++) {
-    const a = (i / 24 - 0.5) * Math.PI * 0.8;
-    for (const x of [-0.27, 0.27])
-      vertices.push(x, Math.sin(a) * 1.05, (1 - Math.cos(a)) * 0.45);
-  }
-  for (let i = 0; i < 24; i++) {
-    const k = i * 2;
-    indices.push(k, k + 1, k + 2, k + 1, k + 3, k + 2);
-  }
-  const geo = new T.BufferGeometry();
-  geo.setAttribute("position", new T.Float32BufferAttribute(vertices, 3));
-  geo.setIndex(indices);
-  geo.computeVertexNormals();
-  wing.add(
-    new T.Mesh(
-      geo,
-      new T.MeshStandardMaterial({
-        color: 0x70c6ad,
-        side: T.DoubleSide,
-        roughness: 0.8,
-      }),
-    ),
-  );
+  const geo=canopyGeometry();
+  wing.add(new T.Mesh(geo,canopyMaterial()));
   payload.add(new T.AxesHelper(0.35));
   wing.add(new T.AxesHelper(0.45));
   const ghost = new T.Mesh(
@@ -349,24 +327,7 @@ async function main() {
     );
     axisArrow.position.copy(joint.position);
     axisArrow.visible = tour;
-    const points = [-0.0743, 0.0743].flatMap((y) => {
-      const attach = pp
-        .clone()
-        .add(new T.Vector3(hp.x, y, hp.z).applyQuaternion(rp));
-      return [
-        position(attach.toArray()),
-        position(
-          pc
-            .clone()
-            .add(
-              new T.Vector3(0, Math.sign(y) * 0.75, 0.15).applyQuaternion(rc),
-            )
-            .toArray(),
-        ),
-      ];
-    });
-    lines.geometry.dispose();
-    lines.geometry = new T.BufferGeometry().setFromPoints(points);
+    updateSuspension(lines,payload,wing,{},.066,hp);
     let rotorPhase = 0;
     for (let i = 1; i < c.frames.length && c.frames[i - 1].time_s < t; i++) {
       const a = c.frames[i - 1],

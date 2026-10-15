@@ -1,3 +1,4 @@
+import {canopyGeometry, canopyMaterial, updateSuspension} from './paraglider';
 import * as T from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
@@ -18,11 +19,7 @@ async function main(){
  const views=[0x58a7d0,0x70c6ad].map(color=>{
   const scene=new T.Scene();scene.background=new T.Color('#142735');scene.add(new T.HemisphereLight(0xe6f8ff,0x566473,3));const light=new T.DirectionalLight(0xffffff,3);light.position.set(3,8,4);scene.add(light);
   const body=model.scene.clone(true);scene.add(body);const rig=rigPayload(body);
-  const vertices:number[]=[],indices:number[]=[];
-  for(let i=0;i<=24;i++){const a=(i/24-.5)*Math.PI*.8;for(const x of [-.27,.27])vertices.push(x,Math.sin(a)*1.05,(1-Math.cos(a))*.45);}
-  for(let i=0;i<24;i++){const k=i*2;indices.push(k,k+1,k+2,k+1,k+3,k+2);}
-  const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geometry.setIndex(indices);geometry.computeVertexNormals();
-  const wing=new T.Mesh(geometry,new T.MeshStandardMaterial({color,side:T.DoubleSide}));scene.add(wing);
+  const wing=new T.Mesh(canopyGeometry(),canopyMaterial());scene.add(wing);
   const lines=new T.LineSegments(new T.BufferGeometry(),new T.LineBasicMaterial({color:0xc8d7e2}));scene.add(lines);
   const grid=new T.GridHelper(1000,1000,0x506b7b,0x304958);grid.position.y=-3;scene.add(grid);
   const path=new T.Line(new T.BufferGeometry(),new T.LineBasicMaterial({color,transparent:true,opacity:.25}));scene.add(path);
@@ -40,14 +37,14 @@ async function main(){
  async function load(){
   const token=++generation;playing=false;play.textContent='Play';play.disabled=true;slider.disabled=true;status.textContent='Loading recorded aircraft poses…';
   const comparison=(document.querySelector('#comparison') as HTMLSelectElement).value;const name=comparison+'-'+(document.querySelector('#scenario') as HTMLSelectElement).value,sensing='truth';labels=comparison==='routing'?['Old model, retuned','132 mm routed, retuned']:['132 mm routed',{hardware:'185 mm, same canopy',half:'185 mm, half flattening',flattening:'185 mm, full flattening',drag:'185 mm, flattening + drag'}[comparison]||'185 mm'];
-  runs=data.runs.filter((r:any)=>r.case===name&&r.observer===(sensing==='observer'));
+  runs=data.runs.filter((r:any)=>r.case===name&&r.observer===false);
   try{const rows=await Promise.all(['baseline','direct'].map(async family=>{const r=await fetch(`rigging-comparison/poses/${name}-${sensing}-${family}.json`);if(!r.ok)throw Error('Pose recording unavailable');return r.json() as Promise<number[][]>;}));if(token!==generation)return;
    rows.forEach((r,i)=>{views[i].rows=r;const v=views[i];
    const names=comparison==='routing'?['legacy','current']:['current',({hardware:'wide',half:'wide_half',flattening:'wide_flat',drag:'wide_drag'} as Record<string,string>)[comparison]];
    const meta=data.metadata.find((m:any)=>m.name===names[i]);
-   const arc=meta.arc_span,phi=meta.half_arc,radius=arc/(2*phi);let mean=0;for(let j=0;j<5;j++)mean+=radius*(1-Math.cos(((j+.5)/5*2-1)*phi))/5;
-   const verts:number[]=[];for(let j=0;j<=24;j++){const theta=(j/24*2-1)*phi;for(const x of [-.27,.27])verts.push(x,radius*Math.sin(theta),radius*(1-Math.cos(theta))-mean);}
-   v.wing.geometry.setAttribute('position',new T.Float32BufferAttribute(verts,3));v.wing.geometry.computeVertexNormals();
+   v.wing.userData.shape={arcSpan:meta.arc_span,halfArc:meta.half_arc};
+   v.wing.userData.halfSpacing=names[i].startsWith('wide')?.0925:.066;
+   v.wing.geometry.dispose();v.wing.geometry=canopyGeometry(v.wing.userData.shape);
 let distance=0;v.distance=r.map((a,j)=>{if(j)distance+=Math.hypot(a[1]-r[j-1][1],a[2]-r[j-1][2]);return distance;});
    v.path.geometry.dispose();v.trail.geometry.dispose();v.path.geometry=new T.BufferGeometry().setFromPoints(r.map(a=>position(a.slice(1,4))));v.trail.geometry=v.path.geometry.clone();let phase=0;views[i].phases=r.map((v,j)=>{if(j)phase+=(v[0]-r[j-1][0])*(v[27]+r[j-1][27])*Math.PI/60;return phase;});});
    time=0;playing=true;play.textContent='Pause';signal();play.disabled=false;slider.disabled=false;status.textContent='Predicted motion · drag either view to orbit both; scroll to zoom. Physical scale, no attitude exaggeration.';
@@ -66,8 +63,7 @@ let distance=0;v.distance=r.map((a,j)=>{if(j)distance+=Math.hypot(a[1]-r[j-1][1]
    // Each camera follows its payload; the grid retains earth-fixed altitude and translation.
    v.grid.position.set(-p.x,-3-p.y,-p.z);
    if(v.rig)poseMechanisms(v.rig,v.phases[n]+(v.phases[n+1]-v.phases[n])*f,r.slice(30,32),v.rows[0].slice(30,32));
-   const points:T.Vector3[]=[];for(const y of [-.8,.8])for(const x of [-.22,.22])points.push(new T.Vector3(x,y,.12).applyQuaternion(v.wing.quaternion).add(v.wing.position),new T.Vector3(0,y*.15,-.1).applyQuaternion(v.body.quaternion));
-   v.lines.geometry.dispose();v.lines.geometry=new T.BufferGeometry().setFromPoints(points);
+   updateSuspension(v.lines,v.body,v.wing,v.wing.userData.shape,v.wing.userData.halfSpacing);
    renderer.setViewport(i*w/2,0,w/2,h);renderer.setScissor(i*w/2,0,w/2,h);renderer.render(v.scene,camera);
   });
   ctx.fillStyle='#102330';ctx.fillRect(0,0,1280,1780);ctx.drawImage(renderer.domElement,0,0);

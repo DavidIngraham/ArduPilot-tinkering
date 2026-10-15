@@ -1,3 +1,4 @@
+import {canopyGeometry, canopyMaterial, updateSuspension} from './paraglider';
 import { cameraPath, cameraAt } from "./camera-path";
 import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
@@ -33,7 +34,7 @@ const tracks = await Promise.all(
   names.map(async (n) =>
     parseRecording(
       await (
-        await fetch("/altitude-comparison/" + n.replaceAll(" ", "-") + ".jsonl")
+        await fetch("altitude-comparison/" + n.replaceAll(" ", "-") + ".jsonl")
       ).text(),
     ),
   ),
@@ -48,7 +49,7 @@ const scenes = await Promise.all(
     scene.add(sun);
     const body = new THREE.Group();
     const gltf = await new GLTFLoader().loadAsync(
-      "/models/microagu-payload-tl.glb",
+      "models/microagu-payload-tl.glb",
     );
     body.add(gltf.scene);
     scene.add(body);
@@ -80,35 +81,7 @@ const scenes = await Promise.all(
     );
     const canopy = new THREE.Group();
     scene.add(canopy);
-    const geo = new THREE.BufferGeometry(),
-      verts: number[] = [],
-      indices: number[] = [];
-    for (let i = 0; i <= 24; i++) {
-      const u = (i / 24 - 0.5) * Math.PI * 0.8;
-      for (const x of [-0.3, 0.3])
-        verts.push(
-          x,
-          Math.sin(u) * 1.05,
-          (1 - Math.cos(u)) * 0.45 + (x < 0 ? 0.04 : 0),
-        );
-    }
-    for (let i = 0; i < 24; i++) {
-      const k = i * 2;
-      indices.push(k, k + 1, k + 2, k + 1, k + 3, k + 2);
-    }
-    geo.setAttribute("position", new THREE.Float32BufferAttribute(verts, 3));
-    geo.setIndex(indices);
-    geo.computeVertexNormals();
-    canopy.add(
-      new THREE.Mesh(
-        geo,
-        new THREE.MeshStandardMaterial({
-          color: 0x70d8c6,
-          side: THREE.DoubleSide,
-          roughness: 0.7,
-        }),
-      ),
-    );
+    canopy.add(new THREE.Mesh(canopyGeometry(),canopyMaterial()));
     const lines = new THREE.LineSegments(
       new THREE.BufferGeometry(),
       new THREE.LineBasicMaterial({ color: 0xa8c7cf }),
@@ -225,23 +198,7 @@ function draw(t: number) {
       f.brake_mm,
       tracks[i][0].brake_mm,
     );
-    const ends: number[] = [];
-    for (const side of [-1, 1])
-      for (const fore of [-1, 1]) {
-        const a = s.body.localToWorld(
-          new THREE.Vector3(0.0053, side * 0.1, -0.102),
-        );
-        const b = s.canopy.localToWorld(
-          new THREE.Vector3(fore * 0.22, side * 0.72, 0.15),
-        );
-        ends.push(...a.toArray(), ...b.toArray());
-      }
-    s.lines.geometry.dispose();
-    s.lines.geometry = new THREE.BufferGeometry();
-    s.lines.geometry.setAttribute(
-      "position",
-      new THREE.Float32BufferAttribute(ends, 3),
-    );
+    updateSuspension(s.lines,s.body,s.canopy);
     const target = new THREE.Vector3(0, 0.65, 0);
     s.camera.position
       .copy(target)

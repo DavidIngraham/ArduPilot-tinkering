@@ -1,3 +1,4 @@
+import {canopyGeometry, canopyMaterial, updateSuspension} from './paraglider';
 import * as T from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -70,26 +71,8 @@ async function main() {
   body.add(asset.scene);
   scene.add(body);
   const rig = rigPayload(asset.scene);
-  const vertices: number[] = [],
-    indices: number[] = [];
-  for (let i = 0; i <= 24; i++) {
-    const a = (i / 24 - 0.5) * Math.PI * 0.8;
-    for (const x of [-0.27, 0.27])
-      vertices.push(x, Math.sin(a) * 1.05, (1 - Math.cos(a)) * 0.45);
-  }
-  for (let i = 0; i < 24; i++) {
-    const k = i * 2;
-    indices.push(k, k + 1, k + 2, k + 1, k + 3, k + 2);
-  }
-  const geo = new T.BufferGeometry();
-  geo.setAttribute("position", new T.Float32BufferAttribute(vertices, 3));
-  geo.setIndex(indices);
-  geo.computeVertexNormals();
-  const wing = new T.Mesh(
-    geo,
-    new T.MeshStandardMaterial({ color: 0x70c6ad, side: T.DoubleSide }),
-  );
-  scene.add(wing);
+  const geo=canopyGeometry();
+  const wing=new T.Mesh(geo,canopyMaterial());scene.add(wing);
   if (swoop) {
     const path = new T.BufferGeometry().setFromPoints(
       frames.map((f) => position(f.state.slice(0, 3))),
@@ -184,20 +167,7 @@ async function main() {
         f.brake_mm,
         frames[0].brake_mm,
       );
-    const points: T.Vector3[] = [];
-    for (const y of [-0.8, 0.8])
-      for (const x of [-0.22, 0.22]) {
-        points.push(
-          new T.Vector3(x, y, 0.12)
-            .applyQuaternion(wing.quaternion)
-            .add(wing.position),
-          new T.Vector3(0, y * 0.15, -0.1)
-            .applyQuaternion(body.quaternion)
-            .add(p),
-        );
-      }
-    lines.geometry.dispose();
-    lines.geometry = new T.BufferGeometry().setFromPoints(points);
+    updateSuspension(lines,body,wing);
     renderer.render(scene, camera);
     ctx.fillStyle = "#102330";
     ctx.fillRect(0, 0, 1280, 1320);

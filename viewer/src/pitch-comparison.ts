@@ -32,7 +32,7 @@ const tracks = await Promise.all(
   names.map(async (n) =>
     parseRecording(
       await (
-        await fetch("/pitch-sign/" + n.replaceAll(" ", "-") + ".jsonl")
+        await fetch("pitch-sign/" + n.replaceAll(" ", "-") + ".jsonl")
       ).text(),
     ),
   ),
@@ -47,7 +47,7 @@ const scenes = await Promise.all(
     scene.add(sun);
     const body = new THREE.Group();
     const gltf = await new GLTFLoader().loadAsync(
-      "/models/microagu-payload-tl.glb",
+      "models/microagu-payload-tl.glb",
     );
     body.add(gltf.scene);
     scene.add(body);

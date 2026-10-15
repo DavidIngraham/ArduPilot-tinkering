@@ -1,3 +1,4 @@
+import {canopyGeometry, canopyMaterial, canopyPoint} from './paraglider';
 import * as T from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
@@ -19,16 +20,8 @@ async function main() {
   body.add(asset.scene); scene.add(body);
   const basis = new T.Quaternion().setFromAxisAngle(new T.Vector3(1,0,0),Math.PI/2);
   const ground = new T.GridHelper(16,32,0x506575,0x304657); scene.add(ground);
-  const geometry = new T.BufferGeometry(); const points:number[]=[]; const indices:number[]=[];
-  const ns=24,nc=12;
-  for(let j=0;j<=ns;j++) for(let i=0;i<=nc;i++) {
-    const v=j/ns*2-1,u=i/nc;
-    points.push((u-.5)*.6, .21*(1-v*v)+.09*Math.sin(Math.PI*u),v*1.1);
-    if(i<nc&&j<ns){const a=j*(nc+1)+i;indices.push(a,a+1,a+nc+1,a+1,a+nc+2,a+nc+1);}
-  }
-  geometry.setAttribute("position",new T.Float32BufferAttribute(points,3));geometry.setIndex(indices);geometry.computeVertexNormals();
-  const wing = new T.Mesh(geometry,new T.MeshStandardMaterial({color:0x8acadb,side:T.DoubleSide,roughness:.9})); scene.add(wing);
-  const seams = new T.LineSegments(new T.WireframeGeometry(geometry),new T.LineBasicMaterial({color:0x3f7087,transparent:true,opacity:.18}));wing.add(seams);
+  const geometry=canopyGeometry();geometry.rotateX(Math.PI/2);
+  const wing=new T.Mesh(geometry,canopyMaterial());scene.add(wing);
   const lines = new T.LineSegments(new T.BufferGeometry(),new T.LineBasicMaterial({color:0xc8d7e2}));scene.add(lines);
   const trail = new T.Line(new T.BufferGeometry(),new T.LineDashedMaterial({color:0x71cfa7,dashSize:.1,gapSize:.08}));scene.add(trail);
   const camera = new T.OrthographicCamera(-5.4,5.4,3,-1.65,.1,50);
@@ -48,7 +41,7 @@ async function main() {
     wing.scale.set(1,.12+.88*inflate,1); wing.rotation.z=.07*(1-inflate);
     const vertices:number[]=[];
     for(const side of [-1,1])for(const chord of [-.22,.22])for(const span of [.35,.75,1]) {
-      const a=new T.Vector3(chord,.21*(1-span*span),side*span).multiply(wing.scale).applyEuler(wing.rotation).add(wing.position);
+      const a=canopyPoint(side*span,(.27-chord)/.54).applyAxisAngle(new T.Vector3(1,0,0),Math.PI/2).multiply(wing.scale).applyEuler(wing.rotation).add(wing.position);
       const b=new T.Vector3(0,.13,side*.12).applyQuaternion(new T.Quaternion().setFromAxisAngle(new T.Vector3(0,0,1),rotation)).add(body.position);
       const mid=a.clone().lerp(b,.5);mid.y-=.25*(1-inflate);
       vertices.push(...a.toArray(),...mid.toArray(),...mid.toArray(),...b.toArray());

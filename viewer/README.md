@@ -426,3 +426,23 @@ copies both excerpts with the viewer bundle. Raw logs stay in Mission Planner.
 ### Descending spiral research replay
 
 `landing.html?case=spiral` shows the complete native descending-loiter, tangent-exit and flare experiment. [The study](../research/spiral-swoop-2026-10-13/README.md) includes the matched gentle-gust check, speed-retention plots and failed development cases. This recording is a spiral landing demonstration, not a validated high-energy swoop.
+
+### Shared paraglider rendering
+
+All canopy applets use `src/paraglider.ts`: an inflated, tapered, 28-cell
+photo-inspired canopy with open leading-edge inlets, upper/lower skins and ribs.
+The green/black/white/yellow panels follow the HobbyKing V2 reference photo.
+Cell count, thickness, taper and cascade topology are illustrative, not measured.
+Default effective arc span is 2.15 m, half arc 0.94598569 rad and chord 0.54 m;
+the rigging applet overrides span/arc from each simulation's metadata. The
+catalogue's 2.4 m span is not substituted into calibrated simulations.
+The canopy reference height remains the five-panel mean used by the rigging study.
+
+Suspension branches follow the independent recorded rigid-body transforms.
+White risers and rings use a nominal 60 mm extension; their exact construction
+and routing remain schematic. Rigging comparisons show 132 / 185 mm anchor
+spacing, while the payload CAD itself remains the existing configuration.
+No fabric dynamics or extra aerodynamic effects are introduced by this renderer.
+Actual-flight replay and the payload-pitch closeup intentionally remain
+payload-only; measured flight data does not include canopy attitude.
+The FBD and launch illustration use the same canopy in their explanatory frame.

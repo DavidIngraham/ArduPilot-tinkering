@@ -1,3 +1,4 @@
+import {canopyGeometry, canopyMaterial, updateSuspension} from './paraglider';
 import * as T from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
 import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
@@ -18,11 +19,7 @@ async function main(){
  const views=[0x58a7d0,0x70c6ad].map(color=>{
   const scene=new T.Scene();scene.background=new T.Color('#142735');scene.add(new T.HemisphereLight(0xe6f8ff,0x566473,3));const light=new T.DirectionalLight(0xffffff,3);light.position.set(3,8,4);scene.add(light);
   const body=model.scene.clone(true);scene.add(body);const rig=rigPayload(body);
-  const vertices:number[]=[],indices:number[]=[];
-  for(let i=0;i<=24;i++){const a=(i/24-.5)*Math.PI*.8;for(const x of [-.27,.27])vertices.push(x,Math.sin(a)*1.05,(1-Math.cos(a))*.45);}
-  for(let i=0;i<24;i++){const k=i*2;indices.push(k,k+1,k+2,k+1,k+3,k+2);}
-  const geometry=new T.BufferGeometry();geometry.setAttribute('position',new T.Float32BufferAttribute(vertices,3));geometry.setIndex(indices);geometry.computeVertexNormals();
-  const wing=new T.Mesh(geometry,new T.MeshStandardMaterial({color,side:T.DoubleSide}));scene.add(wing);
+  const wing=new T.Mesh(canopyGeometry(),canopyMaterial());scene.add(wing);
   const lines=new T.LineSegments(new T.BufferGeometry(),new T.LineBasicMaterial({color:0xc8d7e2}));scene.add(lines);
   const grid=new T.GridHelper(1000,1000,0x506b7b,0x304958);grid.position.y=-3;scene.add(grid);
   const path=new T.Line(new T.BufferGeometry(),new T.LineBasicMaterial({color,transparent:true,opacity:.25}));scene.add(path);
@@ -60,8 +57,7 @@ async function main(){
    // Each camera follows its payload; the grid retains earth-fixed altitude and translation.
    v.grid.position.set(-p.x,-3-p.y,-p.z);
    if(v.rig)poseMechanisms(v.rig,v.phases[n]+(v.phases[n+1]-v.phases[n])*f,r.slice(30,32),v.rows[0].slice(30,32));
-   const points:T.Vector3[]=[];for(const y of [-.8,.8])for(const x of [-.22,.22])points.push(new T.Vector3(x,y,.12).applyQuaternion(v.wing.quaternion).add(v.wing.position),new T.Vector3(0,y*.15,-.1).applyQuaternion(v.body.quaternion));
-   v.lines.geometry.dispose();v.lines.geometry=new T.BufferGeometry().setFromPoints(points);
+   updateSuspension(v.lines,v.body,v.wing);
    renderer.setViewport(i*w/2,0,w/2,h);renderer.setScissor(i*w/2,0,w/2,h);renderer.render(v.scene,camera);
   });
   ctx.fillStyle='#102330';ctx.fillRect(0,0,1280,1570);ctx.drawImage(renderer.domElement,0,0);
