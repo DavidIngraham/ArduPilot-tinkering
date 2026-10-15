@@ -125,3 +125,7 @@ $PY $STUDY/final_report.py
 ```
 
 Earlier first-pass and bounded-correction results remain historical experiments with their own sensor models and seeds; compare controllers within an experiment. The final validation is separate from both development and the earlier hybrid validation. No firmware controller was installed or flown.
+
+## Interactive comparison
+
+The blog applet uses all 48 frozen final-validation runs. `export_comparison.py OUTPUT.json` exports height error, payload pitch rate, heading-rate error and voltage every fifth sample (10 Hz display), alongside the original full-resolution RMS metrics. It does not rerun or retune the controllers. Generate the website data with `$PY $STUDY/export_comparison.py ../DavidIngraham.github.io/assets/controller-comparison/data.json`. The applet lives in that website repository under `assets/controller-comparison/`; its source commit identifies the underlying study, not the later presentation changes.

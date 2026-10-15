@@ -379,6 +379,14 @@ However, **only seven of sixteen comparisons met every acceptance limit**. Ordin
 
 The next hypotheses are therefore specific: can disturbance-aware steering tuning reduce the gust heading penalty, and can climb/height reference tracking be improved without restoring excess pitch motion? Testing those hypotheses requires a new development set and another untouched validation set. The present results justify further controller work, but not replacing flight defaults. Accelerometer bias, correlated attitude errors, transport delays and native AUTO integration are still untested. The [full refinement record](../research/scheduled-state-feedback-2026-10-15/README.md#direct-feedback-refinement-with-accelerometer-estimation) includes the rejected searches, frozen selection and all validation results.
 
+### Explore the improvements and remaining tradeoffs
+
+Start with **Falling voltage** and the **IMU + navigation observer** to see whether the recovered height benefit survives estimation. Then select **Gust** to inspect the heading penalty, or **Climb / descent transition** to see the height cost of the refined damping. Switching to exact states helps distinguish feedback tradeoffs from estimation effects. The plots show the frozen final validation runs, not new tuning runs.
+
+[Open the controller comparison applet](https://davidingraham.github.io/assets/controller-comparison/index.html)
+
+The cards compare full-resolution RMS values against the unchanged acceptance limits. The synchronized plots show height error, pitch rate and heading-rate error; move across a plot to inspect the same instant in every trace. The retuned conventional candidate is available as an optional third curve. Zero height and heading-rate error mean perfect tracking of the shared shaped reference.
+
 ## Checking the original conventional tunes against model uncertainty
 
 Separately from the scheduled LQI checks above, the original conventional-controller tuning assumes known actuator effectiveness, motor response and timing. We tested whether the candidate's improvement was fragile when several of those assumptions were wrong together. Both conventional controllers retained their selected gains while the plant's actuator effectiveness, rotor response and added command delays varied. The criterion here was local closed-loop stability and decay rate, not tracking accuracy or nonlinear saturation performance.
