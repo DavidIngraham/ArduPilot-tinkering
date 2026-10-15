@@ -8,6 +8,8 @@ We jointly tuned the existing steering and altitude controller, examined how its
 
 These are results from the articulated simulator, followed by separate native-controller checks. They are not new flight measurements.
 
+The study has three controller configurations. **Baseline** means the retained steering and altitude controller. **Candidate** means that same controller with eight gains and filter settings jointly retuned. **Full-state LQI** means a replacement feedback law that receives every simulated aircraft state. We first compare the two conventional tunes, then examine actuator and sensor limitations in the aircraft model, and finally test whether the replacement controller improves maneuvers and gust rejection. The actuator and sensor calculations are diagnostics of the model; they do not themselves change the controller or add hardware.
+
 ## The model behind the study
 
 The sampled perturbation model is
@@ -128,7 +130,9 @@ $$
 
 This study instead differentiates the integrated simulator directly. It uses $\epsilon=10^{-5}$ in each coordinate's units and repeats the calculation with $\epsilon/2$ to check sensitivity to the finite-difference step. The implementation is in `Chart`, `observations` and `prepare` in [study.py](../research/state-space-2026-10-14/study.py); the numerical and nonlinear checks follow below.
 
-## Make the comparison use the current controller
+## Establishing the baseline and checking the local model
+
+Before comparing controllers, we needed to check that the linear model represented the current simulator and controller near trim. The test was to hold the configuration fixed, vary the numerical perturbation size, and compare a very small commanded maneuver in the linear and nonlinear models. Agreement would support using the linear model for local tuning; it would not validate the underlying aircraft physics against flight data.
 
 The baseline retains the present **1 Hz steering filter**, two **1.5 Hz pitch-filter stages**, pitch-damper gain **0.1**, and the stronger climb feedback selected through `TECS_VERT_ACC = 3.5`. Some historical analysis scripts predate those settings; using them unchanged would have compared against an obsolete baseline.
 
@@ -138,9 +142,11 @@ The plant has 16 states, including altitude. The existing controller adds eight 
 
 The equilibrium residuals were below 7 × 10⁻¹³. Halving the finite-difference perturbation changed the state Jacobians by less than 1.3 × 10⁻¹⁰ in relative matrix norm. More usefully, a 1 mm altitude ramp through nonlinear physics reproduced the sampled linear responses with a maximum relative time-history error of **0.021%** across height, climb, payload pitch rate, throttle and brake. This check holds the feedforward on its climb-side branch so it tests one smooth local system; normal nonlinear tests restore the climb/descent switch.
 
-## What the frequency-domain view made clear
+## Jointly retuning eight settings in the existing controller
 
 The first question was whether we could improve the existing architecture without adding sensors or a new controller. Eight settings were varied together: steering P and I, roll damping, steering filter frequency, pitch damping and its two shared filter cutoffs, climb feedback, and height feedback. Feedforward stayed unchanged.
+
+The working hypothesis was that tuning the steering and altitude loops together could reduce motion and actuator effort caused by their interaction while preserving tracking and gust rejection. The aircraft models, measurements and controller structure stayed fixed. Only the eight settings changed, and the same resulting settings were evaluated across the operating plants.
 
 The objective combined normalized command-response error and motion/control effort with the response to the existing illustrative gust spectrum. It balanced average and worst operating-case scores. This is a declared engineering preference, not a uniquely correct definition of good flight.
 
@@ -163,9 +169,13 @@ The combined objective improved by **7.4%**. Command-response cost fell by 12–
 
 There is an important qualification to that score. The step criterion deliberately stresses abrupt reference edges, whereas the later maneuver test ramps altitude over two seconds. About **115 of the baseline's 160 nominal step-cost units** come from heading-rate motion induced by the altitude step. This is largely a cross-axis transient criterion, not a percentage improvement in ordinary mission tracking. Its output-by-output decomposition is part of the retained evidence.
 
+### Checking which frequencies improved after retuning
+
+The aggregate score does not say where an improvement occurs. To interpret the candidate, we compared baseline and candidate frequency responses on the same nominal level-flight plant. We examined altitude and heading commands, vertical wind, and additive actuator disturbances. The question was whether the lower score represented reduced unwanted amplification, slower command response, or a mixture of both.
+
 ![Command responses, vertical-wind response and coupled actuator sensitivity](../research/state-space-2026-10-14/frequency.png)
 
-*Nominal level-flight plant, sampled at 50 Hz. Both analyses use the same physical states and controller. The plotted wind response is a small-signal gain, not a prediction that a finite 1 m/s high-frequency gust would remain linear.*
+*Baseline versus the retuned candidate on the same nominal level-flight plant, sampled at 50 Hz. Controller structure is unchanged; gains and filter cutoffs differ. The plotted wind response is a small-signal gain, not a prediction that a finite 1 m/s high-frequency gust would remain linear.*
 
 The most conspicuous improvement is around **2 Hz**. The peak singular value of the coupled actuator sensitivity falls from **6.03 to 2.27**. The altitude-command curves remain nearly unchanged. This is a useful example of reducing an unwanted response without slowing every command by the same amount.
 
@@ -175,11 +185,13 @@ Looking only at the baseline sensitivity matrix's diagonal entries gives a peak 
 
 The frequency plot also explains why the large peak reduction does not produce an equally large improvement in our gust tests. Their imposed frequencies run from **0.08 to 0.89 Hz**. They do not directly excite the 2 Hz peak. Looking at a single maximum would have obscured that distinction.
 
-## What the internal states added
+## Diagnosing actuator authority and sensor information
 
-The frequency plots show where a response is large. State-space diagnostics make it convenient to ask which physical motion creates it, which actuator can influence it, and what the available measurements reveal.
+The frequency plots show where a response is large, but leave practical design questions: can the actuators influence the troublesome motion, and can the sensors reveal it? The next two diagnostics use the same nominal level-flight aircraft model without closing either controller around it. We examine actuator coupling and vary the assumed measurement set; these results are not improvements produced by the retuned candidate.
 
-### Actuator authority depends on the mode
+### Testing whether throttle and brake control separate motions
+
+The existing controller assigns altitude and pitch damping to throttle, and turning and roll damping to brake. We tested how well that division matches the aircraft's natural motions by computing each mode's state participation and its coupling to each actuator. We also calculated a four-second controllability Gramian to identify combinations of states that are difficult to move with the available inputs. The model and actuator mappings stayed fixed throughout this diagnostic.
 
 We normalized angles, rates, velocities, rotor speed and height by declared engineering reference excursions before comparing them. Without that scaling, changing metres to millimetres could change an apparently impressive matrix condition number.
 
@@ -195,7 +207,9 @@ The four-second controllability Gramian adds a related warning: its least reacha
 
 *Left: four-second observability Gramians, using declared measurement scales. The gyro-only altitude eigenvalue is zero and is shown at the plot floor. Right: normalized input coupling to each oscillatory mode. Connecting lines guide the eye; there are no additional measured modes between the points.*
 
-### More state information is not automatically a reason for more sensors
+### Testing whether canopy gyros reveal otherwise hidden states
+
+The sensor question was whether canopy motion is hidden from the existing payload and navigation measurements, making additional canopy sensors necessary for state feedback. Holding the aircraft dynamics fixed, we compared three hypothetical measurement sets: payload gyros alone; payload gyros plus attitude, navigation velocity and height; and that navigation-equipped set plus canopy gyros. No observer was implemented in this comparison.
 
 A four-second finite-horizon observability calculation gives a more useful question than nominal rank alone: how unevenly do the measurements reveal different state combinations? Finite-horizon calculations also accommodate the altitude integrator, for which an ordinary infinite-horizon Gramian is inappropriate. [Gramians and their control/estimation uses](https://www.mathworks.com/help/control/ref/statespacemodel.gram.html) provide the general background.
 
@@ -203,13 +217,17 @@ With payload gyros alone, altitude is unobservable. Adding payload attitude, nav
 
 These calculations assume a known model and illustrative independent measurement scales: 1° attitude, 1°/s gyro, 0.1 m/s navigation velocity and 0.2 m height. They are not predicted estimator accuracies. Adding three unknown constant-wind states leaves this nominal navigation-equipped model observable too; we did **not** include unknown force/moment biases or correlated AHRS errors. The ambiguities exposed by the [earlier observer study](data-and-methods.md#can-i-estimate-what-i-cannot-measure) therefore remain relevant. This study does not establish a flight-ready canopy observer.
 
-### Decaying modes can still produce a sharp transient
+### Testing whether retuning reduces motion after an initial displacement
 
-We also searched over initial physical-state perturbations with the controller memories initially at equilibrium. The largest normalized state excursion occurs about **40 ms** after release and is dominated by an initial relative-roll displacement. Its amplification is approximately **10** for both conventional tunes.
+The lower actuator-sensitivity peak suggested another question: would the candidate also reduce the aircraft's response to an initial displacement, such as relative canopy roll? This is a separate closed-loop test. We compared baseline and candidate on the same nominal plant, with no subsequent command or wind perturbation, identical state scaling, and controller memories initially at equilibrium. We searched initial physical-state directions for the largest transient amplification over ten seconds.
+
+The largest normalized state excursion occurs about **40 ms** after release and is dominated by an initial relative-roll displacement. Its amplification is approximately **10** for both conventional tunes.
 
 That number is not tenfold mechanical energy growth. It measures the conversion of normalized displacement into normalized motion under the declared state scales, and it can be rescaled to arbitrarily small perturbations. The useful finding is the comparison: substantially reducing the actuator-sensitivity peak did **not** remove this fast internal release response. Closed-loop pole locations, command tracking and initial-disturbance response describe different aspects of the same system.
 
-## Give a controller every simulated state
+## Replacing the existing loops with full-state LQI feedback
+
+The next hypothesis was that a controller using the aircraft's internal motion could coordinate throttle and brake to follow commands with less payload rocking. To explore that possibility, we replaced the conventional feedback loops with linear-quadratic integral (LQI) control: state feedback selected by penalties on motion and control effort, with integral action for tracking. Baseline and candidate remain the reference cases. The aircraft model and requested maneuvers stay the same; the feedback architecture, available state information and command shaping change together.
 
 To test whether state information could buy better behavior, we built a discrete LQI controller with access to all 16 plant states. Two command-memory states penalize actuator increments; two error integrators support altitude and heading-rate tracking. The same nominal gain is used across operating cases, with their corresponding trim offsets.
 
@@ -219,7 +237,7 @@ We screened **72 weight combinations** across the same training plants and selec
 
 *The selected LQI gains make a different tradeoff. Their linear gust costs already predict substantial additional vertical motion and throttle effort. State normalization and output weights are specified in the study scripts.*
 
-In the nonlinear maneuver test, altitude rises by 1 m over two seconds, followed by a 10°/s turn request and release. The full-state controller substantially reduces the climb’s pitch kick:
+For the maneuver comparison, all three controllers received the same altitude request rising by 1 m over two seconds, followed by a 10°/s turn request and release, in the nonlinear simulator. We measured height and heading tracking alongside payload pitch motion to check whether a gentler response came at the expense of following the command. The full-state controller substantially reduces the climb’s pitch kick:
 
 | Nonlinear maneuver metric | Baseline | Retuned existing loops | Full-state LQI |
 |---|---:|---:|---:|
@@ -232,7 +250,9 @@ Height and pitch metrics cover 5–80 seconds, including the climb and turn; hea
 
 This comparison changes both state access and controller architecture, including reference and command shaping. It therefore does not isolate the value of the otherwise unmeasured states. A matched-bandwidth comparison against a more gently shaped conventional altitude command would be needed before attributing the smaller pitch kick specifically to canopy-state feedback.
 
-## The gust test changes the ranking
+## Testing the three controllers against identical nonlinear gusts
+
+A gentler commanded climb does not establish better disturbance rejection. Here the question was whether the retuned conventional controller and the selected full-state LQI controller could hold the flight condition more quietly than baseline when the disturbance came from wind. We kept the selected gains fixed, removed the commanded climb-and-turn maneuver, and applied the same wind history to all three controllers. This tests their gust response without retuning them for this realization.
 
 The held-out gust realization uses a new phase seed, with nominal component RMS values of 0.5, 0.5 and 0.25 m/s. All controllers start from the same trim and encounter the same prescribed wind history. The table covers 15–80 seconds, before the artificial gust cutoff.
 
@@ -252,13 +272,15 @@ The full-state LQI controller is much worse at holding height in these gusts and
 
 *Truth-sensed nonlinear diagnostics, not native autopilot traces. The dashed vertical line at 80 seconds marks the abrupt end of the synthetic gusts; the resulting transient is excluded from the gust table. “Full-state LQI” is the selected weight-screen candidate.*
 
-The retained experiment set also includes a second phase seed with 50% larger gust amplitudes, the softer-roll profile, its held-out climb condition, and low voltage. These broaden the comparison but do not turn this illustrative gust spectrum into a flight-identified atmospheric model. The stronger LQI cases include appreciable saturation and larger motion; the rigid-canopy model does not establish stall or collapse protection.
+To check whether the nominal result depended on one wind realization or operating condition, we repeated the comparison with a second phase seed and 50% larger gust amplitudes, the softer-roll profile, its held-out climb condition, and low voltage. Controller settings stayed fixed, and each baseline/candidate pair encountered the same prescribed wind. These broaden the comparison but do not turn this illustrative gust spectrum into a flight-identified atmospheric model. The stronger LQI cases include appreciable saturation and larger motion; the rigid-canopy model does not establish stall or collapse protection.
 
 Across all eight paired gust cases, the conventional candidate reduces height RMS by **4.4–6.2%** and brake activity by **42–50%**, while increasing pitch-rate RMS by **5.2–7.9%**. The tradeoff is consistent across this tested set, rather than being confined to the nominal example.
 
 The conclusion is narrower than “state feedback does not work.” This tested LQI family did not beat the existing controller's combined objective. The full-state design produced a gentler commanded maneuver, but did not automatically yield good disturbance rejection. A next state-feedback design should explicitly shape disturbance response and actuator headroom, and isolate the contribution of additional state information, before adding an observer.
 
-## Check combined uncertainty, not just one changed gain
+## Testing stability with actuator errors and command delays
+
+The nominal tuning assumes known actuator effectiveness, motor response and timing. We tested whether the candidate's improvement was fragile when several of those assumptions were wrong together. Both conventional controllers retained their selected gains while the plant's actuator effectiveness, rotor response and added command delays varied. The criterion here was local closed-loop stability and decay rate, not tracking accuracy or nonlinear saturation performance.
 
 For each conventional tune, we evaluated **648 combinations**: six plants, independent throttle and brake effectiveness at 0.75 or 1.25 nominal, independent extra command delays of 0, 40 or 80 ms, and rotor response rates at 0.7, 1.0 or 1.3 nominal. This is a stress grid, not a measured probability distribution or an exhaustive robustness certificate. It does not include estimator-delay models, changing mixer branches or finite-amplitude saturation.
 
@@ -268,7 +290,9 @@ Both tunes remained locally stable in every combination. The worst dominant-pole
 
 *Negative values mean local perturbations decay. Each bar is the worst combination for that operating plant. Full-state LQI is not included in this grid.*
 
-## Back through the native autopilot
+## Testing the retuned parameters in native AUTO missions
+
+The preceding diagnostics used direct simulated state measurements and a study implementation of the controller. The final question was whether the conventional candidate remained usable through the native autopilot's estimator, navigation and control paths. We ran the same AUTO mission with baseline parameters and then with the candidate's eight settings, once in calm air and once with gusts. The mission route and pass/fail assertions stayed fixed. Full-state LQI was excluded because it had not been implemented in firmware.
 
 The baseline and conventional candidate both passed the full native AUTO mission in calm air and gusts: **four passes**, with the existing assertions unchanged. These runs use the airborne preparation fixture and the native estimator, navigation, steering and TECS paths. They do not test launch, and the full-state LQI controller is not installed in firmware.
 
@@ -297,7 +321,9 @@ The native runs use the existing executable, whose embedded version is `51c8e130
 
 The candidate therefore remains an experimental alternative. Lower settled height error and a smaller worst corner came with greater pitch-rate motion, more throttle activity, and a larger maximum waypoint height error in these gusty runs. A passing mission does not settle which tradeoff is preferable.
 
-## What each view contributed
+## Which hypotheses the results support
+
+Joint retuning found a useful but mixed tradeoff, rather than a general improvement. The sensor diagnostic did not show that canopy gyros were required to observe the nominal plant, and the full-state controller's gentler maneuver did not extend to better gust rejection. The table connects each design question to the evidence used to assess it.
 
 | Question | Most useful view in this study | What we learned |
 |---|---|---|
