@@ -167,7 +167,7 @@ async function main() {
         f.brake_mm,
         frames[0].brake_mm,
       );
-    updateSuspension(lines,body,wing);
+    updateSuspension(lines,body,wing,{},.066,undefined,f.brake_mm);
     renderer.render(scene, camera);
     ctx.fillStyle = "#102330";
     ctx.fillRect(0, 0, 1280, 1320);

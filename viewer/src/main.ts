@@ -280,7 +280,7 @@ function draw(f: Frame) {
   const phase = phaseAt(frames, rotorPhases, f.time_s);
   prop.rotation.x = phase;
   if (mechanisms) poseMechanisms(mechanisms, phase, f.brake_mm, brakeReference);
-  updateSuspension(lines,payload,canopy);
+  updateSuspension(lines,payload,canopy,{},.066,undefined,f.brake_mm);
   axes.forEach((a) => (a.visible = el<HTMLInputElement>("axes").checked));
   path.visible = el<HTMLInputElement>("path").checked;
   const mode = el<HTMLSelectElement>("camera").value,

@@ -22,7 +22,7 @@ async function main(){
  const grid=new THREE.GridHelper(2000,1000,0x506b7b,0x304958);grid.position.y=-3;scene.add(grid);
  const path=new THREE.Line(new THREE.BufferGeometry().setFromPoints(track.map(f=>position(f.state.slice(0,3)).sub(origin))),new THREE.LineBasicMaterial({color:0x70c6ad,transparent:true,opacity:.35}));scene.add(path);
  const trail=new THREE.Line(path.geometry.clone(),new THREE.LineBasicMaterial({color:0x70c6ad}));scene.add(trail);
- function update(time:number){const f=sample(track,time);payload.position.copy(position(f.state.slice(0,3)).sub(origin));payload.quaternion.copy(orientation(f.state.slice(3,7)));canopy.position.copy(position(f.state.slice(13,16)).sub(origin));canopy.quaternion.copy(orientation(f.state.slice(16,20)));updateSuspension(lines,payload,canopy);if(rig)poseMechanisms(rig,phaseAt(track,phases,time),f.brake_mm,track[0].brake_mm);const next=track.findIndex(g=>g.time_s>time);trail.geometry.setDrawRange(0,next<0?track.length:next);return f;}
+ function update(time:number){const f=sample(track,time);payload.position.copy(position(f.state.slice(0,3)).sub(origin));payload.quaternion.copy(orientation(f.state.slice(3,7)));canopy.position.copy(position(f.state.slice(13,16)).sub(origin));canopy.quaternion.copy(orientation(f.state.slice(16,20)));updateSuspension(lines,payload,canopy,{},.066,undefined,f.brake_mm);if(rig)poseMechanisms(rig,phaseAt(track,phases,time),f.brake_mm,track[0].brake_mm);const next=track.findIndex(g=>g.time_s>time);trail.geometry.setDrawRange(0,next<0?track.length:next);return f;}
   const auto = track.length > 0 && track.every((f) => f.mode === "AUTO");
   const profile = flightProfile(track);
   const north = track.map((f) => f.state[0]),

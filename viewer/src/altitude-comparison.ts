@@ -193,7 +193,7 @@ function draw(t: number) {
       f.brake_mm,
       tracks[i][0].brake_mm,
     );
-    updateSuspension(s.lines,s.body,s.canopy);
+    updateSuspension(s.lines,s.body,s.canopy,{},.066,undefined,f.brake_mm);
     s.camera.position.copy(orbitCamera.position);s.camera.quaternion.copy(orbitCamera.quaternion);
     renderer.render(s.scene, s.camera);
     ctx.drawImage(renderer.domElement, x, y + 52, 530, 340);

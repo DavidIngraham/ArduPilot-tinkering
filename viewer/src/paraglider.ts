@@ -21,14 +21,44 @@ export function canopyPoint(eta: number, u: number, shape: CanopyShape = {}, upp
     radius*Math.sin(theta)+h*Math.sin(theta),
     radius*(1-Math.cos(theta))-mean-h*Math.cos(theta));
 }
+/** Absolute effective pull in mm, left (negative body y), then right.
+ * Missing/nonfinite inputs render neutral. The 80 mm bound is visual only.
+ */
+export function brakeInfluences(brakes:readonly number[]|null|undefined):[number,number] {
+  return [0,1].map(i=>Number.isFinite(brakes?.[i])?T.MathUtils.clamp(brakes![i]/80,0,1):0) as [number,number];
+}
+export function brakeOffset(eta:number,u:number,shape:CanopyShape={},brakes:readonly number[]|null=null) {
+  const [left,right]=brakeInfluences(brakes);
+  // No hinge: zero displacement AND zero slope where the aft 40% begins.
+  const aft=T.MathUtils.clamp((u-.6)/.4,0,1);
+  const rightWeight=T.MathUtils.smoothstep(eta,-.12,.12);
+  const pull=.08*(left*(1-rightWeight)+right*rightWeight);
+  const angle=eta*(shape.halfArc??defaults.halfArc);
+  // One mm pull -> one mm nominal local downward travel at the trailing edge.
+  // A small forward curl shortens the chord; this is not a line/fabric solver.
+  return new T.Vector3(.35*pull*aft**3,-Math.sin(angle)*pull*aft*aft,Math.cos(angle)*pull*aft*aft);
+}
+export function brakedCanopyPoint(eta:number,u:number,shape:CanopyShape={},brakes:readonly number[]|null=null) {
+  return canopyPoint(eta,u,shape).add(brakeOffset(eta,u,shape,brakes));
+}
+/** Morph targets bend the existing skins and ribs together on the GPU. */
+export function poseCanopyBrakes(wing:T.Object3D,brakes:readonly number[]|null|undefined) {
+  const weights=brakeInfluences(brakes);
+  wing.traverse(object=>{
+    if(!(object instanceof T.Mesh)||!object.geometry.userData.brakeMorph)return;
+    // Rigging comparisons can replace the geometry after constructing the mesh.
+    if(!object.morphTargetInfluences||object.morphTargetInfluences.length!==2)object.updateMorphTargets();
+    object.morphTargetInfluences![0]=weights[0];object.morphTargetInfluences![1]=weights[1];
+  });
+}
 export function canopyGeometry(shape: CanopyShape = {}) {
   const {arcSpan,halfArc,chord}={...defaults,...shape};
   if (!(arcSpan>0 && chord>0 && halfArc>0 && halfArc<Math.PI/2)) throw Error('Invalid canopy dimensions');
-  const pos:number[]=[], colors:number[]=[], indices:number[]=[];
+  const pos:number[]=[], colors:number[]=[], indices:number[]=[], coordinates:number[]=[];
   const cells=28, across=4, along=20;
   const white = new T.Color('#e8ebe3'), black = new T.Color('#25302c');
   const green = new T.Color('#8dc838'), yellow = new T.Color('#ecdc43');
-  function add(p:T.Vector3,c:T.Color){pos.push(...p.toArray());colors.push(c.r,c.g,c.b);return pos.length/3-1;}
+  function add(p:T.Vector3,c:T.Color,eta:number,u:number){coordinates.push(eta,u);pos.push(...p.toArray());colors.push(c.r,c.g,c.b);return pos.length/3-1;}
   for(let cell=0;cell<cells;cell++) {
     const panel = cell<9?green:cell<11?black:cell<17?white:cell<19?black:yellow;
     for(const upper of [true,false]) {
@@ -39,7 +69,7 @@ export function canopyGeometry(shape: CanopyShape = {}) {
         const eta=-1+2*(cell+j/across)/cells;
         const seam=j===0||j===across;
         const color=panel.clone().multiplyScalar(seam?.65:upper?1:.82);
-        add(canopyPoint(eta,u,shape,upper,Math.sin(Math.PI*j/across)),color);
+        add(canopyPoint(eta,u,shape,upper,Math.sin(Math.PI*j/across)),color,eta,u);
         if(j<across&&k<along){const a=base+j*(along+1)+k,b=a+along+1;
           if(upper)indices.push(a,a+1,b,a+1,b+1,b);else indices.push(a,b,a+1,a+1,b,b+1);
         }
@@ -50,20 +80,34 @@ export function canopyGeometry(shape: CanopyShape = {}) {
       const base=pos.length/3;
       for(let k=0;k<=along;k++) {
         const u=.045+.955*k/along;
-        add(canopyPoint(eta,u,shape,true),panel.clone().multiplyScalar(.55));
-        add(canopyPoint(eta,u,shape,false),panel.clone().multiplyScalar(.55));
+        add(canopyPoint(eta,u,shape,true),panel.clone().multiplyScalar(.55),eta,u);
+        add(canopyPoint(eta,u,shape,false),panel.clone().multiplyScalar(.55),eta,u);
         if(k<along){const a=base+k*2;indices.push(a,a+1,a+2,a+1,a+3,a+2);}
       }
     }
   }
-  const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('color',new T.Float32BufferAttribute(colors,3));g.setIndex(indices);g.computeVertexNormals();g.computeBoundingSphere();return g;
+  const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('color',new T.Float32BufferAttribute(colors,3));g.setIndex(indices);g.computeVertexNormals();
+  const targets=[ [80,0], [0,80] ].map(brakes=>{
+    const values=pos.slice();
+    for(let i=0;i<coordinates.length/2;i++){
+      const offset=brakeOffset(coordinates[i*2],coordinates[i*2+1],shape,brakes);
+      values[i*3]+=offset.x;values[i*3+1]+=offset.y;values[i*3+2]+=offset.z;
+    }
+    const target=g.clone();target.setAttribute('position',new T.Float32BufferAttribute(values,3));target.computeVertexNormals();
+    const result={position:target.getAttribute('position').clone(),normal:target.getAttribute('normal').clone()};target.dispose();return result;
+  });
+  g.morphAttributes.position=targets.map(t=>t.position);g.morphAttributes.normal=targets.map(t=>t.normal);
+  g.userData.brakeMorph=true;g.computeBoundingSphere();g.boundingSphere!.radius+=.1;
+  return g;
 }
 export function canopyMaterial() {return new T.MeshStandardMaterial({vertexColors:true,side:T.DoubleSide,roughness:.92});}
 
 /** Branching suspension layout. Anchors follow both recorded rigid bodies.
  * This rendering is schematic: no extra spring, tension or motion is simulated.
  */
-export function updateSuspension(lines:T.LineSegments, body:T.Object3D, wing:T.Object3D, shape:CanopyShape={}, halfSpacing=.066, hinge=new T.Vector3(.0053,0,-.102)) {
+export function updateSuspension(lines:T.LineSegments, body:T.Object3D, wing:T.Object3D, shape:CanopyShape={}, halfSpacing=.066, hinge=new T.Vector3(.0053,0,-.102), brakes:readonly number[]|null=null) {
+  poseCanopyBrakes(wing,brakes);
+  const point=(eta:number,u:number)=>brakedCanopyPoint(eta,u,shape,brakes);
   body.updateWorldMatrix(true,false);wing.updateWorldMatrix(true,false);
   // Small white webbing risers and metal rings use the same moving anchors.
   if(!lines.userData.risers) {
@@ -78,7 +122,7 @@ export function updateSuspension(lines:T.LineSegments, body:T.Object3D, wing:T.O
   const segment=(a:T.Vector3,b:T.Vector3)=>points.push(a,b);
   for(const side of [-1,1]) {
     const bolt=body.localToWorld(hinge.clone().add(new T.Vector3(0,side*halfSpacing,0)));
-    const aim=wing.localToWorld(canopyPoint(side*.45,.4,shape));
+    const aim=wing.localToWorld(point(side*.45,.4));
     const riser=bolt.clone().add(aim.clone().sub(bolt).normalize().multiplyScalar(.06));
     const detail=lines.userData.risers[side<0?0:1];
     detail.strap.position.copy(bolt).lerp(riser,.5);
@@ -86,17 +130,17 @@ export function updateSuspension(lines:T.LineSegments, body:T.Object3D, wing:T.O
     detail.ring.position.copy(riser);detail.ring.quaternion.copy(body.quaternion);
     segment(bolt,riser);
     for(const u of [.18,.5,.78]) for(const band of [0,1]) {
-      const center=wing.localToWorld(canopyPoint(side*(.23+.49*band),u,shape));
+      const center=wing.localToWorld(point(side*(.23+.49*band),u));
       const cascade=riser.clone().lerp(center,.58);
       segment(riser,cascade);
-      for(let k=0;k<5;k++) segment(cascade,wing.localToWorld(canopyPoint(side*(.04+.48*band+.095*k),u,shape)));
+      for(let k=0;k<5;k++) segment(cascade,wing.localToWorld(point(side*(.04+.48*band+.095*k),u)));
     }
     // Brake guide -> moving riser ring -> trailing-edge fan (nominal routing).
     const guide=body.localToWorld(hinge.clone().add(new T.Vector3(-.0225,side*.0455,0)));
     segment(guide,riser);
-    const brakeJunction=riser.clone().lerp(wing.localToWorld(canopyPoint(side*.65,1,shape)),.62);
+    const brakeJunction=riser.clone().lerp(wing.localToWorld(point(side*.65,1)),.62);
     segment(riser,brakeJunction);
-    for(const eta of [.2,.4,.6,.8,.98])segment(brakeJunction,wing.localToWorld(canopyPoint(side*eta,1,shape)));
+    for(const eta of [.2,.4,.6,.8,.98])segment(brakeJunction,wing.localToWorld(point(side*eta,1)));
   }
   const flat=points.flatMap(p=>p.toArray());
   let attr=lines.geometry.getAttribute('position') as T.BufferAttribute|undefined;

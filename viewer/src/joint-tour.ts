@@ -1,4 +1,4 @@
-import {canopyGeometry, canopyMaterial, updateSuspension} from './paraglider';
+import {canopyGeometry, canopyMaterial, poseCanopyBrakes, updateSuspension} from './paraglider';
 import * as T from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
@@ -327,7 +327,8 @@ async function main() {
     );
     axisArrow.position.copy(joint.position);
     axisArrow.visible = tour;
-    updateSuspension(lines,payload,wing,{},.066,hp);
+    updateSuspension(lines,payload,wing,{},.066,hp,f.brake_mm);
+    poseCanopyBrakes(ghost,base.brake_mm);
     let rotorPhase = 0;
     for (let i = 1; i < c.frames.length && c.frames[i - 1].time_s < t; i++) {
       const a = c.frames[i - 1],

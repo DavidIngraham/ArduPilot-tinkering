@@ -458,3 +458,19 @@ telemetry plots, ground track and distance/altitude profile. No new simulation i
 run in the browser. `pitch-fbd.html` remains an explicitly illustrative animation.
 The real-flight replay links load the original converted flight logs, with
 buttons for the full overview and the previously featured excerpts.
+
+### Brake-driven fabric deformation
+
+The simulated replays bend the existing aft 40% of the canopy mesh using the
+recorded absolute effective left/right brake pull in millimetres (negative body
+Y is left). Upper/lower skins and cell ribs deform together; no separate flap,
+hinge, or control surface is added. Deformation begins with zero displacement
+and slope at 60% chord and blends across the central 12% of each half span.
+The nominal visual rule is 1 mm local downward trailing-edge displacement per
+1 mm effective pull, with a small forward curl. Inputs are bounded to 0–80 mm
+for rendering, and missing/nonfinite values remain neutral. This is an
+illustrative shape rule, not a measured fabric response or added aerodynamics.
+GPU position/normal morph targets avoid rebuilding geometry each frame; the
+line fan uses the identical deformation so its endpoints stay attached.
+Neutral explanatory animations and measured-flight replays do not invent brake
+or canopy motion. Joint-tour ghosts retain their reference brake setting.

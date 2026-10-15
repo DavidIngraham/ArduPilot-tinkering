@@ -57,7 +57,7 @@ async function main(){
    // Each camera follows its payload; the grid retains earth-fixed altitude and translation.
    v.grid.position.set(-p.x,-3-p.y,-p.z);
    if(v.rig)poseMechanisms(v.rig,v.phases[n]+(v.phases[n+1]-v.phases[n])*f,r.slice(30,32),v.rows[0].slice(30,32));
-   updateSuspension(v.lines,v.body,v.wing);
+   updateSuspension(v.lines,v.body,v.wing,{},.066,undefined,r.slice(30,32));
    renderer.setViewport(i*w/2,0,w/2,h);renderer.setScissor(i*w/2,0,w/2,h);renderer.render(v.scene,camera);
   });
   ctx.fillStyle='#102330';ctx.fillRect(0,0,1280,1570);ctx.drawImage(renderer.domElement,0,0);

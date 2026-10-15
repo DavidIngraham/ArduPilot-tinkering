@@ -178,7 +178,7 @@ function draw(t: number, slow = false) {
       tracks[i][0].brake_mm,
     );
     s.canopy.position.copy(position(f.state.slice(13,16)).sub(nominal));s.canopy.quaternion.copy(orientation(f.state.slice(16,20)));
-    updateSuspension(s.lines,s.body,s.canopy);
+    updateSuspension(s.lines,s.body,s.canopy,{},.066,undefined,f.brake_mm);
     s.camera.position.copy(orbitCamera.position);s.camera.quaternion.copy(orbitCamera.quaternion);
     s.ref.position.set(-0.5, -0.22, 0);
     const points = tracks[i]
