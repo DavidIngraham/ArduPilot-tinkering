@@ -1,0 +1,370 @@
+{
+  "checks": [
+    {
+      "flight": "hood_river",
+      "variant": "fixed",
+      "baseline_state_max": 0.0,
+      "trim_step_max": 0.0,
+      "frozen_load_error": 0.0,
+      "frozen_derivative_error": 0.0,
+      "reference_load": 11.45908837625244
+    },
+    {
+      "flight": "hood_river",
+      "variant": "yaw",
+      "baseline_state_max": 0.0,
+      "trim_step_max": 0.0,
+      "frozen_load_error": 0.0,
+      "frozen_derivative_error": 7.632783294297951e-10,
+      "reference_load": 11.45908837625244
+    },
+    {
+      "flight": "hood_river",
+      "variant": "roll",
+      "baseline_state_max": 0.0,
+      "trim_step_max": 0.0,
+      "frozen_load_error": 1.7763568394002505e-15,
+      "frozen_derivative_error": 4.5102810375396984e-10,
+      "reference_load": 11.45908837625244
+    },
+    {
+      "flight": "hood_river",
+      "variant": "both",
+      "baseline_state_max": 0.0,
+      "trim_step_max": 0.0,
+      "frozen_load_error": 1.7763568394002505e-15,
+      "frozen_derivative_error": 2.220446049250313e-09,
+      "reference_load": 11.45908837625244
+    },
+    {
+      "flight": "hood_river",
+      "variant": "half",
+      "baseline_state_max": 0.0,
+      "trim_step_max": 0.0,
+      "frozen_load_error": 0.0,
+      "frozen_derivative_error": 3.469446951953614e-10,
+      "reference_load": 11.45908837625244
+    },
+    {
+      "flight": "trout_lake",
+      "variant": "fixed",
+      "baseline_state_max": 0.0,
+      "trim_step_max": 0.0,
+      "frozen_load_error": 0.0,
+      "frozen_derivative_error": 0.0,
+      "reference_load": 15.3522526060806
+    },
+    {
+      "flight": "trout_lake",
+      "variant": "yaw",
+      "baseline_state_max": 0.0,
+      "trim_step_max": 0.0,
+      "frozen_load_error": 1.7763568394002505e-15,
+      "frozen_derivative_error": 1.3877787807814457e-10,
+      "reference_load": 15.3522526060806
+    },
+    {
+      "flight": "trout_lake",
+      "variant": "roll",
+      "baseline_state_max": 0.0,
+      "trim_step_max": 0.0,
+      "frozen_load_error": 1.7763568394002505e-15,
+      "frozen_derivative_error": 3.469446951953614e-11,
+      "reference_load": 15.3522526060806
+    },
+    {
+      "flight": "trout_lake",
+      "variant": "both",
+      "baseline_state_max": 0.0,
+      "trim_step_max": 0.0,
+      "frozen_load_error": 1.7763568394002505e-15,
+      "frozen_derivative_error": 3.469446951953614e-11,
+      "reference_load": 15.3522526060806
+    },
+    {
+      "flight": "trout_lake",
+      "variant": "half",
+      "baseline_state_max": 0.0,
+      "trim_step_max": 0.0,
+      "frozen_load_error": 1.7763568394002505e-15,
+      "frozen_derivative_error": 0.0,
+      "reference_load": 15.3522526060806
+    }
+  ],
+  "flight_refinement": [
+    {
+      "flight": "hood_river",
+      "start": 1020,
+      "alpha": 0.35,
+      "variant": "fixed",
+      "substeps": 64,
+      "valid_fraction": 1.0,
+      "finite": true,
+      "metrics": {
+        "roll_rate": 36.83687404335142,
+        "pitch_rate": 29.843570844871333,
+        "yaw_rate": 37.304567041397675,
+        "bank": 6.0008376836248765,
+        "course": 55.07718076759747,
+        "climb": 0.29369281377183987
+      },
+      "load_quantiles": [
+        0.8068275489838339,
+        0.8731229158090648,
+        0.9991557565437872,
+        1.1163091476322586,
+        1.7742770843453743
+      ],
+      "scale_quantiles": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "clipped_fraction": 0.0,
+      "closure_max": 0.7742770843453743,
+      "constraint_max": 1.2668966209423968e-13,
+      "denominator_min": 1.0
+    },
+    {
+      "flight": "hood_river",
+      "start": 1020,
+      "alpha": 0.35,
+      "variant": "both",
+      "substeps": 64,
+      "valid_fraction": 1.0,
+      "finite": true,
+      "metrics": {
+        "roll_rate": 36.31348764910328,
+        "pitch_rate": 30.815417874191642,
+        "yaw_rate": 37.00483212921629,
+        "bank": 5.9673540107667415,
+        "course": 51.49097259069786,
+        "climb": 0.2941368262161681
+      },
+      "load_quantiles": [
+        0.8050641915655508,
+        0.874297974525048,
+        0.9992445852083206,
+        1.1165214851395935,
+        1.7696374287567005
+      ],
+      "scale_quantiles": [
+        0.8050641915655506,
+        0.8742979745250481,
+        0.9992445852083205,
+        1.1165214851395935,
+        1.7696374287567003
+      ],
+      "clipped_fraction": 0.0,
+      "closure_max": 2.220446049250313e-16,
+      "constraint_max": 1.6055652448456925e-13,
+      "denominator_min": 0.9999828426810234
+    },
+    {
+      "flight": "trout_lake",
+      "start": 900,
+      "alpha": 0.35,
+      "variant": "fixed",
+      "substeps": 64,
+      "valid_fraction": 1.0,
+      "finite": true,
+      "metrics": {
+        "roll_rate": 19.767947964260127,
+        "pitch_rate": 31.214246301747632,
+        "yaw_rate": 39.76886993108018,
+        "bank": 8.187113466215838,
+        "course": 105.29294324388896,
+        "climb": 0.6460183908059863
+      },
+      "load_quantiles": [
+        0.5197987267935493,
+        0.8141796860175299,
+        0.9916079825757962,
+        1.3145229948709494,
+        1.7255460455299647
+      ],
+      "scale_quantiles": [
+        1.0,
+        1.0,
+        1.0,
+        1.0,
+        1.0
+      ],
+      "clipped_fraction": 0.0,
+      "closure_max": 0.7255460455299647,
+      "constraint_max": 1.8866280408202578e-13,
+      "denominator_min": 1.0
+    },
+    {
+      "flight": "trout_lake",
+      "start": 900,
+      "alpha": 0.35,
+      "variant": "both",
+      "substeps": 64,
+      "valid_fraction": 1.0,
+      "finite": true,
+      "metrics": {
+        "roll_rate": 19.867430362517403,
+        "pitch_rate": 31.262608508206586,
+        "yaw_rate": 41.02953779660251,
+        "bank": 8.127609360239859,
+        "course": 105.06502545096212,
+        "climb": 0.6445780093426078
+      },
+      "load_quantiles": [
+        0.5320106624181907,
+        0.8169090131601613,
+        0.9916670698077462,
+        1.3167017735811188,
+        1.725889412900385
+      ],
+      "scale_quantiles": [
+        0.5320106624181906,
+        0.8169090131601613,
+        0.9916670698077463,
+        1.3167017735811188,
+        1.7258894129003848
+      ],
+      "clipped_fraction": 0.0,
+      "closure_max": 4.440892098500626e-16,
+      "constraint_max": 2.9004959018186487e-13,
+      "denominator_min": 0.9998837822030908
+    }
+  ],
+  "controller_refinement": [
+    {
+      "case": "strong_gust",
+      "controller": "baseline",
+      "height_rms": 0.592068805757686,
+      "height_iae": 30.97014833344531,
+      "heading_rms": 10.480868856910478,
+      "pitch_rms": 22.475989958875136,
+      "pitch_peak": 52.005054303734234,
+      "throttle_std": 0.04112067715777656,
+      "brake_std": 0.04844756854186185,
+      "limited_fraction": 0.922177791448785,
+      "ceiling_fraction": 0.0,
+      "minimum_headroom": 0.05560344543736273,
+      "tail_height_rms": 0.7207159742866135,
+      "speed_min": 3.194713152037759,
+      "speed_max": 5.767897064106917,
+      "finite": true,
+      "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+      "sensing": "truth state and airspeed",
+      "variant": "fixed",
+      "substeps": 32,
+      "load_quantiles": [
+        0.7913339046581517,
+        0.8426987758204741,
+        0.9954012621566445,
+        1.256884218367134,
+        1.37384750550127
+      ],
+      "clipped_fraction": 0.0,
+      "closure_max": 0.37384750550127,
+      "constraint_max": 2.506245290668722e-13,
+      "denominator_min": 1.0
+    },
+    {
+      "case": "strong_gust",
+      "controller": "baseline",
+      "height_rms": 0.5923984044511625,
+      "height_iae": 31.00499511222192,
+      "heading_rms": 10.699866772278469,
+      "pitch_rms": 22.574286334055405,
+      "pitch_peak": 52.94129232567397,
+      "throttle_std": 0.041154418180641736,
+      "brake_std": 0.0493612022329049,
+      "limited_fraction": 0.9144878498923408,
+      "ceiling_fraction": 0.0,
+      "minimum_headroom": 0.05512667937658133,
+      "tail_height_rms": 0.722109507677761,
+      "speed_min": 3.1924184865634126,
+      "speed_max": 5.766069880534689,
+      "finite": true,
+      "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+      "sensing": "truth state and airspeed",
+      "variant": "both",
+      "substeps": 32,
+      "load_quantiles": [
+        0.7919048589497072,
+        0.8426292132934238,
+        0.995508773072528,
+        1.2571155595349215,
+        1.3740251137610977
+      ],
+      "clipped_fraction": 0.0,
+      "closure_max": 4.440892098500626e-16,
+      "constraint_max": 3.6987200075942547e-13,
+      "denominator_min": 0.999972969623219
+    },
+    {
+      "case": "limits_recovery",
+      "controller": "baseline",
+      "height_rms": 0.5622805736573733,
+      "height_iae": 36.2323804508604,
+      "heading_rms": 7.4182790430347705,
+      "pitch_rms": 14.170278177586173,
+      "pitch_peak": 93.56686262058722,
+      "throttle_std": 0.060266596010421725,
+      "brake_std": 0.06076812075785218,
+      "limited_fraction": 0.566515595841109,
+      "ceiling_fraction": 0.0,
+      "minimum_headroom": 0.007818156669429532,
+      "tail_height_rms": 0.3682471297888529,
+      "speed_min": 2.9151902090719934,
+      "speed_max": 5.137096154410592,
+      "finite": true,
+      "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+      "sensing": "truth state and airspeed",
+      "variant": "fixed",
+      "substeps": 32,
+      "load_quantiles": [
+        0.7459021021738291,
+        0.898811573863908,
+        0.999562991971981,
+        1.1298563311238756,
+        1.174907947794402
+      ],
+      "clipped_fraction": 0.0,
+      "closure_max": 0.25409789782617087,
+      "constraint_max": 2.7488919595826193e-13,
+      "denominator_min": 1.0
+    },
+    {
+      "case": "limits_recovery",
+      "controller": "baseline",
+      "height_rms": 0.5631617555123504,
+      "height_iae": 36.3163598099544,
+      "heading_rms": 7.670888779131962,
+      "pitch_rms": 14.178982921977708,
+      "pitch_peak": 88.68681478311238,
+      "throttle_std": 0.06023720902954816,
+      "brake_std": 0.061759818529139,
+      "limited_fraction": 0.5659824046920822,
+      "ceiling_fraction": 0.0,
+      "minimum_headroom": 0.005949627401280688,
+      "tail_height_rms": 0.3696417723312465,
+      "speed_min": 2.917210691577067,
+      "speed_max": 5.144407208063673,
+      "finite": true,
+      "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+      "sensing": "truth state and airspeed",
+      "variant": "both",
+      "substeps": 32,
+      "load_quantiles": [
+        0.7473394874506107,
+        0.8988331214354228,
+        0.9995596040214328,
+        1.1301008526865648,
+        1.176890703133018
+      ],
+      "clipped_fraction": 0.0,
+      "closure_max": 4.440892098500626e-16,
+      "constraint_max": 2.410137716800943e-13,
+      "denominator_min": 0.9999812613304652
+    }
+  ]
+}

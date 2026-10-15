@@ -1,0 +1,34 @@
+--- original/dynamics.cpp
++++ experiment/dynamics.cpp
+@@ -26,0 +27 @@
++thread_local double load_diag[8]={};
+@@ -64,0 +66,19 @@
++
++ // Sensitivity model: scale only nominated geometric spring components.
++ // T is tension along canopy-to-attachment direction, NOT |J| or load factor.
++ V axis=rc.normalized(); double Tbase=-axis.dot(J),Tref=p[62];
++ V geom=Rp*Jinv.transpose()*V(p[60]*p[21]*err.x(),0,p[61]*p[23]*err.z());
++ V6 gp=V6::Zero(),gc=V6::Zero();gp.tail<3>()=geom;gc.tail<3>()=-geom;
++ V6 dp=Hpi*gp,dc=Hci*gc;
++ V dJ=A.ldlt().solve(-(Gp*dp-Gc*dc));double dT=-axis.dot(dJ);
++ double denominator=Tref-dT,raw=1.,scale=1.;
++ if(p[60]!=0 || p[61]!=0){
++   if(Tref<=0 || denominator<=1e-6*Tref)return State::Constant(NAN);
++   raw=(Tbase-dT)/denominator;scale=std::clamp(raw,.25,2.);
++   cp+=(scale-1)*dp;cc+=(scale-1)*dc;J+=(scale-1)*dJ;
++ }
++ double tension=-axis.dot(J);
++ load_diag[0]=tension;load_diag[1]=Tref;load_diag[2]=scale;load_diag[3]=raw;
++ load_diag[4]=denominator/Tref;load_diag[5]=J.norm();
++ load_diag[6]=scale-std::clamp(tension/Tref,.25,2.);
++ load_diag[7]=(Gp*(cp+Hpi*Gp.transpose()*J)+wp.cross(wp.cross(rp))-Gc*(cc-Hci*Gc.transpose()*J)-wc.cross(wc.cross(rc))).norm();
+@@ -111,0 +132,9 @@
++
++extern "C" void tension_diagnostic(const double*y,const double*u,const double*p,double mass,const double*w,double rpm,double voltage,double*out){
++ State z=Eigen::Map<const State>(y);V wind=Eigen::Map<const V>(w);
++ double target=743.5778222336925*voltage*pow(std::max(u[0]-.0005141016498671315,0.),.9086807307118114);
++ double axial=(rot(z,0).transpose()*(z.segment<3>(7)-wind)).x();
++ double input[3]={thrust(rpm,axial)/p[18],u[1],u[2]};
++ rhs(z,input,p,mass,wind,rpm,(target-rpm)/.01756125311487475,torque(rpm,axial));
++ for(int i=0;i<8;i++)out[i]=load_diag[i];
++}
