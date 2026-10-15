@@ -12,6 +12,7 @@ test('effective span, reflection symmetry and finite normals survive geometry va
   assert.ok(Math.abs(span-2.15/halfArc*Math.sin(halfArc))<1e-10);
   const g=canopyGeometry(shape);
   for(const key of ['position','normal'])assert.ok(Array.from(g.getAttribute(key).array).every(Number.isFinite));
+  assert.ok(g.getAttribute('normal').getZ(13*294+52)<0, 'upper crown normal points up in FRD');
   g.dispose();
  }
  assert.throws(()=>canopyGeometry({halfArc:0}));

@@ -41,7 +41,7 @@ export function canopyGeometry(shape: CanopyShape = {}) {
         const color=panel.clone().multiplyScalar(seam?.65:upper?1:.82);
         add(canopyPoint(eta,u,shape,upper,Math.sin(Math.PI*j/across)),color);
         if(j<across&&k<along){const a=base+j*(along+1)+k,b=a+along+1;
-          if(upper)indices.push(a,b,a+1,a+1,b,b+1);else indices.push(a,a+1,b,a+1,b+1,b);
+          if(upper)indices.push(a,a+1,b,a+1,b+1,b);else indices.push(a,b,a+1,a+1,b,b+1);
         }
       }
     }
