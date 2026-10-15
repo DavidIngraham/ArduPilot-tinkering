@@ -33,6 +33,7 @@ test('brakes smoothly curl only the aft fabric, with correct left/right mapping'
  assert.deepEqual(brakeInfluences(null),[0,0]);assert.deepEqual(brakeInfluences([NaN,-20]),[0,0]);assert.deepEqual(brakeInfluences([160,40]),[1,.5]);
  for(const eta of [-.8,0,.8])for(const u of [0,.3,.6])assert.equal(brakeOffset(eta,u,{},[80,80]).length(),0);
  const left=brakeOffset(-.6,1,{},[40,0]),right=brakeOffset(.6,1,{},[0,40]);
+ assert.ok(Math.abs(Math.hypot(left.y,left.z)-.1)<1e-12,'40 mm brake gives 100 mm illustrative edge travel');
  assert.ok(left.z>0&&left.x>0&&left.y>0);assert.ok(Math.abs(left.z-right.z)<1e-12&&Math.abs(left.y+right.y)<1e-12);
  assert.equal(brakeOffset(.6,1,{},[80,0]).length(),0);
  assert.ok(brakeOffset(-.6,.600001,{},[80,0]).length()<1e-10,'no crease at onset');

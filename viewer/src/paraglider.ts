@@ -32,9 +32,9 @@ export function brakeOffset(eta:number,u:number,shape:CanopyShape={},brakes:read
   // No hinge: zero displacement AND zero slope where the aft 40% begins.
   const aft=T.MathUtils.clamp((u-.6)/.4,0,1);
   const rightWeight=T.MathUtils.smoothstep(eta,-.12,.12);
-  const pull=.08*(left*(1-rightWeight)+right*rightWeight);
+  const pull=.20*(left*(1-rightWeight)+right*rightWeight);
   const angle=eta*(shape.halfArc??defaults.halfArc);
-  // One mm pull -> one mm nominal local downward travel at the trailing edge.
+  // 2.5x visual gain makes brake motion readable at the applets' overview scale.
   // A small forward curl shortens the chord; this is not a line/fabric solver.
   return new T.Vector3(.35*pull*aft**3,-Math.sin(angle)*pull*aft*aft,Math.cos(angle)*pull*aft*aft);
 }
@@ -97,7 +97,7 @@ export function canopyGeometry(shape: CanopyShape = {}) {
     const result={position:target.getAttribute('position').clone(),normal:target.getAttribute('normal').clone()};target.dispose();return result;
   });
   g.morphAttributes.position=targets.map(t=>t.position);g.morphAttributes.normal=targets.map(t=>t.normal);
-  g.userData.brakeMorph=true;g.computeBoundingSphere();g.boundingSphere!.radius+=.1;
+  g.userData.brakeMorph=true;g.computeBoundingSphere();g.boundingSphere!.radius+=.25;
   return g;
 }
 export function canopyMaterial() {return new T.MeshStandardMaterial({vertexColors:true,side:T.DoubleSide,roughness:.92});}
