@@ -10,16 +10,123 @@ These are results from the articulated simulator, followed by separate native-co
 
 ## The model behind the study
 
-The sampled state model is
+The sampled perturbation model is
 
-```text
-x[k+1] = A x[k] + B u[k] + E wind[k]
-y[k]   = C x[k]
-```
+$$
+\begin{aligned}
+\delta x_{k+1} &= A_d\delta x_k+B_d\delta u_k+E_d\delta w_k,\\
+\delta y_k &= C\delta x_k.
+\end{aligned}
+$$
 
 Here the inputs are throttle and differential brake. The state includes payload attitude, relative canopy attitude, both bodies’ angular rates, velocity, rotor speed and altitude.
 
 This study extends the earlier Jacobian, modal, LQI and observability work with joint tuning of the current loops, combined uncertainty testing, finite-horizon actuator/sensor diagnostics, and a new full-state benchmark on the current plant.
+
+### Deriving the linearized matrices
+
+The starting point is the nonlinear simulator's advance over one 20 ms sample, with commands and wind held during that interval:
+
+$$
+x_{k+1}=F(x_k,u_k,w_k),\qquad y_k=H(x_k).
+$$
+
+First solve for a trimmed flight condition. In straight level flight, attitude, velocity and rotor speed stay constant. For a steady climb or descent, height is measured relative to the nominal trajectory:
+
+$$
+\delta h_k=h_k-\bar h_k,\qquad
+\bar h_{k+1}=\bar h_k+\bar v_{\mathrm{climb}}\Delta t.
+$$
+
+This makes steady climbing flight an equilibrium in the perturbation coordinates too. Bars denote nominal values; deviations are $\delta x=x-\bar x$, $\delta u=u-\bar u$ and $\delta w=w-\bar w$. For orientations, subtraction means the local angular coordinates described below, rather than subtracting quaternion components.
+
+Expand the advance map about trim and keep its first-order terms:
+
+$$
+\begin{aligned}
+F(\bar x+\delta x,\bar u+\delta u,\bar w+\delta w)
+&\approx F(\bar x,\bar u,\bar w)\\
+&\quad+F_x\delta x+F_u\delta u+F_w\delta w.
+\end{aligned}
+$$
+
+Subtracting the nominal advance gives the sampled perturbation model above, with
+
+$$
+\begin{aligned}
+A_d&=\left.\frac{\partial F}{\partial x}\right|_{\mathrm{trim}},&
+B_d&=\left.\frac{\partial F}{\partial u}\right|_{\mathrm{trim}},\\
+E_d&=\left.\frac{\partial F}{\partial w}\right|_{\mathrm{trim}},&
+C&=\left.\frac{\partial H}{\partial x}\right|_{\mathrm{trim}}.
+\end{aligned}
+$$
+
+The outputs depend on the current state, so this measurement model has no direct command-feedthrough term: $D=0$.
+
+### Building one column at a time
+
+The implementation evaluates these derivatives with central finite differences. Let $e_j$ select coordinate $j$, and let $\widetilde F$ denote the advance map expressed in local perturbation coordinates, with the nominal climb removed. Trim is then the origin:
+
+$$
+\begin{aligned}
+A_d[:,j]&\approx\frac{\widetilde F(\epsilon e_j,0,0)-\widetilde F(-\epsilon e_j,0,0)}{2\epsilon},\\
+B_d[:,j]&\approx\frac{\widetilde F(0,\epsilon e_j,0)-\widetilde F(0,-\epsilon e_j,0)}{2\epsilon},\\
+E_d[:,j]&\approx\frac{\widetilde F(0,0,\epsilon e_j)-\widetilde F(0,0,-\epsilon e_j)}{2\epsilon},\\
+C[:,j]&\approx\frac{\widetilde H(\epsilon e_j)-\widetilde H(-\epsilon e_j)}{2\epsilon}.
+\end{aligned}
+$$
+
+For example, the payload pitch-rate column of $A_d$ comes from two runs: start at trim with pitch rate increased by $\epsilon$, advance 20 ms, then repeat with pitch rate decreased by $\epsilon$. Subtract the resulting state vectors and divide by $2\epsilon$. That column describes how the initial pitch-rate perturbation changes every state one sample later.
+
+The actual 16-state ordering is
+
+$$
+\delta x=\begin{bmatrix}
+\delta\phi_p\\ \delta\theta_p\\
+\delta\alpha_{\mathrm{rel}}\\ \delta\beta_{\mathrm{rel}}\\ \delta\gamma_{\mathrm{rel}}\\
+\delta\boldsymbol v_p\\
+\delta\boldsymbol\omega_p\\
+\delta\boldsymbol\omega_c\\
+\delta\mathrm{RPM}/1000\\ \delta h
+\end{bmatrix}.
+$$
+
+Here $p$ and $c$ identify payload and canopy. Each bold velocity or angular-rate entry contains three components. Relative attitude uses a local rotation vector; payload velocity is expressed in payload axes, and each body's angular velocity is expressed in its own axes. The code reconstructs canopy position and velocity to preserve the suspension-joint constraints. Independently perturbing every raw position or quaternion component would not preserve those constraints.
+
+| Matrix | Dimensions | Meaning |
+|---|---|---|
+| $A_d$ | $16\times16$ | State-to-next-state response |
+| $B_d$ | $16\times2$ | Throttle and differential-brake response |
+| $E_d$ | $16\times3$ | Response to three wind components |
+| $C$ | $6\times16$ | State-to-measurement response |
+
+The six measurement outputs are climb rate, payload pitch rate, relative pitch rate, heading rate, payload roll rate and height. The output matrix includes coordinate transformations, not just state selection. For example, heading rate is
+
+$$
+\dot\psi=\frac{q\sin\phi+r\cos\phi}{\cos\theta}.
+$$
+
+Its row of $C$ therefore differentiates this expression at trim, including the implementation's conversion to degrees per second. It is not simply a selector for body yaw rate $r$.
+
+### Why these are already discrete-time matrices
+
+The differentiated map includes the full 20 ms advance, its 16 integration substeps and the rotor dynamics. No additional discretization is applied to these matrices. An alternative would be to linearize the continuous dynamics first,
+
+$$
+\delta\dot x=A_c\delta x+B_c\delta u+E_c\delta w,
+$$
+
+and then discretize the fixed linear model with held inputs:
+
+$$
+\begin{aligned}
+A_d&=e^{A_c\Delta t},\\
+B_d&=\int_0^{\Delta t}e^{A_c\tau}B_c\,d\tau,\\
+E_d&=\int_0^{\Delta t}e^{A_c\tau}E_c\,d\tau.
+\end{aligned}
+$$
+
+This study instead differentiates the integrated simulator directly. It uses $\epsilon=10^{-5}$ in each coordinate's units and repeats the calculation with $\epsilon/2$ to check sensitivity to the finite-difference step. The implementation is in `Chart`, `observations` and `prepare` in [study.py](../research/state-space-2026-10-14/study.py); the numerical and nonlinear checks follow below.
 
 ## Make the comparison use the current controller
 
