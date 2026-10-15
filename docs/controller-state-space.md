@@ -8,9 +8,7 @@ We jointly tuned the existing steering and altitude controller, examined how its
 
 These are results from the articulated simulator, followed by separate native-controller checks. They are not new flight measurements.
 
-## Two views of the same linear aircraft
-
-“Linear versus state space” is an easy shorthand, but it can suggest the wrong comparison. Both analyses here are linear. The distinction is between looking at input/output responses and looking explicitly at the internal states that produce them.
+## The model behind the study
 
 The sampled state model is
 
@@ -19,15 +17,9 @@ x[k+1] = A x[k] + B u[k] + E wind[k]
 y[k]   = C x[k]
 ```
 
-Here the inputs are throttle and differential brake. The state includes payload attitude, relative canopy attitude, both bodies’ angular rates, velocity, rotor speed and altitude. The same model gives the transfer matrix
+Here the inputs are throttle and differential brake. The state includes payload attitude, relative canopy attitude, both bodies’ angular rates, velocity, rotor speed and altitude.
 
-```text
-G(z) = C (zI − A)⁻¹ B
-```
-
-A Bode plot and a state-space simulation therefore must agree when they describe the same plant, controller and sampling. We checked that directly: independently assembling the feedback return matrix and solving the augmented closed-loop states agreed to within **7 × 10⁻¹⁴** in the sampled frequency sweep. That is an algebra and implementation check, not validation of the aircraft model.
-
-State space was already present in the earlier work. The original classical analysis used numerical Jacobians and modal participation; the earlier pitch-joint experiments also tried LQI and assessed observability. What is new here is the joint tuning of the current loops, combined uncertainty testing, finite-horizon actuator/sensor diagnostics, and a new full-state benchmark on the current plant.
+This study extends the earlier Jacobian, modal, LQI and observability work with joint tuning of the current loops, combined uncertainty testing, finite-horizon actuator/sensor diagnostics, and a new full-state benchmark on the current plant.
 
 ## Make the comparison use the current controller
 
@@ -208,8 +200,6 @@ The candidate therefore remains an experimental alternative. Lower settled heigh
 | Would more sensors unlock useful information? | Finite-horizon observability | Navigation already reveals the nominal plant; canopy gyros improve conditioning, while model/bias uncertainty remains unresolved. |
 | Can an initially disturbed aircraft move sharply despite stable poles? | Initial-state response | A fast relative-roll release remains even after the sensitivity peak is reduced. |
 | Does more state feedback improve flight behavior? | Full-state synthesis plus nonlinear tests | It can soften the commanded climb while worsening gust response and turn tracking. |
-
-These are complementary ways to interrogate the same equations. The state-space results do not contradict the transfer functions. Much of the extra information could also be expressed through a sufficiently complete set of transfer matrices; retaining explicit physical states makes the questions easier to formulate and interpret.
 
 For Micro-AGU, I would keep the current defaults, retain the conventional candidate for further comparisons, and use the state analysis to focus the next experiments. The highest-value follow-up is to identify the coupled dynamics and delays that matter around the response peaks, then refine the tuning objective around the motion we actually want to reduce. The full-state results justify targeted work on gentler maneuver response, rather than assuming that a more elaborate controller will improve every aspect of flight.
 
