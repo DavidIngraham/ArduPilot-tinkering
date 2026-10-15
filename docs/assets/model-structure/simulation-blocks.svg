@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 850" role="img" aria-labelledby="title desc"><title id="title">How one simulation step is assembled</title><desc id="desc">Commands become brake travel and rotor loads. Aerodynamic, gravity and joint loads enter a constrained two-body solve. Integration updates both bodies; payload measurements close the controller loop.</desc>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto-start-reverse"><path d="M0 0L8 4L0 8Z" fill="context-stroke"/></marker></defs>
+<style>text{font-family:Arial,sans-serif;fill:#213c4a;font-size:19px}.title{font-size:29px;font-weight:bold}.head{font-size:20px;font-weight:bold}.small{font-size:17px}.box{fill:#fff;stroke:#9bb2bd;stroke-width:2}.link{fill:none;stroke:#536f80;stroke-width:2.5;marker-end:url(#arrow)}.force{fill:none;stroke:#c56a2e;stroke-width:3;marker-end:url(#arrow)}.joint{fill:none;stroke:#237f78;stroke-width:3;marker-end:url(#arrow)}.ghost{fill:none;stroke:#9bb2bd;stroke-width:2;stroke-dasharray:6 5}</style>
+<rect width="1200" height="850" fill="#f5f8fa"/>
+<text x="32" y="45" class="title">One aircraft model, two ways to drive it</text>
+<text x="32" y="79" class="">Recorded commands for replay, or live commands from a controller / native ArduPilot SITL.</text>
+<rect x="30" y="125" width="290" height="120" rx="10" class="box"/>
+<text x="48" y="157" class="head">1 · Commands &amp; actuators</text>
+<text x="48" y="187" class="small">Throttle + left/right PWM or pull</text>
+<text x="48" y="211" class="small">Asymmetric mapping, limits, rate</text>
+<text x="48" y="235" class="small">Slack / preload → effective pull</text>
+<rect x="410" y="125" width="350" height="125" rx="10" class="box"/>
+<text x="428" y="157" class="head">2a · Canopy aerodynamics</text>
+<text x="428" y="187" class="small">Five curved rigid panels</text>
+<text x="428" y="211" class="small">Local airflow + rotation + brakes</text>
+<text x="428" y="235" class="small">Sum panel forces and moments</text>
+<rect x="410" y="280" width="350" height="125" rx="10" class="box"/>
+<text x="428" y="312" class="head">2b · Payload &amp; propulsion</text>
+<text x="428" y="342" class="small">Payload drag + thrust at motor</text>
+<text x="428" y="366" class="small">Voltage → RPM lag → prop map</text>
+<text x="428" y="390" class="small">Shaft torque + rotor momentum</text>
+<rect x="410" y="435" width="350" height="105" rx="10" class="box"/>
+<text x="428" y="467" class="head">2c · Coupling &amp; gravity</text>
+<text x="428" y="497" class="small">Weights of both bodies</text>
+<text x="428" y="521" class="small">Relative-rotation spring/damper</text>
+<path d="M320 175H410" class="link"/>
+<path d="M350 175V330H410" class="link"/>
+<text x="30" y="325" class="head">Environment / configuration</text>
+<text x="30" y="358" class="">Wind → relative airflow</text>
+<text x="30" y="385" class="">Voltage → motor speed</text>
+<text x="30" y="412" class="">Mass, inertia, geometry</text>
+<text x="30" y="439" class="">Mission / softer-roll profile</text>
+<path d="M300 385H370V220H410" class="link"/>
+<path d="M370 385H410" class="link"/>
+<path d="M300 420H350V490H410" class="link"/>
+<rect x="840" y="235" width="330" height="240" rx="10" class="box"/>
+<text x="858" y="267" class="head">3 · Coupled acceleration solve</text>
+<text x="858" y="297" class="small">Payload inertia</text>
+<text x="858" y="321" class="small">Canopy + air added inertia</text>
+<text x="858" y="345" class="small">Point-joint reaction force J</text>
+<text x="858" y="369" class="small">Equal attachment acceleration</text>
+<text x="858" y="393" class="small">→ both bodies’ linear and</text>
+<text x="858" y="417" class="small">   angular accelerations</text>
+<path d="M760 188H800V280H840" class="link"/>
+<path d="M760 343H840" class="link"/>
+<path d="M760 488H800V430H840" class="link"/>
+<rect x="840" y="565" width="330" height="145" rx="10" class="box"/>
+<text x="858" y="597" class="head">4 · Integrate &amp; retain states</text>
+<text x="858" y="627" class="small">RK4 substeps; normalize attitudes</text>
+<text x="858" y="651" class="small">Position, velocity, quaternion,</text>
+<text x="858" y="675" class="small">angular velocity for each body</text>
+<text x="858" y="699" class="small">Plus rotor RPM and brake memory</text>
+<path d="M1005 475V565" class="link"/>
+<rect x="410" y="595" width="350" height="115" rx="10" class="box"/>
+<text x="428" y="627" class="head">5 · Payload observations</text>
+<text x="428" y="657" class="small">IMU location and body frame</text>
+<text x="428" y="681" class="small">Attitude / rates / navigation</text>
+<text x="428" y="705" class="small">JSON sensor interface in SITL</text>
+<path d="M840 650H760" class="link"/>
+<rect x="30" y="595" width="290" height="115" rx="10" class="box"/>
+<text x="48" y="627" class="head">Controller or log analysis</text>
+<text x="48" y="657" class="small">Standalone feedback / analysis</text>
+<text x="48" y="681" class="small">or ArduPilot estimator,</text>
+<text x="48" y="705" class="small">navigation and control loops</text>
+<path d="M410 650H320" class="link"/>
+<path d="M150 595V465H15V185H30" class="link"/>
+<path d="M1005 710V775H785V110H580V125" class="link"/>
+<path d="M785 375H760" class="link"/>
+<path d="M785 515H760" class="link"/>
+<text x="345" y="804" class="small">Updated motion feeds the next airflow, joint and rotor-load calculation.</text>
+</svg>
