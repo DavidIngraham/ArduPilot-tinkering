@@ -10,6 +10,7 @@ export default defineConfig({
         "trim-launch.html",
         "joint-tour.html",
         "landing.html",
+        "controller-comparison.html",
       ],
       output: { manualChunks: { three: ["three"] } },
     },

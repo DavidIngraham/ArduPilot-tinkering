@@ -6,11 +6,15 @@ import {rigPayload,poseMechanisms} from './mechanisms';
 
 async function main(){
  const host=document.querySelector<HTMLElement>('#replay')!;
- const canvas=document.createElement('canvas');host.append(canvas);
- const renderer=new T.WebGLRenderer({canvas,antialias:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+ const canvas=document.createElement('canvas');canvas.width=1280;canvas.height=1250;host.append(canvas);
+ const ctx=canvas.getContext('2d')!;
+ const renderer=new T.WebGLRenderer({antialias:true});renderer.setSize(1280,500);
+ const data=await (await fetch('controller-comparison/data.json')).json();
+ let runs:any[]=[];
+ const specs=[['height_rms','Height error','m',1],['pitch_rms','Pitch rate','deg/s',2],['heading_rms','Heading-rate error','deg/s',3]] as const;
  const camera=new T.PerspectiveCamera(40,1,.01,2000);camera.position.set(4,2,5);
  const orbit=new OrbitControls(camera,canvas);orbit.target.set(0,.5,0);orbit.enablePan=false;orbit.minDistance=2;orbit.maxDistance=15;orbit.update();
- const model=await new GLTFLoader().loadAsync('/assets/microagu-viewer/models/microagu-payload-tl.glb');
+ const model=await new GLTFLoader().loadAsync('models/microagu-payload-tl.glb');
  const views=[0x58a7d0,0x70c6ad].map(color=>{
   const scene=new T.Scene();scene.background=new T.Color('#142735');scene.add(new T.HemisphereLight(0xe6f8ff,0x566473,3));const light=new T.DirectionalLight(0xffffff,3);light.position.set(3,8,4);scene.add(light);
   const body=model.scene.clone(true);scene.add(body);const rig=rigPayload(body);
@@ -25,23 +29,25 @@ async function main(){
  });
  let time=15,playing=false,last=performance.now(),generation=0;
  const slider=document.querySelector<HTMLInputElement>('#replay-time')!,play=document.querySelector<HTMLButtonElement>('#replay-play')!,status=document.querySelector<HTMLElement>('#replay-status')!;
- const signal=()=>{slider.value=String(time);document.dispatchEvent(new CustomEvent('replay-time',{detail:time}));};
+ const signal=()=>{slider.value=String(time);};
  play.onclick=()=>{playing=!playing;play.textContent=playing?'Pause':'Play';};
  slider.oninput=()=>{playing=false;play.textContent='Play';time=Number(slider.value);signal();};
  document.querySelector('#replay-reset')!.addEventListener('click',()=>{camera.position.set(4,2,5);orbit.target.set(0,.5,0);orbit.update();});
- document.addEventListener('comparison-time',e=>{time=(e as CustomEvent<number>).detail;playing=false;play.textContent='Play';signal();});
+ canvas.addEventListener('pointerdown',e=>{const box=canvas.getBoundingClientRect();const y=(e.clientY-box.top)/box.height*1250;if(y<550)return;const x=(e.clientX-box.left)/box.width*1280;time=Math.max(0,Math.min(80,(x-75)/1160*80));playing=false;play.textContent='Play';signal();});
+ document.querySelector('#replay-restart')!.addEventListener('click',()=>{time=0;playing=true;play.textContent='Pause';signal();});
  async function load(){
   const token=++generation;playing=false;play.textContent='Play';play.disabled=true;slider.disabled=true;status.textContent='Loading recorded aircraft poses…';
   const name=(document.querySelector('#scenario') as HTMLSelectElement).value,sensing=(document.querySelector('#sensing') as HTMLSelectElement).value==='true'?'observer':'truth';
-  try{const rows=await Promise.all(['baseline','direct'].map(async family=>{const r=await fetch(`poses/${name}-${sensing}-${family}.json`);if(!r.ok)throw Error('Pose recording unavailable');return r.json() as Promise<number[][]>;}));if(token!==generation)return;
+  runs=data.runs.filter((r:any)=>r.case===name&&r.observer===(sensing==='observer'));
+  try{const rows=await Promise.all(['baseline','direct'].map(async family=>{const r=await fetch(`controller-comparison/poses/${name}-${sensing}-${family}.json`);if(!r.ok)throw Error('Pose recording unavailable');return r.json() as Promise<number[][]>;}));if(token!==generation)return;
    rows.forEach((r,i)=>{views[i].rows=r;let phase=0;views[i].phases=r.map((v,j)=>{if(j)phase+=(v[0]-r[j-1][0])*(v[27]+r[j-1][27])*Math.PI/60;return phase;});});
-   time=['maneuver','speed_transition','limits_recovery'].includes(name)?5:15;signal();play.disabled=false;slider.disabled=false;status.textContent='Ready · drag either view to orbit both; scroll to zoom. Physical scale, no attitude exaggeration.';
+   time=0;playing=true;play.textContent='Pause';signal();play.disabled=false;slider.disabled=false;status.textContent='Ready · drag either view to orbit both; scroll to zoom. Physical scale, no attitude exaggeration.';
   }catch(e){if(token===generation)status.textContent=String(e);}
  }
  document.querySelector('#scenario')!.addEventListener('change',load);document.querySelector('#sensing')!.addEventListener('change',load);await load();
  function draw(now:number){
-  const dt=Math.min((now-last)/1000,.1);last=now;if(playing){time+=dt*Number((document.querySelector('#replay-speed') as HTMLSelectElement).value);if(time>=80){time=80;playing=false;play.textContent='Play';}signal();}
-  const w=host.clientWidth,h=Math.max(260,Math.min(440,w*.42));renderer.setSize(w,h,false);camera.aspect=w/2/h;camera.updateProjectionMatrix();renderer.setScissorTest(true);
+  const dt=Math.min((now-last)/1000,.1);last=now;if(playing){time+=dt*Number((document.querySelector('#replay-speed') as HTMLSelectElement).value);if(time>=80)time=0;signal();}
+  const w=1280,h=500;camera.aspect=w/2/h;camera.updateProjectionMatrix();renderer.setScissorTest(true);
   views.forEach((v,i)=>{
    if(!v.rows.length)return;
    const n=Math.min(799,Math.floor(time*10)),a=v.rows[n],b=v.rows[n+1],f=Math.min(1,(time-a[0])/(b[0]-a[0]));const r=a.map((x,j)=>x+(b[j]-x)*f);
@@ -54,6 +60,28 @@ async function main(){
    v.lines.geometry.dispose();v.lines.geometry=new T.BufferGeometry().setFromPoints(points);
    renderer.setViewport(i*w/2,0,w/2,h);renderer.setScissor(i*w/2,0,w/2,h);renderer.render(v.scene,camera);
   });
+  ctx.fillStyle='#102330';ctx.fillRect(0,0,1280,1250);ctx.drawImage(renderer.domElement,0,0);
+  ctx.font='22px system-ui';ctx.fillStyle='#58a7d0';ctx.fillText('Conventional baseline',24,32);ctx.fillStyle='#70c6ad';ctx.fillText('Refined direct feedback',664,32);
+  ctx.fillStyle='#edf5ff';ctx.font='18px system-ui';ctx.fillText(`${time.toFixed(1)} s / 80 s · same scale and camera · recorded physical motion`,24,530);
+  const baseline=runs.find(r=>r.family==='baseline'),direct=runs.find(r=>r.family==='direct');
+  if(baseline&&direct){
+   const showCandidate=(document.querySelector('#candidate') as HTMLInputElement).checked;
+   const shown=runs.filter(r=>r.family!=='candidate'||showCandidate);
+   for(let j=0;j<specs.length;j++){
+    const [key,label,unit,col]=specs[j],top=570+j*210;
+    const values=shown.flatMap(r=>r.trace.map((t:number[])=>t[col]));let lo=Math.min(0,...values),hi=Math.max(0,...values);const pad=Math.max((hi-lo)*.08,.001);lo-=pad;hi+=pad;
+    const x=(t:number)=>75+t/80*1160,y=(a:number)=>top+155-(a-lo)/(hi-lo)*115;
+    const ratio=direct.metrics[key]/baseline.metrics[key],limit=j===2?1.1:1.05;
+    ctx.fillStyle='#edf5ff';ctx.font='19px system-ui';ctx.fillText(`${label} (${unit})`,24,top+10);
+    ctx.font='17px system-ui';ctx.fillStyle=ratio<=limit?'#8fdac6':'#ffba68';ctx.fillText(`RMS ${baseline.metrics[key].toFixed(3)} → ${direct.metrics[key].toFixed(3)} · ${((ratio-1)*100).toFixed(1)}% · ${ratio<=limit?'within':'outside'} limit`,490,top+10);
+    ctx.font='15px system-ui';
+    for(let k=0;k<3;k++){const value=lo+(hi-lo)*k/2;ctx.strokeStyle='#304958';ctx.beginPath();ctx.moveTo(75,y(value));ctx.lineTo(1235,y(value));ctx.stroke();ctx.fillStyle='#b9cbd7';ctx.fillText(value.toFixed(1),8,y(value)+5);}
+    ctx.fillStyle='#162f3e';ctx.fillRect(75,top+40,x(baseline.start)-75,115);
+    for(const r of shown){ctx.strokeStyle=r.family==='baseline'?'#58a7d0':r.family==='direct'?'#70c6ad':'#ffba68';ctx.lineWidth=2;ctx.setLineDash(r.family==='candidate'?[6,4]:[]);ctx.beginPath();r.trace.forEach((t:number[],i:number)=>i?ctx.lineTo(x(t[0]),y(t[col])):ctx.moveTo(x(t[0]),y(t[col])));ctx.stroke();}ctx.setLineDash([]);
+    ctx.strokeStyle='#edf5ff';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x(time),top+35);ctx.lineTo(x(time),top+160);ctx.stroke();ctx.fillStyle='#b9cbd7';for(let t=0;t<=80;t+=10)ctx.fillText(String(t),x(t)-7,top+180);ctx.fillText('Time (s)',1150,top+201);
+   }
+   ctx.fillStyle='#b9cbd7';ctx.font='16px system-ui';ctx.fillText('Blue: baseline · Green: refined · Gold: optional conventional candidate · Shaded startup excluded from RMS',24,1230);
+  }
   document.querySelector('#replay-clock')!.textContent=`${time.toFixed(1)} s`;requestAnimationFrame(draw);
  }
  requestAnimationFrame(draw);
