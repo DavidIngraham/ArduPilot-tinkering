@@ -1,0 +1,20 @@
+{
+  "case": "voltage_ramp",
+  "controller": "scheduled_observer",
+  "height_rms": 0.4930102081364899,
+  "height_iae": 25.084901817856057,
+  "heading_rms": 8.23859065085168,
+  "pitch_rms": 18.39370221461887,
+  "pitch_peak": 45.37953469268626,
+  "throttle_std": 0.04285385644100078,
+  "brake_std": 0.0033931730874232546,
+  "limited_fraction": 0.05352199323285143,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.05814662329110443,
+  "tail_height_rms": 0.4235349537151189,
+  "speed_min": 3.3486061696672085,
+  "speed_max": 5.7564769779759395,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "noisy attitude/gyro 50 Hz, navigation velocity/height 5 Hz; inferred canopy/rotor/wind"
+}

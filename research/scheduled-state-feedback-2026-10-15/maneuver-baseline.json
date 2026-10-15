@@ -1,0 +1,20 @@
+{
+  "case": "maneuver",
+  "controller": "baseline",
+  "height_rms": 0.08837669049306983,
+  "height_iae": 5.610370525163719,
+  "heading_rms": 1.1573885611980663,
+  "pitch_rms": 1.6535207269792849,
+  "pitch_peak": 13.177286375489976,
+  "throttle_std": 0.010358290280489811,
+  "brake_std": 0.04704337801810137,
+  "limited_fraction": 0.09144228205811783,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.07757978465209481,
+  "tail_height_rms": 0.062419536189852784,
+  "speed_min": 3.986763089654305,
+  "speed_max": 4.680782415623597,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "truth state and airspeed"
+}

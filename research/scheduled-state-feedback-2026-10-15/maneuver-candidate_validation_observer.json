@@ -1,0 +1,20 @@
+{
+  "case": "maneuver",
+  "controller": "candidate_validation_observer",
+  "height_rms": 0.06823513480908511,
+  "height_iae": 4.144629572380224,
+  "heading_rms": 2.297096230281196,
+  "pitch_rms": 2.558683642421048,
+  "pitch_peak": 15.582555932150305,
+  "throttle_std": 0.01107418774985134,
+  "brake_std": 0.04748882476629762,
+  "limited_fraction": 0.5942415355905092,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.07267680230381224,
+  "tail_height_rms": 0.036420775979818354,
+  "speed_min": 4.017476842682034,
+  "speed_max": 4.673585369134318,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "noisy attitude/gyro 50 Hz, navigation velocity/height 5 Hz; inferred canopy/rotor/wind"
+}

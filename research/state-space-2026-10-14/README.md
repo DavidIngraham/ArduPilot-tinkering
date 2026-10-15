@@ -2,6 +2,8 @@
 
 Read [the article](../../docs/controller-state-space.md). No production controller defaults or firmware sources are changed by this study.
 
+The original fixed-gain LQI benchmark below is retained as historical evidence. The main article now compares [scheduled feedback with practical compensation and a second iteration](../scheduled-state-feedback-2026-10-15/README.md). That extension uses a new shared reference/actuator harness and fresh baseline runs; its metrics are not interchangeable with these results.
+
 The retained result is a tradeoff, not a replacement recommendation. The conventional candidate reduces the nominal coupled sensitivity peak from 6.03 to 2.27; paired nonlinear gust tests show 4.4–6.2% lower height RMS with 5.2–7.9% greater pitch-rate RMS. Full-state LQI makes the commanded climb gentler but performs worse in the tested gusts. All four native baseline/candidate calm/gust AUTO regressions pass; BIN audits confirm the overrides and all backends report zero errors/clipped packets.
 
 ## Scope and provenance

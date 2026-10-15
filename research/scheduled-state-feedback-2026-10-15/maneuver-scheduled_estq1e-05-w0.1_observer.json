@@ -1,0 +1,20 @@
+{
+  "case": "maneuver",
+  "controller": "scheduled_estq1e-05-w0.1_observer",
+  "height_rms": 0.10274824472912396,
+  "height_iae": 6.208647824116078,
+  "heading_rms": 10.124660604156674,
+  "pitch_rms": 8.645369278132703,
+  "pitch_peak": 46.319052756256454,
+  "throttle_std": 0.01669832345909217,
+  "brake_std": 0.04341382841135091,
+  "limited_fraction": 0.2100773127166089,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.05397879321711818,
+  "tail_height_rms": 0.14820280700500044,
+  "speed_min": 3.807371733720327,
+  "speed_max": 4.629493893480023,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "noisy attitude/gyro 50 Hz, navigation velocity/height 5 Hz; inferred canopy/rotor/wind"
+}

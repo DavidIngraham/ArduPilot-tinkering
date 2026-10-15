@@ -1,0 +1,192 @@
+{
+  "nodes": [
+    {
+      "voltage": 20.4,
+      "climb": -0.5,
+      "turn": -10.0,
+      "speed": 4.402892016130955,
+      "residual": 3.373135965765593e-13,
+      "drift": 7.145519795320676e-13,
+      "A_relative_error": 5.511357560604099e-11,
+      "B_relative_error": 2.9603726773908254e-11
+    },
+    {
+      "voltage": 20.4,
+      "climb": -0.5,
+      "turn": 0.0,
+      "speed": 4.455560687475255,
+      "residual": 1.9031934750221392e-11,
+      "drift": 2.8674281306508607e-12,
+      "A_relative_error": 5.8113491298127356e-11,
+      "B_relative_error": 3.791759009061757e-11
+    },
+    {
+      "voltage": 20.4,
+      "climb": -0.5,
+      "turn": 10.0,
+      "speed": 4.3544658571634445,
+      "residual": 3.559690464054953e-14,
+      "drift": 8.890135141641865e-13,
+      "A_relative_error": 5.2470009584720494e-11,
+      "B_relative_error": 2.6687331241978567e-11
+    },
+    {
+      "voltage": 20.4,
+      "climb": 0.0,
+      "turn": -10.0,
+      "speed": 4.4104672087994645,
+      "residual": 4.3903615639610615e-13,
+      "drift": 1.84879327613199e-12,
+      "A_relative_error": 7.386329968810196e-11,
+      "B_relative_error": 2.6706338670386443e-11
+    },
+    {
+      "voltage": 20.4,
+      "climb": 0.0,
+      "turn": 0.0,
+      "speed": 4.382873735195498,
+      "residual": 3.557262068015157e-10,
+      "drift": 1.4658427039086608e-11,
+      "A_relative_error": 6.072115060412874e-11,
+      "B_relative_error": 2.137055291765195e-11
+    },
+    {
+      "voltage": 20.4,
+      "climb": 0.0,
+      "turn": 10.0,
+      "speed": 4.309594811718802,
+      "residual": 1.0843327754578755e-13,
+      "drift": 1.829670631849512e-12,
+      "A_relative_error": 6.813386003053976e-11,
+      "B_relative_error": 2.673713934274942e-11
+    },
+    {
+      "voltage": 20.4,
+      "climb": 0.5,
+      "turn": -10.0,
+      "speed": 4.444909363728019,
+      "residual": 9.221307513067923e-13,
+      "drift": 3.2508277594768626e-12,
+      "A_relative_error": 7.603437857776338e-11,
+      "B_relative_error": 4.3661199235666505e-11
+    },
+    {
+      "voltage": 20.4,
+      "climb": 0.5,
+      "turn": 0.0,
+      "speed": 4.322396361400753,
+      "residual": 3.6979699094429986e-10,
+      "drift": 1.2595871856148455e-11,
+      "A_relative_error": 7.56995381474877e-11,
+      "B_relative_error": 2.8946391592195466e-11
+    },
+    {
+      "voltage": 20.4,
+      "climb": 0.5,
+      "turn": 10.0,
+      "speed": 4.281713345984562,
+      "residual": 4.3558758685418463e-13,
+      "drift": 3.0224521269199205e-12,
+      "A_relative_error": 8.156415185793322e-11,
+      "B_relative_error": 3.139918862148914e-11
+    },
+    {
+      "voltage": 22.2,
+      "climb": -0.5,
+      "turn": -10.0,
+      "speed": 4.4028920161309655,
+      "residual": 2.193793807907105e-13,
+      "drift": 7.176786874782709e-13,
+      "A_relative_error": 5.813261199212694e-11,
+      "B_relative_error": 1.7092817972728997e-11
+    },
+    {
+      "voltage": 22.2,
+      "climb": -0.5,
+      "turn": 0.0,
+      "speed": 4.455560687465934,
+      "residual": 2.0565790594163815e-10,
+      "drift": 6.5719343411785606e-12,
+      "A_relative_error": 5.460410831920574e-11,
+      "B_relative_error": 1.1373758550976884e-11
+    },
+    {
+      "voltage": 22.2,
+      "climb": -0.5,
+      "turn": 10.0,
+      "speed": 4.3544658571638415,
+      "residual": 1.6756165431611459e-12,
+      "drift": 9.05916092697105e-13,
+      "A_relative_error": 5.5626482599995035e-11,
+      "B_relative_error": 2.097640322098046e-11
+    },
+    {
+      "voltage": 22.2,
+      "climb": 0.0,
+      "turn": -10.0,
+      "speed": 4.4104672087994405,
+      "residual": 4.3954027061055913e-13,
+      "drift": 1.8546121661809052e-12,
+      "A_relative_error": 6.519214749468358e-11,
+      "B_relative_error": 2.9276709270969274e-11
+    },
+    {
+      "voltage": 22.2,
+      "climb": 0.0,
+      "turn": 0.0,
+      "speed": 4.382873735057615,
+      "residual": 7.228988860474703e-14,
+      "drift": 5.025800347981616e-15,
+      "A_relative_error": 6.150069844994466e-11,
+      "B_relative_error": 3.036708399554589e-11
+    },
+    {
+      "voltage": 22.2,
+      "climb": 0.0,
+      "turn": 10.0,
+      "speed": 4.309594811719324,
+      "residual": 2.571614081005431e-12,
+      "drift": 1.849749128449804e-12,
+      "A_relative_error": 5.978102493803659e-11,
+      "B_relative_error": 2.4400024223213133e-11
+    },
+    {
+      "voltage": 22.2,
+      "climb": 0.5,
+      "turn": -10.0,
+      "speed": 4.444909363727919,
+      "residual": 4.39495133710657e-13,
+      "drift": 3.2587849034369298e-12,
+      "A_relative_error": 7.272580474506671e-11,
+      "B_relative_error": 2.3957634833994398e-11
+    },
+    {
+      "voltage": 22.2,
+      "climb": 0.5,
+      "turn": 0.0,
+      "speed": 4.322396361240872,
+      "residual": 8.078013336963291e-10,
+      "drift": 5.5606193998121294e-11,
+      "A_relative_error": 7.326933536421038e-11,
+      "B_relative_error": 4.2622264853821495e-11
+    },
+    {
+      "voltage": 22.2,
+      "climb": 0.5,
+      "turn": 10.0,
+      "speed": 4.281713345984544,
+      "residual": 7.820575783049528e-13,
+      "drift": 3.0346473961039554e-12,
+      "A_relative_error": 6.847021656026628e-11,
+      "B_relative_error": 3.230200801341492e-11
+    }
+  ],
+  "source_hashes": {
+    "dynamics.cpp": "1093c4641a4c248b468fb3152d28d9270a003b1ec56a1e3f5b7f1b8bceedfdf6",
+    "libdynamics.so": "19d488f1d1dc3867e831607cb8b506296db3ed051e615b4566c19afce877092e",
+    "parameters.json": "408ced75e166d8ad20b7684cd3d3fa9d0c66712fd6a9216983b29f42f58adb1a",
+    "profiles.py": "e3beaace39e5b867e25b3b0505251e5eaef962d6c99734717a7eb37d05c107fb",
+    "actuator.py": "1b1dbc9d47cf09807c272d6ea137751c7194a9921544609d439bf75179c6ab2a"
+  },
+  "note": "Common nominal chart; trim at requested turn/climb/voltage; no new trim oracle during tests."
+}

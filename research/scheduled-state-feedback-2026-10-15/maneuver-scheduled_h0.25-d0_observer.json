@@ -1,0 +1,20 @@
+{
+  "case": "maneuver",
+  "controller": "scheduled_h0.25-d0_observer",
+  "height_rms": 0.08780923182723442,
+  "height_iae": 5.390399494606644,
+  "heading_rms": 3.5945614232472325,
+  "pitch_rms": 4.238531842423844,
+  "pitch_peak": 29.219122915605826,
+  "throttle_std": 0.013557041193082623,
+  "brake_std": 0.04331475987935599,
+  "limited_fraction": 0.0967741935483871,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.05647416282147544,
+  "tail_height_rms": 0.0810412465380976,
+  "speed_min": 3.7196181148040335,
+  "speed_max": 4.838808325246425,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "noisy attitude/gyro 50 Hz, navigation velocity/height 5 Hz; inferred canopy/rotor/wind"
+}

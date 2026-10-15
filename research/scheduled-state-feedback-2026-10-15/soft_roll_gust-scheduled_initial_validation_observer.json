@@ -1,0 +1,20 @@
+{
+  "case": "soft_roll_gust",
+  "controller": "scheduled_initial_validation_observer",
+  "height_rms": 0.52584085532597,
+  "height_iae": 27.585054493881408,
+  "heading_rms": 9.379053745300785,
+  "pitch_rms": 22.13736172076962,
+  "pitch_peak": 55.360976797305234,
+  "throttle_std": 0.04710241306007502,
+  "brake_std": 0.0036206029617908125,
+  "limited_fraction": 0.17010150722854506,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.039722988770657275,
+  "tail_height_rms": 0.4205079834967844,
+  "speed_min": 3.1808263199327764,
+  "speed_max": 6.005962764499004,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "noisy attitude/gyro 50 Hz, navigation velocity/height 5 Hz; inferred canopy/rotor/wind"
+}

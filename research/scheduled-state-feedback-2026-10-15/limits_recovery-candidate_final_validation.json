@@ -1,0 +1,20 @@
+{
+  "case": "limits_recovery",
+  "controller": "candidate_final_validation",
+  "height_rms": 0.6263693448278238,
+  "height_iae": 39.128612149857226,
+  "heading_rms": 9.234496380276555,
+  "pitch_rms": 16.6677592201015,
+  "pitch_peak": 98.9282987341233,
+  "throttle_std": 0.06331618959967635,
+  "brake_std": 0.05551790656448777,
+  "limited_fraction": 0.5267928552386031,
+  "ceiling_fraction": 0.0021327645961077045,
+  "minimum_headroom": 0.0,
+  "tail_height_rms": 0.3877309657519239,
+  "speed_min": 2.600223907138267,
+  "speed_max": 5.947939161218208,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "truth state and airspeed"
+}

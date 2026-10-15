@@ -1,0 +1,20 @@
+{
+  "case": "gust",
+  "controller": "scheduled_estq0-w0.1_observer",
+  "height_rms": 0.9756819631628039,
+  "height_iae": 57.2472930444725,
+  "heading_rms": 13.123196833489166,
+  "pitch_rms": 23.387170078011497,
+  "pitch_peak": 67.5869045433078,
+  "throttle_std": 0.040949010015555135,
+  "brake_std": 0.0023301512071526066,
+  "limited_fraction": 0.23685019993848047,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.04503014384331627,
+  "tail_height_rms": 1.2126601004416517,
+  "speed_min": 3.0809660963637056,
+  "speed_max": 5.76802954136859,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "noisy attitude/gyro 50 Hz, navigation velocity/height 5 Hz; inferred canopy/rotor/wind"
+}

@@ -1,0 +1,20 @@
+{
+  "case": "speed_transition",
+  "controller": "baseline",
+  "height_rms": 0.08638554316297253,
+  "height_iae": 5.565310794722284,
+  "heading_rms": 1.6669413591056712,
+  "pitch_rms": 2.3204195897731528,
+  "pitch_peak": 14.94062920585734,
+  "throttle_std": 0.051390605179916976,
+  "brake_std": 0.04432172531765604,
+  "limited_fraction": 0.12663289789389495,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.07155799758087023,
+  "tail_height_rms": 0.07141908200130326,
+  "speed_min": 3.9657631888335807,
+  "speed_max": 4.741261916171369,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "truth state and airspeed"
+}

@@ -1,0 +1,20 @@
+{
+  "case": "soft_roll_gust",
+  "controller": "scheduled_v0.7-h0.25-s1.5",
+  "height_rms": 0.5032000699975689,
+  "height_iae": 27.3190082040649,
+  "heading_rms": 8.374078244376017,
+  "pitch_rms": 16.970600841758174,
+  "pitch_peak": 46.42469613055763,
+  "throttle_std": 0.039486171704449735,
+  "brake_std": 0.0029717294534787665,
+  "limited_fraction": 0.0,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.04851904564523535,
+  "tail_height_rms": 0.5542363864574754,
+  "speed_min": 3.5536967471229333,
+  "speed_max": 5.605401514648682,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "truth state and airspeed"
+}

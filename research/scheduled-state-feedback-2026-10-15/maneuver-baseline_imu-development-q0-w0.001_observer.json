@@ -1,0 +1,20 @@
+{
+  "case": "maneuver",
+  "controller": "baseline_imu-development-q0-w0.001_observer",
+  "height_rms": 0.10010109331319815,
+  "height_iae": 6.682602033273236,
+  "heading_rms": 1.2966576878935487,
+  "pitch_rms": 1.7532592719557905,
+  "pitch_peak": 14.118352652991724,
+  "throttle_std": 0.010610065674042385,
+  "brake_std": 0.04707445263821918,
+  "limited_fraction": 0.6054385497200746,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.07635859740409301,
+  "tail_height_rms": 0.16822705194248078,
+  "speed_min": 3.974396978639614,
+  "speed_max": 4.675540183596176,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "noisy attitude/gyro 50 Hz, navigation velocity/height 5 Hz; inferred canopy/rotor/wind"
+}

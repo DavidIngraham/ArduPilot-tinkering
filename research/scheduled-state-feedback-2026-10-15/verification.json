@@ -1,0 +1,28 @@
+{
+  "model_hashes_match": true,
+  "closure": [
+    {
+      "node": 4,
+      "relative_error": 2.10495524965679e-09
+    },
+    {
+      "node": 9,
+      "relative_error": 1.5178563136813475e-09
+    },
+    {
+      "node": 13,
+      "relative_error": 2.1007299671365072e-09
+    },
+    {
+      "node": 17,
+      "relative_error": 5.133011217600409e-09
+    }
+  ],
+  "interpolated_frozen_cases": 375,
+  "interpolated_unstable": 0,
+  "interpolated_worst_pole": -0.03474176910009916,
+  "uncertainty_cases": 288,
+  "uncertainty_unstable": 0,
+  "uncertainty_worst_pole": -0.03473698405449003,
+  "note": "Frozen interpolated plant/gain checks are not a nonlinear scheduling stability proof."
+}

@@ -1,0 +1,20 @@
+{
+  "case": "voltage_ramp",
+  "controller": "scheduled_imu-development-q1e-06-w0.01-d0.05_observer",
+  "height_rms": 0.3575196721799678,
+  "height_iae": 17.76958156150122,
+  "heading_rms": 7.350596526227199,
+  "pitch_rms": 12.47070258810682,
+  "pitch_peak": 31.9621329137706,
+  "throttle_std": 0.04157374532921199,
+  "brake_std": 0.0025141251147970385,
+  "limited_fraction": 0.004306367271608736,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.08459997636943961,
+  "tail_height_rms": 0.3223718989177264,
+  "speed_min": 3.7038679620928514,
+  "speed_max": 5.28784814496562,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "noisy attitude/gyro 50 Hz, navigation velocity/height 5 Hz; inferred canopy/rotor/wind"
+}

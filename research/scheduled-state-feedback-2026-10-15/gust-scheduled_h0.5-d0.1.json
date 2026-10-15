@@ -1,0 +1,20 @@
+{
+  "case": "gust",
+  "controller": "scheduled_h0.5-d0.1",
+  "height_rms": 0.3889555694272777,
+  "height_iae": 19.58976251138551,
+  "heading_rms": 5.648236559118919,
+  "pitch_rms": 16.68174179678291,
+  "pitch_peak": 45.959257698914776,
+  "throttle_std": 0.029609185145908525,
+  "brake_std": 0.0020416538347125925,
+  "limited_fraction": 0.0,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.08608508431156359,
+  "tail_height_rms": 0.44051196252160896,
+  "speed_min": 3.3955399162957227,
+  "speed_max": 5.38295525286629,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "truth state and airspeed"
+}

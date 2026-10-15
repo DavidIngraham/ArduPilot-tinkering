@@ -1,0 +1,16 @@
+{
+  "python": "3.12.3",
+  "gain_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "source_hashes": {
+    "experiment.py": "38b3af6b12d0a8b3f8d608e316e4c582325c0e8e5863c869d9de685d0d188593",
+    "run_observer.py": "979091a1b6995bb83f86264b09741553789be5a4934a941463743b97260e7216",
+    "observer.py": "ced3ba9a69097f5f37c3ab4518967bf493b7096231f886c4828f6f539f199764",
+    "verify.py": "88860759748b41778aded2a1f85950cc02724f8b1ab9cfafc4410fa71cd14fb0",
+    "run_ablations.py": "fdd39a3401a41f1006dd5d63a8835ec42571cd19b1bccfbf967d284e9c77dc72",
+    "report.py": "46570e1ae3bf2e9a5e39c0f64ad1989622372b9465f6a08d73fa04c803f66de7",
+    "run_suite.py": "6a384f100a2a91bbee68379b0309dd132cc831be41ab1f92eea2fc761602d03c"
+  },
+  "completed_runs": 40,
+  "all_finite": true,
+  "note": "No native scheduled-controller runs. Original native tests concern the old conventional tunes only."
+}

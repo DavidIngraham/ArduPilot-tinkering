@@ -1,0 +1,20 @@
+{
+  "case": "voltage_ramp",
+  "controller": "scheduled_v0.5-h1",
+  "height_rms": 0.38759536796966065,
+  "height_iae": 19.32619264635934,
+  "heading_rms": 9.099141878806334,
+  "pitch_rms": 14.414232644490795,
+  "pitch_peak": 31.348591278116345,
+  "throttle_std": 0.03868287031599076,
+  "brake_std": 0.002082976470004147,
+  "limited_fraction": 0.0,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.0806471219103877,
+  "tail_height_rms": 0.33133078787001263,
+  "speed_min": 3.788828960615167,
+  "speed_max": 5.23863567937786,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "truth state and airspeed"
+}

@@ -1,0 +1,20 @@
+{
+  "case": "voltage_ramp",
+  "controller": "scheduled_estq1e-06-w0.01_observer",
+  "height_rms": 0.48856640750153313,
+  "height_iae": 24.778764368027087,
+  "heading_rms": 8.137405785624734,
+  "pitch_rms": 17.849093433290268,
+  "pitch_peak": 45.37913365408372,
+  "throttle_std": 0.04299609842215524,
+  "brake_std": 0.0033472873977117416,
+  "limited_fraction": 0.05136880959704706,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.057798292195740064,
+  "tail_height_rms": 0.4217188473407702,
+  "speed_min": 3.358700383868323,
+  "speed_max": 5.7205962322844375,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "noisy attitude/gyro 50 Hz, navigation velocity/height 5 Hz; inferred canopy/rotor/wind"
+}

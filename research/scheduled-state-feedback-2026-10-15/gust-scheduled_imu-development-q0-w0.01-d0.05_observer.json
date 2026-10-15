@@ -1,0 +1,20 @@
+{
+  "case": "gust",
+  "controller": "scheduled_imu-development-q0-w0.01-d0.05_observer",
+  "height_rms": 0.3356057080468197,
+  "height_iae": 16.96602928726737,
+  "heading_rms": 5.898633441988883,
+  "pitch_rms": 16.75041154780805,
+  "pitch_peak": 49.620085348368264,
+  "throttle_std": 0.03900879876200568,
+  "brake_std": 0.0017854838654173027,
+  "limited_fraction": 0.0009227929867733005,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.05983770572206615,
+  "tail_height_rms": 0.3541350425676045,
+  "speed_min": 3.3857937297763008,
+  "speed_max": 5.38240002196372,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "noisy attitude/gyro 50 Hz, navigation velocity/height 5 Hz; inferred canopy/rotor/wind"
+}

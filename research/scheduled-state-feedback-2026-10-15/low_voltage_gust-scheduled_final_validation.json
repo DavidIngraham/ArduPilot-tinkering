@@ -1,0 +1,40 @@
+{
+  "case": "low_voltage_gust",
+  "controller": "scheduled_final_validation",
+  "height_rms": 0.5002485054254103,
+  "height_iae": 27.141357090324895,
+  "heading_rms": 8.999883599321725,
+  "pitch_rms": 16.99538036867813,
+  "pitch_peak": 45.51395749466399,
+  "throttle_std": 0.04328471339272481,
+  "brake_std": 0.0023404388259959177,
+  "limited_fraction": 0.0,
+  "ceiling_fraction": 0.0,
+  "minimum_headroom": 0.05043421744480514,
+  "tail_height_rms": 0.550740657736092,
+  "speed_min": 3.5654573545602086,
+  "speed_max": 5.5929342283852606,
+  "finite": true,
+  "gains_sha256": "27d7b466899aea73097727f3e653036651def97d4f73f49c140365a2611cf258",
+  "sensing": "truth state and airspeed",
+  "variant": {
+    "id": "v0.7-h0.25-s1.5",
+    "hidden": 1.0,
+    "damper": 0.05,
+    "velocity_feedback": 0.7,
+    "height_feedback": 0.25,
+    "steering_feedback": 1.5,
+    "worst_pole": -0.01975317733552435,
+    "unstable": 0
+  },
+  "observer": false,
+  "family": "direct",
+  "config": {
+    "state_q": 1e-06,
+    "wind_q": 0.001
+  },
+  "seed": 2026104501,
+  "gust_multiplier": 1.2,
+  "maneuver_height": null,
+  "maneuver_turn": null
+}
