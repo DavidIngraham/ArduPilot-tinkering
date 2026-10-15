@@ -385,7 +385,7 @@ Start with **Falling voltage** and the **IMU + navigation observer** to see whet
 
 [Open the controller comparison applet](https://davidingraham.github.io/assets/microagu-viewer/controller-comparison.html)
 
-The two 3D views replay the baseline and refined controller at the same instant using the existing payload CAD model and schematic canopy. Playback starts automatically and loops. Pause or scrub the timeline; drag to orbit both views and scroll to zoom. The rendered motion is the simulated physical aircraft, including when the controller uses estimated states. Cameras follow each payload at the same physical scale.
+The two 3D views replay the baseline and refined controller at the same instant using the existing payload CAD model and schematic canopy. Playback starts automatically and loops. Pause or scrub the timeline; drag to orbit both views and scroll to zoom. The rendered motion is the simulated physical aircraft, including when the controller uses estimated states. Cameras follow each payload at the same physical scale. Each 3D scene includes the payload trajectory, with the traveled portion bright and the remaining recording faint. The top-down overview compares ground tracks on equal metre scales; the side overview compares height against horizontal distance traveled, with independent axis scales. Both show synchronized current-position markers.
 
 The plot labels compare full-resolution RMS values against the unchanged acceptance limits. The synchronized plots show height error, pitch rate and heading-rate error; click a plot to scrub both aircraft to that instant. The retuned conventional candidate is available as an optional third curve. Zero height and heading-rate error mean perfect tracking of the shared shaped reference.
 
