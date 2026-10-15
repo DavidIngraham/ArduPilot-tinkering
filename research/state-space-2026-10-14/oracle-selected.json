@@ -1,0 +1,6 @@
+{
+  "move_penalty": 1000.0,
+  "integral_weight": 0.5,
+  "rate_weight": 0.3,
+  "state_weight": 0.1
+}

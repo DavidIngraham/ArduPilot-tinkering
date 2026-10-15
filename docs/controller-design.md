@@ -4,6 +4,8 @@
 
 The controller has two jobs: turn the aircraft along its route and use throttle to follow the requested altitude. Both jobs act on the same suspended system. A brake correction can excite payload pitch, and a throttle correction changes the motion seen by the steering loop. The design uses feedforward for the expected effort, modest feedback for tracking, and separate damping paths shaped around the coupled modes.
 
+The follow-up [state-space controller study](controller-state-space.md) compares joint tuning of these loops with actuator/sensor diagnostics and a full-state feedback benchmark, using the same sampled linear plant and matched nonlinear tests.
+
 [Part 1](first-flight-controller.md) follows my independent preflight design work through the Trout Lake missions: adapting the roll loop, changing TECS to throttle-only altitude control, and disabling a pitch damper that made the motion worse. This second phase uses those flights to inform the articulated model and design the replacement controller. It brings steering and altitude together around the resulting architecture, its classical analysis and its simulation evidence.
 
 ## From flight logs to a model for controller design

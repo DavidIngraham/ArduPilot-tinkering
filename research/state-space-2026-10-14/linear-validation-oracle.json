@@ -1,0 +1,11 @@
+{
+  "outputs": [
+    "height",
+    "climb",
+    "payload q",
+    "throttle",
+    "brake"
+  ],
+  "note": "1 mm ramp, smooth climb feedforward branch; includes nonlinear physics and travel-rate actuator.",
+  "rows": []
+}

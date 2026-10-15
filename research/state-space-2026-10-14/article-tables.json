@@ -1,0 +1,98 @@
+{
+  "gust": [
+    {
+      "plant": "level",
+      "scenario": "gust_holdout",
+      "controller": "baseline",
+      "height_rmse": 0.2468675579079393,
+      "climb_rms": 0.3452682524040563,
+      "pitch_std": 5.990826207279418,
+      "pitch_rate_rms": 15.79824856586653,
+      "relative_rate_rms": 9.229232649382034,
+      "heading_rmse": 7.239805884535145,
+      "throttle_std": 0.025840183772318146,
+      "brake_std": 0.035592245119486644,
+      "saturation_fraction": 0.0
+    },
+    {
+      "plant": "level",
+      "scenario": "gust_holdout",
+      "controller": "candidate",
+      "height_rmse": 0.23573559896892848,
+      "climb_rms": 0.33090651412785166,
+      "pitch_std": 6.266714528794654,
+      "pitch_rate_rms": 16.785622146255825,
+      "relative_rate_rms": 9.083472816473748,
+      "heading_rmse": 7.332729365743196,
+      "throttle_std": 0.028587220840015703,
+      "brake_std": 0.019277499871835576,
+      "saturation_fraction": 0.0
+    },
+    {
+      "plant": "level",
+      "scenario": "gust_holdout",
+      "controller": "effort",
+      "height_rmse": 0.2741627592464719,
+      "climb_rms": 0.35590058191190155,
+      "pitch_std": 6.157594644421088,
+      "pitch_rate_rms": 16.08279444410258,
+      "relative_rate_rms": 8.50376302062112,
+      "heading_rmse": 6.965576283171798,
+      "throttle_std": 0.025394058233748885,
+      "brake_std": 0.012984300767359729,
+      "saturation_fraction": 0.0
+    },
+    {
+      "plant": "level",
+      "scenario": "gust_holdout",
+      "controller": "oracle",
+      "height_rmse": 0.9382385566264551,
+      "climb_rms": 1.096450650988706,
+      "pitch_std": 13.85571889313237,
+      "pitch_rate_rms": 29.51670295912249,
+      "relative_rate_rms": 15.308168000802672,
+      "heading_rmse": 11.521784135233684,
+      "throttle_std": 0.13525543926634503,
+      "brake_std": 0.07297477846205369,
+      "saturation_fraction": 0.1154807532077987
+    },
+    {
+      "plant": "level",
+      "scenario": "gust_holdout",
+      "controller": "oracle_selected",
+      "height_rmse": 0.7289430844493391,
+      "climb_rms": 0.7601790022391457,
+      "pitch_std": 9.3194696232281,
+      "pitch_rate_rms": 16.336627607797087,
+      "relative_rate_rms": 8.356061309358866,
+      "heading_rmse": 7.046549242700605,
+      "throttle_std": 0.08537290426465914,
+      "brake_std": 0.028242603766193645,
+      "saturation_fraction": 0.05315780703216131
+    }
+  ],
+  "maneuver": [
+    {
+      "controller": "baseline",
+      "height_iae_m_s": 5.945737748864059,
+      "pitch_rate_rms": 1.6924134592009794,
+      "peak_pitch_rate": 13.538001898467664,
+      "heading_rmse": 1.1461013303134104
+    },
+    {
+      "controller": "candidate",
+      "height_iae_m_s": 5.9370654732497625,
+      "pitch_rate_rms": 1.7288167035431266,
+      "peak_pitch_rate": 13.042143897015968,
+      "heading_rmse": 1.2334129049013673
+    },
+    {
+      "controller": "oracle_selected",
+      "height_iae_m_s": 4.167055219159624,
+      "pitch_rate_rms": 0.2877567899940993,
+      "peak_pitch_rate": 0.7348690897927018,
+      "heading_rmse": 2.7743387501758803
+    }
+  ],
+  "windows": "Gust: 15 <= t < 80 s. Maneuver height/rate: 5 <= t < 80 s; heading: 20 <= t < 60 s."
+}

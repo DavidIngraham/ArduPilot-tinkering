@@ -1,0 +1,52 @@
+{
+  "outputs": [
+    "height",
+    "climb",
+    "payload q",
+    "throttle",
+    "brake"
+  ],
+  "rows": [
+    {
+      "controller": "baseline",
+      "relative_l2_errors": [
+        6.365945965151974e-06,
+        5.7602857855540234e-05,
+        0.00012884530494986776,
+        3.570788422664574e-05,
+        0.00020949019564538883
+      ]
+    },
+    {
+      "controller": "candidate",
+      "relative_l2_errors": [
+        6.162059847716011e-06,
+        5.407051619799865e-05,
+        0.00011990508583488077,
+        3.507967137914656e-05,
+        0.00018503576033850454
+      ]
+    },
+    {
+      "controller": "effort",
+      "relative_l2_errors": [
+        8.690402522413021e-06,
+        5.999904115953232e-05,
+        0.00012841109574976534,
+        2.8446015119583762e-05,
+        0.00017429326926363773
+      ]
+    },
+    {
+      "controller": "oracle_selected",
+      "relative_l2_errors": [
+        4.361221653883754e-06,
+        6.59942181679533e-05,
+        0.000175262285297,
+        5.315850557739142e-05,
+        5.7149606936906405e-05
+      ]
+    }
+  ],
+  "note": "1 mm ramp, smooth feedforward branch; nonlinear physics and travel-rate actuator included."
+}

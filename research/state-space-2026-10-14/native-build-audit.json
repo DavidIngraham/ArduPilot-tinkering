@@ -1,0 +1,92 @@
+{
+  "runs": [
+    {
+      "controller": "baseline",
+      "condition": "gust",
+      "version": {
+        "mavpackettype": "VER",
+        "TimeUS": 21497255,
+        "BT": 3,
+        "BST": 65535,
+        "Maj": 4,
+        "Min": 8,
+        "Pat": 0,
+        "FWT": 0,
+        "GH": 1372119344,
+        "FWS": "ArduPlane V4.8.0-dev (51c8e130)",
+        "APJ": 0,
+        "BU": 3,
+        "FV": 4,
+        "IMI": 0,
+        "ICI": 0
+      }
+    },
+    {
+      "controller": "candidate",
+      "condition": "gust",
+      "version": {
+        "mavpackettype": "VER",
+        "TimeUS": 21517255,
+        "BT": 3,
+        "BST": 65535,
+        "Maj": 4,
+        "Min": 8,
+        "Pat": 0,
+        "FWT": 0,
+        "GH": 1372119344,
+        "FWS": "ArduPlane V4.8.0-dev (51c8e130)",
+        "APJ": 0,
+        "BU": 3,
+        "FV": 4,
+        "IMI": 0,
+        "ICI": 0
+      }
+    },
+    {
+      "controller": "baseline",
+      "condition": "calm",
+      "version": {
+        "mavpackettype": "VER",
+        "TimeUS": 21517255,
+        "BT": 3,
+        "BST": 65535,
+        "Maj": 4,
+        "Min": 8,
+        "Pat": 0,
+        "FWT": 0,
+        "GH": 1372119344,
+        "FWS": "ArduPlane V4.8.0-dev (51c8e130)",
+        "APJ": 0,
+        "BU": 3,
+        "FV": 4,
+        "IMI": 0,
+        "ICI": 0
+      }
+    },
+    {
+      "controller": "candidate",
+      "condition": "calm",
+      "version": {
+        "mavpackettype": "VER",
+        "TimeUS": 21517255,
+        "BT": 3,
+        "BST": 65535,
+        "Maj": 4,
+        "Min": 8,
+        "Pat": 0,
+        "FWT": 0,
+        "GH": 1372119344,
+        "FWS": "ArduPlane V4.8.0-dev (51c8e130)",
+        "APJ": 0,
+        "BU": 3,
+        "FV": 4,
+        "IMI": 0,
+        "ICI": 0
+      }
+    }
+  ],
+  "checkout_revision": "c44434dee6d68340fa463c0341d245f77451cd19",
+  "binary_sha256": "228fc434eddea12e8c0cfa0016003e88ee69693555da0a0fdba0269a7f017503",
+  "source_difference_from_embedded_revision": " ArduPlane/Attitude.cpp                   |  6 ++++-\n ArduPlane/PG_TurnController.cpp          |  9 ++++---\n ArduPlane/PG_TurnController.h            |  2 +-\n ArduPlane/Parameters.cpp                 | 25 ++++++++++++++++++\n ArduPlane/Parameters.h                   |  3 +++\n ArduPlane/Plane.h                        |  5 +++-\n ArduPlane/servos.cpp                     | 44 +++++++++++++++++++++++++++-----\n libraries/AP_TECS/AP_TECS_Paraglider.cpp |  5 +++-\n 8 files changed, 85 insertions(+), 14 deletions(-)\n",
+  "note": "Executable build tree is not inferred from the checkout hash. The BIN version records, settings and binary hash identify the tested executable. The article documents the source-difference assessment for this study."
+}

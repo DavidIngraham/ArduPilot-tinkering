@@ -1,0 +1,30 @@
+{
+  "baseline": {
+    "total": 648,
+    "unstable": 0,
+    "worst": {
+      "case": "low_voltage",
+      "controller": "baseline",
+      "throttle_gain": 1.25,
+      "brake_gain": 1.25,
+      "throttle_delay_ms": 80,
+      "brake_delay_ms": 80,
+      "rotor_rate": 0.7,
+      "max_real": -0.039659267835018275
+    }
+  },
+  "candidate": {
+    "total": 648,
+    "unstable": 0,
+    "worst": {
+      "case": "low_voltage",
+      "controller": "candidate",
+      "throttle_gain": 1.25,
+      "brake_gain": 1.25,
+      "throttle_delay_ms": 80,
+      "brake_delay_ms": 80,
+      "rotor_rate": 0.7,
+      "max_real": -0.04308867764225159
+    }
+  }
+}

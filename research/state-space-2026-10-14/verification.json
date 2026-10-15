@@ -1,0 +1,246 @@
+{
+  "linear_cost_checks": [
+    {
+      "case": "level",
+      "controller": "baseline",
+      "lyapunov_vs_time_sum_relative_error": 1.3467804793391854e-12
+    },
+    {
+      "case": "level",
+      "controller": "candidate",
+      "lyapunov_vs_time_sum_relative_error": 5.537162869263203e-13
+    },
+    {
+      "case": "climb",
+      "controller": "baseline",
+      "lyapunov_vs_time_sum_relative_error": 6.811485691283174e-13
+    },
+    {
+      "case": "climb",
+      "controller": "candidate",
+      "lyapunov_vs_time_sum_relative_error": 7.468762280394284e-13
+    },
+    {
+      "case": "descent",
+      "controller": "baseline",
+      "lyapunov_vs_time_sum_relative_error": 2.4713434398265425e-13
+    },
+    {
+      "case": "descent",
+      "controller": "candidate",
+      "lyapunov_vs_time_sum_relative_error": 5.808547863231114e-13
+    },
+    {
+      "case": "low_voltage",
+      "controller": "baseline",
+      "lyapunov_vs_time_sum_relative_error": 2.66494442413643e-12
+    },
+    {
+      "case": "low_voltage",
+      "controller": "candidate",
+      "lyapunov_vs_time_sum_relative_error": 3.336174997155877e-13
+    },
+    {
+      "case": "dynamic_roll",
+      "controller": "baseline",
+      "lyapunov_vs_time_sum_relative_error": 1.5393604011260962e-12
+    },
+    {
+      "case": "dynamic_roll",
+      "controller": "candidate",
+      "lyapunov_vs_time_sum_relative_error": 2.844192166920425e-13
+    },
+    {
+      "case": "dynamic_climb",
+      "controller": "baseline",
+      "lyapunov_vs_time_sum_relative_error": 1.4424467211343968e-13
+    },
+    {
+      "case": "dynamic_climb",
+      "controller": "candidate",
+      "lyapunov_vs_time_sum_relative_error": 8.133953465977591e-13
+    }
+  ],
+  "small_signal_checks": [
+    {
+      "controller": "baseline",
+      "relative_l2_errors": [
+        6.365945965151974e-06,
+        5.7602857855540234e-05,
+        0.00012884530494986776,
+        3.570788422664574e-05,
+        0.00020949019564538883
+      ]
+    },
+    {
+      "controller": "candidate",
+      "relative_l2_errors": [
+        6.162059847716011e-06,
+        5.407051619799865e-05,
+        0.00011990508583488077,
+        3.507967137914656e-05,
+        0.00018503576033850454
+      ]
+    },
+    {
+      "controller": "effort",
+      "relative_l2_errors": [
+        8.690402522413021e-06,
+        5.999904115953232e-05,
+        0.00012841109574976534,
+        2.8446015119583762e-05,
+        0.00017429326926363773
+      ]
+    },
+    {
+      "controller": "oracle_selected",
+      "relative_l2_errors": [
+        4.361221653883754e-06,
+        6.59942181679533e-05,
+        0.000175262285297,
+        5.315850557739142e-05,
+        5.7149606936906405e-05
+      ]
+    }
+  ],
+  "robustness_cases": 1296,
+  "local_links_valid": true,
+  "native_audits": [
+    {
+      "controller": "baseline",
+      "condition": "gust",
+      "audited_parameters": [
+        "PG_TURN_ENABLE",
+        "PG_TURN_FF",
+        "PG_TURN_P",
+        "PG_TURN_I",
+        "PG_TURN_IMAX",
+        "PG_TURN_RMAX",
+        "PG_TURN_ACCEL",
+        "PG_TURN_FILT",
+        "PG_TURN_TC",
+        "PG_TURN_ASPD",
+        "PG_TURN_RDAMP",
+        "PG_TURN_D_FF",
+        "TECS_PG_ENABLE",
+        "TECS_PG_HR_TC",
+        "TECS_PG_PR_FILT",
+        "TECS_PG_PR_WASH",
+        "TECS_PTCH_DAMP",
+        "TECS_HDEM_TCONST",
+        "TECS_CLMB_MAX",
+        "TECS_SINK_MAX",
+        "TECS_SINK_MIN",
+        "TECS_TIME_CONST",
+        "TECS_INTEG_GAIN",
+        "TECS_VERT_ACC",
+        "FWD_BAT_VOLT_MAX",
+        "FWD_BAT_VOLT_MIN",
+        "FWD_BAT_IDX",
+        "TECS_PG_PR_FILT2"
+      ]
+    },
+    {
+      "controller": "candidate",
+      "condition": "gust",
+      "audited_parameters": [
+        "PG_TURN_ENABLE",
+        "PG_TURN_FF",
+        "PG_TURN_P",
+        "PG_TURN_I",
+        "PG_TURN_IMAX",
+        "PG_TURN_RMAX",
+        "PG_TURN_ACCEL",
+        "PG_TURN_FILT",
+        "PG_TURN_TC",
+        "PG_TURN_ASPD",
+        "PG_TURN_RDAMP",
+        "PG_TURN_D_FF",
+        "TECS_PG_ENABLE",
+        "TECS_PG_HR_TC",
+        "TECS_PG_PR_FILT",
+        "TECS_PG_PR_WASH",
+        "TECS_PTCH_DAMP",
+        "TECS_HDEM_TCONST",
+        "TECS_CLMB_MAX",
+        "TECS_SINK_MAX",
+        "TECS_SINK_MIN",
+        "TECS_TIME_CONST",
+        "TECS_INTEG_GAIN",
+        "TECS_VERT_ACC",
+        "FWD_BAT_VOLT_MAX",
+        "FWD_BAT_VOLT_MIN",
+        "FWD_BAT_IDX",
+        "TECS_PG_PR_FILT2"
+      ]
+    },
+    {
+      "controller": "baseline",
+      "condition": "calm",
+      "audited_parameters": [
+        "PG_TURN_ENABLE",
+        "PG_TURN_FF",
+        "PG_TURN_P",
+        "PG_TURN_I",
+        "PG_TURN_IMAX",
+        "PG_TURN_RMAX",
+        "PG_TURN_ACCEL",
+        "PG_TURN_FILT",
+        "PG_TURN_TC",
+        "PG_TURN_ASPD",
+        "PG_TURN_RDAMP",
+        "PG_TURN_D_FF",
+        "TECS_PG_ENABLE",
+        "TECS_PG_HR_TC",
+        "TECS_PG_PR_FILT",
+        "TECS_PG_PR_WASH",
+        "TECS_PTCH_DAMP",
+        "TECS_HDEM_TCONST",
+        "TECS_CLMB_MAX",
+        "TECS_SINK_MAX",
+        "TECS_SINK_MIN",
+        "TECS_TIME_CONST",
+        "TECS_INTEG_GAIN",
+        "TECS_VERT_ACC",
+        "FWD_BAT_VOLT_MAX",
+        "FWD_BAT_VOLT_MIN",
+        "FWD_BAT_IDX",
+        "TECS_PG_PR_FILT2"
+      ]
+    },
+    {
+      "controller": "candidate",
+      "condition": "calm",
+      "audited_parameters": [
+        "PG_TURN_ENABLE",
+        "PG_TURN_FF",
+        "PG_TURN_P",
+        "PG_TURN_I",
+        "PG_TURN_IMAX",
+        "PG_TURN_RMAX",
+        "PG_TURN_ACCEL",
+        "PG_TURN_FILT",
+        "PG_TURN_TC",
+        "PG_TURN_ASPD",
+        "PG_TURN_RDAMP",
+        "PG_TURN_D_FF",
+        "TECS_PG_ENABLE",
+        "TECS_PG_HR_TC",
+        "TECS_PG_PR_FILT",
+        "TECS_PG_PR_WASH",
+        "TECS_PTCH_DAMP",
+        "TECS_HDEM_TCONST",
+        "TECS_CLMB_MAX",
+        "TECS_SINK_MAX",
+        "TECS_SINK_MIN",
+        "TECS_TIME_CONST",
+        "TECS_INTEG_GAIN",
+        "TECS_VERT_ACC",
+        "FWD_BAT_VOLT_MAX",
+        "FWD_BAT_VOLT_MIN",
+        "FWD_BAT_IDX",
+        "TECS_PG_PR_FILT2"
+      ]
+    }
+  ]
+}

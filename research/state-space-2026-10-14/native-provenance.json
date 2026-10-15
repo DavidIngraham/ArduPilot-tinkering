@@ -1,0 +1,5 @@
+{
+  "checkout_revision": "c44434dee6d68340fa463c0341d245f77451cd19",
+  "binary_sha256": "228fc434eddea12e8c0cfa0016003e88ee69693555da0a0fdba0269a7f017503",
+  "note": "Executable build tree is not inferred from the checkout hash. The BIN version records, settings and binary hash identify the tested executable. The article documents the source-difference assessment for this study."
+}

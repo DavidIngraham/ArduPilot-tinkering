@@ -1,0 +1,130 @@
+[
+  {
+    "controller": "baseline",
+    "condition": "calm",
+    "max_waypoint_height_error_m": 1.6769999999999925,
+    "max_corner_overshoot_m": 0.3785091755320025,
+    "loiters": {
+      "3": {
+        "start_s": 252.416,
+        "end_s": 336.216,
+        "duration_s": 83.80000000000001,
+        "pitch_std_deg": 0.03278162392063183,
+        "pitch_rate_rms_deg_s": 0.46416919535962053,
+        "climb_rms_m_s": 0.003975618772877912,
+        "height_rms_m": 0.03741428319982696,
+        "throttle_std_pct": 0.07671611466933112,
+        "throttle_min_pct": 43.0,
+        "throttle_max_pct": 45.2
+      },
+      "8": {
+        "start_s": 792.616,
+        "end_s": 864.516,
+        "duration_s": 71.89999999999998,
+        "pitch_std_deg": 0.04269333481919963,
+        "pitch_rate_rms_deg_s": 1.2850699745358276,
+        "climb_rms_m_s": 0.0050803028925020905,
+        "height_rms_m": 0.04614879117166809,
+        "throttle_std_pct": 0.12085336210386206,
+        "throttle_min_pct": 40.699999999999996,
+        "throttle_max_pct": 44.9
+      }
+    }
+  },
+  {
+    "controller": "baseline",
+    "condition": "gust",
+    "max_waypoint_height_error_m": 1.5129999999999981,
+    "max_corner_overshoot_m": 2.2941969738061347,
+    "loiters": {
+      "3": {
+        "start_s": 255.316,
+        "end_s": 339.81600000000003,
+        "duration_s": 84.50000000000003,
+        "pitch_std_deg": 6.351658691994725,
+        "pitch_rate_rms_deg_s": 18.00066833260262,
+        "climb_rms_m_s": 0.3811391994329788,
+        "height_rms_m": 0.38372246764488205,
+        "throttle_std_pct": 3.1511998446571856,
+        "throttle_min_pct": 38.1,
+        "throttle_max_pct": 53.1
+      },
+      "8": {
+        "start_s": 803.116,
+        "end_s": 877.716,
+        "duration_s": 74.60000000000002,
+        "pitch_std_deg": 6.516119428826611,
+        "pitch_rate_rms_deg_s": 19.620088150951087,
+        "climb_rms_m_s": 0.397901746418802,
+        "height_rms_m": 0.39164336091125157,
+        "throttle_std_pct": 3.321598769430701,
+        "throttle_min_pct": 36.6,
+        "throttle_max_pct": 53.6
+      }
+    }
+  },
+  {
+    "controller": "candidate",
+    "condition": "calm",
+    "max_waypoint_height_error_m": 1.661999999999992,
+    "max_corner_overshoot_m": 0.41186765312508555,
+    "loiters": {
+      "3": {
+        "start_s": 254.216,
+        "end_s": 338.016,
+        "duration_s": 83.80000000000001,
+        "pitch_std_deg": 0.04346219608343944,
+        "pitch_rate_rms_deg_s": 0.480961059342344,
+        "climb_rms_m_s": 0.004700649322534698,
+        "height_rms_m": 0.04078125899163582,
+        "throttle_std_pct": 0.1096873705023305,
+        "throttle_min_pct": 40.9,
+        "throttle_max_pct": 45.300000000000004
+      },
+      "8": {
+        "start_s": 794.616,
+        "end_s": 866.616,
+        "duration_s": 72.0,
+        "pitch_std_deg": 0.04573511006265935,
+        "pitch_rate_rms_deg_s": 1.282216366325452,
+        "climb_rms_m_s": 0.005601349571310543,
+        "height_rms_m": 0.051203408611694125,
+        "throttle_std_pct": 0.1279656124185013,
+        "throttle_min_pct": 40.699999999999996,
+        "throttle_max_pct": 45.0
+      }
+    }
+  },
+  {
+    "controller": "candidate",
+    "condition": "gust",
+    "max_waypoint_height_error_m": 2.0019999999999953,
+    "max_corner_overshoot_m": 1.41262199355981,
+    "loiters": {
+      "3": {
+        "start_s": 259.43600000000004,
+        "end_s": 343.536,
+        "duration_s": 84.09999999999997,
+        "pitch_std_deg": 6.6932331442140045,
+        "pitch_rate_rms_deg_s": 19.416640977026653,
+        "climb_rms_m_s": 0.3778365952541854,
+        "height_rms_m": 0.35559695537524943,
+        "throttle_std_pct": 3.5027320720132913,
+        "throttle_min_pct": 38.4,
+        "throttle_max_pct": 54.0
+      },
+      "8": {
+        "start_s": 806.5360000000001,
+        "end_s": 883.936,
+        "duration_s": 77.39999999999998,
+        "pitch_std_deg": 7.020965096527616,
+        "pitch_rate_rms_deg_s": 20.098553665795507,
+        "climb_rms_m_s": 0.38718756767346807,
+        "height_rms_m": 0.35551080283715975,
+        "throttle_std_pct": 3.6730123483649404,
+        "throttle_min_pct": 38.2,
+        "throttle_max_pct": 55.300000000000004
+      }
+    }
+  }
+]

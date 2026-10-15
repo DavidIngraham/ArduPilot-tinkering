@@ -30,6 +30,7 @@ The original controller flew autonomous missions at Trout Lake after initial tes
 4. [Simulation and controller refinement](docs/controller-design.md): articulated dynamics and classical control analysis.
 5. [Spot landing](docs/spot-landing.md): approach guidance, brake allocation and flare.
 6. [Toward a precision swoop landing](docs/swoop-landing.md): turning approaches and remaining touchdown limitations.
+7. [What state-space analysis added](docs/controller-state-space.md): joint tuning, actuator and sensor diagnostics, and a full-state controller comparison.
 
 [Data and methods](docs/data-and-methods.md) explains the evidence and model assumptions. [Plane trajectory planning](docs/trajectory.md) covers a related investigation into waypoint transitions.
 

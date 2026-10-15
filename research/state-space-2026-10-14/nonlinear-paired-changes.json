@@ -1,0 +1,66 @@
+[
+  {
+    "plant": "level",
+    "scenario": "gust_holdout",
+    "height_rmse": -4.51,
+    "pitch_rate_rms": 6.25,
+    "brake_std": -45.84,
+    "throttle_std": 10.63
+  },
+  {
+    "plant": "level",
+    "scenario": "strong_gust",
+    "height_rmse": -4.5,
+    "pitch_rate_rms": 6.52,
+    "brake_std": -41.73,
+    "throttle_std": 9.01
+  },
+  {
+    "plant": "dynamic_roll",
+    "scenario": "gust_holdout",
+    "height_rmse": -4.41,
+    "pitch_rate_rms": 6.93,
+    "brake_std": -50.42,
+    "throttle_std": 11.86
+  },
+  {
+    "plant": "dynamic_roll",
+    "scenario": "strong_gust",
+    "height_rmse": -6.03,
+    "pitch_rate_rms": 5.19,
+    "brake_std": -48.26,
+    "throttle_std": 8.45
+  },
+  {
+    "plant": "dynamic_climb",
+    "scenario": "gust_holdout",
+    "height_rmse": -6.22,
+    "pitch_rate_rms": 7.94,
+    "brake_std": -48.4,
+    "throttle_std": 11.19
+  },
+  {
+    "plant": "dynamic_climb",
+    "scenario": "strong_gust",
+    "height_rmse": -5.82,
+    "pitch_rate_rms": 7.8,
+    "brake_std": -44.69,
+    "throttle_std": 7.74
+  },
+  {
+    "plant": "low_voltage",
+    "scenario": "gust_holdout",
+    "height_rmse": -4.92,
+    "pitch_rate_rms": 6.52,
+    "brake_std": -45.72,
+    "throttle_std": 11.62
+  },
+  {
+    "plant": "low_voltage",
+    "scenario": "strong_gust",
+    "height_rmse": -4.87,
+    "pitch_rate_rms": 6.58,
+    "brake_std": -41.8,
+    "throttle_std": 9.65
+  }
+]

@@ -1,0 +1,22 @@
+{
+  "outputs": [
+    "height",
+    "climb",
+    "payload q",
+    "throttle",
+    "brake"
+  ],
+  "note": "1 mm ramp, smooth climb feedforward branch; includes nonlinear physics and travel-rate actuator.",
+  "rows": [
+    {
+      "controller": "candidate",
+      "relative_l2_errors": [
+        6.162059847716011e-06,
+        5.407051619799865e-05,
+        0.00011990508583488077,
+        3.507967137914656e-05,
+        0.00018503576033850454
+      ]
+    }
+  ]
+}

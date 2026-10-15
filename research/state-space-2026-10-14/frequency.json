@@ -1,0 +1,14 @@
+{
+  "baseline": {
+    "max_absolute_matrix_difference": 6.824163363467863e-14,
+    "peak_actuator_sensitivity": 6.026903894121222,
+    "peak_diagonal_sensitivity": 2.1807090146273524,
+    "peak_frequency_hz": 2.067053419436971
+  },
+  "candidate": {
+    "max_absolute_matrix_difference": 2.0952969941394858e-14,
+    "peak_actuator_sensitivity": 2.265823536380622,
+    "peak_diagonal_sensitivity": 1.8543236837616128,
+    "peak_frequency_hz": 2.005031127139673
+  }
+}

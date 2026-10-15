@@ -1,0 +1,5 @@
+{
+  "move_penalty": 100.0,
+  "max_real": -0.20508739151645178,
+  "note": "Full-state LQI, normalized input increments; nonlinear validation must enforce limits."
+}

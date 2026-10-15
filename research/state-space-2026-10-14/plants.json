@@ -1,0 +1,149 @@
+{
+  "dt": 0.02,
+  "states": [
+    "payload roll",
+    "payload pitch",
+    "relative roll",
+    "relative pitch",
+    "relative yaw",
+    "forward velocity",
+    "side velocity",
+    "vertical velocity",
+    "payload p",
+    "payload q",
+    "payload r",
+    "canopy p",
+    "canopy q",
+    "canopy r",
+    "rotor / 1000 RPM",
+    "height"
+  ],
+  "state_scales": [
+    0.17453292519943295,
+    0.17453292519943295,
+    0.17453292519943295,
+    0.17453292519943295,
+    0.17453292519943295,
+    0.5,
+    0.5,
+    0.5,
+    0.5235987755982988,
+    0.5235987755982988,
+    0.5235987755982988,
+    0.5235987755982988,
+    0.5235987755982988,
+    0.5235987755982988,
+    1.0,
+    1.0
+  ],
+  "input_scales": [
+    0.1,
+    0.1
+  ],
+  "source_hashes": {
+    "dynamics.cpp": "1093c4641a4c248b468fb3152d28d9270a003b1ec56a1e3f5b7f1b8bceedfdf6",
+    "libdynamics.so": "19d488f1d1dc3867e831607cb8b506296db3ed051e615b4566c19afce877092e",
+    "profiles.py": "e3beaace39e5b867e25b3b0505251e5eaef962d6c99734717a7eb37d05c107fb",
+    "parameters.json": "408ced75e166d8ad20b7684cd3d3fa9d0c66712fd6a9216983b29f42f58adb1a",
+    "actuator.py": "1b1dbc9d47cf09807c272d6ea137751c7194a9921544609d439bf75179c6ab2a",
+    "mission-controller-candidate.json": "502037fc05ed96e408da496e7011d56f898e5abfaea93c9c95894b4b28071974"
+  },
+  "cases": [
+    {
+      "name": "level",
+      "profile": "mission",
+      "climb": 0.0,
+      "voltage": 22.2,
+      "trim_residual": 6.744124018466896e-14,
+      "zero_drift": 5.1392472853545036e-15,
+      "jacobian_relative_error": 6.129139193755213e-11,
+      "input_jacobian_relative_error": 3.391849968760466e-11,
+      "command": [
+        0.4458960456256897,
+        0.0,
+        3.747198112001202
+      ],
+      "speed": 4.382873735057615
+    },
+    {
+      "name": "climb",
+      "profile": "mission",
+      "climb": 0.5,
+      "voltage": 22.2,
+      "trim_residual": 7.174288543882442e-14,
+      "zero_drift": 7.420255765205707e-15,
+      "jacobian_relative_error": 7.798171534923523e-11,
+      "input_jacobian_relative_error": 6.01954352515854e-11,
+      "command": [
+        0.5253415455857027,
+        0.0,
+        6.1815225275437005
+      ],
+      "speed": 4.322396361286759
+    },
+    {
+      "name": "descent",
+      "profile": "mission",
+      "climb": -0.5,
+      "voltage": 22.2,
+      "trim_residual": 6.715006126106909e-13,
+      "zero_drift": 1.749855254743575e-14,
+      "jacobian_relative_error": 4.976783572168765e-11,
+      "input_jacobian_relative_error": 4.0103318606594024e-11,
+      "command": [
+        0.35587839557005774,
+        0.0,
+        1.8509578320069875
+      ],
+      "speed": 4.455560687483782
+    },
+    {
+      "name": "low_voltage",
+      "profile": "mission",
+      "climb": 0.0,
+      "voltage": 20.4,
+      "trim_residual": 4.249759940872729e-14,
+      "zero_drift": 2.0026003810005085e-15,
+      "jacobian_relative_error": 6.553706097309657e-11,
+      "input_jacobian_relative_error": 2.4644355322231075e-11,
+      "command": [
+        0.48933068212202174,
+        0.0,
+        3.7471981120010267
+      ],
+      "speed": 4.382873735057551
+    },
+    {
+      "name": "dynamic_roll",
+      "profile": "dynamic_roll",
+      "climb": 0.0,
+      "voltage": 22.2,
+      "trim_residual": 2.850185005000519e-14,
+      "zero_drift": 3.1367955261051635e-14,
+      "jacobian_relative_error": 9.381927896652887e-11,
+      "input_jacobian_relative_error": 3.7952412616307555e-11,
+      "command": [
+        0.4452835956001868,
+        0.0,
+        3.747198116126359
+      ],
+      "speed": 4.395482345815717
+    },
+    {
+      "name": "dynamic_climb",
+      "profile": "dynamic_roll",
+      "climb": 0.5,
+      "voltage": 22.2,
+      "trim_residual": 3.229926016443134e-13,
+      "zero_drift": 6.671662320885683e-15,
+      "jacobian_relative_error": 1.2324799786487755e-10,
+      "input_jacobian_relative_error": 3.8070475019376654e-11,
+      "command": [
+        0.5241814452935993,
+        0.0,
+        5.817015305123008
+      ],
+      "speed": 4.339217105200013
+    }
+  ]
+}
