@@ -60,7 +60,7 @@ try {
   );
   console.log("BOOT OK");
   assert.ok(Math.abs(sim.state.alt) < 2, "EKF must initialize on the ground");
-  for (const mode of ["MANUAL", "FBWA", "CRUISE"]) {
+  for (const mode of ["MANUAL", "FBWA", "FBWB", "CRUISE"]) {
     await sim.mode(mode);
     console.log("MODE OK", mode);
   }
@@ -125,6 +125,19 @@ try {
     "Mission must advance to a navigation item",
   );
   console.log("FLIGHT OK", JSON.stringify(sim.state));
+  for (const mode of ["AUTO", "LOITER"]) {
+    await sim.mode(mode);
+    for (const direction of [1, -1]) {
+      sim.controls(direction, 0, 0.45);
+      await new Promise((r) => setTimeout(r, 2000));
+      assert.ok(
+        direction * sim.state.targetRoll! > 1,
+        `${mode} must mix pilot steering: ${sim.state.targetRoll}`,
+      );
+    }
+    sim.controls(0, 0, 0.45);
+    console.log("AUTOPILOT NUDGE OK", mode);
+  }
   await sim.mode("FBWA");
   sim.controls(0.6, 0, 0.6);
   const yaw = sim.state.yaw;
@@ -156,6 +169,33 @@ try {
   );
   await assert.rejects(sim.altitude(NaN));
   console.log("MANUAL TAKEOVER AND CRUISE OK");
+  for (const mode of ["FBWB", "CRUISE"]) {
+    await sim.mode(mode);
+    sim.controls(0, 0, 0.5);
+    await sim.altitude(45);
+    sim.controls(0, 0, 1);
+    await new Promise((r) => setTimeout(r, 2500));
+    assert.ok(
+      sim.state.targetAlt! > 46,
+      `${mode} lever must raise AP altitude target: ${sim.state.targetAlt}`,
+    );
+    sim.controls(0, 0, 0.5);
+    await new Promise((r) => setTimeout(r, 1000));
+    const hold = sim.state.targetAlt!;
+    await new Promise((r) => setTimeout(r, 1000));
+    assert.ok(
+      Math.abs(sim.state.targetAlt! - hold) < 0.3,
+      `${mode} release must hold target`,
+    );
+    sim.controls(0, 0, 0);
+    await new Promise((r) => setTimeout(r, 2000));
+    assert.ok(
+      sim.state.targetAlt! < hold - 1,
+      `${mode} lever must lower AP altitude target`,
+    );
+    sim.controls(0, 0, 0.5);
+    console.log("ALTITUDE LEVER OK", mode);
+  }
   assert.ok(
     truthFrames > 50 && maxJoint > 0.01,
     "Independent canopy/payload truth must stream",

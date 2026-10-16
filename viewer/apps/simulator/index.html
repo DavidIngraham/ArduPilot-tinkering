@@ -22,7 +22,7 @@
       </div>
       <span id="connection" role="status">Preparing</span
       ><button id="panel-toggle" aria-expanded="false" aria-controls="panel">
-        Mission &amp; wind
+        Mission &amp; weather
       </button>
     </header>
     <section class="telemetry" aria-label="Flight telemetry">
@@ -32,6 +32,7 @@
         <select id="mode" aria-label="Flight mode" disabled>
           <option>MANUAL</option>
           <option>FBWA</option>
+          <option>FBWB</option>
           <option>CRUISE</option>
           <option>AUTO</option>
           <option>LOITER</option>
@@ -81,9 +82,9 @@
     </section>
     <aside id="panel" hidden>
       <div class="eyebrow">
-        MISSION &amp; WIND <span id="armed">DISARMED</span>
+        MISSION &amp; WEATHER <span id="armed">DISARMED</span>
       </div>
-      <h1>Mission &amp; wind</h1>
+      <h1>Mission &amp; weather</h1>
       <p class="intro">
         Fly MicroAGU from your browser, or let ArduPlane follow a mission.
       </p>
@@ -147,9 +148,66 @@
         />
         <p class="hint">
           Direction is where wind comes from: 0° N, 90° E. Positive vertical air
-          rises. Uniform, steady wind.
+          rises. Gusts and thermal lift add to this background wind.
         </p>
-        <button id="apply-wind" disabled>Apply wind</button>
+        <label for="turbulence"
+          >Turbulence <output id="turbulence-value">0.0 m/s</output></label
+        >
+        <input
+          id="turbulence"
+          type="range"
+          min="0"
+          max="2"
+          step="0.1"
+          value="0"
+        />
+        <label for="thermal-strength"
+          >Thermal lift
+          <output id="thermal-strength-value">0.0 m/s</output></label
+        >
+        <input
+          id="thermal-strength"
+          type="range"
+          min="0"
+          max="5"
+          step="0.1"
+          value="0"
+        />
+        <label for="thermal-radius"
+          >Thermal radius <output id="thermal-radius-value">40 m</output></label
+        >
+        <input
+          id="thermal-radius"
+          type="range"
+          min="5"
+          max="200"
+          step="5"
+          value="40"
+        />
+        <div class="row thermal-position">
+          <label
+            >North · m<input
+              id="thermal-north"
+              type="number"
+              min="-1000"
+              max="1000"
+              value="0"
+          /></label>
+          <label
+            >East · m<input
+              id="thermal-east"
+              type="number"
+              min="-1000"
+              max="1000"
+              value="0"
+          /></label>
+        </div>
+        <button id="thermal-here">Place at aircraft</button>
+        <p class="hint">
+          Thermal position is relative to home. Synthetic gusts and a smooth,
+          stationary thermal column; zero strength disables each.
+        </p>
+        <button id="apply-wind" disabled>Apply weather</button>
         <p id="wind-status" role="status">Calm</p>
       </section>
       <details>
@@ -157,13 +215,14 @@
         <p>
           Right control: left/right steering. In MANUAL, pull down for both
           brakes. Arrow keys do the same. The vertical slider and W/S control
-          throttle; automatic modes control power themselves. Release centers
-          steering.
+          throttle in MANUAL/FBWA. In FBWB/CRUISE it commands climb or descent
+          and springs to altitude hold on release. Left/right also nudges
+          AUTO/LOITER; release returns steering to the autopilot.
         </p>
         <p>
           MANUAL directly controls brakes and throttle. FBWA uses heading-rate
-          steering with manual throttle. CRUISE controls heading and altitude;
-          click the altitude display to set its altitude target.
+          steering with manual throttle. FBWB controls altitude; CRUISE also
+          holds heading; click the altitude display to set its altitude target.
         </p>
         <p>
           Starts held on the ground while sensors initialize. The default
@@ -196,12 +255,12 @@
     </div>
     <div class="flight-status">
       <p id="status" role="status">Initializing upright…</p>
-      <p id="mode-help"></p>
     </div>
     <section class="pilot-controls" aria-label="Pilot controls">
       <div class="throttle-box">
         <label for="throttle"
-          >THROTTLE <output id="throttle-value">0%</output></label
+          ><span id="throttle-label">THROTTLE</span>
+          <output id="throttle-value">0%</output></label
         ><input
           id="throttle"
           type="range"
@@ -210,7 +269,7 @@
           value="0"
           aria-label="Throttle percent"
           disabled
-        /><small id="throttle-hint">W / S</small>
+        />
       </div>
       <div class="stick-box">
         <div
@@ -222,7 +281,6 @@
           <span class="cross horizontal"></span
           ><span class="cross vertical"></span><span id="knob"></span>
         </div>
-        <small id="stick-label">← STEER →</small>
       </div>
     </section>
     <footer>

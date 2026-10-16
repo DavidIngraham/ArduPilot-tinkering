@@ -1,6 +1,7 @@
 export const MODES: Record<string, number> = {
   MANUAL: 0,
   FBWA: 5,
+  FBWB: 6,
   CRUISE: 7,
   AUTO: 10,
   LOITER: 12,
@@ -13,6 +14,7 @@ export interface Telemetry {
   lon: number;
   alt: number;
   targetAlt: number | null;
+  targetRoll: number | null;
   speed: number;
   climb: number;
   roll: number;
@@ -34,6 +36,7 @@ export function initialTelemetry(home: {
     lon: home.lon,
     alt: 0,
     targetAlt: null,
+    targetRoll: null,
     speed: 0,
     climb: 0,
     roll: 0,

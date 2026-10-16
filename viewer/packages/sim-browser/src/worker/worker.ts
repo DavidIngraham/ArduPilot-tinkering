@@ -40,7 +40,7 @@ self.onmessage = async ({ data }: MessageEvent<WorkerRequest>) => {
         await sim.altitude(args[0]);
         break;
       case "wind":
-        sim.physics.setWind(args[0], args[1], args[2]);
+        sim.physics.setWind(...args);
         break;
       case "launch":
         await sim.launch(args[0]);

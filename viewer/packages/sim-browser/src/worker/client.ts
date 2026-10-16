@@ -1,4 +1,5 @@
 import type { Frame } from "@microagu/contracts/recordings";
+import type { Weather } from "@microagu/contracts/weather";
 import {
   initialTelemetry,
   type Telemetry,
@@ -124,8 +125,8 @@ export class SimulatorClient {
   execute() {
     return this.call("execute");
   }
-  wind(speed: number, from: number, up: number) {
-    return this.call("wind", speed, from, up);
+  wind(speed: number, from: number, up: number, weather?: Weather) {
+    return this.call("wind", speed, from, up, weather);
   }
   controls(roll: number, pitch: number, throttle: number) {
     if (this.disposed) return;

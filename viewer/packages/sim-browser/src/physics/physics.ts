@@ -1,4 +1,6 @@
 import { RuntimeAssets } from "../assets/runtime";
+import { Atmosphere } from "./atmosphere";
+import type { Weather } from "@microagu/contracts/weather";
 import { Quaternion, Vector3 } from "@microagu/contracts/math";
 import type { Frame } from "@microagu/contracts/recordings";
 import type { Kernel } from "../../../../generated/physics/sim_wasm";
@@ -30,6 +32,7 @@ export class Physics {
   private frame: number | null = null;
   private cached = "";
   private windNED = [0, 0, 0];
+  private atmosphere = new Atmosphere();
   private surfaceEnv: Float64Array | null = null;
   launchPhase = 2;
   inflation = 1;
@@ -79,20 +82,9 @@ export class Physics {
       this.state = Array.from(pose.subarray(0, 26));
     }
   }
-  setWind(speed: number, fromDegrees: number, up: number) {
-    if (
-      ![speed, fromDegrees, up].every(Number.isFinite) ||
-      speed < 0 ||
-      speed > 10 ||
-      fromDegrees < 0 ||
-      fromDegrees > 360 ||
-      Math.abs(up) > 3
-    )
-      throw Error(
-        "Wind must be 0–10 m/s, from 0–360°, with vertical air ±3 m/s.",
-      );
-    const angle = (fromDegrees * Math.PI) / 180;
-    this.windNED = [-speed * Math.cos(angle), -speed * Math.sin(angle), -up];
+  setWind(speed: number, fromDegrees: number, up: number, weather?: Weather) {
+    this.atmosphere.configure(speed, fromDegrees, up, weather);
+    this.windNED = this.atmosphere.sample(0, this.state[13], this.state[14]);
   }
   constructor(
     private kernel: Kernel,
@@ -189,6 +181,8 @@ export class Physics {
       throw Error("Physics frame discontinuity; reset the simulator.");
     const dt = 1 / rate,
       before = this.observation();
+    // One wind sample drives forces, airspeed, JSON wind and render truth alike.
+    this.windNED = this.atmosphere.sample(dt, this.state[13], this.state[14]);
     if (this.released) {
       const clamp = (x: number, lo: number, hi: number) =>
         Math.max(lo, Math.min(hi, x));

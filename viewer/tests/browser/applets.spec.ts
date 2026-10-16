@@ -59,10 +59,31 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   });
   await expect(page.locator("#mode-label")).toHaveText("AUTO");
   await expect(page.locator("#launch")).toHaveText("Reset simulation");
+  await expect(page.locator("#mode-help")).toHaveCount(0);
+  await expect(page.locator("#stick")).toHaveAttribute(
+    "aria-disabled",
+    "false",
+  );
+  await page.keyboard.down("ArrowRight");
+  await expect(page.locator("#knob")).toHaveCSS(
+    "transform",
+    "matrix(1, 0, 0, 1, 52, 0)",
+  );
+  await page.keyboard.up("ArrowRight");
+  await expect(page.locator("#knob")).toHaveCSS(
+    "transform",
+    "matrix(1, 0, 0, 1, 0, 0)",
+  );
   await page.locator("#panel-toggle").click();
   await page.locator("#wind-speed").fill("1.5");
+  await page.locator("#turbulence").fill("0.2");
+  await page.locator("#thermal-strength").fill("0.5");
+  await page.locator("#thermal-here").click();
   await page.locator("#apply-wind").click();
   await expect(page.locator("#wind-status")).toContainText("1.5 m/s");
+  await expect(page.locator("#wind-status")).toContainText(
+    "gusts 0.2 m/s · thermal 0.5 m/s",
+  );
   await page.locator("#panel-toggle").click();
   await page.locator("#mode").selectOption("MANUAL");
   await expect(page.locator("#mode-label")).toHaveText("MANUAL");
@@ -96,6 +117,25 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   await expect(page.locator("#mode-label")).toHaveText("CRUISE");
   await expect(page.locator("#stick")).toHaveAttribute("data-shape", "line");
   await expect(page.locator("#alt-target")).toHaveText("TARGET 45 m");
+  for (const mode of ["FBWB", "CRUISE"]) {
+    await page.locator("#mode").selectOption(mode);
+    await expect(page.locator("#mode-label")).toHaveText(mode);
+    await expect(page.locator("#throttle")).toBeEnabled();
+    await expect(page.locator("#throttle")).toHaveValue("50");
+    await expect(page.locator("#throttle-label")).toHaveText("ALTITUDE");
+    // Blur select so keyboard pilot input is active.
+    await page.locator("#camera").focus();
+    await page.keyboard.down("w");
+    await expect(page.locator("#throttle")).toHaveValue("100");
+    await page.keyboard.up("w");
+    await expect(page.locator("#throttle")).toHaveValue("50");
+    const lever = await page.locator("#throttle").boundingBox();
+    await page.mouse.move(lever!.x + lever!.width / 2, lever!.y + 5);
+    await page.mouse.down();
+    await expect(page.locator("#throttle")).not.toHaveValue("50");
+    await page.mouse.up();
+    await expect(page.locator("#throttle")).toHaveValue("50");
+  }
   await page.screenshot({ path: "test-results/simulator.png", fullPage: true });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.screenshot({
@@ -104,6 +144,17 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   });
   const throttle = await page.locator("#throttle").boundingBox();
   expect(throttle!.height).toBeGreaterThan(throttle!.width * 2);
+  expect(throttle!.height).toBeLessThanOrEqual(110);
+  await expect(page.locator("#stick-label")).toHaveCount(0);
+  await page.locator("#panel-toggle").click();
+  await page.locator("#thermal-strength").scrollIntoViewIfNeeded();
+  await page.screenshot({ path: "test-results/simulator-mobile-weather.png" });
+  await page.locator("#panel-toggle").click();
+  await page.setViewportSize({ width: 844, height: 390 });
+  await page.screenshot({ path: "test-results/simulator-landscape.png" });
+  await expect(page.locator("#throttle")).toBeInViewport();
+  await expect(page.locator("#stick")).toBeInViewport();
+  await page.setViewportSize({ width: 390, height: 844 });
   await page.locator("#launch").click();
   await expect(page.locator("#panel")).toBeHidden();
   await expect(page.locator("#status")).toContainText("AUTO confirmed", {

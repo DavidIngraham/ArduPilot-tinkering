@@ -1,5 +1,6 @@
 import { RuntimeAssets } from "../assets/runtime";
 import { delay } from "./delay";
+import { altitudeLever, pilotChannels } from "./pilot-input";
 import {
   MAVLink,
   type Message,
@@ -90,7 +91,7 @@ export class Simulator {
     const { default: create } = await import(/* @vite-ignore */ url);
     const defaults =
       this.physics.config.defaults +
-      `\nFLTMODE_CH 0\nLOG_DISARMED 0\nLOG_BACKEND_TYPE 0\nFS_GCS_ENABL 0\nFS_LONG_ACTN 0\nRC_OVERRIDE_TIME 1\nSIM_SPEEDUP 1\n`;
+      `\nFLTMODE_CH 0\nLOG_DISARMED 0\nLOG_BACKEND_TYPE 0\nFS_GCS_ENABL 0\nFS_LONG_ACTN 0\nRC_OVERRIDE_TIME 1\nSIM_SPEEDUP 1\nSTICK_MIXING 4\nFBWB_ELEV_REV 0\n`;
     this.module = await create({
       ...(wasmBinary ? { wasmBinary } : {}),
       arguments: [
@@ -246,6 +247,7 @@ export class Simulator {
             break;
           case "NAV_CONTROLLER_OUTPUT":
             this.state.targetAlt = this.state.alt + v.alt_error;
+            this.state.targetRoll = v.nav_roll;
             break;
           case "VFR_HUD":
             Object.assign(this.state, { speed: v.groundspeed, climb: v.climb });
@@ -335,6 +337,9 @@ export class Simulator {
     const mode = MODES[name];
     if (mode === undefined) throw Error("Unknown mode");
     if (this.state.mode === mode) return;
+    // Never carry a manual brake pull or climb command across a mode switch.
+    this.channels[0] = this.channels[1] = 1500;
+    this.sendRC();
     const confirmed = this.wait(
       (m) => m.name === "HEARTBEAT" && m.values.custom_mode === mode,
     );
@@ -342,17 +347,31 @@ export class Simulator {
     await confirmed;
   }
   controls(roll: number, pitch: number, throttle: number) {
-    this.channels[0] = 1500 + Math.round(Math.max(-1, Math.min(1, roll)) * 500);
-    this.channels[1] =
-      1500 + Math.round(Math.max(-1, Math.min(1, pitch)) * 500);
-    this.channels[2] =
-      1000 + Math.round(Math.max(0, Math.min(1, throttle)) * 1000);
+    const channels = pilotChannels(
+      this.state.mode,
+      roll,
+      pitch,
+      throttle,
+      this.physics.config.command[0],
+    );
+    this.channels.splice(0, 3, ...channels);
   }
   async altitude(metres: number) {
     if (!Number.isFinite(metres) || metres < 5 || metres > 300)
       throw Error("Altitude must be 5–300 m above home.");
-    if (![MODES.CRUISE, MODES.AUTO, MODES.LOITER].includes(this.state.mode))
-      throw Error("Select CRUISE, AUTO or LOITER to command altitude.");
+    if (
+      ![MODES.FBWB, MODES.CRUISE, MODES.AUTO, MODES.LOITER].includes(
+        this.state.mode,
+      )
+    )
+      throw Error("Select FBWB, CRUISE, AUTO or LOITER to command altitude.");
+    if (altitudeLever(this.state.mode)) {
+      // AP locks current height on stick release. Let that transition finish
+      // before installing a numeric target, or it can overwrite the command.
+      this.channels[1] = 1500;
+      this.sendRC();
+      await delay(250, this.lifetime.signal);
+    }
     const reply = this.wait(
       (m) => m.name === "COMMAND_ACK" && m.values.command === 186,
     );
@@ -424,7 +443,11 @@ export class Simulator {
       await delay(100, this.lifetime.signal);
     }
     await this.mode(mode);
-    this.controls(0, 0, this.physics.config.command[0]);
+    this.controls(
+      0,
+      0,
+      altitudeLever(this.state.mode) ? 0.5 : this.physics.config.command[0],
+    );
   }
   async upload(items: Waypoint[], progress: (n: number) => void) {
     if (this.busy) throw Error("A mission upload is already in progress.");

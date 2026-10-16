@@ -27,6 +27,14 @@ Flat-plane contact, inflation time, launch motion and friction are explicit
 assumptions: the existing logs do not measure canopy inflation or identify those
 constants. The model does not simulate cloth pull-up, terrain or canopy collapse.
 
+The browser's weather panel adds repeatable correlated gusts and an adjustable,
+stationary Gaussian thermal column to the mean wind. These are synthetic scenarios,
+not weather identified from the flight logs. The combined wind drives both the
+Rust dynamics and simulated airspeed/wind measurements. AUTO/LOITER steering nudges
+use native ArduPlane stick mixing; the sprung FBWB/CRUISE altitude lever uses its
+pitch-stick climb command while the autopilot controls power. See the
+[browser simulator guide](../viewer/SIMULATOR.md) for controls and weather limits.
+
 ## Design record
 
 The design record includes pages 1, 185, and 323 of `Paraglider.pdf`, SolidWorks files, build photographs, and flight logs. The [design evidence](assets/micro-agu/design-evidence.json) records assembly structure and source hashes. CAD previews were extracted with [SWFormat](https://github.com/KenM76/swformat).

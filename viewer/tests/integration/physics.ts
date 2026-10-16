@@ -122,6 +122,47 @@ assert.ok(wind.truth().wind_ned_m_s!.every((v) => v === 0));
 console.log(
   "PASS: wind convention, sensor airspeed, physical response, reset and bounds",
 );
+wind.setWind(0, 0, 0, {
+  turbulence: 0.3,
+  thermalStrength: 1,
+  thermalRadius: 40,
+  thermalNorth: wind.state[13],
+  thermalEast: wind.state[14],
+});
+let previousWind = wind.truth().wind_ned_m_s!;
+let gustChanged = false;
+for (let i = 200; i < 400; i++) {
+  const packet = new Uint8Array(40),
+    v = new DataView(packet.buffer);
+  v.setUint16(0, 18458, true);
+  v.setUint16(2, 200, true);
+  v.setUint32(4, i, true);
+  [1450, 1500, 800, 2400, ...Array(12).fill(1500)].forEach((p, c) =>
+    v.setUint16(8 + c * 2, p, true),
+  );
+  const response = wind.respond(packet);
+  const sensors = JSON.parse(response);
+  const flow = wind.truth().wind_ned_m_s!;
+  compare(sensors.velocity_wind, flow, "weather sensor/truth agreement");
+  assert.ok(
+    Math.abs(
+      sensors.airspeed -
+        Math.hypot(...wind.state.slice(7, 10).map((v, axis) => v - flow[axis])),
+    ) < 1e-9,
+  );
+  assert.equal(
+    wind.respond(packet),
+    response,
+    "duplicate packets must not advance turbulence",
+  );
+  gustChanged ||= Math.abs(flow[0] - previousWind[0]) > 0.001;
+  previousWind = flow;
+}
+assert.ok(gustChanged);
+assert.ok(wind.truth().wind_ned_m_s![2] < -0.5, "thermal produces upward air");
+console.log(
+  "PASS: turbulence and thermal feed matching dynamics/sensor/truth wind",
+);
 const surfaceFixture = JSON.parse(
   await readFile("tests/fixtures/surface-parity.json", "utf8"),
 );

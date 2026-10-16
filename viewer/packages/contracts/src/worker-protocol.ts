@@ -1,11 +1,12 @@
 import type { Frame } from "./recordings";
 import type { Telemetry } from "./telemetry";
 import type { Waypoint, Home } from "./mission";
+import type { Weather } from "./weather";
 export interface Calls {
   start: [url: string, home: Home];
   mode: [name: string];
   altitude: [metres: number];
-  wind: [speed: number, from: number, up: number];
+  wind: [speed: number, from: number, up: number, weather?: Weather];
   launch: [mode: string];
   upload: [items: Waypoint[]];
   execute: [];

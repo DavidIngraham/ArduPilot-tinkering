@@ -14,18 +14,26 @@ takes two steps, tosses upright and glides unpowered for one second. It climbs i
 FBWA and hands over to AUTO above 12 m. Click the **mode display** to choose a mode;
 the displayed value follows confirmed telemetry. The launch button becomes
 **Reset simulation** as launch begins. Reset starts a fresh default mission.
-The **Mission & wind** panel is closed by default.
+The **Mission & weather** panel is closed by default.
 
 * **MANUAL**: direct brake and throttle inputs.
 * **FBWA**: native heading-rate steering; pilot controls throttle.
-* **CRUISE**: centered steering holds heading; click altitude to command height.
+* **FBWB**: steering with automatic altitude and power control.
+* **CRUISE**: centered steering holds heading and altitude.
+* **AUTO**: follow the mission, with left/right steering nudges.
 * **LOITER**: orbit the current position.
 
 The right control moves left/right in assisted modes. MANUAL exposes a lower
 semicircle: pull backward/down for symmetric brakes; forward has no brake command.
 Release centers it. The **vertical throttle** slider retains its setting in MANUAL
-and FBWA; automatic modes control power. Keyboard: left/right arrows steer,
-down pulls both brakes in MANUAL, and W/S adjusts manual throttle.
+and FBWA. In FBWB/CRUISE it becomes a sprung **ALTITUDE** lever: up commands
+climb, down commands descent, and release centers it and holds the current height.
+ArduPlane controls power. Keyboard: left/right arrows steer (including AUTO/LOITER
+nudges), down pulls both brakes in MANUAL, and W/S adjusts manual throttle or
+commands climb/descent in FBWB/CRUISE. Release W/S to hold altitude.
+AUTO/LOITER nudges use ArduPlane's native roll-only stick mixing (`STICK_MIXING=4`);
+releasing the stick lets navigation resume. The altitude lever maps to AP's pitch
+RC input with centered neutral; it does not write motor output.
 A lost pointer, window blur or hidden tab centers the stick. Browser
 background throttling may pause or interrupt simulation; keep the tab visible while
 flying. **Reset simulation** creates a fresh aircraft and clears its mission.
@@ -55,11 +63,20 @@ The example ends in unlimited loiter rather than an uncommanded landing.
 
 ## Wind and camera
 
-Use **Mission & wind** to choose wind speed (0–10 m/s), the bearing wind comes
+Use **Mission & weather** to choose wind speed (0–10 m/s), the bearing wind comes
 from (0° north, 90° east), and vertical air (−3 to +3 m/s, positive upward), then
-select **Apply wind**. These are uniform steady winds applied to the actual Rust
-dynamics and sensor output. Set speed and vertical air to zero for calm conditions.
-Wind is reset to calm on session reset; there is no gust/turbulence model in this UI.
+select **Apply weather**. Add turbulence (0–2 m/s horizontal RMS; vertical RMS is
+half that) and a thermal (0–5 m/s centre lift, radius 5–200 m). Set the thermal's
+north/east position relative to home or use **Place at aircraft**, then apply.
+Zero turbulence or thermal lift disables that component. Reset restores calm air.
+
+The reusable browser environment samples seeded, correlated Gaussian gusts with a
+two-second correlation time and a stationary Gaussian thermal column. At one
+radius from its centre, thermal lift is 1/e of its centre value. These are synthetic
+weather scenarios, not flight-log fits or a boundary-layer model; there is no
+thermal drift, compensating sink ring, or altitude-dependent thermal structure.
+The same combined wind sample feeds Rust dynamics, JSON airspeed/wind and render
+truth at every physics step. Existing aircraft coefficients remain unchanged.
 
 Chase rendering uses a continuous buffered truth clock for the aircraft and camera,
 so worker message timing cannot rewind the pose. The chase camera moves with the

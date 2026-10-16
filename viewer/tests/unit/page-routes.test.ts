@@ -5,7 +5,13 @@ import { applets } from "../../apps/applets/registry";
 
 test("development serves every public page and redirects source links with queries", async () => {
   const server = await createServer({
-    server: { host: "127.0.0.1", port: 0, open: false },
+    server: {
+      host: "127.0.0.1",
+      port: 0,
+      open: false,
+      preTransformRequests: false,
+    },
+    optimizeDeps: { noDiscovery: true, include: [] },
   });
   try {
     await server.listen();
