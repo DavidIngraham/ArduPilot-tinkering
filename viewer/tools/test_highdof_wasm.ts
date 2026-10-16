@@ -78,3 +78,45 @@ for (let i = 0; i < fixture.steps; i++) {
 console.log(
   `PASS: ${fixture.steps} steps, ${fixture.samples.length} native/Python parity checkpoints; maximum absolute difference ${maxError}`,
 );
+const wind = await Physics.load(
+  pathToFileURL(resolve("public/wasm/")).href + "/",
+  config,
+);
+const calm = await Physics.load(
+  pathToFileURL(resolve("public/wasm/")).href + "/",
+  config,
+);
+wind.setWind(2, 90, 0.5);
+wind.released = calm.released = true;
+let sensor: any;
+for (let i = 0; i < 200; i++) {
+  const packet = new Uint8Array(40),
+    v = new DataView(packet.buffer);
+  v.setUint16(0, 18458, true);
+  v.setUint16(2, 200, true);
+  v.setUint32(4, i, true);
+  [1450, 1500, 800, 2400, ...Array(12).fill(1500)].forEach((p, c) =>
+    v.setUint16(8 + c * 2, p, true),
+  );
+  sensor = JSON.parse(wind.respond(packet));
+  calm.respond(packet);
+}
+compare(sensor.velocity_wind, [0, -2, -0.5], "wind NED");
+compare(wind.truth().wind_ned_m_s!, [0, -2, -0.5], "wind truth");
+assert.ok(
+  Math.abs(wind.state[1] - calm.state[1]) > 0.01,
+  "wind must affect actual physics",
+);
+assert.ok(
+  Math.abs(
+    sensor.airspeed -
+      Math.hypot(wind.state[7], wind.state[8] + 2, wind.state[9] + 0.5),
+  ) < 1e-9,
+);
+assert.throws(() => wind.setWind(NaN, 0, 0));
+assert.throws(() => wind.setWind(11, 0, 0));
+wind.setWind(0, 0, 0);
+assert.ok(wind.truth().wind_ned_m_s!.every((v) => v === 0));
+console.log(
+  "PASS: wind convention, sensor airspeed, physical response, reset and bounds",
+);

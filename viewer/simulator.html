@@ -86,6 +86,48 @@
         <button id="upload" disabled>Upload</button
         ><button id="execute" disabled>Fly mission</button>
       </div>
+      <section id="wind-controls" aria-label="Wind controls">
+        <h2>Wind</h2>
+        <label for="wind-speed"
+          >Speed <output id="wind-speed-value">0.0 m/s</output></label
+        >
+        <input
+          id="wind-speed"
+          type="range"
+          min="0"
+          max="10"
+          step="0.1"
+          value="0"
+        />
+        <label for="wind-direction"
+          >From bearing <output id="wind-direction-value">0° · N</output></label
+        >
+        <input
+          id="wind-direction"
+          type="range"
+          min="0"
+          max="360"
+          step="5"
+          value="0"
+        />
+        <label for="wind-up"
+          >Vertical air <output id="wind-up-value">0.0 m/s</output></label
+        >
+        <input
+          id="wind-up"
+          type="range"
+          min="-3"
+          max="3"
+          step="0.1"
+          value="0"
+        />
+        <p class="hint">
+          Direction is where wind comes from: 0° N, 90° E. Positive vertical air
+          rises. Uniform, steady wind.
+        </p>
+        <button id="apply-wind" disabled>Apply wind</button>
+        <p id="wind-status" role="status">Calm</p>
+      </section>
       <details>
         <summary>Controls & model</summary>
         <p>
@@ -99,9 +141,9 @@
           its pitch input requests climb/descent.
         </p>
         <p>
-          Starts airborne in steady trim at 100 m while sensors initialize.
-          Start flight arms ArduPlane and releases the model in your selected
-          mode. Fly mission enters AUTO; choose another mode to take over.
+          Starts airborne in steady trim at 100 m while sensors initialize. The
+          default circuit uploads and starts automatically in AUTO when sensors
+          are ready. Choose another mode and Engage to take over.
         </p>
         <p>
           Full 9-DOF canopy–payload research model, compiled from its C++

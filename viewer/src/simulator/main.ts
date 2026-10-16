@@ -39,9 +39,12 @@ sim.onError = (text) => {
   buttons();
 };
 function buttons() {
-  for (const id of ["mode", "set-mode", "throttle"])
+  for (const id of ["mode", "set-mode", "throttle", "apply-wind"])
     (el(id) as HTMLButtonElement).disabled = !ready || operation;
   el<HTMLButtonElement>("launch").disabled = !ready || operation || launched;
+  el("launch").textContent = launched
+    ? "Flight running"
+    : "Start flight at 100 m";
   el<HTMLButtonElement>("upload").disabled =
     !ready || operation || !items.length;
   el<HTMLButtonElement>("execute").disabled =
@@ -72,7 +75,6 @@ function controls() {
 }
 sim.onUpdate = () => {
   const s = sim.state;
-  view.update(s);
   el("mode-label").textContent =
     Object.keys(MODES).find((n) => MODES[n] === s.mode) ?? String(s.mode);
   el("armed").textContent = s.armed ? "ARMED" : "DISARMED";
@@ -114,6 +116,28 @@ el<HTMLInputElement>("throttle").oninput = (e) => {
   throttle = Number((e.target as HTMLInputElement).value) / 100;
   controls();
 };
+const windValues = () =>
+  ["wind-speed", "wind-direction", "wind-up"].map((id) =>
+    Number(el<HTMLInputElement>(id).value),
+  );
+function windLabels() {
+  const [speed, bearing, up] = windValues();
+  el("wind-speed-value").textContent = `${speed.toFixed(1)} m/s`;
+  el("wind-direction-value").textContent =
+    `${bearing}° · ${["N", "NE", "E", "SE", "S", "SW", "W", "NW"][Math.round(bearing / 45) % 8]}`;
+  el("wind-up-value").textContent = `${up > 0 ? "+" : ""}${up.toFixed(1)} m/s`;
+}
+for (const id of ["wind-speed", "wind-direction", "wind-up"])
+  el(id).oninput = windLabels;
+el("apply-wind").onclick = () =>
+  void action(async () => {
+    const [speed, bearing, up] = windValues();
+    await sim.wind(speed, bearing, up);
+    el("wind-status").textContent =
+      speed === 0 && up === 0
+        ? "Calm"
+        : `Applied: ${speed.toFixed(1)} m/s from ${bearing}°, vertical ${up.toFixed(1)} m/s`;
+  });
 const stick = el("stick");
 let pointer: number | null = null;
 function move(e: PointerEvent) {
@@ -356,11 +380,33 @@ async function boot() {
   }
   sessionStorage.removeItem("microagu-isolation-reload");
   status("Starting ArduPlane and initializing sensors…");
+  operation = true;
+  buttons();
   await sim.start();
+  operation = false;
   ready = true;
   buttons();
   el("connection").textContent = "SITL online";
-  status("Ready. Load a mission or launch to begin flying.");
+  await action(async () => {
+    setMission(exampleMission(), "Trout Lake circuit · 60 m, ends in loiter");
+    status("Uploading the default mission…");
+    await sim.upload(items, (n) =>
+      status(`Uploading mission item ${n} / ${items.length}…`),
+    );
+    uploaded = true;
+    el("mission-info").textContent =
+      `${items.length} items uploaded and accepted by ArduPlane.`;
+    status("Starting the default AUTO mission…");
+    await sim.launch("AUTO");
+    launched = true;
+    throttle = sim.trimThrottle;
+    controls();
+    await sim.execute();
+    status(
+      "AUTO confirmed. Flying the default circuit. Engage another mode to take over.",
+    );
+    if (innerWidth <= 720) setDesk(false);
+  });
 }
 drawMap();
 void boot().catch((e) => {

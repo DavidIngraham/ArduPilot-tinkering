@@ -472,6 +472,22 @@ body.desk-closed .pilot-controls {
     margin-top: 12px;
   }
 }
+#wind-controls label {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+#wind-controls input[type="range"] {
+  display: block;
+  width: 100%;
+  height: 32px;
+  margin: 0;
+  accent-color: #b7ee75;
+  touch-action: pan-y;
+}
+#wind-controls output {
+  color: #b7ee75;
+}
 @media (max-height: 600px) and (orientation: landscape) {
   header {
     height: 55px;

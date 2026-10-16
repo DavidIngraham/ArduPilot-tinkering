@@ -25,6 +25,9 @@ self.onmessage = async ({ data }) => {
       case "mode":
         await sim.mode(args[0]);
         break;
+      case "wind":
+        sim.physics.setWind(args[0], args[1], args[2]);
+        break;
       case "launch":
         await sim.launch(args[0]);
         break;

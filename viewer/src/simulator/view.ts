@@ -8,10 +8,10 @@ import {
   updateSuspension,
 } from "../paraglider";
 import { rigPayload, poseMechanisms, type Mechanisms } from "../mechanisms";
-import { position, orientation, sample, type Frame } from "../state";
+import { position, orientation, type Frame } from "../state";
+import { TruthBuffer } from "./truth-buffer";
 import { RotorPhase } from "../mechanisms";
 import { HOME, offset, type Waypoint } from "./mission";
-import type { Telemetry } from "./runtime";
 export class FlightView {
   private scene = new T.Scene();
   private renderer = new T.WebGLRenderer({ antialias: true });
@@ -33,14 +33,12 @@ export class FlightView {
   );
   private mechanisms: Mechanisms | null = null;
   private phase = 0;
-  private truthFrames: Frame[] = [];
-  private truthAt = 0;
+  private truth = new TruthBuffer();
   private rotor = new RotorPhase();
   private last = performance.now();
   private lastTarget = new T.Vector3();
   private mode = 0;
   private first = true;
-  private state: Telemetry | null = null;
   constructor(host: HTMLElement, log: (s: string) => void) {
     host.append(this.renderer.domElement);
     this.renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
@@ -107,13 +105,8 @@ export class FlightView {
     }).observe(host);
     this.renderer.setAnimationLoop(() => this.draw());
   }
-  update(state: Telemetry) {
-    this.state = state;
-  }
   updateTruth(frame: Frame) {
-    this.truthFrames.push(frame);
-    if (this.truthFrames.length > 2) this.truthFrames.shift();
-    this.truthAt = performance.now();
+    this.truth.push(frame, performance.now() / 1000);
   }
   cycle() {
     this.mode = (this.mode + 1) % 3;
@@ -138,12 +131,9 @@ export class FlightView {
     const now = performance.now(),
       dt = Math.min(0.1, (now - this.last) / 1000);
     this.last = now;
-    const s = this.state;
-    if (this.truthFrames.length) {
-      const f = sample(
-        this.truthFrames,
-        this.truthFrames[0].time_s + (now - this.truthAt) / 1000,
-      );
+    const f = this.truth.advance(dt);
+    if (!f) return;
+    {
       this.payload.position.copy(position(f.state.slice(0, 3)));
       this.payload.quaternion.copy(orientation(f.state.slice(3, 7)));
       this.canopy.position.copy(position(f.state.slice(13, 16)));
@@ -177,10 +167,16 @@ export class FlightView {
       this.first = false;
     }
     if (this.mode === 0) {
-      const desired = new T.Vector3(0, 3, 9).applyAxisAngle(
-        new T.Vector3(0, 1, 0),
-        -(s?.yaw ?? 0),
+      const forward = new T.Vector3(1, 0, 0).applyQuaternion(
+        this.payload.quaternion,
       );
+      forward.y = 0;
+      const desired = forward
+        .normalize()
+        .multiplyScalar(-9)
+        .add(new T.Vector3(0, 3, 0));
+      // Translate with the same sampled aircraft pose; only damp the offset.
+      this.camera.position.add(target.clone().sub(this.lastTarget));
       this.camera.position.lerp(
         target.clone().add(desired),
         1 - Math.exp(-dt * 3),
@@ -191,7 +187,9 @@ export class FlightView {
       this.orbit.target.copy(target);
     } else this.orbit.target.copy(target);
     this.lastTarget.copy(target);
-    this.orbit.update();
+    this.orbit.enabled = this.mode === 1;
+    if (this.mode === 1) this.orbit.update();
+    else this.camera.lookAt(target);
     this.renderer.render(this.scene, this.camera);
   }
 }

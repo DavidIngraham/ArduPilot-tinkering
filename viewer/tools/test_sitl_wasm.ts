@@ -40,7 +40,7 @@ try {
   let armed = false;
   for (let i = 0; i < 12; i++) {
     try {
-      await sim.launch();
+      await sim.launch("AUTO");
       armed = true;
       break;
     } catch (e) {
@@ -60,6 +60,7 @@ try {
   await sim.execute();
   assert.equal(sim.state.mode, 10);
   console.log("AUTO OK");
+  sim.physics.setWind(1.5, 270, 0.2);
   const before = { ...sim.state };
   await new Promise((r) => setTimeout(r, 12000));
   assert.ok(

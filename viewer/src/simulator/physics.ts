@@ -32,6 +32,23 @@ export class Physics {
   private wind: number;
   private out: number;
   private rpmOut: number;
+  private windNED = [0, 0, 0];
+  setWind(speed: number, fromDegrees: number, up: number) {
+    if (
+      ![speed, fromDegrees, up].every(Number.isFinite) ||
+      speed < 0 ||
+      speed > 10 ||
+      fromDegrees < 0 ||
+      fromDegrees > 360 ||
+      Math.abs(up) > 3
+    )
+      throw Error(
+        "Wind must be 0–10 m/s, from 0–360°, with vertical air ±3 m/s.",
+      );
+    const angle = (fromDegrees * Math.PI) / 180;
+    this.windNED = [-speed * Math.cos(angle), -speed * Math.sin(angle), -up];
+    this.module.HEAPF64.set(this.windNED, this.wind / 8);
+  }
   constructor(
     private module: any,
     readonly config: PhysicsConfig,
@@ -191,8 +208,10 @@ export class Physics {
       position: obs.position.toArray(),
       quaternion: [this.state[6], ...this.state.slice(3, 6)],
       velocity: obs.velocity.toArray(),
-      airspeed: Math.hypot(...this.state.slice(7, 10)),
-      velocity_wind: [0, 0, 0],
+      airspeed: Math.hypot(
+        ...this.state.slice(7, 10).map((v, i) => v - this.windNED[i]),
+      ),
+      velocity_wind: this.windNED.slice(),
     };
     this.frame = frame;
     this.cached = "\n" + JSON.stringify(message) + "\n";
@@ -223,6 +242,7 @@ export class Physics {
       brake_mm: this.brakes.slice(),
       throttle: this.command[0],
       released: this.released,
+      wind_ned_m_s: this.windNED.slice(),
       joint_rotvec_rad: [
         relative.x * scale,
         relative.y * scale,

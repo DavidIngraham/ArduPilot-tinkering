@@ -113,6 +113,9 @@ export class SimulatorClient {
   execute() {
     return this.call("execute");
   }
+  wind(speed: number, from: number, up: number) {
+    return this.call("wind", speed, from, up);
+  }
   controls(roll: number, pitch: number, throttle: number) {
     this.worker.postMessage({
       method: "controls",

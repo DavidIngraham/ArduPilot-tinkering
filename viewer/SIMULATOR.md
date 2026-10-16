@@ -8,9 +8,9 @@ visit reloads once to enable cross-origin isolation on GitHub Pages.
 
 ## Flying
 
-Wait for sensor initialization, then select **Start flight at 100 m**. The aircraft
-starts in airborne steady trim; this button arms ArduPlane and releases the physics
-in the selected mode. Select a mode and **Engage** to take control during flight.
+The example circuit uploads and starts automatically in **AUTO** after sensor
+initialization. The aircraft starts in airborne steady trim at 100 m. Select a mode
+and **Engage** to take control during flight. Reset starts a fresh default mission.
 The top mode display is confirmed telemetry.
 
 * **MANUAL**: direct brake and throttle inputs.
@@ -38,6 +38,18 @@ rejected instead of silently changed. WPL item 0 is treated as planned home and
 replaced by the simulator home. Home is fixed at 45.997° N, 121.536° W, 600 m MSL;
 imported coordinates are **not relocated**. Inspect the route before uploading.
 The example ends in unlimited loiter rather than an uncommanded landing.
+
+## Wind and camera
+
+Use **Wind** in the flight desk to choose speed (0–10 m/s), the bearing wind comes
+from (0° north, 90° east), and vertical air (−3 to +3 m/s, positive upward), then
+select **Apply wind**. These are uniform steady winds applied to the actual C++
+dynamics and sensor output. Set speed and vertical air to zero for calm conditions.
+Wind is reset to calm on page reload; there is no gust/turbulence model in this UI.
+
+Chase rendering uses a continuous buffered truth clock for the aircraft and camera,
+so worker message timing cannot rewind the pose. The chase camera moves with the
+sampled payload and smooths its offset; OrbitControls only controls the orbit view.
 
 ## Model and visual limits
 
