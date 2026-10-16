@@ -119,6 +119,13 @@ browser, and no WebSocket server or custom native physics ABI is required.
 The adapter preserves the native brake rate limits, motor dynamics, IMU lever arm
 and RK4 substeps. Flight control remains in ArduPlane.
 
+The primary heading-rate controller remains the deployed baseline. The firmware's
+custom-controller frontend now receives its heading-rate reference and can request
+symmetric brake through the shared allocator. Returning from custom steering
+matches the previous differential demand within the brake limits, then releases
+excess matching correction with a 0.25 s time constant. No LQI backend is installed
+or enabled. See the [firmware integration notes](https://github.com/DavidIngraham/ardupilot/blob/paraglider-browser-9dof/Tools/simulation/paraglider/README.md).
+
 This deliberately depends on the socket internals of the pinned **Emscripten
 6.0.8**, rather than maintaining an ArduPilot transport patch. The build exports
 the existing `SOCKFS` runtime through a deployment linker setting. SDK upgrades
