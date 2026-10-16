@@ -63,7 +63,10 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   await expect(page.locator("#thermal-strength")).toHaveValue("1.5");
   await expect(page.locator("#thermal-radius")).toHaveValue("60");
   await expect(page.locator("#thermal-north")).toHaveValue("300");
-  await expect(page.locator("#wind-truth")).toContainText("m/s from");
+  await expect(page.locator("#wind-truth")).toHaveAttribute(
+    "aria-label",
+    /m\/s from/,
+  );
   await page.screenshot({ path: "test-results/simulator-default-weather.png" });
   await expect(page.locator("#mode-help")).toHaveCount(0);
   await expect(page.locator("#stick")).toHaveAttribute(
@@ -153,6 +156,12 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   expect(throttle!.height).toBeLessThanOrEqual(110);
   await expect(page.locator("#stick-label")).toHaveCount(0);
   await expect(page.locator("#wind-truth")).toBeInViewport();
+  const speedPill = await page.locator("#ground-speed").boundingBox();
+  const windPill = await page.locator("#wind-truth").boundingBox();
+  expect(windPill!.width).toBeCloseTo(speedPill!.width, 0);
+  expect(windPill!.height).toBeCloseTo(speedPill!.height, 0);
+  expect(windPill!.y).toBeCloseTo(speedPill!.y, 0);
+  expect(windPill!.x).toBeGreaterThan(speedPill!.x);
   await page.locator("#panel-toggle").click();
   await page.locator("#thermal-strength").scrollIntoViewIfNeeded();
   await page.screenshot({ path: "test-results/simulator-mobile-weather.png" });
@@ -171,6 +180,9 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   await expect(page.locator("#turbulence")).toHaveValue("0.2");
   await expect(page.locator("#thermal-strength")).toHaveValue("1.5");
   await expect(page.locator("#thermal-north")).toHaveValue("300");
-  await expect(page.locator("#wind-truth")).toContainText("m/s from");
+  await expect(page.locator("#wind-truth")).toHaveAttribute(
+    "aria-label",
+    /m\/s from/,
+  );
   expect(errors).toEqual([]);
 });

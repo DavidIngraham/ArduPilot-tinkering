@@ -522,6 +522,45 @@ body.panel-closed .pilot-controls {
   color: #b7ee75;
   margin-top: 5px;
 }
+.telemetry > .telemetry-metric {
+  width: 116px;
+  min-width: 116px;
+  padding: 8px 12px;
+}
+.telemetry .wind-speed-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.telemetry-arrow {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.wind-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3px;
+  margin-top: 5px;
+  font-size: 9px;
+  color: #b7ee75;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.wind-vertical {
+  display: inline-flex;
+  align-items: center;
+}
+.wind-vertical .telemetry-arrow {
+  width: 10px;
+  height: 10px;
+}
 .altitude-control {
   position: relative;
 }
@@ -565,13 +604,6 @@ body.panel-closed .pilot-controls {
   margin: 5px 0;
   font-size: 12px;
   color: #f0f6ef;
-}
-#wind-truth {
-  display: block;
-  font-size: 10px;
-  line-height: 1.5;
-  color: #e8d3c6;
-  font-variant-numeric: tabular-nums;
 }
 .throttle-box {
   width: 100px;
@@ -628,7 +660,7 @@ body.panel-closed .pilot-controls {
     min-width: 85px;
     padding: 6px 8px;
   }
-  .telemetry > div:nth-child(n + 4) {
+  .telemetry > div:nth-child(n + 5) {
     display: none;
   }
   .view-controls {
@@ -754,15 +786,28 @@ body.panel-closed .pilot-controls {
     right: 10px;
     gap: 8px;
     justify-content: flex-start;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    max-width: 440px;
   }
-  .telemetry-control {
-    min-width: 82px;
-    padding: 5px 8px;
+  .telemetry-control,
+  .telemetry > .telemetry-metric {
+    width: 100%;
+    min-width: 0;
+    padding: 5px 6px;
   }
   .telemetry strong {
-    font-size: 20px;
+    font-size: 19px;
   }
-  .telemetry > div:nth-child(n + 4) {
+  .telemetry small,
+  .telemetry-control label {
+    letter-spacing: 0.05em;
+  }
+  .wind-detail {
+    font-size: 8px;
+  }
+  .telemetry > div:nth-child(n + 5) {
     display: none;
   }
   .view-controls {
@@ -823,5 +868,27 @@ body.panel-closed .pilot-controls {
   }
   .flight-status {
     max-width: 260px;
+  }
+}
+@media (max-width: 360px) {
+  .telemetry-control,
+  .telemetry > .telemetry-metric {
+    padding: 5px 4px;
+  }
+  .telemetry strong {
+    font-size: 16px;
+  }
+  .telemetry i {
+    font-size: 10px;
+  }
+  .telemetry small,
+  .telemetry-control label {
+    font-size: 7px;
+  }
+  .wind-detail {
+    font-size: 7px;
+  }
+  .telemetry .wind-speed-row {
+    gap: 2px;
   }
 }

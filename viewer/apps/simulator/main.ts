@@ -69,7 +69,7 @@ export const applet = registerApplet(definition, async (scope) => {
 
   sim.onTruth = (frame) => {
     truth.push(frame, performance.now() / 1000);
-    el("wind-truth").textContent = windTruthLabel(frame.wind_ned_m_s);
+    paintWind(frame.wind_ned_m_s);
     const phase = [
       "Ground hold",
       "Assisted inflation",
@@ -618,6 +618,31 @@ export const applet = registerApplet(definition, async (scope) => {
     });
   }
 
+  function paintWind(wind?: number[]) {
+    const valid = wind?.length === 3 && wind.every(Number.isFinite);
+    const [north, east, down] = valid ? wind! : [0, 0, 0];
+    const speed = Math.hypot(north, east);
+    const from =
+      (Math.round((Math.atan2(-east, -north) * 180) / Math.PI) + 360) % 360;
+    const label = windTruthLabel(wind);
+    el("wind-truth").setAttribute("aria-label", label);
+    el("wind-truth").title =
+      `${label}. Direction arrow points downwind; bearing is where wind comes from. Vertical speed in m/s.`;
+    el("wind-truth-speed").textContent = valid ? speed.toFixed(1) : "—";
+    el("wind-truth-bearing").textContent =
+      valid && speed >= 0.05 ? `${from}° from` : "—";
+    el("wind-direction-arrow").style.transform = `rotate(${from + 180}deg)`;
+    el("wind-direction-arrow").style.opacity =
+      valid && speed >= 0.05 ? "1" : "0.3";
+    el("wind-truth-vertical").textContent = valid
+      ? Math.abs(down).toFixed(1)
+      : "—";
+    el("wind-vertical-arrow").style.transform =
+      `rotate(${down > 0 ? 180 : 0}deg)`;
+    el("wind-vertical-arrow").style.opacity =
+      valid && Math.abs(down) >= 0.05 ? "1" : "0.3";
+  }
+
   // Reset restores the same scenario, including values left in the DOM.
   for (const [id, value] of Object.entries({
     "wind-speed": 0,
@@ -631,7 +656,7 @@ export const applet = registerApplet(definition, async (scope) => {
   }))
     el<HTMLInputElement>(id).value = String(value);
   windLabels();
-  el("wind-truth").textContent = windTruthLabel();
+  paintWind();
   setPanel(false);
   drawMap();
 
