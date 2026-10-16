@@ -6,10 +6,10 @@ from scipy.spatial.transform import Rotation
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-MODEL=Path('/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider')
-sys.path.insert(0,str(MODEL))
-from profiles import make_simulator
-from trim import find_trim
+from microagu_sim import compat
+MODEL=Path(compat.__file__).parent
+from microagu_sim.compat.profiles import make_simulator
+from microagu_sim.compat.trim import find_trim
 out=Path(__file__).parent
 raw=Path('/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/spiral-swoop-2026-10-13');raw.mkdir(exist_ok=True)
 rows=[];fig,axs=plt.subplots(2,3,figsize=(14,8))
@@ -31,4 +31,4 @@ for pi,profile in enumerate(['mission','dynamic_roll']):
  axs[pi,0].legend(ncol=2)
 fig.suptitle('Sustained asymmetric brake at idle; release over 22.5-24 s. Same physical limits and model.');fig.tight_layout();fig.savefig(out/'authority.png',dpi=150)
 (out/'authority.json').write_text(json.dumps(rows,indent=2))
-(out/'provenance.json').write_text(json.dumps(dict(ardupilot_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=MODEL,text=True).strip(),model_parameters={profile:make_simulator('trout_lake',profile).parameters for profile in ['mission','dynamic_roll']}),indent=2,default=lambda x:np.asarray(x).tolist()))
+(out/'provenance.json').write_text(json.dumps(dict(simulator_package=str(MODEL),model_parameters={profile:make_simulator('trout_lake',profile).parameters for profile in ['mission','dynamic_roll']}),indent=2,default=lambda x:np.asarray(x).tolist()))

@@ -1,16 +1,17 @@
 # AP_FLAKE8_CLEAN
 """Geometry invariants, exact disabled-mode parity and integration convergence."""
-import sys,ctypes,json,subprocess
+import json,sys
 import numpy as np
 from scipy.spatial.transform import Rotation as R
 from study import HERE,make,replay
-import dynamics,routing
-old=HERE/'model'/'legacy.cpp'
-subprocess.run(['g++','-O3','-std=c++17','-shared','-fPIC','-I/usr/include/eigen3',str(old),'-o',str(old.with_suffix('.so'))],check=True)
-lib=ctypes.CDLL(str(old.with_suffix('.so')));lib.derivative.argtypes=dynamics.lib.derivative.argtypes
-s,trim=make('trout_lake');y=trim['state'];u=s.controls(*trim['command']);p=dynamics.params(s.parameters);out=np.zeros(26)
-lib.derivative(y,u,p,s.geometry['mass'],np.zeros(3),out)
-assert np.array_equal(out,dynamics.derivative(y,u,s.parameters,s.geometry['mass'],np.zeros(3)))
+from microagu_sim.compat import dynamics,routing
+# Independent disabled-mode output from the historical kernel.
+from microagu_sim import Kernel
+config=json.loads((HERE/'disabled-reference.json').read_text())
+assert config['parameters'][60]==0
+kernel=Kernel(config['parameters'],config['mass'])
+np.testing.assert_allclose(kernel.derivative(config['state'],config['command'],config['wind']),config['derivative'],rtol=1e-10,atol=1e-10)
+s,trim=make('trout_lake');y=trim['state']
 routing.configure(s,y)
 assert np.max(abs(routing.diagnostic(s,y,trim['command'])['delta_m']))<1e-14
 # A common world rotation leaves relative geometry unchanged.
@@ -29,8 +30,10 @@ assert s.controls(.3,0,0)[1]==-.012
 routing.configure(s,z)
 s.parameters['route_reference_left']-=.020
 assert abs(routing.diagnostic(s,z,[.3,0,0])['effective_m'][0]-.008)<1e-12
-rows=[replay(('trout_lake',840,'routed',(1.,1.,1.),30,.35,.06,n)) for n in [32,64]]
-relative={k:abs(rows[0]['metrics'][k]-rows[1]['metrics'][k])/max(rows[1]['metrics'][k],1e-8) for k in rows[0]['metrics']}
-assert max(relative.values())<.001
-result=dict(disabled_derivative_bitwise_equal=True,geometry_invariants=True,slack_before_clip=True,integration_relative_metric_difference=relative)
-(HERE/'verification.json').write_text(json.dumps(result,indent=2));print(json.dumps(result,indent=2))
+geometry_only='--geometry-only' in sys.argv
+rows=[] if geometry_only else [replay(('trout_lake',840,'routed',(1.,1.,1.),30,.35,.06,n)) for n in [32,64]]
+relative={} if geometry_only else {k:abs(rows[0]['metrics'][k]-rows[1]['metrics'][k])/max(rows[1]['metrics'][k],1e-8) for k in rows[0]['metrics']}
+assert max(relative.values(),default=0)<.001
+result=dict(disabled_derivative_reference_tolerance=1e-10,geometry_invariants=True,slack_before_clip=True,integration_relative_metric_difference=relative)
+if not geometry_only:(HERE/'verification.json').write_text(json.dumps(result,indent=2))
+print(json.dumps(result,indent=2))

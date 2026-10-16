@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 def run(model, selected=None):
     TRACES.mkdir(parents=True,exist_ok=True)
     make=setup(model)
-    from actuator import BrakeActuator
+    from microagu_sim.compat.actuator import BrakeActuator
     sys_path=Path(__file__).resolve().parents[2]/'viewer/tools'
     import sys
     sys.path.insert(0,str(sys_path))

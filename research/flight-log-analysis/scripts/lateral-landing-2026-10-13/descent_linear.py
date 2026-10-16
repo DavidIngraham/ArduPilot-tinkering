@@ -6,10 +6,10 @@ from scipy.spatial.transform import Rotation as R
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-model=Path('/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider')
-sys.path.insert(0,str(model))
-from profiles import make_simulator
-from equilibrium import solve,perturb,difference
+from microagu_sim import compat
+model=Path(compat.__file__).parent
+from microagu_sim.compat.profiles import make_simulator
+from microagu_sim.compat.equilibrium import solve,perturb,difference
 out=Path('/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/lateral-tuning-2026-10-13')
 sim=make_simulator('trout_lake','mission');sim.substeps=2
 a=np.load(model/'equilibrium-trim-trout_lake-0.0-0.0.npz');seed=a['state'];command=a['command'];dt=.0025

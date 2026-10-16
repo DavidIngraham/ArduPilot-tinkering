@@ -12,9 +12,10 @@ from scipy.spatial.transform import Rotation as R
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-model=Path('/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider');sys.path.insert(0,str(model))
-from profiles import make_simulator
-from equilibrium import perturb,difference
+from microagu_sim import compat
+model=Path(compat.__file__).parent
+from microagu_sim.compat.profiles import make_simulator
+from microagu_sim.compat.equilibrium import perturb,difference
 out=Path(__file__).parent
 sim=make_simulator('trout_lake','mission');sim.substeps=16
 initial=np.load(model/'equilibrium-trim-trout_lake-0.0-0.0.npz')

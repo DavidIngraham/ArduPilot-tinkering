@@ -2,7 +2,7 @@
 """Matched commanded pulses, individual level trim, no trajectory controller."""
 from study import *
 from scipy.optimize import brentq
-from equilibrium import solve
+from microagu_sim.compat.equilibrium import solve
 OUT=HERE.parents[1]/'viewer/public/rigging-comparison'
 
 def setup(name):

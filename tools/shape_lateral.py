@@ -81,7 +81,7 @@ fig.tight_layout();fig.savefig(args.output/'trim-margins.png',dpi=160);plt.close
 
 # Nonlinear held-out checks: actual actuator, speed scaling, antiwindup and common sensor delay.
 from scipy.signal import bilinear,tf2sos,sosfilt
-from actuator import BrakeActuator
+from microagu_sim.compat.actuator import BrakeActuator
 checks=[];traces={}
 for name in ['level','right_turn','left_turn']:
     ns,A,B,C,S=plants[name];sim=ns['sim'];base=ns['base'];command=ns['command'];obs=ns['obs'];u0=ns['u0']

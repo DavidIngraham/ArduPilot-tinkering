@@ -2,8 +2,7 @@ import sys,json
 from pathlib import Path
 import numpy as np
 from scipy.spatial.transform import Rotation as R
-sys.path.insert(0,'/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider')
-from profiles import make_simulator
+from microagu_sim.compat.profiles import make_simulator
 r=Path('/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/lateral-tuning-2026-10-13');sim=make_simulator('trout_lake','mission');sim.substeps=2;results=[]
 for sink in [0,.5,1]:
  a=np.load(r/f'descent-linear-{sink:g}.npz');dt=float(a['dt']);base=a['state'];u=a['command'];A=a['A'];B=a['B'];C=a['C']

@@ -36,9 +36,21 @@ CASES = [('level', 'mission', 0., 22.2), ('climb', 'mission', .5, 22.2),
 def save(name, obj):
     (HERE / name).write_text(json.dumps(obj, indent=2, allow_nan=False) + '\n')
 
-def setup(model):
-    sys.path.insert(0, str(model))
-    from profiles import make_simulator
+def source_hashes():
+    """Record the Rust checkout and actual installed Python extension/resources."""
+    from microagu_sim import _native, compat
+    source = HERE.parents[1] / 'simulation'
+    files = [source/'Cargo.toml', source/'Cargo.lock', *sorted((source/'crates').glob('*/src/**/*.rs'))]
+    hashes = {str(p.relative_to(source)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files}
+    hashes['installed_native'] = hashlib.sha256(Path(_native.__file__).read_bytes()).hexdigest()
+    for p in sorted(Path(compat.__file__).parent.iterdir()):
+        if p.suffix in {'.py', '.json', '.npz'}:
+            hashes['installed_compat/' + p.name] = hashlib.sha256(p.read_bytes()).hexdigest()
+    return hashes
+
+def setup(model=None):
+    """The model argument is retained for old callers; uv selects the Rust wheel."""
+    from microagu_sim.compat.profiles import make_simulator
     return make_simulator
 
 class Chart:
@@ -78,7 +90,7 @@ def observations(y):
 
 def prepare(model, cache):
     make = setup(model)
-    from equilibrium import solve
+    from microagu_sim.compat.equilibrium import solve
     records = []
     for name, profile, climb, voltage in CASES:
         sim = make('trout_lake', profile); sim.substeps = 16
@@ -108,8 +120,7 @@ def prepare(model, cache):
         np.savez_compressed(HERE/(name+'.npz'), A=A, B=B[:, :2], E=B[:, 2:], C=C,
                             state=chart.base, command=command, rpm=trim['rpm'])
         records.append(record); print(record, flush=True)
-    hashes = {f: hashlib.sha256((model/f).read_bytes()).hexdigest() for f in
-              ['dynamics.cpp', 'libdynamics.so', 'profiles.py', 'parameters.json', 'actuator.py', 'mission-controller-candidate.json']}
+    hashes = source_hashes()
     save('plants.json', dict(dt=DT, states=NAMES, state_scales=XS.tolist(), input_scales=US.tolist(),
                             source_hashes=hashes, cases=records))
 

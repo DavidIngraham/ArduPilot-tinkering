@@ -50,12 +50,13 @@ The finite-time amplification calculation starts with physical-state perturbatio
 
 ## Reproduction
 
-Use the ArduPilot Python environment with NumPy, SciPy, Matplotlib and pymavlink installed, and a matching compiled `libdynamics.so`. Set `OPENBLAS_NUM_THREADS=1` to avoid unnecessary BLAS thread overhead on these small matrices. From the Micro-AGU root, with the sibling checkout shown here:
+Use the locked research uv environment, which builds the Rust Python wheel. Set `OPENBLAS_NUM_THREADS=1` for these small matrices. From the Micro-AGU root:
 
 ```sh
 export OPENBLAS_NUM_THREADS=1
-PY=/home/david/envs/venv-ardupilot/bin/python
-MODEL=/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider
+uv sync --project research --locked --group sitl
+PY=research/.venv/bin/python
+MODEL=simulation
 STUDY=research/state-space-2026-10-14
 
 # Re-solve from retained trim seeds; --cache DIR can instead use historical trims.

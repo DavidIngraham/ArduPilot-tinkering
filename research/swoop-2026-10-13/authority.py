@@ -6,9 +6,8 @@ from scipy.spatial.transform import Rotation
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-sys.path.insert(0,'/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider')
-from profiles import make_simulator
-from trim import find_trim
+from microagu_sim.compat.profiles import make_simulator
+from microagu_sim.compat.trim import find_trim
 raw=Path('/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/swoop-2026-10-13')
 out=Path(__file__).parent
 sim=make_simulator('trout_lake','mission')

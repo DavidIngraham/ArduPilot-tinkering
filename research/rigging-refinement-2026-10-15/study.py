@@ -6,15 +6,14 @@ import sys,json,itertools,concurrent.futures
 import numpy as np
 from scipy.spatial.transform import Rotation as R
 HERE=Path(__file__).resolve().parent
-sys.path.insert(0,str(HERE/'model'))
-from profiles import make_simulator
-import dynamics,routing
+from microagu_sim.compat.profiles import make_simulator
+from microagu_sim.compat import dynamics,routing
 DATA=Path(os.environ.get('MICROAGU_REPLAY_DATA','/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike'))
 FLIGHTS={'hood_river':('2026-01-03',[300,360,480,600,690,720,930,1020]),'trout_lake':('2026-02-15',[600,840,900,1350,1920,2400,2790,2910])}
 
 def make(flight,variant='legacy',tuning=(1.,1.,1.),height=.06,substeps=32):
  s=make_simulator(flight,substeps=substeps)
- trim=dict(np.load(HERE/'model'/f'equilibrium-trim-{flight}-0.0-0.0.npz'))
+ trim=dict(np.load(Path(dynamics.__file__).parent/f'equilibrium-trim-{flight}-0.0-0.0.npz'))
  if variant in ('geometry','routed'):s.parameters['joint_k_yaw']*=.066/.0743
  if variant in ('routing_only','routed'):routing.configure(s,trim['state'],ring_height=height)
  damping,brake,yaw=tuning

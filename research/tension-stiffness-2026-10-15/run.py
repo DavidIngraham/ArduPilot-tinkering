@@ -2,21 +2,23 @@
 import os
 os.environ['OPENBLAS_NUM_THREADS']='1'
 from pathlib import Path
-import sys,json,hashlib,concurrent.futures,ctypes
+import sys,json,hashlib,concurrent.futures
 import numpy as np
 from scipy.spatial.transform import Rotation as R
 HERE=Path(__file__).resolve().parent
-sys.path.insert(0,str(HERE/'model'))
-from profiles import make_simulator
-import dynamics
+sys.path.insert(0,str(HERE/'model-rust/python'))
+from microagu_sim.compat.profiles import make_simulator
+from microagu_sim.compat import dynamics
+if not hasattr(dynamics, 'tension_diagnostic') or not Path(dynamics.__file__).is_relative_to(HERE/'model-rust'):
+ raise RuntimeError('Build the isolated Rust tension study with prepare.py first')
 VARIANTS={'fixed':(0,0),'yaw':(0,1),'roll':(1,0),'both':(1,1),'half':(.5,.5)}
 DATA=Path('/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/longitudinal-2026-10-09/turn-model-spike')
 FLIGHTS={'hood_river':('2026-01-03',[300,360,480,600,690,720,930,1020]),'trout_lake':('2026-02-15',[600,840,900,1350,1920,2400,2790,2910])}
 def make(flight,variant,profile='mission',substeps=32):
  s=make_simulator(flight,profile,substeps=substeps)
- a=dict(np.load(HERE/'model'/f'equilibrium-trim-{flight}-0.0-0.0.npz'))
+ a=dict(np.load(Path(dynamics.__file__).parent/f'equilibrium-trim-{flight}-0.0-0.0.npz'))
  if profile!='mission':
-  from equilibrium import solve
+  from microagu_sim.compat.equilibrium import solve
   a=solve(s,a['state'],a['command'])
  ref=dynamics.tension_diagnostic(s,a['state'],a['rpm'],a['command'])[0]
  s.parameters.update(tension_reference=float(ref),tension_roll_fraction=VARIANTS[variant][0],tension_yaw_fraction=VARIANTS[variant][1])

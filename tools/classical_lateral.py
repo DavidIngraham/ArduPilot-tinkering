@@ -12,12 +12,11 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--model', type=Path, required=True)
+parser.add_argument('--model', type=Path, help='Deprecated; uses the installed microagu-sim package')
 parser.add_argument('--output', type=Path, required=True)
 args = parser.parse_args()
-sys.path.insert(0, str(args.model))
-from profiles import make_simulator
-from trim import find_trim
+from microagu_sim.compat.profiles import make_simulator
+from microagu_sim.compat.trim import find_trim
 sim = make_simulator('trout_lake', 'mission')
 sim.substeps = 2
 out = args.output
@@ -275,7 +274,7 @@ axes[0].set_title('Local command response: +0.2 deg/s step, selected gains and f
 axes[-1].set_xlabel('Time (s)');fig.tight_layout();fig.savefig(out/'closed-step.png',dpi=160);plt.close(fig)
 print('NUM HEADING',num[0],flush=True);print('NUM ROLL',num[1],flush=True);print('DEN',den,flush=True)
 print('Validation max',summary['max_sine_relative_complex_error'],flush=True)
-from actuator import BrakeActuator
+from microagu_sim.compat.actuator import BrakeActuator
 state=base.copy();motor=rpm;act=BrakeActuator(position_mm=command[1:])
 filt=obs(base);integral=u0;target=0.;nonlinear=[]
 dt=.0025

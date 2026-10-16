@@ -336,7 +336,7 @@ Open `joint-tour.html`; it defaults to the 9-degree disturbance response. A scro
 response mode offers 60 open-loop actual-model releases (two disturbed bodies, three axes, two profiles, five amplitudes).
 The disturbance slider selects 3–15 degrees in 3-degree steps, defaulting to 9. Select canopy-only or payload-only deflection. The selected body rotates about an initial payload axis while the other body retains its attitude. Each perturbation preserves attachment position/velocity by repositioning the selected body about the hinge; both bodies then evolve freely. Trim
 actuators remain fixed in open loop. The additional native closed-loop comparisons are described below. Neither mode adds turbulence or artificial animation to the response trajectories. The camera follows nominal forward/vertical motion and actual lateral attachment drift, projected perpendicular to the initial horizontal flight track. Fore–aft and vertical excursions remain visible. The ground grid includes lateral camera travel, and the gray canopy stays on the nominal trajectory. Framing uses the same reference transform. Model amplitudes are unscaled. Torque is canopy-side, payload-frame,
-using the same log-Jacobian spring law and relative-rate damper as dynamics.cpp.
+using the same log-Jacobian spring law and relative-rate damper as simulation/crates/sim-core/src/dynamics.rs.
 
 Generate final playback samples at 20 Hz while keeping 100 Hz raw output outside Git:
 

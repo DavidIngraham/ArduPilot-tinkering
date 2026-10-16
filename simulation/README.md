@@ -18,7 +18,7 @@ the high-fidelity external simulator is optional, like JSBSim for Plane.
 | `data/presets` | Explicit selected configurations; no fitting at runtime |
 | `schemas` | Generated JSON Schema |
 | `tests`, crate-local `tests` | Contracts, regression and independent numerical parity |
-| `legacy` | Frozen C++ parity oracle; never linked into production |
+| `tests/parity` | Immutable numerical outputs from the retired C++ implementation |
 | `../research` | Experiments, fitting, controller studies and historical evidence |
 
 Root Python modules are temporary import/command shims for existing scripts.
@@ -30,7 +30,7 @@ references. No runtime imports experiments or modifies `sys.path`.
 
 Install current stable Rust, Python >=3.10 and uv. Development was verified on
 Ubuntu/WSL with Rust 1.99.0 and Python 3.12. Other native platforms are not yet
-verified. C++/Eigen are needed only for the independent legacy comparison.
+verified. No C++ compiler or Eigen installation is required.
 
 ```sh
 cd simulation
@@ -121,15 +121,17 @@ uses Hood River and Trout Lake logs only. The C++ extraction's original hashes
 remain in [the migration manifest](../provenance/simulator-migration.json).
 
 ```sh
-sh legacy/build.sh
-uv run python tests/parity/compare_legacy.py
+uv run pytest tests/parity -q
 cd ../viewer
 node --import tsx tools/test_highdof_wasm.ts
 node --import tsx tools/test_sitl_wasm.ts
 ```
 
 Tests compare randomized derivatives, airborne trajectories and 5,000 launch /
-flight / contact steps against C++. Saved browser fixtures remain independent
+flight / contact steps against frozen C++ outputs. The fixture records the original
+source revision, hashes and complete input configuration. Recover historical
+source from Git when investigating a discrepancy; never regenerate these
+expected values with Rust. Saved browser fixtures remain independent
 C++ reference traces and are not overwritten by the Rust configuration exporter.
 
 Ground contact, scalar inflation and prescribed hand motion remain development

@@ -1,9 +1,9 @@
 name: Simulator
 on:
   push:
-    paths: ['simulation/**', 'viewer/**', '.github/workflows/simulation.yml']
+    paths: ['simulation/**', 'viewer/**', 'research/**', 'tools/**', '.github/workflows/simulation.yml']
   pull_request:
-    paths: ['simulation/**', 'viewer/**', '.github/workflows/simulation.yml']
+    paths: ['simulation/**', 'viewer/**', 'research/**', 'tools/**', '.github/workflows/simulation.yml']
 jobs:
   parity:
     runs-on: ubuntu-latest
@@ -17,7 +17,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
-      - run: sudo apt-get update && sudo apt-get install -y libeigen3-dev
       - run: cargo install wasm-bindgen-cli --version 0.2.114 --locked
       - working-directory: simulation
         run: |
@@ -26,8 +25,6 @@ jobs:
           cargo test --locked --release --workspace
           uv sync --locked
           uv run pytest -q
-          sh legacy/build.sh
-          uv run python tests/parity/compare_legacy.py
           sh tools/generate.sh
           git diff --exit-code -- schemas crates/sim-python/python/microagu_sim/_native ../viewer/public/wasm/sim_wasm.d.ts ../viewer/public/wasm/config.d.ts
           uv run maturin build --release -m crates/sim-python/Cargo.toml --out target/dist-wheels
@@ -41,3 +38,9 @@ jobs:
           npm run build
           node --import tsx tools/test_highdof_wasm.ts
           npm test
+      - name: Research adapters and isolated tension model
+        run: |
+          uv sync --project research --locked
+          uv run --project research python research/rigging-refinement-2026-10-15/verify.py --geometry-only
+          uv run --project simulation python research/tension-stiffness-2026-10-15/prepare.py
+          uv run --project research python research/tension-stiffness-2026-10-15/audit.py --checks-only

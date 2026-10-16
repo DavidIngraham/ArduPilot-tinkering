@@ -4,9 +4,10 @@ See [the article](../../docs/rigging-refinement.md) and [protocol](PLAN.md). Thi
 
 ## Reproduce
 
-Python 3.12, NumPy, SciPy, matplotlib, g++ C++17 and Eigen3 are required. From this directory:
+Install Rust and uv, then run `uv sync --project research --locked` from the repo root. From this directory, use the research Python environment:
 
 ```sh
+export PATH="$(realpath ../.venv/bin):$PATH"
 python prepare.py
 python verify.py
 python study.py
@@ -16,7 +17,7 @@ python predict.py
 python report.py
 ```
 
-`prepare.py` extracts the frozen source archive into ignored `model/`, verifies SHA-256 hashes, and builds the native dynamics library. The archive includes the prior C++ implementation as `legacy.cpp` for disabled-mode parity. No executable binaries are distributed. The same routing implementation is in the ArduPilot research branch under Tools/simulation/paraglider.
+`prepare.py` checks the installed Rust model. Scripts import `microagu_sim.compat` and its packaged trim seeds. `verify.py --geometry-only` runs geometry and frozen C++ numerical-reference checks without flight data or replacing published results. The source archive and hashes remain historical evidence; current scripts do not extract or compile them. Routing lives in microAGU’s reusable Rust simulator.
 
 Set `MICROAGU_REPLAY_DATA` to the existing turn-model-spike dataset directory. Required files are `2026-01-03-causal-input.npz`, `2026-02-15-causal-input.npz`, and the corresponding `*-propulsion-9x45.npz` files. Input archive hashes are in `input-hashes.json`; raw inputs are not duplicated here. See [data provenance](../../docs/data-and-methods.md). The default local path in the script supports this workstation only. Predictions and geometry checks can run from the source archive without raw logs; the final convergence replay in verify.py requires them.
 

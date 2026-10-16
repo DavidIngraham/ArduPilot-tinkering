@@ -50,7 +50,7 @@ The firmware controller gains have not been retuned by this physics fit.
 
 ## Ground and launch scope
 
-`surface.cpp` adds flat-plane, inelastic contact impulses for payload and canopy,
+`simulation/crates/sim-core/src/surface.rs` (ported from the study’s original C++ implementation) adds flat-plane, inelastic contact impulses for payload and canopy,
 with bounded Coulomb friction and the payload–canopy point constraint retained.
 It uses the kernel's payload inertia and canopy added-mass matrix. The two contact
 radii (100 mm payload, 30 mm canopy) and friction coefficient 0.5 are assumptions;

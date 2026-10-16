@@ -1,4 +1,5 @@
 model/
+model-rust/
 traces/
 *.log
 __pycache__/

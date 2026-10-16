@@ -118,7 +118,7 @@ for ff in [.1,.33,1,3]:
         use=t>duration/2;tt=t[use];xx=np.c_[np.sin(2*np.pi*ff*tt),np.cos(2*np.pi*ff*tt),np.ones(len(tt)),tt-tt.mean()];coef=np.linalg.lstsq(xx,output[use],rcond=None)[0];actual=(coef[0]+1j*coef[1])/amplitude;expected=C[:3]@np.linalg.solve(np.exp(2j*np.pi*ff*dt)*np.eye(15)-ad,bd[:,0]);validation.append(dict(frequency=ff,amplitude=amplitude,relative_complex_error=(abs(actual-expected)/np.maximum(abs(expected),1e-10)).tolist()))
 (a.output/'sine-validation.json').write_text(json.dumps(validation,indent=2));print('SINE',validation,flush=True)
 # Nonlinear diagnostic controller follows native algebra; truth sensing, no EKF.
-from actuator import BrakeActuator
+from microagu_sim.compat.actuator import BrakeActuator
 checks=[];histories={};dt=.005
 for name,lat in [('level','4'),('level','1'),('climb','1'),('low_voltage','1'),('dynamic_roll','1')]:
     ns,A,B,C,S,voltage,climb,gff=models[name];sim=ns['sim'];sim.substeps=4;base=ns['base'];R=ns['R'];command=ns['command'];rpm=ns['rpm']

@@ -17,9 +17,9 @@ from scipy.spatial.transform import Rotation as R
 HERE = Path(__file__).resolve().parent
 OLD = HERE.parent / 'state-space-2026-10-14'
 sys.path.insert(0, str(OLD))
-from study import Chart, DT, XS, US, BASE, observations, plants, setup
+from study import Chart, DT, XS, US, BASE, observations, plants, setup, source_hashes
 
-MODEL = Path('/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider')
+MODEL = HERE.parents[1] / 'simulation'
 VOLTAGES = [20.4, 22.2]
 CLIMBS = [-.5, 0., .5]
 TURNS = [-10., 0., 10.]
@@ -45,7 +45,7 @@ def brake_command(value):
 
 def prepare():
     make = setup(MODEL)
-    from equilibrium import solve
+    from microagu_sim.compat.equilibrium import solve
     p = plants()[0]
     sim = make('trout_lake', 'mission'); sim.substeps = 16
     chart = Chart(sim, p['state'], float(p['rpm']))
@@ -80,8 +80,7 @@ def prepare():
                             B_relative_error=float(np.linalg.norm(B-B2)/np.linalg.norm(B))))
         print(records[-1], flush=True)
     np.savez_compressed(HERE/'grid.npz', **{k:np.array(v) for k,v in arrays.items()})
-    save('grid.json', dict(nodes=records,source_hashes={f:hashlib.sha256((MODEL/f).read_bytes()).hexdigest()
-        for f in ['dynamics.cpp','libdynamics.so','parameters.json','profiles.py','actuator.py']},
+    save('grid.json', dict(nodes=records,source_hashes=source_hashes(),
         note='Common nominal chart; trim at requested turn/climb/voltage; no new trim oracle during tests.'))
 
 
@@ -182,7 +181,7 @@ class Reference:
 
 class Actuation:
     def __init__(self,sim,command):
-        from actuator import BrakeActuator
+        from microagu_sim.compat.actuator import BrakeActuator
         self.brake=BrakeActuator(position_mm=command[1:]);self.throttle=command[0]
     def apply(self,requested,voltage):
         limit=limits(voltage)

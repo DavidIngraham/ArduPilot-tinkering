@@ -1,6 +1,7 @@
 __pycache__/
 *.so
 *.npz
+!tests/parity/cpp-reference.npz
 mission-demo.json
 verification.json
 !equilibrium-trim-*.npz

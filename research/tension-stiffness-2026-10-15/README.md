@@ -98,11 +98,11 @@ The result supports keeping this as an isolated sensitivity model rather than ad
 
 ## Reproduce
 
-Use the existing ArduPilot Python environment with NumPy, SciPy and Matplotlib, plus g++ and Eigen. The paths to the source checkout and flight datasets are explicit in `prepare.py` and `run.py`; change them for another workstation. Input hashes are in `summary.json`; source hashes and commit are in `source-provenance.json`. The local source hashes are authoritative if the checkout has uncommitted changes. `prepare.py` copies the source model into ignored `model/`, applies the patch and compiles it; it does not modify that source checkout.
+Use Rust and the locked research uv environment. From the repo root, run `uv sync --project research --locked` and `uv run --project simulation python research/tension-stiffness-2026-10-15/prepare.py`. Preparation copies the Rust workspace into ignored `model-rust/`, applies `tension.rs.inc`, and builds an isolated wheel there. The production package is untouched. `run.py` explicitly loads that wheel and refuses to use the production model as a substitute. New build hashes go to `model-rust/source-provenance.json`; the existing provenance and published results describe the historical study. Run `audit.py --checks-only` to check the force law against production Rust without rerunning flight studies or replacing results.
 
 ```bash
 export OPENBLAS_NUM_THREADS=1
-python prepare.py
+export PATH="$(realpath ../.venv/bin):$PATH"
 python run.py
 python closed.py
 python audit.py

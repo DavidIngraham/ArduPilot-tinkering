@@ -1,58 +1,104 @@
-"""Build an isolated, reproducible sensitivity model; never alter the flight model."""
+"""Build the study's tension law in an isolated Rust wheel, never in production.
+
+Run from the repo root:
+uv run --project simulation python research/tension-stiffness-2026-10-15/prepare.py
+Exact patch anchors make core refactors fail for review instead of silently
+dropping the experimental force law.
+"""
 from pathlib import Path
-import shutil,subprocess,json,hashlib
-HERE=Path(__file__).resolve().parent
-SOURCE=Path('/home/david/repos/ardupilot-high-dof/Tools/simulation/paraglider')
-MODEL=HERE/'model';MODEL.mkdir(exist_ok=True)
-hashes={}
-for p in SOURCE.iterdir():
-    if p.suffix in ['.py','.json','.cpp','.npz'] or p.name=='build.sh':
-        shutil.copyfile(p,MODEL/p.name);hashes[p.name]=hashlib.sha256(p.read_bytes()).hexdigest()
-p=MODEL/'dynamics.cpp';s=p.read_text()
-s=s.replace('State rhs(', 'thread_local double load_diag[8]={};\nState rhs(',1)
-needle=' cp+=Hpi*Gp.transpose()*J;cc-=Hci*Gc.transpose()*J;'
-replacement='''
- // Sensitivity model: scale only nominated geometric spring components.
- // T is tension along canopy-to-attachment direction, NOT |J| or load factor.
- V axis=rc.normalized(); double Tbase=-axis.dot(J),Tref=p[62];
- V geom=Rp*Jinv.transpose()*V(p[60]*p[21]*err.x(),0,p[61]*p[23]*err.z());
- V6 gp=V6::Zero(),gc=V6::Zero();gp.tail<3>()=geom;gc.tail<3>()=-geom;
- V6 dp=Hpi*gp,dc=Hci*gc;
- V dJ=A.ldlt().solve(-(Gp*dp-Gc*dc));double dT=-axis.dot(dJ);
- double denominator=Tref-dT,raw=1.,scale=1.;
- if(p[60]!=0 || p[61]!=0){
-   if(Tref<=0 || denominator<=1e-6*Tref)return State::Constant(NAN);
-   raw=(Tbase-dT)/denominator;scale=std::clamp(raw,.25,2.);
-   cp+=(scale-1)*dp;cc+=(scale-1)*dc;J+=(scale-1)*dJ;
- }
- double tension=-axis.dot(J);
- load_diag[0]=tension;load_diag[1]=Tref;load_diag[2]=scale;load_diag[3]=raw;
- load_diag[4]=denominator/Tref;load_diag[5]=J.norm();
- load_diag[6]=scale-std::clamp(tension/Tref,.25,2.);
- load_diag[7]=(Gp*(cp+Hpi*Gp.transpose()*J)+wp.cross(wp.cross(rp))-Gc*(cc-Hci*Gc.transpose()*J)-wc.cross(wc.cross(rc))).norm();
- cp+=Hpi*Gp.transpose()*J;cc-=Hci*Gc.transpose()*J;'''
-assert s.count(needle)==1;s=s.replace(needle,replacement)
-s+='''
-extern "C" void tension_diagnostic(const double*y,const double*u,const double*p,double mass,const double*w,double rpm,double voltage,double*out){
- State z=Eigen::Map<const State>(y);V wind=Eigen::Map<const V>(w);
- double target=743.5778222336925*voltage*pow(std::max(u[0]-.0005141016498671315,0.),.9086807307118114);
- double axial=(rot(z,0).transpose()*(z.segment<3>(7)-wind)).x();
- double input[3]={thrust(rpm,axial)/p[18],u[1],u[2]};
- rhs(z,input,p,mass,wind,rpm,(target-rpm)/.01756125311487475,torque(rpm,axial));
- for(int i=0;i<8;i++)out[i]=load_diag[i];
+import hashlib
+import json
+import os
+import shutil
+import subprocess
+import sys
+import zipfile
+
+HERE = Path(__file__).resolve().parent
+SOURCE = HERE.parents[1] / 'simulation'
+MODEL = HERE / 'model-rust'
+
+
+def replace(path, old, new):
+    text = path.read_text()
+    assert text.count(old) == 1, (path, old)
+    path.write_text(text.replace(old, new))
+
+
+def main():
+    MODEL.mkdir(exist_ok=True)
+    rust = MODEL / 'source'
+    rust.mkdir(exist_ok=True)
+    for name in ['Cargo.toml', 'Cargo.lock']:
+        shutil.copy2(SOURCE / name, rust / name)
+    shutil.copytree(SOURCE / 'crates', rust / 'crates', dirs_exist_ok=True,
+                    ignore=shutil.ignore_patterns('__pycache__', '*.so', '*.pyc'))
+    core = rust / 'crates/sim-core/src'
+    config = core / 'config.rs'
+    replace(config, '    pub route_reference_right: f64,', '''    pub route_reference_right: f64,
+    pub tension_roll_fraction: f64,
+    pub tension_yaw_fraction: f64,
+    pub tension_reference: f64,''')
+    for anchor in ['            route_reference_right: 0.0,', '            route_reference_right: values[69],']:
+        replace(config, anchor, anchor + '''
+            tension_roll_fraction: 0.,
+            tension_yaw_fraction: 0.,
+            tension_reference: 1.,''')
+    replace(core/'kernel.rs', '        let parameters = Parameters::from_packed(parameters)?;', '''        let values = array::<73>(parameters)?;
+        let mut parameters = Parameters::from_packed(&values[..70])?;
+        parameters.tension_roll_fraction = values[70];
+        parameters.tension_yaw_fraction = values[71];
+        parameters.tension_reference = values[72];''')
+    replace(core/'dynamics.rs', '    let reaction = solve.solve(&-mismatch);', (HERE/'tension.rs.inc').read_text())
+    with (core/'dynamics.rs').open('a') as f:
+        f.write('''
+thread_local! {
+    pub static LOAD_DIAG: std::cell::Cell<[f64; 8]> = const { std::cell::Cell::new([0.; 8]) };
 }
-'''
-p.write_text(s)
-p=MODEL/'dynamics.py';s=p.read_text().replace('def params(p=None):',"KEYS+=['tension_roll_fraction','tension_yaw_fraction','tension_reference']\nDEFAULT.update(tension_roll_fraction=0.,tension_yaw_fraction=0.,tension_reference=1.)\n\ndef params(p=None):")
-s+='''
-lib.tension_diagnostic.argtypes=[ptr,ptr,ptr,ctypes.c_double,ptr,ctypes.c_double,ctypes.c_double,ptr]
+''')
+    replace(core/'kernel.rs', '    pub fn brake_paths(', '''    pub fn tension_diagnostic(&self, state: &[f64], command: &[f64], wind: &[f64], rpm: f64, voltage: f64) -> crate::Result<Vec<f64>> {
+        use crate::propulsion::*;
+        let y = State::from(array::<26>(state)?);
+        validate(&y)?;
+        let u = array::<3>(command)?;
+        let wind = V::from(array::<3>(wind)?);
+        let axial = (rotation(&y, 0).transpose() * (vector(&y, 7) - wind)).x;
+        let dy = dynamics::rhs(&y, &[thrust(rpm, axial)/self.parameters.thrust_max, u[1], u[2]],
+            &self.parameters, self.mass, wind, rpm, (target_rpm(u[0], voltage)-rpm)/MOTOR_TAU_S,
+            Some(torque(rpm, axial)));
+        if !dy.iter().all(|x| x.is_finite()) { return Err("invalid tension diagnostic".into()); }
+        Ok(dynamics::LOAD_DIAG.with(|d| d.get().to_vec()))
+    }
+    pub fn brake_paths(''')
+    replace(rust/'crates/sim-python/src/lib.rs', '    fn brake_paths(', '''    fn tension_diagnostic(&self, state: Vec<f64>, command: Vec<f64>, wind: Vec<f64>, rpm: f64, voltage: f64) -> PyResult<Vec<f64>> {
+        self.inner.tension_diagnostic(&state, &command, &wind, rpm, voltage).map_err(err)
+    }
+    fn brake_paths(''')
+    compat = rust/'crates/sim-python/python/microagu_sim/compat'
+    replace(compat/'dynamics.py', 'KEYS = _native.parameter_keys()',
+            "KEYS = _native.parameter_keys() + ['tension_roll_fraction', 'tension_yaw_fraction', 'tension_reference']")
+    with (compat/'dynamics.py').open('a') as f:
+        f.write('''
 def tension_diagnostic(sim,state,rpm,command,voltage=22.2,wind=(0.,0.,0.)):
- out=np.zeros(8)
- lib.tension_diagnostic(np.ascontiguousarray(state),np.ascontiguousarray(sim.controls(*command)),params(sim.parameters),sim.geometry['mass'],np.ascontiguousarray(wind,dtype=float),float(rpm),float(voltage),out)
- return out
-''';p.write_text(s)
-subprocess.run(['sh','build.sh'],cwd=MODEL,check=True)
-diff=subprocess.run(['diff','-U0','--label','original/dynamics.cpp','--label','experiment/dynamics.cpp',str(SOURCE/'dynamics.cpp'),str(MODEL/'dynamics.cpp')],capture_output=True,text=True)
-(HERE/'dynamics.patch').write_text(diff.stdout)
-(HERE/'source-provenance.json').write_text(json.dumps(dict(source=str(SOURCE),source_commit=subprocess.check_output(['git','rev-parse','HEAD'],cwd=SOURCE,text=True).strip(),hashes=hashes),indent=2)+'\n')
-print('Isolated model built',MODEL)
+ return np.asarray(_kernel(sim.parameters,sim.geometry['mass']).tension_diagnostic(state,sim.controls(*command),wind,float(rpm),float(voltage)))
+''')
+    env = os.environ.copy()
+    env['CARGO_TARGET_DIR'] = str(SOURCE/'target/tension-study')
+    wheels = MODEL/'wheels'
+    subprocess.run([sys.executable, '-m', 'maturin', 'build', '--release', '--locked',
+                    '-m', str(rust/'crates/sim-python/Cargo.toml'), '--out', str(wheels)], env=env, check=True)
+    wheel = max(wheels.glob('*.whl'), key=lambda p: p.stat().st_mtime)
+    with zipfile.ZipFile(wheel) as archive:
+        archive.extractall(MODEL/'python')
+    files = [SOURCE/'Cargo.toml', SOURCE/'Cargo.lock', *sorted((SOURCE/'crates').rglob('*.rs'))]
+    provenance = dict(source=str(SOURCE), source_commit=subprocess.check_output(
+        ['git','rev-parse','HEAD'], cwd=SOURCE, text=True).strip(),
+        hashes={str(p.relative_to(SOURCE)): hashlib.sha256(p.read_bytes()).hexdigest() for p in files},
+        patch_sha256=hashlib.sha256((HERE/'tension.rs.inc').read_bytes()).hexdigest(),
+        wheel_sha256=hashlib.sha256(wheel.read_bytes()).hexdigest())
+    (MODEL/'source-provenance.json').write_text(json.dumps(provenance, indent=2)+'\n')
+    print('Built isolated research model:', MODEL)
+
+
+if __name__ == '__main__':
+    main()
