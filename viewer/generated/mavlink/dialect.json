@@ -61,22 +61,6 @@
       ["yawspeed", "float", 24, 1]
     ]
   },
-  "GLOBAL_POSITION_INT": {
-    "id": 33,
-    "crc": 104,
-    "length": 28,
-    "fields": [
-      ["time_boot_ms", "uint32_t", 0, 1],
-      ["lat", "int32_t", 4, 1],
-      ["lon", "int32_t", 8, 1],
-      ["alt", "int32_t", 12, 1],
-      ["relative_alt", "int32_t", 16, 1],
-      ["vx", "int16_t", 20, 1],
-      ["vy", "int16_t", 22, 1],
-      ["vz", "int16_t", 24, 1],
-      ["hdg", "uint16_t", 26, 1]
-    ]
-  },
   "SERVO_OUTPUT_RAW": {
     "id": 36,
     "crc": 222,
@@ -195,6 +179,21 @@
       ["mission_type", "uint8_t", 4, 1]
     ]
   },
+  "NAV_CONTROLLER_OUTPUT": {
+    "id": 62,
+    "crc": 183,
+    "length": 26,
+    "fields": [
+      ["nav_roll", "float", 0, 1],
+      ["nav_pitch", "float", 4, 1],
+      ["alt_error", "float", 8, 1],
+      ["aspd_error", "float", 12, 1],
+      ["xtrack_error", "float", 16, 1],
+      ["nav_bearing", "int16_t", 20, 1],
+      ["target_bearing", "int16_t", 22, 1],
+      ["wp_dist", "uint16_t", 24, 1]
+    ]
+  },
   "RC_CHANNELS_OVERRIDE": {
     "id": 70,
     "crc": 124,
@@ -255,6 +254,26 @@
       ["climb", "float", 12, 1],
       ["heading", "int16_t", 16, 1],
       ["throttle", "uint16_t", 18, 1]
+    ]
+  },
+  "COMMAND_INT": {
+    "id": 75,
+    "crc": 158,
+    "length": 35,
+    "fields": [
+      ["param1", "float", 0, 1],
+      ["param2", "float", 4, 1],
+      ["param3", "float", 8, 1],
+      ["param4", "float", 12, 1],
+      ["x", "int32_t", 16, 1],
+      ["y", "int32_t", 20, 1],
+      ["z", "float", 24, 1],
+      ["command", "uint16_t", 28, 1],
+      ["target_system", "uint8_t", 30, 1],
+      ["target_component", "uint8_t", 31, 1],
+      ["frame", "uint8_t", 32, 1],
+      ["current", "uint8_t", 33, 1],
+      ["autocontinue", "uint8_t", 34, 1]
     ]
   },
   "COMMAND_LONG": {
@@ -345,6 +364,22 @@
       ["text", "char", 1, 50],
       ["id", "uint16_t", 51, 1],
       ["chunk_seq", "uint8_t", 53, 1]
+    ]
+  },
+  "GLOBAL_POSITION_INT": {
+    "id": 33,
+    "crc": 104,
+    "length": 28,
+    "fields": [
+      ["time_boot_ms", "uint32_t", 0, 1],
+      ["lat", "int32_t", 4, 1],
+      ["lon", "int32_t", 8, 1],
+      ["alt", "int32_t", 12, 1],
+      ["relative_alt", "int32_t", 16, 1],
+      ["vx", "int16_t", 20, 1],
+      ["vy", "int16_t", 22, 1],
+      ["vz", "int16_t", 24, 1],
+      ["hdg", "uint16_t", 26, 1]
     ]
   },
   "HEARTBEAT": {

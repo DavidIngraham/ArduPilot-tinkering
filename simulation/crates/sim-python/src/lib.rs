@@ -14,6 +14,16 @@ struct Kernel {
 #[gen_stub_pymethods]
 #[pymethods]
 impl Kernel {
+    fn inverted_launch(
+        &self,
+        trim: Vec<f64>,
+        time_s: f64,
+        hand_height_m: f64,
+    ) -> PyResult<Vec<f64>> {
+        self.inner
+            .inverted_launch(&trim, time_s, hand_height_m)
+            .map_err(err)
+    }
     #[new]
     fn new(parameters: Vec<f64>, mass: f64) -> PyResult<Self> {
         Ok(Self {

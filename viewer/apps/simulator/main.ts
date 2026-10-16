@@ -1,11 +1,9 @@
 import { ensureIsolation } from "@microagu/sim-browser/session/isolation";
-import { joystick } from "@microagu/applet-ui/controls/joystick";
-import { registerApplet } from "@microagu/applet-ui/shell/mount";
 import {
-  ManagedRenderer,
-  ManagedScene,
-} from "@microagu/rendering/scene/resources";
-import { ModelAssets } from "@microagu/rendering/assets/models";
+  joystick,
+  constrainStick,
+} from "@microagu/applet-ui/controls/joystick";
+import { registerApplet } from "@microagu/applet-ui/shell/mount";
 import { TruthBuffer } from "@microagu/playback/live-buffer";
 import { truthPose } from "@microagu/playback/pose";
 import { HOME, exampleMission } from "./missions/default";
@@ -21,8 +19,6 @@ import {
   type Waypoint,
 } from "@microagu/contracts/mission";
 export const applet = registerApplet(definition, async (scope) => {
-  const assets = scope.own(new ModelAssets(scope.signal));
-
   const el = <T extends HTMLElement = HTMLElement>(id: string) =>
     document.getElementById(id) as T;
 
@@ -73,6 +69,7 @@ export const applet = registerApplet(definition, async (scope) => {
       "Free flight",
       "Ground contact",
     ][frame.launch_phase ?? 2];
+    if (operation && frame.launch_stage) status(frame.launch_stage + "…");
     el("joint-truth").textContent =
       `${phase} · ${Math.round((frame.inflation ?? 1) * 100)}% inflation · ${frame.time_s.toFixed(1)} s · Canopy / payload joint: ${frame.joint_rotvec_rad.map((v) => ((v * 180) / Math.PI).toFixed(1)).join(" / ")}° · ${(frame.rpm ?? 0).toFixed(0)} rpm`;
   };
@@ -86,12 +83,16 @@ export const applet = registerApplet(definition, async (scope) => {
   };
 
   function buttons() {
-    for (const id of ["mode", "set-mode", "throttle", "apply-wind"])
+    for (const id of ["mode", "apply-wind"])
       (el(id) as HTMLButtonElement).disabled = !ready || operation;
-    el<HTMLButtonElement>("launch").disabled = !ready || operation || launched;
-    el("launch").textContent = launched
-      ? "Flight running"
-      : "Inflate and launch";
+    el<HTMLButtonElement>("launch").disabled = !ready && !launched;
+    el("launch").textContent = launched ? "Reset simulation" : "Launch";
+    el<HTMLInputElement>("throttle").disabled =
+      !ready ||
+      operation ||
+      ![MODES.MANUAL, MODES.FBWA].includes(sim.state.mode);
+    el<HTMLButtonElement>("altitude-open").disabled = !ready || operation;
+    pilotShape();
     el<HTMLButtonElement>("upload").disabled =
       !ready || operation || !items.length;
     el<HTMLButtonElement>("execute").disabled =
@@ -118,14 +119,36 @@ export const applet = registerApplet(definition, async (scope) => {
   }
 
   function controls() {
-    el("knob").style.transform = `translate(${roll * 45}px,${pitch * 45}px)`;
-    el<HTMLInputElement>("throttle").value = String(Math.round(throttle * 100));
-    el("throttle-value").textContent = `${Math.round(throttle * 100)}%`;
+    const input = constrainStick(
+      roll,
+      pitch,
+      sim.state.mode === MODES.MANUAL ? "semicircle" : "line",
+    );
+    [roll, pitch] = input;
+    el("knob").style.transform = `translate(${roll * 52}px,${pitch * 52}px)`;
+    paintThrottle();
     if (ready) sim.controls(roll, pitch, throttle);
+  }
+  function paintThrottle() {
+    const automatic = [MODES.CRUISE, MODES.AUTO, MODES.LOITER].includes(
+      sim.state.mode,
+    );
+    const percent = automatic
+      ? Math.max(
+          0,
+          Math.min(
+            100,
+            Math.round(((sim.state.servos[0] ?? 1000) - 1000) / 10),
+          ),
+        )
+      : Math.round(throttle * 100);
+    el<HTMLInputElement>("throttle").value = String(percent);
+    el("throttle-value").textContent = `${percent}%`;
   }
 
   sim.onUpdate = () => {
     const s = sim.state;
+    paintThrottle();
     el("mode-label").textContent =
       Object.keys(MODES).find((n) => MODES[n] === s.mode) ?? String(s.mode);
     el("armed").textContent = s.armed ? "ARMED" : "DISARMED";
@@ -137,50 +160,117 @@ export const applet = registerApplet(definition, async (scope) => {
     el("mission-current").textContent = uploaded
       ? `ITEM ${s.mission} / ${items.length}`
       : "NO MISSION";
+    el("alt-target").textContent =
+      [MODES.CRUISE, MODES.AUTO, MODES.LOITER].includes(s.mode) &&
+      s.targetAlt !== null
+        ? `TARGET ${s.targetAlt.toFixed(0)} m`
+        : "MANUAL HEIGHT";
+    el<HTMLSelectElement>("mode").value =
+      Object.keys(MODES).find((n) => MODES[n] === s.mode) ?? "";
+    el("mode-help").textContent =
+      help[el<HTMLSelectElement>("mode").value] ?? "";
+    buttons();
     drawMap();
   };
 
-  scope.property(
-    el("launch"),
-    "onclick",
-    () =>
-      void action(async () => {
-        status("Arming and preparing assisted launch…");
-        await sim.launch(el<HTMLSelectElement>("mode").value);
-        launched = true;
-        throttle = sim.trimThrottle;
-        controls();
-        status("Inflating and launching. Flight controls are active.");
-        if (innerWidth <= 720) setDesk(false);
-      }),
-  );
-
+  scope.property(el("launch"), "onclick", () => {
+    if (launched) {
+      void applet.mount().catch(log);
+      return;
+    }
+    void action(async () => {
+      launched = true;
+      buttons();
+      await sim.launch(el<HTMLSelectElement>("mode").value || "CRUISE");
+      throttle = sim.trimThrottle;
+      controls();
+      status("Launch complete.");
+    });
+  });
   const help: Record<string, string> = {
-    MANUAL: "Direct brake and throttle control. Keep enough airspeed to fly.",
-    FBWA: "Heading-rate steering with manual throttle.",
+    MANUAL: "Direct brakes · pull down for both brakes · manual throttle",
+    FBWA: "Steer left/right · manual throttle",
     CRUISE:
-      "Centered controls hold heading and altitude; pitch requests climb/descent.",
-    LOITER: "Circles the current location at the current altitude.",
+      "Steer left/right · click altitude to command height · automatic throttle",
+    AUTO: "Following mission · altitude changes apply to the current leg",
+    LOITER: "Circling · click altitude to command height · automatic throttle",
   };
-
-  scope.property(
-    el<HTMLSelectElement>("mode"),
-    "onchange",
-    () =>
-      (el("mode-help").textContent = help[el<HTMLSelectElement>("mode").value]),
-  );
-
-  scope.property(
-    el("set-mode"),
-    "onclick",
-    () =>
-      void action(async () => {
-        await sim.mode(el<HTMLSelectElement>("mode").value);
-        status(
-          `${el<HTMLSelectElement>("mode").value} confirmed by ArduPlane.`,
-        );
-      }),
-  );
+  let lastMode = -1;
+  function pilotShape() {
+    const manual = sim.state.mode === MODES.MANUAL;
+    el("stick").dataset.shape = manual ? "semicircle" : "line";
+    const active =
+      ready &&
+      !operation &&
+      [MODES.MANUAL, MODES.FBWA, MODES.CRUISE].includes(sim.state.mode);
+    el("stick").setAttribute("aria-disabled", String(!active));
+    el("stick").setAttribute(
+      "aria-label",
+      manual
+        ? "Steer left/right; pull down for both brakes"
+        : "Steer left or right",
+    );
+    el("stick-label").textContent = manual
+      ? "← STEER → · ↓ BOTH BRAKES"
+      : active
+        ? "← STEER →"
+        : "AUTOPILOT STEERING";
+    if (lastMode !== sim.state.mode) {
+      lastMode = sim.state.mode;
+      roll = pitch = 0;
+      el("knob").style.transform = "translate(0,0)";
+    }
+    el("throttle-hint").textContent = [MODES.MANUAL, MODES.FBWA].includes(
+      sim.state.mode,
+    )
+      ? "W / S"
+      : "AUTOMATIC";
+  }
+  scope.property(el<HTMLSelectElement>("mode"), "onchange", () => {
+    const next = el<HTMLSelectElement>("mode").value;
+    void action(async () => {
+      roll = pitch = 0;
+      controls();
+      await sim.mode(next);
+      status(`${next} confirmed by ArduPlane.`);
+    });
+  });
+  function closeAltitude() {
+    el("altitude-form").hidden = true;
+    el("altitude-open").setAttribute("aria-expanded", "false");
+  }
+  scope.property(el("altitude-open"), "onclick", () => {
+    el("altitude-form").hidden = false;
+    el("altitude-open").setAttribute("aria-expanded", "true");
+    el<HTMLInputElement>("altitude-command").value = String(
+      Math.round(sim.state.targetAlt ?? Math.max(5, sim.state.alt)),
+    );
+    el("altitude-help").textContent =
+      sim.state.mode === MODES.AUTO
+        ? "Changes this mission leg; later waypoints keep their planned heights."
+        : [MODES.MANUAL, MODES.FBWA].includes(sim.state.mode)
+          ? "Setting an altitude switches to CRUISE with automatic throttle."
+          : "ArduPlane will climb or descend to this height.";
+    el<HTMLInputElement>("altitude-command").focus();
+    el<HTMLInputElement>("altitude-command").select();
+  });
+  scope.property(el("altitude-close"), "onclick", closeAltitude);
+  scope.listen(el("altitude-form"), "keydown", (e) => {
+    if (e.key === "Escape") closeAltitude();
+  });
+  scope.listen(el("altitude-form"), "submit", (e) => {
+    e.preventDefault();
+    const metres = Number(el<HTMLInputElement>("altitude-command").value);
+    void action(async () => {
+      if (!Number.isFinite(metres) || metres < 5 || metres > 300)
+        throw Error("Enter 5–300 m above home.");
+      if ([MODES.MANUAL, MODES.FBWA].includes(sim.state.mode))
+        await sim.mode("CRUISE");
+      await sim.altitude(metres);
+      closeAltitude();
+      status(`Altitude target ${metres} m confirmed by ArduPlane.`);
+    });
+  });
 
   scope.property(el<HTMLInputElement>("throttle"), "oninput", (e) => {
     throttle = Number((e.target as HTMLInputElement).value) / 100;
@@ -221,12 +311,16 @@ export const applet = registerApplet(definition, async (scope) => {
   const stick = joystick(
     scope,
     el("stick"),
-    () => ready && !operation,
+    () =>
+      ready &&
+      !operation &&
+      [MODES.MANUAL, MODES.FBWA, MODES.CRUISE].includes(sim.state.mode),
     (x, y) => {
       roll = x;
       pitch = y;
       controls();
     },
+    () => (sim.state.mode === MODES.MANUAL ? "semicircle" : "line"),
   );
   const release = () => stick.reset();
   const keys = new Set<string>();
@@ -235,6 +329,7 @@ export const applet = registerApplet(definition, async (scope) => {
     if (
       !ready ||
       operation ||
+      ![MODES.MANUAL, MODES.FBWA, MODES.CRUISE].includes(sim.state.mode) ||
       e.target instanceof HTMLInputElement ||
       e.target instanceof HTMLSelectElement ||
       ![
@@ -258,14 +353,15 @@ export const applet = registerApplet(definition, async (scope) => {
   scope.interval(() => {
     if (!keys.size || !ready || operation) return;
     roll = (keys.has("arrowright") ? 1 : 0) - (keys.has("arrowleft") ? 1 : 0);
-    pitch = (keys.has("arrowdown") ? 1 : 0) - (keys.has("arrowup") ? 1 : 0);
-    throttle = Math.max(
-      0,
-      Math.min(
-        1,
-        throttle + (keys.has("w") ? 0.01 : 0) - (keys.has("s") ? 0.01 : 0),
-      ),
-    );
+    pitch = sim.state.mode === MODES.MANUAL && keys.has("arrowdown") ? 1 : 0;
+    if ([MODES.MANUAL, MODES.FBWA].includes(sim.state.mode))
+      throttle = Math.max(
+        0,
+        Math.min(
+          1,
+          throttle + (keys.has("w") ? 0.01 : 0) - (keys.has("s") ? 0.01 : 0),
+        ),
+      );
     controls();
   }, 50);
 
@@ -360,8 +456,6 @@ export const applet = registerApplet(definition, async (scope) => {
       }),
   );
 
-  scope.property(el("reset"), "onclick", () => void applet.mount().catch(log));
-
   scope.property(
     el("camera"),
     "onclick",
@@ -379,14 +473,14 @@ export const applet = registerApplet(definition, async (scope) => {
       ).catch((e) => status(e.message)),
   );
 
-  function setDesk(open: boolean) {
+  function setPanel(open: boolean) {
     el("panel").hidden = !open;
-    document.body.classList.toggle("desk-closed", !open);
+    document.body.classList.toggle("panel-closed", !open);
     el("panel-toggle").setAttribute("aria-expanded", String(open));
   }
 
   scope.property(el("panel-toggle"), "onclick", () =>
-    setDesk(el("panel").hidden),
+    setPanel(el("panel").hidden),
   );
 
   function drawMap() {
@@ -464,18 +558,20 @@ export const applet = registerApplet(definition, async (scope) => {
       el("mission-info").textContent =
         `${items.length} items uploaded and accepted by ArduPlane.`;
       status("Starting the default AUTO mission…");
-      await sim.launch("AUTO");
       launched = true;
+      buttons();
+      await sim.launch("AUTO");
       throttle = sim.trimThrottle;
       controls();
       await sim.execute();
       status(
         "AUTO confirmed. Flying the default circuit. Engage another mode to take over.",
       );
-      if (innerWidth <= 720) setDesk(false);
+      if (innerWidth <= 720) setPanel(false);
     });
   }
 
+  setPanel(false);
   drawMap();
 
   void boot().catch((e) => {

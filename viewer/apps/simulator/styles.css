@@ -367,7 +367,7 @@ footer {
   justify-content: space-between;
   pointer-events: none;
 }
-body.desk-closed .pilot-controls {
+body.panel-closed .pilot-controls {
   right: 24px;
 }
 @media (max-width: 1000px) {
@@ -447,7 +447,7 @@ body.desk-closed .pilot-controls {
     background: #112128f5;
   }
   .pilot-controls,
-  .desk-closed .pilot-controls {
+  .panel-closed .pilot-controls {
     left: 16px;
     right: 16px;
     bottom: 42px;
@@ -470,6 +470,204 @@ body.desk-closed .pilot-controls {
   h1 {
     font-size: 22px;
     margin-top: 12px;
+  }
+}
+
+/* Primary controls stay on the flight view; the auxiliary panel starts closed. */
+.telemetry {
+  z-index: 4;
+  pointer-events: auto;
+  gap: 20px;
+}
+.telemetry-control {
+  position: relative;
+  display: block;
+  border: 1px solid #a7c0c350;
+  border-radius: 8px;
+  padding: 8px 12px;
+  background: #102129a8;
+  text-align: left;
+  min-width: 100px;
+  color: inherit;
+}
+.telemetry-control label {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+}
+.mode-control select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.mode-control:focus-within {
+  outline: 3px solid #b7ee75;
+}
+.telemetry-control:disabled {
+  opacity: 0.7;
+}
+.telemetry strong {
+  margin-top: 4px;
+}
+.telemetry > div:not(.mode-control):not(.altitude-control) {
+  padding-top: 9px;
+}
+.target-label {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  color: #b7ee75;
+  margin-top: 5px;
+}
+.altitude-control {
+  position: relative;
+}
+#altitude-form {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 300px;
+  padding: 16px;
+  margin-top: 8px;
+  background: #112128;
+  border: 1px solid #617c83;
+  border-radius: 10px;
+  box-shadow: 0 8px 30px #0005;
+}
+#altitude-form[hidden] {
+  display: none;
+}
+#altitude-command {
+  width: 110px;
+  font: inherit;
+  color: inherit;
+  background: #08191f;
+  border: 1px solid #607d87;
+  border-radius: 6px;
+  padding: 8px;
+}
+.view-controls {
+  top: 204px;
+}
+.flight-status {
+  position: fixed;
+  left: 24px;
+  top: 252px;
+  max-width: 450px;
+  pointer-events: none;
+  padding-right: 12px;
+  text-shadow: 0 1px 4px #000;
+}
+.flight-status p {
+  margin: 5px 0;
+  font-size: 12px;
+  color: #f0f6ef;
+}
+#mode-help {
+  font-size: 11px;
+}
+.throttle-box {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 8px;
+}
+.throttle-box label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: center;
+}
+#throttle {
+  writing-mode: vertical-lr;
+  direction: rtl;
+  width: 44px;
+  height: 180px;
+  margin: 0;
+}
+#stick {
+  width: 164px;
+  height: 58px;
+  border-radius: 30px;
+}
+#stick .vertical {
+  display: none;
+}
+#stick[data-shape="semicircle"] {
+  height: 110px;
+  border-radius: 29px 29px 82px 82px;
+}
+#stick[data-shape="semicircle"] #knob {
+  top: 0;
+}
+#stick[data-shape="semicircle"] .horizontal {
+  top: 29px;
+}
+#stick[data-shape="semicircle"] .vertical {
+  display: block;
+  top: 29px;
+  bottom: 12px;
+}
+#stick[aria-disabled="true"] {
+  opacity: 0.45;
+}
+@media (max-width: 720px) {
+  .telemetry {
+    gap: 7px;
+  }
+  .telemetry-control {
+    min-width: 85px;
+    padding: 6px 8px;
+  }
+  .telemetry > div:nth-child(n + 4) {
+    display: none;
+  }
+  .view-controls {
+    top: 177px;
+  }
+  .flight-status {
+    top: 225px;
+    left: 16px;
+    right: 16px;
+  }
+  #altitude-form {
+    left: -85px;
+    width: 285px;
+  }
+  .throttle-box {
+    width: 90px;
+    padding: 10px 6px;
+  }
+  #throttle {
+    height: 150px;
+  }
+  #panel {
+    z-index: 5;
+    top: 80px;
+    bottom: 300px;
+  }
+}
+@media (max-height: 600px) and (orientation: landscape) {
+  .telemetry {
+    top: 60px;
+  }
+  .view-controls {
+    top: 153px;
+  }
+  .flight-status {
+    top: 200px;
+    max-width: 300px;
+  }
+  #throttle {
+    height: 95px;
+  }
+  .pilot-controls {
+    bottom: 32px;
   }
 }
 #wind-controls label {
@@ -496,15 +694,15 @@ body.desk-closed .pilot-controls {
     top: 65px;
   }
   .view-controls {
-    top: 125px;
+    top: 153px;
   }
   #panel {
     top: 65px;
     bottom: 40px;
   }
   #stick {
-    width: 120px;
-    height: 120px;
+    width: 164px;
+    height: 58px;
   }
   .pilot-controls {
     bottom: 35px;

@@ -20,16 +20,20 @@ export class Simulator {
   private lifetime = new AbortController();
   private started = false;
   private disposed = false;
-  dispose() {
+  dispose(reason: unknown = Error("Simulator disposed")) {
     if (this.disposed) return;
     this.disposed = true;
     this.stopped = true;
-    this.lifetime.abort(Error("Simulator disposed"));
+    this.lifetime.abort(reason);
     this.timers.forEach(clearInterval);
     this.timers = [];
     this.listeners.clear();
     this.physics?.dispose();
-    this.module?.PThread?.terminateAllThreads();
+    // Emscripten installs throwing getters for unexported runtime names.
+    const pthread =
+      this.module &&
+      Object.getOwnPropertyDescriptor(this.module, "PThread")?.value;
+    pthread?.terminateAllThreads();
   }
   constructor(readonly home: Home) {
     this.state = initialTelemetry(home);
@@ -71,7 +75,7 @@ export class Simulator {
         "This browser has not enabled shared memory. Reload once after the simulator service worker activates, or use a browser supporting cross-origin isolation.",
       );
     this.physics = await Physics.load(physicsBase, config);
-    this.physics.groundStart();
+    this.physics.groundStart(true);
     const assets = url.startsWith("file:")
       ? null
       : await RuntimeAssets.load(new URL(".", url).href);
@@ -155,7 +159,7 @@ export class Simulator {
           } else await new Promise((resolve) => setTimeout(resolve, 0));
         }
       } catch (e) {
-        this.dispose();
+        this.dispose(e);
         this.onError(e instanceof Error ? e.message : String(e));
       }
     };
@@ -187,6 +191,7 @@ export class Simulator {
       [74, 5],
       [42, 2],
       [193, 2],
+      [62, 5],
     ])
       await this.command(511, [id, 1e6 / hz]);
     await this.wait(
@@ -238,6 +243,9 @@ export class Simulator {
               lon: v.lon / 1e7,
               alt: v.relative_alt / 1000,
             });
+            break;
+          case "NAV_CONTROLLER_OUTPUT":
+            this.state.targetAlt = this.state.alt + v.alt_error;
             break;
           case "VFR_HUD":
             Object.assign(this.state, { speed: v.groundspeed, climb: v.climb });
@@ -340,6 +348,33 @@ export class Simulator {
     this.channels[2] =
       1000 + Math.round(Math.max(0, Math.min(1, throttle)) * 1000);
   }
+  async altitude(metres: number) {
+    if (!Number.isFinite(metres) || metres < 5 || metres > 300)
+      throw Error("Altitude must be 5–300 m above home.");
+    if (![MODES.CRUISE, MODES.AUTO, MODES.LOITER].includes(this.state.mode))
+      throw Error("Select CRUISE, AUTO or LOITER to command altitude.");
+    const reply = this.wait(
+      (m) => m.name === "COMMAND_ACK" && m.values.command === 186,
+    );
+    this.send("COMMAND_INT", {
+      command: 186,
+      frame: 3,
+      param1: metres,
+      param2: 3,
+      current: 0,
+      autocontinue: 0,
+    });
+    const result = Number((await reply).values.result);
+    if (result !== 0)
+      throw Error(`ArduPlane rejected altitude command (${result}).`);
+    // Verify the controller demand, rather than treating an ACK as a climb.
+    await this.wait(
+      (m) =>
+        m.name === "NAV_CONTROLLER_OUTPUT" &&
+        Math.abs(this.state.alt + Number(m.values.alt_error) - metres) < 1,
+      8000,
+    );
+  }
   private sendRC() {
     this.send(
       "RC_CHANNELS_OVERRIDE",
@@ -369,11 +404,15 @@ export class Simulator {
     await home;
     // A waypoint-only AUTO mission suppresses throttle while on the ground.
     // The assisted launch uses the normal FBWA RC/throttle path, then hands over.
-    this.controls(0, 0, 0.65);
+    this.controls(0, 0, 0);
     this.sendRC();
-    await this.mode("FBWA");
     await delay(1000, this.lifetime.signal);
     this.physics.released = true;
+    while (!this.physics.powerReady) await delay(50, this.lifetime.signal);
+    // Do not let stabilization pull a brake while the operator holds the
+    // carriage inverted. Engage it only after upright release and the glide.
+    await this.mode("FBWA");
+    this.controls(0, 0, 0.65);
     const deadline = performance.now() + 45000;
     // Above 10 m ArduPlane's normal AUTO throttle-suppression gate clears,
     // including when this slow aircraft is below the fixed-wing 5 m/s gate.

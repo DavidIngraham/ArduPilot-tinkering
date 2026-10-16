@@ -33,6 +33,23 @@ export class Kernel {
         return v4;
     }
     /**
+     * @param {Float64Array} trim
+     * @param {number} time_s
+     * @param {number} hand_height_m
+     * @returns {Float64Array}
+     */
+    inverted_launch(trim, time_s, hand_height_m) {
+        const ptr0 = passArrayF64ToWasm0(trim, wasm.__wbindgen_malloc);
+        const len0 = WASM_VECTOR_LEN;
+        const ret = wasm.kernel_inverted_launch(this.__wbg_ptr, ptr0, len0, time_s, hand_height_m);
+        if (ret[3]) {
+            throw takeFromExternrefTable0(ret[2]);
+        }
+        var v2 = getArrayF64FromWasm0(ret[0], ret[1]).slice();
+        wasm.__wbindgen_free(ret[0], ret[1] * 8, 8);
+        return v2;
+    }
+    /**
      * @param {Float64Array} parameters
      * @param {number} mass
      */

@@ -33,7 +33,30 @@ export class Physics {
   private surfaceEnv: Float64Array | null = null;
   launchPhase = 2;
   inflation = 1;
-  groundStart() {
+  private inverted = false;
+  launchElapsed = 0;
+  get powerReady() {
+    return !this.inverted || this.launchElapsed >= 6.8;
+  }
+  get launchStage() {
+    if (!this.inverted) return undefined;
+    if (!this.released) return "Upright initialization";
+    const t = this.launchElapsed;
+    return t < 2
+      ? "Invert payload"
+      : t < 2.8
+        ? "Inverted setup"
+        : t < 3.8
+          ? "Overhead swing"
+          : t < 5.4
+            ? "Two steps"
+            : t < 5.8
+              ? "Light toss"
+              : t < 6.8
+                ? "Unpowered glide"
+                : "Free flight";
+  }
+  groundStart(inverted = false) {
     if (!this.config.launch_settings)
       throw Error("Launch configuration missing");
     this.surfaceEnv = new Float64Array([0, 0, 0]);
@@ -45,6 +68,16 @@ export class Physics {
     this.rpm = 0;
     this.launchPhase = 0;
     this.inflation = 0;
+    this.inverted = inverted;
+    this.launchElapsed = 0;
+    if (inverted) {
+      const pose = this.kernel.inverted_launch(
+        new Float64Array(this.config.state),
+        0,
+        this.config.launch_settings[1],
+      );
+      this.state = Array.from(pose.subarray(0, 26));
+    }
   }
   setWind(speed: number, fromDegrees: number, up: number) {
     if (
@@ -166,6 +199,10 @@ export class Physics {
         (clamp(pwm(2), 800, 2100) - 800) * mmPerUS,
         (2400 - clamp(pwm(3), 900, 2400)) * mmPerUS,
       ];
+      if (this.inverted) {
+        this.launchElapsed += dt;
+        if (!this.powerReady) this.command[0] = 0;
+      }
       const average = this.brakes.map((start, i) => {
         const end =
           start +
@@ -187,7 +224,18 @@ export class Physics {
       ];
       const y = new Float64Array(this.state),
         wind = new Float64Array(this.windNED);
-      if (this.surfaceEnv) {
+      if (this.inverted && this.launchElapsed <= 5.8 + 1e-8) {
+        const result = this.kernel.inverted_launch(
+          new Float64Array(this.config.state),
+          Math.min(5.8, this.launchElapsed),
+          this.config.launch_settings![1],
+        );
+        this.state = Array.from(result.subarray(0, 26));
+        this.rpm = 0;
+        this.inflation = result[26];
+        this.launchPhase = 1;
+        this.surfaceEnv = new Float64Array([2, 0, 1]);
+      } else if (this.surfaceEnv) {
         if (this.surfaceEnv[0] === 0) this.surfaceEnv[0] = 1;
         const result = this.kernel.surface_step(
           y,
@@ -281,6 +329,7 @@ export class Physics {
       throttle: this.command[0],
       released: this.released,
       launch_phase: this.launchPhase,
+      launch_stage: this.launchStage,
       inflation: this.inflation,
       wind_ned_m_s: this.windNED.slice(),
       joint_rotvec_rad: [

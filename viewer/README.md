@@ -64,7 +64,7 @@ timers, event handlers, workers, sockets, captures and owned render resources.
 Use `ModelAssets` for per-mount CAD loading. Disposal cancels callbacks and pending
 loads, terminates workers, releases GPU resources and closes sockets. The exported
 handle supports `mount()` and `dispose()`; the browser tests repeatedly exercise
-those operations. The flight desk's Reset uses that lifecycle without a reload.
+those operations. The simulator's Reset uses that lifecycle without a reload.
 
 ## State and clocks
 

@@ -1,4 +1,5 @@
 import * as T from "three";
+import { flightGround } from "./ground";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { ModelAssets } from "../assets/models";
 import { ManagedRenderer, disposeTree } from "./resources";
@@ -20,8 +21,11 @@ import { RotorPhase } from "@microagu/rendering/aircraft/mechanisms";
 
 export class FlightView {
   private scene = new T.Scene();
-  private renderer = new ManagedRenderer({ antialias: true });
-  private camera = new T.PerspectiveCamera(48, 1, 0.05, 10000);
+  private renderer = new ManagedRenderer({
+    antialias: true,
+    logarithmicDepthBuffer: true,
+  });
+  private camera = new T.PerspectiveCamera(48, 1, 0.1, 5000);
   private orbit: OrbitControls;
   private payload = new T.Group();
   private canopy = new T.Group();
@@ -56,16 +60,7 @@ export class FlightView {
     const sun = new T.DirectionalLight(0xffedc4, 3);
     sun.position.set(-100, 300, 100);
     this.scene.add(sun);
-    const ground = new T.Mesh(
-      new T.PlaneGeometry(8000, 8000),
-      new T.MeshStandardMaterial({ color: 0x6e8363, roughness: 1 }),
-    );
-    ground.rotation.x = -Math.PI / 2;
-    ground.position.y = -0.12;
-    this.scene.add(ground);
-    const grid = new T.GridHelper(2000, 80, 0x9fa68b, 0x819575);
-    grid.position.y = -0.1;
-    this.scene.add(grid);
+    this.scene.add(flightGround());
     // Deterministic distant tree line, leaving the launch area open.
     const treeGeo = new T.ConeGeometry(7, 25, 6),
       treeMat = new T.MeshStandardMaterial({ color: 0x435f50 });
@@ -76,13 +71,6 @@ export class FlightView {
       tree.position.set(Math.sin(angle) * r, 12, Math.cos(angle) * r);
       this.scene.add(tree);
     }
-    const pad = new T.Mesh(
-      new T.CircleGeometry(12, 40),
-      new T.MeshStandardMaterial({ color: 0xafa98a }),
-    );
-    pad.rotation.x = -Math.PI / 2;
-    pad.position.y = -0.05;
-    this.scene.add(pad);
     this.payload.add(
       new T.Mesh(
         new T.BoxGeometry(0.18, 0.18, 0.25),
@@ -172,6 +160,9 @@ export class FlightView {
       const forward = new T.Vector3(1, 0, 0).applyQuaternion(
         this.payload.quaternion,
       );
+      // The operator flips the carriage during handling; keep the launch
+      // camera on the same side until the canopy is overhead.
+      if ((f.inflation ?? 1) < 0.99) forward.set(0, 0, -1);
       forward.y = 0;
       const desired = forward
         .normalize()

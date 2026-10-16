@@ -15,6 +15,7 @@ export interface Frame {
   wind_ned_m_s?: number[];
   turbulence?: string;
   launch_phase?: number;
+  launch_stage?: string;
   inflation?: number;
 }
 const vector = (x: unknown, n: number): x is number[] =>

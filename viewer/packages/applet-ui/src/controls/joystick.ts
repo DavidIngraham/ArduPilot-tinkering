@@ -1,10 +1,22 @@
 import { Scope } from "../shell/scope";
+export type StickShape = "circle" | "line" | "semicircle";
+export function constrainStick(
+  x: number,
+  y: number,
+  shape: StickShape,
+): [number, number] {
+  if (shape === "line") return [Math.max(-1, Math.min(1, x)), 0];
+  if (shape === "semicircle") y = Math.max(0, y);
+  const radius = Math.max(1, Math.hypot(x, y));
+  return [x / radius, y / radius];
+}
 /** One captured touch/pointer, circular travel, and deterministic release-to-center. */
 export function joystick(
   scope: Scope,
   host: HTMLElement,
   enabled: () => boolean,
   change: (x: number, y: number) => void,
+  shape: () => StickShape = () => "circle",
 ) {
   let pointer: number | null = null;
   const reset = () => {
@@ -17,12 +29,14 @@ export function joystick(
   function move(event: PointerEvent) {
     if (event.pointerId !== pointer) return;
     const box = host.getBoundingClientRect();
-    let x = (event.clientX - box.left - box.width / 2) / (box.width * 0.32),
-      y = (event.clientY - box.top - box.height / 2) / (box.height * 0.32);
-    const radius = Math.max(1, Math.hypot(x, y));
-    x /= radius;
-    y /= radius;
-    change(x, y);
+    const form = shape();
+    const x = (event.clientX - box.left - box.width / 2) / 52;
+    const y =
+      (event.clientY -
+        box.top -
+        (form === "semicircle" ? 29 : box.height / 2)) /
+      52;
+    change(...constrainStick(x, y, form));
   }
   scope.listen(host, "pointerdown", (event) => {
     if (!enabled() || pointer !== null) return;

@@ -14,6 +14,19 @@ pub fn array<const N: usize>(values: &[f64]) -> crate::Result<[f64; N]> {
     Ok(result)
 }
 impl Kernel {
+    pub fn inverted_launch(
+        &self,
+        trim: &[f64],
+        time_s: f64,
+        hand_height_m: f64,
+    ) -> crate::Result<Vec<f64>> {
+        crate::launch::sample(
+            &State::from(array::<26>(trim)?),
+            &self.parameters,
+            time_s,
+            hand_height_m,
+        )
+    }
     pub fn new(parameters: &[f64], mass: f64) -> crate::Result<Self> {
         let parameters = Parameters::from_packed(parameters)?;
         parameters.validate(mass)?;

@@ -9,27 +9,40 @@ visit reloads once to enable cross-origin isolation on GitHub Pages.
 ## Flying
 
 The example circuit uploads and starts automatically in **AUTO** after sensor
-initialization. The aircraft starts held on the ground, inflates through an assisted
-hand launch, climbs in FBWA and hands over to AUTO above 12 m. Select a mode
-and **Engage** to take control during flight. Reset starts a fresh default mission.
-The top mode display is confirmed telemetry.
+initialization while upright. It then inverts for setup, swings the canopy overhead,
+takes two steps, tosses upright and glides unpowered for one second. It climbs in
+FBWA and hands over to AUTO above 12 m. Click the **mode display** to choose a mode;
+the displayed value follows confirmed telemetry. The launch button becomes
+**Reset simulation** as launch begins. Reset starts a fresh default mission.
+The **Mission & wind** panel is closed by default.
 
 * **MANUAL**: direct brake and throttle inputs.
 * **FBWA**: native heading-rate steering; pilot controls throttle.
-* **CRUISE**: centered stick holds heading/altitude; pitch requests climb/descent.
+* **CRUISE**: centered steering holds heading; click altitude to command height.
 * **LOITER**: orbit the current position.
 
-Drag the right joystick to steer and command pitch. Releasing it centers both axes.
-The throttle slider stays at the selected value. Keyboard: arrow keys for the stick,
-W/S for throttle. A lost pointer, window blur or hidden tab centers the stick. Browser
+The right control moves left/right in assisted modes. MANUAL exposes a lower
+semicircle: pull backward/down for symmetric brakes; forward has no brake command.
+Release centers it. The **vertical throttle** slider retains its setting in MANUAL
+and FBWA; automatic modes control power. Keyboard: left/right arrows steer,
+down pulls both brakes in MANUAL, and W/S adjusts manual throttle.
+A lost pointer, window blur or hidden tab centers the stick. Browser
 background throttling may pause or interrupt simulation; keep the tab visible while
 flying. **Reset simulation** creates a fresh aircraft and clears its mission.
+
+Click **ALT / HOME** to enter a target between 5 and 300 m above home. MANUAL/FBWA
+switch to CRUISE when Set altitude is pressed (explained in the input panel).
+In AUTO this changes the current leg only; later waypoints retain their heights.
+The target shown comes from ArduPlane's navigation telemetry, and confirmation
+requires both a command acknowledgement and matching controller demand. The browser
+firmware includes a small GCS fix applying altitude requests to CRUISE/FBWB's separate
+altitude demand, in addition to the waypoint altitude.
 
 ## Missions
 
 Load QGroundControl `.plan` (SimpleItem) or QGC WPL 110 `.waypoints` files, or use the
 example circuit. Upload waits for ArduPlane's mission acknowledgement. After launch,
-**Fly mission** selects item 1 and AUTO. Engage another mode to take over manually.
+**Fly mission** selects item 1 and AUTO. Select another mode to take over manually.
 The route preview and item counter show the loaded route and current sequence.
 
 Supported commands: waypoint, loiter unlimited/turns/time, RTL, land and takeoff.
@@ -42,7 +55,7 @@ The example ends in unlimited loiter rather than an uncommanded landing.
 
 ## Wind and camera
 
-Use **Wind** in the flight desk to choose speed (0–10 m/s), the bearing wind comes
+Use **Mission & wind** to choose wind speed (0–10 m/s), the bearing wind comes
 from (0° north, 90° east), and vertical air (−3 to +3 m/s, positive upward), then
 select **Apply wind**. These are uniform steady winds applied to the actual Rust
 dynamics and sensor output. Set speed and vertical air to zero for calm conditions.
@@ -69,7 +82,19 @@ The model uses as-built 132 mm riser spacing and the bounded existing-log fit in
 Reduced flat-plane contact retains the two-body constraint. Scalar overhead
 inflation and prescribed hand motion approximate launch; neither cloth pull-up nor
 canopy collapse is modeled. Launch/contact constants are assumptions, not log fits.
-Terrain is an illustrative flat field, not a map or elevation database.
+The assisted inverted trajectory is implemented in `sim-core/src/launch.rs`, with
+generated Python and TypeScript bindings. Both body poses and their derivatives
+are used for sensor truth; the canopy starts laid out behind the payload and rises
+overhead. At release, the position/velocity constraints match the normal solver.
+Power remains zero during handling and the first second of dynamic glide. The
+assumed inverted hand height is 1.2 m, rising by 0.6 m through the swing and
+another 0.24 m through the toss. Release is at 5.8 s with 4.5 m/s forward and
+0.6 m/s upward velocity. Stabilization engages after the glide, so it cannot
+pull a brake against the operator during inverted handling. These are launch
+assumptions rather than new flight-log measurements. The
+legacy reduced surface-launch API remains available for frozen parity fixtures.
+Terrain is an illustrative flat field, not a map or elevation database. Grid and
+launch-circle markings are shaded on one surface to avoid distant depth fighting.
 The simulator is a development aid, not a validated flight-training model.
 
 ## Build and verify

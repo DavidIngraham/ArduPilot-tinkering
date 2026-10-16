@@ -5,6 +5,7 @@ export class Kernel {
     free(): void;
     [Symbol.dispose](): void;
     derivative(state: Float64Array, command: Float64Array, wind: Float64Array): Float64Array;
+    inverted_launch(trim: Float64Array, time_s: number, hand_height_m: number): Float64Array;
     constructor(parameters: Float64Array, mass: number);
     replay(state: Float64Array, commands: Float64Array, wind: Float64Array, voltage: number, rpm: number, dt: number, substeps: number, causal: boolean): Float64Array;
     surface_step(state: Float64Array, command: Float64Array, wind: Float64Array, voltage: number, rpm: number, dt: number, env: Float64Array, settings: Float64Array): Float64Array;
@@ -32,6 +33,7 @@ export interface InitOutput {
     readonly __wbg_simulator_free: (a: number, b: number) => void;
     readonly config_schema: () => [number, number];
     readonly kernel_derivative: (a: number, b: number, c: number, d: number, e: number, f: number, g: number) => [number, number, number, number];
+    readonly kernel_inverted_launch: (a: number, b: number, c: number, d: number, e: number) => [number, number, number, number];
     readonly kernel_new: (a: number, b: number, c: number) => [number, number, number];
     readonly kernel_replay: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number, l: number) => [number, number, number, number];
     readonly kernel_surface_step: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number, l: number, m: number, n: number) => [number, number, number, number];

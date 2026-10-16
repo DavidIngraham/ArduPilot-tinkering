@@ -4,6 +4,7 @@ import type { Waypoint, Home } from "./mission";
 export interface Calls {
   start: [url: string, home: Home];
   mode: [name: string];
+  altitude: [metres: number];
   wind: [speed: number, from: number, up: number];
   launch: [mode: string];
   upload: [items: Waypoint[]];

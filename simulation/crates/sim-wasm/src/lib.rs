@@ -9,6 +9,16 @@ pub struct Kernel {
 }
 #[wasm_bindgen]
 impl Kernel {
+    pub fn inverted_launch(
+        &self,
+        trim: &[f64],
+        time_s: f64,
+        hand_height_m: f64,
+    ) -> Result<Vec<f64>, JsValue> {
+        self.inner
+            .inverted_launch(trim, time_s, hand_height_m)
+            .map_err(error)
+    }
     #[wasm_bindgen(constructor)]
     pub fn new(parameters: &[f64], mass: f64) -> Result<Kernel, JsValue> {
         Ok(Self {

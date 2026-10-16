@@ -94,7 +94,7 @@ export class SimulatorClient {
           this.pending.delete(id);
           reject(Error("Simulator request timed out; reset to restart."));
         },
-        method === "start" ? 120000 : 30000,
+        method === "start" || method === "launch" ? 120000 : 30000,
       );
       this.pending.set(id, { resolve, reject, timer });
       this.worker.postMessage({ id, method, args } as WorkerRequest);
@@ -114,6 +114,9 @@ export class SimulatorClient {
   }
   mode(name: string) {
     return this.call("mode", name);
+  }
+  altitude(metres: number) {
+    return this.call("altitude", metres);
   }
   launch(mode: string) {
     return this.call("launch", mode);

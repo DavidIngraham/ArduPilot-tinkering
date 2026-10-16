@@ -38,6 +38,7 @@ jobs:
           npm run assets:fetch
           npm run build
           npm run test:physics
+          npm run test:launch
           npm run test:sitl
           npm test
           npx playwright install --with-deps chromium

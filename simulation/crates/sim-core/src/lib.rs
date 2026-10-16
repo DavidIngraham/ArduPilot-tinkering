@@ -5,6 +5,7 @@ pub mod config;
 pub mod dynamics;
 pub mod integrator;
 pub mod kernel;
+pub mod launch;
 pub mod propulsion;
 pub mod sensors;
 pub mod simulator;

@@ -12,14 +12,41 @@ const sim = new Simulator(HOME);
 sim.onLog = (text) => console.log(text);
 sim.onError = (text) => {
   console.error(text);
+  console.error(
+    "Physics at failure",
+    sim.physics.launchElapsed,
+    sim.physics.state,
+    sim.physics.command,
+  );
   process.exit(1);
 };
 let truthFrames = 0,
   maxJoint = 0;
+const launchStages = new Set<string>();
+let inverted = false,
+  canopyLow = false,
+  canopyHigh = false;
 sim.onTruth = (frame) => {
   validate(frame);
   truthFrames++;
   maxJoint = Math.max(maxJoint, Math.hypot(...frame.joint_rotvec_rad));
+  if (frame.launch_stage) launchStages.add(frame.launch_stage);
+  if (frame.launch_stage === "Inverted setup")
+    inverted = frame.state[4] ** 2 > 0.8;
+  if (frame.launch_stage === "Upright initialization")
+    canopyLow = frame.state[15] > -0.2;
+  if (frame.launch_stage === "Two steps") canopyHigh = frame.state[15] < -1.8;
+  if (
+    frame.launch_stage === "Unpowered glide" ||
+    frame.launch_stage === "Free flight"
+  )
+    assert.equal(frame.launch_phase, 2, "Launch must not touch down");
+  if (frame.launch_stage && frame.launch_stage !== "Free flight")
+    assert.equal(
+      frame.rpm,
+      0,
+      "Propeller stays stopped through handling and unpowered glide",
+    );
 };
 const timeout = setTimeout(() => {
   console.error("Integration timeout");
@@ -60,6 +87,18 @@ try {
     `Ground home datum must be preserved: ${sim.state.alt}`,
   );
   console.log("GROUND LAUNCH OK", JSON.stringify(sim.state));
+  assert.ok(
+    inverted && canopyLow && canopyHigh,
+    "Inverted launch must move the real canopy truth from ground to overhead",
+  );
+  for (const stage of [
+    "Inverted setup",
+    "Overhead swing",
+    "Two steps",
+    "Light toss",
+    "Unpowered glide",
+  ])
+    assert.ok(launchStages.has(stage), stage);
   await sim.execute();
   assert.equal(sim.state.mode, 10);
   console.log("AUTO OK");
@@ -105,6 +144,17 @@ try {
   assert.equal(sim.state.mode, 0);
   await sim.mode("CRUISE");
   assert.equal(sim.state.mode, 7);
+  await sim.altitude(45);
+  assert.ok(
+    Math.abs(sim.state.targetAlt! - 45) < 1,
+    "CRUISE must accept an actual AP altitude demand",
+  );
+  await new Promise((r) => setTimeout(r, 2500));
+  assert.ok(
+    Math.abs(sim.state.targetAlt! - 45) < 1,
+    "CRUISE demand must persist after heading locks",
+  );
+  await assert.rejects(sim.altitude(NaN));
   console.log("MANUAL TAKEOVER AND CRUISE OK");
   assert.ok(
     truthFrames > 50 && maxJoint > 0.01,

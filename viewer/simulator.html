@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#101c22" />
     <title>MicroAGU · Flight simulator</title>
   </head>
-  <body>
+  <body class="panel-closed">
     <main id="scene" aria-label="Three-dimensional flight view"></main>
     <header>
       <a
@@ -21,15 +21,53 @@
         ><small>ArduPlane · full 9-DOF physics</small>
       </div>
       <span id="connection" role="status">Preparing</span
-      ><button id="panel-toggle" aria-expanded="true" aria-controls="panel">
-        Flight desk
+      ><button id="panel-toggle" aria-expanded="false" aria-controls="panel">
+        Mission &amp; wind
       </button>
     </header>
     <section class="telemetry" aria-label="Flight telemetry">
-      <div><small>MODE</small><strong id="mode-label">—</strong></div>
-      <div>
-        <small>ALT / HOME</small
-        ><strong><span id="alt">0.0</span><i> m</i></strong>
+      <div class="telemetry-control mode-control">
+        <label for="mode">MODE ▾</label
+        ><strong id="mode-label" aria-hidden="true">—</strong>
+        <select id="mode" aria-label="Flight mode" disabled>
+          <option>MANUAL</option>
+          <option>FBWA</option>
+          <option>CRUISE</option>
+          <option>AUTO</option>
+          <option>LOITER</option>
+        </select>
+      </div>
+      <div class="altitude-control">
+        <button
+          id="altitude-open"
+          class="telemetry-control"
+          aria-label="Set commanded altitude"
+          aria-expanded="false"
+          aria-controls="altitude-form"
+          disabled
+        >
+          <small>ALT / HOME ▾</small
+          ><strong><span id="alt">0.0</span><i> m</i></strong>
+          <span id="alt-target" class="target-label">TARGET —</span>
+        </button>
+        <form id="altitude-form" hidden>
+          <label for="altitude-command"
+            >Commanded altitude · m above home</label
+          >
+          <div class="row">
+            <input
+              id="altitude-command"
+              type="number"
+              min="5"
+              max="300"
+              step="1"
+              inputmode="decimal"
+              required
+            /><button type="submit">Set altitude</button>
+          </div>
+          <p id="altitude-help" class="hint"></p>
+          <button id="altitude-close" type="button">Cancel</button>
+        </form>
       </div>
       <div>
         <small>GROUND SPEED</small
@@ -41,27 +79,13 @@
       </div>
       <div><small>HEADING</small><strong id="heading">000°</strong></div>
     </section>
-    <aside id="panel">
-      <div class="eyebrow">FLIGHT DESK <span id="armed">DISARMED</span></div>
-      <h1>Your own patch of sky.</h1>
+    <aside id="panel" hidden>
+      <div class="eyebrow">
+        MISSION &amp; WIND <span id="armed">DISARMED</span>
+      </div>
+      <h1>Mission &amp; wind</h1>
       <p class="intro">
         Fly MicroAGU from your browser, or let ArduPlane follow a mission.
-      </p>
-      <button id="launch" class="primary" disabled>
-        Inflate and launch
-      </button>
-      <p id="status" role="status">Loading simulator…</p>
-      <label for="mode">Flight mode</label>
-      <div class="row">
-        <select id="mode" disabled>
-          <option>MANUAL</option>
-          <option>FBWA</option>
-          <option selected>CRUISE</option>
-          <option>LOITER</option></select
-        ><button id="set-mode" disabled>Engage</button>
-      </div>
-      <p id="mode-help" class="hint">
-        CRUISE holds heading and altitude with centered controls.
       </p>
       <div class="section-title">
         <h2>Mission</h2>
@@ -131,31 +155,34 @@
       <details>
         <summary>Controls & model</summary>
         <p>
-          Right stick: steering and pitch. Left slider: throttle. Arrow keys
-          also move the stick; W/S adjust throttle. Release centers the stick.
-          Throttle stays where you leave it.
+          Right control: left/right steering. In MANUAL, pull down for both
+          brakes. Arrow keys do the same. The vertical slider and W/S control
+          throttle; automatic modes control power themselves. Release centers
+          steering.
         </p>
         <p>
           MANUAL directly controls brakes and throttle. FBWA uses heading-rate
           steering with manual throttle. CRUISE controls heading and altitude;
-          its pitch input requests climb/descent.
+          click the altitude display to set its altitude target.
         </p>
         <p>
-          Starts held on the ground while sensors initialize. The
-          default circuit uploads and starts automatically in AUTO when sensors
-          are ready. Choose another mode and Engage to take over.
+          Starts held on the ground while sensors initialize. The default
+          circuit uploads and starts automatically in AUTO when sensors are
+          ready. Click the mode display to take over. Reset starts a fresh
+          session.
         </p>
         <p>
-          Full 9-DOF canopy–payload research model, compiled from its C++
-          kernel. Both bodies, rotor and brake actuators are drawn from
-          simulation truth. Uses the as-built 132 mm riser spacing and a fit to
-          existing Hood River / Trout Lake logs. Ground contact uses a flat plane;
-          overhead inflation and hand launch are assisted approximations, not a
-          cloth pull-up simulation. Launch timing and friction are assumptions.
-          All control is local to this tab.
+          Full 9-DOF canopy–payload research model, compiled from Rust. Both
+          bodies, rotor and brake actuators are drawn from simulation truth.
+          Uses the as-built 132 mm riser spacing and a fit to existing Hood
+          River / Trout Lake logs. Ground contact uses a flat plane; inverted
+          setup, overhead swing, two steps and toss use an assisted trajectory,
+          followed by one second of unpowered glide. Canopy motion and inflation
+          during handling are prescribed approximations. Launch timing and
+          friction are assumptions, not newly fitted measurements. All control
+          is local to this tab.
         </p>
         <p id="joint-truth">Waiting for simulation truth…</p>
-        <button id="reset">Reset simulation</button>
       </details>
       <details>
         <summary>Event log</summary>
@@ -163,8 +190,13 @@
       </details>
     </aside>
     <div class="view-controls">
+      <button id="launch" disabled>Launch</button>
       <button id="camera">View: chase</button
       ><button id="fullscreen">Full screen</button>
+    </div>
+    <div class="flight-status">
+      <p id="status" role="status">Initializing upright…</p>
+      <p id="mode-help"></p>
     </div>
     <section class="pilot-controls" aria-label="Pilot controls">
       <div class="throttle-box">
@@ -178,18 +210,19 @@
           value="0"
           aria-label="Throttle percent"
           disabled
-        /><small>W / S</small>
+        /><small id="throttle-hint">W / S</small>
       </div>
       <div class="stick-box">
         <div
           id="stick"
           role="group"
-          aria-label="Touch joystick: steering and pitch"
+          aria-label="Steer left or right"
+          data-shape="line"
         >
           <span class="cross horizontal"></span
           ><span class="cross vertical"></span><span id="knob"></span>
         </div>
-        <small>STEER / PITCH · ARROW KEYS</small>
+        <small id="stick-label">← STEER →</small>
       </div>
     </section>
     <footer>

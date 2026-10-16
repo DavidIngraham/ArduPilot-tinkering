@@ -12,6 +12,7 @@ export interface Telemetry {
   lat: number;
   lon: number;
   alt: number;
+  targetAlt: number | null;
   speed: number;
   climb: number;
   roll: number;
@@ -32,6 +33,7 @@ export function initialTelemetry(home: {
     lat: home.lat,
     lon: home.lon,
     alt: 0,
+    targetAlt: null,
     speed: 0,
     climb: 0,
     roll: 0,

@@ -43,3 +43,18 @@ def test_numpy_batch_contract():
     np.testing.assert_array_equal(result[0, :26], state)
     with pytest.raises(ValueError):
         kernel.replay(state, [0.4, 0., 0.], [0., 0., 0.], 22.2, float('nan'), .005, 4, True)
+
+def test_inverted_launch_binding_and_handoff():
+    from microagu_sim import Kernel
+    c = config()
+    kernel = Kernel([c['parameters'][k] for k in parameter_keys()], c['mass_kg'])
+    initial = kernel.inverted_launch(c['initial_state'], 0., 1.2)
+    release = kernel.inverted_launch(c['initial_state'], 5.8, 1.2)
+    assert len(release) == 27
+    assert initial[15] == pytest.approx(-.04)
+    assert release[2] == pytest.approx(-2.04)
+    assert release[7] == pytest.approx(4.5, abs=1e-6)
+    assert release[9] == pytest.approx(-.6, abs=1e-6)
+    assert release[26] == 1.
+    with pytest.raises(ValueError):
+        kernel.inverted_launch(c['initial_state'], -1., 1.2)

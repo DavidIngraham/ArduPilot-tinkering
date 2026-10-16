@@ -5,6 +5,7 @@ export const __wbg_kernel_free: (a: number, b: number) => void;
 export const __wbg_simulator_free: (a: number, b: number) => void;
 export const config_schema: () => [number, number];
 export const kernel_derivative: (a: number, b: number, c: number, d: number, e: number, f: number, g: number) => [number, number, number, number];
+export const kernel_inverted_launch: (a: number, b: number, c: number, d: number, e: number) => [number, number, number, number];
 export const kernel_new: (a: number, b: number, c: number) => [number, number, number];
 export const kernel_replay: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number, l: number) => [number, number, number, number];
 export const kernel_surface_step: (a: number, b: number, c: number, d: number, e: number, f: number, g: number, h: number, i: number, j: number, k: number, l: number, m: number, n: number) => [number, number, number, number];
