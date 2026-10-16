@@ -1,0 +1,3 @@
+-r ../../simulation/requirements.txt
+matplotlib>=3.6
+pymavlink

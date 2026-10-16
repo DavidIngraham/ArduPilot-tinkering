@@ -1,4 +1,5 @@
 """Summarize the archived and repeated extended AUTO tests, including partial runs."""
+from _sim_path import SIMULATION
 from pathlib import Path
 import json
 import numpy as np
@@ -6,7 +7,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import argparse
-root=Path(__file__).resolve().parents[1]
+root=Path(__file__).resolve().parents[2]
 parser=argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--runs-dir',type=Path,default=root.parent/'pg-sitl-comparison')
 parser.add_argument('--output',type=Path)

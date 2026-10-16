@@ -1,4 +1,5 @@
 """Pitch-damper native SITL comparison using plant truth and logged actuator PWM."""
+from _sim_path import SIMULATION
 from pathlib import Path
 import argparse,json
 import numpy as np
@@ -9,7 +10,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 p=argparse.ArgumentParser(description=__doc__)
-p.add_argument('--runs-dir',type=Path,default=Path(__file__).resolve().parents[2]/'pg-damper-study')
+p.add_argument('--runs-dir',type=Path,default=Path(__file__).resolve().parents[3]/'pg-damper-study')
 p.add_argument('--output',type=Path)
 a=p.parse_args();root=a.runs_dir;out=a.output or root;out.mkdir(parents=True,exist_ok=True)
 fig,axes=plt.subplots(4,1,figsize=(12,11),sharex=True);results={}

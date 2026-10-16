@@ -4,6 +4,7 @@ Stop at first payload ground-plane crossing: no impact or canopy-collapse model.
 PG_LANDING_CASE selects nominal, weak, strong, crosswind, abort, takeover, disabled, timed, or reserve.
 Outputs use the standard autotest buildlogs directory.
 """
+from _sim_path import SIMULATION
 # AP_FLAKE8_CLEAN
 import json
 import math
@@ -27,7 +28,7 @@ CONFIG = json.loads(Path(os.environ['PG_LANDING_CONFIG']).read_text()) if os.env
 # Ordinary landing tests share the complete mission controller. Explicit study
 # overrides retain their existing behavior for reproducible archived runs.
 if 'PG_CONTROLLER_CONFIG' not in os.environ and 'PG_GAINS' not in os.environ:
-    os.environ['PG_CONTROLLER_CONFIG'] = str(Path(__file__).with_name('mission-controller-candidate.json'))
+    os.environ['PG_CONTROLLER_CONFIG'] = str((SIMULATION/'mission-controller-candidate.json'))
 os.environ.setdefault('PG_GAINS', 'mission')
 os.environ['PG_SAMPLE_DIVISOR'] = '8'
 

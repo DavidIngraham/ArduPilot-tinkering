@@ -1,4 +1,5 @@
 """Overlay phase-aligned mission responses for selected native study cases."""
+from _sim_path import SIMULATION
 import argparse,json
 from pathlib import Path
 import numpy as np

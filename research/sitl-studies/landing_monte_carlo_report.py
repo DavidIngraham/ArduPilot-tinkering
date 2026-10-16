@@ -1,4 +1,5 @@
 """Summarize exploratory landing Monte Carlo trials without hiding incomplete runs."""
+from _sim_path import SIMULATION
 # AP_FLAKE8_CLEAN
 import argparse
 import json

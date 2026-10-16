@@ -1,16 +1,28 @@
 # External MicroAGU simulator
 
-This directory owns the full 9-DOF two-body physics, Python JSON adapter,
-observer/LQI experiments, controller studies and research presets. It was migrated
+This directory is the reusable simulator: full 9-DOF two-body physics, Python JSON
+adapter, actuator/sensor models, trim solvers, named profiles and runtime data.
+Experiment drivers, controller candidates, plotting and historical notes live in
+[research/sitl-studies](../research/sitl-studies/README.md); the as-built fitting
+script lives with [its dated results](../research/as-built-simulator-2026-10-15/README.md).
+The runtime never imports experiment code. It was migrated
 from ArduPilot commit `94aa4afc8ba8e963b329d92781c3020a4caa3fc3`;
 [the migration manifest](../provenance/simulator-migration.json) records original
-file hashes. Dated studies and [historical instructions](HISTORICAL-README.md)
+file hashes. Dated studies and [historical instructions](../research/sitl-studies/HISTORICAL-README.md)
 retain provenance; they are not the current build instructions.
 
 ArduPilot retains flight control, mixer/TECS/flare, native firmware tests,
 `SIM_Paraglider` (including limited pitch articulation), and generic JSON/WASM
 transport. The external model is optional, like JSBSim for Plane. It is not linked
 into the firmware. No observer or LQI controller has been moved into ArduPilot.
+
+Keep reusable mechanics, adapters and their regression tests here. Keep hypotheses,
+parameter sweeps, fitting scripts and reports under `research/`. A result needed by
+the runtime is explicitly promoted as a configuration artifact: the selected
+`as-built-calibration.json`, geometry, trim references and mission-controller
+preset remain here so the simulator and browser build need no research checkout.
+Named legacy profiles are retained as reusable API compatibility, not executable
+study drivers. `smoke_sitl.py` is a transport regression check, not a controller study.
 
 ## Build and verify
 
@@ -53,7 +65,7 @@ For native comparison scripts, for example:
 
 ```sh
 export ARDUPILOT_ROOT=/path/to/ardupilot
-python simulation/compare_autotest.py --help
+python research/sitl-studies/compare_autotest.py --help
 ```
 
 The browser compiles `dynamics.cpp` and `surface.cpp` directly into a separate

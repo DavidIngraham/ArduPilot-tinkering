@@ -1,3 +1,4 @@
+from _sim_path import SIMULATION
 from pathlib import Path
 import sys,json,numpy as np
 from scipy.spatial.transform import Rotation as Rot
@@ -30,7 +31,7 @@ for flight in [args.flight]:
    if case=='low_damping':sim.parameters['joint_c_yaw']*=.25;sim.parameters['joint_c_pitch']*=.25
    if case=='rotor_low':sim.parameters['rotor_spin_inertia']*=.75
    if case=='rotor_high':sim.parameters['rotor_spin_inertia']*=1.25
-   d=np.load(R/f'equilibrium-trim-{flight}-0.0-0.0.npz');root=solve(sim,d['state'],d['command']);assert abs(root['residual']).max()<1e-6,'Equilibrium not resolved';state=root['state'];rpm=root['rpm'];act=BrakeActuator(rate_mm_s=110.761279453 if case=='slow_servo' else 221.522558906,position_mm=root['command'][1:]);throttle=th0
+   d=np.load(SIMULATION/f'equilibrium-trim-{flight}-0.0-0.0.npz');root=solve(sim,d['state'],d['command']);assert abs(root['residual']).max()<1e-6,'Equilibrium not resolved';state=root['state'];rpm=root['rpm'];act=BrakeActuator(rate_mm_s=110.761279453 if case=='slow_servo' else 221.522558906,position_mm=root['command'][1:]);throttle=th0
    def feedforward(rate):return float(np.interp(rate,tx,fx)+(bias_slope*(throttle-th0) if ffmode=='power_trim' else 0))
    turn=Turn(feedforward=None if ffmode=='fixed' else feedforward,p=.005,i=.0005,rdamp=.003,dff=0,filter_hz=1);climb=Climb();climb.last=th0;climb.integral=th0-.43;dt=.04;t=np.arange(6001)*dt;out=[];states=[];previous=np.arctan2(state[8],state[7]);airrate=0.
    for now in t:

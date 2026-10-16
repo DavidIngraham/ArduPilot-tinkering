@@ -1,4 +1,5 @@
 """Native TECS damper sign experiment: matched TL geometry and pitch-rate kick."""
+from _sim_path import SIMULATION
 import os
 import json
 import runpy

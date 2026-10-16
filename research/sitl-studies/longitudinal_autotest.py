@@ -1,4 +1,5 @@
 """Native FBWB longitudinal mission and bounded lateral ablation study."""
+from _sim_path import SIMULATION
 import os,json,runpy
 from pathlib import Path
 import numpy as np

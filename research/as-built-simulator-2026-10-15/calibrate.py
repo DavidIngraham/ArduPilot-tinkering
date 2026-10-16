@@ -12,7 +12,8 @@ from pathlib import Path
 import sys
 import numpy as np
 
-ROOT=Path(__file__).resolve().parent
+ROOT=Path(__file__).resolve().parents[2]/'simulation'
+sys.path.insert(0,str(ROOT))
 HIST=ROOT.parent/'research/rigging-refinement-2026-10-15'
 # Reuse the published observation/initialization method, with the migrated kernel.
 import profiles, dynamics, routing
@@ -71,7 +72,7 @@ def run():
             for k in ['roll_rate','pitch_rate','yaw_rate','bank','course','climb']} for v in ['legacy','routed']})
     (OUT/'fit.json').write_text(json.dumps(rows+baseline,indent=2)+'\n')
     (OUT/'checks.json').write_text(json.dumps(checks,indent=2)+'\n')
-    (ROOT/'as-built-calibration.json').write_text(json.dumps(result,indent=2)+'\n')
+    (OUT/'calibration.json').write_text(json.dumps(result,indent=2)+'\n')
     print(json.dumps(result,indent=2))
 
 if __name__=='__main__':run()

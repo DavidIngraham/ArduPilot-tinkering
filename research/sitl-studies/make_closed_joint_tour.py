@@ -24,6 +24,8 @@ p.add_argument('--profile', choices=['mission', 'dynamic_roll'], default='missio
 a, forwarded = p.parse_known_args()
 if forwarded[:1] == ['--']: forwarded = forwarded[1:]
 sys.path.insert(0, str(a.model_dir.resolve()))
+os.environ['MICROAGU_SIM_ROOT']=str(a.model_dir.resolve())
+sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'research/sitl-studies'))
 import compare_autotest as harness
 from json_backend import Backend
 os.environ['PG_PROFILE'] = a.profile

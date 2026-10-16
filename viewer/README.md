@@ -369,7 +369,7 @@ available, including the earlier rotor-coupling example. The frozen-command
 shadow remains a raw research diagnostic and is not offered in the widget.
 Camera framing is shared within each body/axis/profile/amplitude comparison.
 
-`make_closed_joint_tour.py` uses the airborne SITL harness and the branch's
+`research/sitl-studies/make_closed_joint_tour.py` uses the airborne SITL harness and the branch's
 `mission-controller-candidate.json`. AUTO flies a straight northbound leg toward
 waypoints 1 km and 2 km from home, at 100 m relative altitude. Physics runs under
 native control for 100 seconds before the disturbance; mission item 1 and AUTO
@@ -384,8 +384,8 @@ logs remain in Mission Planner. Packaged traces record parameter readback, sourc
 revision and executable SHA-256. No firmware/controller changes are required.
 
 ```sh
-python viewer/tools/run_closed_joint_tour.py --repo /path/to/ardupilot --raw /path/to/Mission-Planner/joint-tour/auto-suite
-python viewer/tools/package_closed_joint_tour.py --repo /path/to/ardupilot --raw /path/to/Mission-Planner/joint-tour/auto-suite --output viewer/public/joint-tour/responses.json
+python research/sitl-studies/run_closed_joint_tour.py --repo /path/to/ardupilot --raw /path/to/Mission-Planner/joint-tour/auto-suite
+python research/sitl-studies/package_closed_joint_tour.py --repo /path/to/ardupilot --raw /path/to/Mission-Planner/joint-tour/auto-suite --output viewer/public/joint-tour/responses.json
 ```
 
 ## Manual trim and launch illustration

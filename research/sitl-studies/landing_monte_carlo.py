@@ -1,4 +1,5 @@
 """Run seeded native-SITL landing trials and matched no-flare controls."""
+from _sim_path import SIMULATION
 # AP_FLAKE8_CLEAN
 import argparse
 import json

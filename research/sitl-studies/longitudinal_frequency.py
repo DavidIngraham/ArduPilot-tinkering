@@ -1,4 +1,5 @@
 """Fixed-brake throttle frequency response, with nonlinear sine validation."""
+from _sim_path import SIMULATION
 import argparse,json
 from pathlib import Path
 import numpy as np

@@ -1,0 +1,50 @@
+{
+  "schema": "microagu.as-built-fit.v1",
+  "spacing_m": 0.132,
+  "ring_height_m": 0.06,
+  "damping_scale": 3.0,
+  "brake_scale": 1.0,
+  "yaw_scale": 1.1257575757575757,
+  "ranked": [
+    {
+      "damping": 3.0,
+      "score": 0.926560130518893
+    },
+    {
+      "damping": 2.5,
+      "score": 0.9345271334084031
+    },
+    {
+      "damping": 2.0,
+      "score": 0.945974172618643
+    },
+    {
+      "damping": 1.5,
+      "score": 0.9642435154285044
+    },
+    {
+      "damping": 1.0,
+      "score": 0.9990608535266949
+    }
+  ],
+  "bound_hit": true,
+  "limitations": "Same two historical flights; canopy initial attitude inferred, not measured. Launch/contact settings are assumptions, not fitted.",
+  "check_mean": {
+    "legacy": {
+      "roll_rate": 13.461968564314738,
+      "pitch_rate": 19.402273044971853,
+      "yaw_rate": 26.462964445119383,
+      "bank": 5.734953551731089,
+      "course": 59.65207093401194,
+      "climb": 0.3390131828075685
+    },
+    "routed": {
+      "roll_rate": 13.23498989349761,
+      "pitch_rate": 17.471169507933595,
+      "yaw_rate": 23.714384927925902,
+      "bank": 5.673912515246542,
+      "course": 57.88455350906778,
+      "climb": 0.3394886028156386
+    }
+  }
+}

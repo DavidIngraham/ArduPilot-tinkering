@@ -2,6 +2,7 @@
 Source: ArduPilot commit b2f6da3a183a68d3de6f2c721ec90fca0eab53d5, ArduPlane/PG_TurnController.cpp.
 No navigation/EKF/servo dynamics. Scheduled feedforward is a research alternative.
 """
+from _sim_path import SIMULATION
 import numpy as np
 class Turn:
  def __init__(self,dt=.04,feedforward=None,p=.04,i=.002,rdamp=.03,dff=.02,filter_hz=4.):self.dt=dt;self.feedforward=feedforward;self.initial=False;self.integral=0.;self.p=p;self.i=i;self.rdamp=rdamp;self.dff=dff;self.filter_hz=filter_hz

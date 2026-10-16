@@ -9,6 +9,7 @@ repeatable gust velocity drives the physics and matching wind/airspeed sensors.
 """
 import argparse
 import json
+import os
 from pathlib import Path
 import runpy
 import sys
@@ -42,7 +43,10 @@ with args.output.open('x') as recording:
         return response
 
     Backend.respond = observe
-    sys.argv = [str(args.model_dir / 'compare_autotest.py'), *forwarded]
+    study=Path(__file__).resolve().parents[2]/'research/sitl-studies'
+    os.environ['MICROAGU_SIM_ROOT']=str(args.model_dir.resolve())
+    sys.path.insert(0,str(study))
+    sys.argv = [str(study / 'compare_autotest.py'), *forwarded]
     try:
         runpy.run_path(sys.argv[0], run_name='__main__')
     finally:

@@ -1,4 +1,5 @@
 """Sequential native experiments; each case records its full configuration."""
+from _sim_path import SIMULATION
 import os,json,subprocess,sys
 from pathlib import Path
 from firmware import checkout

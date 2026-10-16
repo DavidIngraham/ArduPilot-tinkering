@@ -14,9 +14,15 @@ The measured riser attachment spacing is **132 mm**. The 185 mm proposal is not
 used. Flight-specific mass, CG, inertia, brake slack and preload remain unchanged.
 Routing is enabled, with the existing uncertain 60 mm ring-height assumption.
 
-Run `python simulation/calibrate_as_built.py` after building the native kernel;
+Run `python research/as-built-simulator-2026-10-15/calibrate.py` after building the native kernel;
 set `MICROAGU_REPLAY_DATA` to the directory containing the four NPZ inputs. The
-script reuses the published observation and canopy-initialization method. It fits
+script reuses the published observation and canopy-initialization method.
+The script writes `calibration.json` beside its results; it never overwrites the
+runtime configuration. After reviewing a new fit, explicitly copy that artifact
+to `simulation/as-built-calibration.json` to promote it. The retained runtime copy
+continues to reproduce the deployed model.
+
+The fit varies
 only a common pitch/yaw joint damping multiplier in [1, 1.5, 2, 2.5, 3]. Brake
 authority is unchanged. The corrected yaw geometry retains the previously fitted
 stiffness product; this is not a claim that geometry alone identifies stiffness.

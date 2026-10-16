@@ -17,6 +17,7 @@ The original controller flew autonomous missions at Trout Lake after initial tes
 | [cad/](cad/) | Native SolidWorks parts, assemblies and file manifest |
 | [docs/](docs/) | Build, flight tests, controller design and landing articles |
 | [viewer/](viewer/) | Three.js replay/live viewer, articulated models and export tools |
+| [simulation/](simulation/) | Reusable physics, adapters, trim solvers, runtime profiles and regression tests |
 | [research/](research/) | Study scripts, final plots, configurations and compact replay excerpts |
 | [tools/](tools/) | Analysis and archive utilities |
 | [provenance/](provenance/) | Source revisions, artifact manifests and historical implementation records |
@@ -65,7 +66,7 @@ Open `cad/solidworks/microAGU.SLDASM` in SolidWorks, keeping the neighboring par
 
 ## Firmware and simulator
 
-The flight controller, native autotests and lightweight built-in articulated model live in the [paraglider-browser-9dof branch of the ArduPilot fork](https://github.com/DavidIngraham/ardupilot/tree/paraglider-browser-9dof), stacked on the separate generic `sitl-wasm-json` transport branch. This repository owns the [external 9-DOF simulator, adapters and control experiments](simulation/README.md), alongside the hardware and Three.js viewer. The older `paraglider-high-dof-control` branch remains historical provenance.
+The flight controller, native autotests and lightweight built-in articulated model live in the [paraglider-browser-9dof branch of the ArduPilot fork](https://github.com/DavidIngraham/ardupilot/tree/paraglider-browser-9dof), stacked on the separate generic `sitl-wasm-json` transport branch. This repository owns the [reusable external simulator](simulation/README.md) and separate [research experiments](research/README.md), alongside the hardware and Three.js viewer. The older `paraglider-high-dof-control` branch remains historical provenance.
 
 For setup and native tests, follow the [simulator README](simulation/README.md). The [browser simulator](https://davidingraham.github.io/assets/microagu-viewer/simulator.html) uses the same external kernel with the as-built 132 mm geometry. See [the latest fit and launch limitations](research/as-built-simulator-2026-10-15/README.md). Individual study directories retain their original configurations and pinned source revisions.
 

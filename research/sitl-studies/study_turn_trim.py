@@ -1,3 +1,4 @@
+from _sim_path import SIMULATION
 from profiles import make_simulator
 from trim import find_trim
 import json,numpy as np

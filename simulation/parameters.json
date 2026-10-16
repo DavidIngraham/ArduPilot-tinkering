@@ -32,5 +32,5 @@
     "geometry_yaw": 0.0,
     "spin_acceleration_scale": 0.0
   },
-  "description": "Raw common parameters. Use Simulator for a complete configured model; see README.txt and configuration-provenance.json."
+  "description": "Raw common parameters. Use Simulator for a complete configured model; see README.md. Historical configuration provenance is in ../research/sitl-studies/configuration-provenance.json."
 }

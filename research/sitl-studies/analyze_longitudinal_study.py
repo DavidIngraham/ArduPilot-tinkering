@@ -1,4 +1,5 @@
 """Extract phase-wise native tracking, pitch and actuator metrics."""
+from _sim_path import SIMULATION
 import argparse,json
 from pathlib import Path
 import numpy as np

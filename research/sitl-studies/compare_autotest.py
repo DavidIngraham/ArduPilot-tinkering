@@ -3,6 +3,7 @@
 PG_PROFILE selects mission/dynamic_roll. PG_GAINS selects original/conservative/mission.
 The original native launch is replaced; route, metrics and pass criteria are not.
 """
+from _sim_path import SIMULATION
 from pathlib import Path
 import os
 import runpy
@@ -46,7 +47,7 @@ def airborne(self, altitude=60, **kwargs):
     self._pg_backend=(backend,stop,thread,errors,samples)
     self.customise_SITL_commandline(['--rate','400'],model='JSON:127.0.0.1',
         defaults_filepath=[str(ROOT/'Tools/autotest/default_params/paraglider.parm'),
-                           str(Path(__file__).with_name('sitl.parm'))],wipe=True)
+                           str((SIMULATION/'sitl.parm'))],wipe=True)
     self.set_rc_default()
     self.set_parameters({'SIM_WIND_SPD':0,'SIM_WIND_TURB':0,'SIM_SPEEDUP':10})
     if os.environ.get('PG_GAINS','conservative')=='original':
@@ -55,7 +56,7 @@ def airborne(self, altitude=60, **kwargs):
     elif os.environ.get('PG_GAINS') == 'mission':
         # Share the selected lateral configuration without changing this test's
         # independently configured longitudinal controller.
-        selected = json.loads(Path(__file__).with_name('mission-controller-candidate.json').read_text())
+        selected = json.loads((SIMULATION/'mission-controller-candidate.json').read_text())
         self.set_parameters({key: value for key, value in selected['parameters'].items()
                              if key.startswith('PG_TURN_')})
     if os.environ.get('PG_CONTROLLER_CONFIG'):

@@ -1,4 +1,5 @@
 """Check landing control invariants and plot the recorded SITL comparisons."""
+from _sim_path import SIMULATION
 # AP_FLAKE8_CLEAN
 import argparse
 import json
