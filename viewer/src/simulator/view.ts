@@ -138,6 +138,8 @@ export class FlightView {
       this.payload.quaternion.copy(orientation(f.state.slice(3, 7)));
       this.canopy.position.copy(position(f.state.slice(13, 16)));
       this.canopy.quaternion.copy(orientation(f.state.slice(16, 20)));
+      // Illustrative pressure fill only; the solver has no cloth shape state.
+      this.canopy.scale.set(1, 1, 0.15 + 0.85 * (f.inflation ?? 1));
       const brakes = f.brake_mm;
       this.phase = this.rotor.advance(f.time_s, f.rpm);
       if (this.mechanisms)

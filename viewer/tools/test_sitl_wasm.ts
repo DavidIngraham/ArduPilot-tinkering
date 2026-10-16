@@ -30,6 +30,7 @@ try {
     JSON.parse(await readFile("public/wasm/highdof.json", "utf8")),
   );
   console.log("BOOT OK");
+  assert.ok(Math.abs(sim.state.alt) < 2, "EKF must initialize on the ground");
   for (const mode of ["MANUAL", "FBWA", "CRUISE"]) {
     await sim.mode(mode);
     console.log("MODE OK", mode);
@@ -53,16 +54,25 @@ try {
     "Paraglider must arm and release airborne physics",
   );
   assert.ok(
-    sim.state.alt > 90 && sim.state.alt < 110,
+    sim.state.alt > 2 && sim.state.alt < 15,
     `Ground home datum must be preserved: ${sim.state.alt}`,
   );
-  console.log("AIRBORNE RELEASE OK", JSON.stringify(sim.state));
+  console.log("GROUND LAUNCH OK", JSON.stringify(sim.state));
   await sim.execute();
   assert.equal(sim.state.mode, 10);
   console.log("AUTO OK");
   sim.physics.setWind(1.5, 270, 0.2);
   const before = { ...sim.state };
   await new Promise((r) => setTimeout(r, 12000));
+  assert.equal(
+    sim.physics.launchPhase,
+    2,
+    "Assisted launch must release into free flight",
+  );
+  assert.ok(
+    sim.state.alt > 3,
+    `AUTO must climb after launch: ${sim.state.alt}`,
+  );
   assert.ok(
     Math.abs(sim.state.lat - before.lat) +
       Math.abs(sim.state.lon - before.lon) >

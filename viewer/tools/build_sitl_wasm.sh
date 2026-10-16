@@ -18,5 +18,8 @@ data={'repository':'https://github.com/DavidIngraham/ardupilot','revision':revis
       'license':'GPL-3.0-or-later','board':'wasm','vehicle':'ArduPlane',
       'model':'JSON:wasm + full 9-DOF research kernel','emscripten':'6.0.8',
       'sha256':{p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in out.parent.iterdir() if p.name.startswith(('arduplane.','highdof.'))}}
+physics=json.loads((out.parent/'highdof.json').read_text())
+data['physics_source']={'repository':physics['source_repository'],'revision':physics['source_revision'],
+                        'kernel_sha256':physics['kernel_sha256'],'surface_sha256':physics['surface_sha256']}
 out.write_text(json.dumps(data,indent=2)+'\n')
 PY

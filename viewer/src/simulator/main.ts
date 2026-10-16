@@ -28,8 +28,14 @@ const view = new FlightView(el("scene"), log);
 sim.onLog = log;
 sim.onTruth = (frame) => {
   view.updateTruth(frame);
+  const phase = [
+    "Ground hold",
+    "Assisted inflation",
+    "Free flight",
+    "Ground contact",
+  ][frame.launch_phase ?? 2];
   el("joint-truth").textContent =
-    `${frame.time_s.toFixed(1)} s · Canopy / payload joint: ${frame.joint_rotvec_rad.map((v) => ((v * 180) / Math.PI).toFixed(1)).join(" / ")}° · ${(frame.rpm ?? 0).toFixed(0)} rpm`;
+    `${phase} · ${Math.round((frame.inflation ?? 1) * 100)}% inflation · ${frame.time_s.toFixed(1)} s · Canopy / payload joint: ${frame.joint_rotvec_rad.map((v) => ((v * 180) / Math.PI).toFixed(1)).join(" / ")}° · ${(frame.rpm ?? 0).toFixed(0)} rpm`;
 };
 sim.onError = (text) => {
   ready = false;
@@ -42,9 +48,7 @@ function buttons() {
   for (const id of ["mode", "set-mode", "throttle", "apply-wind"])
     (el(id) as HTMLButtonElement).disabled = !ready || operation;
   el<HTMLButtonElement>("launch").disabled = !ready || operation || launched;
-  el("launch").textContent = launched
-    ? "Flight running"
-    : "Start flight at 100 m";
+  el("launch").textContent = launched ? "Flight running" : "Inflate and launch";
   el<HTMLButtonElement>("upload").disabled =
     !ready || operation || !items.length;
   el<HTMLButtonElement>("execute").disabled =
@@ -90,12 +94,12 @@ sim.onUpdate = () => {
 };
 el("launch").onclick = () =>
   void action(async () => {
-    status("Arming and preparing airborne control…");
+    status("Arming and preparing assisted launch…");
     await sim.launch(el<HTMLSelectElement>("mode").value);
     launched = true;
     throttle = sim.trimThrottle;
     controls();
-    status("9-DOF physics released. You have control at 100 m.");
+    status("Inflating and launching. Flight controls are active.");
     if (innerWidth <= 720) setDesk(false);
   });
 const help: Record<string, string> = {

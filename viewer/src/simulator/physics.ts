@@ -16,6 +16,7 @@ export interface PhysicsConfig {
   brake_offsets_m: number[];
   defaults: string;
   trim_residual: number;
+  launch_settings?: number[];
 }
 export class Physics {
   state: number[];
@@ -33,6 +34,29 @@ export class Physics {
   private out: number;
   private rpmOut: number;
   private windNED = [0, 0, 0];
+  private surfaceEnv = 0;
+  private surfaceSettings = 0;
+  launchPhase = 2;
+  inflation = 1;
+  groundStart() {
+    if (!this.config.launch_settings)
+      throw Error("Launch configuration missing");
+    this.surfaceEnv = this.module._malloc(24);
+    this.surfaceSettings = this.module._malloc(48);
+    this.module.HEAPF64.set([0, 0, 0], this.surfaceEnv / 8);
+    this.module.HEAPF64.set(
+      this.config.launch_settings,
+      this.surfaceSettings / 8,
+    );
+    const dz = this.state[2] + this.config.launch_settings[0];
+    this.state[2] -= dz;
+    this.state[15] -= dz;
+    this.state.fill(0, 7, 13);
+    this.state.fill(0, 20, 26);
+    this.rpm = 0;
+    this.launchPhase = 0;
+    this.inflation = 0;
+  }
   setWind(speed: number, fromDegrees: number, up: number) {
     if (
       ![speed, fromDegrees, up].every(Number.isFinite) ||
@@ -160,29 +184,57 @@ export class Physics {
       ];
       this.module.HEAPF64.set(this.state, this.y / 8);
       this.module.HEAPF64.set([...input, ...input], this.u / 8);
-      const count = this.module._causal_replay(
-        this.y,
-        this.u,
-        2,
-        dt,
-        Math.max(1, Math.ceil(dt / 0.00125)),
-        this.p,
-        this.config.mass,
-        this.wind,
-        this.config.voltage,
-        this.rpm,
-        this.out,
-        this.rpmOut,
-      );
+      let offset = 26;
+      let count: number;
+      if (this.surfaceEnv) {
+        if (this.module.HEAPF64[this.surfaceEnv / 8] === 0)
+          this.module.HEAPF64[this.surfaceEnv / 8] = 1;
+        count =
+          this.module._surface_step(
+            this.y,
+            this.u,
+            this.p,
+            this.config.mass,
+            this.wind,
+            this.config.voltage,
+            this.rpm,
+            dt,
+            this.surfaceSettings,
+            this.surfaceEnv,
+            this.out,
+            this.rpmOut,
+          ) * 2;
+        offset = 0;
+        this.launchPhase = this.module.HEAPF64[this.surfaceEnv / 8];
+        this.inflation = this.module.HEAPF64[this.surfaceEnv / 8 + 2];
+      } else
+        count = this.module._causal_replay(
+          this.y,
+          this.u,
+          2,
+          dt,
+          Math.max(1, Math.ceil(dt / 0.00125)),
+          this.p,
+          this.config.mass,
+          this.wind,
+          this.config.voltage,
+          this.rpm,
+          this.out,
+          this.rpmOut,
+        );
       if (count !== 2)
         throw Error("The 9-DOF physics diverged; reset the simulator.");
       this.state = Array.from(
-        this.module.HEAPF64.subarray(this.out / 8 + 26, this.out / 8 + 52),
+        this.module.HEAPF64.subarray(
+          this.out / 8 + offset,
+          this.out / 8 + offset + 26,
+        ),
       );
-      this.rpm = this.module.HEAPF64[this.rpmOut / 8 + 1];
+      this.rpm =
+        this.module.HEAPF64[this.rpmOut / 8 + (this.surfaceEnv ? 0 : 1)];
       if (!this.state.every(Number.isFinite) || !Number.isFinite(this.rpm))
         throw Error("Non-finite physics state; reset the simulator.");
-      if (this.state[2] >= 0)
+      if (!this.surfaceEnv && this.state[2] >= 0)
         throw Error(
           "Ground reached. This airborne research model has no contact dynamics; reset for another flight.",
         );
@@ -242,6 +294,8 @@ export class Physics {
       brake_mm: this.brakes.slice(),
       throttle: this.command[0],
       released: this.released,
+      launch_phase: this.launchPhase,
+      inflation: this.inflation,
       wind_ned_m_s: this.windNED.slice(),
       joint_rotvec_rad: [
         relative.x * scale,

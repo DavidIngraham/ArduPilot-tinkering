@@ -9,7 +9,8 @@ visit reloads once to enable cross-origin isolation on GitHub Pages.
 ## Flying
 
 The example circuit uploads and starts automatically in **AUTO** after sensor
-initialization. The aircraft starts in airborne steady trim at 100 m. Select a mode
+initialization. The aircraft starts held on the ground, inflates through an assisted
+hand launch, climbs in FBWA and hands over to AUTO above 12 m. Select a mode
 and **Engage** to take control during flight. Reset starts a fresh default mission.
 The top mode display is confirmed telemetry.
 
@@ -63,21 +64,25 @@ and RK4 substeps. Flight control remains in ArduPlane.
 The existing Three.js canopy, SolidWorks payload and suspension tools consume
 `microagu.state.v1` truth: independent payload and canopy positions/quaternions,
 rotor RPM, brake travel and joint rotation/rates. Fabric deformation is illustrative.
-The model starts at 100 m in moving equilibrium while the EKF initializes. It has
-no ground contact, toss or canopy inflation; reaching the ground stops simulation.
+The model uses as-built 132 mm riser spacing and the bounded existing-log fit in
+[the calibration report](../research/as-built-simulator-2026-10-15/README.md).
+Reduced flat-plane contact retains the two-body constraint. Scalar overhead
+inflation and prescribed hand motion approximate launch; neither cloth pull-up nor
+canopy collapse is modeled. Launch/contact constants are assumptions, not log fits.
 Terrain is an illustrative flat field, not a map or elevation database.
 The simulator is a development aid, not a validated flight-training model.
 
 ## Build and verify
 
 The exact source revision and SHA-256 hashes are in `public/wasm/build.json`.
-The corresponding source is public in the ArduPilot fork; binaries and source
+Firmware source is public in the ArduPilot fork; the external physics source is
+in this repository's `simulation/` directory. Binaries and source
 are GPL-3.0-or-later. `public/wasm/COPYING.txt` accompanies the deployed build.
 
 ```sh
 # Node >=22; Emscripten 6.0.8 installed at ~/emsdk; Eigen 3.4 headers
 # Checkout DavidIngraham/ardupilot branch paraglider-browser-9dof.
-# Build its Tools/simulation/paraglider native library with build.sh first.
+# From microAGU: bash simulation/build.sh; then cd viewer.
 # Python needs numpy and scipy for the canonical trim/export and parity fixture.
 PYTHON=/path/to/python bash tools/build_highdof_wasm.sh /path/to/ardupilot-browser-9dof
 bash tools/build_sitl_wasm.sh /path/to/ardupilot-browser-9dof
@@ -94,7 +99,7 @@ python3 -m http.server 5173 --directory dist
 The parity test compares 1,200 physics steps and 49 native Python/C++ checkpoints,
 including both bodies, sensors, rotor, actuators and joints. The integration test
 boots the packaged WASM, confirms MANUAL/FBWA/CRUISE, uploads a mission, arms with
-normal prearm checks, releases at 100 m, enters AUTO, checks steering and validates
+normal prearm checks, launches from ground, climbs into AUTO, checks steering and validates
 articulated truth. `tools/generate_mavlink.py` regenerates the small browser
 dialect from the firmware's pymavlink installation. No control algorithms are
 reimplemented in JavaScript.

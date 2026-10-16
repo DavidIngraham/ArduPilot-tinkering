@@ -11,16 +11,20 @@ parser = argparse.ArgumentParser()
 parser.add_argument('firmware', type=Path)
 parser.add_argument('destination', type=Path)
 args = parser.parse_args()
-source = args.firmware.resolve() / 'Tools/simulation/paraglider'
+source = Path(__file__).resolve().parents[2] / 'simulation'
 sys.path.insert(0, str(source))
 from json_backend import Backend
 import dynamics
 
-backend = Backend(flight='trout_lake', profile='mission', altitude=100, voltage=22.2)
+backend = Backend(flight='trout_lake', profile='as_built', altitude=100, voltage=22.2)
 config = dict(
-    schema='microagu.physics.v1', flight='trout_lake', profile='mission',
+    schema='microagu.physics.v1', flight='trout_lake', profile='as_built',
     model='9-DOF two-body modal research model',
-    source_revision=subprocess.check_output(['git', '-C', str(args.firmware), 'rev-parse', 'HEAD'], text=True).strip(),
+    source_revision=subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip(),
+    source_repository='https://github.com/DavidIngraham/micro-agu',
+    surface_sha256=hashlib.sha256((source / 'surface.cpp').read_bytes()).hexdigest(),
+    calibration=json.loads((source/'as-built-calibration.json').read_text()),
+    launch_settings=dynamics.LAUNCH_SETTINGS.tolist(),
     kernel_sha256=hashlib.sha256((source / 'dynamics.cpp').read_bytes()).hexdigest(),
     parameters=dynamics.params(backend.sim.parameters).tolist(),
     parameter_keys=dynamics.KEYS,
@@ -49,3 +53,13 @@ fixture = Path(__file__).resolve().parent/'fixtures/highdof-parity.json'
 fixture.parent.mkdir(parents=True, exist_ok=True)
 fixture.write_text(json.dumps(dict(rate=400, steps=1200, samples=samples), allow_nan=False)+'\n')
 print(f'Exported {len(config["parameters"])} parameters; trim residual {config["trim_residual"]:.3g}; {len(samples)} parity checkpoints')
+backend=Backend(profile='as_built',ground=True)
+samples=[]
+for i in range(5000):
+    backend.released=i>=20
+    pwm=[1650 if i<1600 else 1000,1500,800,2400]+[1500]*12
+    sensors=json.loads(backend.respond(struct.pack('<HHI16H',18458,200,i,*pwm)))
+    if i%100==0 or i==4999:samples.append(dict(frame=i,truth=backend.viewer_state(),sensors=sensors))
+(fixture.parent/'surface-parity.json').write_text(json.dumps(dict(rate=200,steps=5000,samples=samples),allow_nan=False)+'\n')
+assert {s['truth']['launch_phase'] for s in samples}=={0,1,2,3}
+print('Exported native hold/inflation/free-flight/contact parity trace')

@@ -1,0 +1,1154 @@
+[
+  {
+    "flight": "hood_river",
+    "start": 360,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 17.077421756257518,
+      "pitch_rate": 19.880817431931106,
+      "yaw_rate": 36.4143125836461,
+      "bank": 12.493128231766208,
+      "course": 75.86994038499773,
+      "climb": 0.42400458041553496
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 360,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 16.30671918202888,
+      "pitch_rate": 22.951620117081635,
+      "yaw_rate": 37.512740791053574,
+      "bank": 12.472508974161448,
+      "course": 75.77422133811879,
+      "climb": 0.4271330316195127
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 360,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 16.49811479037282,
+      "pitch_rate": 27.57825744345402,
+      "yaw_rate": 39.53546035206371,
+      "bank": 12.454680267578743,
+      "course": 75.6858224466249,
+      "climb": 0.4316006615583063
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 600,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 14.36348768277054,
+      "pitch_rate": 16.149412294704238,
+      "yaw_rate": 24.147537754538536,
+      "bank": 7.654044392590391,
+      "course": 79.44169115924282,
+      "climb": 0.3957115283831382
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 600,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 14.662551926326383,
+      "pitch_rate": 18.422545739336158,
+      "yaw_rate": 24.15988159116815,
+      "bank": 7.642277271845005,
+      "course": 78.69827586350567,
+      "climb": 0.39626566751573217
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 600,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 15.030792658951405,
+      "pitch_rate": 22.553709462701462,
+      "yaw_rate": 24.19997186986234,
+      "bank": 7.631767917564117,
+      "course": 77.97598841360308,
+      "climb": 0.39853925381334515
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 720,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 11.921277764336653,
+      "pitch_rate": 19.715015747902214,
+      "yaw_rate": 30.080319519493123,
+      "bank": 6.527369602512853,
+      "course": 84.94614869273717,
+      "climb": 0.3008442967404359
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 720,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 13.06569206854512,
+      "pitch_rate": 23.51339522037791,
+      "yaw_rate": 32.38480558700729,
+      "bank": 6.54244267563471,
+      "course": 84.46651429718385,
+      "climb": 0.3078683280113589
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 720,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 14.79717686111612,
+      "pitch_rate": 28.33708448385169,
+      "yaw_rate": 35.60959178345272,
+      "bank": 6.564914100163625,
+      "course": 83.90167702241563,
+      "climb": 0.3156821781423934
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 1020,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 36.452994370867984,
+      "pitch_rate": 26.253690241302706,
+      "yaw_rate": 35.39428442266774,
+      "bank": 5.973050450605806,
+      "course": 55.75737372718465,
+      "climb": 0.28857859133936287
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 1020,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 36.836837223835076,
+      "pitch_rate": 29.843570783997592,
+      "yaw_rate": 37.30455973730395,
+      "bank": 6.000837388291353,
+      "course": 55.07718087039346,
+      "climb": 0.2936928115041779
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 1020,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 37.500191161740936,
+      "pitch_rate": 34.64619884262892,
+      "yaw_rate": 39.9385280250474,
+      "bank": 6.053081405690823,
+      "course": 54.385838767908844,
+      "climb": 0.2986816628731109
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 840,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 5.953954549389668,
+      "pitch_rate": 11.217610371342184,
+      "yaw_rate": 21.399609072730758,
+      "bank": 5.19299516435768,
+      "course": 110.53430671865469,
+      "climb": 0.3357237247992735
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 840,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 6.400410157361835,
+      "pitch_rate": 14.8954890052544,
+      "yaw_rate": 23.847747526826193,
+      "bank": 5.188542927716607,
+      "course": 110.51617823538504,
+      "climb": 0.3391595302894237
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 840,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 8.060509408431075,
+      "pitch_rate": 20.538787643714475,
+      "yaw_rate": 28.088909804067388,
+      "bank": 5.186714803602363,
+      "course": 110.51498650909876,
+      "climb": 0.34464723059297747
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 1350,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 7.1626129942591765,
+      "pitch_rate": 13.236971509448011,
+      "yaw_rate": 18.736149609365764,
+      "bank": 2.9485217004927584,
+      "course": 11.197395997116553,
+      "climb": 0.37035989627142013
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 1350,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 7.216413363166695,
+      "pitch_rate": 17.668995265986375,
+      "yaw_rate": 21.510993833819064,
+      "bank": 2.9398199937981655,
+      "course": 11.188018557906394,
+      "climb": 0.37141694020518407
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 1350,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 8.195482162120623,
+      "pitch_rate": 23.66953367790158,
+      "yaw_rate": 25.555965827319692,
+      "bank": 2.9306300830503504,
+      "course": 11.175233013027134,
+      "climb": 0.3732809535590259
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 2400,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 6.274828592711439,
+      "pitch_rate": 10.06964065891318,
+      "yaw_rate": 11.729905684762803,
+      "bank": 1.91563038477358,
+      "course": 21.07508408836072,
+      "climb": 0.3317073374644218
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 2400,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 5.641103153857605,
+      "pitch_rate": 9.759383206332023,
+      "yaw_rate": 11.79604592677562,
+      "bank": 1.9067450095429312,
+      "course": 20.698531526963123,
+      "climb": 0.33027488126599824
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 2400,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 5.81280308606868,
+      "pitch_rate": 13.391106814255412,
+      "yaw_rate": 16.479830062517653,
+      "bank": 1.9086077241505996,
+      "course": 20.25257653081179,
+      "climb": 0.33092581955982725
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 2910,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 5.467620079893265,
+      "pitch_rate": 9.14728531517838,
+      "yaw_rate": 15.998770914674274,
+      "bank": 3.1933558496107306,
+      "course": 40.9584702435431,
+      "climb": 0.24837050366682284
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 2910,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 5.247346548809966,
+      "pitch_rate": 13.16953551019331,
+      "yaw_rate": 19.14814801129166,
+      "bank": 3.168120320550104,
+      "course": 40.8145334219744,
+      "climb": 0.24270737310923154
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 2910,
+    "variant": "legacy",
+    "tuning": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 7.140904000334226,
+      "pitch_rate": 19.044896291535487,
+      "yaw_rate": 24.13707639140963,
+      "bank": 3.149098601495189,
+      "course": 40.743714589528174,
+      "climb": 0.2391396046816273
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 360,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 17.084648631772794,
+      "pitch_rate": 19.465873327250826,
+      "yaw_rate": 35.42906565111617,
+      "bank": 12.316717461968219,
+      "course": 72.3193684000698,
+      "climb": 0.42344950933313513
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 360,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 16.3398359071431,
+      "pitch_rate": 21.04452150509669,
+      "yaw_rate": 35.403240147089015,
+      "bank": 12.295183457421372,
+      "course": 72.24371155081434,
+      "climb": 0.4265737395315344
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 360,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 15.849987509479481,
+      "pitch_rate": 23.654959621048057,
+      "yaw_rate": 35.47302285350204,
+      "bank": 12.274953245871169,
+      "course": 72.17682286685366,
+      "climb": 0.43085608794943064
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 600,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 14.275913373384855,
+      "pitch_rate": 15.998037925464564,
+      "yaw_rate": 24.493975519333695,
+      "bank": 7.587950970204121,
+      "course": 65.67612633012483,
+      "climb": 0.39032937560490094
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 600,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 14.572092391019961,
+      "pitch_rate": 16.693567104804565,
+      "yaw_rate": 24.494451593194693,
+      "bank": 7.580500355327113,
+      "course": 65.05793408691913,
+      "climb": 0.3911322842088521
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 600,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 14.944900243142735,
+      "pitch_rate": 18.173275412073075,
+      "yaw_rate": 24.501800684187945,
+      "bank": 7.573465142478522,
+      "course": 64.43944552398972,
+      "climb": 0.39355088311876735
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 720,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 12.187964768544337,
+      "pitch_rate": 18.018948183504733,
+      "yaw_rate": 29.29776749031625,
+      "bank": 6.3704574459468555,
+      "course": 78.05695783172494,
+      "climb": 0.30473010273027684
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 720,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 13.504703599593208,
+      "pitch_rate": 20.078112467626923,
+      "yaw_rate": 29.500935876338737,
+      "bank": 6.378769241840327,
+      "course": 77.51755324859481,
+      "climb": 0.31157406581662367
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 720,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 15.30347539765611,
+      "pitch_rate": 22.9490208205056,
+      "yaw_rate": 29.853886987259298,
+      "bank": 6.38881084753607,
+      "course": 76.79833436077207,
+      "climb": 0.31905604785665614
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 1020,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 36.53068175811888,
+      "pitch_rate": 27.583239554756087,
+      "yaw_rate": 33.60456985226498,
+      "bank": 5.9141993300139335,
+      "course": 58.315491489122664,
+      "climb": 0.291381486640181
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 1020,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 36.92038488124364,
+      "pitch_rate": 29.161876569914224,
+      "yaw_rate": 33.82146890334038,
+      "bank": 5.919548602881133,
+      "course": 56.70881070934505,
+      "climb": 0.2967368942742613
+    }
+  },
+  {
+    "flight": "hood_river",
+    "start": 1020,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 37.54689882158687,
+      "pitch_rate": 31.577923079206343,
+      "yaw_rate": 34.14346711106981,
+      "bank": 5.93299227802386,
+      "course": 54.84188701217921,
+      "climb": 0.3020499263980924
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 840,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 5.969154525669913,
+      "pitch_rate": 10.914751189129307,
+      "yaw_rate": 20.93902854485844,
+      "bank": 5.337573058441624,
+      "course": 111.05092445046665,
+      "climb": 0.3352490504162139
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 840,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 6.167188194848353,
+      "pitch_rate": 13.193888311148873,
+      "yaw_rate": 21.18286647673128,
+      "bank": 5.33221876714656,
+      "course": 111.02477762793127,
+      "climb": 0.3387143719788335
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 840,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 6.663060291735296,
+      "pitch_rate": 17.092918070501252,
+      "yaw_rate": 21.724515266064124,
+      "bank": 5.3280668989912545,
+      "course": 111.01430912212645,
+      "climb": 0.34400794860668066
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 1350,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 7.139689380143042,
+      "pitch_rate": 12.657336071331173,
+      "yaw_rate": 17.512115531232034,
+      "bank": 2.89779664136191,
+      "course": 17.535523183155288,
+      "climb": 0.37509289721149686
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 1350,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 7.008299607069111,
+      "pitch_rate": 15.092040780524636,
+      "yaw_rate": 17.744206392233473,
+      "bank": 2.8885236529660268,
+      "course": 17.41926533496903,
+      "climb": 0.3762467993211548
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 1350,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 6.896462729553409,
+      "pitch_rate": 18.958616377788708,
+      "yaw_rate": 18.196355692337445,
+      "bank": 2.878197837341867,
+      "course": 17.312473519670952,
+      "climb": 0.3781165048494716
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 2400,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 6.182414764068404,
+      "pitch_rate": 9.5181929401793,
+      "yaw_rate": 11.113273077763914,
+      "bank": 1.8080825174314172,
+      "course": 19.57447386629934,
+      "climb": 0.32973676033961263
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 2400,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 5.464235213760249,
+      "pitch_rate": 9.712046287265517,
+      "yaw_rate": 10.941864122062109,
+      "bank": 1.792500152057712,
+      "course": 18.98167713932394,
+      "climb": 0.3282101439450116
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 2400,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 4.950569221991374,
+      "pitch_rate": 12.417785001267356,
+      "yaw_rate": 11.44084108037474,
+      "bank": 1.7834950026100282,
+      "course": 18.32326609851193,
+      "climb": 0.3285569223085551
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 2910,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.25,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 5.428949020209434,
+      "pitch_rate": 8.817716591930312,
+      "yaw_rate": 15.748751260067598,
+      "bank": 3.205006292396576,
+      "course": 44.11026694269423,
+      "climb": 0.24845777052163948
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 2910,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.35,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 5.0786209155390525,
+      "pitch_rate": 11.181843407232249,
+      "yaw_rate": 15.990917782133847,
+      "bank": 3.195801386447769,
+      "course": 44.2430290493429,
+      "climb": 0.2434596611311304
+    }
+  },
+  {
+    "flight": "trout_lake",
+    "start": 2910,
+    "variant": "routed",
+    "tuning": [
+      3.0,
+      1.0,
+      1.1257575757575757
+    ],
+    "seconds": 30,
+    "alpha": 0.45,
+    "height": 0.06,
+    "substeps": 32,
+    "valid_fraction": 1.0,
+    "finite": true,
+    "metrics": {
+      "roll_rate": 5.629626296669041,
+      "pitch_rate": 15.351577590855939,
+      "yaw_rate": 16.59285037534959,
+      "bank": 3.1930897792115687,
+      "course": 44.48685447262438,
+      "climb": 0.24045723348281497
+    }
+  }
+]

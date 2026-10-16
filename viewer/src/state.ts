@@ -15,6 +15,8 @@ export interface Frame {
   mission_item?: number;
   wind_ned_m_s?: number[];
   turbulence?: string;
+  launch_phase?: number;
+  inflation?: number;
 }
 const vector = (x: unknown, n: number): x is number[] =>
   Array.isArray(x) && x.length === n && x.every(Number.isFinite);
@@ -31,6 +33,9 @@ export function validate(x: unknown): Frame {
     !Number.isFinite(f.voltage_v) ||
     ![f.rpm, f.throttle].every((v) => v === null || Number.isFinite(v)) ||
     typeof f.released !== "boolean" ||
+    (f.launch_phase !== undefined && ![0, 1, 2, 3].includes(f.launch_phase)) ||
+    (f.inflation !== undefined &&
+      (!Number.isFinite(f.inflation) || f.inflation < 0 || f.inflation > 1)) ||
     (f.wind_ned_m_s !== undefined && !vector(f.wind_ned_m_s, 3)) ||
     (f.turbulence !== undefined && typeof f.turbulence !== "string") ||
     (f.mode !== undefined && f.mode !== "AUTO") ||
@@ -102,6 +107,10 @@ export function sample(frames: Frame[], time: number): Frame {
     ...a,
     time_s: time,
     state,
+    inflation:
+      a.inflation === undefined || b.inflation === undefined
+        ? a.inflation
+        : lerp(a.inflation, b.inflation),
     rpm: a.rpm === null || b.rpm === null ? null : lerp(a.rpm, b.rpm),
     throttle:
       a.throttle === null || b.throttle === null

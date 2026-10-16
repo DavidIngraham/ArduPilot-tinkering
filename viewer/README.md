@@ -54,7 +54,7 @@ python tools/bridge.py --udp 9010 --port 8765 --record /path/to/new-run.jsonl
 Then start the backend on the ArduPilot feature branch:
 
 ```sh
-cd /path/to/ardupilot/Tools/simulation/paraglider
+cd /path/to/micro-agu/simulation
 python json_backend.py --flight trout_lake --profile mission \
   --voltage 22.2 --viewer-port 9010 --viewer-hz 30
 ```
@@ -129,7 +129,7 @@ Prepare a new output (the tool refuses to overwrite an existing file):
 
 ```sh
 node tools/prepare_asset.mjs /path/to/raw.glb \
-  /path/to/ardupilot/Tools/simulation/paraglider/napkin-payload-model.json \
+  /path/to/micro-agu/simulation/napkin-payload-model.json \
   /path/to/payload-tl.glb
 ```
 
@@ -160,7 +160,7 @@ Generate a 30-second powered right turn, left reversal and brake release using t
 real physics backend (scripted actuators, without a native autopilot):
 
 ```sh
-python tools/make_showcase.py --model-dir /path/to/ardupilot/Tools/simulation/paraglider \
+python tools/make_showcase.py --model-dir /path/to/micro-agu/simulation \
   --output /path/to/Mission-Planner/analysis/viewer-showcase/reversing-turn.jsonl
 ```
 
@@ -186,10 +186,10 @@ Use a fresh run directory in the existing research data location:
 
 ```sh
 PG_GAINS=original PG_VOLTAGE=22.2 \
-PG_CONTROLLER_CONFIG=Tools/simulation/paraglider/mission-controller-candidate.json \
+ARDUPILOT_ROOT=/path/to/ardupilot PG_CONTROLLER_CONFIG=/path/to/micro-agu/simulation/mission-controller-candidate.json \
 BUILDLOGS=/path/to/research/viewer-auto-mission \
 python /path/to/ArduPilot-tinkering/viewer/tools/record_auto.py \
-  --model-dir "$PWD/Tools/simulation/paraglider" \
+  --model-dir "/path/to/micro-agu/simulation" \
   --output /path/to/research/viewer-auto-mission/truth.jsonl -- \
   --no-check-parameter-leaks --speedup 10 test.Plane.ParagliderAutoMission
 ```
@@ -219,7 +219,7 @@ only the first loiter entry, with the heading-rate controller enabled.
 npm test
 npm run build
 python -m unittest discover -s tools -p 'test_*.py'
-python tools/check_live.py --model-dir /path/to/ardupilot/Tools/simulation/paraglider
+python tools/check_live.py --model-dir /path/to/micro-agu/simulation
 # Native exporter/protocol checks, from ArduPilot model directory:
 python -m unittest test_json_backend
 ```
@@ -341,7 +341,7 @@ using the same log-Jacobian spring law and relative-rate damper as dynamics.cpp.
 Generate final playback samples at 20 Hz while keeping 100 Hz raw output outside Git:
 
 ```sh
-python tools/make_joint_tour.py --model-dir /path/to/Tools/simulation/paraglider \
+python tools/make_joint_tour.py --model-dir /path/to/micro-agu/simulation \
   --output public/joint-tour/responses.json --raw /path/to/Mission-Planner/joint-tour
 ```
 

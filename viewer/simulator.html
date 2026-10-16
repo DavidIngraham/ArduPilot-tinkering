@@ -48,7 +48,7 @@
         Fly MicroAGU from your browser, or let ArduPlane follow a mission.
       </p>
       <button id="launch" class="primary" disabled>
-        Start flight at 100 m
+        Inflate and launch
       </button>
       <p id="status" role="status">Loading simulator…</p>
       <label for="mode">Flight mode</label>
@@ -141,17 +141,18 @@
           its pitch input requests climb/descent.
         </p>
         <p>
-          Starts airborne in steady trim at 100 m while sensors initialize. The
+          Starts held on the ground while sensors initialize. The
           default circuit uploads and starts automatically in AUTO when sensors
           are ready. Choose another mode and Engage to take over.
         </p>
         <p>
           Full 9-DOF canopy–payload research model, compiled from its C++
           kernel. Both bodies, rotor and brake actuators are drawn from
-          simulation truth. Fabric deformation remains illustrative. This
-          airborne model has no ground contact, toss or canopy inflation;
-          reaching the ground stops the simulation. All control is local to this
-          tab.
+          simulation truth. Uses the as-built 132 mm riser spacing and a fit to
+          existing Hood River / Trout Lake logs. Ground contact uses a flat plane;
+          overhead inflation and hand launch are assisted approximations, not a
+          cloth pull-up simulation. Launch timing and friction are assumptions.
+          All control is local to this tab.
         </p>
         <p id="joint-truth">Waiting for simulation truth…</p>
         <button id="reset">Reset simulation</button>

@@ -120,3 +120,41 @@ assert.ok(wind.truth().wind_ned_m_s!.every((v) => v === 0));
 console.log(
   "PASS: wind convention, sensor airspeed, physical response, reset and bounds",
 );
+const surfaceFixture = JSON.parse(
+  await readFile("tools/fixtures/surface-parity.json", "utf8"),
+);
+const surface = await Physics.load(
+  pathToFileURL(resolve("public/wasm/")).href + "/",
+  config,
+);
+surface.groundStart();
+for (let i = 0; i < surfaceFixture.steps; i++) {
+  const packet = new Uint8Array(40),
+    v = new DataView(packet.buffer);
+  v.setUint16(0, 18458, true);
+  v.setUint16(2, 200, true);
+  v.setUint32(4, i, true);
+  [i < 1600 ? 1650 : 1000, 1500, 800, 2400, ...Array(12).fill(1500)].forEach(
+    (p, c) => v.setUint16(8 + 2 * c, p, true),
+  );
+  surface.released = i >= 20;
+  const response = surface.respond(packet),
+    sensors = JSON.parse(response);
+  const expected = surfaceFixture.samples.find((s: any) => s.frame === i);
+  if (!expected) continue;
+  compare(surface.state, expected.truth.state, `surface state frame ${i}`, 1e-7);
+  compare(
+    sensors.imu.accel_body,
+    expected.sensors.imu.accel_body,
+    "surface acceleration",
+    1e-6,
+  );
+  compare([surface.inflation], [expected.truth.inflation], "inflation");
+  assert.equal(surface.launchPhase, expected.truth.launch_phase);
+  assert.equal(surface.respond(packet), response);
+}
+assert.equal(surface.launchPhase, 3);
+console.log(
+  "PASS: 5000 native/WASM steps through ground hold, inflation, free flight and contact",
+  { maxError },
+);

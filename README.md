@@ -65,9 +65,9 @@ Open `cad/solidworks/microAGU.SLDASM` in SolidWorks, keeping the neighboring par
 
 ## Firmware and simulator
 
-The flight controller, native autotests and 9-DOF simulator are developed in the [paraglider-high-dof-control branch of the ArduPilot fork](https://github.com/DavidIngraham/ardupilot/tree/paraglider-high-dof-control). They use ArduPilot's build and SITL infrastructure. This repository supplies the hardware design, viewer and supporting experiments rather than a second copy of the firmware.
+The flight controller, native autotests and lightweight built-in articulated model live in the [paraglider-browser-9dof branch of the ArduPilot fork](https://github.com/DavidIngraham/ardupilot/tree/paraglider-browser-9dof), stacked on the separate generic `sitl-wasm-json` transport branch. This repository owns the [external 9-DOF simulator, adapters and control experiments](simulation/README.md), alongside the hardware and Three.js viewer. The older `paraglider-high-dof-control` branch remains historical provenance.
 
-For simulator setup and native tests, follow the [paraglider simulator README](https://github.com/DavidIngraham/ardupilot/blob/paraglider-high-dof-control/Tools/simulation/paraglider/README.md). Individual study directories record their configurations and source revisions; the current branch may be newer than a published result.
+For setup and native tests, follow the [simulator README](simulation/README.md). The [browser simulator](https://davidingraham.github.io/assets/microagu-viewer/simulator.html) uses the same external kernel with the as-built 132 mm geometry. See [the latest fit and launch limitations](research/as-built-simulator-2026-10-15/README.md). Individual study directories retain their original configurations and pinned source revisions.
 
 ## Research data and reproducibility
 

@@ -4,6 +4,28 @@
 
 This appendix supports the four project chapters. Flight measurements, the initial simulation tuning, and later controller/model experiments are separate evidence sets.
 
+## Current simulator and source ownership
+
+[Fly the browser simulator](https://davidingraham.github.io/assets/microagu-viewer/simulator.html).
+The [external 9-DOF kernel, Python adapters and experiments](../simulation/README.md)
+now live in microAGU. ArduPilot retains the lightweight articulated built-in model,
+firmware controllers and generic JSON/WASM transport. Earlier commit-pinned links
+below remain historical evidence, rather than links to the active implementation.
+
+The current browser uses **132 mm as-built riser spacing**, routing and an updated
+bounded damping fit using only the existing Hood River and Trout Lake logs. The
+[fit report and reproduction method](../research/as-built-simulator-2026-10-15/README.md)
+record input hashes, fit/check windows, unchanged brake authority and limitations.
+Held-out mean pitch/yaw rate RMS changes from 19.40/26.46 to 17.47/23.71°/s;
+the damping search reaches its upper bound and course prediction remains weak.
+This is a model refit, not a new aircraft controller tune or independent flight validation.
+
+The browser starts on the ground, performs assisted overhead inflation and hand
+launch, then enters its default AUTO mission after a FBWA climb above 12 m.
+Flat-plane contact, inflation time, launch motion and friction are explicit
+assumptions: the existing logs do not measure canopy inflation or identify those
+constants. The model does not simulate cloth pull-up, terrain or canopy collapse.
+
 ## Design record
 
 The design record includes pages 1, 185, and 323 of `Paraglider.pdf`, SolidWorks files, build photographs, and flight logs. The [design evidence](assets/micro-agu/design-evidence.json) records assembly structure and source hashes. CAD previews were extracted with [SWFormat](https://github.com/KenM76/swformat).

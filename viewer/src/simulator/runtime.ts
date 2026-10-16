@@ -70,6 +70,7 @@ export class Simulator {
         "This browser has not enabled shared memory. Reload once after the simulator service worker activates, or use a browser supporting cross-origin isolation.",
       );
     this.physics = await Physics.load(new URL(".", url).href, config);
+    this.physics.groundStart();
     const { default: create } = await import(/* @vite-ignore */ url);
     const defaults =
       this.physics.config.defaults +
@@ -335,11 +336,25 @@ export class Simulator {
     await this.command(179, [0, 0, 0, 0, HOME.lat, HOME.lon, HOME.alt]);
     await this.command(512, [242]);
     await home;
-    this.controls(0, 0, this.physics.config.command[0]);
+    // A waypoint-only AUTO mission suppresses throttle while on the ground.
+    // The assisted launch uses the normal FBWA RC/throttle path, then hands over.
+    this.controls(0, 0, 0.65);
     this.sendRC();
-    await this.mode(mode);
+    await this.mode("FBWA");
     await new Promise((resolve) => setTimeout(resolve, 1000));
     this.physics.released = true;
+    const deadline = performance.now() + 45000;
+    // Above 10 m ArduPlane's normal AUTO throttle-suppression gate clears,
+    // including when this slow aircraft is below the fixed-wing 5 m/s gate.
+    while (this.physics.launchPhase !== 2 || this.state.alt < 12) {
+      if (performance.now() > deadline)
+        throw Error(
+          "Launch did not clear the ground. Reset and check wind conditions.",
+        );
+      await new Promise((resolve) => setTimeout(resolve, 100));
+    }
+    await this.mode(mode);
+    this.controls(0, 0, this.physics.config.command[0]);
   }
   async upload(items: Waypoint[], progress: (n: number) => void) {
     if (this.busy) throw Error("A mission upload is already in progress.");
