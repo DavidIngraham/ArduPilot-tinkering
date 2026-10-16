@@ -9,7 +9,7 @@
   "emscripten": "6.0.8",
   "sha256": {
     "sim_wasm_bg.wasm.d.ts": "af088b7d8fe44428463524b782662a8a229d2e0825e9839569afe64afd2c3809",
-    "highdof.json": "53aafb2e94dc235fe181ac84a4824eab0b42b72ae9c1cdff89aceadbdccdedf2",
+    "highdof.json": "d4e069b61205b82da0cdd72ad1b5214b953d2da393605a4b7f11a6b78d44cd6e",
     "arduplane.wasm": "021029da5d95132b8287aef7e79d0f22939696a2c311f61d8954c956a8384205",
     "arduplane.js": "def1c4c428a32489ea25ad102280727f14b6bb8e1e11f3e840e5793766e6d50b",
     "sim_wasm.d.ts": "de71d4ce45585cb3692701dadc17e689af56c1c49798929cf10ba4f52f3f680f",
@@ -18,8 +18,8 @@
   },
   "physics_source": {
     "repository": "https://github.com/DavidIngraham/micro-agu",
-    "revision": "50ba4596dab74829a580e36401ee9553b1867f6d",
-    "working_tree_dirty": true,
+    "revision": "85883828946d9550a608e8c7e1ccf511769b4876",
+    "working_tree_dirty": false,
     "language": "Rust",
     "source_sha256": {
       "Cargo.toml": "d44f4d4022048d66dc37b930f1a9de48321592dcb62e489c5f5c792a265c7834",
