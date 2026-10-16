@@ -2,9 +2,12 @@ node_modules/
 dist/
 *.jsonl
 *.npz
-public/pitch-sign
-public/altitude-comparison
-public/flight-replays
+assets/recordings/pitch-sign
+assets/recordings/altitude-comparison
+assets/recordings/flight-replays
 
 dist-comparison/
-public/controller-comparison/
+assets/recordings/controller-comparison/
+
+test-results/
+playwright-report/

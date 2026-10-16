@@ -26,7 +26,7 @@ def package(output):
         'this package does not claim to regenerate those results unchanged.\n'
     ).encode()
     files['COPYING.txt'] = (ROOT/'COPYING.txt').read_bytes()
-    files['RUST-NOTICES.txt'] = (ROOT/'viewer/public/wasm/RUST-NOTICES.txt').read_bytes()
+    files['RUST-NOTICES.txt'] = (ROOT/'viewer/assets/runtime/RUST-NOTICES.txt').read_bytes()
     manifest = dict(source_revision=subprocess.check_output(
         ['git','rev-parse','HEAD'], cwd=ROOT, text=True).strip(),
         files={name:hashlib.sha256(data).hexdigest() for name,data in files.items()})

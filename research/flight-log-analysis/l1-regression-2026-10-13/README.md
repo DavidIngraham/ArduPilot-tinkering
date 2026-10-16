@@ -25,4 +25,4 @@ The landing article uses the selected 10 s L1 profile. A separate native `gentle
 
 `tools/report_landing_guidance.py` audits logged parameters and native flare events, generates the publication figures and final regression summary, and exports bounded 22-second truth replays. Run it from the ArduPilot Python environment with `--root` pointing to the Mission Planner study directory. `--run-preview` can generate the gentle preview when that completed recording does not already exist. Raw telemetry remains in Mission Planner.
 
-The blog assets are in `docs/assets/landing-guidance`; the applet excerpts are in `viewer/public/landing`.
+The blog assets are in `docs/assets/landing-guidance`; the applet excerpts are in `viewer/assets/recordings/landing`.

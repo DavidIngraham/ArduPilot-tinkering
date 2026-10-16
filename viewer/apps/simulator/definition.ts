@@ -1,0 +1,22 @@
+import type { AppletDefinition } from "@microagu/contracts/applet";
+export const definition = {
+  id: "simulator",
+  title: "MicroAGU \u00b7 Simulator",
+  page: "simulator.html",
+  entry: "apps/simulator/main.ts",
+  kind: "simulator",
+  assets: [
+    "models/microagu-payload-tl.glb",
+    "wasm/arduplane.js",
+    "wasm/arduplane.wasm",
+    "wasm/sim_wasm.js",
+    "wasm/sim_wasm_bg.wasm",
+    "wasm/highdof.json",
+    "wasm/build.json",
+    "wasm/COPYING.txt",
+    "wasm/RUST-NOTICES.txt",
+    "simulator-sw.js",
+  ],
+  controls: ["joystick", "throttle", "wind", "mission", "camera"],
+  defaultCamera: "follow",
+} satisfies AppletDefinition;

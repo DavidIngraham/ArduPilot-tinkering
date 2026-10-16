@@ -6,10 +6,10 @@ repo=$(realpath "$1")
 output=$(realpath -m "$2")
 config=$(realpath "$3")
 condition=$4
-scripts=$(cd "$(dirname "${BASH_SOURCE[0]}")/../viewer/tools" && pwd)
+scripts=$(cd "$(dirname "${BASH_SOURCE[0]}")/../research/viewer-studies" && pwd)
 case "$condition" in gust) options=(--turbulence);; calm) options=();; crosswind) options=(--wind-ned 0 2 0);; *) echo 'Use gust, calm or crosswind' >&2; exit 2;; esac
 mkdir -p "$output"
 cd "$repo"
 export BUILDLOGS="$output" PG_CONTROLLER_CONFIG="$config" PG_GAINS=original PG_VOLTAGE=22.2
-python "$scripts/record_auto.py" "${options[@]}" --model-dir "$repo/Tools/simulation/paraglider" --output "$output/truth.jsonl" -- --no-check-parameter-leaks --speedup 10 test.Plane.ParagliderAutoMission > "$output/run.log" 2>&1
-python "$scripts/extract_auto_clip.py" "$output"
+python "$scripts/record_auto.py" "${options[@]}" --model-dir "$scripts/../../simulation" --output "$output/truth.jsonl" -- --no-check-parameter-leaks --speedup 10 test.Plane.ParagliderAutoMission > "$output/run.log" 2>&1
+python "$scripts/../../viewer/tools/convert/extract_auto_clip.py" "$output"

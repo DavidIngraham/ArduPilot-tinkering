@@ -26,7 +26,7 @@ jobs:
           uv sync --locked
           uv run pytest -q
           sh tools/generate.sh
-          git diff --exit-code -- schemas crates/sim-python/python/microagu_sim/_native ../viewer/public/wasm/sim_wasm.d.ts ../viewer/public/wasm/config.d.ts
+          git diff --exit-code -- schemas crates/sim-python/python/microagu_sim/_native ../viewer/generated/physics/sim_wasm.d.ts ../viewer/generated/physics/config.d.ts
           uv run maturin build --release -m crates/sim-python/Cargo.toml --out target/dist-wheels
           uv venv /tmp/microagu-wheel-test
           uv pip install --python /tmp/microagu-wheel-test/bin/python target/dist-wheels/*.whl
@@ -35,12 +35,18 @@ jobs:
       - working-directory: viewer
         run: |
           npm ci
+          npm run assets:fetch
           npm run build
-          node --import tsx tools/test_highdof_wasm.ts
+          npm run test:physics
+          npm run test:sitl
           npm test
+          npx playwright install --with-deps chromium
+          npm run test:browser
       - name: Research adapters and isolated tension model
         run: |
           uv sync --project research --locked
           uv run --project research python research/rigging-refinement-2026-10-15/verify.py --geometry-only
           uv run --project simulation python research/tension-stiffness-2026-10-15/prepare.py
           uv run --project research python research/tension-stiffness-2026-10-15/audit.py --checks-only
+          uv run --project research --group capture python -m unittest discover -s research/viewer-studies -p 'test_*.py'
+          uv run --project research --group capture python research/viewer-studies/check_live.py --model-dir simulation

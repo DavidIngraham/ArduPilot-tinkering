@@ -3,7 +3,7 @@
 from study import *
 from scipy.optimize import brentq
 from microagu_sim.compat.equilibrium import solve
-OUT=HERE.parents[1]/'viewer/public/rigging-comparison'
+OUT=HERE.parents[1]/'viewer/assets/recordings/rigging-comparison'
 
 def setup(name):
  selected=json.loads((HERE/'selected-final.json').read_text())

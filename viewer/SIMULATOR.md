@@ -46,7 +46,7 @@ Use **Wind** in the flight desk to choose speed (0–10 m/s), the bearing wind c
 from (0° north, 90° east), and vertical air (−3 to +3 m/s, positive upward), then
 select **Apply wind**. These are uniform steady winds applied to the actual Rust
 dynamics and sensor output. Set speed and vertical air to zero for calm conditions.
-Wind is reset to calm on page reload; there is no gust/turbulence model in this UI.
+Wind is reset to calm on session reset; there is no gust/turbulence model in this UI.
 
 Chase rendering uses a continuous buffered truth clock for the aircraft and camera,
 so worker message timing cannot rewind the pose. The chase camera moves with the
@@ -61,8 +61,8 @@ worker exchanges servo frames and IMU/GPS sensor truth without UDP or a server.
 The adapter preserves the native brake rate limits, motor dynamics, IMU lever arm
 and RK4 substeps. Flight control remains in ArduPlane.
 
-The existing Three.js canopy, SolidWorks payload and suspension tools consume
-`microagu.state.v1` truth: independent payload and canopy positions/quaternions,
+The app adapts `microagu.state.v1` truth to a render pose for the shared
+Three.js canopy, SolidWorks payload and suspension tools: independent payload and canopy positions/quaternions,
 rotor RPM, brake travel and joint rotation/rates. Fabric deformation is illustrative.
 The model uses as-built 132 mm riser spacing and the bounded existing-log fit in
 [the calibration report](../research/as-built-simulator-2026-10-15/README.md).
@@ -74,25 +74,25 @@ The simulator is a development aid, not a validated flight-training model.
 
 ## Build and verify
 
-The exact source revision and SHA-256 hashes are in `public/wasm/build.json`.
+The exact source revision and SHA-256 hashes are in `assets/runtime/build.json`.
 Firmware source is public in the ArduPilot fork; the external physics source is
 in this repository's `simulation/` directory. Project binaries and source
-are GPL-3.0-or-later; Rust dependencies retain their own licenses. `public/wasm/COPYING.txt` accompanies the deployed build.
+are GPL-3.0-or-later; Rust dependencies retain their own licenses. `assets/runtime/COPYING.txt` accompanies the deployed build.
 
 ```sh
 # Node >=22; Rust + wasm32-unknown-unknown; wasm-bindgen-cli 0.2.114
 # Emscripten 6.0.8 is needed only when rebuilding ArduPilot.
 # Checkout DavidIngraham/ardupilot branch paraglider-browser-9dof.
-# From microAGU: bash simulation/build.sh; then cd viewer.
+# From microAGU: uv sync --project simulation --locked; then cd viewer.
 # Use simulation/.venv/bin/python (uv sync --locked) for configuration export.
 # Saved C++ parity fixtures are preserved independently.
-PYTHON=/path/to/python bash tools/build_highdof_wasm.sh /path/to/ardupilot-browser-9dof
-bash tools/build_sitl_wasm.sh /path/to/ardupilot-browser-9dof
-cp ../COPYING.txt public/wasm/COPYING.txt
+PYTHON=/path/to/python bash tools/build/build_highdof_wasm.sh /path/to/ardupilot-browser-9dof
+bash tools/build/build_sitl_wasm.sh /path/to/ardupilot-browser-9dof
+cp ../COPYING.txt assets/runtime/COPYING.txt
 npm ci
 npm test
-node --import tsx tools/test_highdof_wasm.ts
-node --import tsx tools/test_sitl_wasm.ts
+node --import tsx tests/integration/physics.ts
+node --import tsx tests/integration/sitl.ts
 npm run build
 python3 -m http.server 5173 --directory dist
 # Open http://localhost:5173/simulator.html
@@ -102,7 +102,7 @@ The parity test compares 1,200 physics steps and 49 native Python/C++ checkpoint
 including both bodies, sensors, rotor, actuators and joints. The integration test
 boots the packaged WASM, confirms MANUAL/FBWA/CRUISE, uploads a mission, arms with
 normal prearm checks, launches from ground, climbs into AUTO, checks steering and validates
-articulated truth. `tools/generate_mavlink.py` regenerates the small browser
+articulated truth. `tools/build/generate_mavlink.py` regenerates the small browser
 dialect from the firmware's pymavlink installation. No control algorithms are
 reimplemented in JavaScript.
 

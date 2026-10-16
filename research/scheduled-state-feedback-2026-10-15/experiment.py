@@ -247,7 +247,7 @@ def scenarios():
 
 def run_case(case,name,duration=80.):
     make=setup(MODEL)
-    sys.path.insert(0,str(HERE.parents[1]/'viewer/tools'))
+    sys.path.insert(0,str(HERE.parents[1]/'research/viewer-studies'))
     from turbulence import Gusts,SETTINGS
     p=next(p for p in plants() if p['profile']==case['profile'] and p['voltage']==case['voltage'] and p['climb']==0)
     sim=make('trout_lake',case['profile']);sim.substeps=16

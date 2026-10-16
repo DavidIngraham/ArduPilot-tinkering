@@ -6,17 +6,30 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "tsc --noEmit && vite build",
-    "test": "tsx --test src/*.test.ts",
-    "preview": "vite preview --host 127.0.0.1"
+    "build": "npm run check:boundaries && tsc --noEmit && vite build",
+    "test": "tsx --test tests/unit/*.test.ts",
+    "preview": "vite preview --host 127.0.0.1",
+    "check:boundaries": "tsx tools/build/check-boundaries.ts",
+    "publish": "tsx tools/publish/publish.ts",
+    "test:browser": "playwright test",
+    "test:physics": "tsx tests/integration/physics.ts",
+    "test:sitl": "tsx tests/integration/sitl.ts",
+    "assets:fetch": "tsx tools/convert/fetch-recordings.ts",
+    "assets:inventory": "tsx tools/convert/inventory-recordings.ts"
   },
   "dependencies": {
+    "@microagu/applet-ui": "*",
+    "@microagu/contracts": "*",
+    "@microagu/playback": "*",
+    "@microagu/rendering": "*",
+    "@microagu/sim-browser": "*",
     "three": "0.180.0"
   },
   "devDependencies": {
     "@gltf-transform/core": "^4.5.1",
     "@gltf-transform/extensions": "^4.5.1",
     "@gltf-transform/functions": "^4.5.1",
+    "@playwright/test": "^1.64.1",
     "@types/node": "^26.6.5",
     "@types/three": "0.180.0",
     "prettier": "^3.9.10",
@@ -26,5 +39,8 @@
   },
   "engines": {
     "node": ">=22"
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }

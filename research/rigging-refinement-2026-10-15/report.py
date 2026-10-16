@@ -19,11 +19,11 @@ for ax,k,title in zip(axs.flat,['roll_rate','pitch_rate','yaw_rate','bank','cour
  r=[x for x in summary if x['split']=='check' and x['alpha']==.35]
  ax.bar(np.arange(5),[x['metrics'][k] for x in r],color=['#8a98a4','#c4a54c','#508ab4','#9b73b9','#24978a']);ax.set_title(title);ax.set_xticks(range(5),[x['label'] for x in r],rotation=27,ha='right');ax.set_ylabel('Mean per-window RMSE');ax.grid(axis='y',alpha=.2)
 fig.suptitle('Thirty-second replay: eight check windows, two flights\nSame logs and initialization; smaller bars are better',fontsize=16);fig.savefig(OUT/'replay-errors.png',dpi=160);plt.close(fig)
-data=json.loads((HERE.parents[1]/'viewer/public/rigging-comparison/data.json').read_text())
+data=json.loads((HERE.parents[1]/'viewer/assets/recordings/rigging-comparison/data.json').read_text())
 fig,axs=plt.subplots(2,2,figsize=(12,8),layout='constrained');colors=['#247ba0','#24978a','#b47d20','#9b559a']
 for name,color in zip(['current','wide','wide_flat','wide_drag'],colors):
  case={'current':'hardware','wide':'hardware','wide_flat':'flattening','wide_drag':'drag'}[name]+'-turns';family='baseline' if name=='current' else 'direct'
- r=next(x for x in data['runs'] if x['case']==case and x['family']==family);t=np.array(r['trace']);p=np.array(json.loads((HERE.parents[1]/'viewer/public/rigging-comparison/poses'/f'{case}-truth-{family}.json').read_text()))
+ r=next(x for x in data['runs'] if x['case']==case and x['family']==family);t=np.array(r['trace']);p=np.array(json.loads((HERE.parents[1]/'viewer/assets/recordings/rigging-comparison/poses'/f'{case}-truth-{family}.json').read_text()))
  label={'current':'132 mm routed','wide':'185 mm / same canopy','wide_flat':'185 mm / +53 mm projected span','wide_drag':'185 mm / flattening + drag hypothesis'}[name]
  axs[0,0].plot(p[:,2],p[:,1],label=label,color=color);axs[0,1].plot(t[:,0],t[:,3],color=color);axs[1,0].plot(t[:,0],t[:,1],color=color);axs[1,1].plot(t[:,0],t[:,4],color=color)
 axs[0,0].set(xlabel='East (m)',ylabel='North (m)',title='Top-down path');axs[0,0].axis('equal');axs[0,0].legend(fontsize=9)

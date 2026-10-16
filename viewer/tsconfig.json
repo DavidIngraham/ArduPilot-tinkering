@@ -6,14 +6,18 @@
     "strict": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "lib": ["ES2022", "DOM"],
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
     "skipLibCheck": true,
     "resolveJsonModule": true
   },
   "include": [
-    "src/main.ts",
-    "src/state.ts",
-    "src/landing.ts",
-    "src/simulator/*.ts"
+    "apps/**/*.ts",
+    "packages/**/*.ts",
+    "tests/**/*.ts",
+    "tools/**/*.ts",
+    "vite.config.ts"
   ]
 }

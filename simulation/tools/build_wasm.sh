@@ -7,5 +7,5 @@ if [ "$(wasm-bindgen --version)" != "$expected" ]; then
   exit 1
 fi
 cargo build --locked --release -p sim-wasm --target wasm32-unknown-unknown
-wasm-bindgen target/wasm32-unknown-unknown/release/sim_wasm.wasm --target web --out-dir ../viewer/public/wasm
+wasm-bindgen target/wasm32-unknown-unknown/release/sim_wasm.wasm --target web --out-dir ../viewer/generated/physics
 python3 tools/build_metadata.py

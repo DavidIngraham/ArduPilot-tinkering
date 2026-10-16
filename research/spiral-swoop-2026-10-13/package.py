@@ -8,7 +8,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 r=Path(__file__).parent
 raw=Path('/mnt/c/Users/davin/OneDrive/Documentos/Mission Planner/analysis/spiral-swoop-2026-10-13')
-viewer=r.parents[1]/'viewer/public/landing'
+viewer=r.parents[1]/'viewer/assets/recordings/landing'
 selection={'replays':{'spiral':'spiral06'}}
 results=json.loads((r/'results.json').read_text())
 for style,name in selection['replays'].items():

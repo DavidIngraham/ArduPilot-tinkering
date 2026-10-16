@@ -1,23 +1,28 @@
 import { defineConfig } from "vite";
+import { applets } from "./apps/applets/registry";
+import { appletBuild, workerInventory } from "./tools/build/plugin";
 export default defineConfig({
   base: "./",
+  publicDir: false,
+  plugins: [appletBuild()],
+  worker: { plugins: () => [workerInventory()] },
+  server: {
+    headers: {
+      "Cross-Origin-Opener-Policy": "same-origin",
+      "Cross-Origin-Embedder-Policy": "require-corp",
+    },
+  },
+  preview: {
+    headers: {
+      "Cross-Origin-Opener-Policy": "same-origin",
+      "Cross-Origin-Embedder-Policy": "require-corp",
+    },
+  },
   build: {
+    manifest: true,
     target: "es2022",
     rollupOptions: {
-      input: [
-        "index.html",
-        "simulator.html",
-        "simulation-replay.html",
-        "altitude-comparison.html",
-        "pitch-comparison.html",
-        "flight-replay.html",
-        "pitch-fbd.html",
-        "trim-launch.html",
-        "joint-tour.html",
-        "landing.html",
-        "controller-comparison.html",
-        "rigging-comparison.html",
-      ],
+      input: applets.map((app) => app.page),
       output: { manualChunks: { three: ["three"] } },
     },
   },

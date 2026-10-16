@@ -1,0 +1,13 @@
+{
+  "name": "@microagu/sim-browser",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./*.css": "./src/*.css",
+    "./*": "./src/*.ts"
+  },
+  "dependencies": {
+    "@microagu/contracts": "*"
+  }
+}

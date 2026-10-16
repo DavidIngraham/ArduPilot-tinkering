@@ -12,7 +12,7 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 p=argparse.ArgumentParser();p.add_argument('--model',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--seed',type=int,default=20261011);p.add_argument('--scale',type=float,default=1.0);p.add_argument('--validation-only',action='store_true');p.add_argument('--two-pole',action='store_true');p.add_argument('--two-pole-hz',type=float,default=.75);p.add_argument('--gain-check',action='store_true');p.add_argument('--cutoff-check',action='store_true');p.add_argument('--candidates',type=Path);p.add_argument('--height-ramp',type=float,default=0);a=p.parse_args()
-sys.path.insert(0,str(a.model));sys.path.insert(0,str(Path(__file__).parents[1]/'viewer/tools'))
+sys.path.insert(0,str(a.model));sys.path.insert(0,str(Path(__file__).parents[1]/'research/viewer-studies'))
 from json_backend import Backend
 from controllers import Turn
 from turbulence import Gusts,SETTINGS

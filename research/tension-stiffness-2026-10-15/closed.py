@@ -3,7 +3,7 @@ import shutil,contextlib,io
 sys.path.insert(0,str(HERE.parent/'scheduled-state-feedback-2026-10-15'))
 import experiment as ex
 ORIGINAL=ex.HERE
-sys.path.insert(0,str(HERE.parents[1]/'viewer/tools'))
+sys.path.insert(0,str(HERE.parents[1]/'research/viewer-studies'))
 def task(job):
  case,variant,resolution=job
  dest=HERE/'traces'/f"closed-{case['name']}-{variant}-{resolution}";dest.mkdir(parents=True,exist_ok=True)

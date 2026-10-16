@@ -109,7 +109,7 @@ def replay(data, label, filename):
                   label=label, parameters=stats['parameters'], flare_time_s=stats['flare_time_s'],
                   flare_event_source='First active native PGFL sample; SITL simulation timestamp',
                   flare_log_sha256=stats['log_sha256'])
-    (repo/'viewer/public/landing'/filename).write_text(json.dumps(result, separators=(',', ':')))
+    (repo/'viewer/assets/recordings/landing'/filename).write_text(json.dumps(result, separators=(',', ':')))
 
 
 calm_old = read(old/'preview-calm', 8)

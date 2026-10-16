@@ -6,7 +6,7 @@ Assembly references and mates are preserved in the original files. This copy has
 
 ## Rendered models and tools
 
-The browser-ready, articulated models and their export metadata live in [viewer/public/models](../viewer/public/models/). The [viewer tools](../viewer/tools/) contain the SolidWorks export and model-processing scripts. Render assets are derived geometry; the editable design remains here.
+The browser-ready, articulated models and their export metadata live in [viewer/assets/models](../viewer/assets/models/). The [viewer tools](../viewer/tools/) contain the SolidWorks export and model-processing scripts. Render assets are derived geometry; the editable design remains here.
 
 The CAD prop file is named `APC 9x6 CW.SLDPRT`; the flight-tested prop was **9x4.5**, so the filename is not a flight hardware specification. See the [build article](../docs/micro-agu-design.md) for the actual avionics and propulsion configuration.
 

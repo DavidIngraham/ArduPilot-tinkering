@@ -123,8 +123,8 @@ remain in [the migration manifest](../provenance/simulator-migration.json).
 ```sh
 uv run pytest tests/parity -q
 cd ../viewer
-node --import tsx tools/test_highdof_wasm.ts
-node --import tsx tools/test_sitl_wasm.ts
+npm run test:physics
+npm run test:sitl
 ```
 
 Tests compare randomized derivatives, airborne trajectories and 5,000 launch /
