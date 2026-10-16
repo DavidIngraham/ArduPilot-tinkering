@@ -31,7 +31,7 @@ fn duplicate_and_discontinuous_frames() {
 #[test]
 fn independent_cpp_airborne_trace() {
     let fixture: serde_json::Value = serde_json::from_str(include_str!(
-        "../../../../viewer/tools/fixtures/highdof-parity.json"
+        "../../../../viewer/tests/fixtures/highdof-parity.json"
     ))
     .unwrap();
     let mut b = backend(false);
