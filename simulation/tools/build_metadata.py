@@ -14,7 +14,7 @@ sources += sorted((root/'crates').rglob('Cargo.toml'))
 hashes = {str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}
 revision = subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip()
 dirty = bool(subprocess.check_output(['git','status','--porcelain','--','Cargo.toml','Cargo.lock','crates'],cwd=root,text=True).strip())
-manifest['model'] = 'JSON:wasm + Rust full 9-DOF external model'
+manifest['model'] = 'JSON:127.0.0.1 + Rust full 9-DOF external model'
 manifest['physics_source'] = dict(repository='https://github.com/DavidIngraham/micro-agu', revision=revision,
     working_tree_dirty=dirty, language='Rust', source_sha256=hashes,
     rustc=subprocess.check_output(['rustc','--version'],text=True).strip(), wasm_bindgen='0.2.114')

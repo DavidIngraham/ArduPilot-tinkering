@@ -1,5 +1,6 @@
 import { RuntimeAssets } from "../assets/runtime";
 import { delay } from "./delay";
+import { connectPhysicsSocket } from "../ardupilot/socket-physics";
 import { altitudeLever, pilotChannels } from "./pilot-input";
 import {
   MAVLink,
@@ -29,6 +30,7 @@ export class Simulator {
     this.timers.forEach(clearInterval);
     this.timers = [];
     this.listeners.clear();
+    this.disconnectPhysics?.();
     this.physics?.dispose();
     // Emscripten installs throwing getters for unexported runtime names.
     const pthread =
@@ -50,10 +52,7 @@ export class Simulator {
   onTruth = (frame: Frame) => {};
   onError = (text: string) => {};
   physics!: Physics;
-  private jsonRead!: (ptr: number, length: number) => number;
-  private jsonWrite!: (frame: number, ptr: number, length: number) => number;
-  private jsonRx = 0;
-  private jsonTx = 0;
+  private disconnectPhysics?: () => void;
   private lastTruth = 0;
   private stopped = false;
   private mav = new MAVLink();
@@ -101,7 +100,7 @@ export class Simulator {
       ...(wasmBinary ? { wasmBinary } : {}),
       arguments: [
         "--model",
-        "JSON:wasm",
+        "JSON:127.0.0.1",
         "--rate",
         "200",
         "--speedup",
@@ -125,7 +124,19 @@ export class Simulator {
               assets?.url(name) ?? new URL(name, url).href,
             mainScriptUrlOrBlob: url,
           }),
-      preRun: [(m: any) => m.FS.writeFile("/browser.parm", defaults)],
+      preRun: [
+        (m: any) => {
+          m.FS.writeFile("/browser.parm", defaults);
+          this.disconnectPhysics = connectPhysicsSocket(m, (packet) => {
+            const sensors = this.physics.respond(packet);
+            if (performance.now() - this.lastTruth >= 40) {
+              this.lastTruth = performance.now();
+              this.onTruth(this.physics.truth());
+            }
+            return sensors;
+          });
+        },
+      ],
       print: (s: string) => this.onLog(s),
       printErr: (s: string) => this.onLog(s),
     });
@@ -133,14 +144,6 @@ export class Simulator {
     const malloc = wrap("ardupilot_malloc", "number", ["number"]);
     this.rx = malloc(8192);
     this.tx = malloc(8192);
-    this.jsonRx = malloc(72);
-    this.jsonTx = malloc(8192);
-    this.jsonRead = wrap("ardupilot_json_read", "number", ["number", "number"]);
-    this.jsonWrite = wrap("ardupilot_json_write", "number", [
-      "number",
-      "number",
-      "number",
-    ]);
     this.read = wrap("ardupilot_serial_read", "number", [
       "number",
       "number",
@@ -151,20 +154,11 @@ export class Simulator {
       "number",
       "number",
     ]);
-    const phase = wrap("ardupilot_json_phase", "number", [])();
-    const waitAsync = (Atomics as any).waitAsync;
     const run = async () => {
       try {
         while (!this.stopped) {
           this.poll();
-          const memory = new Int32Array(this.module.HEAPU8.buffer);
-          const value = Atomics.load(memory, phase / 4);
-          // The firmware wakes us when a new servo frame is published. The
-          // short timeout also services UARTs while the FDM is not running.
-          if (waitAsync) {
-            if (value !== 1)
-              await waitAsync(memory, phase / 4, value, 10).value;
-          } else await new Promise((resolve) => setTimeout(resolve, 0));
+          await delay(4, this.lifetime.signal);
         }
       } catch (e) {
         this.dispose(e);
@@ -222,21 +216,6 @@ export class Simulator {
     this.onLog("EKF ready; simulation speed restored to 1× before launch.");
   }
   private poll() {
-    const bytes = this.jsonRead(this.jsonRx, 72);
-    if (bytes) {
-      const packet = this.module.HEAPU8.slice(this.jsonRx, this.jsonRx + bytes);
-      const frame = new DataView(packet.buffer).getUint32(4, true);
-      const sensors = new TextEncoder().encode(this.physics.respond(packet));
-      if (sensors.length > 8192)
-        throw Error("Physics sensor packet is too large");
-      this.module.HEAPU8.set(sensors, this.jsonTx);
-      if (this.jsonWrite(frame, this.jsonTx, sensors.length) !== sensors.length)
-        throw Error("SITL rejected the lockstep physics frame");
-      if (performance.now() - this.lastTruth >= 40) {
-        this.lastTruth = performance.now();
-        this.onTruth(this.physics.truth());
-      }
-    }
     for (let i = 0; i < 16; i++) {
       const count = this.read(0, this.rx, 8192);
       if (!count) break;

@@ -10,7 +10,9 @@ This appendix supports the four project chapters. Flight measurements, the initi
 The [reusable Rust 9-DOF kernel and generated Python/TypeScript bindings](../simulation/README.md)
 live in `simulation/`; [study drivers, fitting and historical notes](../research/README.md)
 live separately in `research/`. ArduPilot retains the lightweight articulated built-in model,
-firmware controllers and generic JSON/WASM transport. Earlier commit-pinned links
+firmware controllers and its standard JSON socket transport. The browser connects
+the Rust physics through a local Emscripten socket adapter owned by microAGU;
+no custom native WASM physics interface or network server is needed. Earlier commit-pinned links
 below remain historical evidence, rather than links to the active implementation.
 
 The current browser uses **132 mm as-built riser spacing**, routing and an updated

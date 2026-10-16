@@ -23,7 +23,7 @@ simulation second and only after at least 0.5 m of movement.
 Upright initialization runs SITL at **4× speed**, then waits for confirmation of
 `SIM_SPEEDUP=1` before launch. EKF3 still processes simulated sensor measurements;
 its alignment requirements and normal arming checks are unchanged. In a local
-cached-firmware test, initialization fell from 21.3 s to 5.7 s. Actual savings
+cached-firmware test, initialization fell from about 21 s to about 6 s. Actual savings
 depend on the device; download/compilation and the launch sequence still take time.
 
 * **MANUAL**: direct brake and throttle inputs.
@@ -104,10 +104,22 @@ sampled payload and smooths its offset; OrbitControls only controls the orbit vi
 
 This version uses the **full 9-DOF canopy–payload research backend**. Its Rust
 `sim-core` is compiled into `sim_wasm_bg.wasm`; ArduPlane runs in a
-separate WASM module using the fork's `JSON:wasm` lockstep transport. A dedicated
-worker exchanges servo frames and IMU/GPS sensor truth without UDP or a server.
+separate WASM module using upstream's unchanged `JSON:127.0.0.1` socket transport.
+A dedicated worker runs both modules. The microAGU adapter intercepts the local
+UDP peer at `127.0.0.1:9002` in Emscripten's `SOCKFS` layer and places each Rust
+sensor response into that socket's receive queue. ArduPilot uses its ordinary
+`sendto`/`recvfrom` calls and JSON timestamps for lockstep; no packets leave the
+browser, and no WebSocket server or custom native physics ABI is required.
 The adapter preserves the native brake rate limits, motor dynamics, IMU lever arm
 and RK4 substeps. Flight control remains in ArduPlane.
+
+This deliberately depends on the socket internals of the pinned **Emscripten
+6.0.8**, rather than maintaining an ArduPilot transport patch. The build exports
+the existing `SOCKFS` runtime through a deployment linker setting. SDK upgrades
+must pass the adapter, real-firmware and browser restart tests. Other socket
+destinations retain Emscripten's normal behavior. SharedArrayBuffer and isolation
+are still needed for ArduPilot's pthreads. The former `sitl-wasm-json` branch is
+historical; the active firmware branch is rebased directly onto upstream master.
 
 The app adapts `microagu.state.v1` truth to a render pose for the shared
 Three.js canopy, SolidWorks payload and suspension tools: independent payload and canopy positions/quaternions,
