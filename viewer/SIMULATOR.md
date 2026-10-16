@@ -16,6 +16,16 @@ the displayed value follows confirmed telemetry. The launch button becomes
 **Reset simulation** as launch begins. Reset starts a fresh default mission.
 The **Mission & weather** panel is closed by default.
 
+**Trail** toggles a gold flight path. History is recorded even while hidden and
+cleared on reset. It retains up to 4,096 points, sampled at most four times per
+simulation second and only after at least 0.5 m of movement.
+
+Upright initialization runs SITL at **4× speed**, then waits for confirmation of
+`SIM_SPEEDUP=1` before launch. EKF3 still processes simulated sensor measurements;
+its alignment requirements and normal arming checks are unchanged. In a local
+cached-firmware test, initialization fell from 21.3 s to 5.7 s. Actual savings
+depend on the device; download/compilation and the launch sequence still take time.
+
 * **MANUAL**: direct brake and throttle inputs.
 * **FBWA**: native heading-rate steering; pilot controls throttle.
 * **FBWB**: steering with automatic altitude and power control.

@@ -269,6 +269,11 @@ pre {
   font-size: 11px;
   background: #162a33b8;
 }
+.view-controls button[aria-pressed="true"] {
+  border-color: #b7ee75;
+  color: #b7ee75;
+  background: #243d33db;
+}
 .pilot-controls {
   position: fixed;
   bottom: 54px;

@@ -36,7 +36,12 @@ export class Simulator {
       Object.getOwnPropertyDescriptor(this.module, "PThread")?.value;
     pthread?.terminateAllThreads();
   }
-  constructor(readonly home: Home) {
+  constructor(
+    readonly home: Home,
+    private readonly warmupSpeed = 4,
+  ) {
+    if (!Number.isFinite(warmupSpeed) || warmupSpeed < 1 || warmupSpeed > 8)
+      throw new Error("Warm-up speed must be between 1× and 8×");
     this.state = initialTelemetry(home);
   }
   state: Telemetry;
@@ -91,7 +96,7 @@ export class Simulator {
     const { default: create } = await import(/* @vite-ignore */ url);
     const defaults =
       this.physics.config.defaults +
-      `\nFLTMODE_CH 0\nLOG_DISARMED 0\nLOG_BACKEND_TYPE 0\nFS_GCS_ENABL 0\nFS_LONG_ACTN 0\nRC_OVERRIDE_TIME 1\nSIM_SPEEDUP 1\nSTICK_MIXING 4\nFBWB_ELEV_REV 0\n`;
+      `\nFLTMODE_CH 0\nLOG_DISARMED 0\nLOG_BACKEND_TYPE 0\nFS_GCS_ENABL 0\nFS_LONG_ACTN 0\nRC_OVERRIDE_TIME 1\nSIM_SPEEDUP ${this.warmupSpeed}\nSTICK_MIXING 4\nFBWB_ELEV_REV 0\n`;
     this.module = await create({
       ...(wasmBinary ? { wasmBinary } : {}),
       arguments: [
@@ -99,6 +104,8 @@ export class Simulator {
         "JSON:wasm",
         "--rate",
         "200",
+        "--speedup",
+        String(this.warmupSpeed),
         "--home",
         `${this.home.lat},${this.home.lon},${this.home.alt},0`,
         "--serial0",
@@ -200,6 +207,19 @@ export class Simulator {
         m.name === "EKF_STATUS_REPORT" && (Number(m.values.flags) & 19) === 19,
       45000,
     );
+    const normalSpeed = this.wait(
+      (m) =>
+        m.name === "PARAM_VALUE" &&
+        m.values.param_id === "SIM_SPEEDUP" &&
+        Number(m.values.param_value) === 1,
+    );
+    this.send("PARAM_SET", {
+      param_id: "SIM_SPEEDUP",
+      param_value: 1,
+      param_type: 9,
+    });
+    await normalSpeed;
+    this.onLog("EKF ready; simulation speed restored to 1× before launch.");
   }
   private poll() {
     const bytes = this.jsonRead(this.jsonRx, 72);

@@ -520,6 +520,13 @@ export const applet = registerApplet(definition, async (scope) => {
           : document.documentElement.requestFullscreen()
       ).catch((e) => status(e.message)),
   );
+  let trailVisible = false;
+  el("trail-toggle").setAttribute("aria-pressed", "false");
+  scope.property(el("trail-toggle"), "onclick", () => {
+    trailVisible = !trailVisible;
+    view.showTrail(trailVisible);
+    el("trail-toggle").setAttribute("aria-pressed", String(trailVisible));
+  });
 
   function setPanel(open: boolean) {
     el("panel").hidden = !open;
@@ -592,6 +599,9 @@ export const applet = registerApplet(definition, async (scope) => {
     operation = true;
     buttons();
     await sim.start();
+    // Warm-up ran faster than real time while held upright. Start a fresh
+    // presentation clock before the real-time launch sequence.
+    truth.clear();
     await applyWeather();
     operation = false;
     ready = true;

@@ -65,3 +65,14 @@ test("jittered truth delivery never rewinds aircraft or rotor time", () => {
   buffer.push(frame(1), 11); // Late/out-of-order packet is ignored.
   assert.ok(buffer.advance(1 / 120)!.time_s >= previous);
 });
+
+test("clearing warm-up history starts presentation at the next live frame", () => {
+  const buffer = new TruthBuffer();
+  buffer.push(frame(1), 0);
+  buffer.push(frame(5), 1);
+  buffer.advance(0.016);
+  buffer.clear();
+  assert.equal(buffer.advance(0.016), null);
+  buffer.push(frame(20), 2);
+  assert.equal(buffer.advance(0.016)!.time_s, 20);
+});

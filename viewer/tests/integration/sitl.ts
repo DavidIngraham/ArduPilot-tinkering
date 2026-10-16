@@ -59,6 +59,15 @@ try {
     pathToFileURL(resolve("generated/physics/")).href + "/",
   );
   console.log("BOOT OK");
+  const normalStart = sim.physics.time;
+  const wallStart = performance.now();
+  await new Promise((r) => setTimeout(r, 1500));
+  const rate =
+    (sim.physics.time - normalStart) / ((performance.now() - wallStart) / 1000);
+  assert.ok(
+    rate > 0.7 && rate < 1.3,
+    `Warm-up must return to real time: ${rate}`,
+  );
   assert.ok(Math.abs(sim.state.alt) < 2, "EKF must initialize on the ground");
   for (const mode of ["MANUAL", "FBWA", "FBWB", "CRUISE"]) {
     await sim.mode(mode);

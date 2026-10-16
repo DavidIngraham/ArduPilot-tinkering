@@ -8,6 +8,12 @@ export class TruthBuffer {
   private time: number | null = null;
   private rate = 1;
   private anchor: { wall: number; sim: number } | null = null;
+  clear() {
+    this.frames = [];
+    this.time = null;
+    this.rate = 1;
+    this.anchor = null;
+  }
   push(frame: Frame, wall: number) {
     if (this.frames.length && frame.time_s <= this.frames.at(-1)!.time_s)
       return;

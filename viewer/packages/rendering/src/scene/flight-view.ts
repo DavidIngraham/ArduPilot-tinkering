@@ -1,6 +1,7 @@
 import * as T from "three";
 import { flightGround } from "./ground";
 import { ThermalColumn } from "./thermal";
+import { FlightTrail } from "./trail";
 import type { Weather } from "@microagu/contracts/weather";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { ModelAssets } from "../assets/models";
@@ -24,6 +25,7 @@ import { RotorPhase } from "@microagu/rendering/aircraft/mechanisms";
 export class FlightView {
   private scene = new T.Scene();
   private thermal = new ThermalColumn();
+  private trail = new FlightTrail();
   private renderer = new ManagedRenderer({
     antialias: true,
     logarithmicDepthBuffer: true,
@@ -65,6 +67,7 @@ export class FlightView {
     this.scene.add(sun);
     this.scene.add(flightGround());
     this.scene.add(this.thermal);
+    this.scene.add(this.trail);
     // Deterministic distant tree line, leaving the launch area open.
     const treeGeo = new T.ConeGeometry(7, 25, 6),
       treeMat = new T.MeshStandardMaterial({ color: 0x435f50 });
@@ -123,9 +126,13 @@ export class FlightView {
   weather(weather: Weather) {
     this.thermal.configure(weather);
   }
+  showTrail(show: boolean) {
+    this.trail.visible = show;
+  }
   render(f: RenderPose, dt: number) {
     if (this.controller.signal.aborted) return;
     this.thermal.update(f.time_s);
+    this.trail.record(f.time_s, f.payload.position);
     {
       this.payload.position.copy(position(f.payload.position));
       this.payload.quaternion.copy(orientation(f.payload.quaternion));
