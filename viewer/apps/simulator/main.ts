@@ -8,6 +8,7 @@ import { TruthBuffer } from "@microagu/playback/live-buffer";
 import { truthPose } from "@microagu/playback/pose";
 import { HOME, exampleMission } from "./missions/default";
 import { defaultWeather, windTruthLabel } from "./weather";
+import { FlightPlots } from "./flight-plots";
 const offset = (lat: number, lon: number) => homeOffset(lat, lon, HOME);
 import { definition } from "./definition";
 import "./styles.css";
@@ -55,6 +56,17 @@ export const applet = registerApplet(definition, async (scope) => {
 
   const view = scope.own(new FlightView(el("scene"), log));
   const truth = new TruthBuffer();
+  const plots = new FlightPlots(el("flight-plots"));
+  el("flight-plots").hidden = true;
+  el("plot-toggle").setAttribute("aria-pressed", "false");
+  scope.property(el("plot-toggle"), "onclick", () => {
+    el("flight-plots").hidden = !el("flight-plots").hidden;
+    el("plot-toggle").setAttribute(
+      "aria-pressed",
+      String(!el("flight-plots").hidden),
+    );
+    plots.draw();
+  });
   let lastPresentation = performance.now();
   function present(now: number) {
     const dt = Math.min(0.1, Math.max(0, (now - lastPresentation) / 1000));
@@ -68,6 +80,7 @@ export const applet = registerApplet(definition, async (scope) => {
   sim.onLog = log;
 
   sim.onTruth = (frame) => {
+    if (ready && frame.released) plots.record(frame.time_s, sim.state);
     truth.push(frame, performance.now() / 1000);
     paintWind(frame.wind_ned_m_s);
     const phase = [

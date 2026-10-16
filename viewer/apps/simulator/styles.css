@@ -274,6 +274,95 @@ pre {
   color: #b7ee75;
   background: #243d33db;
 }
+#flight-plots {
+  position: fixed;
+  right: 24px;
+  bottom: 210px;
+  width: 300px;
+  padding: 10px 12px 7px;
+  border: 1px solid #607d87;
+  border-radius: 10px;
+  background: #10242de8;
+  color: #e4eee8;
+  pointer-events: none;
+}
+#flight-plots[hidden] {
+  display: none;
+}
+#flight-plots svg {
+  display: block;
+  width: 100%;
+  height: 60px;
+  overflow: hidden;
+}
+#flight-plots svg text {
+  fill: #b8c9ca;
+  font: 9px sans-serif;
+}
+.plot-heading,
+.plot-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+  font-size: 9px;
+}
+.plot-heading {
+  letter-spacing: 0.03em;
+}
+.plot-heading b {
+  font-weight: 500;
+  margin-left: 4px;
+}
+.plot-heading i {
+  color: #b7ee75;
+  font-style: normal;
+}
+.plot-heading em {
+  color: #f7d898;
+  font-style: normal;
+}
+.plot-footer {
+  color: #a6bcbf;
+  font-size: 8px;
+}
+.plot-grid {
+  fill: none;
+  stroke: #607d87;
+  stroke-width: 0.5;
+}
+.plot-actual,
+.plot-target {
+  fill: none;
+  stroke: #b7ee75;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+}
+.plot-target {
+  stroke: #f7d898;
+  stroke-dasharray: 4 3;
+}
+@media (max-width: 600px) {
+  #flight-plots {
+    right: 10px;
+    bottom: 180px;
+    width: 250px;
+    padding: 8px 10px 6px;
+  }
+  .view-controls {
+    right: 10px;
+  }
+  .view-controls button {
+    min-width: 0;
+  }
+}
+@media (max-height: 600px) and (orientation: landscape) {
+  #flight-plots {
+    right: 10px;
+    top: 80px;
+    bottom: auto;
+    width: 230px;
+  }
+}
 .pilot-controls {
   position: fixed;
   bottom: 54px;

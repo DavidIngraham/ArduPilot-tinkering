@@ -20,6 +20,12 @@ The **Mission & weather** panel is closed by default.
 cleared on reset. It retains up to 4,096 points, sampled at most four times per
 simulation second and only after at least 0.5 m of movement.
 
+**Plots** toggles two compact traces covering the last 120 simulation seconds:
+EKF altitude above home (green) and commanded altitude (dashed gold), plus signed
+ArduPilot cross-track error in metres. Axes scale automatically; cross-track is
+centered on zero. Navigation errors are shown in AUTO, LOITER and CRUISE;
+manual modes leave gaps. History accumulates while hidden and clears on reset.
+
 Upright initialization runs SITL at **4× speed**, then waits for confirmation of
 `SIM_SPEEDUP=1` before launch. EKF3 still processes simulated sensor measurements;
 its alignment requirements and normal arming checks are unchanged. In a local

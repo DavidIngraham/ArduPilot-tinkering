@@ -245,6 +245,7 @@ export class Simulator {
             });
             break;
           case "NAV_CONTROLLER_OUTPUT":
+            this.state.crossTrack = v.xtrack_error;
             this.state.targetAlt = this.state.alt + v.alt_error;
             this.state.targetRoll = v.nav_roll;
             break;

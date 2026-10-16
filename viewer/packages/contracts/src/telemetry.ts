@@ -15,6 +15,7 @@ export interface Telemetry {
   alt: number;
   targetAlt: number | null;
   targetRoll: number | null;
+  crossTrack: number | null;
   speed: number;
   climb: number;
   roll: number;
@@ -37,6 +38,7 @@ export function initialTelemetry(home: {
     alt: 0,
     targetAlt: null,
     targetRoll: null,
+    crossTrack: null,
     speed: 0,
     climb: 0,
     roll: 0,

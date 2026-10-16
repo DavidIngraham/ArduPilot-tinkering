@@ -291,7 +291,41 @@
         Trail
       </button>
       <button id="fullscreen">Full screen</button>
+      <button
+        id="plot-toggle"
+        aria-pressed="false"
+        aria-controls="flight-plots"
+      >
+        Plots
+      </button>
     </div>
+    <section
+      id="flight-plots"
+      hidden
+      aria-label="Altitude and cross-track history"
+    >
+      <div class="plot-heading">
+        <span>ALT / HOME <b id="plot-alt">—</b></span
+        ><span><i>Actual</i> · <em>Target</em></span>
+      </div>
+      <svg
+        id="alt-plot"
+        viewBox="0 0 300 60"
+        role="img"
+        aria-label="Altitude above home in metres, actual and target"
+      ></svg>
+      <div class="plot-heading">
+        <span>CROSS TRACK <b id="plot-xtrack">—</b></span
+        ><span>m · signed</span>
+      </div>
+      <svg
+        id="xtrack-plot"
+        viewBox="0 0 300 60"
+        role="img"
+        aria-label="Signed autopilot cross-track error in metres"
+      ></svg>
+      <div class="plot-footer">−120 s <span>Now · simulation time</span></div>
+    </section>
     <div class="flight-status">
       <p id="status" role="status">Initializing upright…</p>
     </div>

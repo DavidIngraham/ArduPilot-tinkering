@@ -50,6 +50,7 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/simulator.html");
   await expect(page.locator("#panel")).toBeHidden();
+  await expect(page.locator("#flight-plots")).toBeHidden();
   await expect(page.locator("#status")).toContainText("Inverted setup", {
     timeout: 100000,
   });
@@ -59,6 +60,17 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   });
   await expect(page.locator("#mode-label")).toHaveText("AUTO");
   await expect(page.locator("#launch")).toHaveText("Reset simulation");
+  await page.locator("#plot-toggle").click();
+  await expect(page.locator("#flight-plots")).toBeVisible();
+  await expect(page.locator("#plot-toggle")).toHaveAttribute(
+    "aria-pressed",
+    "true",
+  );
+  await expect(page.locator("#alt-plot .plot-actual")).toHaveAttribute(
+    "d",
+    /L/,
+  );
+  await expect(page.locator("#plot-xtrack")).toContainText("m");
   await expect(page.locator("#trail-toggle")).toHaveAttribute(
     "aria-pressed",
     "false",
@@ -173,6 +185,8 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   expect(windPill!.x).toBeGreaterThan(speedPill!.x);
   await page.setViewportSize({ width: 320, height: 740 });
   await expect(page.locator("#fullscreen")).toBeInViewport();
+  await expect(page.locator("#plot-toggle")).toBeInViewport();
+  await expect(page.locator("#flight-plots")).toBeInViewport();
   await page.screenshot({ path: "test-results/simulator-narrow.png" });
   await page.setViewportSize({ width: 390, height: 844 });
   await page.locator("#panel-toggle").click();
@@ -185,6 +199,8 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   await expect(page.locator("#stick")).toBeInViewport();
   await page.setViewportSize({ width: 390, height: 844 });
   await page.locator("#launch").click();
+  await expect(page.locator("#flight-plots")).toBeHidden();
+  await expect(page.locator("#alt-plot path")).toHaveCount(0);
   await expect(page.locator("#panel")).toBeHidden();
   await expect(page.locator("#status")).toContainText("AUTO confirmed", {
     timeout: 100000,
