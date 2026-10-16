@@ -566,6 +566,13 @@ body.panel-closed .pilot-controls {
   font-size: 12px;
   color: #f0f6ef;
 }
+#wind-truth {
+  display: block;
+  font-size: 10px;
+  line-height: 1.5;
+  color: #e8d3c6;
+  font-variant-numeric: tabular-nums;
+}
 .throttle-box {
   width: 100px;
   display: flex;

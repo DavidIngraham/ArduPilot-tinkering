@@ -68,7 +68,11 @@ from (0° north, 90° east), and vertical air (−3 to +3 m/s, positive upward),
 select **Apply weather**. Add turbulence (0–2 m/s horizontal RMS; vertical RMS is
 half that) and a thermal (0–5 m/s centre lift, radius 5–200 m). Set the thermal's
 north/east position relative to home or use **Place at aircraft**, then apply.
-Zero turbulence or thermal lift disables that component. Reset restores calm air.
+Zero turbulence or thermal lift disables that component. New sessions and resets
+start with 0.2 m/s turbulence and a 1.5 m/s thermal of radius 60 m, centred 300 m
+north of home on the northbound AUTO leg. Background wind remains zero.
+The compact **WIND TRUTH** readout shows instantaneous local horizontal wind speed
+and its from-bearing, plus upward/downward air speed, including gusts and thermals.
 An enabled thermal appears as a translucent red column with rising tracers. Its
 radius and position follow the applied settings; zero lift hides it. Tracer motion
 is exaggerated for visibility, and the displayed column extends 200 m above ground

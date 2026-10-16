@@ -7,6 +7,7 @@ import { registerApplet } from "@microagu/applet-ui/shell/mount";
 import { TruthBuffer } from "@microagu/playback/live-buffer";
 import { truthPose } from "@microagu/playback/pose";
 import { HOME, exampleMission } from "./missions/default";
+import { defaultWeather, windTruthLabel } from "./weather";
 const offset = (lat: number, lon: number) => homeOffset(lat, lon, HOME);
 import { definition } from "./definition";
 import "./styles.css";
@@ -68,6 +69,7 @@ export const applet = registerApplet(definition, async (scope) => {
 
   sim.onTruth = (frame) => {
     truth.push(frame, performance.now() / 1000);
+    el("wind-truth").textContent = windTruthLabel(frame.wind_ned_m_s);
     const phase = [
       "Ground hold",
       "Assisted inflation",
@@ -338,24 +340,20 @@ export const applet = registerApplet(definition, async (scope) => {
   ])
     scope.property(el(id), "oninput", windLabels);
 
-  scope.property(
-    el("apply-wind"),
-    "onclick",
-    () =>
-      void action(async () => {
-        const [speed, bearing, up] = windValues();
-        const weather = weatherValues();
-        await sim.wind(speed, bearing, up, weather);
-        view.weather(weather);
-        el("wind-status").textContent =
-          speed === 0 &&
-          up === 0 &&
-          weather.turbulence === 0 &&
-          weather.thermalStrength === 0
-            ? "Calm"
-            : `Applied: ${speed.toFixed(1)} m/s from ${bearing}°, vertical ${up.toFixed(1)} m/s · gusts ${weather.turbulence.toFixed(1)} m/s · thermal ${weather.thermalStrength.toFixed(1)} m/s`;
-      }),
-  );
+  async function applyWeather() {
+    const [speed, bearing, up] = windValues();
+    const weather = weatherValues();
+    await sim.wind(speed, bearing, up, weather);
+    view.weather(weather);
+    el("wind-status").textContent =
+      speed === 0 &&
+      up === 0 &&
+      weather.turbulence === 0 &&
+      weather.thermalStrength === 0
+        ? "Calm"
+        : `Applied: ${speed.toFixed(1)} m/s from ${bearing}°, vertical ${up.toFixed(1)} m/s · gusts ${weather.turbulence.toFixed(1)} m/s · thermal ${weather.thermalStrength.toFixed(1)} m/s`;
+  }
+  scope.property(el("apply-wind"), "onclick", () => void action(applyWeather));
 
   const stick = joystick(
     scope,
@@ -594,6 +592,7 @@ export const applet = registerApplet(definition, async (scope) => {
     operation = true;
     buttons();
     await sim.start();
+    await applyWeather();
     operation = false;
     ready = true;
     buttons();
@@ -619,6 +618,20 @@ export const applet = registerApplet(definition, async (scope) => {
     });
   }
 
+  // Reset restores the same scenario, including values left in the DOM.
+  for (const [id, value] of Object.entries({
+    "wind-speed": 0,
+    "wind-direction": 0,
+    "wind-up": 0,
+    turbulence: defaultWeather.turbulence,
+    "thermal-strength": defaultWeather.thermalStrength,
+    "thermal-radius": defaultWeather.thermalRadius,
+    "thermal-north": defaultWeather.thermalNorth,
+    "thermal-east": defaultWeather.thermalEast,
+  }))
+    el<HTMLInputElement>(id).value = String(value);
+  windLabels();
+  el("wind-truth").textContent = windTruthLabel();
   setPanel(false);
   drawMap();
 

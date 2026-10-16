@@ -59,6 +59,12 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   });
   await expect(page.locator("#mode-label")).toHaveText("AUTO");
   await expect(page.locator("#launch")).toHaveText("Reset simulation");
+  await expect(page.locator("#turbulence")).toHaveValue("0.2");
+  await expect(page.locator("#thermal-strength")).toHaveValue("1.5");
+  await expect(page.locator("#thermal-radius")).toHaveValue("60");
+  await expect(page.locator("#thermal-north")).toHaveValue("300");
+  await expect(page.locator("#wind-truth")).toContainText("m/s from");
+  await page.screenshot({ path: "test-results/simulator-default-weather.png" });
   await expect(page.locator("#mode-help")).toHaveCount(0);
   await expect(page.locator("#stick")).toHaveAttribute(
     "aria-disabled",
@@ -146,6 +152,7 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   expect(throttle!.height).toBeGreaterThan(throttle!.width * 2);
   expect(throttle!.height).toBeLessThanOrEqual(110);
   await expect(page.locator("#stick-label")).toHaveCount(0);
+  await expect(page.locator("#wind-truth")).toBeInViewport();
   await page.locator("#panel-toggle").click();
   await page.locator("#thermal-strength").scrollIntoViewIfNeeded();
   await page.screenshot({ path: "test-results/simulator-mobile-weather.png" });
@@ -160,5 +167,10 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   await expect(page.locator("#status")).toContainText("AUTO confirmed", {
     timeout: 100000,
   });
+  await expect(page.locator("#wind-speed")).toHaveValue("0");
+  await expect(page.locator("#turbulence")).toHaveValue("0.2");
+  await expect(page.locator("#thermal-strength")).toHaveValue("1.5");
+  await expect(page.locator("#thermal-north")).toHaveValue("300");
+  await expect(page.locator("#wind-truth")).toContainText("m/s from");
   expect(errors).toEqual([]);
 });
