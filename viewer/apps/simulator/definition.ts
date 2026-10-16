@@ -3,6 +3,7 @@ export const definition = {
   id: "simulator",
   title: "MicroAGU \u00b7 Simulator",
   page: "simulator.html",
+  html: "apps/simulator/index.html",
   entry: "apps/simulator/main.ts",
   kind: "simulator",
   assets: [

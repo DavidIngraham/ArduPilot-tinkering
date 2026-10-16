@@ -3,6 +3,7 @@ export const definition = {
   id: "altitude-comparison",
   title: "MicroAGU \u00b7 Altitude Comparison",
   page: "altitude-comparison.html",
+  html: "apps/applets/altitude-comparison/index.html",
   entry: "apps/applets/altitude-comparison/applet.ts",
   kind: "replay",
   assets: ["models/microagu-payload-tl.glb", "altitude-comparison/*.jsonl"],

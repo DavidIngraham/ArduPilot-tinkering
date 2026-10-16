@@ -25,7 +25,7 @@ for (const app of applets.filter((a) => a.kind !== "simulator")) {
       await page.evaluate(() => (window as any).microaguApplet.resources),
     ).toBe(0);
     await expect(page.locator("canvas")).toHaveCount(
-      (readFileSync(app.page, "utf8").match(/<canvas/g) ?? []).length,
+      (readFileSync(app.html, "utf8").match(/<canvas/g) ?? []).length,
     );
     await page.evaluate(async () => {
       await (window as any).microaguApplet.mount();

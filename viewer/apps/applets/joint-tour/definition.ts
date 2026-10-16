@@ -3,6 +3,7 @@ export const definition = {
   id: "joint-tour",
   title: "MicroAGU \u00b7 Joint Tour",
   page: "joint-tour.html",
+  html: "apps/applets/joint-tour/index.html",
   entry: "apps/applets/joint-tour/applet.ts",
   kind: "explanation",
   assets: ["models/microagu-payload-tl.glb", "joint-tour/responses.json"],

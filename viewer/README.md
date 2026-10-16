@@ -14,7 +14,7 @@ simulator. Existing HTML URLs are preserved for blog embeds. Physics lives in
 | `packages/sim-browser` | Rust binding adapter, ArduPilot transport, worker client, browser isolation and runtime integrity | Rendering, Three.js, applets |
 | `packages/applet-ui` | Mount lifecycle, touch controls, timeline controls, comparison layout, charts and capture | Simulator, applications |
 | `apps/applets` | Each explanation's data selection, annotations, layout and definition | Other applet implementations |
-| `apps/simulator` | Flight desk, default home/mission, input mapping, presentation loop | Private renderer or worker state |
+| `apps/simulator` | Simulator HTML, flight controls, default home/mission, input mapping, presentation loop | Private renderer or worker state |
 | `assets` | CAD models, bounded presentation recordings, runtime configuration and pinned asset inventories | Experiment execution |
 | `generated` | Rust JS/WASM/types, ArduPilot WASM and generated MAVLink dialect | Hand edits |
 | `tools/build`, `tools/convert`, `tools/publish` | Build manifests, data conversion and verified publishing | Tuning or flight-study execution |
@@ -51,8 +51,9 @@ these expected hashes or regenerate experiments.
 
 ## Adding an applet
 
-Create `apps/applets/NAME/definition.ts` and `applet.ts`, plus the stable HTML entry.
-The definition declares its public page, source entry, exact asset requirements
+Create `apps/applets/NAME/index.html`, `definition.ts` and `applet.ts` together.
+The simulator's HTML lives at `apps/simulator/index.html` beside `main.ts`.
+The definition declares its stable public `page`, source `html`, TypeScript `entry`, exact asset requirements
 (or pinned dataset groups), controls and initial camera category. Register it in
 `apps/applets/registry.ts`; the build and publisher derive their page lists from
 that registry. Applet-specific diagrams and scientific annotations stay beside
@@ -89,6 +90,13 @@ applet's declared assets into `dist/applet-manifest.json`. Publishing verifies e
 file hash before copying the selected dependency closure. It never parses minified
 JavaScript. Existing Python `tools/publish_*.py` commands delegate to this publisher.
 Only publishing the simulator includes its worker, WASM and isolation service worker.
+
+Source folders do not determine published URLs. The build emits each HTML file at
+its definition's `page` (for example `pitch-fbd.html` or `simulator.html`) and makes
+its compiled asset URLs relative to that location. The dev server serves these
+same routes and redirects source HTML paths to them, preserving query parameters.
+Blog links and iframe embeds continue to use `/assets/microagu-viewer/<page>`;
+link to `apps/applets/<id>/index.html` on GitHub only when referring to source code.
 
 Generated Rust bindings are produced by `../simulation/tools/generate.sh` into
 `generated/physics`. Firmware builds write to `generated/ardupilot`; resolved runtime

@@ -5,6 +5,13 @@ export default defineConfig({
   base: "./",
   publicDir: false,
   plugins: [appletBuild()],
+  experimental: {
+    // HTML is emitted at each app's stable root-level URL by appletBuild.
+    renderBuiltUrl(filename, { hostType }) {
+      if (hostType === "html") return `./${filename}`;
+      return { relative: true };
+    },
+  },
   worker: { plugins: () => [workerInventory()] },
   server: {
     headers: {
@@ -22,7 +29,7 @@ export default defineConfig({
     manifest: true,
     target: "es2022",
     rollupOptions: {
-      input: applets.map((app) => app.page),
+      input: applets.map((app) => app.html),
       output: { manualChunks: { three: ["three"] } },
     },
   },

@@ -23,14 +23,39 @@ export function workerInventory(): Plugin {
 export function appletBuild(): Plugin {
   let root = "",
     out = "";
+  let building = false;
   return {
     name: "microagu-applets",
+    enforce: "post",
     configResolved(config) {
       root = config.root;
       out = resolve(root, config.build.outDir);
+      building = config.command === "build";
     },
     configureServer(server) {
       const sources = assetSources(root);
+      server.middlewares.use(async (req, res, next) => {
+        const url = new URL(req.url ?? "/", "http://localhost");
+        const name = url.pathname.slice(1) || "index.html";
+        const app = applets.find((app) => app.page === name || app.html === name);
+        if (!app) return next();
+        // Keep relative recordings and navigation rooted at the public page URL.
+        if (name === app.html) {
+          res.writeHead(302, { Location: `/${app.page}${url.search}` });
+          return res.end();
+        }
+        try {
+          const html = await server.transformIndexHtml(
+            `/${app.html}`,
+            readFileSync(resolve(root, app.html), "utf8"),
+            req.url,
+          );
+          res.setHeader("Content-Type", "text/html");
+          res.end(html);
+        } catch (error) {
+          next(error);
+        }
+      });
       server.middlewares.use((req, res, next) => {
         const name = decodeURIComponent((req.url ?? "").split("?")[0]).replace(
             /^\//,
@@ -52,7 +77,18 @@ export function appletBuild(): Plugin {
         res.end(readFileSync(source));
       });
     },
+    generateBundle(_options, bundle) {
+      for (const app of applets) {
+        const html = bundle[app.html];
+        if (!html || html.type !== "asset")
+          throw Error(`Missing built HTML ${app.html}`);
+        delete bundle[app.html];
+        html.fileName = app.page;
+        bundle[app.page] = html;
+      }
+    },
     closeBundle() {
+      if (!building) return;
       const manifest = JSON.parse(
         readFileSync(resolve(out, ".vite/manifest.json"), "utf8"),
       ) as Manifest;
@@ -62,8 +98,8 @@ export function appletBuild(): Plugin {
       ).sha256 as Record<string, string>;
       const result: Record<string, unknown> = {};
       for (const definition of applets) {
-        const entry = manifest[definition.page];
-        if (!entry) throw Error(`Missing Vite entry ${definition.page}`);
+        const entry = manifest[definition.html];
+        if (!entry) throw Error(`Missing Vite entry ${definition.html}`);
         const files = new Set<string>([definition.page]),
           seen = new Set<string>();
         function visit(key: string) {
@@ -78,7 +114,7 @@ export function appletBuild(): Plugin {
             visit,
           );
         }
-        visit(definition.page);
+        visit(definition.html);
         if (definition.kind === "simulator")
           workerFiles.forEach((f) => files.add(f));
         const assets = appAssets(definition, sources, expected);
