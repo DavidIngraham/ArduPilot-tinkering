@@ -1,5 +1,7 @@
 import { MAVLink, type Message, type Values } from "./mavlink";
 import { HOME, type Waypoint } from "./mission";
+import { Physics, type PhysicsConfig } from "./physics";
+import type { Frame } from "../state";
 export const MODES: Record<string, number> = {
   MANUAL: 0,
   FBWA: 5,
@@ -41,6 +43,15 @@ export class Simulator {
   };
   onUpdate = () => {};
   onLog = (text: string) => {};
+  onTruth = (frame: Frame) => {};
+  onError = (text: string) => {};
+  physics!: Physics;
+  private jsonRead!: (ptr: number, length: number) => number;
+  private jsonWrite!: (frame: number, ptr: number, length: number) => number;
+  private jsonRx = 0;
+  private jsonTx = 0;
+  private lastTruth = 0;
+  private stopped = false;
   private mav = new MAVLink();
   private module: any;
   private read!: (port: number, ptr: number, length: number) => number;
@@ -53,17 +64,22 @@ export class Simulator {
   private channels = [1500, 1500, 1000, 1500, 1500, 1500, 1000, 1800];
   private busy = false;
   private lastStatus = "";
-  async start(url = new URL("wasm/arduplane.js", document.baseURI).href) {
+  async start(url: string, config?: PhysicsConfig) {
     if (!crossOriginIsolated)
       throw Error(
         "This browser has not enabled shared memory. Reload once after the simulator service worker activates, or use a browser supporting cross-origin isolation.",
       );
+    this.physics = await Physics.load(new URL(".", url).href, config);
     const { default: create } = await import(/* @vite-ignore */ url);
-    const defaults = `SERVO7_FUNCTION 0\nFLTMODE_CH 0\nTKOFF_ALT 60\nLOG_DISARMED 0\nLOG_BACKEND_TYPE 0\nFS_GCS_ENABL 0\nFS_LONG_ACTN 0\nRC_OVERRIDE_TIME 1\nSIM_SPEEDUP 1\n`;
+    const defaults =
+      this.physics.config.defaults +
+      `\nFLTMODE_CH 0\nLOG_DISARMED 0\nLOG_BACKEND_TYPE 0\nFS_GCS_ENABL 0\nFS_LONG_ACTN 0\nRC_OVERRIDE_TIME 1\nSIM_SPEEDUP 1\n`;
     this.module = await create({
       arguments: [
         "--model",
-        "paraglider-throw",
+        "JSON:wasm",
+        "--rate",
+        "200",
         "--home",
         `${HOME.lat},${HOME.lon},${HOME.alt},0`,
         "--serial0",
@@ -90,6 +106,14 @@ export class Simulator {
     const malloc = wrap("ardupilot_malloc", "number", ["number"]);
     this.rx = malloc(8192);
     this.tx = malloc(8192);
+    this.jsonRx = malloc(72);
+    this.jsonTx = malloc(8192);
+    this.jsonRead = wrap("ardupilot_json_read", "number", ["number", "number"]);
+    this.jsonWrite = wrap("ardupilot_json_write", "number", [
+      "number",
+      "number",
+      "number",
+    ]);
     this.read = wrap("ardupilot_serial_read", "number", [
       "number",
       "number",
@@ -100,7 +124,28 @@ export class Simulator {
       "number",
       "number",
     ]);
-    this.timers.push(setInterval(() => this.poll(), 10));
+    const phase = wrap("ardupilot_json_phase", "number", [])();
+    const waitAsync = (Atomics as any).waitAsync;
+    const run = async () => {
+      try {
+        while (!this.stopped) {
+          this.poll();
+          const memory = new Int32Array(this.module.HEAPU8.buffer);
+          const value = Atomics.load(memory, phase / 4);
+          // The firmware wakes us when a new servo frame is published. The
+          // short timeout also services UARTs while the FDM is not running.
+          if (waitAsync) {
+            if (value !== 1)
+              await waitAsync(memory, phase / 4, value, 10).value;
+          } else await new Promise((resolve) => setTimeout(resolve, 0));
+        }
+      } catch (e) {
+        this.stopped = true;
+        this.timers.forEach(clearInterval);
+        this.onError(e instanceof Error ? e.message : String(e));
+      }
+    };
+    void run();
     this.timers.push(
       setInterval(
         () =>
@@ -137,6 +182,21 @@ export class Simulator {
     );
   }
   private poll() {
+    const bytes = this.jsonRead(this.jsonRx, 72);
+    if (bytes) {
+      const packet = this.module.HEAPU8.slice(this.jsonRx, this.jsonRx + bytes);
+      const frame = new DataView(packet.buffer).getUint32(4, true);
+      const sensors = new TextEncoder().encode(this.physics.respond(packet));
+      if (sensors.length > 8192)
+        throw Error("Physics sensor packet is too large");
+      this.module.HEAPU8.set(sensors, this.jsonTx);
+      if (this.jsonWrite(frame, this.jsonTx, sensors.length) !== sensors.length)
+        throw Error("SITL rejected the lockstep physics frame");
+      if (performance.now() - this.lastTruth >= 40) {
+        this.lastTruth = performance.now();
+        this.onTruth(this.physics.truth());
+      }
+    }
     for (let i = 0; i < 16; i++) {
       const count = this.read(0, this.rx, 8192);
       if (!count) break;
@@ -262,12 +322,24 @@ export class Simulator {
       Object.fromEntries(this.channels.map((v, i) => [`chan${i + 1}_raw`, v])),
     );
   }
-  async launch() {
-    await this.mode("TAKEOFF");
+  async launch(mode = "CRUISE") {
+    await this.mode("MANUAL");
     await this.command(400, [1]);
-    this.controls(0, 0, 1);
+    // Arming an airborne model moves home. Restore the ground reference before
+    // initializing the height demand, matching the native research harness.
+    const home = this.wait(
+      (m) =>
+        m.name === "HOME_POSITION" &&
+        Math.abs(Number(m.values.altitude) / 1000 - HOME.alt) < 0.1,
+    );
+    await this.command(179, [0, 0, 0, 0, HOME.lat, HOME.lon, HOME.alt]);
+    await this.command(512, [242]);
+    await home;
+    this.controls(0, 0, this.physics.config.command[0]);
     this.sendRC();
-    await this.command(183, [7, 2000]);
+    await this.mode(mode);
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    this.physics.released = true;
   }
   async upload(items: Waypoint[], progress: (n: number) => void) {
     if (this.busy) throw Error("A mission upload is already in progress.");

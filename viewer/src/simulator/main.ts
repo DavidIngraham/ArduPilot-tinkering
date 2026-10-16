@@ -1,14 +1,14 @@
 import "./style.css";
-import { Simulator, MODES } from "./runtime";
+import { MODES } from "./runtime";
+import { SimulatorClient } from "./client";
 import { FlightView } from "./view";
 import { exampleMission, parseMission, offset, type Waypoint } from "./mission";
 const el = <T extends HTMLElement = HTMLElement>(id: string) =>
   document.getElementById(id) as T;
-const sim = new Simulator();
+const sim = new SimulatorClient();
 let ready = false,
   operation = false,
   launched = false,
-  launching = false,
   uploaded = false,
   items: Waypoint[] = [];
 let roll = 0,
@@ -26,6 +26,18 @@ function status(text: string) {
 }
 const view = new FlightView(el("scene"), log);
 sim.onLog = log;
+sim.onTruth = (frame) => {
+  view.updateTruth(frame);
+  el("joint-truth").textContent =
+    `${frame.time_s.toFixed(1)} s · Canopy / payload joint: ${frame.joint_rotvec_rad.map((v) => ((v * 180) / Math.PI).toFixed(1)).join(" / ")}° · ${(frame.rpm ?? 0).toFixed(0)} rpm`;
+};
+sim.onError = (text) => {
+  ready = false;
+  status(text);
+  log(text);
+  el("connection").textContent = "Simulation stopped";
+  buttons();
+};
 function buttons() {
   for (const id of ["mode", "set-mode", "throttle"])
     (el(id) as HTMLButtonElement).disabled = !ready || operation;
@@ -33,7 +45,7 @@ function buttons() {
   el<HTMLButtonElement>("upload").disabled =
     !ready || operation || !items.length;
   el<HTMLButtonElement>("execute").disabled =
-    !ready || operation || !uploaded || !launched || launching;
+    !ready || operation || !uploaded || !launched;
   el<HTMLButtonElement>("example").disabled = operation;
   el<HTMLInputElement>("mission-file").disabled = operation;
 }
@@ -72,26 +84,16 @@ sim.onUpdate = () => {
   el("mission-current").textContent = uploaded
     ? `ITEM ${s.mission} / ${items.length}`
     : "NO MISSION";
-  if (launching && s.alt >= 55 && !operation) {
-    launching = false;
-    void action(async () => {
-      throttle = 0.45;
-      controls();
-      await sim.mode(el<HTMLSelectElement>("mode").value);
-      status("Launch complete. You have control.");
-    });
-  }
   drawMap();
 };
 el("launch").onclick = () =>
   void action(async () => {
-    status("Arming and launching…");
-    await sim.launch();
+    status("Arming and preparing airborne control…");
+    await sim.launch(el<HTMLSelectElement>("mode").value);
     launched = true;
-    launching = true;
-    throttle = 1;
+    throttle = sim.trimThrottle;
     controls();
-    status("Climbing to 60 m in TAKEOFF. Selected mode engages at 55 m.");
+    status("9-DOF physics released. You have control at 100 m.");
     if (innerWidth <= 720) setDesk(false);
   });
 const help: Record<string, string> = {
@@ -106,7 +108,6 @@ el<HTMLSelectElement>("mode").onchange = () =>
 el("set-mode").onclick = () =>
   void action(async () => {
     await sim.mode(el<HTMLSelectElement>("mode").value);
-    launching = false;
     status(`${el<HTMLSelectElement>("mode").value} confirmed by ArduPlane.`);
   });
 el<HTMLInputElement>("throttle").oninput = (e) => {
@@ -235,7 +236,11 @@ el("upload").onclick = () =>
     uploaded = true;
     el("mission-info").textContent =
       `${items.length} items uploaded and accepted by ArduPlane.`;
-    status("Mission accepted by ArduPlane. Launch, then select Fly mission.");
+    status(
+      launched
+        ? "Mission accepted. Select Fly mission to enter AUTO."
+        : "Mission accepted. Start flight, then select Fly mission.",
+    );
   });
 el("execute").onclick = () =>
   void action(async () => {
@@ -364,7 +369,7 @@ void boot().catch((e) => {
   el("connection").textContent = "Unable to start";
 });
 setInterval(() => {
-  if (ready && performance.now() - sim.state.lastHeartbeat > 5000) {
+  if (ready && performance.now() - sim.lastReceipt > 5000) {
     el("connection").textContent = "Telemetry delayed";
   } else if (ready) el("connection").textContent = "SITL online";
 }, 1000);

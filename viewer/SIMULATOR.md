@@ -8,9 +8,10 @@ visit reloads once to enable cross-origin isolation on GitHub Pages.
 
 ## Flying
 
-Wait for sensor initialization, then select **Launch to 60 m**. The native throw
-assist launches in TAKEOFF. At 55 m the selected flight mode engages. Select a mode
-and **Engage** to take control earlier. The top mode display is confirmed telemetry.
+Wait for sensor initialization, then select **Start flight at 100 m**. The aircraft
+starts in airborne steady trim; this button arms ArduPlane and releases the physics
+in the selected mode. Select a mode and **Engage** to take control during flight.
+The top mode display is confirmed telemetry.
 
 * **MANUAL**: direct brake and throttle inputs.
 * **FBWA**: native heading-rate steering; pilot controls throttle.
@@ -40,12 +41,19 @@ The example ends in unlimited loiter rather than an uncommanded landing.
 
 ## Model and visual limits
 
-This version uses the fork's **native rigid-body `paraglider-throw` SITL model**,
-its embedded paraglider defaults, heading-rate steering and paraglider TECS. It is
-not the Python/C++ 9-DOF canopy–payload research backend. The existing Three.js
-canopy, SolidWorks payload, suspension lines and brake morphs are reused. The
-visual canopy follows the payload attitude; brake motion is schematic PWM-scaled
-deflection. Terrain is an illustrative flat field, not a map or elevation database.
+This version uses the **full 9-DOF canopy–payload research backend**. Its original
+Eigen/C++ dynamics kernel is compiled into `highdof.wasm`; ArduPlane runs in a
+separate WASM module using the fork's `JSON:wasm` lockstep transport. A dedicated
+worker exchanges servo frames and IMU/GPS sensor truth without UDP or a server.
+The adapter preserves the native brake rate limits, motor dynamics, IMU lever arm
+and RK4 substeps. Flight control remains in ArduPlane.
+
+The existing Three.js canopy, SolidWorks payload and suspension tools consume
+`microagu.state.v1` truth: independent payload and canopy positions/quaternions,
+rotor RPM, brake travel and joint rotation/rates. Fabric deformation is illustrative.
+The model starts at 100 m in moving equilibrium while the EKF initializes. It has
+no ground contact, toss or canopy inflation; reaching the ground stops simulation.
+Terrain is an illustrative flat field, not a map or elevation database.
 The simulator is a development aid, not a validated flight-training model.
 
 ## Build and verify
@@ -55,20 +63,27 @@ The corresponding source is public in the ArduPilot fork; binaries and source
 are GPL-3.0-or-later. `public/wasm/COPYING.txt` accompanies the deployed build.
 
 ```sh
-# Node >=22; Emscripten 6.0.8 installed at ~/emsdk
-bash tools/build_sitl_wasm.sh /path/to/ardupilot-high-dof
+# Node >=22; Emscripten 6.0.8 installed at ~/emsdk; Eigen 3.4 headers
+# Checkout DavidIngraham/ardupilot branch paraglider-browser-9dof.
+# Build its Tools/simulation/paraglider native library with build.sh first.
+# Python needs numpy and scipy for the canonical trim/export and parity fixture.
+PYTHON=/path/to/python bash tools/build_highdof_wasm.sh /path/to/ardupilot-browser-9dof
+bash tools/build_sitl_wasm.sh /path/to/ardupilot-browser-9dof
 cp ../COPYING.txt public/wasm/COPYING.txt
 npm ci
 npm test
+node --import tsx tools/test_highdof_wasm.ts
 node --import tsx tools/test_sitl_wasm.ts
 npm run build
 python3 -m http.server 5173 --directory dist
 # Open http://localhost:5173/simulator.html
 ```
 
-The integration test boots the actual packaged WASM, confirms MANUAL/FBWA/CRUISE,
-uploads a mission, arms with normal prearm checks, launches, enters AUTO, and checks
-that the aircraft moves. `tools/generate_mavlink.py` regenerates the small browser
+The parity test compares 1,200 physics steps and 49 native Python/C++ checkpoints,
+including both bodies, sensors, rotor, actuators and joints. The integration test
+boots the packaged WASM, confirms MANUAL/FBWA/CRUISE, uploads a mission, arms with
+normal prearm checks, releases at 100 m, enters AUTO, checks steering and validates
+articulated truth. `tools/generate_mavlink.py` regenerates the small browser
 dialect from the firmware's pymavlink installation. No control algorithms are
 reimplemented in JavaScript.
 

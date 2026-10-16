@@ -2,17 +2,33 @@
 import assert from "node:assert/strict";
 import { pathToFileURL } from "node:url";
 import { resolve } from "node:path";
+import { readFile } from "node:fs/promises";
+import { validate } from "../src/state";
 import { Simulator } from "../src/simulator/runtime";
 import { exampleMission } from "../src/simulator/mission";
 Object.defineProperty(globalThis, "crossOriginIsolated", { value: true });
 const sim = new Simulator();
 sim.onLog = (text) => console.log(text);
+sim.onError = (text) => {
+  console.error(text);
+  process.exit(1);
+};
+let truthFrames = 0,
+  maxJoint = 0;
+sim.onTruth = (frame) => {
+  validate(frame);
+  truthFrames++;
+  maxJoint = Math.max(maxJoint, Math.hypot(...frame.joint_rotvec_rad));
+};
 const timeout = setTimeout(() => {
   console.error("Integration timeout");
   process.exit(1);
 }, 180000);
 try {
-  await sim.start(pathToFileURL(resolve("public/wasm/arduplane.js")).href);
+  await sim.start(
+    pathToFileURL(resolve("public/wasm/arduplane.js")).href,
+    JSON.parse(await readFile("public/wasm/highdof.json", "utf8")),
+  );
   console.log("BOOT OK");
   for (const mode of ["MANUAL", "FBWA", "CRUISE"]) {
     await sim.mode(mode);
@@ -32,15 +48,15 @@ try {
       await new Promise((r) => setTimeout(r, 3000));
     }
   }
-  assert.ok(armed, "Paraglider must arm and launch");
-  const start = Date.now();
-  while (sim.state.alt < 15 && Date.now() - start < 60000)
-    await new Promise((r) => setTimeout(r, 500));
   assert.ok(
-    sim.state.alt > 15,
-    `Expected climb after launch; altitude ${sim.state.alt}`,
+    armed && sim.physics.released,
+    "Paraglider must arm and release airborne physics",
   );
-  console.log("LAUNCH OK", JSON.stringify(sim.state));
+  assert.ok(
+    sim.state.alt > 90 && sim.state.alt < 110,
+    `Ground home datum must be preserved: ${sim.state.alt}`,
+  );
+  console.log("AIRBORNE RELEASE OK", JSON.stringify(sim.state));
   await sim.execute();
   assert.equal(sim.state.mode, 10);
   console.log("AUTO OK");
@@ -77,6 +93,15 @@ try {
   await sim.mode("CRUISE");
   assert.equal(sim.state.mode, 7);
   console.log("MANUAL TAKEOVER AND CRUISE OK");
+  assert.ok(
+    truthFrames > 50 && maxJoint > 0.01,
+    "Independent canopy/payload truth must stream",
+  );
+  console.log("9-DOF TRUTH OK", {
+    truthFrames,
+    maxJoint,
+    simTime: sim.physics.time,
+  });
   clearTimeout(timeout);
   process.exit(0);
 } catch (e) {

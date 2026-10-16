@@ -8,7 +8,8 @@ import {
   updateSuspension,
 } from "../paraglider";
 import { rigPayload, poseMechanisms, type Mechanisms } from "../mechanisms";
-import { worldBasis } from "../state";
+import { position, orientation, sample, type Frame } from "../state";
+import { RotorPhase } from "../mechanisms";
 import { HOME, offset, type Waypoint } from "./mission";
 import type { Telemetry } from "./runtime";
 export class FlightView {
@@ -32,6 +33,9 @@ export class FlightView {
   );
   private mechanisms: Mechanisms | null = null;
   private phase = 0;
+  private truthFrames: Frame[] = [];
+  private truthAt = 0;
+  private rotor = new RotorPhase();
   private last = performance.now();
   private lastTarget = new T.Vector3();
   private mode = 0;
@@ -106,6 +110,11 @@ export class FlightView {
   update(state: Telemetry) {
     this.state = state;
   }
+  updateTruth(frame: Frame) {
+    this.truthFrames.push(frame);
+    if (this.truthFrames.length > 2) this.truthFrames.shift();
+    this.truthAt = performance.now();
+  }
   cycle() {
     this.mode = (this.mode + 1) % 3;
     this.first = true;
@@ -130,23 +139,17 @@ export class FlightView {
       dt = Math.min(0.1, (now - this.last) / 1000);
     this.last = now;
     const s = this.state;
-    if (s) {
-      const p = offset(s.lat, s.lon);
-      this.payload.position.set(p.east, Math.max(0.25, s.alt), -p.north);
-      const body = new T.Quaternion().setFromEuler(
-        new T.Euler(s.roll, s.pitch, s.yaw, "ZYX"),
+    if (this.truthFrames.length) {
+      const f = sample(
+        this.truthFrames,
+        this.truthFrames[0].time_s + (now - this.truthAt) / 1000,
       );
-      this.payload.quaternion.copy(worldBasis).multiply(body);
-      this.canopy.quaternion.copy(this.payload.quaternion);
-      this.canopy.position.copy(
-        new T.Vector3(-0.05, 0, -1.2)
-          .applyQuaternion(this.payload.quaternion)
-          .add(this.payload.position),
-      );
-      const brakes = s.servos
-        .slice(0, 2)
-        .map((p) => T.MathUtils.clamp((p - 1000) / 1000, 0, 1) * 80);
-      this.phase += dt * Math.max(0, s.servos[2] - 1000) * 0.4;
+      this.payload.position.copy(position(f.state.slice(0, 3)));
+      this.payload.quaternion.copy(orientation(f.state.slice(3, 7)));
+      this.canopy.position.copy(position(f.state.slice(13, 16)));
+      this.canopy.quaternion.copy(orientation(f.state.slice(16, 20)));
+      const brakes = f.brake_mm;
+      this.phase = this.rotor.advance(f.time_s, f.rpm);
       if (this.mechanisms)
         poseMechanisms(this.mechanisms, this.phase, brakes, [0, 0]);
       poseCanopyBrakes(this.canopy, brakes);

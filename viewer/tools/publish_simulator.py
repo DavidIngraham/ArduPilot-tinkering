@@ -13,7 +13,8 @@ def copy(name):
     if name.endswith('.html'):
         for ref in re.findall(r'\./(assets/[^"\s]+)',src.read_text()):copy(ref)
     if name.endswith('.js') and name.startswith('assets/'):
-        for ref in re.findall(r'["\']\./([^"\']+\.js)["\']',src.read_text()):copy('assets/'+ref)
-for name in ['simulator.html','simulator-sw.js','models/microagu-payload-tl.glb','wasm/arduplane.js','wasm/arduplane.wasm','wasm/build.json','wasm/COPYING.txt']:
+        for ref in re.findall(r'["\'](?:\./)?([\w-]+\.js)["\']',src.read_text()):
+            if (source/'assets'/ref).is_file():copy('assets/'+ref)
+for name in ['simulator.html','simulator-sw.js','models/microagu-payload-tl.glb','wasm/arduplane.js','wasm/arduplane.wasm','wasm/highdof.js','wasm/highdof.wasm','wasm/highdof.json','wasm/build.json','wasm/COPYING.txt','wasm/EIGEN-NOTICE.txt']:
     copy(name)
 print(f'Published {len(copied)} simulator files to {a.destination}')

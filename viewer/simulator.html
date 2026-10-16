@@ -17,7 +17,8 @@
         >µ<span>AGU</span></a
       >
       <div>
-        <strong>Flight simulator</strong><small>ArduPlane · browser SITL</small>
+        <strong>Flight simulator</strong
+        ><small>ArduPlane · full 9-DOF physics</small>
       </div>
       <span id="connection" role="status">Preparing</span
       ><button id="panel-toggle" aria-expanded="true" aria-controls="panel">
@@ -46,7 +47,9 @@
       <p class="intro">
         Fly MicroAGU from your browser, or let ArduPlane follow a mission.
       </p>
-      <button id="launch" class="primary" disabled>Launch to 60 m</button>
+      <button id="launch" class="primary" disabled>
+        Start flight at 100 m
+      </button>
       <p id="status" role="status">Loading simulator…</p>
       <label for="mode">Flight mode</label>
       <div class="row">
@@ -96,15 +99,19 @@
           its pitch input requests climb/descent.
         </p>
         <p>
-          Launch uses ArduPlane TAKEOFF and the native throw assist. After
-          reaching 55 m, the selected mode engages. Fly mission enters AUTO;
-          choose another mode to take over.
+          Starts airborne in steady trim at 100 m while sensors initialize.
+          Start flight arms ArduPlane and releases the model in your selected
+          mode. Fly mission enters AUTO; choose another mode to take over.
         </p>
         <p>
-          Physics: firmware’s native rigid-body paraglider, not the separate
-          9-DOF research model. Canopy and brake deformation are illustrative.
-          All control is local to this tab.
+          Full 9-DOF canopy–payload research model, compiled from its C++
+          kernel. Both bodies, rotor and brake actuators are drawn from
+          simulation truth. Fabric deformation remains illustrative. This
+          airborne model has no ground contact, toss or canopy inflation;
+          reaching the ground stops the simulation. All control is local to this
+          tab.
         </p>
+        <p id="joint-truth">Waiting for simulation truth…</p>
         <button id="reset">Reset simulation</button>
       </details>
       <details>

@@ -7076,6 +7076,12 @@ var _ardupilot_malloc = Module["_ardupilot_malloc"] = makeInvalidEarlyAccess("_a
 
 var _ardupilot_free = Module["_ardupilot_free"] = makeInvalidEarlyAccess("_ardupilot_free");
 
+var _ardupilot_json_phase = Module["_ardupilot_json_phase"] = makeInvalidEarlyAccess("_ardupilot_json_phase");
+
+var _ardupilot_json_read = Module["_ardupilot_json_read"] = makeInvalidEarlyAccess("_ardupilot_json_read");
+
+var _ardupilot_json_write = Module["_ardupilot_json_write"] = makeInvalidEarlyAccess("_ardupilot_json_write");
+
 var __emscripten_tls_init = makeInvalidEarlyAccess("__emscripten_tls_init");
 
 var __emscripten_proxy_main = Module["__emscripten_proxy_main"] = makeInvalidEarlyAccess("__emscripten_proxy_main");
@@ -7132,6 +7138,9 @@ function assignWasmExports(wasmExports) {
   assert(typeof wasmExports["ardupilot_serial_read_available"] != "undefined", "missing Wasm export: ardupilot_serial_read_available");
   assert(typeof wasmExports["ardupilot_malloc"] != "undefined", "missing Wasm export: ardupilot_malloc");
   assert(typeof wasmExports["ardupilot_free"] != "undefined", "missing Wasm export: ardupilot_free");
+  assert(typeof wasmExports["ardupilot_json_phase"] != "undefined", "missing Wasm export: ardupilot_json_phase");
+  assert(typeof wasmExports["ardupilot_json_read"] != "undefined", "missing Wasm export: ardupilot_json_read");
+  assert(typeof wasmExports["ardupilot_json_write"] != "undefined", "missing Wasm export: ardupilot_json_write");
   assert(typeof wasmExports["_emscripten_tls_init"] != "undefined", "missing Wasm export: _emscripten_tls_init");
   assert(typeof wasmExports["_emscripten_proxy_main"] != "undefined", "missing Wasm export: _emscripten_proxy_main");
   assert(typeof wasmExports["emscripten_stack_get_base"] != "undefined", "missing Wasm export: emscripten_stack_get_base");
@@ -7164,6 +7173,9 @@ function assignWasmExports(wasmExports) {
   _ardupilot_serial_read_available = Module["_ardupilot_serial_read_available"] = createExportWrapper("ardupilot_serial_read_available", wasmExports["ardupilot_serial_read_available"], 1);
   _ardupilot_malloc = Module["_ardupilot_malloc"] = createExportWrapper("ardupilot_malloc", wasmExports["ardupilot_malloc"], 1);
   _ardupilot_free = Module["_ardupilot_free"] = createExportWrapper("ardupilot_free", wasmExports["ardupilot_free"], 1);
+  _ardupilot_json_phase = Module["_ardupilot_json_phase"] = createExportWrapper("ardupilot_json_phase", wasmExports["ardupilot_json_phase"], 0);
+  _ardupilot_json_read = Module["_ardupilot_json_read"] = createExportWrapper("ardupilot_json_read", wasmExports["ardupilot_json_read"], 2);
+  _ardupilot_json_write = Module["_ardupilot_json_write"] = createExportWrapper("ardupilot_json_write", wasmExports["ardupilot_json_write"], 3);
   __emscripten_tls_init = createExportWrapper("_emscripten_tls_init", wasmExports["_emscripten_tls_init"], 0);
   __emscripten_proxy_main = Module["__emscripten_proxy_main"] = createExportWrapper("_emscripten_proxy_main", wasmExports["_emscripten_proxy_main"], 2);
   _emscripten_stack_get_base = wasmExports["emscripten_stack_get_base"];
