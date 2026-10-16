@@ -18,8 +18,8 @@
   },
   "physics_source": {
     "repository": "https://github.com/DavidIngraham/micro-agu",
-    "revision": "30d74b6489fbabac9ac3c979a17c6a1da7d671c6",
-    "working_tree_dirty": true,
+    "revision": "9725f73fac6cc4060480dca3cf1743a4bd465b2f",
+    "working_tree_dirty": false,
     "language": "Rust",
     "source_sha256": {
       "Cargo.toml": "d44f4d4022048d66dc37b930f1a9de48321592dcb62e489c5f5c792a265c7834",
