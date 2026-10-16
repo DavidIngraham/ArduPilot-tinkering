@@ -346,6 +346,7 @@ export const applet = registerApplet(definition, async (scope) => {
         const [speed, bearing, up] = windValues();
         const weather = weatherValues();
         await sim.wind(speed, bearing, up, weather);
+        view.weather(weather);
         el("wind-status").textContent =
           speed === 0 &&
           up === 0 &&

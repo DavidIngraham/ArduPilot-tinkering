@@ -69,6 +69,10 @@ select **Apply weather**. Add turbulence (0–2 m/s horizontal RMS; vertical RMS
 half that) and a thermal (0–5 m/s centre lift, radius 5–200 m). Set the thermal's
 north/east position relative to home or use **Place at aircraft**, then apply.
 Zero turbulence or thermal lift disables that component. Reset restores calm air.
+An enabled thermal appears as a translucent red column with rising tracers. Its
+radius and position follow the applied settings; zero lift hides it. Tracer motion
+is exaggerated for visibility, and the displayed column extends 200 m above ground
+(the synthetic weather field itself has no height cutoff).
 
 The reusable browser environment samples seeded, correlated Gaussian gusts with a
 two-second correlation time and a stationary Gaussian thermal column. At one
