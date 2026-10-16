@@ -1,0 +1,14 @@
+{
+  "repository": "https://github.com/DavidIngraham/ardupilot",
+  "revision": "b9b85429a345bc8cd2970cacecc3d43200731947",
+  "source": "https://github.com/DavidIngraham/ardupilot/tree/b9b85429a345bc8cd2970cacecc3d43200731947",
+  "license": "GPL-3.0-or-later",
+  "board": "wasm",
+  "vehicle": "ArduPlane",
+  "model": "paraglider-throw",
+  "emscripten": "6.0.8",
+  "sha256": {
+    "arduplane.wasm": "f5cb2b6d958647b4ce67502549574cd5d3edeac3a787de14ab2b5708032b4a97",
+    "arduplane.js": "324273cd4a249978130b88b797b9347cd879821e18ce8e2bf78ed7dadcca11eb"
+  }
+}

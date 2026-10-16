@@ -6,6 +6,7 @@ export default defineConfig({
     rollupOptions: {
       input: [
         "index.html",
+        "simulator.html",
         "simulation-replay.html",
         "altitude-comparison.html",
         "pitch-comparison.html",

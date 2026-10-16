@@ -6,15 +6,14 @@
     "strict": true,
     "noEmit": true,
     "allowImportingTsExtensions": true,
-    "lib": [
-      "ES2022",
-      "DOM"
-    ],
-    "skipLibCheck": true
+    "lib": ["ES2022", "DOM"],
+    "skipLibCheck": true,
+    "resolveJsonModule": true
   },
   "include": [
     "src/main.ts",
     "src/state.ts",
-    "src/landing.ts"
+    "src/landing.ts",
+    "src/simulator/*.ts"
   ]
 }

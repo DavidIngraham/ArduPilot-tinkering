@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#101c22" />
+    <title>MicroAGU · Flight simulator</title>
+  </head>
+  <body>
+    <main id="scene" aria-label="Three-dimensional flight view"></main>
+    <header>
+      <a
+        href="https://davidingraham.github.io/research/?collection=ardupilot-tinkering"
+        >µ<span>AGU</span></a
+      >
+      <div>
+        <strong>Flight simulator</strong><small>ArduPlane · browser SITL</small>
+      </div>
+      <span id="connection" role="status">Preparing</span
+      ><button id="panel-toggle" aria-expanded="true" aria-controls="panel">
+        Flight desk
+      </button>
+    </header>
+    <section class="telemetry" aria-label="Flight telemetry">
+      <div><small>MODE</small><strong id="mode-label">—</strong></div>
+      <div>
+        <small>ALT / HOME</small
+        ><strong><span id="alt">0.0</span><i> m</i></strong>
+      </div>
+      <div>
+        <small>GROUND SPEED</small
+        ><strong><span id="speed">0.0</span><i> m/s</i></strong>
+      </div>
+      <div>
+        <small>CLIMB</small
+        ><strong><span id="climb">0.0</span><i> m/s</i></strong>
+      </div>
+      <div><small>HEADING</small><strong id="heading">000°</strong></div>
+    </section>
+    <aside id="panel">
+      <div class="eyebrow">FLIGHT DESK <span id="armed">DISARMED</span></div>
+      <h1>Your own patch of sky.</h1>
+      <p class="intro">
+        Fly MicroAGU from your browser, or let ArduPlane follow a mission.
+      </p>
+      <button id="launch" class="primary" disabled>Launch to 60 m</button>
+      <p id="status" role="status">Loading simulator…</p>
+      <label for="mode">Flight mode</label>
+      <div class="row">
+        <select id="mode" disabled>
+          <option>MANUAL</option>
+          <option>FBWA</option>
+          <option selected>CRUISE</option>
+          <option>LOITER</option></select
+        ><button id="set-mode" disabled>Engage</button>
+      </div>
+      <p id="mode-help" class="hint">
+        CRUISE holds heading and altitude with centered controls.
+      </p>
+      <div class="section-title">
+        <h2>Mission</h2>
+        <span id="mission-current">NO MISSION</span>
+      </div>
+      <canvas
+        id="map"
+        aria-label="Mission route and aircraft position"
+      ></canvas>
+      <div class="row">
+        <label class="file-button" for="mission-file"
+          >Load file<input
+            id="mission-file"
+            type="file"
+            accept=".plan,.waypoints,.txt" /></label
+        ><button id="example">Example circuit</button>
+      </div>
+      <p id="mission-info" class="hint">
+        QGC .plan or .waypoints · relative or absolute altitude
+      </p>
+      <div class="row">
+        <button id="upload" disabled>Upload</button
+        ><button id="execute" disabled>Fly mission</button>
+      </div>
+      <details>
+        <summary>Controls & model</summary>
+        <p>
+          Right stick: steering and pitch. Left slider: throttle. Arrow keys
+          also move the stick; W/S adjust throttle. Release centers the stick.
+          Throttle stays where you leave it.
+        </p>
+        <p>
+          MANUAL directly controls brakes and throttle. FBWA uses heading-rate
+          steering with manual throttle. CRUISE controls heading and altitude;
+          its pitch input requests climb/descent.
+        </p>
+        <p>
+          Launch uses ArduPlane TAKEOFF and the native throw assist. After
+          reaching 55 m, the selected mode engages. Fly mission enters AUTO;
+          choose another mode to take over.
+        </p>
+        <p>
+          Physics: firmware’s native rigid-body paraglider, not the separate
+          9-DOF research model. Canopy and brake deformation are illustrative.
+          All control is local to this tab.
+        </p>
+        <button id="reset">Reset simulation</button>
+      </details>
+      <details>
+        <summary>Event log</summary>
+        <pre id="log" aria-label="Simulator event log"></pre>
+      </details>
+    </aside>
+    <div class="view-controls">
+      <button id="camera">View: chase</button
+      ><button id="fullscreen">Full screen</button>
+    </div>
+    <section class="pilot-controls" aria-label="Pilot controls">
+      <div class="throttle-box">
+        <label for="throttle"
+          >THROTTLE <output id="throttle-value">0%</output></label
+        ><input
+          id="throttle"
+          type="range"
+          min="0"
+          max="100"
+          value="0"
+          aria-label="Throttle percent"
+          disabled
+        /><small>W / S</small>
+      </div>
+      <div class="stick-box">
+        <div
+          id="stick"
+          role="group"
+          aria-label="Touch joystick: steering and pitch"
+        >
+          <span class="cross horizontal"></span
+          ><span class="cross vertical"></span><span id="knob"></span>
+        </div>
+        <small>STEER / PITCH · ARROW KEYS</small>
+      </div>
+    </section>
+    <footer>
+      MICRO AERIAL GUIDANCE UNIT <span>TROUT LAKE · SIMULATION</span>
+    </footer>
+    <script type="module" src="/src/simulator/main.ts"></script>
+  </body>
+</html>

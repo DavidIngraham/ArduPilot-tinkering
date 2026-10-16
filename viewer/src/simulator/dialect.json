@@ -1,0 +1,363 @@
+{
+  "EKF_STATUS_REPORT": {
+    "id": 193,
+    "crc": 71,
+    "length": 26,
+    "fields": [
+      ["velocity_variance", "float", 0, 1],
+      ["pos_horiz_variance", "float", 4, 1],
+      ["pos_vert_variance", "float", 8, 1],
+      ["compass_variance", "float", 12, 1],
+      ["terrain_alt_variance", "float", 16, 1],
+      ["flags", "uint16_t", 20, 1],
+      ["airspeed_variance", "float", 22, 1]
+    ]
+  },
+  "SET_MODE": {
+    "id": 11,
+    "crc": 89,
+    "length": 6,
+    "fields": [
+      ["custom_mode", "uint32_t", 0, 1],
+      ["target_system", "uint8_t", 4, 1],
+      ["base_mode", "uint8_t", 5, 1]
+    ]
+  },
+  "PARAM_VALUE": {
+    "id": 22,
+    "crc": 220,
+    "length": 25,
+    "fields": [
+      ["param_value", "float", 0, 1],
+      ["param_count", "uint16_t", 4, 1],
+      ["param_index", "uint16_t", 6, 1],
+      ["param_id", "char", 8, 16],
+      ["param_type", "uint8_t", 24, 1]
+    ]
+  },
+  "PARAM_SET": {
+    "id": 23,
+    "crc": 168,
+    "length": 23,
+    "fields": [
+      ["param_value", "float", 0, 1],
+      ["target_system", "uint8_t", 4, 1],
+      ["target_component", "uint8_t", 5, 1],
+      ["param_id", "char", 6, 16],
+      ["param_type", "uint8_t", 22, 1]
+    ]
+  },
+  "ATTITUDE": {
+    "id": 30,
+    "crc": 39,
+    "length": 28,
+    "fields": [
+      ["time_boot_ms", "uint32_t", 0, 1],
+      ["roll", "float", 4, 1],
+      ["pitch", "float", 8, 1],
+      ["yaw", "float", 12, 1],
+      ["rollspeed", "float", 16, 1],
+      ["pitchspeed", "float", 20, 1],
+      ["yawspeed", "float", 24, 1]
+    ]
+  },
+  "GLOBAL_POSITION_INT": {
+    "id": 33,
+    "crc": 104,
+    "length": 28,
+    "fields": [
+      ["time_boot_ms", "uint32_t", 0, 1],
+      ["lat", "int32_t", 4, 1],
+      ["lon", "int32_t", 8, 1],
+      ["alt", "int32_t", 12, 1],
+      ["relative_alt", "int32_t", 16, 1],
+      ["vx", "int16_t", 20, 1],
+      ["vy", "int16_t", 22, 1],
+      ["vz", "int16_t", 24, 1],
+      ["hdg", "uint16_t", 26, 1]
+    ]
+  },
+  "SERVO_OUTPUT_RAW": {
+    "id": 36,
+    "crc": 222,
+    "length": 37,
+    "fields": [
+      ["time_usec", "uint32_t", 0, 1],
+      ["servo1_raw", "uint16_t", 4, 1],
+      ["servo2_raw", "uint16_t", 6, 1],
+      ["servo3_raw", "uint16_t", 8, 1],
+      ["servo4_raw", "uint16_t", 10, 1],
+      ["servo5_raw", "uint16_t", 12, 1],
+      ["servo6_raw", "uint16_t", 14, 1],
+      ["servo7_raw", "uint16_t", 16, 1],
+      ["servo8_raw", "uint16_t", 18, 1],
+      ["port", "uint8_t", 20, 1],
+      ["servo9_raw", "uint16_t", 21, 1],
+      ["servo10_raw", "uint16_t", 23, 1],
+      ["servo11_raw", "uint16_t", 25, 1],
+      ["servo12_raw", "uint16_t", 27, 1],
+      ["servo13_raw", "uint16_t", 29, 1],
+      ["servo14_raw", "uint16_t", 31, 1],
+      ["servo15_raw", "uint16_t", 33, 1],
+      ["servo16_raw", "uint16_t", 35, 1]
+    ]
+  },
+  "MISSION_ITEM": {
+    "id": 39,
+    "crc": 254,
+    "length": 38,
+    "fields": [
+      ["param1", "float", 0, 1],
+      ["param2", "float", 4, 1],
+      ["param3", "float", 8, 1],
+      ["param4", "float", 12, 1],
+      ["x", "float", 16, 1],
+      ["y", "float", 20, 1],
+      ["z", "float", 24, 1],
+      ["seq", "uint16_t", 28, 1],
+      ["command", "uint16_t", 30, 1],
+      ["target_system", "uint8_t", 32, 1],
+      ["target_component", "uint8_t", 33, 1],
+      ["frame", "uint8_t", 34, 1],
+      ["current", "uint8_t", 35, 1],
+      ["autocontinue", "uint8_t", 36, 1],
+      ["mission_type", "uint8_t", 37, 1]
+    ]
+  },
+  "MISSION_REQUEST": {
+    "id": 40,
+    "crc": 230,
+    "length": 5,
+    "fields": [
+      ["seq", "uint16_t", 0, 1],
+      ["target_system", "uint8_t", 2, 1],
+      ["target_component", "uint8_t", 3, 1],
+      ["mission_type", "uint8_t", 4, 1]
+    ]
+  },
+  "MISSION_SET_CURRENT": {
+    "id": 41,
+    "crc": 28,
+    "length": 4,
+    "fields": [
+      ["seq", "uint16_t", 0, 1],
+      ["target_system", "uint8_t", 2, 1],
+      ["target_component", "uint8_t", 3, 1]
+    ]
+  },
+  "MISSION_CURRENT": {
+    "id": 42,
+    "crc": 28,
+    "length": 6,
+    "fields": [
+      ["seq", "uint16_t", 0, 1],
+      ["total", "uint16_t", 2, 1],
+      ["mission_state", "uint8_t", 4, 1],
+      ["mission_mode", "uint8_t", 5, 1]
+    ]
+  },
+  "MISSION_COUNT": {
+    "id": 44,
+    "crc": 221,
+    "length": 5,
+    "fields": [
+      ["count", "uint16_t", 0, 1],
+      ["target_system", "uint8_t", 2, 1],
+      ["target_component", "uint8_t", 3, 1],
+      ["mission_type", "uint8_t", 4, 1]
+    ]
+  },
+  "MISSION_ITEM_REACHED": {
+    "id": 46,
+    "crc": 11,
+    "length": 2,
+    "fields": [["seq", "uint16_t", 0, 1]]
+  },
+  "MISSION_ACK": {
+    "id": 47,
+    "crc": 153,
+    "length": 4,
+    "fields": [
+      ["target_system", "uint8_t", 0, 1],
+      ["target_component", "uint8_t", 1, 1],
+      ["type", "uint8_t", 2, 1],
+      ["mission_type", "uint8_t", 3, 1]
+    ]
+  },
+  "MISSION_REQUEST_INT": {
+    "id": 51,
+    "crc": 196,
+    "length": 5,
+    "fields": [
+      ["seq", "uint16_t", 0, 1],
+      ["target_system", "uint8_t", 2, 1],
+      ["target_component", "uint8_t", 3, 1],
+      ["mission_type", "uint8_t", 4, 1]
+    ]
+  },
+  "RC_CHANNELS_OVERRIDE": {
+    "id": 70,
+    "crc": 124,
+    "length": 38,
+    "fields": [
+      ["chan1_raw", "uint16_t", 0, 1],
+      ["chan2_raw", "uint16_t", 2, 1],
+      ["chan3_raw", "uint16_t", 4, 1],
+      ["chan4_raw", "uint16_t", 6, 1],
+      ["chan5_raw", "uint16_t", 8, 1],
+      ["chan6_raw", "uint16_t", 10, 1],
+      ["chan7_raw", "uint16_t", 12, 1],
+      ["chan8_raw", "uint16_t", 14, 1],
+      ["target_system", "uint8_t", 16, 1],
+      ["target_component", "uint8_t", 17, 1],
+      ["chan9_raw", "uint16_t", 18, 1],
+      ["chan10_raw", "uint16_t", 20, 1],
+      ["chan11_raw", "uint16_t", 22, 1],
+      ["chan12_raw", "uint16_t", 24, 1],
+      ["chan13_raw", "uint16_t", 26, 1],
+      ["chan14_raw", "uint16_t", 28, 1],
+      ["chan15_raw", "uint16_t", 30, 1],
+      ["chan16_raw", "uint16_t", 32, 1],
+      ["chan17_raw", "uint16_t", 34, 1],
+      ["chan18_raw", "uint16_t", 36, 1]
+    ]
+  },
+  "MISSION_ITEM_INT": {
+    "id": 73,
+    "crc": 38,
+    "length": 38,
+    "fields": [
+      ["param1", "float", 0, 1],
+      ["param2", "float", 4, 1],
+      ["param3", "float", 8, 1],
+      ["param4", "float", 12, 1],
+      ["x", "int32_t", 16, 1],
+      ["y", "int32_t", 20, 1],
+      ["z", "float", 24, 1],
+      ["seq", "uint16_t", 28, 1],
+      ["command", "uint16_t", 30, 1],
+      ["target_system", "uint8_t", 32, 1],
+      ["target_component", "uint8_t", 33, 1],
+      ["frame", "uint8_t", 34, 1],
+      ["current", "uint8_t", 35, 1],
+      ["autocontinue", "uint8_t", 36, 1],
+      ["mission_type", "uint8_t", 37, 1]
+    ]
+  },
+  "VFR_HUD": {
+    "id": 74,
+    "crc": 20,
+    "length": 20,
+    "fields": [
+      ["airspeed", "float", 0, 1],
+      ["groundspeed", "float", 4, 1],
+      ["alt", "float", 8, 1],
+      ["climb", "float", 12, 1],
+      ["heading", "int16_t", 16, 1],
+      ["throttle", "uint16_t", 18, 1]
+    ]
+  },
+  "COMMAND_LONG": {
+    "id": 76,
+    "crc": 152,
+    "length": 33,
+    "fields": [
+      ["param1", "float", 0, 1],
+      ["param2", "float", 4, 1],
+      ["param3", "float", 8, 1],
+      ["param4", "float", 12, 1],
+      ["param5", "float", 16, 1],
+      ["param6", "float", 20, 1],
+      ["param7", "float", 24, 1],
+      ["command", "uint16_t", 28, 1],
+      ["target_system", "uint8_t", 30, 1],
+      ["target_component", "uint8_t", 31, 1],
+      ["confirmation", "uint8_t", 32, 1]
+    ]
+  },
+  "COMMAND_ACK": {
+    "id": 77,
+    "crc": 143,
+    "length": 10,
+    "fields": [
+      ["command", "uint16_t", 0, 1],
+      ["result", "uint8_t", 2, 1],
+      ["progress", "uint8_t", 3, 1],
+      ["result_param2", "int32_t", 4, 1],
+      ["target_system", "uint8_t", 8, 1],
+      ["target_component", "uint8_t", 9, 1]
+    ]
+  },
+  "SIM_STATE": {
+    "id": 108,
+    "crc": 32,
+    "length": 92,
+    "fields": [
+      ["q1", "float", 0, 1],
+      ["q2", "float", 4, 1],
+      ["q3", "float", 8, 1],
+      ["q4", "float", 12, 1],
+      ["roll", "float", 16, 1],
+      ["pitch", "float", 20, 1],
+      ["yaw", "float", 24, 1],
+      ["xacc", "float", 28, 1],
+      ["yacc", "float", 32, 1],
+      ["zacc", "float", 36, 1],
+      ["xgyro", "float", 40, 1],
+      ["ygyro", "float", 44, 1],
+      ["zgyro", "float", 48, 1],
+      ["lat", "float", 52, 1],
+      ["lon", "float", 56, 1],
+      ["alt", "float", 60, 1],
+      ["std_dev_horz", "float", 64, 1],
+      ["std_dev_vert", "float", 68, 1],
+      ["vn", "float", 72, 1],
+      ["ve", "float", 76, 1],
+      ["vd", "float", 80, 1],
+      ["lat_int", "int32_t", 84, 1],
+      ["lon_int", "int32_t", 88, 1]
+    ]
+  },
+  "HOME_POSITION": {
+    "id": 242,
+    "crc": 104,
+    "length": 60,
+    "fields": [
+      ["latitude", "int32_t", 0, 1],
+      ["longitude", "int32_t", 4, 1],
+      ["altitude", "int32_t", 8, 1],
+      ["x", "float", 12, 1],
+      ["y", "float", 16, 1],
+      ["z", "float", 20, 1],
+      ["q", "float", 24, 4],
+      ["approach_x", "float", 40, 1],
+      ["approach_y", "float", 44, 1],
+      ["approach_z", "float", 48, 1],
+      ["time_usec", "uint64_t", 52, 1]
+    ]
+  },
+  "STATUSTEXT": {
+    "id": 253,
+    "crc": 83,
+    "length": 54,
+    "fields": [
+      ["severity", "uint8_t", 0, 1],
+      ["text", "char", 1, 50],
+      ["id", "uint16_t", 51, 1],
+      ["chunk_seq", "uint8_t", 53, 1]
+    ]
+  },
+  "HEARTBEAT": {
+    "id": 0,
+    "crc": 50,
+    "length": 9,
+    "fields": [
+      ["custom_mode", "uint32_t", 0, 1],
+      ["type", "uint8_t", 4, 1],
+      ["autopilot", "uint8_t", 5, 1],
+      ["base_mode", "uint8_t", 6, 1],
+      ["system_status", "uint8_t", 7, 1],
+      ["mavlink_version", "uint8_t", 8, 1]
+    ]
+  }
+}

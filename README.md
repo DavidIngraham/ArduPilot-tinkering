@@ -36,6 +36,11 @@ The original controller flew autonomous missions at Trout Lake after initial tes
 
 ## Run the viewer
 
+Fly the [interactive browser simulator](https://davidingraham.github.io/assets/microagu-viewer/simulator.html)
+with touch controls, MANUAL/FBWA/CRUISE modes and waypoint missions. It runs the
+native paraglider ArduPlane SITL model in WebAssembly. See the
+[simulator guide](viewer/SIMULATOR.md) for controls, mission formats and model limits.
+
 The packaged replays run locally with **Node.js 22 or newer**. No ArduPilot build is needed to view them.
 
 ```sh
