@@ -1,9 +1,12 @@
+from pathlib import Path
+from microagu_sim.compat import dynamics as _dynamics
+COMPAT_DATA = Path(_dynamics.__file__).parent
 from _sim_path import SIMULATION
 from pathlib import Path
 import sys,json,numpy as np
 from scipy.spatial.transform import Rotation as Rot
 R=Path(__file__).parent
-from simulator import Simulator
+from microagu_sim.compat.simulator import Simulator
 import argparse
 parser=argparse.ArgumentParser(description='Ideal-sensor mission-controller diagnostic, not flight firmware')
 parser.add_argument('--flight',choices=['hood_river','trout_lake'],default='trout_lake')
@@ -12,8 +15,8 @@ parser.add_argument('--feedforward',choices=['power_trim'],default='power_trim')
 parser.add_argument('--output',default='mission-demo.npz')
 args=parser.parse_args()
 from controllers import Turn,Climb
-from actuator import BrakeActuator
-from equilibrium import solve
+from microagu_sim.compat.actuator import BrakeActuator
+from microagu_sim.compat.equilibrium import solve
 trims=json.loads((R/'equilibrium-trim-results.json').read_text());results=[]
 for flight in [args.flight]:
  offset=12.151707100207533 if flight=='hood_river' else 0.;table=sorted([q for q in trims if q['flight']==flight and q['requested_climb']==0],key=lambda q:q['requested_turn']);tx=[q['requested_turn'] for q in table];fx=[(q['command'][2]-max(q['command'][1]-offset,0))/72 for q in table];straight=[next(q for q in trims if q['flight']==flight and q['requested_turn']==0 and q['requested_climb']==c) for c in [0,.5]];bias_slope=(straight[1]['command'][2]-straight[0]['command'][2])/(straight[1]['command'][0]-straight[0]['command'][0])/72;th0=straight[0]['command'][0]
@@ -21,7 +24,7 @@ for flight in [args.flight]:
   for ffmode in [args.feedforward]:
    sim=Simulator(flight)
    if case=='dynamic_roll':
-    from profiles import make_simulator
+    from microagu_sim.compat.profiles import make_simulator
     sim=make_simulator(flight,'dynamic_roll')
    if case=='rigging_low':
     if flight=='hood_river':sim.parameters['right_offset']=-.004
@@ -31,7 +34,7 @@ for flight in [args.flight]:
    if case=='low_damping':sim.parameters['joint_c_yaw']*=.25;sim.parameters['joint_c_pitch']*=.25
    if case=='rotor_low':sim.parameters['rotor_spin_inertia']*=.75
    if case=='rotor_high':sim.parameters['rotor_spin_inertia']*=1.25
-   d=np.load(SIMULATION/f'equilibrium-trim-{flight}-0.0-0.0.npz');root=solve(sim,d['state'],d['command']);assert abs(root['residual']).max()<1e-6,'Equilibrium not resolved';state=root['state'];rpm=root['rpm'];act=BrakeActuator(rate_mm_s=110.761279453 if case=='slow_servo' else 221.522558906,position_mm=root['command'][1:]);throttle=th0
+   d=np.load(COMPAT_DATA/f'equilibrium-trim-{flight}-0.0-0.0.npz');root=solve(sim,d['state'],d['command']);assert abs(root['residual']).max()<1e-6,'Equilibrium not resolved';state=root['state'];rpm=root['rpm'];act=BrakeActuator(rate_mm_s=110.761279453 if case=='slow_servo' else 221.522558906,position_mm=root['command'][1:]);throttle=th0
    def feedforward(rate):return float(np.interp(rate,tx,fx)+(bias_slope*(throttle-th0) if ffmode=='power_trim' else 0))
    turn=Turn(feedforward=None if ffmode=='fixed' else feedforward,p=.005,i=.0005,rdamp=.003,dff=0,filter_hz=1);climb=Climb();climb.last=th0;climb.integral=th0-.43;dt=.04;t=np.arange(6001)*dt;out=[];states=[];previous=np.arctan2(state[8],state[7]);airrate=0.
    for now in t:

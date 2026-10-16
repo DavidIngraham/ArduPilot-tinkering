@@ -17,7 +17,7 @@ The original controller flew autonomous missions at Trout Lake after initial tes
 | [cad/](cad/) | Native SolidWorks parts, assemblies and file manifest |
 | [docs/](docs/) | Build, flight tests, controller design and landing articles |
 | [viewer/](viewer/) | Three.js replay/live viewer, articulated models and export tools |
-| [simulation/](simulation/) | Reusable physics, adapters, trim solvers, runtime profiles and regression tests |
+| [simulation/](simulation/) | Rust physics, generated Python/TypeScript bindings, native JSON adapter and regression tests |
 | [research/](research/) | Study scripts, final plots, configurations and compact replay excerpts |
 | [tools/](tools/) | Analysis and archive utilities |
 | [provenance/](provenance/) | Source revisions, artifact manifests and historical implementation records |

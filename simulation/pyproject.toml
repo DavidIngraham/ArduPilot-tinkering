@@ -1,0 +1,14 @@
+[project]
+name = "microagu-simulation-dev"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = ["microagu-sim[analysis]"]
+[tool.uv]
+package = false
+[tool.uv.sources]
+microagu-sim = { path = "crates/sim-python" }
+[dependency-groups]
+dev = ["pytest>=8", "maturin>=1.9,<2", "ruff>=0.11"]
+[tool.pytest.ini_options]
+testpaths = ["tests", "."]
+norecursedirs = ["target", "legacy", "crates", ".venv"]

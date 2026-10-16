@@ -1,4 +1,4 @@
-"""Export the canonical Python model configuration and independent parity trace."""
+"""Export the selected configuration; preserve independent C++ parity fixtures."""
 import argparse
 import hashlib
 import json
@@ -12,9 +12,9 @@ parser.add_argument('firmware', type=Path)
 parser.add_argument('destination', type=Path)
 args = parser.parse_args()
 source = Path(__file__).resolve().parents[2] / 'simulation'
-sys.path.insert(0, str(source))
-from json_backend import Backend
-import dynamics
+
+from microagu_sim.compat.json_backend import Backend
+from microagu_sim.compat import dynamics
 
 backend = Backend(flight='trout_lake', profile='as_built', altitude=100, voltage=22.2)
 config = dict(
@@ -22,10 +22,10 @@ config = dict(
     model='9-DOF two-body modal research model',
     source_revision=subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip(),
     source_repository='https://github.com/DavidIngraham/micro-agu',
-    surface_sha256=hashlib.sha256((source / 'surface.cpp').read_bytes()).hexdigest(),
-    calibration=json.loads((source/'as-built-calibration.json').read_text()),
+    surface_sha256=hashlib.sha256((source / 'crates/sim-core/src/surface.rs').read_bytes()).hexdigest(),
+    calibration=json.loads((Path(dynamics.__file__).parent/'as-built-calibration.json').read_text()),
     launch_settings=dynamics.LAUNCH_SETTINGS.tolist(),
-    kernel_sha256=hashlib.sha256((source / 'dynamics.cpp').read_bytes()).hexdigest(),
+    kernel_sha256=hashlib.sha256((source / 'crates/sim-core/src/dynamics.rs').read_bytes()).hexdigest(),
     parameters=dynamics.params(backend.sim.parameters).tolist(),
     parameter_keys=dynamics.KEYS,
     mass=backend.sim.geometry['mass'], imu=backend.sim.geometry['imu'].tolist(),
@@ -37,29 +37,4 @@ config = dict(
 )
 args.destination.mkdir(parents=True, exist_ok=True)
 (args.destination/'highdof.json').write_text(json.dumps(config, indent=2, allow_nan=False)+'\n')
-# Exercise trim hold, release, asymmetric reversed servos and both throttle steps.
-samples = []
-for i in range(1200):
-    pwm = [1500, 1500, 800, 2400] + [1500]*12
-    if 200 <= i < 700:
-        pwm[0], pwm[2], pwm[3] = 1550, 960, 1900
-    if i >= 700:
-        pwm[0], pwm[2], pwm[3] = 1430, 1450, 2250
-    backend.released = i >= 20
-    sensors = json.loads(backend.respond(struct.pack('<HHI16H', 18458, 400, i, *pwm)))
-    if i % 25 == 0 or i == 1199:
-        samples.append(dict(frame=i, truth=backend.viewer_state(), sensors=sensors))
-fixture = Path(__file__).resolve().parent/'fixtures/highdof-parity.json'
-fixture.parent.mkdir(parents=True, exist_ok=True)
-fixture.write_text(json.dumps(dict(rate=400, steps=1200, samples=samples), allow_nan=False)+'\n')
-print(f'Exported {len(config["parameters"])} parameters; trim residual {config["trim_residual"]:.3g}; {len(samples)} parity checkpoints')
-backend=Backend(profile='as_built',ground=True)
-samples=[]
-for i in range(5000):
-    backend.released=i>=20
-    pwm=[1650 if i<1600 else 1000,1500,800,2400]+[1500]*12
-    sensors=json.loads(backend.respond(struct.pack('<HHI16H',18458,200,i,*pwm)))
-    if i%100==0 or i==4999:samples.append(dict(frame=i,truth=backend.viewer_state(),sensors=sensors))
-(fixture.parent/'surface-parity.json').write_text(json.dumps(dict(rate=200,steps=5000,samples=samples),allow_nan=False)+'\n')
-assert {s['truth']['launch_phase'] for s in samples}=={0,1,2,3}
-print('Exported native hold/inflation/free-flight/contact parity trace')
+print(f'Exported {len(config["parameters"])} Rust-compatible parameters; trim residual {config["trim_residual"]:.3g}')

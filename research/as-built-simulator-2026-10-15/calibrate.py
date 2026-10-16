@@ -13,15 +13,15 @@ import sys
 import numpy as np
 
 ROOT=Path(__file__).resolve().parents[2]/'simulation'
-sys.path.insert(0,str(ROOT))
 HIST=ROOT.parent/'research/rigging-refinement-2026-10-15'
 # Reuse the published observation/initialization method, with the migrated kernel.
-import profiles, dynamics, routing
+from microagu_sim.compat import profiles, dynamics, routing
+DATA = Path(dynamics.__file__).parent
 spec=importlib.util.spec_from_file_location('study',HIST/'study.py')
 study=importlib.util.module_from_spec(spec);sys.modules['study']=study;spec.loader.exec_module(study)
 def migrated_model(flight,variant='legacy',tuning=(1.,1.,1.),height=.06,substeps=32):
     sim=profiles.make_simulator(flight,substeps=substeps)
-    trim=dict(np.load(ROOT/f'equilibrium-trim-{flight}-0.0-0.0.npz'))
+    trim=dict(np.load(DATA/f'equilibrium-trim-{flight}-0.0-0.0.npz'))
     if variant=='routed':
         sim.parameters['joint_k_yaw']*=.066/.0743
         routing.configure(sim,trim['state'],ring_height=height)

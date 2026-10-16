@@ -1,6 +1,6 @@
 from _sim_path import SIMULATION
-from profiles import make_simulator
-from trim import find_trim
+from microagu_sim.compat.profiles import make_simulator
+from microagu_sim.compat.trim import find_trim
 import json,numpy as np
 s=make_simulator('trout_lake','mission')
 for turn in [-10.,10.]:

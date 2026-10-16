@@ -11,7 +11,7 @@ from pathlib import Path
 
 import numpy as np
 
-from firmware import checkout
+from microagu_sim.compat.firmware import checkout
 ROOT = checkout()
 
 

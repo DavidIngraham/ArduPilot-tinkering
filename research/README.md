@@ -12,6 +12,6 @@ interactive application and its build/recording tools are [viewer/](../viewer/RE
   results. Frozen source snapshots remain evidence for those published results.
 
 New experiments belong in a named or dated study folder. Import reusable physics
-from `simulation/`; do not make the simulator import a study. Promote selected
+from the installed `microagu_sim` Python package (`cd research && uv sync --locked`); do not make the simulator import a study. Promote selected
 runtime configuration artifacts explicitly, with their evidence and provenance,
 rather than running experiments as part of a browser or simulator build.

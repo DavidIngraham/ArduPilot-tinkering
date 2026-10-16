@@ -7,7 +7,7 @@ This appendix supports the four project chapters. Flight measurements, the initi
 ## Current simulator and source ownership
 
 [Fly the browser simulator](https://davidingraham.github.io/assets/microagu-viewer/simulator.html).
-The [reusable external 9-DOF kernel and Python adapters](../simulation/README.md)
+The [reusable Rust 9-DOF kernel and generated Python/TypeScript bindings](../simulation/README.md)
 live in `simulation/`; [study drivers, fitting and historical notes](../research/README.md)
 live separately in `research/`. ArduPilot retains the lightweight articulated built-in model,
 firmware controllers and generic JSON/WASM transport. Earlier commit-pinned links

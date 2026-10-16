@@ -5,7 +5,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation as R
 p=argparse.ArgumentParser();p.add_argument('--model-dir',type=Path,required=True);p.add_argument('--output',type=Path,required=True);p.add_argument('--raw',type=Path,required=True);p.add_argument('--body',choices=['canopy','payload','both'],default='both');a=p.parse_args()
 sys.path.insert(0,str(a.model_dir))
-from json_backend import Backend
+from microagu_sim.compat.json_backend import Backend
 out={'kind':'Open-loop relative deflection releases; fixed trim actuators; no flight controller','amplitudes_deg':[3,6,9,12,15],'cases':[]}
 if a.body!='both' and a.output.exists():
  out=json.loads(a.output.read_text());out['cases']=[c for c in out['cases'] if c.get('body','canopy')!=a.body]

@@ -9,7 +9,7 @@ p.add_argument('--model-dir',type=Path,required=True)
 p.add_argument('--output',type=Path,required=True)
 p.add_argument('--turbulence',action='store_true')
 a=p.parse_args();sys.path.insert(0,str(a.model_dir))
-from json_backend import Backend
+from microagu_sim.compat.json_backend import Backend
 from turbulence import Gusts, SETTINGS
 gusts=Gusts()
 b=Backend(flight='trout_lake',profile='mission',altitude=100,voltage=22.2)

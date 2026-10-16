@@ -15,24 +15,17 @@ preserves original hashes. Files moved with Git retain their history.
 | `analyze_*`, `plot_*`, `report_*`, `compare_longitudinal_study.py` | Analysis and report generation |
 | Historical Markdown, text and provenance JSON | Original methods, assumptions and results |
 
-The small `_sim_path.py` bootstrap resolves `../../simulation` relative to these
-files, so scripts run from any working directory. The dependency goes from studies
-to simulator. No simulator import or browser build needs this folder.
-Set `MICROAGU_SIM_ROOT` to select an alternative simulator checkout; the viewer's
-`--model-dir` recording tools forward that choice explicitly.
-Selected
-runtime presets and trim-reference states are read from `simulation/`; study-only
-presets and historical outputs stay here.
-
-From the microAGU repository:
+Studies import the installed `microagu_sim.compat` package. `_sim_path.py`
+locates repository parameter files only; it does not modify Python's import path.
+Select another simulator checkout with `uv`'s path dependency, then resync.
+`MICROAGU_SIM_ROOT` selects the associated firmware parameter files for recordings.
 
 ```sh
-python -m pip install -r research/sitl-studies/requirements.txt
-bash simulation/build.sh
+cd research
+uv sync --locked --group sitl
 export ARDUPILOT_ROOT=/path/to/ardupilot
-python research/sitl-studies/compare_autotest.py --help
-python research/sitl-studies/mission_demo.py --help
-python research/sitl-studies/landing_monte_carlo.py --help
+uv run --group sitl python sitl-studies/compare_autotest.py --help
+uv run python sitl-studies/mission_demo.py --help
 ```
 
 The ArduPilot checkout needs its normal autotest dependencies and a built SITL

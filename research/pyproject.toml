@@ -1,0 +1,11 @@
+[project]
+name = "microagu-research"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = ["microagu-sim[analysis]", "matplotlib>=3.7", "pymavlink>=2.4"]
+[dependency-groups]
+sitl = ["MAVProxy>=1.8", "pexpect>=4.9"]
+[tool.uv]
+package = false
+[tool.uv.sources]
+microagu-sim = { path = "../simulation/crates/sim-python" }

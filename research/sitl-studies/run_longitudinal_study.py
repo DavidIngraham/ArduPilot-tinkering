@@ -2,7 +2,7 @@
 from _sim_path import SIMULATION
 import os,json,subprocess,sys
 from pathlib import Path
-from firmware import checkout
+from microagu_sim.compat.firmware import checkout
 root=checkout()
 out=Path(os.environ.get('MICROAGU_STUDY_OUTPUT','pg-longitudinal-design')).resolve();out.mkdir(exist_ok=True)
 cases=json.loads(Path(sys.argv[1]).read_text())

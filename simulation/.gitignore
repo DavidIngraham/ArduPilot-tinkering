@@ -4,3 +4,5 @@ __pycache__/
 mission-demo.json
 verification.json
 !equilibrium-trim-*.npz
+target/
+.venv/

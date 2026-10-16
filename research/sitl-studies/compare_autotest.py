@@ -14,11 +14,11 @@ import json
 import shutil
 import numpy as np
 
-from firmware import checkout
+from microagu_sim.compat.firmware import checkout
 ROOT=checkout()
 sys.path.insert(0,str(ROOT/'Tools/autotest'))
 import arduplane
-from json_backend import Backend
+from microagu_sim.compat.json_backend import Backend
 from pymavlink import mavutil
 
 

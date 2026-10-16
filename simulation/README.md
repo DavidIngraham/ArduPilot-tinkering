@@ -1,80 +1,137 @@
-# External MicroAGU simulator
+# MicroAGU simulator
 
-This directory is the reusable simulator: full 9-DOF two-body physics, Python JSON
-adapter, actuator/sensor models, trim solvers, named profiles and runtime data.
-Experiment drivers, controller candidates, plotting and historical notes live in
-[research/sitl-studies](../research/sitl-studies/README.md); the as-built fitting
-script lives with [its dated results](../research/as-built-simulator-2026-10-15/README.md).
-The runtime never imports experiment code. It was migrated
-from ArduPilot commit `94aa4afc8ba8e963b329d92781c3020a4caa3fc3`;
-[the migration manifest](../provenance/simulator-migration.json) records original
-file hashes. Dated studies and [historical instructions](../research/sitl-studies/HISTORICAL-README.md)
-retain provenance; they are not the current build instructions.
+The authoritative runtime is Rust. The same `sim-core` implements full 9-DOF
+canopy–payload dynamics for native ArduPilot JSON, Python research, and browser
+WASM. ArduPilot retains its lightweight built-in model and flight controller;
+the high-fidelity external simulator is optional, like JSBSim for Plane.
 
-ArduPilot retains flight control, mixer/TECS/flare, native firmware tests,
-`SIM_Paraglider` (including limited pitch articulation), and generic JSON/WASM
-transport. The external model is optional, like JSBSim for Plane. It is not linked
-into the firmware. No observer or LQI controller has been moved into ArduPilot.
+## Layout and ownership
 
-Keep reusable mechanics, adapters and their regression tests here. Keep hypotheses,
-parameter sweeps, fitting scripts and reports under `research/`. A result needed by
-the runtime is explicitly promoted as a configuration artifact: the selected
-`as-built-calibration.json`, geometry, trim references and mission-controller
-preset remain here so the simulator and browser build need no research checkout.
-Named legacy profiles are retained as reusable API compatibility, not executable
-study drivers. `smoke_sitl.py` is a transport regression check, not a controller study.
+| Path | Responsibility |
+| --- | --- |
+| `crates/sim-core` | Named configuration, validation, forces, RK4, actuators, sensors, contact and assisted launch; no I/O |
+| `crates/sim-io` | Configuration schema, recording format and configuration hashes |
+| `crates/sim-sitl` | Standalone UDP JSON backend and PWM mapping |
+| `crates/sim-cli` | Configuration validation, schema/type generation and batch replay |
+| `crates/sim-python` | PyO3 extension, generated Python stubs, NumPy batch API and packaged SciPy compatibility helpers |
+| `crates/sim-wasm` | wasm-bindgen adapter and generated TypeScript API |
+| `data/presets` | Explicit selected configurations; no fitting at runtime |
+| `schemas` | Generated JSON Schema |
+| `tests`, crate-local `tests` | Contracts, regression and independent numerical parity |
+| `legacy` | Frozen C++ parity oracle; never linked into production |
+| `../research` | Experiments, fitting, controller studies and historical evidence |
 
-## Build and verify
+Root Python modules are temporary import/command shims for existing scripts.
+New code imports `microagu_sim`; historical SciPy utilities are explicitly under
+`microagu_sim.compat`. Their packaged data retains historical profiles and trim
+references. No runtime imports experiments or modifies `sys.path`.
 
-Ubuntu/WSL requires g++, Eigen3, Python with NumPy/SciPy and pymavlink for native
-ArduPilot integration. From this repository:
+## Development
+
+Install current stable Rust, Python >=3.10 and uv. Development was verified on
+Ubuntu/WSL with Rust 1.99.0 and Python 3.12. Other native platforms are not yet
+verified. C++/Eigen are needed only for the independent legacy comparison.
 
 ```sh
-bash simulation/build.sh
 cd simulation
-python verify.py
-python -m unittest test_json_backend test_surface -v
+uv sync --locked
+cargo test --locked --release --workspace
+cargo clippy --locked --workspace --all-targets -- -D warnings
+uv run pytest -q
+uv run python examples/replay.py
 ```
 
-`mission` retains the original model for reproducing old results. `as_built` uses
-132 mm riser spacing, routing and the [bounded existing-log fit](../research/as-built-simulator-2026-10-15/README.md).
-`dynamic_roll`, `routed_research` and `wide_research` remain explicitly named
-research alternatives. The 185 mm `wide_research` configuration is not deployed.
+`uv sync` builds the Python extension using maturin/Cargo. `Cargo.lock` pins Rust
+dependencies; `uv.lock` pins the development environment. Research has its own
+uv project and lockfile. Wheels contain the native library and compatibility
+resources and work outside this checkout.
 
-## Native ArduPilot loop
+## API and numerical contract
 
-Build the separate [firmware branch](https://github.com/DavidIngraham/ardupilot/tree/paraglider-browser-9dof)
-with `./waf configure --board sitl` and `./waf plane`. Set `ARDUPILOT_ROOT` to that
-checkout for scripts that run its autotest framework. Standalone physics and
-observer experiments do not need a firmware checkout.
+```python
+from microagu_sim import Simulator
+
+sim = Simulator(open("data/presets/as-built-trout-lake.json").read())
+state = sim.step([0.4, 0.0, 0.0], [0.0, 0.0, 0.0], 0.005)
+```
+
+Commands are throttle fraction and left/right effective brake pull in **metres**;
+wind is NED metres/second. State packs payload then canopy, each as position NED,
+body-to-world quaternion **xyzw**, velocity NED and angular velocity in world
+coordinates. Bodies use FRD axes. `step` advances exactly one requested interval;
+a failed step does not mutate state, rotor state, launch phase or time.
+
+`Kernel.replay_numpy` accepts contiguous float64 arrays and returns an owned
+Nx27 array (26 state values plus RPM), without Python objects per sample. Its
+legacy replay convention includes the initial state as row zero and ignores the
+last command. `Simulator.step` and the CLI replay instead return interval
+endpoints. Actuator/PWM conversion is explicit in the SITL adapters; do not apply
+it twice when using the low-level kernel.
+
+Rust validates finite values, dimensions, inertia and supported configuration
+versions. `sim-core::Parameters` is the authoritative coefficient definition;
+Python defaults, JSON Schema and TypeScript configuration types derive from it.
+Packed parameter order exists only for historical compatibility.
+
+## Native ArduPilot
 
 ```sh
-# First terminal, microAGU repository
-python simulation/json_backend.py --profile as_built --ground
-# Second terminal, ArduPilot checkout; replace the microAGU absolute path
+# In simulation/, first terminal:
+cargo run --release -p sim-sitl -- data/presets/as-built-trout-lake-sitl.json --ground
+# In a built ArduPilot checkout, second terminal:
 Tools/autotest/sim_vehicle.py -v ArduPlane -f paraglider --model JSON:127.0.0.1 \
-  --add-param-file /path/to/microAGU/simulation/sitl.parm --console
+  --add-param-file /path/to/micro-agu/simulation/sitl.parm --console
 ```
 
-Initialize and arm in MANUAL/FBWA, set launch throttle, then press Enter in the
-backend terminal. `--ground` enables reduced contact and assisted overhead
-inflation/hand release. Without it the legacy 100 m moving-trim initialization is
-retained. The native adapter speaks ArduPilot's existing UDP JSON interface.
-
-For native comparison scripts, for example:
+Initialize and arm, then press Enter in the backend terminal to release. Without
+`--ground`, the backend starts in translating airborne trim. `--release` skips
+the operator release gate; `--port` selects the localhost UDP port. Duplicate
+servo frames return the cached response without advancing time. Discontinuous
+frames are rejected. The compatibility Python adapter remains available for
+historical recording/experiment hooks:
 
 ```sh
-export ARDUPILOT_ROOT=/path/to/ardupilot
-python research/sitl-studies/compare_autotest.py --help
+uv run python -m microagu_sim.compat.json_backend --profile as_built --ground
 ```
 
-The browser compiles `dynamics.cpp` and `surface.cpp` directly into a separate
-WASM module; [browser build, tests and deployment](../viewer/SIMULATOR.md).
-The browser adapter and native adapter preserve the same brake/propulsion model.
-Firmware uses simulated IMU/GPS measurements through its own AHRS/EKF; rendered
-body poses are simulation truth. Standalone observer/LQI harnesses are separate
-research experiments and do not imply ArduPilot was in their control loop.
+Firmware source: [paraglider-browser-9dof](https://github.com/DavidIngraham/ardupilot/tree/paraglider-browser-9dof).
+Firmware uses simulated measurements through its own AHRS/EKF; rendering uses
+truth. Standalone observer/LQI experiments remain separate from ArduPilot.
 
-Ground contact, scalar inflation and prescribed hand motion are development
-approximations. Existing logs do not identify inflation pressure, fabric shape,
-contact friction or launch timing. See the fit report for all assumptions.
+## Generated bindings and browser build
+
+```sh
+rustup target add wasm32-unknown-unknown
+cargo install wasm-bindgen-cli --version 0.2.114 --locked
+sh tools/generate.sh
+```
+
+This generates Python `.pyi` files from PyO3 declarations, JSON Schema and
+TypeScript configuration types from Rust definitions, and browser JS/WASM/`.d.ts`
+from wasm-bindgen. No handwritten foreign-function declarations or heap offsets
+are required. The wasm-bindgen CLI version must match Cargo.lock. CI checks
+generated declarations for drift. See [viewer build and deployment](../viewer/SIMULATOR.md).
+
+## Physics provenance and migration gates
+
+The port retains the as-built **132 mm** spacing, propeller tables, RK4 method,
+existing-log calibration and firmware tune. No physics retuning accompanied the
+language migration. The [calibration study](../research/as-built-simulator-2026-10-15/README.md)
+uses Hood River and Trout Lake logs only. The C++ extraction's original hashes
+remain in [the migration manifest](../provenance/simulator-migration.json).
+
+```sh
+sh legacy/build.sh
+uv run python tests/parity/compare_legacy.py
+cd ../viewer
+node --import tsx tools/test_highdof_wasm.ts
+node --import tsx tools/test_sitl_wasm.ts
+```
+
+Tests compare randomized derivatives, airborne trajectories and 5,000 launch /
+flight / contact steps against C++. Saved browser fixtures remain independent
+C++ reference traces and are not overwritten by the Rust configuration exporter.
+
+Ground contact, scalar inflation and prescribed hand motion remain development
+approximations. Existing logs do not identify cloth dynamics, inflation pressure,
+contact friction or launch timing. The model is not a validated training model.

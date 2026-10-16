@@ -7,9 +7,9 @@ from scipy.spatial.transform import Rotation as R
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
-from profiles import make_simulator
-from trim import find_trim
-from equilibrium import perturb,difference
+from microagu_sim.compat.profiles import make_simulator
+from microagu_sim.compat.trim import find_trim
+from microagu_sim.compat.equilibrium import perturb,difference
 p=argparse.ArgumentParser();p.add_argument('--output',type=Path,required=True);a=p.parse_args();a.output.mkdir(parents=True,exist_ok=True)
 sim=make_simulator('trout_lake','mission');sim.substeps=4
 trim=find_trim(sim);base=trim['state'];rpm=trim['rpm'];u=trim['command'];dt=.005

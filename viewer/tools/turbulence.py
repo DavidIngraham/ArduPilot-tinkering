@@ -41,7 +41,7 @@ def install_backend_wind(backend):
 
 def respond_with_wind(backend, packet, original, mean_wind=(0., 0., 0.), gusts_enabled=True):
     # Preserve retransmission behavior and do not create a second gust clock.
-    from json_backend import decode_packet
+    from microagu_sim.compat.json_backend import decode_packet
     rate, frame, _ = decode_packet(packet)
     if frame == backend.frame:
         return backend.last

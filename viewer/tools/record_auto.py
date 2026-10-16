@@ -23,7 +23,7 @@ args, forwarded = parser.parse_known_args()
 if forwarded[:1] == ['--']:
     forwarded = forwarded[1:]
 sys.path.insert(0, str(args.model_dir.resolve()))
-from json_backend import Backend
+from microagu_sim.compat.json_backend import Backend
 from turbulence import SETTINGS, respond_with_wind
 
 original = Backend.respond

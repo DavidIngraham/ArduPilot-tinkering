@@ -1,5 +1,6 @@
 import { Quaternion, Vector3 } from "three";
 import type { Frame } from "../state";
+import type { Kernel } from "../../public/wasm/sim_wasm";
 
 export interface PhysicsConfig {
   schema: string;
@@ -27,27 +28,14 @@ export class Physics {
   command: number[];
   private frame: number | null = null;
   private cached = "";
-  private y: number;
-  private u: number;
-  private p: number;
-  private wind: number;
-  private out: number;
-  private rpmOut: number;
   private windNED = [0, 0, 0];
-  private surfaceEnv = 0;
-  private surfaceSettings = 0;
+  private surfaceEnv: Float64Array | null = null;
   launchPhase = 2;
   inflation = 1;
   groundStart() {
     if (!this.config.launch_settings)
       throw Error("Launch configuration missing");
-    this.surfaceEnv = this.module._malloc(24);
-    this.surfaceSettings = this.module._malloc(48);
-    this.module.HEAPF64.set([0, 0, 0], this.surfaceEnv / 8);
-    this.module.HEAPF64.set(
-      this.config.launch_settings,
-      this.surfaceSettings / 8,
-    );
+    this.surfaceEnv = new Float64Array([0, 0, 0]);
     const dz = this.state[2] + this.config.launch_settings[0];
     this.state[2] -= dz;
     this.state[15] -= dz;
@@ -71,10 +59,9 @@ export class Physics {
       );
     const angle = (fromDegrees * Math.PI) / 180;
     this.windNED = [-speed * Math.cos(angle), -speed * Math.sin(angle), -up];
-    this.module.HEAPF64.set(this.windNED, this.wind / 8);
   }
   constructor(
-    private module: any,
+    private kernel: Kernel,
     readonly config: PhysicsConfig,
   ) {
     if (
@@ -87,34 +74,25 @@ export class Physics {
     this.rpm = config.rpm;
     this.command = config.command.slice();
     this.brakes = config.command.slice(1);
-    const alloc = (n: number) => module._malloc(n * 8);
-    this.y = alloc(26);
-    this.u = alloc(6);
-    this.p = alloc(70);
-    this.wind = alloc(3);
-    this.out = alloc(52);
-    this.rpmOut = alloc(2);
-    module.HEAPF64.set(config.parameters, this.p / 8);
-    module.HEAPF64.set([0, 0, 0], this.wind / 8);
   }
   static async load(base: string, config?: PhysicsConfig) {
-    const url = new URL("highdof.js", base).href;
-    const [{ default: create }, data] = await Promise.all([
-      import(/* @vite-ignore */ url),
-      config ??
-        fetch(new URL("highdof.json", base)).then((r) => {
-          if (!r.ok) throw Error("Could not load high-DOF configuration");
-          return r.json();
-        }),
+    const url = new URL("sim_wasm.js", base).href;
+    const [bindings, data] = await Promise.all([
+      import(/* @vite-ignore */ url) as Promise<typeof import("../../public/wasm/sim_wasm")>,
+      config ?? fetch(new URL("highdof.json", base)).then(r => {
+        if (!r.ok) throw Error("Could not load high-DOF configuration");
+        return r.json() as Promise<PhysicsConfig>;
+      }),
     ]);
-    return new Physics(
-      await create(
-        url.startsWith("file:")
-          ? {}
-          : { locateFile: (file: string) => new URL(file, base).href },
-      ),
-      data,
-    );
+    const wasmUrl = new URL("sim_wasm_bg.wasm", base);
+    if (url.startsWith("file:")) {
+      const nodeFs = "node:fs/promises";
+      const fs = await import(/* @vite-ignore */ nodeFs);
+      await bindings.default({ module_or_path: await fs.readFile(wasmUrl) });
+    } else {
+      await bindings.default({ module_or_path: wasmUrl });
+    }
+    return new Physics(new bindings.Kernel(new Float64Array(data.parameters), data.mass), data);
   }
   private observation() {
     const q = new Quaternion().fromArray(this.state, 3).normalize(),
@@ -182,56 +160,23 @@ export class Physics {
           return this.config.parameters[60] > 0 ? pull : Math.max(0, pull);
         }),
       ];
-      this.module.HEAPF64.set(this.state, this.y / 8);
-      this.module.HEAPF64.set([...input, ...input], this.u / 8);
-      let offset = 26;
-      let count: number;
+      const y = new Float64Array(this.state), wind = new Float64Array(this.windNED);
       if (this.surfaceEnv) {
-        if (this.module.HEAPF64[this.surfaceEnv / 8] === 0)
-          this.module.HEAPF64[this.surfaceEnv / 8] = 1;
-        count =
-          this.module._surface_step(
-            this.y,
-            this.u,
-            this.p,
-            this.config.mass,
-            this.wind,
-            this.config.voltage,
-            this.rpm,
-            dt,
-            this.surfaceSettings,
-            this.surfaceEnv,
-            this.out,
-            this.rpmOut,
-          ) * 2;
-        offset = 0;
-        this.launchPhase = this.module.HEAPF64[this.surfaceEnv / 8];
-        this.inflation = this.module.HEAPF64[this.surfaceEnv / 8 + 2];
-      } else
-        count = this.module._causal_replay(
-          this.y,
-          this.u,
-          2,
-          dt,
-          Math.max(1, Math.ceil(dt / 0.00125)),
-          this.p,
-          this.config.mass,
-          this.wind,
-          this.config.voltage,
-          this.rpm,
-          this.out,
-          this.rpmOut,
-        );
-      if (count !== 2)
-        throw Error("The 9-DOF physics diverged; reset the simulator.");
-      this.state = Array.from(
-        this.module.HEAPF64.subarray(
-          this.out / 8 + offset,
-          this.out / 8 + offset + 26,
-        ),
-      );
-      this.rpm =
-        this.module.HEAPF64[this.rpmOut / 8 + (this.surfaceEnv ? 0 : 1)];
+        if (this.surfaceEnv[0] === 0) this.surfaceEnv[0] = 1;
+        const result = this.kernel.surface_step(y, new Float64Array(input), wind,
+          this.config.voltage, this.rpm, dt, this.surfaceEnv,
+          new Float64Array(this.config.launch_settings!));
+        this.state = Array.from(result.subarray(0, 26));
+        this.rpm = result[26];
+        this.surfaceEnv = result.slice(27);
+        this.launchPhase = this.surfaceEnv[0];
+        this.inflation = this.surfaceEnv[2];
+      } else {
+        const result = this.kernel.replay(y, new Float64Array([...input, ...input]), wind,
+          this.config.voltage, this.rpm, dt, Math.max(1, Math.ceil(dt / 0.00125)), true);
+        this.state = Array.from(result.subarray(27, 53));
+        this.rpm = result[53];
+      }
       if (!this.state.every(Number.isFinite) || !Number.isFinite(this.rpm))
         throw Error("Non-finite physics state; reset the simulator.");
       if (!this.surfaceEnv && this.state[2] >= 0)

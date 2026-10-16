@@ -1,0 +1,411 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SimulationConfig",
+  "type": "object",
+  "required": [
+    "initial_rpm",
+    "initial_state",
+    "mass_kg",
+    "parameters",
+    "schema_version",
+    "substeps",
+    "voltage_v"
+  ],
+  "properties": {
+    "initial_rpm": {
+      "type": "number",
+      "format": "double"
+    },
+    "initial_state": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "double"
+      },
+      "maxItems": 26,
+      "minItems": 26
+    },
+    "mass_kg": {
+      "type": "number",
+      "format": "double"
+    },
+    "parameters": {
+      "$ref": "#/definitions/Parameters"
+    },
+    "schema_version": {
+      "type": "integer",
+      "format": "uint32",
+      "minimum": 0.0
+    },
+    "substeps": {
+      "type": "integer",
+      "format": "uint",
+      "minimum": 0.0
+    },
+    "voltage_v": {
+      "type": "number",
+      "format": "double"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "Parameters": {
+      "type": "object",
+      "required": [
+        "CD0",
+        "CDbrake",
+        "CL0",
+        "CLa",
+        "CLbrake",
+        "CYbeta",
+        "Clbeta",
+        "Cldelta",
+        "Clp",
+        "Cm0",
+        "Cma",
+        "Cmq",
+        "Cnbeta",
+        "Cndelta",
+        "Cnr",
+        "Ixx",
+        "Ixy",
+        "Ixz",
+        "Iyy",
+        "Iyz",
+        "Izz",
+        "S",
+        "added_Jx",
+        "added_Jy",
+        "added_Jz",
+        "added_mx",
+        "added_my",
+        "added_mz",
+        "added_z1",
+        "added_z2",
+        "b",
+        "brake_tilt_rad_per_m",
+        "c",
+        "canopy_half_arc",
+        "canopy_mass",
+        "cascade_x",
+        "geometry_yaw",
+        "guide_halfspacing",
+        "guide_x",
+        "hinge_x",
+        "hinge_y",
+        "hinge_z",
+        "joint_c_pitch",
+        "joint_c_roll",
+        "joint_c_yaw",
+        "joint_k_pitch",
+        "joint_k_roll",
+        "joint_k_yaw",
+        "k_drag",
+        "payload_CDA",
+        "prop_torque",
+        "rho",
+        "ring_height",
+        "riser_halfspacing",
+        "rotor_spin_inertia",
+        "rotor_spin_sign",
+        "route_reference_left",
+        "route_reference_right",
+        "routing_enabled",
+        "spin_acceleration_scale",
+        "support_halfspacing",
+        "support_height",
+        "thrust_arm_z",
+        "thrust_max",
+        "thrust_x",
+        "thrust_y",
+        "thrust_z",
+        "yaw_canopy_halfspacing",
+        "yaw_payload_halfspacing",
+        "yaw_vertical_separation"
+      ],
+      "properties": {
+        "CD0": {
+          "type": "number",
+          "format": "double"
+        },
+        "CDbrake": {
+          "type": "number",
+          "format": "double"
+        },
+        "CL0": {
+          "type": "number",
+          "format": "double"
+        },
+        "CLa": {
+          "type": "number",
+          "format": "double"
+        },
+        "CLbrake": {
+          "type": "number",
+          "format": "double"
+        },
+        "CYbeta": {
+          "type": "number",
+          "format": "double"
+        },
+        "Clbeta": {
+          "type": "number",
+          "format": "double"
+        },
+        "Cldelta": {
+          "type": "number",
+          "format": "double"
+        },
+        "Clp": {
+          "type": "number",
+          "format": "double"
+        },
+        "Cm0": {
+          "type": "number",
+          "format": "double"
+        },
+        "Cma": {
+          "type": "number",
+          "format": "double"
+        },
+        "Cmq": {
+          "type": "number",
+          "format": "double"
+        },
+        "Cnbeta": {
+          "type": "number",
+          "format": "double"
+        },
+        "Cndelta": {
+          "type": "number",
+          "format": "double"
+        },
+        "Cnr": {
+          "type": "number",
+          "format": "double"
+        },
+        "Ixx": {
+          "type": "number",
+          "format": "double"
+        },
+        "Ixy": {
+          "type": "number",
+          "format": "double"
+        },
+        "Ixz": {
+          "type": "number",
+          "format": "double"
+        },
+        "Iyy": {
+          "type": "number",
+          "format": "double"
+        },
+        "Iyz": {
+          "type": "number",
+          "format": "double"
+        },
+        "Izz": {
+          "type": "number",
+          "format": "double"
+        },
+        "S": {
+          "type": "number",
+          "format": "double"
+        },
+        "added_Jx": {
+          "type": "number",
+          "format": "double"
+        },
+        "added_Jy": {
+          "type": "number",
+          "format": "double"
+        },
+        "added_Jz": {
+          "type": "number",
+          "format": "double"
+        },
+        "added_mx": {
+          "type": "number",
+          "format": "double"
+        },
+        "added_my": {
+          "type": "number",
+          "format": "double"
+        },
+        "added_mz": {
+          "type": "number",
+          "format": "double"
+        },
+        "added_z1": {
+          "type": "number",
+          "format": "double"
+        },
+        "added_z2": {
+          "type": "number",
+          "format": "double"
+        },
+        "b": {
+          "type": "number",
+          "format": "double"
+        },
+        "brake_tilt_rad_per_m": {
+          "type": "number",
+          "format": "double"
+        },
+        "c": {
+          "type": "number",
+          "format": "double"
+        },
+        "canopy_half_arc": {
+          "type": "number",
+          "format": "double"
+        },
+        "canopy_mass": {
+          "type": "number",
+          "format": "double"
+        },
+        "cascade_x": {
+          "type": "number",
+          "format": "double"
+        },
+        "geometry_yaw": {
+          "type": "number",
+          "format": "double"
+        },
+        "guide_halfspacing": {
+          "type": "number",
+          "format": "double"
+        },
+        "guide_x": {
+          "type": "number",
+          "format": "double"
+        },
+        "hinge_x": {
+          "type": "number",
+          "format": "double"
+        },
+        "hinge_y": {
+          "type": "number",
+          "format": "double"
+        },
+        "hinge_z": {
+          "type": "number",
+          "format": "double"
+        },
+        "joint_c_pitch": {
+          "type": "number",
+          "format": "double"
+        },
+        "joint_c_roll": {
+          "type": "number",
+          "format": "double"
+        },
+        "joint_c_yaw": {
+          "type": "number",
+          "format": "double"
+        },
+        "joint_k_pitch": {
+          "type": "number",
+          "format": "double"
+        },
+        "joint_k_roll": {
+          "type": "number",
+          "format": "double"
+        },
+        "joint_k_yaw": {
+          "type": "number",
+          "format": "double"
+        },
+        "k_drag": {
+          "type": "number",
+          "format": "double"
+        },
+        "payload_CDA": {
+          "type": "number",
+          "format": "double"
+        },
+        "prop_torque": {
+          "type": "number",
+          "format": "double"
+        },
+        "rho": {
+          "type": "number",
+          "format": "double"
+        },
+        "ring_height": {
+          "type": "number",
+          "format": "double"
+        },
+        "riser_halfspacing": {
+          "type": "number",
+          "format": "double"
+        },
+        "rotor_spin_inertia": {
+          "type": "number",
+          "format": "double"
+        },
+        "rotor_spin_sign": {
+          "type": "number",
+          "format": "double"
+        },
+        "route_reference_left": {
+          "type": "number",
+          "format": "double"
+        },
+        "route_reference_right": {
+          "type": "number",
+          "format": "double"
+        },
+        "routing_enabled": {
+          "type": "number",
+          "format": "double"
+        },
+        "spin_acceleration_scale": {
+          "type": "number",
+          "format": "double"
+        },
+        "support_halfspacing": {
+          "type": "number",
+          "format": "double"
+        },
+        "support_height": {
+          "type": "number",
+          "format": "double"
+        },
+        "thrust_arm_z": {
+          "type": "number",
+          "format": "double"
+        },
+        "thrust_max": {
+          "type": "number",
+          "format": "double"
+        },
+        "thrust_x": {
+          "type": "number",
+          "format": "double"
+        },
+        "thrust_y": {
+          "type": "number",
+          "format": "double"
+        },
+        "thrust_z": {
+          "type": "number",
+          "format": "double"
+        },
+        "yaw_canopy_halfspacing": {
+          "type": "number",
+          "format": "double"
+        },
+        "yaw_payload_halfspacing": {
+          "type": "number",
+          "format": "double"
+        },
+        "yaw_vertical_separation": {
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

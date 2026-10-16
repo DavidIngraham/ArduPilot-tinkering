@@ -1,0 +1,20 @@
+[workspace]
+resolver = "2"
+members = ["crates/*"]
+default-members = ["crates/sim-core", "crates/sim-io", "crates/sim-cli", "crates/sim-sitl"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "GPL-3.0-or-later"
+
+[workspace.dependencies]
+sim-core = { path = "crates/sim-core" }
+sim-io = { path = "crates/sim-io" }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+nalgebra = "0.33"
+schemars = "0.8"
+
+[profile.release]
+lto = "thin"

@@ -23,3 +23,4 @@ data['physics_source']={'repository':physics['source_repository'],'revision':phy
                         'kernel_sha256':physics['kernel_sha256'],'surface_sha256':physics['surface_sha256']}
 out.write_text(json.dumps(data,indent=2)+'\n')
 PY
+python3 "$root/../simulation/tools/build_metadata.py"

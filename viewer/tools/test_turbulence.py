@@ -19,7 +19,7 @@ class TurbulenceTest(unittest.TestCase):
     @unittest.skipUnless(os.environ.get('PG_MODEL_DIR'), 'Set PG_MODEL_DIR for native adapter check')
     def test_native_wind_sensor_consistency_and_retransmission(self):
         sys.path.insert(0, os.environ['PG_MODEL_DIR'])
-        from json_backend import Backend
+        from microagu_sim.compat.json_backend import Backend
         b = Backend()
         b.released = True
         packet = lambda i: struct.pack('<HHI16H', 18458, 400, i, *([1450, 1500, 800, 2322] + [1500]*12))
@@ -37,7 +37,7 @@ class TurbulenceTest(unittest.TestCase):
     @unittest.skipUnless(os.environ.get('PG_MODEL_DIR'), 'Set PG_MODEL_DIR for native adapter check')
     def test_steady_wind_reaches_physics_and_sensors_without_gusts(self):
         sys.path.insert(0, os.environ['PG_MODEL_DIR'])
-        from json_backend import Backend
+        from microagu_sim.compat.json_backend import Backend
         b = Backend()
         b.released = True
         winds = []

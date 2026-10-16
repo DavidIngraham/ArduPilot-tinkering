@@ -44,7 +44,7 @@ The example ends in unlimited loiter rather than an uncommanded landing.
 
 Use **Wind** in the flight desk to choose speed (0–10 m/s), the bearing wind comes
 from (0° north, 90° east), and vertical air (−3 to +3 m/s, positive upward), then
-select **Apply wind**. These are uniform steady winds applied to the actual C++
+select **Apply wind**. These are uniform steady winds applied to the actual Rust
 dynamics and sensor output. Set speed and vertical air to zero for calm conditions.
 Wind is reset to calm on page reload; there is no gust/turbulence model in this UI.
 
@@ -54,8 +54,8 @@ sampled payload and smooths its offset; OrbitControls only controls the orbit vi
 
 ## Model and visual limits
 
-This version uses the **full 9-DOF canopy–payload research backend**. Its original
-Eigen/C++ dynamics kernel is compiled into `highdof.wasm`; ArduPlane runs in a
+This version uses the **full 9-DOF canopy–payload research backend**. Its Rust
+`sim-core` is compiled into `sim_wasm_bg.wasm`; ArduPlane runs in a
 separate WASM module using the fork's `JSON:wasm` lockstep transport. A dedicated
 worker exchanges servo frames and IMU/GPS sensor truth without UDP or a server.
 The adapter preserves the native brake rate limits, motor dynamics, IMU lever arm
@@ -76,14 +76,16 @@ The simulator is a development aid, not a validated flight-training model.
 
 The exact source revision and SHA-256 hashes are in `public/wasm/build.json`.
 Firmware source is public in the ArduPilot fork; the external physics source is
-in this repository's `simulation/` directory. Binaries and source
-are GPL-3.0-or-later. `public/wasm/COPYING.txt` accompanies the deployed build.
+in this repository's `simulation/` directory. Project binaries and source
+are GPL-3.0-or-later; Rust dependencies retain their own licenses. `public/wasm/COPYING.txt` accompanies the deployed build.
 
 ```sh
-# Node >=22; Emscripten 6.0.8 installed at ~/emsdk; Eigen 3.4 headers
+# Node >=22; Rust + wasm32-unknown-unknown; wasm-bindgen-cli 0.2.114
+# Emscripten 6.0.8 is needed only when rebuilding ArduPilot.
 # Checkout DavidIngraham/ardupilot branch paraglider-browser-9dof.
 # From microAGU: bash simulation/build.sh; then cd viewer.
-# Python needs numpy and scipy for the canonical trim/export and parity fixture.
+# Use simulation/.venv/bin/python (uv sync --locked) for configuration export.
+# Saved C++ parity fixtures are preserved independently.
 PYTHON=/path/to/python bash tools/build_highdof_wasm.sh /path/to/ardupilot-browser-9dof
 bash tools/build_sitl_wasm.sh /path/to/ardupilot-browser-9dof
 cp ../COPYING.txt public/wasm/COPYING.txt

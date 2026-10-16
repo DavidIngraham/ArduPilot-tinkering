@@ -12,8 +12,8 @@ p.add_argument('--raw', type=Path, required=True, help='Native closed-suite dire
 p.add_argument('--output', type=Path, required=True)
 a = p.parse_args()
 sys.path.insert(0, str(a.model_dir))
-from json_backend import Backend
-from actuator import BrakeActuator
+from microagu_sim.compat.json_backend import Backend
+from microagu_sim.compat.actuator import BrakeActuator
 rows = []
 for body in ['payload', 'canopy']:
     source = a.raw / f'mission-{body}-pitch-9deg/result.json'

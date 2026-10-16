@@ -27,7 +27,7 @@ sys.path.insert(0, str(a.model_dir.resolve()))
 os.environ['MICROAGU_SIM_ROOT']=str(a.model_dir.resolve())
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'research/sitl-studies'))
 import compare_autotest as harness
-from json_backend import Backend
+from microagu_sim.compat.json_backend import Backend
 os.environ['PG_PROFILE'] = a.profile
 os.environ['PG_CONTROLLER_CONFIG'] = str(a.model_dir / 'mission-controller-candidate.json')
 os.environ['PG_GAINS'] = 'original'

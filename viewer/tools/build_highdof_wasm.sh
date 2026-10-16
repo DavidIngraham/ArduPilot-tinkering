@@ -2,13 +2,6 @@
 set -euo pipefail
 firmware=${1:?Usage: build_highdof_wasm.sh /path/to/ardupilot-browser-9dof}
 root=$(cd "$(dirname "$0")/.." && pwd)
-source "${EMSDK_ROOT:-$HOME/emsdk}/emsdk_env.sh"
-source_dir="$root/../simulation"
-mkdir -p "$root/public/wasm"
-# The exact research kernel, including its propeller maps and RK4 integrator.
-em++ "$source_dir/dynamics.cpp" "$source_dir/surface.cpp" -O3 -std=c++17 -I"${EIGEN_INCLUDE:-/usr/include/eigen3}" \
-  -sMODULARIZE=1 -sEXPORT_ES6=1 -sALLOW_MEMORY_GROWTH=1 \
-  -sEXPORTED_FUNCTIONS='["_causal_replay","_surface_step","_malloc","_free"]' \
-  -sEXPORTED_RUNTIME_METHODS='["HEAPF64"]' \
-  -o "$root/public/wasm/highdof.js"
+sh "$root/../simulation/tools/build_wasm.sh"
 "${PYTHON:-python3}" "$root/tools/export_highdof.py" "$firmware" "$root/public/wasm"
+python3 "$root/../simulation/tools/build_metadata.py"
