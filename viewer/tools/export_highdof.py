@@ -3,9 +3,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-import struct
 import subprocess
-import sys
 
 parser = argparse.ArgumentParser()
 parser.add_argument('firmware', type=Path)
@@ -13,26 +11,28 @@ parser.add_argument('destination', type=Path)
 args = parser.parse_args()
 source = Path(__file__).resolve().parents[2] / 'simulation'
 
-from microagu_sim.compat.json_backend import Backend
-from microagu_sim.compat import dynamics
+from microagu_sim import parameter_keys
 
-backend = Backend(flight='trout_lake', profile='as_built', altitude=100, voltage=22.2)
+preset = json.loads((source/'data/presets/as-built-trout-lake-sitl.json').read_text())
+selected = preset['config']
+metadata = json.loads((source/'data/presets/as-built-trout-lake-metadata.json').read_text())
+keys = parameter_keys()
 config = dict(
     schema='microagu.physics.v1', flight='trout_lake', profile='as_built',
     model='9-DOF two-body modal research model',
     source_revision=subprocess.check_output(['git', '-C', str(source), 'rev-parse', 'HEAD'], text=True).strip(),
     source_repository='https://github.com/DavidIngraham/micro-agu',
     surface_sha256=hashlib.sha256((source / 'crates/sim-core/src/surface.rs').read_bytes()).hexdigest(),
-    calibration=json.loads((Path(dynamics.__file__).parent/'as-built-calibration.json').read_text()),
-    launch_settings=dynamics.LAUNCH_SETTINGS.tolist(),
+    calibration=metadata['calibration'],
+    launch_settings=metadata['launch_settings'],
     kernel_sha256=hashlib.sha256((source / 'crates/sim-core/src/dynamics.rs').read_bytes()).hexdigest(),
-    parameters=dynamics.params(backend.sim.parameters).tolist(),
-    parameter_keys=dynamics.KEYS,
-    mass=backend.sim.geometry['mass'], imu=backend.sim.geometry['imu'].tolist(),
-    state=backend.state.tolist(), rpm=backend.rpm, command=backend.command.tolist(),
-    voltage=backend.voltage, brake_rate_mm_s=backend.actuator.rate,
-    brake_offsets_m=[backend.sim.parameters['left_offset'], backend.sim.parameters['right_offset']],
-    trim_residual=backend.trim['equilibrium_residual_max'],
+    parameters=[selected['parameters'][key] for key in keys],
+    parameter_keys=keys,
+    mass=selected['mass_kg'], imu=preset['imu_offset_m'],
+    state=selected['initial_state'], rpm=selected['initial_rpm'], command=preset['trim_command'],
+    voltage=selected['voltage_v'], brake_rate_mm_s=preset['brake_rate_mm_s'],
+    brake_offsets_m=preset['brake_offsets_m'],
+    trim_residual=metadata['trim_residual'],
     defaults=(source/'sitl.parm').read_text()+'\n'+(source/'mission-controller-candidate.parm').read_text(),
 )
 args.destination.mkdir(parents=True, exist_ok=True)
