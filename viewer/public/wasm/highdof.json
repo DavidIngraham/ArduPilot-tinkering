@@ -1,9 +1,69 @@
 {
   "schema": "microagu.physics.v1",
   "flight": "trout_lake",
-  "profile": "mission",
+  "profile": "as_built",
   "model": "9-DOF two-body modal research model",
-  "source_revision": "4f813eff521421b36a8b1e06fa14d6cd77e2eba7",
+  "source_revision": "556fd9053069c9de846a2dd0f9a39c7d85800d4e",
+  "source_repository": "https://github.com/DavidIngraham/micro-agu",
+  "surface_sha256": "4ab2ce508dcb7b777fac14e30384138f5044347ebbde6cf559759b27c46f2821",
+  "calibration": {
+    "schema": "microagu.as-built-fit.v1",
+    "spacing_m": 0.132,
+    "ring_height_m": 0.06,
+    "damping_scale": 3.0,
+    "brake_scale": 1.0,
+    "yaw_scale": 1.1257575757575757,
+    "ranked": [
+      {
+        "damping": 3.0,
+        "score": 0.926560130518893
+      },
+      {
+        "damping": 2.5,
+        "score": 0.9345271334084031
+      },
+      {
+        "damping": 2.0,
+        "score": 0.945974172618643
+      },
+      {
+        "damping": 1.5,
+        "score": 0.9642435154285044
+      },
+      {
+        "damping": 1.0,
+        "score": 0.9990608535266949
+      }
+    ],
+    "bound_hit": true,
+    "limitations": "Same two historical flights; canopy initial attitude inferred, not measured. Launch/contact settings are assumptions, not fitted.",
+    "check_mean": {
+      "legacy": {
+        "roll_rate": 13.461968564314738,
+        "pitch_rate": 19.402273044971853,
+        "yaw_rate": 26.462964445119383,
+        "bank": 5.734953551731089,
+        "course": 59.65207093401194,
+        "climb": 0.3390131828075685
+      },
+      "routed": {
+        "roll_rate": 13.23498989349761,
+        "pitch_rate": 17.471169507933595,
+        "yaw_rate": 23.714384927925902,
+        "bank": 5.673912515246542,
+        "course": 57.88455350906778,
+        "climb": 0.3394886028156386
+      }
+    }
+  },
+  "launch_settings": [
+    0.1,
+    1.2,
+    4.5,
+    3.0,
+    0.8,
+    0.5
+  ],
   "kernel_sha256": "1aeb42442d50f0f10fb07db0e718bee8475bbb6e6cabfb073a1390901d4160bc",
   "parameters": [
     1.225,
@@ -31,8 +91,8 @@
     0.0,
     0.43489340043192554,
     0.0010331850005169947,
-    0.015,
-    0.02,
+    0.045,
+    0.06,
     0.0075,
     -0.0125,
     0.0,
@@ -62,20 +122,20 @@
     4.2164374870231074e-05,
     1.0,
     0.0,
-    0.0743,
+    0.066,
     0.3235535694002066,
     0.85,
     1.0,
-    0.0,
+    1.0,
     0.066,
     0.0455,
     -0.0225,
     0.06,
-    0.3235535694,
+    0.3235535694002066,
     0.85,
     -0.1,
-    0.0,
-    0.0
+    0.9058767862136051,
+    0.9054302474791037
   ],
   "parameter_keys": [
     "rho",
@@ -159,35 +219,35 @@
     0.0,
     0.0,
     -100.0,
-    -0.021976096889047256,
-    0.06669043745812515,
-    0.0014692236305947379,
-    0.9975305900568116,
-    4.380544666750586,
-    -0.1428656713293415,
-    4.288302818821908e-19,
-    9.264223800503292e-14,
-    1.1484602376797364e-13,
-    2.3333733301346926e-14,
-    -0.16352733473717063,
-    -0.03769385270914981,
-    -100.93270104786752,
-    -0.019932221002448076,
-    0.09195265257319997,
-    -0.0028204121428114684,
-    0.9955598734008954,
-    4.380544666750008,
-    -0.14286567132885486,
-    8.718429943326974e-14,
-    5.24487677600542e-13,
-    6.688693635201082e-13,
-    -2.557445605244468e-13
+    -0.021976096888145523,
+    0.06669043745766945,
+    0.0014692236305232046,
+    0.997530590056862,
+    4.380544666746653,
+    -0.14286567132710534,
+    -3.213815882630839e-19,
+    -3.855438456733784e-13,
+    -6.607106926269097e-12,
+    2.050515932292859e-13,
+    -0.16352733473732486,
+    -0.037693852707335614,
+    -100.93270104786757,
+    -0.01993222100145863,
+    0.09195265257335047,
+    -0.002820412142567963,
+    0.9955598734009019,
+    4.380544666749551,
+    -0.14286567132728334,
+    -4.642987939756968e-13,
+    -1.5960384682263922e-13,
+    -2.695407157366712e-12,
+    3.512301154551847e-14
   ],
-  "rpm": 7915.70299726845,
+  "rpm": 7915.702997285762,
   "command": [
-    0.44589604562770047,
+    0.44589604562877244,
     0.0,
-    3.7471981120878133
+    3.747198112132692
   ],
   "voltage": 22.2,
   "brake_rate_mm_s": 221.522558906,
@@ -195,6 +255,6 @@
     0.0,
     -0.0
   ],
-  "trim_residual": 2.813896140016378e-11,
+  "trim_residual": 4.235799978742744e-11,
   "defaults": "# Load AFTER Tools/autotest/default_params/paraglider.parm. SITL research only.\n# Actual HR/TL channel assignments, ranges and reversal.\nSERVO1_FUNCTION 70\nSERVO1_MIN 1000\nSERVO1_MAX 2000\nSERVO1_TRIM 1000\nSERVO1_REVERSED 0\nSERVO2_FUNCTION 0\nSERVO3_FUNCTION 190\nSERVO3_MIN 800\nSERVO3_MAX 2100\nSERVO3_TRIM 800\nSERVO3_REVERSED 0\nSERVO4_FUNCTION 191\nSERVO4_MIN 900\nSERVO4_MAX 2400\nSERVO4_TRIM 2400\nSERVO4_REVERSED 1\nPG_TURN_ENABLE 1\nPG_TURN_P 0.005\nPG_TURN_I 0.0005\nPG_TURN_RDAMP 0.003\nPG_TURN_D_FF 0\nPG_TURN_FILT 1\nPG_TURN_RMAX 20\n# Keep native constant FF; trim-table research is in mission_demo.py.\nPG_TURN_FF 0.051\nTECS_PTCH_DAMP 0\nTHR_MAX 60\nTRIM_THROTTLE 43\n# Voltage-only SITL monitor; JSON backend supplies the physics voltage.\n# No current/discharge model is provided by this research backend.\nBATT_MONITOR 3\nBATT_VOLT_PIN 13\nBATT_VOLT_MULT 10.1\n# Reference matches the existing 22.2 V throttle calibration, not full-charge 6S.\n# Compensation is clamped below 18 V and above 22.2 V; tested at 20.4/22.2 V.\nFWD_BAT_VOLT_MAX 22.2\nFWD_BAT_VOLT_MIN 18\nFWD_BAT_IDX 0\n\n# SITL research candidate. Load after paraglider.parm and sitl.parm.\n# Whole-guidance-loop mission and landing regression: 2026-10-13.\nNAVL1_PERIOD 10\nNAVL1_DAMPING 1.0\nPG_TURN_ENABLE 1\nPG_TURN_FF 0.009\nPG_TURN_P 0.005\nPG_TURN_I 0.002\nPG_TURN_IMAX 0.15\nPG_TURN_RMAX 25\nPG_TURN_ACCEL 40\nPG_TURN_FILT 1\nPG_TURN_TC 0.1\nPG_TURN_ASPD 5\nPG_TURN_RDAMP 0.003\nPG_TURN_D_FF 0\nTECS_PG_ENABLE 1\nTECS_PG_HR_TC 0.5\nTECS_PG_PR_FILT 1.5\nTECS_PG_PR_FILT2 1.5\nTECS_PG_PR_WASH 0\nTECS_PTCH_DAMP 0.1\nTECS_HDEM_TCONST 10\nTECS_CLMB_MAX 1\nTECS_SINK_MAX 2.5\nTECS_SINK_MIN 2.5\nTECS_TIME_CONST 5\nTECS_INTEG_GAIN 0.3\nTECS_VERT_ACC 3.5\nTHR_MAX 60\nTHR_MIN 0\nTHR_SLEWRATE 100\nTRIM_THROTTLE 45\n\n# Match the 22.2 V feedforward calibration; output compensation is native.\nFWD_BAT_VOLT_MAX 22.2\nFWD_BAT_VOLT_MIN 18\nFWD_BAT_IDX 0\n"
 }

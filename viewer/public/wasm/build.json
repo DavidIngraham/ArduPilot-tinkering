@@ -1,17 +1,23 @@
 {
   "repository": "https://github.com/DavidIngraham/ardupilot",
-  "revision": "4f813eff521421b36a8b1e06fa14d6cd77e2eba7",
-  "source": "https://github.com/DavidIngraham/ardupilot/tree/4f813eff521421b36a8b1e06fa14d6cd77e2eba7",
+  "revision": "9737a9c0f7dbf16bc338ad6e3322b3dbc6a90dde",
+  "source": "https://github.com/DavidIngraham/ardupilot/tree/9737a9c0f7dbf16bc338ad6e3322b3dbc6a90dde",
   "license": "GPL-3.0-or-later",
   "board": "wasm",
   "vehicle": "ArduPlane",
   "model": "JSON:wasm + full 9-DOF research kernel",
   "emscripten": "6.0.8",
   "sha256": {
-    "highdof.js": "ff319711fa775b6b933b90e7303c63c4ca0ab81d94e966f1913d1a380a871136",
-    "highdof.json": "53bdafd690584b0071f7da4a877f7a8abee5ae19a4bb27199e07c82138c0ead5",
-    "arduplane.wasm": "19a332f98295cc88c865a1f619e09d28390aceb6da1bc9868cdd232d28979fef",
+    "highdof.js": "ee0ed20c42d4f1e0587fa577a6ae6ce6fabb890bd567295a839b093d321c47f4",
+    "highdof.json": "53aafb2e94dc235fe181ac84a4824eab0b42b72ae9c1cdff89aceadbdccdedf2",
+    "arduplane.wasm": "021029da5d95132b8287aef7e79d0f22939696a2c311f61d8954c956a8384205",
     "arduplane.js": "def1c4c428a32489ea25ad102280727f14b6bb8e1e11f3e840e5793766e6d50b",
-    "highdof.wasm": "2d5e2a7fb88bdc76cd97fac2b1ba0ab0a53f24a23da0613204f0ada351a5b795"
+    "highdof.wasm": "1dbb9a7e7d16f36b60939557ff0c2852514611b8dd5f324a97ea90513cac8116"
+  },
+  "physics_source": {
+    "repository": "https://github.com/DavidIngraham/micro-agu",
+    "revision": "556fd9053069c9de846a2dd0f9a39c7d85800d4e",
+    "kernel_sha256": "1aeb42442d50f0f10fb07db0e718bee8475bbb6e6cabfb073a1390901d4160bc",
+    "surface_sha256": "4ab2ce508dcb7b777fac14e30384138f5044347ebbde6cf559759b27c46f2821"
   }
 }

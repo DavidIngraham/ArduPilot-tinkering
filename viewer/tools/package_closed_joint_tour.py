@@ -9,7 +9,7 @@ out['cases']=[c for c in out['cases'] if c.get('loop','open')=='open']
 files=sorted(a.raw.glob('*/result.json'));assert len(files)==12,len(files)
 for path in files:
  d=json.loads(path.read_text())
- expected=json.loads((a.repo/'Tools/simulation/paraglider/mission-controller-candidate.json').read_text())['parameters']
+ expected=json.loads((Path(__file__).resolve().parents[2]/'simulation/mission-controller-candidate.json').read_text())['parameters']
  for key,value in expected.items():assert np.isclose(d['parameters'][key],value,rtol=1e-6,atol=1e-8),(key,d['parameters'][key],value)
  paired=d['traces'];assert paired['open'][0]['state']==paired['closed'][0]['state']
  assert d['mode']=='AUTO' and d['settle_s']==100

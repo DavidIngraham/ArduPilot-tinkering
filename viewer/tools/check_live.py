@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Exercise actual backend CLI -> UDP bridge -> WebSocket with lockstep packets.
 
-Run with --model-dir /path/to/ardupilot/Tools/simulation/paraglider.
+Run with --model-dir /path/to/micro-agu/simulation.
 Uses isolated ephemeral ports and temporary recordings; does not run autopilot.
 """
 import argparse
