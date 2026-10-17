@@ -50,6 +50,10 @@ the final source commits, not that revision alone, to identify the tested code.
 - Full Rust physics WASM smoke: 20 seconds continuous LQI, return to PG+TECS,
   MANUAL exclusion, CRUISE re-entry, an altitude command and explicit left/right
   steering checks; EKF remains in the loop.
+- Packaged-firmware handover continuity: maximum observed throttle-command
+  changes between truth frames were 0.8 percentage points entering LQI and 0.6
+  points returning to baseline (0.4 points on the later CRUISE return). The test
+  rejects a step above 8 percentage points during the switch window.
 - Browser test: selection and active-state feedback, reset, touch layouts and
   existing plots/trail/weather controls. Viewer unit suite: 40 tests passed.
 

@@ -13,6 +13,31 @@ sim.onError = (message) => {
   throw Error(message);
 };
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+let monitorHandover = false;
+let previousThrottle: number | undefined;
+let maxThrottleStep = 0;
+sim.onTruth = (frame) => {
+  if (monitorHandover && previousThrottle !== undefined) {
+    maxThrottleStep = Math.max(
+      maxThrottleStep,
+      Math.abs(frame.throttle! - previousThrottle),
+    );
+  }
+  previousThrottle = frame.throttle;
+};
+async function switchController(scheme: "baseline" | "lqi") {
+  maxThrottleStep = 0;
+  monitorHandover = true;
+  await sim.controller(scheme);
+  await until(() => sim.state.controllerActive === (scheme === "lqi"));
+  await delay(500);
+  monitorHandover = false;
+  assert.ok(
+    maxThrottleStep <= 0.08,
+    `${scheme} handover throttle step: ${maxThrottleStep}`,
+  );
+  console.log("HANDOVER", scheme, { maxThrottleStep });
+}
 async function until(condition: () => boolean, seconds = 15) {
   const deadline = performance.now() + seconds * 1000;
   while (!condition()) {
@@ -37,8 +62,7 @@ try {
   await sim.launch("AUTO");
   await until(() => sim.state.alt > 15, 60);
   assert.equal(sim.state.controllerActive, false);
-  await sim.controller("lqi");
-  await until(() => sim.state.controllerActive);
+  await switchController("lqi");
   const startAltitude = sim.state.alt;
   const samples: (typeof sim.state)[] = [];
   for (let i = 0; i < 200; i++) {
@@ -55,8 +79,7 @@ try {
     );
     assert.ok(sim.state.alt > startAltitude - 10, "LQI must retain altitude");
   }
-  await sim.controller("baseline");
-  await until(() => !sim.state.controllerActive);
+  await switchController("baseline");
   await delay(5000);
   assert.ok(
     sim.state.alt > startAltitude - 10,
@@ -89,8 +112,7 @@ try {
     sim.controls(0, 0, 0.5);
     await delay(2000);
   }
-  await sim.controller("baseline");
-  await until(() => !sim.state.controllerActive);
+  await switchController("baseline");
   console.log(
     "MIMO PASS",
     JSON.stringify({
