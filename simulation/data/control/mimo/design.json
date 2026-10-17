@@ -1,0 +1,19 @@
+{
+  "dt": 0.02,
+  "profile": "as_built",
+  "riser_spacing_m": 0.132,
+  "trim_residual": 2.650941764791499e-14,
+  "trim_command": [
+    0.45256198556273464,
+    0.1,
+    0.03584486422121804
+  ],
+  "trim_speed_mps": 4.215722868473598,
+  "controller_max_pole": 0.9996515221727966,
+  "observer_max_pole": 0.9892827077828902,
+  "zero_drift": 6.580296321418028e-15,
+  "generator_sha256": "26d06ded4bf3a0860a75e461e83fcd832563af6f7900ee6c0ffda2d87257168f",
+  "native_sha256": "e811adfbbd84733e13381d1a34d3294192df61d93544f10d0248df571c649d2f",
+  "calibration_sha256": "cf0679e30b3ea4d6a2413b834ebfd8867d5b48913c12983d0e418c0aee924409",
+  "note": "Local synthesis checks only; nonlinear and native EKF validation required."
+}

@@ -1,0 +1,5096 @@
+{
+  "scheme": "lqi",
+  "weather": {
+    "turbulence": 0.2,
+    "thermalStrength": 1.5,
+    "thermalRadius": 60,
+    "thermalNorth": 300,
+    "thermalEast": 0
+  },
+  "windSpeed": 1,
+  "windFrom": 90,
+  "duration": 100,
+  "metricsWindow": [
+    20,
+    100
+  ],
+  "metrics": {
+    "altitudeRms": 4.505652143978968,
+    "crossTrackRms": 0,
+    "pitchRms": 0.14793339848600198,
+    "finalMission": 1
+  },
+  "samples": [
+    {
+      "time": 0.20000000000010232,
+      "altitude": 27.593,
+      "targetAltitude": 28.8409999332428,
+      "crossTrack": 0,
+      "roll": -0.05617425963282585,
+      "pitch": 0.13554978370666504,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 0.40000000000020464,
+      "altitude": 27.73,
+      "targetAltitude": 29.052999985694886,
+      "crossTrack": 0,
+      "roll": -0.06915345788002014,
+      "pitch": 0.15306343138217926,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 0.600000000000307,
+      "altitude": 27.857,
+      "targetAltitude": 29.273000019073486,
+      "crossTrack": 0,
+      "roll": -0.06188133731484413,
+      "pitch": 0.19840599596500397,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 0.8000000000004093,
+      "altitude": 27.981,
+      "targetAltitude": 29.4899999332428,
+      "crossTrack": 0,
+      "roll": -0.057449378073215485,
+      "pitch": 0.21472768485546112,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 1.0000000000005116,
+      "altitude": 28.094,
+      "targetAltitude": 29.718999947547914,
+      "crossTrack": 0,
+      "roll": -0.054027654230594635,
+      "pitch": 0.20244038105010986,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 1.200000000000614,
+      "altitude": 28.188,
+      "targetAltitude": 29.92299997138977,
+      "crossTrack": 0,
+      "roll": -0.050021469593048096,
+      "pitch": 0.21864822506904602,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 1.4000000000007162,
+      "altitude": 28.268,
+      "targetAltitude": 30.12899997615814,
+      "crossTrack": 0,
+      "roll": -0.0465933158993721,
+      "pitch": 0.2075055092573166,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 1.6000000000008185,
+      "altitude": 28.331,
+      "targetAltitude": 30.322999980926514,
+      "crossTrack": 0,
+      "roll": -0.04800873622298241,
+      "pitch": 0.15631616115570068,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 1.8000000000009209,
+      "altitude": 28.366,
+      "targetAltitude": 30.520999837875365,
+      "crossTrack": 0,
+      "roll": -0.05129462853074074,
+      "pitch": 0.13213865458965302,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 2.000000000001023,
+      "altitude": 28.389,
+      "targetAltitude": 30.72099991416931,
+      "crossTrack": 0,
+      "roll": -0.05999455600976944,
+      "pitch": 0.09139352291822433,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 2.2000000000011255,
+      "altitude": 28.39,
+      "targetAltitude": 30.92199997138977,
+      "crossTrack": 0,
+      "roll": -0.06507217139005661,
+      "pitch": 0.10049682855606079,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 2.400000000001228,
+      "altitude": 28.378,
+      "targetAltitude": 31.135,
+      "crossTrack": 0,
+      "roll": -0.059498488903045654,
+      "pitch": 0.07769770920276642,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 2.60000000000133,
+      "altitude": 28.359,
+      "targetAltitude": 31.35800000953674,
+      "crossTrack": 0,
+      "roll": -0.05740824714303017,
+      "pitch": 0.10095367580652237,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 2.79500000000143,
+      "altitude": 28.352,
+      "targetAltitude": 31.57400002861023,
+      "crossTrack": 0,
+      "roll": -0.05633345618844032,
+      "pitch": 0.13079659640789032,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 3.0000000000015348,
+      "altitude": 28.372,
+      "targetAltitude": 31.807999809265137,
+      "crossTrack": 0,
+      "roll": -0.057448867708444595,
+      "pitch": 0.16000574827194214,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 3.200000000001637,
+      "altitude": 28.422,
+      "targetAltitude": 32.02399987602234,
+      "crossTrack": 0,
+      "roll": -0.06587383151054382,
+      "pitch": 0.18006807565689087,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 3.4000000000017394,
+      "altitude": 28.496,
+      "targetAltitude": 32.256999952316285,
+      "crossTrack": 0,
+      "roll": -0.07041235268115997,
+      "pitch": 0.1684916615486145,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 3.6000000000018417,
+      "altitude": 28.575,
+      "targetAltitude": 32.48499980926513,
+      "crossTrack": 0,
+      "roll": -0.075950488448143,
+      "pitch": 0.1710984706878662,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 3.8000000000019085,
+      "altitude": 28.659,
+      "targetAltitude": 32.70599967575073,
+      "crossTrack": 0,
+      "roll": -0.07730336487293243,
+      "pitch": 0.17453759908676147,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 4.000000000001727,
+      "altitude": 28.737,
+      "targetAltitude": 32.93100001907349,
+      "crossTrack": 0,
+      "roll": -0.07200371474027634,
+      "pitch": 0.16209131479263306,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 4.200000000001545,
+      "altitude": 28.804,
+      "targetAltitude": 33.15100011444092,
+      "crossTrack": 0,
+      "roll": -0.06382308155298233,
+      "pitch": 0.14101611077785492,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 4.395000000001367,
+      "altitude": 28.859,
+      "targetAltitude": 33.38399971389771,
+      "crossTrack": 0,
+      "roll": -0.07824552804231644,
+      "pitch": 0.11272397637367249,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 4.600000000001181,
+      "altitude": 28.9,
+      "targetAltitude": 33.61100001907349,
+      "crossTrack": 0,
+      "roll": -0.07986955344676971,
+      "pitch": 0.11095152795314789,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 4.795000000001004,
+      "altitude": 28.933,
+      "targetAltitude": 33.85700005722046,
+      "crossTrack": 0,
+      "roll": -0.079892598092556,
+      "pitch": 0.1322801262140274,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 4.995000000000822,
+      "altitude": 28.973,
+      "targetAltitude": 34.091999866485594,
+      "crossTrack": 0,
+      "roll": -0.07837124168872833,
+      "pitch": 0.13883087038993835,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 5.19500000000064,
+      "altitude": 29.032,
+      "targetAltitude": 34.33999967575073,
+      "crossTrack": 0,
+      "roll": -0.09056655317544937,
+      "pitch": 0.1581811159849167,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 5.395000000000458,
+      "altitude": 29.108,
+      "targetAltitude": 34.59799973297119,
+      "crossTrack": 0,
+      "roll": -0.09518593549728394,
+      "pitch": 0.1700328141450882,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 5.595000000000276,
+      "altitude": 29.21,
+      "targetAltitude": 34.834999828338624,
+      "crossTrack": 0,
+      "roll": -0.09250302612781525,
+      "pitch": 0.1676330268383026,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 5.795000000000094,
+      "altitude": 29.335,
+      "targetAltitude": 35.07999994277954,
+      "crossTrack": 0,
+      "roll": -0.086015984416008,
+      "pitch": 0.19488753378391266,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 5.994999999999912,
+      "altitude": 29.478,
+      "targetAltitude": 35.334999828338624,
+      "crossTrack": 0,
+      "roll": -0.08596432209014893,
+      "pitch": 0.18928498029708862,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 6.19499999999973,
+      "altitude": 29.623,
+      "targetAltitude": 35.570999980926516,
+      "crossTrack": 0,
+      "roll": -0.08858730643987656,
+      "pitch": 0.2008560597896576,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 6.394999999999548,
+      "altitude": 29.769,
+      "targetAltitude": 35.816999885559085,
+      "crossTrack": 0,
+      "roll": -0.09629053622484207,
+      "pitch": 0.16753946244716644,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 6.5949999999993665,
+      "altitude": 29.903,
+      "targetAltitude": 36.048000038146974,
+      "crossTrack": 0,
+      "roll": -0.09548556804656982,
+      "pitch": 0.17620417475700378,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 6.794999999999185,
+      "altitude": 30.028,
+      "targetAltitude": 36.28599969482422,
+      "crossTrack": 0,
+      "roll": -0.09196517616510391,
+      "pitch": 0.19658324122428894,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 6.994999999999003,
+      "altitude": 30.152,
+      "targetAltitude": 36.511000076293946,
+      "crossTrack": 0,
+      "roll": -0.10189832001924515,
+      "pitch": 0.18034487962722778,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 7.194999999998821,
+      "altitude": 30.267,
+      "targetAltitude": 36.74999996185303,
+      "crossTrack": 0,
+      "roll": -0.10478555411100388,
+      "pitch": 0.19197331368923187,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 7.394999999998639,
+      "altitude": 30.382,
+      "targetAltitude": 36.98399984741211,
+      "crossTrack": 0,
+      "roll": -0.10818582773208618,
+      "pitch": 0.18685373663902283,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 7.594999999998457,
+      "altitude": 30.497,
+      "targetAltitude": 37.20999998092651,
+      "crossTrack": 0,
+      "roll": -0.10767373442649841,
+      "pitch": 0.1884782910346985,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 7.794999999998275,
+      "altitude": 30.61,
+      "targetAltitude": 37.44299986648559,
+      "crossTrack": 0,
+      "roll": -0.11130370944738388,
+      "pitch": 0.18216972053050995,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 7.994999999998093,
+      "altitude": 30.717,
+      "targetAltitude": 37.666,
+      "crossTrack": 0,
+      "roll": -0.11340924352407455,
+      "pitch": 0.149395152926445,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 8.194999999997911,
+      "altitude": 30.808,
+      "targetAltitude": 37.893999637603756,
+      "crossTrack": 0,
+      "roll": -0.11949454993009567,
+      "pitch": 0.1259724497795105,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 8.39499999999773,
+      "altitude": 30.872,
+      "targetAltitude": 38.131999961853026,
+      "crossTrack": 0,
+      "roll": -0.11877396702766418,
+      "pitch": 0.13368919491767883,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 8.594999999997547,
+      "altitude": 30.916,
+      "targetAltitude": 38.36599979019165,
+      "crossTrack": 0,
+      "roll": -0.11403519660234451,
+      "pitch": 0.14802564680576324,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 8.794999999997366,
+      "altitude": 30.965,
+      "targetAltitude": 38.60799959945679,
+      "crossTrack": 0,
+      "roll": -0.11426207423210144,
+      "pitch": 0.1371869146823883,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 8.994999999997184,
+      "altitude": 31.025,
+      "targetAltitude": 38.84299990463256,
+      "crossTrack": 0,
+      "roll": -0.1157282218337059,
+      "pitch": 0.1639496386051178,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 9.194999999997002,
+      "altitude": 31.1,
+      "targetAltitude": 39.080999504089355,
+      "crossTrack": 0,
+      "roll": -0.1137741431593895,
+      "pitch": 0.17588619887828827,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 9.39499999999682,
+      "altitude": 31.193,
+      "targetAltitude": 39.32499935150146,
+      "crossTrack": 0,
+      "roll": -0.11544910073280334,
+      "pitch": 0.1723688393831253,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 9.594999999996638,
+      "altitude": 31.292,
+      "targetAltitude": 39.56199969482422,
+      "crossTrack": 0,
+      "roll": -0.11301180720329285,
+      "pitch": 0.17329256236553192,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 9.794999999996456,
+      "altitude": 31.401,
+      "targetAltitude": 39.806000038146976,
+      "crossTrack": 0,
+      "roll": -0.11151277273893356,
+      "pitch": 0.13289879262447357,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 9.994999999996274,
+      "altitude": 31.508,
+      "targetAltitude": 40.033999923706055,
+      "crossTrack": 0,
+      "roll": -0.10860108584165573,
+      "pitch": 0.14687111973762512,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 10.194999999996092,
+      "altitude": 31.621,
+      "targetAltitude": 40.27500003814697,
+      "crossTrack": 0,
+      "roll": -0.11173418909311295,
+      "pitch": 0.1466728001832962,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 10.39499999999591,
+      "altitude": 31.734,
+      "targetAltitude": 40.52699942779541,
+      "crossTrack": 0,
+      "roll": -0.10061126947402954,
+      "pitch": 0.19894717633724213,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 10.594999999995729,
+      "altitude": 31.856,
+      "targetAltitude": 40.76600026702881,
+      "crossTrack": 0,
+      "roll": -0.11321087926626205,
+      "pitch": 0.18912996351718903,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 10.794999999995547,
+      "altitude": 31.975,
+      "targetAltitude": 40.994999923706054,
+      "crossTrack": 0,
+      "roll": -0.10527981072664261,
+      "pitch": 0.24612794816493988,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 10.994999999995365,
+      "altitude": 32.105,
+      "targetAltitude": 41.2289995803833,
+      "crossTrack": 0,
+      "roll": -0.11203709244728088,
+      "pitch": 0.23262959718704224,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 11.194999999995183,
+      "altitude": 32.228,
+      "targetAltitude": 41.44899973297119,
+      "crossTrack": 0,
+      "roll": -0.10138598829507828,
+      "pitch": 0.2347421497106552,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 11.394999999995001,
+      "altitude": 32.331,
+      "targetAltitude": 41.65199988555908,
+      "crossTrack": 0,
+      "roll": -0.12036582082509995,
+      "pitch": 0.19868303835391998,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 11.594999999994819,
+      "altitude": 32.406,
+      "targetAltitude": 41.863999771118166,
+      "crossTrack": 0,
+      "roll": -0.12475808709859848,
+      "pitch": 0.14751169085502625,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 11.794999999994637,
+      "altitude": 32.446,
+      "targetAltitude": 42.067999389648435,
+      "crossTrack": 0,
+      "roll": -0.12180230766534805,
+      "pitch": 0.11412710696458817,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 11.99999999999445,
+      "altitude": 32.468,
+      "targetAltitude": 42.28799992370605,
+      "crossTrack": 0,
+      "roll": -0.11981608718633652,
+      "pitch": 0.07878382503986359,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 12.199999999994269,
+      "altitude": 32.489,
+      "targetAltitude": 42.49799950408936,
+      "crossTrack": 0,
+      "roll": -0.12054739892482758,
+      "pitch": 0.0696297362446785,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 12.399999999994087,
+      "altitude": 32.518,
+      "targetAltitude": 42.72099931335449,
+      "crossTrack": 0,
+      "roll": -0.1088690236210823,
+      "pitch": 0.11657306551933289,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 12.599999999993905,
+      "altitude": 32.583,
+      "targetAltitude": 42.95499984741211,
+      "crossTrack": 0,
+      "roll": -0.11529601365327835,
+      "pitch": 0.15443450212478638,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 12.799999999993723,
+      "altitude": 32.683,
+      "targetAltitude": 43.18899946594238,
+      "crossTrack": 0,
+      "roll": -0.11019054055213928,
+      "pitch": 0.17809301614761353,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 12.999999999993541,
+      "altitude": 32.802,
+      "targetAltitude": 43.411000076293945,
+      "crossTrack": 0,
+      "roll": -0.1120879054069519,
+      "pitch": 0.18527944386005402,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 13.19999999999336,
+      "altitude": 32.925,
+      "targetAltitude": 43.63399950408935,
+      "crossTrack": 0,
+      "roll": -0.11266984790563583,
+      "pitch": 0.20582795143127441,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 13.399999999993177,
+      "altitude": 33.059,
+      "targetAltitude": 43.85899988555908,
+      "crossTrack": 0,
+      "roll": -0.11598620563745499,
+      "pitch": 0.20176216959953308,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 13.599999999992995,
+      "altitude": 33.199,
+      "targetAltitude": 44.05999935150147,
+      "crossTrack": 0,
+      "roll": -0.12452124059200287,
+      "pitch": 0.19885867834091187,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 13.799999999992814,
+      "altitude": 33.332,
+      "targetAltitude": 44.27400022888184,
+      "crossTrack": 0,
+      "roll": -0.12278478592634201,
+      "pitch": 0.22239679098129272,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 13.999999999992632,
+      "altitude": 33.465,
+      "targetAltitude": 44.45999946594238,
+      "crossTrack": 0,
+      "roll": -0.12698538601398468,
+      "pitch": 0.1938958317041397,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 14.19999999999245,
+      "altitude": 33.584,
+      "targetAltitude": 44.66599938964844,
+      "crossTrack": 0,
+      "roll": -0.11372488737106323,
+      "pitch": 0.182928666472435,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 14.399999999992268,
+      "altitude": 33.684,
+      "targetAltitude": 44.858999313354495,
+      "crossTrack": 0,
+      "roll": -0.1195615902543068,
+      "pitch": 0.1579887419939041,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 14.599999999992086,
+      "altitude": 33.757,
+      "targetAltitude": 45.03299946594238,
+      "crossTrack": 0,
+      "roll": -0.12682510912418365,
+      "pitch": 0.14224298298358917,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 14.799999999991904,
+      "altitude": 33.809,
+      "targetAltitude": 45.2249995803833,
+      "crossTrack": 0,
+      "roll": -0.127241313457489,
+      "pitch": 0.13228675723075867,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 14.999999999991722,
+      "altitude": 33.853,
+      "targetAltitude": 45.421000152587894,
+      "crossTrack": 0,
+      "roll": -0.12556102871894836,
+      "pitch": 0.12899377942085266,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 15.19999999999154,
+      "altitude": 33.896,
+      "targetAltitude": 45.60499954223633,
+      "crossTrack": 0,
+      "roll": -0.11646100133657455,
+      "pitch": 0.13204312324523926,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 15.399999999991358,
+      "altitude": 33.936,
+      "targetAltitude": 45.80399938964844,
+      "crossTrack": 0,
+      "roll": -0.11530095338821411,
+      "pitch": 0.16118104755878448,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 15.599999999991176,
+      "altitude": 33.991,
+      "targetAltitude": 45.991999732971195,
+      "crossTrack": 0,
+      "roll": -0.11525576561689377,
+      "pitch": 0.17631979286670685,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 15.799999999990995,
+      "altitude": 34.06,
+      "targetAltitude": 46.17299961853028,
+      "crossTrack": 0,
+      "roll": -0.11274310946464539,
+      "pitch": 0.1649179458618164,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 15.999999999990813,
+      "altitude": 34.138,
+      "targetAltitude": 46.36899950408935,
+      "crossTrack": 0,
+      "roll": -0.11374101042747498,
+      "pitch": 0.14741206169128418,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 16.19999999999063,
+      "altitude": 34.226,
+      "targetAltitude": 46.54999988555908,
+      "crossTrack": 0,
+      "roll": -0.10800638049840927,
+      "pitch": 0.16019026935100555,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 16.39999999999045,
+      "altitude": 34.332,
+      "targetAltitude": 46.737000038146974,
+      "crossTrack": 0,
+      "roll": -0.11134760081768036,
+      "pitch": 0.1662636548280716,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 16.599999999990267,
+      "altitude": 34.45,
+      "targetAltitude": 46.918999732971194,
+      "crossTrack": 0,
+      "roll": -0.09652460366487503,
+      "pitch": 0.21769167482852936,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 16.799999999990085,
+      "altitude": 34.591,
+      "targetAltitude": 47.09699992370606,
+      "crossTrack": 0,
+      "roll": -0.09154228866100311,
+      "pitch": 0.2319926619529724,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 16.999999999989903,
+      "altitude": 34.747,
+      "targetAltitude": 47.26899942779541,
+      "crossTrack": 0,
+      "roll": -0.10137876123189926,
+      "pitch": 0.24846094846725464,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 17.19999999998972,
+      "altitude": 34.906,
+      "targetAltitude": 47.43599965667725,
+      "crossTrack": 0,
+      "roll": -0.10815189778804779,
+      "pitch": 0.24586832523345947,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 17.39999999998954,
+      "altitude": 35.055,
+      "targetAltitude": 47.59299965667724,
+      "crossTrack": 0,
+      "roll": -0.11959119886159897,
+      "pitch": 0.2324647307395935,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 17.599999999989357,
+      "altitude": 35.18,
+      "targetAltitude": 47.73999988555908,
+      "crossTrack": 0,
+      "roll": -0.1195538341999054,
+      "pitch": 0.21196937561035156,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 17.799999999989176,
+      "altitude": 35.289,
+      "targetAltitude": 47.886999618530275,
+      "crossTrack": 0,
+      "roll": -0.12995196878910065,
+      "pitch": 0.17828483879566193,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 17.999999999988994,
+      "altitude": 35.379,
+      "targetAltitude": 48.0259995803833,
+      "crossTrack": 0,
+      "roll": -0.12890709936618805,
+      "pitch": 0.1809898018836975,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 18.194999999988816,
+      "altitude": 35.46,
+      "targetAltitude": 48.151999542236325,
+      "crossTrack": 0,
+      "roll": -0.1350114494562149,
+      "pitch": 0.16922643780708313,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 18.394999999988634,
+      "altitude": 35.53,
+      "targetAltitude": 48.284999961853025,
+      "crossTrack": 0,
+      "roll": -0.13140423595905304,
+      "pitch": 0.15675677359104156,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 18.594999999988453,
+      "altitude": 35.591,
+      "targetAltitude": 48.39199992370605,
+      "crossTrack": 0,
+      "roll": -0.12154992669820786,
+      "pitch": 0.12432932108640671,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 18.79499999998827,
+      "altitude": 35.637,
+      "targetAltitude": 48.52499984741211,
+      "crossTrack": 0,
+      "roll": -0.11432453244924545,
+      "pitch": 0.1326947957277298,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 18.99499999998809,
+      "altitude": 35.677,
+      "targetAltitude": 48.63799954223633,
+      "crossTrack": 0,
+      "roll": -0.11619114875793457,
+      "pitch": 0.1377030462026596,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 19.194999999987907,
+      "altitude": 35.722,
+      "targetAltitude": 48.76599969482422,
+      "crossTrack": 0,
+      "roll": -0.12800849974155426,
+      "pitch": 0.13056714832782745,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 19.394999999987725,
+      "altitude": 35.77,
+      "targetAltitude": 48.87900011444092,
+      "crossTrack": 0,
+      "roll": -0.13023336231708527,
+      "pitch": 0.11809223145246506,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 19.594999999987543,
+      "altitude": 35.805,
+      "targetAltitude": 48.99800003814697,
+      "crossTrack": 0,
+      "roll": -0.12912243604660034,
+      "pitch": 0.13876760005950928,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 19.799999999987357,
+      "altitude": 35.845,
+      "targetAltitude": 49.104999732971194,
+      "crossTrack": 0,
+      "roll": -0.12315882742404938,
+      "pitch": 0.1158464178442955,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 19.999999999987175,
+      "altitude": 35.885,
+      "targetAltitude": 49.21499942779541,
+      "crossTrack": 0,
+      "roll": -0.11874647438526154,
+      "pitch": 0.1435142159461975,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 20.199999999986993,
+      "altitude": 35.944,
+      "targetAltitude": 49.31899984741211,
+      "crossTrack": 0,
+      "roll": -0.11298152804374695,
+      "pitch": 0.17670191824436188,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 20.39999999998681,
+      "altitude": 36.036,
+      "targetAltitude": 49.41699935150147,
+      "crossTrack": 0,
+      "roll": -0.1158108040690422,
+      "pitch": 0.20058877766132355,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 20.59999999998663,
+      "altitude": 36.157,
+      "targetAltitude": 49.51300007629395,
+      "crossTrack": 0,
+      "roll": -0.12751691043376923,
+      "pitch": 0.2282865196466446,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 20.799999999986447,
+      "altitude": 36.299,
+      "targetAltitude": 49.59499988555908,
+      "crossTrack": 0,
+      "roll": -0.12301264703273773,
+      "pitch": 0.24830201268196106,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 20.999999999986265,
+      "altitude": 36.455,
+      "targetAltitude": 49.67499923706055,
+      "crossTrack": 0,
+      "roll": -0.12121552973985672,
+      "pitch": 0.24127264320850372,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 21.199999999986083,
+      "altitude": 36.617,
+      "targetAltitude": 49.74700003814697,
+      "crossTrack": 0,
+      "roll": -0.12070135772228241,
+      "pitch": 0.23316840827465057,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 21.3999999999859,
+      "altitude": 36.77,
+      "targetAltitude": 49.802999656677244,
+      "crossTrack": 0,
+      "roll": -0.12082349509000778,
+      "pitch": 0.21776340901851654,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 21.59999999998572,
+      "altitude": 36.908,
+      "targetAltitude": 49.86399950408936,
+      "crossTrack": 0,
+      "roll": -0.13336896896362305,
+      "pitch": 0.15702785551548004,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 21.799999999985538,
+      "altitude": 37.001,
+      "targetAltitude": 49.928999313354495,
+      "crossTrack": 0,
+      "roll": -0.13523158431053162,
+      "pitch": 0.11616553366184235,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 21.999999999985356,
+      "altitude": 37.063,
+      "targetAltitude": 49.965999351501466,
+      "crossTrack": 0,
+      "roll": -0.14591090381145477,
+      "pitch": 0.07066167891025543,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 22.199999999985174,
+      "altitude": 37.092,
+      "targetAltitude": 50.01099935150147,
+      "crossTrack": 0,
+      "roll": -0.14890408515930176,
+      "pitch": 0.043913405388593674,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 22.399999999984992,
+      "altitude": 37.103,
+      "targetAltitude": 50.05800003814697,
+      "crossTrack": 0,
+      "roll": -0.1468171328306198,
+      "pitch": 0.06492853164672852,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 22.59999999998481,
+      "altitude": 37.121,
+      "targetAltitude": 50.08999954223633,
+      "crossTrack": 0,
+      "roll": -0.131807342171669,
+      "pitch": 0.1003776490688324,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 22.799999999984628,
+      "altitude": 37.171,
+      "targetAltitude": 50.11099931335449,
+      "crossTrack": 0,
+      "roll": -0.12354917079210281,
+      "pitch": 0.1379113644361496,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 22.999999999984446,
+      "altitude": 37.268,
+      "targetAltitude": 50.14199935150147,
+      "crossTrack": 0,
+      "roll": -0.11487887054681778,
+      "pitch": 0.20504693686962128,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 23.199999999984264,
+      "altitude": 37.418,
+      "targetAltitude": 50.177000152587894,
+      "crossTrack": 0,
+      "roll": -0.10749772936105728,
+      "pitch": 0.26657208800315857,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 23.399999999984082,
+      "altitude": 37.627,
+      "targetAltitude": 50.185000076293946,
+      "crossTrack": 0,
+      "roll": -0.11169277131557465,
+      "pitch": 0.29176104068756104,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 23.5999999999839,
+      "altitude": 37.873,
+      "targetAltitude": 50.19999980926514,
+      "crossTrack": 0,
+      "roll": -0.12275724858045578,
+      "pitch": 0.3112885653972626,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 23.79999999998372,
+      "altitude": 38.122,
+      "targetAltitude": 50.20700003814697,
+      "crossTrack": 0,
+      "roll": -0.13251958787441254,
+      "pitch": 0.3141064941883087,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 23.999999999983537,
+      "altitude": 38.361,
+      "targetAltitude": 50.19399980926514,
+      "crossTrack": 0,
+      "roll": -0.13077999651432037,
+      "pitch": 0.2667500078678131,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 24.199999999983355,
+      "altitude": 38.574,
+      "targetAltitude": 50.18100003814697,
+      "crossTrack": 0,
+      "roll": -0.1273084282875061,
+      "pitch": 0.24800632894039154,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 24.399999999983173,
+      "altitude": 38.76,
+      "targetAltitude": 50.16199977111816,
+      "crossTrack": 0,
+      "roll": -0.1400994062423706,
+      "pitch": 0.17973333597183228,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 24.59999999998299,
+      "altitude": 38.902,
+      "targetAltitude": 50.14599946594238,
+      "crossTrack": 0,
+      "roll": -0.1410479098558426,
+      "pitch": 0.14039340615272522,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 24.79999999998281,
+      "altitude": 39.013,
+      "targetAltitude": 50.109999618530274,
+      "crossTrack": 0,
+      "roll": -0.14086268842220306,
+      "pitch": 0.12345682829618454,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 24.999999999982627,
+      "altitude": 39.108,
+      "targetAltitude": 50.08199950408935,
+      "crossTrack": 0,
+      "roll": -0.14045393466949463,
+      "pitch": 0.12039214372634888,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 25.199999999982445,
+      "altitude": 39.191,
+      "targetAltitude": 50.039999389648436,
+      "crossTrack": 0,
+      "roll": -0.13416288793087006,
+      "pitch": 0.14416348934173584,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 25.399999999982263,
+      "altitude": 39.284,
+      "targetAltitude": 50.00599950408935,
+      "crossTrack": 0,
+      "roll": -0.12684696912765503,
+      "pitch": 0.12115845829248428,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 25.59999999998208,
+      "altitude": 39.376,
+      "targetAltitude": 49.950999885559085,
+      "crossTrack": 0,
+      "roll": -0.12428589165210724,
+      "pitch": 0.13226816058158875,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 25.7999999999819,
+      "altitude": 39.467,
+      "targetAltitude": 49.89099931335449,
+      "crossTrack": 0,
+      "roll": -0.12270865589380264,
+      "pitch": 0.13913632929325104,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 25.999999999981718,
+      "altitude": 39.569,
+      "targetAltitude": 49.83799969482422,
+      "crossTrack": 0,
+      "roll": -0.12166741490364075,
+      "pitch": 0.13557231426239014,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 26.199999999981536,
+      "altitude": 39.673,
+      "targetAltitude": 49.76999961853027,
+      "crossTrack": 0,
+      "roll": -0.11880791932344437,
+      "pitch": 0.15234827995300293,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 26.399999999981354,
+      "altitude": 39.779,
+      "targetAltitude": 49.71599977111816,
+      "crossTrack": 0,
+      "roll": -0.11359039694070816,
+      "pitch": 0.16824796795845032,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 26.594999999981177,
+      "altitude": 39.888,
+      "targetAltitude": 49.64199946594238,
+      "crossTrack": 0,
+      "roll": -0.1108742281794548,
+      "pitch": 0.2071634829044342,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 26.794999999980995,
+      "altitude": 40.002,
+      "targetAltitude": 49.56599988555908,
+      "crossTrack": 0,
+      "roll": -0.12779879570007324,
+      "pitch": 0.19412699341773987,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 26.994999999980813,
+      "altitude": 40.109,
+      "targetAltitude": 49.48599935150146,
+      "crossTrack": 0,
+      "roll": -0.13352178037166595,
+      "pitch": 0.20468135178089142,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 27.19499999998063,
+      "altitude": 40.212,
+      "targetAltitude": 49.40199977111816,
+      "crossTrack": 0,
+      "roll": -0.1268959790468216,
+      "pitch": 0.19111128151416779,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 27.39499999998045,
+      "altitude": 40.295,
+      "targetAltitude": 49.30700019073486,
+      "crossTrack": 0,
+      "roll": -0.12668326497077942,
+      "pitch": 0.16999451816082,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 27.594999999980267,
+      "altitude": 40.349,
+      "targetAltitude": 49.207000114440916,
+      "crossTrack": 0,
+      "roll": -0.12332045286893845,
+      "pitch": 0.12513306736946106,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 27.794999999980085,
+      "altitude": 40.375,
+      "targetAltitude": 49.10399977111816,
+      "crossTrack": 0,
+      "roll": -0.13213807344436646,
+      "pitch": 0.10895257443189621,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 27.994999999979903,
+      "altitude": 40.387,
+      "targetAltitude": 48.991999656677244,
+      "crossTrack": 0,
+      "roll": -0.13527096807956696,
+      "pitch": 0.1058925911784172,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 28.19499999997972,
+      "altitude": 40.398,
+      "targetAltitude": 48.870999542236326,
+      "crossTrack": 0,
+      "roll": -0.12255126982927322,
+      "pitch": 0.14164449274539948,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 28.39499999997954,
+      "altitude": 40.419,
+      "targetAltitude": 48.738999923706054,
+      "crossTrack": 0,
+      "roll": -0.11838988959789276,
+      "pitch": 0.1575573831796646,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 28.594999999979358,
+      "altitude": 40.455,
+      "targetAltitude": 48.60400007629394,
+      "crossTrack": 0,
+      "roll": -0.12082083523273468,
+      "pitch": 0.17274436354637146,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 28.794999999979176,
+      "altitude": 40.506,
+      "targetAltitude": 48.46000001907348,
+      "crossTrack": 0,
+      "roll": -0.12201667577028275,
+      "pitch": 0.19388507306575775,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 28.99999999997899,
+      "altitude": 40.57,
+      "targetAltitude": 48.324999961853024,
+      "crossTrack": 0,
+      "roll": -0.12277907133102417,
+      "pitch": 0.19940336048603058,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 29.194999999978812,
+      "altitude": 40.65,
+      "targetAltitude": 48.18899992370606,
+      "crossTrack": 0,
+      "roll": -0.12438435107469559,
+      "pitch": 0.18824565410614014,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 29.39499999997863,
+      "altitude": 40.746,
+      "targetAltitude": 48.036999675750735,
+      "crossTrack": 0,
+      "roll": -0.11072593182325363,
+      "pitch": 0.20764611661434174,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 29.594999999978448,
+      "altitude": 40.84,
+      "targetAltitude": 47.88399967575073,
+      "crossTrack": 0,
+      "roll": -0.10710033029317856,
+      "pitch": 0.2315310835838318,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 29.794999999978266,
+      "altitude": 40.934,
+      "targetAltitude": 47.734999904632566,
+      "crossTrack": 0,
+      "roll": -0.11820031702518463,
+      "pitch": 0.22592486441135406,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 29.994999999978084,
+      "altitude": 41.029,
+      "targetAltitude": 47.58199990463257,
+      "crossTrack": 0,
+      "roll": -0.12380608916282654,
+      "pitch": 0.21591679751873016,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 30.194999999977902,
+      "altitude": 41.125,
+      "targetAltitude": 47.43799965667725,
+      "crossTrack": 0,
+      "roll": -0.12249451875686646,
+      "pitch": 0.1717578023672104,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 30.39499999997772,
+      "altitude": 41.212,
+      "targetAltitude": 47.26999990463257,
+      "crossTrack": 0,
+      "roll": -0.11459895968437195,
+      "pitch": 0.17638298869132996,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 30.59499999997754,
+      "altitude": 41.304,
+      "targetAltitude": 47.115999656677246,
+      "crossTrack": 0,
+      "roll": -0.11643759161233902,
+      "pitch": 0.16816933453083038,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 30.794999999977357,
+      "altitude": 41.398,
+      "targetAltitude": 46.95099990463257,
+      "crossTrack": 0,
+      "roll": -0.12698371708393097,
+      "pitch": 0.1733359843492508,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 30.994999999977175,
+      "altitude": 41.493,
+      "targetAltitude": 46.795999904632566,
+      "crossTrack": 0,
+      "roll": -0.1327429562807083,
+      "pitch": 0.17510417103767395,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 31.194999999976993,
+      "altitude": 41.579,
+      "targetAltitude": 46.61799992370605,
+      "crossTrack": 0,
+      "roll": -0.12814216315746307,
+      "pitch": 0.16867415606975555,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 31.39499999997681,
+      "altitude": 41.661,
+      "targetAltitude": 46.44099969482422,
+      "crossTrack": 0,
+      "roll": -0.12655600905418396,
+      "pitch": 0.14853917062282562,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 31.59499999997663,
+      "altitude": 41.745,
+      "targetAltitude": 46.25299971389771,
+      "crossTrack": 0,
+      "roll": -0.1318081170320511,
+      "pitch": 0.1590714305639267,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 31.799999999976443,
+      "altitude": 41.835,
+      "targetAltitude": 46.06899973297119,
+      "crossTrack": 0,
+      "roll": -0.12689396739006042,
+      "pitch": 0.17737053334712982,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 31.99999999997626,
+      "altitude": 41.939,
+      "targetAltitude": 45.877000009536744,
+      "crossTrack": 0,
+      "roll": -0.13018915057182312,
+      "pitch": 0.18929533660411835,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 32.19999999997608,
+      "altitude": 42.039,
+      "targetAltitude": 45.67799981880188,
+      "crossTrack": 0,
+      "roll": -0.12713077664375305,
+      "pitch": 0.18359439074993134,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 32.3999999999759,
+      "altitude": 42.143,
+      "targetAltitude": 45.47199987602234,
+      "crossTrack": 0,
+      "roll": -0.12832722067832947,
+      "pitch": 0.18860800564289093,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 32.599999999975715,
+      "altitude": 42.247,
+      "targetAltitude": 45.2639999332428,
+      "crossTrack": 0,
+      "roll": -0.13978515565395355,
+      "pitch": 0.16566479206085205,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 32.79499999997554,
+      "altitude": 42.354,
+      "targetAltitude": 45.06099999046326,
+      "crossTrack": 0,
+      "roll": -0.13252043724060059,
+      "pitch": 0.16775497794151306,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 32.994999999975356,
+      "altitude": 42.454,
+      "targetAltitude": 44.84400005722046,
+      "crossTrack": 0,
+      "roll": -0.12923750281333923,
+      "pitch": 0.16237232089042664,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 33.194999999975174,
+      "altitude": 42.559,
+      "targetAltitude": 44.63499987602234,
+      "crossTrack": 0,
+      "roll": -0.13348644971847534,
+      "pitch": 0.18192178010940552,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 33.39499999997499,
+      "altitude": 42.662,
+      "targetAltitude": 44.400999961853024,
+      "crossTrack": 0,
+      "roll": -0.13163237273693085,
+      "pitch": 0.179166778922081,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 33.59499999997481,
+      "altitude": 42.765,
+      "targetAltitude": 44.18299990940094,
+      "crossTrack": 0,
+      "roll": -0.13577167689800262,
+      "pitch": 0.1613161861896515,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 33.79499999997463,
+      "altitude": 42.866,
+      "targetAltitude": 43.95499998569488,
+      "crossTrack": 0,
+      "roll": -0.13480383157730103,
+      "pitch": 0.17536835372447968,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 33.994999999974446,
+      "altitude": 42.967,
+      "targetAltitude": 43.716999952316286,
+      "crossTrack": 0,
+      "roll": -0.1292237937450409,
+      "pitch": 0.16493558883666992,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 34.194999999974264,
+      "altitude": 43.057,
+      "targetAltitude": 43.48399999880791,
+      "crossTrack": 0,
+      "roll": -0.1314060091972351,
+      "pitch": 0.16615256667137146,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 34.39499999997408,
+      "altitude": 43.136,
+      "targetAltitude": 43.23600000059604,
+      "crossTrack": 0,
+      "roll": -0.12873509526252747,
+      "pitch": 0.1823529303073883,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 34.5949999999739,
+      "altitude": 43.22,
+      "targetAltitude": 42.9980000077486,
+      "crossTrack": 0,
+      "roll": -0.13081258535385132,
+      "pitch": 0.16839973628520966,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 34.79499999997372,
+      "altitude": 43.293,
+      "targetAltitude": 42.757,
+      "crossTrack": 0,
+      "roll": -0.13145284354686737,
+      "pitch": 0.18988542258739471,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 34.99499999997354,
+      "altitude": 43.367,
+      "targetAltitude": 42.501000016689304,
+      "crossTrack": 0,
+      "roll": -0.12210254371166229,
+      "pitch": 0.14929085969924927,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 35.194999999973355,
+      "altitude": 43.426,
+      "targetAltitude": 42.259000014305116,
+      "crossTrack": 0,
+      "roll": -0.10608654469251633,
+      "pitch": 0.1564353108406067,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 35.39499999997317,
+      "altitude": 43.474,
+      "targetAltitude": 42.00000007152558,
+      "crossTrack": 0,
+      "roll": -0.10291920602321625,
+      "pitch": 0.16188153624534607,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 35.59499999997299,
+      "altitude": 43.511,
+      "targetAltitude": 41.75399999046326,
+      "crossTrack": 0,
+      "roll": -0.10180818289518356,
+      "pitch": 0.15407471358776093,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 35.79499999997281,
+      "altitude": 43.529,
+      "targetAltitude": 41.50400001907349,
+      "crossTrack": 0,
+      "roll": -0.1031060740351677,
+      "pitch": 0.13882020115852356,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 35.99499999997263,
+      "altitude": 43.524,
+      "targetAltitude": 41.25900001907349,
+      "crossTrack": 0,
+      "roll": -0.09867925196886063,
+      "pitch": 0.12428409606218338,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 36.194999999972445,
+      "altitude": 43.5,
+      "targetAltitude": 41.00300000953674,
+      "crossTrack": 0,
+      "roll": -0.09479162096977234,
+      "pitch": 0.09058263897895813,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 36.39499999997226,
+      "altitude": 43.459,
+      "targetAltitude": 40.733,
+      "crossTrack": 0,
+      "roll": -0.09366811066865921,
+      "pitch": 0.05809066817164421,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 36.59499999997208,
+      "altitude": 43.401,
+      "targetAltitude": 40.46999996185303,
+      "crossTrack": 0,
+      "roll": -0.091033935546875,
+      "pitch": 0.0443151593208313,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 36.7949999999719,
+      "altitude": 43.339,
+      "targetAltitude": 40.190000171661374,
+      "crossTrack": 0,
+      "roll": -0.0817098319530487,
+      "pitch": 0.06437220424413681,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 36.99499999997172,
+      "altitude": 43.291,
+      "targetAltitude": 39.90100015258789,
+      "crossTrack": 0,
+      "roll": -0.0756804421544075,
+      "pitch": 0.10648702085018158,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 37.194999999971536,
+      "altitude": 43.262,
+      "targetAltitude": 39.61400015258789,
+      "crossTrack": 0,
+      "roll": -0.06037919223308563,
+      "pitch": 0.15644684433937073,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 37.394999999971354,
+      "altitude": 43.258,
+      "targetAltitude": 39.32800017166138,
+      "crossTrack": 0,
+      "roll": -0.05610844865441322,
+      "pitch": 0.17542998492717743,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 37.59499999997117,
+      "altitude": 43.265,
+      "targetAltitude": 39.02999998092651,
+      "crossTrack": 0,
+      "roll": -0.03661749139428139,
+      "pitch": 0.22254711389541626,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 37.79499999997099,
+      "altitude": 43.29,
+      "targetAltitude": 38.755000019073485,
+      "crossTrack": 0,
+      "roll": -0.038746319711208344,
+      "pitch": 0.21473515033721924,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 37.99499999997081,
+      "altitude": 43.318,
+      "targetAltitude": 38.48500030517578,
+      "crossTrack": 0,
+      "roll": -0.0380345955491066,
+      "pitch": 0.20671531558036804,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 38.19499999997063,
+      "altitude": 43.336,
+      "targetAltitude": 52.42899942779541,
+      "crossTrack": 0,
+      "roll": -0.042096931487321854,
+      "pitch": 0.16382190585136414,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 38.394999999970445,
+      "altitude": 43.332,
+      "targetAltitude": 43.14800000238419,
+      "crossTrack": 0,
+      "roll": -0.04298849031329155,
+      "pitch": 0.11282586306333542,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 38.59499999997026,
+      "altitude": 43.291,
+      "targetAltitude": 42.94599999523163,
+      "crossTrack": 0,
+      "roll": -0.04055493697524071,
+      "pitch": 0.093890480697155,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 38.79499999997008,
+      "altitude": 43.229,
+      "targetAltitude": 42.752000009536744,
+      "crossTrack": 0,
+      "roll": -0.03817083314061165,
+      "pitch": 0.049740176647901535,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 38.9949999999699,
+      "altitude": 43.154,
+      "targetAltitude": 42.552000014305115,
+      "crossTrack": 0,
+      "roll": -0.04303053021430969,
+      "pitch": 0.038113679736852646,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 39.19499999996972,
+      "altitude": 43.075,
+      "targetAltitude": 42.34400001907348,
+      "crossTrack": 0,
+      "roll": -0.04556422680616379,
+      "pitch": 0.04686123877763748,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 39.394999999969535,
+      "altitude": 43.009,
+      "targetAltitude": 42.1310000333786,
+      "crossTrack": 0,
+      "roll": -0.04613490402698517,
+      "pitch": 0.053470317274332047,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 39.59499999996935,
+      "altitude": 42.96,
+      "targetAltitude": 41.9120000667572,
+      "crossTrack": 0,
+      "roll": -0.048033226281404495,
+      "pitch": 0.08595035970211029,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 39.79499999996917,
+      "altitude": 42.939,
+      "targetAltitude": 41.68500000953674,
+      "crossTrack": 0,
+      "roll": -0.04043126478791237,
+      "pitch": 0.13632841408252716,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 39.99499999996899,
+      "altitude": 42.953,
+      "targetAltitude": 41.45099999046326,
+      "crossTrack": 0,
+      "roll": -0.0403931699693203,
+      "pitch": 0.16261078417301178,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 40.19499999996881,
+      "altitude": 42.992,
+      "targetAltitude": 41.229999990463256,
+      "crossTrack": 0,
+      "roll": -0.045418355613946915,
+      "pitch": 0.19075120985507965,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 40.394999999968626,
+      "altitude": 43.048,
+      "targetAltitude": 41.018,
+      "crossTrack": 0,
+      "roll": -0.041054558008909225,
+      "pitch": 0.2333255261182785,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 40.594999999968444,
+      "altitude": 43.128,
+      "targetAltitude": 40.80700002861023,
+      "crossTrack": 0,
+      "roll": -0.04066670686006546,
+      "pitch": 0.24053388833999634,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 40.79499999996826,
+      "altitude": 43.218,
+      "targetAltitude": 40.591000076293945,
+      "crossTrack": 0,
+      "roll": -0.03331763669848442,
+      "pitch": 0.25762563943862915,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 40.989999999968084,
+      "altitude": 43.309,
+      "targetAltitude": 40.40600010490417,
+      "crossTrack": 0,
+      "roll": -0.03512025997042656,
+      "pitch": 0.23516151309013367,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 41.1899999999679,
+      "altitude": 43.373,
+      "targetAltitude": 40.226000114440915,
+      "crossTrack": 0,
+      "roll": -0.04083825647830963,
+      "pitch": 0.22847290337085724,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 41.38999999996772,
+      "altitude": 43.401,
+      "targetAltitude": 40.042000095367435,
+      "crossTrack": 0,
+      "roll": -0.04961148649454117,
+      "pitch": 0.17677649855613708,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 41.58999999996754,
+      "altitude": 43.381,
+      "targetAltitude": 39.87000002861023,
+      "crossTrack": 0,
+      "roll": -0.04915308579802513,
+      "pitch": 0.09739822149276733,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 41.78999999996736,
+      "altitude": 43.296,
+      "targetAltitude": 39.7050001335144,
+      "crossTrack": 0,
+      "roll": -0.050662267953157425,
+      "pitch": 0.06881826370954514,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 41.989999999967175,
+      "altitude": 43.162,
+      "targetAltitude": 39.5230002002716,
+      "crossTrack": 0,
+      "roll": -0.044607385993003845,
+      "pitch": 0.011030361987650394,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 42.19499999996699,
+      "altitude": 42.994,
+      "targetAltitude": 39.34199999046326,
+      "crossTrack": 0,
+      "roll": -0.038914043456315994,
+      "pitch": -0.023400140926241875,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 42.39499999996681,
+      "altitude": 42.799,
+      "targetAltitude": 39.15799999046326,
+      "crossTrack": 0,
+      "roll": -0.036473680287599564,
+      "pitch": 0.03243720158934593,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 42.594999999966625,
+      "altitude": 42.615,
+      "targetAltitude": 38.953,
+      "crossTrack": 0,
+      "roll": -0.03387739881873131,
+      "pitch": 0.051207344979047775,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 42.79499999996644,
+      "altitude": 42.454,
+      "targetAltitude": 38.75300002861023,
+      "crossTrack": 0,
+      "roll": -0.03724990785121918,
+      "pitch": 0.0806749165058136,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 42.99499999996626,
+      "altitude": 42.305,
+      "targetAltitude": 38.54700007629395,
+      "crossTrack": 0,
+      "roll": -0.028090588748455048,
+      "pitch": 0.09577328711748123,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 43.18999999996608,
+      "altitude": 42.173,
+      "targetAltitude": 38.336000143051145,
+      "crossTrack": 0,
+      "roll": -0.028331266716122627,
+      "pitch": 0.1189616471529007,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 43.3899999999659,
+      "altitude": 42.06,
+      "targetAltitude": 38.13399998092651,
+      "crossTrack": 0,
+      "roll": -0.02754015102982521,
+      "pitch": 0.14294485747814178,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 43.58999999996572,
+      "altitude": 41.965,
+      "targetAltitude": 37.920000324249266,
+      "crossTrack": 0,
+      "roll": -0.030965304002165794,
+      "pitch": 0.14183737337589264,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 43.78999999996554,
+      "altitude": 41.878,
+      "targetAltitude": 37.711999961853024,
+      "crossTrack": 0,
+      "roll": -0.03341734781861305,
+      "pitch": 0.11598054319620132,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 43.989999999965356,
+      "altitude": 41.79,
+      "targetAltitude": 37.51500030517578,
+      "crossTrack": 0,
+      "roll": -0.041243452578783035,
+      "pitch": 0.10714492946863174,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 44.189999999965174,
+      "altitude": 41.7,
+      "targetAltitude": 37.31400017166138,
+      "crossTrack": 0,
+      "roll": -0.046220265328884125,
+      "pitch": 0.13952195644378662,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 44.38999999996499,
+      "altitude": 41.622,
+      "targetAltitude": 37.11000028610229,
+      "crossTrack": 0,
+      "roll": -0.043677009642124176,
+      "pitch": 0.15150411427021027,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 44.58999999996481,
+      "altitude": 41.552,
+      "targetAltitude": 36.91699992370606,
+      "crossTrack": 0,
+      "roll": -0.04280727356672287,
+      "pitch": 0.14748811721801758,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 44.78999999996463,
+      "altitude": 41.477,
+      "targetAltitude": 36.715000286102295,
+      "crossTrack": 0,
+      "roll": -0.04287658631801605,
+      "pitch": 0.1477426141500473,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 44.989999999964446,
+      "altitude": 41.399,
+      "targetAltitude": 36.52800015258789,
+      "crossTrack": 0,
+      "roll": -0.03494832664728165,
+      "pitch": 0.13903886079788208,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 45.189999999964265,
+      "altitude": 41.323,
+      "targetAltitude": 47.98099988555908,
+      "crossTrack": 0,
+      "roll": -0.0328710600733757,
+      "pitch": 0.1367352455854416,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 45.38999999996408,
+      "altitude": 41.244,
+      "targetAltitude": 41.236000002980234,
+      "crossTrack": 0,
+      "roll": -0.030826758593320847,
+      "pitch": 0.11532201617956161,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 45.5899999999639,
+      "altitude": 41.144,
+      "targetAltitude": 41.09700000596047,
+      "crossTrack": 0,
+      "roll": -0.030165718868374825,
+      "pitch": 0.07073823362588882,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 45.78999999996372,
+      "altitude": 41.018,
+      "targetAltitude": 40.94599999940395,
+      "crossTrack": 0,
+      "roll": -0.0273768100887537,
+      "pitch": 0.02009144052863121,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 45.98999999996354,
+      "altitude": 40.862,
+      "targetAltitude": 40.7910000089407,
+      "crossTrack": 0,
+      "roll": -0.028312375769019127,
+      "pitch": 0.014896714128553867,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 46.189999999963355,
+      "altitude": 40.7,
+      "targetAltitude": 40.63200000894069,
+      "crossTrack": 0,
+      "roll": -0.03248482197523117,
+      "pitch": -0.0035402458161115646,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 46.38999999996317,
+      "altitude": 40.533,
+      "targetAltitude": 40.47599999940395,
+      "crossTrack": 0,
+      "roll": -0.03750557824969292,
+      "pitch": 0.02178182080388069,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 46.58999999996299,
+      "altitude": 40.381,
+      "targetAltitude": 40.29500000357628,
+      "crossTrack": 0,
+      "roll": -0.035467520356178284,
+      "pitch": 0.05854516476392746,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 46.78999999996281,
+      "altitude": 40.258,
+      "targetAltitude": 40.12600000238419,
+      "crossTrack": 0,
+      "roll": -0.036605529487133026,
+      "pitch": 0.1020193099975586,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 46.98999999996263,
+      "altitude": 40.168,
+      "targetAltitude": 39.94800000953674,
+      "crossTrack": 0,
+      "roll": -0.03675583377480507,
+      "pitch": 0.11571823060512543,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 47.189999999962446,
+      "altitude": 40.107,
+      "targetAltitude": 39.764999995231626,
+      "crossTrack": 0,
+      "roll": -0.03584613278508186,
+      "pitch": 0.13086169958114624,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 47.389999999962264,
+      "altitude": 40.063,
+      "targetAltitude": 39.584,
+      "crossTrack": 0,
+      "roll": -0.029829425737261772,
+      "pitch": 0.1513214111328125,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 47.58999999996208,
+      "altitude": 40.039,
+      "targetAltitude": 39.41800000476837,
+      "crossTrack": 0,
+      "roll": -0.020360203459858894,
+      "pitch": 0.16470696032047272,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 47.7899999999619,
+      "altitude": 40.03,
+      "targetAltitude": 39.23200004768371,
+      "crossTrack": 0,
+      "roll": -0.024022944271564484,
+      "pitch": 0.1590036302804947,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 47.98999999996172,
+      "altitude": 40.022,
+      "targetAltitude": 39.06700002145767,
+      "crossTrack": 0,
+      "roll": -0.0316578708589077,
+      "pitch": 0.1667400300502777,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 48.189999999961536,
+      "altitude": 40.015,
+      "targetAltitude": 38.90699998569489,
+      "crossTrack": 0,
+      "roll": -0.028809679672122,
+      "pitch": 0.18627746403217316,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 48.389999999961354,
+      "altitude": 40.015,
+      "targetAltitude": 38.73500002861023,
+      "crossTrack": 0,
+      "roll": -0.03323116898536682,
+      "pitch": 0.17861954867839813,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 48.58999999996117,
+      "altitude": 40.004,
+      "targetAltitude": 38.57200006198883,
+      "crossTrack": 0,
+      "roll": -0.03654874861240387,
+      "pitch": 0.15200820565223694,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 48.78999999996099,
+      "altitude": 39.971,
+      "targetAltitude": 38.429000057220456,
+      "crossTrack": 0,
+      "roll": -0.04327777028083801,
+      "pitch": 0.11048948764801025,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 48.98999999996081,
+      "altitude": 39.92,
+      "targetAltitude": 38.26800005245209,
+      "crossTrack": 0,
+      "roll": -0.05225509777665138,
+      "pitch": 0.09064976871013641,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 49.19499999996062,
+      "altitude": 39.855,
+      "targetAltitude": 38.10000003814697,
+      "crossTrack": 0,
+      "roll": -0.042118772864341736,
+      "pitch": 0.06647519022226334,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 49.39499999996044,
+      "altitude": 39.778,
+      "targetAltitude": 37.94599999523163,
+      "crossTrack": 0,
+      "roll": -0.03207512944936752,
+      "pitch": 0.0956045463681221,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 49.59499999996026,
+      "altitude": 39.702,
+      "targetAltitude": 37.78000008106232,
+      "crossTrack": 0,
+      "roll": -0.032955873757600784,
+      "pitch": 0.13280415534973145,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 49.794999999960076,
+      "altitude": 39.638,
+      "targetAltitude": 37.61900004768371,
+      "crossTrack": 0,
+      "roll": -0.030699679628014565,
+      "pitch": 0.1456010639667511,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 49.994999999959894,
+      "altitude": 39.582,
+      "targetAltitude": 37.458000143051144,
+      "crossTrack": 0,
+      "roll": -0.03471964970231056,
+      "pitch": 0.14046400785446167,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 50.19499999995971,
+      "altitude": 39.528,
+      "targetAltitude": 37.29500000953674,
+      "crossTrack": 0,
+      "roll": -0.03342380002140999,
+      "pitch": 0.13091057538986206,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 50.39499999995953,
+      "altitude": 39.473,
+      "targetAltitude": 37.14100010490417,
+      "crossTrack": 0,
+      "roll": -0.03267597034573555,
+      "pitch": 0.1324453204870224,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 50.59499999995935,
+      "altitude": 39.413,
+      "targetAltitude": 36.982999961853025,
+      "crossTrack": 0,
+      "roll": -0.024281712248921394,
+      "pitch": 0.13060668110847473,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 50.79499999995917,
+      "altitude": 39.356,
+      "targetAltitude": 36.834000047683716,
+      "crossTrack": 0,
+      "roll": -0.030555903911590576,
+      "pitch": 0.1317141205072403,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 50.994999999958985,
+      "altitude": 39.296,
+      "targetAltitude": 36.67800014305115,
+      "crossTrack": 0,
+      "roll": -0.03375142067670822,
+      "pitch": 0.13153645396232605,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 51.1949999999588,
+      "altitude": 39.214,
+      "targetAltitude": 36.527999980926516,
+      "crossTrack": 0,
+      "roll": -0.041039593517780304,
+      "pitch": 0.10914074629545212,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 51.39499999995862,
+      "altitude": 39.11,
+      "targetAltitude": 36.37500003814697,
+      "crossTrack": 0,
+      "roll": -0.049207381904125214,
+      "pitch": 0.09076347947120667,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 51.59499999995844,
+      "altitude": 38.98,
+      "targetAltitude": 36.2270000667572,
+      "crossTrack": 0,
+      "roll": -0.05539696291089058,
+      "pitch": 0.06844565272331238,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 51.79499999995826,
+      "altitude": 38.836,
+      "targetAltitude": 36.06000009536743,
+      "crossTrack": 0,
+      "roll": -0.05726780742406845,
+      "pitch": 0.042505793273448944,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 51.994999999958075,
+      "altitude": 38.679,
+      "targetAltitude": 35.908000095367434,
+      "crossTrack": 0,
+      "roll": -0.053057778626680374,
+      "pitch": 0.0276231337338686,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 52.19499999995789,
+      "altitude": 38.514,
+      "targetAltitude": 35.74800009536743,
+      "crossTrack": 0,
+      "roll": -0.04746755585074425,
+      "pitch": 0.03461192920804024,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 52.39499999995771,
+      "altitude": 38.354,
+      "targetAltitude": 35.57200010490418,
+      "crossTrack": 0,
+      "roll": -0.04812920466065407,
+      "pitch": 0.056066084653139114,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 52.59499999995753,
+      "altitude": 38.215,
+      "targetAltitude": 35.393000133514406,
+      "crossTrack": 0,
+      "roll": -0.05640702694654465,
+      "pitch": 0.08062978088855743,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 52.79499999995735,
+      "altitude": 38.096,
+      "targetAltitude": 35.22100017166138,
+      "crossTrack": 0,
+      "roll": -0.053078219294548035,
+      "pitch": 0.1017179936170578,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 52.994999999957166,
+      "altitude": 38.017,
+      "targetAltitude": 35.041000009536745,
+      "crossTrack": 0,
+      "roll": -0.051118530333042145,
+      "pitch": 0.1436595320701599,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 53.194999999956984,
+      "altitude": 37.978,
+      "targetAltitude": 34.86300012397766,
+      "crossTrack": 0,
+      "roll": -0.04986753687262535,
+      "pitch": 0.19497480988502502,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 53.3949999999568,
+      "altitude": 37.977,
+      "targetAltitude": 34.69300002861023,
+      "crossTrack": 0,
+      "roll": -0.06339476257562637,
+      "pitch": 0.2206874042749405,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 53.59499999995662,
+      "altitude": 37.996,
+      "targetAltitude": 34.53600019073486,
+      "crossTrack": 0,
+      "roll": -0.057593390345573425,
+      "pitch": 0.21048110723495483,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 53.79499999995644,
+      "altitude": 38.006,
+      "targetAltitude": 34.37300012397766,
+      "crossTrack": 0,
+      "roll": -0.052899181842803955,
+      "pitch": 0.23412269353866577,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 53.994999999956256,
+      "altitude": 38.004,
+      "targetAltitude": 34.22600002861023,
+      "crossTrack": 0,
+      "roll": -0.057112451642751694,
+      "pitch": 0.2218904346227646,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 54.194999999956075,
+      "altitude": 37.987,
+      "targetAltitude": 34.08800015258789,
+      "crossTrack": 0,
+      "roll": -0.055035244673490524,
+      "pitch": 0.1691044569015503,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 54.39499999995589,
+      "altitude": 37.93,
+      "targetAltitude": 33.94600001907349,
+      "crossTrack": 0,
+      "roll": -0.057840749621391296,
+      "pitch": 0.10837400704622269,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 54.59499999995571,
+      "altitude": 37.827,
+      "targetAltitude": 33.813000305175784,
+      "crossTrack": 0,
+      "roll": -0.05300348997116089,
+      "pitch": 0.06022120639681816,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 54.79499999995553,
+      "altitude": 37.683,
+      "targetAltitude": 33.670000324249266,
+      "crossTrack": 0,
+      "roll": -0.04311608523130417,
+      "pitch": -0.002918425016105175,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 54.99499999995535,
+      "altitude": 37.504,
+      "targetAltitude": 33.536000057220456,
+      "crossTrack": 0,
+      "roll": -0.037231989204883575,
+      "pitch": -0.026399774476885796,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 55.194999999955165,
+      "altitude": 37.303,
+      "targetAltitude": 33.386000019073485,
+      "crossTrack": 0,
+      "roll": -0.030297450721263885,
+      "pitch": -0.016455261036753654,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 55.39499999995498,
+      "altitude": 37.092,
+      "targetAltitude": 33.22899997138977,
+      "crossTrack": 0,
+      "roll": -0.033510059118270874,
+      "pitch": -0.03688044100999832,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 55.5949999999548,
+      "altitude": 36.873,
+      "targetAltitude": 33.053000171661374,
+      "crossTrack": 0,
+      "roll": -0.03985065221786499,
+      "pitch": -0.02305668778717518,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 55.79499999995462,
+      "altitude": 36.661,
+      "targetAltitude": 32.884000123977664,
+      "crossTrack": 0,
+      "roll": -0.04207627475261688,
+      "pitch": 0.018405213952064514,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 55.99499999995444,
+      "altitude": 36.482,
+      "targetAltitude": 32.69600011444092,
+      "crossTrack": 0,
+      "roll": -0.04845834895968437,
+      "pitch": 0.04374418407678604,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 56.194999999954256,
+      "altitude": 36.342,
+      "targetAltitude": 32.5170001335144,
+      "crossTrack": 0,
+      "roll": -0.0530921034514904,
+      "pitch": 0.07407864183187485,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 56.394999999954074,
+      "altitude": 36.243,
+      "targetAltitude": 32.327000200271605,
+      "crossTrack": 0,
+      "roll": -0.05708394572138786,
+      "pitch": 0.13904771208763123,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 56.59499999995389,
+      "altitude": 36.194,
+      "targetAltitude": 32.133000076293946,
+      "crossTrack": 0,
+      "roll": -0.05315921828150749,
+      "pitch": 0.19282890856266022,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 56.79499999995371,
+      "altitude": 36.182,
+      "targetAltitude": 31.946000228881836,
+      "crossTrack": 0,
+      "roll": -0.05674534663558006,
+      "pitch": 0.21822524070739746,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 56.99499999995353,
+      "altitude": 36.186,
+      "targetAltitude": 31.772000152587893,
+      "crossTrack": 0,
+      "roll": -0.0507783479988575,
+      "pitch": 0.23085661232471466,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 57.194999999953346,
+      "altitude": 36.201,
+      "targetAltitude": 31.603000324249265,
+      "crossTrack": 0,
+      "roll": -0.04664849862456322,
+      "pitch": 0.20234356820583344,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 57.394999999953164,
+      "altitude": 36.202,
+      "targetAltitude": 31.446000247955325,
+      "crossTrack": 0,
+      "roll": -0.04235098883509636,
+      "pitch": 0.18972550332546234,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 57.59499999995298,
+      "altitude": 36.172,
+      "targetAltitude": 31.29099990463257,
+      "crossTrack": 0,
+      "roll": -0.04766465723514557,
+      "pitch": 0.15770429372787476,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 57.7949999999528,
+      "altitude": 36.112,
+      "targetAltitude": 31.156000228881837,
+      "crossTrack": 0,
+      "roll": -0.050144776701927185,
+      "pitch": 0.09006008505821228,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 57.99499999995262,
+      "altitude": 36.008,
+      "targetAltitude": 31.156000152587893,
+      "crossTrack": 0,
+      "roll": -0.04834411293268204,
+      "pitch": 0.03418166935443878,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 58.19499999995244,
+      "altitude": 35.867,
+      "targetAltitude": 31.152000038146973,
+      "crossTrack": 0,
+      "roll": -0.04407663643360138,
+      "pitch": 0.0012579039903357625,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 58.394999999952255,
+      "altitude": 35.694,
+      "targetAltitude": 31.15399988555908,
+      "crossTrack": 0,
+      "roll": -0.05174596607685089,
+      "pitch": -0.023820867761969566,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 58.59499999995207,
+      "altitude": 35.493,
+      "targetAltitude": 31.15799994277954,
+      "crossTrack": 0,
+      "roll": -0.05957591161131859,
+      "pitch": -0.01073753833770752,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 58.79499999995189,
+      "altitude": 35.282,
+      "targetAltitude": 31.155999980926516,
+      "crossTrack": 0,
+      "roll": -0.06315232068300247,
+      "pitch": 0.02195926196873188,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 58.99499999995171,
+      "altitude": 35.086,
+      "targetAltitude": 31.151000267028806,
+      "crossTrack": 0,
+      "roll": -0.055609460920095444,
+      "pitch": 0.07610370218753815,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 59.18999999995153,
+      "altitude": 34.921,
+      "targetAltitude": 31.15000009536743,
+      "crossTrack": 0,
+      "roll": -0.050471238791942596,
+      "pitch": 0.09274190664291382,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 59.394999999951345,
+      "altitude": 34.78,
+      "targetAltitude": 31.15700018119812,
+      "crossTrack": 0,
+      "roll": -0.053818654268980026,
+      "pitch": 0.13039402663707733,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 59.58999999995117,
+      "altitude": 34.654,
+      "targetAltitude": 31.157000057220458,
+      "crossTrack": 0,
+      "roll": -0.05402284488081932,
+      "pitch": 0.12333172559738159,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 59.79499999995098,
+      "altitude": 34.533,
+      "targetAltitude": 31.153000181198124,
+      "crossTrack": 0,
+      "roll": -0.049912746995687485,
+      "pitch": 0.12863504886627197,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 59.9949999999508,
+      "altitude": 34.428,
+      "targetAltitude": 31.1590000667572,
+      "crossTrack": 0,
+      "roll": -0.051914844661951065,
+      "pitch": 0.13065673410892487,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 60.19499999995062,
+      "altitude": 34.329,
+      "targetAltitude": 31.15899997138977,
+      "crossTrack": 0,
+      "roll": -0.04323814436793327,
+      "pitch": 0.14783388376235962,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 60.394999999950436,
+      "altitude": 34.237,
+      "targetAltitude": 31.15100012397766,
+      "crossTrack": 0,
+      "roll": -0.03515898808836937,
+      "pitch": 0.15387305617332458,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 60.594999999950254,
+      "altitude": 34.153,
+      "targetAltitude": 31.155000038146973,
+      "crossTrack": 0,
+      "roll": -0.03998637571930885,
+      "pitch": 0.16095440089702606,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 60.79499999995007,
+      "altitude": 34.074,
+      "targetAltitude": 31.152999961853027,
+      "crossTrack": 0,
+      "roll": -0.046329449862241745,
+      "pitch": 0.15060676634311676,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 60.99499999994989,
+      "altitude": 33.984,
+      "targetAltitude": 31.152000123977658,
+      "crossTrack": 0,
+      "roll": -0.051556166261434555,
+      "pitch": 0.1414993852376938,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 61.19499999994971,
+      "altitude": 33.876,
+      "targetAltitude": 31.15000002861023,
+      "crossTrack": 0,
+      "roll": -0.05891086161136627,
+      "pitch": 0.14267098903656006,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 61.38999999994953,
+      "altitude": 33.754,
+      "targetAltitude": 31.159000152587893,
+      "crossTrack": 0,
+      "roll": -0.05475667491555214,
+      "pitch": 0.12074103206396103,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 61.58999999994935,
+      "altitude": 33.611,
+      "targetAltitude": 31.154000028610227,
+      "crossTrack": 0,
+      "roll": -0.061486534774303436,
+      "pitch": 0.06492812186479568,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 61.78999999994917,
+      "altitude": 33.447,
+      "targetAltitude": 31.152000123977658,
+      "crossTrack": 0,
+      "roll": -0.06414438784122467,
+      "pitch": 0.010194768197834492,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 61.989999999948985,
+      "altitude": 33.26,
+      "targetAltitude": 31.155999952316286,
+      "crossTrack": 0,
+      "roll": -0.062074895948171616,
+      "pitch": -0.01942620985209942,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 62.1949999999488,
+      "altitude": 33.056,
+      "targetAltitude": 31.15000000953674,
+      "crossTrack": 0,
+      "roll": -0.058149468153715134,
+      "pitch": -0.011099549941718578,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 62.39499999994862,
+      "altitude": 32.85,
+      "targetAltitude": 31.152000047683714,
+      "crossTrack": 0,
+      "roll": -0.048981018364429474,
+      "pitch": 0.003825374413281679,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 62.58999999994844,
+      "altitude": 32.663,
+      "targetAltitude": 31.15300009536743,
+      "crossTrack": 0,
+      "roll": -0.04282151162624359,
+      "pitch": 0.02996634878218174,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 62.78999999994826,
+      "altitude": 32.501,
+      "targetAltitude": 31.157000042915342,
+      "crossTrack": 0,
+      "roll": -0.039457768201828,
+      "pitch": 0.11193574965000153,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 62.989999999948076,
+      "altitude": 32.389,
+      "targetAltitude": 31.158000028610232,
+      "crossTrack": 0,
+      "roll": -0.04325930029153824,
+      "pitch": 0.1489485502243042,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 63.189999999947894,
+      "altitude": 32.323,
+      "targetAltitude": 31.153000071525575,
+      "crossTrack": 0,
+      "roll": -0.04414818063378334,
+      "pitch": 0.17102353274822235,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 63.38999999994771,
+      "altitude": 32.278,
+      "targetAltitude": 31.159000014305114,
+      "crossTrack": 0,
+      "roll": -0.042558904737234116,
+      "pitch": 0.18878470361232758,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 63.58999999994753,
+      "altitude": 32.244,
+      "targetAltitude": 31.149999985694883,
+      "crossTrack": 0,
+      "roll": -0.04543136805295944,
+      "pitch": 0.1990436464548111,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 63.78999999994735,
+      "altitude": 32.203,
+      "targetAltitude": 31.1560000667572,
+      "crossTrack": 0,
+      "roll": -0.04919598624110222,
+      "pitch": 0.1881777048110962,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 63.989999999947166,
+      "altitude": 32.147,
+      "targetAltitude": 31.158000019073484,
+      "crossTrack": 0,
+      "roll": -0.05281633511185646,
+      "pitch": 0.12981468439102173,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 64.18999999994699,
+      "altitude": 32.069,
+      "targetAltitude": 31.15000002145767,
+      "crossTrack": 0,
+      "roll": -0.05877894535660744,
+      "pitch": 0.10271952301263809,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 64.38999999994681,
+      "altitude": 31.976,
+      "targetAltitude": 31.15299999523163,
+      "crossTrack": 0,
+      "roll": -0.061096709221601486,
+      "pitch": 0.0714268833398819,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 64.58999999994663,
+      "altitude": 31.872,
+      "targetAltitude": 31.154000019073486,
+      "crossTrack": 0,
+      "roll": -0.06505735963582993,
+      "pitch": 0.06579957157373428,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 64.78999999994645,
+      "altitude": 31.765,
+      "targetAltitude": 31.1590000333786,
+      "crossTrack": 0,
+      "roll": -0.06834949553012848,
+      "pitch": 0.046911004930734634,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 64.98999999994626,
+      "altitude": 31.655,
+      "targetAltitude": 31.149999997615815,
+      "crossTrack": 0,
+      "roll": -0.07401879131793976,
+      "pitch": 0.06879446655511856,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 65.18999999994608,
+      "altitude": 31.547,
+      "targetAltitude": 31.15000001192093,
+      "crossTrack": 0,
+      "roll": -0.06845255941152573,
+      "pitch": 0.0826212614774704,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 65.3899999999459,
+      "altitude": 31.454,
+      "targetAltitude": 31.157999996423722,
+      "crossTrack": 0,
+      "roll": -0.06620389223098755,
+      "pitch": 0.08952884376049042,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 65.58999999994572,
+      "altitude": 31.384,
+      "targetAltitude": 31.155000009536742,
+      "crossTrack": 0,
+      "roll": -0.06785465031862259,
+      "pitch": 0.09268688410520554,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 65.78999999994554,
+      "altitude": 31.328,
+      "targetAltitude": 31.15600001192093,
+      "crossTrack": 0,
+      "roll": -0.07306285202503204,
+      "pitch": 0.1174456849694252,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 65.99499999994535,
+      "altitude": 31.282,
+      "targetAltitude": 31.151000008940695,
+      "crossTrack": 0,
+      "roll": -0.07270750403404236,
+      "pitch": 0.14581264555454254,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 66.19499999994517,
+      "altitude": 31.264,
+      "targetAltitude": 31.15100000268221,
+      "crossTrack": 0,
+      "roll": -0.07884710282087326,
+      "pitch": 0.16432568430900574,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 66.39499999994499,
+      "altitude": 31.262,
+      "targetAltitude": 31.151000000596046,
+      "crossTrack": 0,
+      "roll": -0.07952221482992172,
+      "pitch": 0.19165417551994324,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 66.58999999994481,
+      "altitude": 31.262,
+      "targetAltitude": 31.153000000596048,
+      "crossTrack": 0,
+      "roll": -0.08029840886592865,
+      "pitch": 0.21173922717571259,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 66.78999999994463,
+      "altitude": 31.249,
+      "targetAltitude": 31.158000005960464,
+      "crossTrack": 0,
+      "roll": -0.07024381309747696,
+      "pitch": 0.20430579781532288,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 66.98999999994444,
+      "altitude": 31.222,
+      "targetAltitude": 31.157000001788138,
+      "crossTrack": 0,
+      "roll": -0.07014729827642441,
+      "pitch": 0.14684627950191498,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 67.18999999994426,
+      "altitude": 31.165,
+      "targetAltitude": 31.15900000089407,
+      "crossTrack": 0,
+      "roll": -0.07082697004079819,
+      "pitch": 0.1089906319975853,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 67.38999999994408,
+      "altitude": 31.07,
+      "targetAltitude": 31.151999999329448,
+      "crossTrack": 0,
+      "roll": -0.07152924686670303,
+      "pitch": 0.09155678004026413,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 67.5899999999439,
+      "altitude": 30.941,
+      "targetAltitude": 31.157999991059302,
+      "crossTrack": 0,
+      "roll": -0.07274757325649261,
+      "pitch": 0.05435042828321457,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 67.78999999994372,
+      "altitude": 30.796,
+      "targetAltitude": 31.150000001192094,
+      "crossTrack": 0,
+      "roll": -0.07491045445203781,
+      "pitch": 0.02739555947482586,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 67.98999999994354,
+      "altitude": 30.642,
+      "targetAltitude": 31.157999997615814,
+      "crossTrack": 0,
+      "roll": -0.07774166762828827,
+      "pitch": 0.04451723396778107,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 68.18999999994335,
+      "altitude": 30.492,
+      "targetAltitude": 31.156999973773956,
+      "crossTrack": 0,
+      "roll": -0.07501387596130371,
+      "pitch": 0.034967247396707535,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 68.38999999994317,
+      "altitude": 30.349,
+      "targetAltitude": 31.158000009536742,
+      "crossTrack": 0,
+      "roll": -0.07190738618373871,
+      "pitch": 0.0531635619699955,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 68.58999999994299,
+      "altitude": 30.222,
+      "targetAltitude": 31.15500000476837,
+      "crossTrack": 0,
+      "roll": -0.08551132678985596,
+      "pitch": 0.10292522609233856,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 68.78999999994281,
+      "altitude": 30.12,
+      "targetAltitude": 31.1559999499321,
+      "crossTrack": 0,
+      "roll": -0.08827127516269684,
+      "pitch": 0.1496913880109787,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 68.98999999994263,
+      "altitude": 30.066,
+      "targetAltitude": 31.156999933242798,
+      "crossTrack": 0,
+      "roll": -0.08797399699687958,
+      "pitch": 0.17675498127937317,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 69.19499999994244,
+      "altitude": 30.047,
+      "targetAltitude": 31.15300002384186,
+      "crossTrack": 0,
+      "roll": -0.09128561615943909,
+      "pitch": 0.1932428479194641,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 69.39499999994226,
+      "altitude": 30.039,
+      "targetAltitude": 31.152000014305116,
+      "crossTrack": 0,
+      "roll": -0.08791974186897278,
+      "pitch": 0.20175763964653015,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 69.59499999994208,
+      "altitude": 30.032,
+      "targetAltitude": 31.156000004768373,
+      "crossTrack": 0,
+      "roll": -0.09886805713176727,
+      "pitch": 0.16422629356384277,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 69.7949999999419,
+      "altitude": 30.008,
+      "targetAltitude": 31.152999995231628,
+      "crossTrack": 0,
+      "roll": -0.09574390947818756,
+      "pitch": 0.1265675574541092,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 69.99499999994171,
+      "altitude": 29.962,
+      "targetAltitude": 31.156999957084654,
+      "crossTrack": 0,
+      "roll": -0.09881895035505295,
+      "pitch": 0.10859023034572601,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 70.19499999994153,
+      "altitude": 29.894,
+      "targetAltitude": 31.15000002861023,
+      "crossTrack": 0,
+      "roll": -0.10503517836332321,
+      "pitch": 0.12103929370641708,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 70.39499999994135,
+      "altitude": 29.818,
+      "targetAltitude": 31.154999952316285,
+      "crossTrack": 0,
+      "roll": -0.10816269367933273,
+      "pitch": 0.12687534093856812,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 70.58999999994117,
+      "altitude": 29.744,
+      "targetAltitude": 31.15200000476837,
+      "crossTrack": 0,
+      "roll": -0.10888651758432388,
+      "pitch": 0.09718790650367737,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 70.78999999994099,
+      "altitude": 29.655,
+      "targetAltitude": 31.150999928474427,
+      "crossTrack": 0,
+      "roll": -0.10375858098268509,
+      "pitch": 0.10004820674657822,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 70.9899999999408,
+      "altitude": 29.568,
+      "targetAltitude": 31.150999961853028,
+      "crossTrack": 0,
+      "roll": -0.10132785141468048,
+      "pitch": 0.09369047731161118,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 71.19499999994062,
+      "altitude": 29.485,
+      "targetAltitude": 31.154999995231627,
+      "crossTrack": 0,
+      "roll": -0.10238103568553925,
+      "pitch": 0.12610338628292084,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 71.38999999994044,
+      "altitude": 29.422,
+      "targetAltitude": 31.150999928474427,
+      "crossTrack": 0,
+      "roll": -0.10551997274160385,
+      "pitch": 0.13486015796661377,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 71.58999999994026,
+      "altitude": 29.385,
+      "targetAltitude": 31.15,
+      "crossTrack": 0,
+      "roll": -0.11004482209682465,
+      "pitch": 0.16704800724983215,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 71.78999999994008,
+      "altitude": 29.37,
+      "targetAltitude": 31.15499997138977,
+      "crossTrack": 0,
+      "roll": -0.11335041373968124,
+      "pitch": 0.19462549686431885,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 71.9899999999399,
+      "altitude": 29.367,
+      "targetAltitude": 31.158999961853027,
+      "crossTrack": 0,
+      "roll": -0.11757570505142212,
+      "pitch": 0.21467016637325287,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 72.18999999993972,
+      "altitude": 29.37,
+      "targetAltitude": 31.15699996185303,
+      "crossTrack": 0,
+      "roll": -0.11778569221496582,
+      "pitch": 0.19965624809265137,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 72.38999999993953,
+      "altitude": 29.378,
+      "targetAltitude": 31.15399997138977,
+      "crossTrack": 0,
+      "roll": -0.11703884601593018,
+      "pitch": 0.17766034603118896,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 72.59499999993935,
+      "altitude": 29.385,
+      "targetAltitude": 31.151999980926515,
+      "crossTrack": 0,
+      "roll": -0.12685617804527283,
+      "pitch": 0.1487678736448288,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 72.78999999993917,
+      "altitude": 29.372,
+      "targetAltitude": 31.151999980926515,
+      "crossTrack": 0,
+      "roll": -0.12345732748508453,
+      "pitch": 0.15896634757518768,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 72.99499999993898,
+      "altitude": 29.345,
+      "targetAltitude": 31.158999952316286,
+      "crossTrack": 0,
+      "roll": -0.12178462743759155,
+      "pitch": 0.1391797959804535,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 73.1999999999388,
+      "altitude": 29.317,
+      "targetAltitude": 31.1519999332428,
+      "crossTrack": 0,
+      "roll": -0.11667542159557343,
+      "pitch": 0.11751986294984818,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 73.39999999993861,
+      "altitude": 29.286,
+      "targetAltitude": 31.151999904632568,
+      "crossTrack": 0,
+      "roll": -0.10903596878051758,
+      "pitch": 0.12267162650823593,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 73.59999999993843,
+      "altitude": 29.253,
+      "targetAltitude": 31.149999995231628,
+      "crossTrack": 0,
+      "roll": -0.10849576443433762,
+      "pitch": 0.09631913900375366,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 73.79499999993826,
+      "altitude": 29.214,
+      "targetAltitude": 31.153999957084658,
+      "crossTrack": 0,
+      "roll": -0.10457280278205872,
+      "pitch": 0.09790828078985214,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 73.99499999993807,
+      "altitude": 29.182,
+      "targetAltitude": 31.157999918937684,
+      "crossTrack": 0,
+      "roll": -0.10486355423927307,
+      "pitch": 0.0940302237868309,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 74.19499999993789,
+      "altitude": 29.158,
+      "targetAltitude": 31.157000009536745,
+      "crossTrack": 0,
+      "roll": -0.10103671252727509,
+      "pitch": 0.12447956204414368,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 74.39499999993771,
+      "altitude": 29.159,
+      "targetAltitude": 31.155,
+      "crossTrack": 0,
+      "roll": -0.10303199291229248,
+      "pitch": 0.13734136521816254,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 74.59499999993753,
+      "altitude": 29.175,
+      "targetAltitude": 31.154000009536745,
+      "crossTrack": 0,
+      "roll": -0.10607388615608215,
+      "pitch": 0.17906434834003448,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 74.79499999993735,
+      "altitude": 29.206,
+      "targetAltitude": 31.15799990940094,
+      "crossTrack": 0,
+      "roll": -0.10460328310728073,
+      "pitch": 0.18321940302848816,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 74.98999999993717,
+      "altitude": 29.243,
+      "targetAltitude": 31.15599994754791,
+      "crossTrack": 0,
+      "roll": -0.11808715760707855,
+      "pitch": 0.15598531067371368,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 75.18999999993699,
+      "altitude": 29.265,
+      "targetAltitude": 31.15499997615814,
+      "crossTrack": 0,
+      "roll": -0.12566952407360077,
+      "pitch": 0.15128910541534424,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 75.3899999999368,
+      "altitude": 29.277,
+      "targetAltitude": 31.15399999523163,
+      "crossTrack": 0,
+      "roll": -0.12799109518527985,
+      "pitch": 0.10318472236394882,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 75.59499999993662,
+      "altitude": 29.269,
+      "targetAltitude": 31.154999995231627,
+      "crossTrack": 0,
+      "roll": -0.12474585324525833,
+      "pitch": 0.10342926532030106,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 75.79499999993644,
+      "altitude": 29.257,
+      "targetAltitude": 31.152999985694887,
+      "crossTrack": 0,
+      "roll": -0.11827314645051956,
+      "pitch": 0.09330708533525467,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 75.99499999993625,
+      "altitude": 29.237,
+      "targetAltitude": 31.155999966621398,
+      "crossTrack": 0,
+      "roll": -0.1135173812508583,
+      "pitch": 0.12022268772125244,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 76.19499999993607,
+      "altitude": 29.229,
+      "targetAltitude": 31.152999957084656,
+      "crossTrack": 0,
+      "roll": -0.12255469709634781,
+      "pitch": 0.09665516763925552,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 76.39499999993589,
+      "altitude": 29.22,
+      "targetAltitude": 31.15299994754791,
+      "crossTrack": 0,
+      "roll": -0.1235557571053505,
+      "pitch": 0.12698474526405334,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 76.59499999993571,
+      "altitude": 29.23,
+      "targetAltitude": 31.153999947547913,
+      "crossTrack": 0,
+      "roll": -0.12304449826478958,
+      "pitch": 0.12771059572696686,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 76.79499999993553,
+      "altitude": 29.256,
+      "targetAltitude": 31.149999966621397,
+      "crossTrack": 0,
+      "roll": -0.11420439928770065,
+      "pitch": 0.16301816701889038,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 76.99499999993535,
+      "altitude": 29.312,
+      "targetAltitude": 31.15100000476837,
+      "crossTrack": 0,
+      "roll": -0.11511640250682831,
+      "pitch": 0.19603592157363892,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 77.19499999993516,
+      "altitude": 29.384,
+      "targetAltitude": 31.156999942779542,
+      "crossTrack": 0,
+      "roll": -0.1150517538189888,
+      "pitch": 0.2273159772157669,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 77.39499999993498,
+      "altitude": 29.469,
+      "targetAltitude": 31.156000019073485,
+      "crossTrack": 0,
+      "roll": -0.11427053064107895,
+      "pitch": 0.20733648538589478,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 77.5999999999348,
+      "altitude": 29.542,
+      "targetAltitude": 31.15799997615814,
+      "crossTrack": 0,
+      "roll": -0.11640551686286926,
+      "pitch": 0.20296908915042877,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 77.79499999993462,
+      "altitude": 29.586,
+      "targetAltitude": 31.157999914169313,
+      "crossTrack": 0,
+      "roll": -0.12474945187568665,
+      "pitch": 0.18403121829032898,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 77.99499999993444,
+      "altitude": 29.607,
+      "targetAltitude": 31.15899994277954,
+      "crossTrack": 0,
+      "roll": -0.1303214430809021,
+      "pitch": 0.12693919241428375,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 78.19999999993425,
+      "altitude": 29.598,
+      "targetAltitude": 31.156999952316283,
+      "crossTrack": 0,
+      "roll": -0.13507477939128876,
+      "pitch": 0.08203812688589096,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 78.40499999993406,
+      "altitude": 29.562,
+      "targetAltitude": 31.152999933242796,
+      "crossTrack": 0,
+      "roll": -0.13084092736244202,
+      "pitch": 0.04712466150522232,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 78.59999999993389,
+      "altitude": 29.51,
+      "targetAltitude": 31.158000004768372,
+      "crossTrack": 0,
+      "roll": -0.1378203183412552,
+      "pitch": 0.07053493708372116,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 78.7999999999337,
+      "altitude": 29.448,
+      "targetAltitude": 31.158999947547912,
+      "crossTrack": 0,
+      "roll": -0.13237741589546204,
+      "pitch": 0.085199274122715,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 78.99999999993352,
+      "altitude": 29.392,
+      "targetAltitude": 31.158000009536742,
+      "crossTrack": 0,
+      "roll": -0.12912185490131378,
+      "pitch": 0.09788243472576141,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 79.19999999993334,
+      "altitude": 29.356,
+      "targetAltitude": 31.15099997138977,
+      "crossTrack": 0,
+      "roll": -0.12849189341068268,
+      "pitch": 0.10409832745790482,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 79.39999999993316,
+      "altitude": 29.337,
+      "targetAltitude": 31.15599994277954,
+      "crossTrack": 0,
+      "roll": -0.12368011474609375,
+      "pitch": 0.12061374634504318,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 79.59999999993298,
+      "altitude": 29.322,
+      "targetAltitude": 31.158999923706055,
+      "crossTrack": 0,
+      "roll": -0.11880245804786682,
+      "pitch": 0.13110996782779694,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 79.7999999999328,
+      "altitude": 29.305,
+      "targetAltitude": 31.154999914169313,
+      "crossTrack": 0,
+      "roll": -0.12107954174280167,
+      "pitch": 0.1461075097322464,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 79.99999999993261,
+      "altitude": 29.294,
+      "targetAltitude": 31.157000014305115,
+      "crossTrack": 0,
+      "roll": -0.12428239732980728,
+      "pitch": 0.1358257681131363,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 80.19999999993243,
+      "altitude": 29.305,
+      "targetAltitude": 31.157000014305115,
+      "crossTrack": 0,
+      "roll": -0.12184910476207733,
+      "pitch": 0.15104863047599792,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 80.39999999993225,
+      "altitude": 29.328,
+      "targetAltitude": 31.15699991416931,
+      "crossTrack": 0,
+      "roll": -0.1231837347149849,
+      "pitch": 0.200478658080101,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 80.59999999993207,
+      "altitude": 29.361,
+      "targetAltitude": 31.15199994277954,
+      "crossTrack": 0,
+      "roll": -0.13104578852653503,
+      "pitch": 0.18895943462848663,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 80.79999999993188,
+      "altitude": 29.404,
+      "targetAltitude": 31.152999980926513,
+      "crossTrack": 0,
+      "roll": -0.13446326553821564,
+      "pitch": 0.1822453737258911,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 80.9999999999317,
+      "altitude": 29.433,
+      "targetAltitude": 31.150000019073488,
+      "crossTrack": 0,
+      "roll": -0.1321014165878296,
+      "pitch": 0.17911803722381592,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 81.19999999993152,
+      "altitude": 29.445,
+      "targetAltitude": 31.152999918937684,
+      "crossTrack": 0,
+      "roll": -0.13238587975502014,
+      "pitch": 0.12573440372943878,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 81.39999999993134,
+      "altitude": 29.43,
+      "targetAltitude": 31.150999918937682,
+      "crossTrack": 0,
+      "roll": -0.13102750480175018,
+      "pitch": 0.11440756171941757,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 81.59999999993116,
+      "altitude": 29.398,
+      "targetAltitude": 31.155000009536742,
+      "crossTrack": 0,
+      "roll": -0.12751150131225586,
+      "pitch": 0.09091129899024963,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 81.79999999993098,
+      "altitude": 29.353,
+      "targetAltitude": 31.15599997138977,
+      "crossTrack": 0,
+      "roll": -0.12377037853002548,
+      "pitch": 0.09536471962928772,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 81.9999999999308,
+      "altitude": 29.31,
+      "targetAltitude": 31.150999933242797,
+      "crossTrack": 0,
+      "roll": -0.1205107793211937,
+      "pitch": 0.11701882630586624,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 82.19999999993061,
+      "altitude": 29.268,
+      "targetAltitude": 31.158000004768372,
+      "crossTrack": 0,
+      "roll": -0.12417721003293991,
+      "pitch": 0.15275800228118896,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 82.39999999993043,
+      "altitude": 29.248,
+      "targetAltitude": 31.15499997615814,
+      "crossTrack": 0,
+      "roll": -0.12295879423618317,
+      "pitch": 0.15301084518432617,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 82.59999999993025,
+      "altitude": 29.242,
+      "targetAltitude": 31.1539999666214,
+      "crossTrack": 0,
+      "roll": -0.12396631389856339,
+      "pitch": 0.1842888444662094,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 82.79999999993007,
+      "altitude": 29.255,
+      "targetAltitude": 31.1549999666214,
+      "crossTrack": 0,
+      "roll": -0.12704238295555115,
+      "pitch": 0.1888756901025772,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 82.99999999992988,
+      "altitude": 29.288,
+      "targetAltitude": 31.158999985694884,
+      "crossTrack": 0,
+      "roll": -0.12560732662677765,
+      "pitch": 0.18281571567058563,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 83.1999999999297,
+      "altitude": 29.327,
+      "targetAltitude": 31.157999904632568,
+      "crossTrack": 0,
+      "roll": -0.13019897043704987,
+      "pitch": 0.19575047492980957,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 83.39999999992952,
+      "altitude": 29.359,
+      "targetAltitude": 31.15199994277954,
+      "crossTrack": 0,
+      "roll": -0.1393362581729889,
+      "pitch": 0.1782345473766327,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 83.59999999992934,
+      "altitude": 29.38,
+      "targetAltitude": 31.15399997138977,
+      "crossTrack": 0,
+      "roll": -0.14236387610435486,
+      "pitch": 0.12715139985084534,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 83.79999999992916,
+      "altitude": 29.382,
+      "targetAltitude": 31.152999980926513,
+      "crossTrack": 0,
+      "roll": -0.14531947672367096,
+      "pitch": 0.11656409502029419,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 83.99999999992897,
+      "altitude": 29.38,
+      "targetAltitude": 31.150999980926514,
+      "crossTrack": 0,
+      "roll": -0.1499355584383011,
+      "pitch": 0.11373375356197357,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 84.19999999992879,
+      "altitude": 29.384,
+      "targetAltitude": 31.151999980926515,
+      "crossTrack": 0,
+      "roll": -0.14701582491397858,
+      "pitch": 0.11805877089500427,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 84.39999999992861,
+      "altitude": 29.394,
+      "targetAltitude": 31.157999980926515,
+      "crossTrack": 0,
+      "roll": -0.14578428864479065,
+      "pitch": 0.10989436507225037,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 84.59999999992843,
+      "altitude": 29.404,
+      "targetAltitude": 31.158999990463258,
+      "crossTrack": 0,
+      "roll": -0.1427706629037857,
+      "pitch": 0.13677217066287994,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 84.79999999992825,
+      "altitude": 29.423,
+      "targetAltitude": 31.152000009536742,
+      "crossTrack": 0,
+      "roll": -0.1428477019071579,
+      "pitch": 0.13367588818073273,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 84.99999999992806,
+      "altitude": 29.452,
+      "targetAltitude": 31.15699990940094,
+      "crossTrack": 0,
+      "roll": -0.14360901713371277,
+      "pitch": 0.1428229957818985,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 85.19999999992788,
+      "altitude": 29.474,
+      "targetAltitude": 31.153999938011168,
+      "crossTrack": 0,
+      "roll": -0.13375189900398254,
+      "pitch": 0.1353980153799057,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 85.3999999999277,
+      "altitude": 29.493,
+      "targetAltitude": 31.153999957084658,
+      "crossTrack": 0,
+      "roll": -0.12979981303215027,
+      "pitch": 0.12186194211244583,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 85.59999999992752,
+      "altitude": 29.512,
+      "targetAltitude": 31.150999976158143,
+      "crossTrack": 0,
+      "roll": -0.11979459226131439,
+      "pitch": 0.13900943100452423,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 85.79999999992734,
+      "altitude": 29.541,
+      "targetAltitude": 31.154999995231627,
+      "crossTrack": 0,
+      "roll": -0.11873500794172287,
+      "pitch": 0.16012699902057648,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 85.99999999992716,
+      "altitude": 29.575,
+      "targetAltitude": 31.157999904632568,
+      "crossTrack": 0,
+      "roll": -0.11813673377037048,
+      "pitch": 0.16533289849758148,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 86.19999999992697,
+      "altitude": 29.608,
+      "targetAltitude": 31.150999942779542,
+      "crossTrack": 0,
+      "roll": -0.12048406153917313,
+      "pitch": 0.17179708182811737,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 86.39999999992679,
+      "altitude": 29.642,
+      "targetAltitude": 31.15599997138977,
+      "crossTrack": 0,
+      "roll": -0.12343624234199524,
+      "pitch": 0.16296648979187012,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 86.59999999992661,
+      "altitude": 29.666,
+      "targetAltitude": 31.155,
+      "crossTrack": 0,
+      "roll": -0.13070987164974213,
+      "pitch": 0.15903665125370026,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 86.79999999992643,
+      "altitude": 29.678,
+      "targetAltitude": 31.154000019073486,
+      "crossTrack": 0,
+      "roll": -0.1328492909669876,
+      "pitch": 0.13353921473026276,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 86.99999999992625,
+      "altitude": 29.677,
+      "targetAltitude": 31.159000019073485,
+      "crossTrack": 0,
+      "roll": -0.13211220502853394,
+      "pitch": 0.13031068444252014,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 87.19999999992606,
+      "altitude": 29.671,
+      "targetAltitude": 31.154000019073486,
+      "crossTrack": 0,
+      "roll": -0.14176690578460693,
+      "pitch": 0.12099830061197281,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 87.39999999992588,
+      "altitude": 29.664,
+      "targetAltitude": 31.157000009536745,
+      "crossTrack": 0,
+      "roll": -0.13931317627429962,
+      "pitch": 0.15552499890327454,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 87.5999999999257,
+      "altitude": 29.67,
+      "targetAltitude": 31.154000009536745,
+      "crossTrack": 0,
+      "roll": -0.13869020342826843,
+      "pitch": 0.18000303208827972,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 87.79999999992552,
+      "altitude": 29.69,
+      "targetAltitude": 31.159000019073485,
+      "crossTrack": 0,
+      "roll": -0.1352059692144394,
+      "pitch": 0.19767585396766663,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 87.99999999992534,
+      "altitude": 29.707,
+      "targetAltitude": 31.149999928474426,
+      "crossTrack": 0,
+      "roll": -0.1309581696987152,
+      "pitch": 0.203583762049675,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 88.19999999992515,
+      "altitude": 29.72,
+      "targetAltitude": 31.153999938011168,
+      "crossTrack": 0,
+      "roll": -0.12784092128276825,
+      "pitch": 0.1636064499616623,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 88.39999999992497,
+      "altitude": 29.727,
+      "targetAltitude": 31.153999947547913,
+      "crossTrack": 0,
+      "roll": -0.12897367775440216,
+      "pitch": 0.16542938351631165,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 88.59999999992479,
+      "altitude": 29.734,
+      "targetAltitude": 31.150999957084657,
+      "crossTrack": 0,
+      "roll": -0.13574367761611938,
+      "pitch": 0.12168911099433899,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 88.79999999992461,
+      "altitude": 29.729,
+      "targetAltitude": 31.152999957084656,
+      "crossTrack": 0,
+      "roll": -0.1312813013792038,
+      "pitch": 0.11493905633687973,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 88.99999999992443,
+      "altitude": 29.716,
+      "targetAltitude": 31.15299994754791,
+      "crossTrack": 0,
+      "roll": -0.12721134722232819,
+      "pitch": 0.11046095937490463,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 89.19999999992424,
+      "altitude": 29.702,
+      "targetAltitude": 31.158999928474426,
+      "crossTrack": 0,
+      "roll": -0.12361281365156174,
+      "pitch": 0.11834908276796341,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 89.39999999992406,
+      "altitude": 29.688,
+      "targetAltitude": 31.153999918937682,
+      "crossTrack": 0,
+      "roll": -0.11990146338939667,
+      "pitch": 0.14283908903598785,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 89.59999999992388,
+      "altitude": 29.683,
+      "targetAltitude": 31.15499990940094,
+      "crossTrack": 0,
+      "roll": -0.11764849722385406,
+      "pitch": 0.1484953612089157,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 89.7999999999237,
+      "altitude": 29.681,
+      "targetAltitude": 31.15199990940094,
+      "crossTrack": 0,
+      "roll": -0.11016641557216644,
+      "pitch": 0.17047332227230072,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 89.99999999992352,
+      "altitude": 29.693,
+      "targetAltitude": 31.15399990940094,
+      "crossTrack": 0,
+      "roll": -0.11225011199712753,
+      "pitch": 0.16018296778202057,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 90.19999999992334,
+      "altitude": 29.719,
+      "targetAltitude": 31.155999928474426,
+      "crossTrack": 0,
+      "roll": -0.11376053094863892,
+      "pitch": 0.16448000073432922,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 90.39999999992315,
+      "altitude": 29.745,
+      "targetAltitude": 31.150999957084657,
+      "crossTrack": 0,
+      "roll": -0.125435009598732,
+      "pitch": 0.1697196215391159,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 90.59999999992297,
+      "altitude": 29.773,
+      "targetAltitude": 31.158999976158142,
+      "crossTrack": 0,
+      "roll": -0.12121041864156723,
+      "pitch": 0.1724931299686432,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 90.79999999992279,
+      "altitude": 29.799,
+      "targetAltitude": 31.15700000476837,
+      "crossTrack": 0,
+      "roll": -0.12467902153730392,
+      "pitch": 0.15587842464447021,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 90.99999999992261,
+      "altitude": 29.819,
+      "targetAltitude": 31.14999991416931,
+      "crossTrack": 0,
+      "roll": -0.12242408841848373,
+      "pitch": 0.12610332667827606,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 91.19999999992243,
+      "altitude": 29.826,
+      "targetAltitude": 31.152999923706055,
+      "crossTrack": 0,
+      "roll": -0.12150419503450394,
+      "pitch": 0.10763932764530182,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 91.39999999992224,
+      "altitude": 29.828,
+      "targetAltitude": 31.157999923706054,
+      "crossTrack": 0,
+      "roll": -0.11891968548297882,
+      "pitch": 0.07509257644414902,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 91.59999999992206,
+      "altitude": 29.816,
+      "targetAltitude": 31.152999923706055,
+      "crossTrack": 0,
+      "roll": -0.12088055908679962,
+      "pitch": 0.08511457592248917,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 91.79999999992188,
+      "altitude": 29.799,
+      "targetAltitude": 31.157000023841857,
+      "crossTrack": 0,
+      "roll": -0.11160069704055786,
+      "pitch": 0.12381400167942047,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 91.9999999999217,
+      "altitude": 29.793,
+      "targetAltitude": 31.154000014305115,
+      "crossTrack": 0,
+      "roll": -0.12117636203765869,
+      "pitch": 0.14195473492145538,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 92.19999999992152,
+      "altitude": 29.802,
+      "targetAltitude": 31.156000014305114,
+      "crossTrack": 0,
+      "roll": -0.11559581756591797,
+      "pitch": 0.15994474291801453,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 92.39999999992133,
+      "altitude": 29.822,
+      "targetAltitude": 31.15900002384186,
+      "crossTrack": 0,
+      "roll": -0.11101990938186646,
+      "pitch": 0.198148712515831,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 92.59999999992115,
+      "altitude": 29.866,
+      "targetAltitude": 31.150999942779542,
+      "crossTrack": 0,
+      "roll": -0.11983470618724823,
+      "pitch": 0.20554687082767487,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 92.79999999992097,
+      "altitude": 29.922,
+      "targetAltitude": 31.153999990463255,
+      "crossTrack": 0,
+      "roll": -0.11531795561313629,
+      "pitch": 0.2137266844511032,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 92.99999999992079,
+      "altitude": 29.974,
+      "targetAltitude": 31.157999918937684,
+      "crossTrack": 0,
+      "roll": -0.12348154187202454,
+      "pitch": 0.1934448480606079,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 93.1999999999206,
+      "altitude": 30.01,
+      "targetAltitude": 31.155999966621398,
+      "crossTrack": 0,
+      "roll": -0.1286894828081131,
+      "pitch": 0.16489161550998688,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 93.39999999992042,
+      "altitude": 30.022,
+      "targetAltitude": 31.157999985694886,
+      "crossTrack": 0,
+      "roll": -0.13590118288993835,
+      "pitch": 0.13113193213939667,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 93.59999999992024,
+      "altitude": 30.01,
+      "targetAltitude": 31.158999985694884,
+      "crossTrack": 0,
+      "roll": -0.13811686635017395,
+      "pitch": 0.09978865087032318,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 93.79999999992006,
+      "altitude": 29.978,
+      "targetAltitude": 31.155999966621398,
+      "crossTrack": 0,
+      "roll": -0.13007709383964539,
+      "pitch": 0.05960167199373245,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 93.99999999991988,
+      "altitude": 29.919,
+      "targetAltitude": 31.151999928474428,
+      "crossTrack": 0,
+      "roll": -0.11841399222612381,
+      "pitch": 0.04894226789474487,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 94.1999999999197,
+      "altitude": 29.84,
+      "targetAltitude": 31.150999980926514,
+      "crossTrack": 0,
+      "roll": -0.11313649266958237,
+      "pitch": 0.036281757056713104,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 94.39999999991952,
+      "altitude": 29.753,
+      "targetAltitude": 31.157000014305115,
+      "crossTrack": 0,
+      "roll": -0.10955715924501419,
+      "pitch": 0.04353150352835655,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 94.59999999991933,
+      "altitude": 29.664,
+      "targetAltitude": 31.157999928474425,
+      "crossTrack": 0,
+      "roll": -0.11106184124946594,
+      "pitch": 0.09357094019651413,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 94.79999999991915,
+      "altitude": 29.594,
+      "targetAltitude": 31.15499997138977,
+      "crossTrack": 0,
+      "roll": -0.11199035495519638,
+      "pitch": 0.1189013123512268,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 94.99999999991897,
+      "altitude": 29.549,
+      "targetAltitude": 31.15699991416931,
+      "crossTrack": 0,
+      "roll": -0.10873501747846603,
+      "pitch": 0.14929072558879852,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 95.19999999991879,
+      "altitude": 29.539,
+      "targetAltitude": 31.151000014305115,
+      "crossTrack": 0,
+      "roll": -0.10328438133001328,
+      "pitch": 0.14541131258010864,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 95.3999999999186,
+      "altitude": 29.544,
+      "targetAltitude": 31.151000014305115,
+      "crossTrack": 0,
+      "roll": -0.11174871027469635,
+      "pitch": 0.18230187892913818,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 95.59999999991842,
+      "altitude": 29.561,
+      "targetAltitude": 31.151999904632568,
+      "crossTrack": 0,
+      "roll": -0.11658075451850891,
+      "pitch": 0.17225095629692078,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 95.79999999991824,
+      "altitude": 29.578,
+      "targetAltitude": 31.149999923706055,
+      "crossTrack": 0,
+      "roll": -0.119178406894207,
+      "pitch": 0.17322029173374176,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 95.99999999991806,
+      "altitude": 29.604,
+      "targetAltitude": 31.150999942779542,
+      "crossTrack": 0,
+      "roll": -0.12260846793651581,
+      "pitch": 0.147221177816391,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 96.19999999991788,
+      "altitude": 29.621,
+      "targetAltitude": 31.153999961853028,
+      "crossTrack": 0,
+      "roll": -0.11188343912363052,
+      "pitch": 0.17202913761138916,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 96.3999999999177,
+      "altitude": 29.64,
+      "targetAltitude": 31.149999980926513,
+      "crossTrack": 0,
+      "roll": -0.11781898140907288,
+      "pitch": 0.15022605657577515,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 96.59999999991751,
+      "altitude": 29.66,
+      "targetAltitude": 31.15,
+      "crossTrack": 0,
+      "roll": -0.1268310397863388,
+      "pitch": 0.1809057742357254,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 96.79999999991733,
+      "altitude": 29.688,
+      "targetAltitude": 31.152000019073487,
+      "crossTrack": 0,
+      "roll": -0.12869451940059662,
+      "pitch": 0.1704345941543579,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 96.99999999991715,
+      "altitude": 29.719,
+      "targetAltitude": 31.155999928474426,
+      "crossTrack": 0,
+      "roll": -0.12643100321292877,
+      "pitch": 0.15635715425014496,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 97.19999999991697,
+      "altitude": 29.728,
+      "targetAltitude": 31.154999947547914,
+      "crossTrack": 0,
+      "roll": -0.12334802001714706,
+      "pitch": 0.13958603143692017,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 97.39999999991679,
+      "altitude": 29.73,
+      "targetAltitude": 31.150999957084657,
+      "crossTrack": 0,
+      "roll": -0.11660126596689224,
+      "pitch": 0.11609246581792831,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 97.5999999999166,
+      "altitude": 29.706,
+      "targetAltitude": 31.150999947547913,
+      "crossTrack": 0,
+      "roll": -0.10682226717472076,
+      "pitch": 0.12326501309871674,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 97.79999999991642,
+      "altitude": 29.673,
+      "targetAltitude": 31.149999918937684,
+      "crossTrack": 0,
+      "roll": -0.11155513674020767,
+      "pitch": 0.12764368951320648,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 97.99999999991624,
+      "altitude": 29.64,
+      "targetAltitude": 31.154,
+      "crossTrack": 0,
+      "roll": -0.11008938401937485,
+      "pitch": 0.13992750644683838,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 98.19999999991606,
+      "altitude": 29.63,
+      "targetAltitude": 31.152999980926513,
+      "crossTrack": 0,
+      "roll": -0.11396854370832443,
+      "pitch": 0.16563978791236877,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 98.39999999991588,
+      "altitude": 29.642,
+      "targetAltitude": 31.152999980926513,
+      "crossTrack": 0,
+      "roll": -0.11677633970975876,
+      "pitch": 0.1908932328224182,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 98.5999999999157,
+      "altitude": 29.664,
+      "targetAltitude": 31.153,
+      "crossTrack": 0,
+      "roll": -0.11397691816091537,
+      "pitch": 0.20255981385707855,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 98.79999999991551,
+      "altitude": 29.692,
+      "targetAltitude": 31.157000019073486,
+      "crossTrack": 0,
+      "roll": -0.12195335328578949,
+      "pitch": 0.1774424910545349,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 98.99999999991533,
+      "altitude": 29.714,
+      "targetAltitude": 31.153999928474427,
+      "crossTrack": 0,
+      "roll": -0.12135143578052521,
+      "pitch": 0.15973985195159912,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 99.19999999991515,
+      "altitude": 29.727,
+      "targetAltitude": 31.151999947547914,
+      "crossTrack": 0,
+      "roll": -0.11987736821174622,
+      "pitch": 0.10526193678379059,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 99.39999999991497,
+      "altitude": 29.72,
+      "targetAltitude": 31.15599994754791,
+      "crossTrack": 0,
+      "roll": -0.11964648962020874,
+      "pitch": 0.08896730095148087,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 99.59999999991479,
+      "altitude": 29.696,
+      "targetAltitude": 31.157999928474425,
+      "crossTrack": 0,
+      "roll": -0.1226147785782814,
+      "pitch": 0.09974616020917892,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 99.7999999999146,
+      "altitude": 29.68,
+      "targetAltitude": 31.15699990940094,
+      "crossTrack": 0,
+      "roll": -0.1143161877989769,
+      "pitch": 0.11736826598644257,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 99.99999999991442,
+      "altitude": 29.667,
+      "targetAltitude": 31.152000019073487,
+      "crossTrack": 0,
+      "roll": -0.11085812002420425,
+      "pitch": 0.14516806602478027,
+      "active": true,
+      "mission": 1
+    },
+    {
+      "time": 100.19999999991424,
+      "altitude": 29.666,
+      "targetAltitude": 31.155000009536742,
+      "crossTrack": 0,
+      "roll": -0.10992082208395004,
+      "pitch": 0.1730649322271347,
+      "active": true,
+      "mission": 1
+    }
+  ],
+  "build": {
+    "repository": "https://github.com/DavidIngraham/ardupilot",
+    "revision": "22aeb411d7c80426f9bc570f42f7c81d9c90cf3f",
+    "source": "https://github.com/DavidIngraham/ardupilot/tree/22aeb411d7c80426f9bc570f42f7c81d9c90cf3f",
+    "license": "GPL-3.0-or-later",
+    "board": "wasm",
+    "vehicle": "ArduPlane",
+    "model": "JSON:127.0.0.1 + Rust full 9-DOF external model",
+    "transport": "Emscripten SOCKFS local UDP peer",
+    "emscripten": "6.0.8",
+    "sha256": {
+      "highdof.json": "e30470823ff62bfa8fd03fdd19af4af677321cb6f7f0b1b8d81ee30598428f05",
+      "sim_wasm_bg.wasm.d.ts": "20c6b4faa8cc91f0d0ea36e5130f3cbb0e19209ab6ef7ab069098e4b5fe6c16c",
+      "sim_wasm.d.ts": "a7d9b12c7b8118fd60f80d6675ff6ed8b37e0ddebbfb1d244c88105a58bac842",
+      "sim_wasm_bg.wasm": "f5d479506baad4065fbfa082e985ab2d930018d7bba700b0cc184102b71a636e",
+      "sim_wasm.js": "400f027b6e8f2968179d2070c9157fa913bad58aa1d1d54e5db034eb19ea6097",
+      "arduplane.wasm": "3e0e3fea519f449fcc0203f32fe7db03e0855f4e785ca0d5fcb890940250e1bb",
+      "arduplane.js": "893b28e3cbea410e48736d7f7426928cbe8b56f22c1813914aa290172f1e8565"
+    },
+    "physics_source": {
+      "repository": "https://github.com/DavidIngraham/micro-agu",
+      "revision": "fc1dfef12b4f27f6ca9fe031aa5d78a0f3ed08b6",
+      "working_tree_dirty": false,
+      "language": "Rust",
+      "source_sha256": {
+        "Cargo.toml": "d44f4d4022048d66dc37b930f1a9de48321592dcb62e489c5f5c792a265c7834",
+        "Cargo.lock": "95e03d07fb8732b18b2aee244d89750a18568689bf6fee1018bfcc95bff9f54b",
+        "crates/sim-cli/src/main.rs": "31f0e8540cd1b8d1beaae31671aac22c8844c649ecd599096e1dc0420da1d4f4",
+        "crates/sim-core/src/actuators.rs": "24fd438cddeb3461e939853f1c419d9a16be8f51d7a650ed7bcf1710a838ba79",
+        "crates/sim-core/src/config.rs": "23ef84e6fb719a06967da268d8b8472497ca7acbb727ea757da320012972c8e2",
+        "crates/sim-core/src/dynamics.rs": "74f751d45aefabaa5a4c2e530e00d782f7e33766c16c6864ee5cc02e66dd104a",
+        "crates/sim-core/src/integrator.rs": "b21ea368c5587484644f0c7add0719b1eafbb9e90028924bb928009c59a438c7",
+        "crates/sim-core/src/kernel.rs": "4caa1b5666c727104b52d15aa43eec8ffb174fe78d86b3176428de1fa6221a5a",
+        "crates/sim-core/src/launch.rs": "c78f658c204a5a6dae30250e6aea087f79e69e94f79ca9d7eb64634b8566507b",
+        "crates/sim-core/src/lib.rs": "befb5416d6010cef301af9f2ebb99a9f18533e69977dc51f517286d8585b5d9e",
+        "crates/sim-core/src/propeller_data.rs": "1897a098858e69611bea1cdcb184fc7e8f6337a60eddf7eb9b4fd7e849530af9",
+        "crates/sim-core/src/propulsion.rs": "497f595fea9bc17e52d3dc0abae0b1e0061a15a227a35766f9e12f38ffc18b60",
+        "crates/sim-core/src/sensors.rs": "8930763c5d6947dd92bf2115fde33520a2eba5194284d115b853f1967205a556",
+        "crates/sim-core/src/simulator.rs": "b4692ade4a2eb710fe734e708911552fb884ff820c7376c8e4fa2a3bf1c08da6",
+        "crates/sim-core/src/state.rs": "5f2005fe9acc4d694e5697d060bd5709124c0d9ba39a7f03834b5bba777bfcf8",
+        "crates/sim-core/src/surface.rs": "9a11b4678381408d02ff0aedef29e9d303c84924ebbe1ad172007cb02d6f9182",
+        "crates/sim-core/tests/contracts.rs": "a6e8a88bc8188975b13993ffb2bedebc0eb098f6db5510086e7b9baa7b33ce58",
+        "crates/sim-core/tests/launch.rs": "bcae4058ca51ccfdc8b047c3d690916646a4a153fa91e054107024fb2e6550e3",
+        "crates/sim-io/src/lib.rs": "7b1b747e5c10003672dc402c05453a05261e408c8744dc31d606d001ac95d6bd",
+        "crates/sim-python/src/bin/stubs.rs": "fd0d35549602676f5765fd8403abeecddd1dab5cc8988ed4f412898c23ac3c7a",
+        "crates/sim-python/src/lib.rs": "1668a6a627dfb6351feb431f6cfa0cba64903e51ea926f17fd7547980473359a",
+        "crates/sim-sitl/src/lib.rs": "1805069c21b26f45050ea7a6f530e9736d0253d2cefbe4a97e2a2fccbac3e750",
+        "crates/sim-sitl/src/main.rs": "2309238c02164131b9ee80f55a8dc670bdb34cf7245c2daee6e30fa34820038d",
+        "crates/sim-sitl/tests/parity.rs": "57b0d0bbb3c66f90a5e1655e6d05ac3b1ddf6cb8011431700817b664574c6ab7",
+        "crates/sim-wasm/src/lib.rs": "6284ef24ab828159f38bfc723ec100749f996ea8dc6007e3ce2a819099468fd0",
+        "crates/sim-cli/Cargo.toml": "f252d11968410da4256a18d5271dbaa1928c3cd7ea3ffa9d18006e4ac13a3ddd",
+        "crates/sim-core/Cargo.toml": "cecd7278395e09f7a266183c9ba20d93a4d6b205e4ba2eb97ce305e0fc71df16",
+        "crates/sim-io/Cargo.toml": "8d2d075009bdc8f3be458d6337b22501c57d1173e89e62d33e6817f21c6edfe4",
+        "crates/sim-python/Cargo.toml": "fd6672d0c4a247c341d21cf7bd72b46a30942dc4ca2cc47e029554131ca5900d",
+        "crates/sim-sitl/Cargo.toml": "538d843e71421dc60f5df16d2c72906e32eacef17947d69b7e871150cb5f76a4",
+        "crates/sim-wasm/Cargo.toml": "dcb0d988c5b5e4503c2f914be7940141bb93c40e99bc64c8302953e9d0b11eb1"
+      },
+      "rustc": "rustc 1.99.0 (b940084d7 2026-09-28)",
+      "wasm_bindgen": "0.2.114"
+    }
+  }
+}
