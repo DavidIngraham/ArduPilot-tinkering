@@ -1,7 +1,7 @@
 {
   "repository": "https://github.com/DavidIngraham/ardupilot",
-  "revision": "22aeb411d7c80426f9bc570f42f7c81d9c90cf3f",
-  "source": "https://github.com/DavidIngraham/ardupilot/tree/22aeb411d7c80426f9bc570f42f7c81d9c90cf3f",
+  "revision": "010ada6a4f0b26910fc18ecca176d2e65c5ed9d7",
+  "source": "https://github.com/DavidIngraham/ardupilot/tree/010ada6a4f0b26910fc18ecca176d2e65c5ed9d7",
   "license": "GPL-3.0-or-later",
   "board": "wasm",
   "vehicle": "ArduPlane",
@@ -14,12 +14,12 @@
     "sim_wasm.d.ts": "a7d9b12c7b8118fd60f80d6675ff6ed8b37e0ddebbfb1d244c88105a58bac842",
     "sim_wasm_bg.wasm": "f5d479506baad4065fbfa082e985ab2d930018d7bba700b0cc184102b71a636e",
     "sim_wasm.js": "400f027b6e8f2968179d2070c9157fa913bad58aa1d1d54e5db034eb19ea6097",
-    "arduplane.wasm": "b54aa6c58700729ed66e3a7eea063fce71f55e0ac91c69933ad3d3a25b032393",
+    "arduplane.wasm": "d8a838c250b937f8fbc13e41219ac8a412e3bacbcb780da00b738f4fae15c045",
     "arduplane.js": "893b28e3cbea410e48736d7f7426928cbe8b56f22c1813914aa290172f1e8565"
   },
   "physics_source": {
     "repository": "https://github.com/DavidIngraham/micro-agu",
-    "revision": "6e3fe2d255d997c080e08d52657db4ff09cf9a8a",
+    "revision": "fc1dfef12b4f27f6ca9fe031aa5d78a0f3ed08b6",
     "working_tree_dirty": false,
     "language": "Rust",
     "source_sha256": {

@@ -5,6 +5,7 @@ import type { Weather } from "./weather";
 export interface Calls {
   start: [url: string, home: Home];
   mode: [name: string];
+  controller: [scheme: "baseline" | "lqi"];
   altitude: [metres: number];
   wind: [speed: number, from: number, up: number, weather?: Weather];
   launch: [mode: string];

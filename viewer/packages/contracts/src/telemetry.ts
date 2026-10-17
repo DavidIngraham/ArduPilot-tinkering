@@ -8,6 +8,8 @@ export const MODES: Record<string, number> = {
   TAKEOFF: 13,
 };
 export interface Telemetry {
+  controllerSelected: "baseline" | "lqi";
+  controllerActive: boolean;
   mode: number;
   armed: boolean;
   lat: number;
@@ -31,6 +33,8 @@ export function initialTelemetry(home: {
   lon: number;
 }): Telemetry {
   return {
+    controllerSelected: "baseline",
+    controllerActive: false,
     mode: -1,
     armed: false,
     lat: home.lat,

@@ -36,6 +36,9 @@ self.onmessage = async ({ data }: MessageEvent<WorkerRequest>) => {
       case "mode":
         await sim.mode(args[0]);
         break;
+      case "controller":
+        await sim.controller(args[0]);
+        break;
       case "altitude":
         await sim.altitude(args[0]);
         break;

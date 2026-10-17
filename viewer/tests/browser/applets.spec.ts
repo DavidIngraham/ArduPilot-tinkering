@@ -60,6 +60,15 @@ test("simulator starts AUTO, can be disposed and restarted", async ({
   });
   await expect(page.locator("#mode-label")).toHaveText("AUTO");
   await expect(page.locator("#launch")).toHaveText("Reset simulation");
+  await page.locator("#panel-toggle").click();
+  await expect(page.locator("#controller")).toHaveValue("baseline");
+  await page.locator("#controller").selectOption("lqi");
+  await expect(page.locator("#controller-status")).toHaveText("LQI active", {
+    timeout: 15000,
+  });
+  await page.locator("#controller").selectOption("baseline");
+  await expect(page.locator("#controller-status")).toHaveText("Baseline");
+  await page.locator("#panel-toggle").click();
   await page.locator("#plot-toggle").click();
   await expect(page.locator("#flight-plots")).toBeVisible();
   await expect(page.locator("#plot-toggle")).toHaveAttribute(

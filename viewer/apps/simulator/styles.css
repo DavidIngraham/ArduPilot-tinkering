@@ -986,3 +986,33 @@ body.panel-closed .pilot-controls {
     gap: 2px;
   }
 }
+.controller-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.55rem;
+  border-radius: 0.6rem;
+  background: #162830ed;
+  color: #dce9e9;
+  font-size: 0.7rem;
+}
+.controller-picker select {
+  max-width: 10rem;
+  color: inherit;
+  background: #162830;
+  border: 1px solid #46616c;
+  border-radius: 0.35rem;
+  padding: 0.3rem;
+}
+#controller-status {
+  font-size: 0.65rem;
+}
+@media (max-width: 600px) {
+  .controller-picker {
+    flex-wrap: wrap;
+    max-width: 12rem;
+  }
+  #controller-status {
+    flex-basis: 100%;
+  }
+}

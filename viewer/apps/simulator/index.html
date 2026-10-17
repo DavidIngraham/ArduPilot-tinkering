@@ -22,7 +22,7 @@
       </div>
       <span id="connection" role="status">Preparing</span
       ><button id="panel-toggle" aria-expanded="false" aria-controls="panel">
-        Mission &amp; weather
+        Settings
       </button>
     </header>
     <section class="telemetry" aria-label="Flight telemetry">
@@ -112,6 +112,14 @@
       <div><small>HEADING</small><strong id="heading">000°</strong></div>
     </section>
     <aside id="panel" hidden>
+      <label class="controller-picker" for="controller"
+        >Control
+        <select id="controller" disabled aria-label="Control scheme">
+          <option value="baseline">PG + TECS</option>
+          <option value="lqi">LQI · experimental</option>
+        </select>
+        <span id="controller-status" role="status">Baseline</span>
+      </label>
       <div class="eyebrow">
         MISSION &amp; WEATHER <span id="armed">DISARMED</span>
       </div>

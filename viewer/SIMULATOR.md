@@ -123,8 +123,9 @@ The primary heading-rate controller remains the deployed baseline. The firmware'
 custom-controller frontend now receives its heading-rate reference and can request
 symmetric brake through the shared allocator. Returning from custom steering
 matches the previous differential demand within the brake limits, then releases
-excess matching correction with a 0.25 s time constant. No LQI backend is installed
-or enabled. See the [firmware integration notes](https://github.com/DavidIngraham/ardupilot/blob/paraglider-browser-9dof/Tools/simulation/paraglider/README.md).
+excess matching correction with a 0.25 s time constant. The optional coordinated
+LQI backend additionally owns throttle and both brakes; see the selection notes
+below and the [firmware contract](https://github.com/DavidIngraham/ardupilot/blob/paraglider-browser-9dof/libraries/AP_CustomControl/MIMO.md).
 
 This deliberately depends on the socket internals of the pinned **Emscripten
 6.0.8**, rather than maintaining an ArduPilot transport patch. The build exports
@@ -202,3 +203,19 @@ branch (`master`). The scoped `simulator-sw.js` supplies COOP/COEP headers for P
 it has no asset cache and leaves external requests alone. All simulator dependencies
 are same-origin. Do not embed the simulator in an ordinary non-isolated iframe;
 link to its standalone page.
+# Coordinated controller selection
+
+The Settings panel offers **PG + TECS** (default) and **LQI · experimental**.
+The status distinguishes selection from firmware-confirmed active control. LQI
+automatically waits through assisted launch, MANUAL, FBWA and landing, where the
+baseline retains ownership. Switching back to PG + TECS does not restart the
+simulator or replace the EKF.
+
+The new LQI uses all three inputs: throttle, symmetric brake and differential
+brake. Its final left/right commands pass through a shared travel/slew allocator
+and servo calibration, bypassing the legacy mixer. It uses onboard estimates
+and an internal canopy observer, never simulator truth. Its matrices are generated
+by `simulation/tools/design_mimo.py` from the 132 mm as-built Rust model. This
+initial fixed operating-point design is distinct from the archived scheduled
+two-input research controller; the switch is for simulation comparison, not a
+claim that it outperforms PG + TECS or is ready for flight.

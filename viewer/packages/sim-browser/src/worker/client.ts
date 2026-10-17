@@ -116,6 +116,9 @@ export class SimulatorClient {
   mode(name: string) {
     return this.call("mode", name);
   }
+  controller(scheme: "baseline" | "lqi") {
+    return this.call("controller", scheme);
+  }
   altitude(metres: number) {
     return this.call("altitude", metres);
   }

@@ -95,6 +95,7 @@ export class Simulator {
     const { default: create } = await import(/* @vite-ignore */ url);
     const defaults =
       this.physics.config.defaults +
+      "\nCP_TYPE 3\nRC6_OPTION 109\n" +
       `\nFLTMODE_CH 0\nLOG_DISARMED 0\nLOG_BACKEND_TYPE 0\nFS_GCS_ENABL 0\nFS_LONG_ACTN 0\nRC_OVERRIDE_TIME 1\nSIM_SPEEDUP ${this.warmupSpeed}\nSTICK_MIXING 4\nFBWB_ELEV_REV 0\n`;
     this.module = await create({
       ...(wasmBinary ? { wasmBinary } : {}),
@@ -259,6 +260,10 @@ export class Simulator {
           case "MISSION_CURRENT":
             this.state.mission = v.seq;
             break;
+          case "NAMED_VALUE_FLOAT":
+            if (String(v.name) === "MIMO")
+              this.state.controllerActive = Number(v.value) > 0.5;
+            break;
           case "STATUSTEXT":
             this.lastStatus = String(m.values.text);
             this.onLog(this.lastStatus);
@@ -399,6 +404,14 @@ export class Simulator {
       "RC_CHANNELS_OVERRIDE",
       Object.fromEntries(this.channels.map((v, i) => [`chan${i + 1}_raw`, v])),
     );
+  }
+  async controller(scheme: "baseline" | "lqi") {
+    // Existing ArduPlane auxiliary-function command: low/high for option 109.
+    await this.command(218, [109, scheme === "lqi" ? 2 : 0]);
+    this.channels[5] = scheme === "lqi" ? 2000 : 1000;
+    this.sendRC();
+    this.state.controllerSelected = scheme;
+    this.onUpdate();
   }
   async launch(mode = "CRUISE") {
     await this.mode("MANUAL");

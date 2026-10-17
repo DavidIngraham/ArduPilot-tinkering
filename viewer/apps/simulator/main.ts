@@ -103,7 +103,7 @@ export const applet = registerApplet(definition, async (scope) => {
   };
 
   function buttons() {
-    for (const id of ["mode", "apply-wind"])
+    for (const id of ["mode", "apply-wind", "controller"])
       (el(id) as HTMLButtonElement).disabled = !ready || operation;
     el<HTMLButtonElement>("launch").disabled = !ready && !launched;
     el("launch").textContent = launched ? "Reset simulation" : "Launch";
@@ -170,6 +170,12 @@ export const applet = registerApplet(definition, async (scope) => {
   }
 
   sim.onUpdate = () => {
+    el<HTMLSelectElement>("controller").value = sim.state.controllerSelected;
+    el("controller-status").textContent = sim.state.controllerActive
+      ? "LQI active"
+      : sim.state.controllerSelected === "lqi"
+        ? "Baseline · LQI waiting"
+        : "Baseline";
     const s = sim.state;
     paintThrottle();
     el("mode-label").textContent =
@@ -534,6 +540,13 @@ export const applet = registerApplet(definition, async (scope) => {
       ).catch((e) => status(e.message)),
   );
   let trailVisible = false;
+  scope.property(el<HTMLSelectElement>("controller"), "onchange", () => {
+    const scheme = el<HTMLSelectElement>("controller").value as
+      "baseline" | "lqi";
+    void action(async () => {
+      await sim.controller(scheme);
+    });
+  });
   el("trail-toggle").setAttribute("aria-pressed", "false");
   scope.property(el("trail-toggle"), "onclick", () => {
     trailVisible = !trailVisible;

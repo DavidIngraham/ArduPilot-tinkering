@@ -61,6 +61,22 @@
       ["yawspeed", "float", 24, 1]
     ]
   },
+  "GLOBAL_POSITION_INT": {
+    "id": 33,
+    "crc": 104,
+    "length": 28,
+    "fields": [
+      ["time_boot_ms", "uint32_t", 0, 1],
+      ["lat", "int32_t", 4, 1],
+      ["lon", "int32_t", 8, 1],
+      ["alt", "int32_t", 12, 1],
+      ["relative_alt", "int32_t", 16, 1],
+      ["vx", "int16_t", 20, 1],
+      ["vy", "int16_t", 22, 1],
+      ["vz", "int16_t", 24, 1],
+      ["hdg", "uint16_t", 26, 1]
+    ]
+  },
   "SERVO_OUTPUT_RAW": {
     "id": 36,
     "crc": 222,
@@ -355,6 +371,16 @@
       ["time_usec", "uint64_t", 52, 1]
     ]
   },
+  "NAMED_VALUE_FLOAT": {
+    "id": 251,
+    "crc": 170,
+    "length": 18,
+    "fields": [
+      ["time_boot_ms", "uint32_t", 0, 1],
+      ["value", "float", 4, 1],
+      ["name", "char", 8, 10]
+    ]
+  },
   "STATUSTEXT": {
     "id": 253,
     "crc": 83,
@@ -364,22 +390,6 @@
       ["text", "char", 1, 50],
       ["id", "uint16_t", 51, 1],
       ["chunk_seq", "uint8_t", 53, 1]
-    ]
-  },
-  "GLOBAL_POSITION_INT": {
-    "id": 33,
-    "crc": 104,
-    "length": 28,
-    "fields": [
-      ["time_boot_ms", "uint32_t", 0, 1],
-      ["lat", "int32_t", 4, 1],
-      ["lon", "int32_t", 8, 1],
-      ["alt", "int32_t", 12, 1],
-      ["relative_alt", "int32_t", 16, 1],
-      ["vx", "int16_t", 20, 1],
-      ["vy", "int16_t", 22, 1],
-      ["vz", "int16_t", 24, 1],
-      ["hdg", "uint16_t", 26, 1]
     ]
   },
   "HEARTBEAT": {
